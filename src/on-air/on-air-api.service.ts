@@ -18,13 +18,12 @@ export class OnAirApiService implements OnModuleInit {
 
     async onModuleInit() {
         await this._initialize();
-        
         // this should also run an interval to check if there are any jobs that are now active and should be scheduled
-        setInterval(async () => {
-            if (!this.onAirApi) {
-                this._initialize();
-            }
-        }, 60000); // run every 60 seconds
+        // setInterval(async () => {
+        //     if (!this.onAirApi) {
+        //         this._initialize();
+        //     }
+        // }, 60000); // run every 60 seconds
     }
     
     private async _initialize() {

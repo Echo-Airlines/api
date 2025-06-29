@@ -36,10 +36,10 @@ export class JobSchedulerService implements OnModuleInit {
     async onModuleInit() {
         await this._loadJobs();
         
-        // this should also run an interval to check if there are any jobs that are now active and should be scheduled
-        setInterval(async () => {
-            this._loadJobs();
-        }, 60000); // run every 1 minute
+        // this should also run an interval to check if there are any jobs that are now active and should be scheduled)
+        // setInterval(async () => {
+        //     this._loadJobs();
+        // }, 60000); // run every 1 minute
     }
 
     public async unscheduleJob(job: Job) {

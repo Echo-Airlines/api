@@ -2,7 +2,7 @@ import { Body, Controller, Get, NotFoundException, Param, Put, Request, UseGuard
 import { Response } from 'express';
 import { AppConfigService } from './app-config.service';
 import { AppConfig, Livery } from 'generated/prisma';
-import { AppConfigWithLiveriesDto } from './dto/app-config-with-livery';
+import { AppConfigWithLiveries, AppConfigWithLiveriesDto } from './dto/app-config-with-livery';
 
 @Controller('config')
 export class AppConfigController {
@@ -14,7 +14,10 @@ export class AppConfigController {
 
         const liveries = await this.appConfigService.Livery_findAllActive();
 
-        const dto = new AppConfigWithLiveriesDto(config, liveries);
+        const dto: AppConfigWithLiveriesDto = {
+            ...config,
+            liveries: liveries
+        } as AppConfigWithLiveriesDto;
 
         return dto;
     }

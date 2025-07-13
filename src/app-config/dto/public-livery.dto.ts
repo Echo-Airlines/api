@@ -1,4 +1,4 @@
-import { Livery } from "generated/prisma";
+import { Livery } from "prisma/generated/prisma";
 
 export class PublicLiveryDto {
     Id: string;

@@ -1,13 +1,14 @@
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
-import { SchedulerRegistry } from '@nestjs/schedule';
+import { SchedulerRegistry, CronExpression as NestCronExpression } from '@nestjs/schedule';
 import { JobsService } from './jobs.service';
 import { OnAirApiService } from '../on-air/on-air-api.service';
 import { VirtualAirlineService } from '../virtual-airline/virtual-airline.service';
 import { AppConfigService } from '../app-config/app-config.service';
 import * as cron from 'cron';
-import { executeVirtualAirlineSync } from './schedules/executeVirtualAirlineSync';
+import { executeAllVirtualAirlinesSync } from './schedules/executeVirtualAirlinesSync';
 // import { executeVirtualAirlineMembersSync } from './schedules/executeVirtualAirlineMembersSync';
-import { AppConfig, Job, JobType } from 'generated/prisma';
+import { AppConfig, Job, JobType, CronExpression } from 'prisma/generated/prisma';
+import { ConfigService } from '@nestjs/config';
 
 export interface IJobSchedulerServices {
     VirtualAirline: VirtualAirlineService;
@@ -16,9 +17,9 @@ export interface IJobSchedulerServices {
 
 @Injectable()
 export class JobSchedulerService implements OnModuleInit {
-    private readonly logger = new Logger(JobSchedulerService.name);
+    public readonly logger = new Logger(JobSchedulerService.name);
     private config: AppConfig|null = null;
-    private services: IJobSchedulerServices;
+    public services: IJobSchedulerServices;
 
     constructor(
         private readonly jobsService: JobsService,
@@ -26,6 +27,7 @@ export class JobSchedulerService implements OnModuleInit {
         private readonly onAirApiService: OnAirApiService,
         private readonly virtualAirlineService: VirtualAirlineService,
         private readonly appConfigService: AppConfigService,
+        private readonly configService: ConfigService,
     ) {
         this.services = {
             VirtualAirline: this.virtualAirlineService,
@@ -36,6 +38,20 @@ export class JobSchedulerService implements OnModuleInit {
     async onModuleInit() {
         await this._loadJobs();
         
+        let jobPollingIntervalInMs = this.configService.get<number|undefined>('JOB_POLLING_INTERVAL_MS');
+
+        if (jobPollingIntervalInMs) {
+            this.logger.log(`Job polling interval is set to every ${jobPollingIntervalInMs/1000} seconds`);
+            if (jobPollingIntervalInMs < 60000) {
+                this.logger.warn(`Job polling interval is less than 60 seconds, forcing minimum interval of 60 seconds. Please set the JOB_POLLING_INTERVAL_MS environment variable to at least 60000.`);
+                jobPollingIntervalInMs = 60000;
+            }
+
+            setInterval(async () => {
+                this._loadJobs();
+            }, jobPollingIntervalInMs);
+        }
+
         // this should also run an interval to check if there are any jobs that are now active and should be scheduled)
         // setInterval(async () => {
         //     this._loadJobs();
@@ -64,8 +80,9 @@ export class JobSchedulerService implements OnModuleInit {
             // Job doesn't exist, that's fine
         }
 
-        // Create new cron job
-        const cronJob = new cron.CronJob(job.CronExpression, async () => {
+        // Create new cron job1
+        this.logger.debug(`Scheduling job ${job.Name} (${job.Id}) with cron ${job.CronExpression}`);
+        const cronJob = new cron.CronJob(this.matchCronExpression(job.CronExpression), async () => {
             await this.executeJob(job);
         });
 
@@ -74,6 +91,16 @@ export class JobSchedulerService implements OnModuleInit {
         cronJob.start();
 
         this.logger.log(`Scheduled job ${job.Name} (${job.Id}) with cron ${job.CronExpression}`);
+    }
+
+    public matchCronExpression(cronExpression: CronExpression): NestCronExpression {
+        const nestCronExpression: NestCronExpression = NestCronExpression[cronExpression];
+
+        if (!nestCronExpression) {
+            throw new Error(`Invalid cron expression: ${cronExpression}`);
+        }
+
+        return nestCronExpression;
     }
 
     private async _loadJobs() {        
@@ -86,7 +113,7 @@ export class JobSchedulerService implements OnModuleInit {
             return;
         }
 
-        this.logger.log('Loading jobs');
+        this.logger.debug(`Loading enabled jobs from the database at ${new Date().toISOString()}`);
 
         // Load all active jobs and schedule them
         const jobs: Job[] = await this.jobsService.findAllEnabled();
@@ -100,6 +127,9 @@ export class JobSchedulerService implements OnModuleInit {
             const cronJob = await this._findJobFromSchedule(job);
             if (job.IsEnabled && !cronJob) {
                 await this.scheduleJob(job);
+                if (!job.FirstRunCompleted) {
+                    await this.executeJob(job);
+                }
             } else if (!job.IsEnabled && cronJob) {
                 await this.unscheduleJob(job);
             }
@@ -138,11 +168,8 @@ export class JobSchedulerService implements OnModuleInit {
 
             switch (job.Type) {
                 case JobType.VIRTUAL_AIRLINE_SYNC:
-                    if (!this.config.VirtualAirlineId) {
-                        throw new Error('Virtual airline ID is not set in app config');
-                    }
+                    const results = await executeAllVirtualAirlinesSync(this);
 
-                    const results = await executeVirtualAirlineSync(this.config.VirtualAirlineId, this.services);
                     // update the job status to completed
                     break;
                 // case JobType.VIRTUAL_AIRLINE_MEMBERS_SYNC:
@@ -154,6 +181,12 @@ export class JobSchedulerService implements OnModuleInit {
                 //     break;
                 default:
                     throw new Error(`Unknown job type: ${job.Type}`);
+            }
+
+            if (!job.FirstRunCompleted) {
+                await this.jobsService.update(job.Id, {
+                    FirstRunCompleted: true,
+                });
             }
 
             // Calculate next run time

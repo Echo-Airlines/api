@@ -1,1 +1,1 @@
-export * from './executeVirtualAirlineSync';
+export * from './executeVirtualAirlinesSync';

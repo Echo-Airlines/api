@@ -10,6 +10,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { LoggerService } from '@logger/logger.service';
 import { SeederService } from './seeder/seeder.service';
 import { SeederModule } from './seeder/seeder.module';
+import { LoggerModule } from '@logger/logger.module';
 
 @Module({
   imports: [
@@ -17,7 +18,14 @@ import { SeederModule } from './seeder/seeder.module';
       isGlobal: true,
       envFilePath: ['.env', '.env.local'],
     }),
-    PrismaModule, OnAirModule,VirtualAirlineModule, AppConfigModule, JobsModule, SeederModule],
+    PrismaModule,
+    OnAirModule,
+    VirtualAirlineModule,
+    AppConfigModule,
+    JobsModule,
+    SeederModule,
+    LoggerModule
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

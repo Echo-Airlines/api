@@ -1,4 +1,4 @@
-import { AppConfig } from "generated/prisma";
+import { AppConfig } from "prisma/generated/prisma";
 
 export type PublicAppConfig = Omit<AppConfig, 'ApiKey' | 'VirtualAirlineId' | 'CreatedAt' | 'UpdatedAt'> & {
     ApiKey: undefined;

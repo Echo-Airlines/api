@@ -1,8 +1,8 @@
-import { AppConfigService } from '@/app-config/app-config.service';
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import OnAirApi from 'onair-api';
 import { OnAirCompany, OnAirMember, OnAirVirtualAirline, OnAirVirtualAirlineRole } from './types';
-import { AppConfig } from 'generated/prisma';
+import { AppConfig, VirtualAirline } from 'prisma/generated/prisma';
+import { VirtualAirlineService } from '@/virtual-airline/virtual-airline.service';
 
 @Injectable()
 export class OnAirApiService implements OnModuleInit {
@@ -11,7 +11,7 @@ export class OnAirApiService implements OnModuleInit {
     private config: AppConfig|null = null;
     
     constructor(
-        private readonly appConfigService: AppConfigService
+        private readonly virtualAirlineService: VirtualAirlineService,
     ) {
         this._initialize();
     }
@@ -27,22 +27,17 @@ export class OnAirApiService implements OnModuleInit {
     }
     
     private async _initialize() {
-        this.config = await this.appConfigService.getLatest();
+        const virtualAirline: VirtualAirline|null = await this.virtualAirlineService.getPrimaryVirtualAirline();
 
-        if (!this.config?.ApiKey || !this.config?.VirtualAirlineId) {
-            this.logger.warn('Missing required OnAir configuration. Please set the config in the admin panel.');
+        if (!virtualAirline) {
+            this.logger.warn('Missing required virtual airline configuration. Please create a virtual airline in the admin panel.');
             return;
         }
-
-        if (!this.config.OnAirSyncEnabled) {
-            this.logger.warn('OnAir sync is not enabled. Please enable it in the admin panel.');
-            return;
-        }
-    
+        
         this.onAirApi = new OnAirApi({
-            apiKey: this.config.ApiKey,
-            companyId: this.config.VirtualAirlineId,
-            vaId: this.config.VirtualAirlineId
+            apiKey: virtualAirline.ApiKey,
+            companyId: virtualAirline.Id,
+            vaId: virtualAirline.Id
         });
     }
 

@@ -1,7 +1,7 @@
 
 import { Controller, Get, HttpStatus, NotFoundException, Param, Post, Res } from '@nestjs/common';
 import { AppConfigService } from './app-config.service';
-import { Livery } from 'generated/prisma';
+import { Livery } from 'prisma/generated/prisma';
 import { Response } from 'express';
 import { PublicLiveryDto } from './dto/public-livery.dto';
 

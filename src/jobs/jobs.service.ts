@@ -1,7 +1,7 @@
 import { Injectable, Logger, NotFoundException, BadRequestException } from '@nestjs/common';
 import { CronExpression } from '@nestjs/schedule';
 import { PrismaService } from '@prisma/prisma.service';
-import { JobStatus, JobType, type Job, type Prisma } from 'generated/prisma';
+import { JobStatus, JobType, type Job, type Prisma } from 'prisma/generated/prisma';
 
 export type CronInterval = {
     Label: string;

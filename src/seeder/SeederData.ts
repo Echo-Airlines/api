@@ -1,9 +1,10 @@
-import { CronExpression, JobType, Prisma } from "generated/prisma";
+import { CronExpression, JobType, Prisma } from "prisma/generated/prisma";
 
 export type SeedData = {
     // roles: CreateRoleDto[];
     // permissions: CreatePermissionDto[];
     // users: CreateUserDto[];
+    worlds: Prisma.WorldCreateInput[];
     liveries: Prisma.LiveryCreateInput[];
     jobs: Prisma.JobCreateInput[];
     appConfig: Prisma.AppConfigCreateInput;
@@ -65,6 +66,28 @@ export const SeedData_Users: CreateUserDto[] = [
     },
 ];
  */
+
+export const SeedData_Worlds: Prisma.WorldCreateInput[] = [
+    {
+        Id: 'c83eb5d5-9dc5-452f-b261-69b45cb0951b',
+        Name: 'Thunder',
+        Slug: 'THUNDER',
+        Description: 'Thunder is a challenging world without AI pilots, and a challenging world economy. Thunder is the final level, no adis, no payout multiplier and AI pilots may not fly without you at the controls. In this world every flight your company performs must be completed by you in a connected simulator. No fees applied for not using rented aircraft.',
+    },
+    {
+        Id: 'be6ab20f-809f-4c57-aaa6-9e78a3022ba8',
+        Name: 'Stratus',
+        Slug: 'STRATUS',
+        Description: 'Stratus is a challening world with AI pilots, and a challenging world economy. Stratus is the final step in difficulty, where you can still utilize AI employees to fly planes even when you are away from the controls. Otherwise, all the aids are disabled.',
+    },
+    {
+        Id: 'ad3ec8a4-246e-4abb-84a9-9dbc43bb6ae6',
+        Name: 'Cumulus',
+        Slug: 'CUMULUS',
+        Description: 'Cumulus is a Relaxed & Casual world with AI pilots, and a n easy world economy. Cumulus is the recommended world for first time CEOs as it features both the most forgiving rule set and providing for a relaxed and casual play style should you have only a few hours to invest in your company and wish to have access to additional helper features.',
+    }
+];
+
 export const SeedData_Liveries: Prisma.LiveryCreateInput[] = [
     {
         Name: '(N487EA) Fenix A320',
@@ -121,8 +144,8 @@ export const SeedData_Jobs: Prisma.JobCreateInput[] = [
     {
         Name: 'Virtual Airline Sync',
         Description: 'Syncs virtual airline data from OnAir',
-        CronExpression: CronExpression.EVERY_MINUTE,
-        IsEnabled: false,
+        CronExpression: CronExpression.EVERY_HOUR,
+        IsEnabled: true,
         Type: JobType.VIRTUAL_AIRLINE_SYNC,
     },
     // {
@@ -135,19 +158,22 @@ export const SeedData_Jobs: Prisma.JobCreateInput[] = [
 ];
 
 export const SeedData_AppConfig: Prisma.AppConfigCreateInput = {
-    OnAirSyncEnabled: false,
-    OnAirVASyncEnabled: false,
-    OnAirVAMembersSyncEnabled: false,
-    DiscordServerInviteLinkEnabled: false,
-    AcceptingNewMembers: false,
-    DiscordAuthEnabled: false,
-    LocalAuthEnabled: true,
+    OnAirSyncEnabled: process.env.ONAIRSYNCENABLED === 'true',
+    OnAirVASyncEnabled: process.env.ONAIRVASYNCENABLED === 'true',
+    OnAirVAMembersSyncEnabled: process.env.ONAIRVAMEMBERSSYNCENABLED === 'true',
+    OnAirCompanySyncEnabled: process.env.ONAIRCOMPANYSYNCENABLED === 'true',
+    DiscordServerInviteLink: process.env.DISCORDSERVERINVITELINK,
+    DiscordServerInviteLinkEnabled: process.env.DISCORDSERVERINVITELINKENABLED === 'true',
+    AcceptingNewMembers: process.env.ACCEPTINGNEWMEMBERS === 'true',
+    DiscordAuthEnabled: process.env.DISCORDAUTHENABLED === 'true',
+    LocalAuthEnabled: process.env.LOCALAUTHENABLED === 'true',
 };
 
 const SeedData: SeedData = {
     // roles: SeedData_UserRoles,
     // permissions: SeedData_Permissions,
     // users: SeedData_Users,
+    worlds: SeedData_Worlds,
     liveries: SeedData_Liveries,
     jobs: SeedData_Jobs,
     appConfig: SeedData_AppConfig,

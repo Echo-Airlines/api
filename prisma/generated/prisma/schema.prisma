@@ -1,0 +1,125 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model AppConfig {
+  Id                             Int      @id() @default(autoincrement())
+  OnAirSyncEnabled               Boolean  @default(false)
+  OnAirVASyncEnabled             Boolean  @default(false)
+  OnAirVAMembersSyncEnabled      Boolean  @default(false)
+  OnAirCompanySyncEnabled        Boolean  @default(false)
+  DiscordServerInviteLink        String?  @db.VarChar
+  DiscordServerInviteLinkEnabled Boolean  @default(false)
+  AcceptingNewMembers            Boolean  @default(false)
+  DiscordAuthEnabled             Boolean  @default(false)
+  LocalAuthEnabled               Boolean  @default(true)
+  CreatedAt                      DateTime @default(now()) @db.Timestamp(6)
+  UpdatedAt                      DateTime @default(now()) @db.Timestamp(6)
+}
+
+model Livery {
+  Id            String   @id() @default(uuid()) @db.Uuid
+  Name          String   @db.VarChar
+  IsActive      Boolean  @default(true)
+  DownloadCount Int      @default(0)
+  Image         String   @db.VarChar
+  Url           String?
+  Description   String?
+  DownloadUrl   String?
+  CreatedAt     DateTime @default(now()) @db.Timestamp(6)
+  UpdatedAt     DateTime @default(now()) @db.Timestamp(6)
+}
+
+model VirtualAirline {
+  Id                                String    @id() @db.Uuid
+  ApiKey                            String    @unique() @db.Uuid
+  IsPrimary                         Boolean   @default(false)
+  Identifier                        String?   @unique() @db.VarChar
+  Name                              String?   @db.VarChar
+  Description                       String?   @db.VarChar
+  WorldId                           String?   @db.Uuid
+  LastDividendsDistribution         DateTime? @db.Timestamp(6)
+  LastComputationDate               DateTime? @db.Timestamp(6)
+  ComputedMemberCount               Int?
+  ComputedAircraftsCount            Int?
+  ComputedNumberOfFlights30Days     Int?
+  ComputedNumberOfFlightHours30Days Int?
+  ComputedMostUsedAirports          String?   @db.VarChar
+  LastConnection                    DateTime? @db.Timestamp(6)
+  LastReportDate                    DateTime? @db.Timestamp(6)
+  Reputation                        Decimal?  @db.Decimal(10, 3)
+  CreationDate                      DateTime? @db.Timestamp(6)
+  DifficultyLevel                   Int?
+  Level                             Int?
+  LevelXP                           Int?
+  TotalContractsCompleted           Int?
+  TotalContractsEarnedCredits       Int?
+  LastRefresh                       DateTime? @db.Timestamp(6)
+  CreatedAt                         DateTime  @default(now()) @db.Timestamp(6)
+  UpdatedAt                         DateTime  @default(now()) @db.Timestamp(6)
+
+  // relations
+  World World? @relation(fields: [WorldId], references: [Id])
+}
+
+model World {
+  Id          String   @id() @db.Uuid
+  Name        String   @db.VarChar
+  Slug        String   @unique() @db.VarChar
+  Description String?  @db.VarChar
+  CreatedAt   DateTime @default(now()) @db.Timestamp(6)
+  UpdatedAt   DateTime @default(now()) @db.Timestamp(6)
+
+  // relations
+  VirtualAirlines VirtualAirline[]
+}
+
+model Job {
+  Id                String         @id() @default(uuid()) @db.Uuid
+  IsEnabled         Boolean        @default(false)
+  FirstRunCompleted Boolean        @default(false)
+  Type              JobType
+  Status            JobStatus      @default(INACTIVE)
+  CronExpression    CronExpression
+  Name              String
+  Description       String?
+  Parameters        Json?
+  LastRunAt         DateTime?      @db.Timestamp(6)
+  NextRunAt         DateTime?      @db.Timestamp(6)
+  LastError         String?
+  ExecutionCount    Int            @default(0)
+  CreatedAt         DateTime       @default(now()) @db.Timestamp(6)
+  UpdatedAt         DateTime       @default(now()) @db.Timestamp(6)
+}
+
+enum JobType {
+  VIRTUAL_AIRLINE_SYNC
+}
+
+enum JobStatus {
+  INACTIVE
+  ACTIVE
+  RUNNING
+  COMPLETED
+  FAILED
+}
+
+enum CronExpression {
+  EVERY_30_SECONDS
+  EVERY_MINUTE
+  EVERY_5_MINUTES
+  EVERY_10_MINUTES
+  EVERY_30_MINUTES
+  EVERY_HOUR
+  EVERY_6_HOURS
+  EVERY_12_HOURS
+  EVERY_DAY
+  EVERY_WEEK
+  EVERY_MONTH
+}

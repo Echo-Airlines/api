@@ -4,7 +4,7 @@ import { eachOfSeries } from 'async';
 import { LoggerService } from '@/logger/logger.service';
 import SeedData from './SeederData';
 import { PrismaService } from '@prisma/prisma.service';
-import { AppConfig, Job, Livery, Prisma } from 'generated/prisma';
+import { AppConfig, Job, Livery, Prisma, World } from 'prisma/generated/prisma';
 
 @Injectable()
 export class SeederService {
@@ -51,6 +51,15 @@ export class SeederService {
       //     this.logger.error('Error seeding user roles:', err);
       //   });
 
+      // then seed worlds
+      await this._seedWorlds(SeedData.worlds)
+        .then(async (worlds: World[]) => {
+          this.logger.debug(`${worlds.length} Worlds seeded.`);
+        })
+        .catch((err) => {
+          this.logger.error('Error seeding worlds:', err);
+        });
+
       // then seed jobs
       await this._seedJobs(SeedData.jobs)
         .then(async (jobs: Job[]) => {
@@ -63,7 +72,7 @@ export class SeederService {
       // then seed app config
       await this._seedAppConfig(SeedData.appConfig)
         .then(async (appConfig: AppConfig) => {
-          this.logger.debug('App config seeded.');
+          this.logger.debug('App config seeded.', appConfig);
         })
         .catch((err) => {
           this.logger.error('Error seeding app config:', err);
@@ -288,6 +297,34 @@ export class SeederService {
   }
  */
 
+  private async _seedWorlds(seedWorlds: Prisma.WorldCreateInput[]): Promise<World[]> {
+    return new Promise(async (resolve, reject) => {
+      if (!seedWorlds || seedWorlds.length === 0) {
+        this.logger.debug('No worlds to seed.');
+        return reject('no worlds to seed');
+      }
+
+      this.logger.debug(`There are ${seedWorlds.length} worlds to seed.`);
+      const worlds: World[] = [];
+
+      // iterate over the worlds and seed them one by one.
+      eachOfSeries(seedWorlds, async (world: Prisma.WorldCreateInput) => {
+        this.logger.debug(`Seeding world ${world.Name}.`);
+        const worldEntity: World = await this._seedWorld(world);
+        worlds.push(worldEntity);
+        return worldEntity;
+      }, (err) => {
+        if (err) {
+          this.logger.error('Error seeding worlds:', err);
+          return reject(err);
+        }
+
+        this.logger.debug('World seeding complete.');
+        return resolve(worlds);
+      });
+    });
+  } 
+
   private async _seedLiveries(seedLiveries: Prisma.LiveryCreateInput[]): Promise<Livery[]> {
     return new Promise(async (resolve, reject) => {
       if (!seedLiveries || seedLiveries.length === 0) {
@@ -315,6 +352,34 @@ export class SeederService {
       });
     });
   }
+
+  private async _seedWorld(dto: Prisma.WorldCreateInput): Promise<World> {
+    return new Promise(async (resolve, reject) => {
+      if (!dto) {
+        this.logger.debug('No world to seed.');
+        return reject('no world to seed');
+      }
+
+      this.logger.debug(`Seeding world ${dto.Name}.`);
+      let worldEntity: World|null = await this.prisma.world.findFirst({
+        where: {
+          Slug: dto.Slug,
+        },
+      });
+
+      if (!worldEntity) {
+        worldEntity = await this.prisma.world.create({
+          data: dto,
+        });
+
+        this.logger.debug(`World ${dto.Name} has been created.`);
+      } else {
+        this.logger.debug(`World ${dto.Name} already exists in the database, skipping.`);
+      }
+
+      return resolve(worldEntity);
+    });
+  } 
 
   private async _seedJobs(seedJobs: Prisma.JobCreateInput[]): Promise<Job[]> {
     return new Promise(async (resolve, reject) => {

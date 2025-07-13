@@ -1,27 +1,46 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '@prisma/prisma.service';
-import { type Prisma, type VirtualAirline } from 'generated/prisma';
+import { Prisma, VirtualAirline } from 'prisma/generated/prisma';
 
 @Injectable()
 export class VirtualAirlineService {
     constructor(private prisma: PrismaService) {}
 
-    async getVirtualAirline() {
-        const entity: VirtualAirline | null = await this.prisma.virtualAirline.findFirst({
+    async findAll(query?: Prisma.VirtualAirlineFindManyArgs) {
+        const entities: VirtualAirline[] = await this.prisma.virtualAirline.findMany({
+            ...query,
+            include: {
+                World: true
+            },
             orderBy: {
                 UpdatedAt: 'desc'
             }
         });
 
-        if (!entity) {
-            throw new NotFoundException('Virtual airline not found');
-        }
+        return entities;
+    }
+
+    async getPrimaryVirtualAirline() {
+        const entity: VirtualAirline | null = await this.prisma.virtualAirline.findFirst({
+            where: {
+                IsPrimary: true
+            },
+            include: {
+                World: true
+            },
+            orderBy: {
+                UpdatedAt: 'desc'
+            }
+        });
 
         return entity;
     }
     
     async getVirtualAirlineById(Id: string) {
         const entity: VirtualAirline | null = await this.prisma.virtualAirline.findUnique({
+            include: {
+                World: true
+            },
             where: {
                 Id
             }
@@ -36,6 +55,9 @@ export class VirtualAirlineService {
 
     async getVirtualAirlineByIdentifier(Identifier: string) {
         const entity: VirtualAirline | null = await this.prisma.virtualAirline.findUnique({
+            include: {
+                World: true
+            },
             where: {
                 Identifier
             }
@@ -63,10 +85,21 @@ export class VirtualAirlineService {
     async upsertByIdentifier(virtualAirline: Prisma.VirtualAirlineCreateInput) {
         const entity = await this.prisma.virtualAirline.upsert({
             where: {
-                Identifier: virtualAirline.Identifier
+                Identifier: virtualAirline.Identifier ?? ''
             },
             update: virtualAirline,
             create: virtualAirline
+        });
+
+        return entity;
+    }
+
+    async create(virtualAirline: Prisma.VirtualAirlineCreateInput) {
+        const entity = await this.prisma.virtualAirline.create({
+            data: virtualAirline,
+            include: {
+                World: true
+            }
         });
 
         return entity;

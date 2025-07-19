@@ -1,4 +1,4 @@
-import { User } from "./PublicUser.dto";
+import { AuthUser, User } from "./PublicUser.dto";
 
 export class UserProfileDto {
     Id: string;
@@ -11,7 +11,7 @@ export class UserProfileDto {
     LastLogin: Date|null;
     Roles: string[];
 
-    constructor(user: User) {
+    constructor(user: User|AuthUser) {
         this.Id = user.Id;
         this.Username = user.Username;
         this.FirstName = user.FirstName;

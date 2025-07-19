@@ -18,6 +18,26 @@ export type User = {
     LastLogin: Date | null
 };
 
+export type AuthUser = {
+    Id: string;
+    Username: string;
+    FirstName: string|null;
+    LastName: string|null;
+    FirstLoginCompleted: boolean;
+    IsOnline: boolean;
+    IsVerified: boolean;
+    CreatedAt: Date;
+    UpdatedAt: Date|null;
+    Roles: Role[];
+    PrivacySettings: UserPrivacySettings|null;
+    Email: string|null;
+    IsBanned: boolean;
+    BanReason: string|null;
+    BanExpiresAt: Date|null;
+    Password: string;
+    LastLogin: Date|null;
+}
+
 export class PublicUserDto {
     Id: string;
     Username: string;

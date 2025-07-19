@@ -1,10 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { PrismaService } from '@prisma/prisma.service';
-import { User } from '@user/dto/PublicUser.dto';
+import { AuthUser, User } from '@user/dto/PublicUser.dto';
 import { UserProfileDto } from '@user/dto/UserProfile.dto';
-import { Prisma, User as PrismaUser } from 'prisma/generated/prisma';
+import { Prisma, User as PrismaUser, Role, UserPrivacySettings } from 'prisma/generated/prisma';
 import { HashService } from 'src/hash/hash.service';
 import { JwtService } from '@nestjs/jwt';
+import { ChangePasswordDto, } from './dto/ChangePasswordDto';
 
 @Injectable()
 export class AuthService {
@@ -27,7 +28,7 @@ export class AuthService {
             // where.Password = hashedPassword;
         }
 
-        const user: PrismaUser | null = await this.prisma.user.findFirst({
+        const user: AuthUser | null = await this.prisma.user.findFirst({
             where,
             select: {
                 Id: true,
@@ -88,8 +89,8 @@ export class AuthService {
         return result;
     }
 
-    async validateUser(identity: string, password: string) {
-        const user = await this._findUserByIdentity(identity, password);
+    private async _validateUser(identity: string, password: string): Promise<AuthUser|null> {
+        const user: AuthUser|null = await this._findUserByIdentity(identity, password);
 
         if (!user) {
             return null;
@@ -101,8 +102,18 @@ export class AuthService {
             return null;
         }
 
-        const result: UserProfileDto = new UserProfileDto(user as unknown as User);
-        
+        return user;
+    }
+
+    async validateUser(identity: string, password: string) {
+        const user: AuthUser|null = await this._validateUser(identity, password);
+
+        if (!user) {
+            return null;
+        }
+
+        const result: UserProfileDto = new UserProfileDto(user as unknown as AuthUser);
+
         return result;
     }
 
@@ -116,5 +127,27 @@ export class AuthService {
             access_token: this.jwtService.sign(payload),
             user,
         };
+    }
+
+    async changePassword(body: ChangePasswordDto) {
+        const user: AuthUser|null = await this._findUserByIdentity(body.Username, body.CurrentPassword);
+
+        if (!user) {
+            throw new UnauthorizedException('Invalid credentials');
+        }
+
+        if (body.NewPassword !== body.ConfirmNewPassword) {
+            throw new BadRequestException('Passwords do not match');
+        }
+
+        const hashedPassword = await this.hashService.hash(body.NewPassword);
+
+        const updatedUser = await this.prisma.user.update({
+            where: { Id: user.Id },
+            data: { Password: hashedPassword },
+        });
+
+        const result = new UserProfileDto(updatedUser as unknown as AuthUser);
+        return result;
     }
 }

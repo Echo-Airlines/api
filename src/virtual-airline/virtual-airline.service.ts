@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '@prisma/prisma.service';
-import { Prisma, VirtualAirline } from 'prisma/generated/prisma';
+import { Member, Prisma, VirtualAirline, VirtualAirlineRole } from 'prisma/generated/prisma';
 
 @Injectable()
 export class VirtualAirlineService {
@@ -10,7 +10,8 @@ export class VirtualAirlineService {
         const entities: VirtualAirline[] = await this.prisma.virtualAirline.findMany({
             ...query,
             include: {
-                World: true
+                World: true,
+                Members: true,
             },
             orderBy: {
                 UpdatedAt: 'desc'
@@ -35,11 +36,49 @@ export class VirtualAirlineService {
 
         return entity;
     }
-    
-    async getVirtualAirlineById(Id: string) {
-        const entity: VirtualAirline | null = await this.prisma.virtualAirline.findUnique({
+
+    async getPrimaryLeaderboard(sortColumn: 'reputation' | 'flights' | 'hours' | 'earnings' = 'earnings') {
+        const entity = await this.prisma.virtualAirline.findFirst({
+            where: {
+                IsPrimary: true
+            },
             include: {
-                World: true
+                World: true,
+                Members: {
+                    include: {
+                        VARole: true,
+                    },
+                },
+
+            },
+            orderBy: {
+                UpdatedAt: 'desc'
+            }
+        });
+
+        if (!entity) {
+            throw new NotFoundException('Virtual airline not found');
+        }
+
+        const leaderboard = entity.Members.sort((a:Member, b:Member) => {
+            switch(sortColumn) {
+                case 'earnings':
+                    return b.TotalEarnedCredits.toNumber() - a.TotalEarnedCredits.toNumber();
+                default:
+                    return a.CompanyName.localeCompare(b.CompanyName);
+            }
+        });
+
+        return leaderboard;
+
+    }
+    
+    async getVirtualAirlineById(Id: string, query?: Prisma.VirtualAirlineFindUniqueArgs) {
+        const entity: VirtualAirline | null = await this.prisma.virtualAirline.findUnique({
+            ...query,
+            include: {
+                World: true,
+                Members: true,
             },
             where: {
                 Id
@@ -100,6 +139,81 @@ export class VirtualAirlineService {
             include: {
                 World: true
             }
+        });
+
+        return entity;
+    }
+
+    // roles
+    async VARole_findAll(query?: Prisma.VirtualAirlineRoleFindManyArgs) {
+        const entities: VirtualAirlineRole[] = await this.prisma.virtualAirlineRole.findMany({
+            ...query,
+            include: {
+                VirtualAirline: true
+            }
+        });
+
+        return entities;
+    }
+
+    async VARole_findById(Id: string) {
+        const entity: VirtualAirlineRole | null = await this.prisma.virtualAirlineRole.findUnique({
+            where: {
+                Id
+            },
+            include: {
+                VirtualAirline: true
+            }
+        });
+
+        return entity;
+    }
+
+    async VARole_upsert(virtualAirlineRole: Prisma.VirtualAirlineRoleCreateInput) {
+        const entity = await this.prisma.virtualAirlineRole.upsert({
+            where: {
+                Id: virtualAirlineRole.Id
+            },
+            update: virtualAirlineRole,
+            create: virtualAirlineRole
+        });
+
+        return entity;
+    }
+
+    async Member_findAll(query?: Prisma.MemberFindManyArgs) {
+        const entities: Member[] = await this.prisma.member.findMany({
+            ...query,
+            include: {
+                VirtualAirline: true,
+                VARole: true
+            }
+        });
+
+        return entities;
+    }
+
+    async Member_findById(Id: string) {
+        const entity: Member | null = await this.prisma.member.findUnique({
+            where: {
+                Id
+            },
+            include: {
+                VirtualAirline: true,
+                VARole: true
+            }
+        });
+
+        return entity;
+    }
+
+    async Member_upsert(member: Prisma.MemberCreateInput) {
+        const entity = await this.prisma.member.upsert({
+            where: {
+                Id: member.Id
+            },
+            update: member,
+            create: member
         });
 
         return entity;

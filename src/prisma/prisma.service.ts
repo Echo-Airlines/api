@@ -3,6 +3,16 @@ import { PrismaClient } from 'prisma/generated/prisma';
 
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit, OnModuleDestroy {
+  constructor() {
+    const omitConfig = {
+      user: { Password: true, Email: true },
+    } as const;
+
+    super({
+      omit: omitConfig,
+    });
+  }
+  
   async onModuleInit() {
     await this.$connect();
   }

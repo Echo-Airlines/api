@@ -11,6 +11,9 @@ import { LoggerService } from '@logger/logger.service';
 import { SeederService } from './seeder/seeder.service';
 import { SeederModule } from './seeder/seeder.module';
 import { LoggerModule } from '@logger/logger.module';
+import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
+import { AdminModule } from './admin/admin.module';
 
 @Module({
   imports: [
@@ -24,7 +27,10 @@ import { LoggerModule } from '@logger/logger.module';
     AppConfigModule,
     JobsModule,
     SeederModule,
-    LoggerModule
+    LoggerModule,
+    UserModule,
+    AuthModule,
+    AdminModule,
   ],
   controllers: [AppController],
   providers: [AppService],

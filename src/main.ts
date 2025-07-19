@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
 import { LoggerService } from './logger/logger.service';
+import SeedData from '@seeder/SeederData';
 
 const logger = new LoggerService('Main');
 
@@ -36,8 +37,8 @@ async function bootstrap() {
 bootstrap()
 .then(({ app, apiBaseUrl}) => {  
 setTimeout(() => {
-  // const admingUser = SeedData.users[0].username;
-  // const adminPassword = SeedData.users[0].password;
-  logger.printStartupBanner(apiBaseUrl);
+  const admingUser = SeedData.users[0].Username;
+  const adminPassword = SeedData.users[0].Password;
+  logger.printStartupBanner(apiBaseUrl, admingUser, adminPassword);
 }, 500);
 });

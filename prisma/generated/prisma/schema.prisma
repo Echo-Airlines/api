@@ -19,8 +19,74 @@ model AppConfig {
   AcceptingNewMembers            Boolean  @default(false)
   DiscordAuthEnabled             Boolean  @default(false)
   LocalAuthEnabled               Boolean  @default(true)
+  VirtualAirlineInitiated        Boolean  @default(false)
   CreatedAt                      DateTime @default(now()) @db.Timestamp(6)
   UpdatedAt                      DateTime @default(now()) @db.Timestamp(6)
+}
+
+model User {
+  Id                  String    @id() @unique() @default(uuid()) @db.Uuid
+  Username            String    @unique() @db.VarChar
+  Password            String    @db.VarChar
+  Email               String?   @unique() @db.VarChar
+  FirstName           String?   @db.VarChar
+  LastName            String?   @db.VarChar
+  FirstLoginCompleted Boolean   @default(false)
+  IsOnline            Boolean   @default(false)
+  IsBanned            Boolean   @default(false)
+  BanReason           String?   @db.VarChar
+  BanExpiresAt        DateTime? @db.Timestamp(6)
+  IsVerified          Boolean   @default(false)
+  LastLogin           DateTime? @db.Timestamp(6)
+  CreatedAt           DateTime  @default(now()) @db.Timestamp(6)
+  UpdatedAt           DateTime  @default(now()) @db.Timestamp(6)
+  // user has many roles
+  Roles               Role[]    @relation("UserRoles")
+
+  // user has one privacy settings
+  PrivacySettings UserPrivacySettings?
+}
+
+model UserPrivacySettings {
+  Id                  String    @id() @unique() @default(uuid()) @db.Uuid
+  UserId              String    @unique() @db.Uuid
+  ShowOnlineStatus    Boolean   @default(true)
+  ShowFirstName       Boolean   @default(false)
+  ShowLastName        Boolean   @default(false)
+  ShowLastNameInitial Boolean   @default(false)
+  ShowLastLogin       DateTime? @db.Timestamp(6)
+  CreatedAt           DateTime  @default(now()) @db.Timestamp(6)
+
+  // relations
+  User User @relation(fields: [UserId], references: [Id])
+}
+
+model Role {
+  Id          Int      @id() @default(autoincrement())
+  Name        String   @db.VarChar
+  Description String?  @db.VarChar
+  Slug        String   @unique() @db.VarChar
+  CreatedAt   DateTime @default(now()) @db.Timestamp(6)
+  UpdatedAt   DateTime @default(now()) @db.Timestamp(6)
+
+  // role has many permissions
+  Permissions Permission[] @relation("RolePermissions")
+
+  // role has many users
+  Users User[] @relation("UserRoles")
+}
+
+model Permission {
+  Id          Int     @id() @default(autoincrement())
+  Name        String  @db.VarChar
+  Description String? @db.VarChar
+  Slug        String  @unique() @db.VarChar
+  Entity      String  @db.VarChar
+  Action      String  @db.VarChar
+
+  // relations
+  // permission has many roles
+  Roles Role[] @relation("RolePermissions")
 }
 
 model Livery {
@@ -66,6 +132,32 @@ model VirtualAirline {
 
   // relations
   World World? @relation(fields: [WorldId], references: [Id])
+
+  // relations
+  VARoles VirtualAirlineRole[]
+  Members Member[]
+}
+
+model VirtualAirlineRole {
+  Id                                     String    @id() @default(uuid()) @db.Uuid
+  VAId                                   String    @db.Uuid
+  Name                                   String    @db.VarChar
+  Permission                             Int
+  IsDefaultNewRole                       Boolean
+  Color                                  String    @db.VarChar
+  PayPercent                             Decimal   @db.Decimal(10, 2) // Precision: 10, Scale: 2
+  IsHidden                               Boolean
+  RestrictLoadingVAJobsIntoNonVAAircraft Boolean
+  RestrictLoadingNonVAJobsIntoVAAircraft Boolean
+  PayWeekly                              Decimal   @db.Decimal(10, 2) // Precision: 10, Scale: 2
+  PayPerFlightHour                       Decimal   @db.Decimal(10, 2) // Precision: 10, Scale: 2
+  LastRefresh                            DateTime? @db.Timestamp(6)
+  CreatedAt                              DateTime  @default(now()) @db.Timestamp(6)
+  UpdatedAt                              DateTime  @default(now()) @db.Timestamp(6)
+
+  // relations
+  VirtualAirline VirtualAirline @relation(fields: [VAId], references: [Id])
+  Members        Member[]
 }
 
 model World {
@@ -78,6 +170,36 @@ model World {
 
   // relations
   VirtualAirlines VirtualAirline[]
+}
+
+model Member {
+  Id                        String    @id() @default(uuid()) @db.Uuid
+  VAId                      String    @db.Uuid
+  CompanyId                 String    @db.Uuid
+  CompanyName               String    @db.VarChar
+  AirlineCode               String    @unique() @db.VarChar
+  LastConnection            DateTime? @db.Timestamp(6)
+  Reputation                Decimal   @db.Decimal(10, 3)
+  CompanyCreationDate       DateTime  @db.Timestamp(6)
+  CompanyLevel              Int
+  CompanyLevelXP            Int
+  VARoleId                  String    @db.Uuid
+  TotalCargosTransportedLbs Int
+  TotalPAXsTransported      Int
+  TotalEarnedCredits        Decimal
+  TotalSpentCredits         Decimal
+  NumberOfFlights           Int
+  FlightHours               Decimal
+  Color                     String    @db.VarChar
+  ReputationImpact          Decimal
+  LastVAFlightDate          DateTime? @db.Timestamp(6)
+  LastRefresh               DateTime? @db.Timestamp(6)
+  CreatedAt                 DateTime  @default(now()) @db.Timestamp(6)
+  UpdatedAt                 DateTime  @default(now()) @db.Timestamp(6)
+
+  // relations
+  VirtualAirline VirtualAirline     @relation(fields: [VAId], references: [Id])
+  VARole         VirtualAirlineRole @relation(fields: [VARoleId], references: [Id])
 }
 
 model Job {
@@ -100,6 +222,7 @@ model Job {
 
 enum JobType {
   VIRTUAL_AIRLINE_SYNC
+  VIRTUAL_AIRLINE_MEMBERS_SYNC
 }
 
 enum JobStatus {

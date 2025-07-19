@@ -20,12 +20,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.11.0
- * Query Engine version: 9c30299f5a0ea26a96790e13f796dc6094db3173
+ * Prisma Client JS version: 6.12.0
+ * Query Engine version: 8047c96bbd92db98a2abc7c9323ce77c02c89dbc
  */
 Prisma.prismaVersion = {
-  client: "6.11.0",
-  engine: "9c30299f5a0ea26a96790e13f796dc6094db3173"
+  client: "6.12.0",
+  engine: "8047c96bbd92db98a2abc7c9323ce77c02c89dbc"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -131,8 +131,56 @@ exports.Prisma.AppConfigScalarFieldEnum = {
   AcceptingNewMembers: 'AcceptingNewMembers',
   DiscordAuthEnabled: 'DiscordAuthEnabled',
   LocalAuthEnabled: 'LocalAuthEnabled',
+  VirtualAirlineInitiated: 'VirtualAirlineInitiated',
   CreatedAt: 'CreatedAt',
   UpdatedAt: 'UpdatedAt'
+};
+
+exports.Prisma.UserScalarFieldEnum = {
+  Id: 'Id',
+  Username: 'Username',
+  Password: 'Password',
+  Email: 'Email',
+  FirstName: 'FirstName',
+  LastName: 'LastName',
+  FirstLoginCompleted: 'FirstLoginCompleted',
+  IsOnline: 'IsOnline',
+  IsBanned: 'IsBanned',
+  BanReason: 'BanReason',
+  BanExpiresAt: 'BanExpiresAt',
+  IsVerified: 'IsVerified',
+  LastLogin: 'LastLogin',
+  CreatedAt: 'CreatedAt',
+  UpdatedAt: 'UpdatedAt'
+};
+
+exports.Prisma.UserPrivacySettingsScalarFieldEnum = {
+  Id: 'Id',
+  UserId: 'UserId',
+  ShowOnlineStatus: 'ShowOnlineStatus',
+  ShowFirstName: 'ShowFirstName',
+  ShowLastName: 'ShowLastName',
+  ShowLastNameInitial: 'ShowLastNameInitial',
+  ShowLastLogin: 'ShowLastLogin',
+  CreatedAt: 'CreatedAt'
+};
+
+exports.Prisma.RoleScalarFieldEnum = {
+  Id: 'Id',
+  Name: 'Name',
+  Description: 'Description',
+  Slug: 'Slug',
+  CreatedAt: 'CreatedAt',
+  UpdatedAt: 'UpdatedAt'
+};
+
+exports.Prisma.PermissionScalarFieldEnum = {
+  Id: 'Id',
+  Name: 'Name',
+  Description: 'Description',
+  Slug: 'Slug',
+  Entity: 'Entity',
+  Action: 'Action'
 };
 
 exports.Prisma.LiveryScalarFieldEnum = {
@@ -177,11 +225,55 @@ exports.Prisma.VirtualAirlineScalarFieldEnum = {
   UpdatedAt: 'UpdatedAt'
 };
 
+exports.Prisma.VirtualAirlineRoleScalarFieldEnum = {
+  Id: 'Id',
+  VAId: 'VAId',
+  Name: 'Name',
+  Permission: 'Permission',
+  IsDefaultNewRole: 'IsDefaultNewRole',
+  Color: 'Color',
+  PayPercent: 'PayPercent',
+  IsHidden: 'IsHidden',
+  RestrictLoadingVAJobsIntoNonVAAircraft: 'RestrictLoadingVAJobsIntoNonVAAircraft',
+  RestrictLoadingNonVAJobsIntoVAAircraft: 'RestrictLoadingNonVAJobsIntoVAAircraft',
+  PayWeekly: 'PayWeekly',
+  PayPerFlightHour: 'PayPerFlightHour',
+  LastRefresh: 'LastRefresh',
+  CreatedAt: 'CreatedAt',
+  UpdatedAt: 'UpdatedAt'
+};
+
 exports.Prisma.WorldScalarFieldEnum = {
   Id: 'Id',
   Name: 'Name',
   Slug: 'Slug',
   Description: 'Description',
+  CreatedAt: 'CreatedAt',
+  UpdatedAt: 'UpdatedAt'
+};
+
+exports.Prisma.MemberScalarFieldEnum = {
+  Id: 'Id',
+  VAId: 'VAId',
+  CompanyId: 'CompanyId',
+  CompanyName: 'CompanyName',
+  AirlineCode: 'AirlineCode',
+  LastConnection: 'LastConnection',
+  Reputation: 'Reputation',
+  CompanyCreationDate: 'CompanyCreationDate',
+  CompanyLevel: 'CompanyLevel',
+  CompanyLevelXP: 'CompanyLevelXP',
+  VARoleId: 'VARoleId',
+  TotalCargosTransportedLbs: 'TotalCargosTransportedLbs',
+  TotalPAXsTransported: 'TotalPAXsTransported',
+  TotalEarnedCredits: 'TotalEarnedCredits',
+  TotalSpentCredits: 'TotalSpentCredits',
+  NumberOfFlights: 'NumberOfFlights',
+  FlightHours: 'FlightHours',
+  Color: 'Color',
+  ReputationImpact: 'ReputationImpact',
+  LastVAFlightDate: 'LastVAFlightDate',
+  LastRefresh: 'LastRefresh',
   CreatedAt: 'CreatedAt',
   UpdatedAt: 'UpdatedAt'
 };
@@ -230,7 +322,8 @@ exports.Prisma.JsonNullValueFilter = {
   AnyNull: Prisma.AnyNull
 };
 exports.JobType = exports.$Enums.JobType = {
-  VIRTUAL_AIRLINE_SYNC: 'VIRTUAL_AIRLINE_SYNC'
+  VIRTUAL_AIRLINE_SYNC: 'VIRTUAL_AIRLINE_SYNC',
+  VIRTUAL_AIRLINE_MEMBERS_SYNC: 'VIRTUAL_AIRLINE_MEMBERS_SYNC'
 };
 
 exports.JobStatus = exports.$Enums.JobStatus = {
@@ -257,9 +350,15 @@ exports.CronExpression = exports.$Enums.CronExpression = {
 
 exports.Prisma.ModelName = {
   AppConfig: 'AppConfig',
+  User: 'User',
+  UserPrivacySettings: 'UserPrivacySettings',
+  Role: 'Role',
+  Permission: 'Permission',
   Livery: 'Livery',
   VirtualAirline: 'VirtualAirline',
+  VirtualAirlineRole: 'VirtualAirlineRole',
   World: 'World',
+  Member: 'Member',
   Job: 'Job'
 };
 

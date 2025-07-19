@@ -4,7 +4,8 @@ import { eachOfSeries } from 'async';
 import { LoggerService } from '@/logger/logger.service';
 import SeedData from './SeederData';
 import { PrismaService } from '@prisma/prisma.service';
-import { AppConfig, Job, Livery, Prisma, World } from 'prisma/generated/prisma';
+import { AppConfig, Job, Livery, Permission, Prisma, Role, User, World } from 'prisma/generated/prisma';
+import { HashService } from '@/hash/hash.service';
 
 @Injectable()
 export class SeederService {
@@ -13,6 +14,7 @@ export class SeederService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly configService: ConfigService,
+    private readonly hashService: HashService,
   ) {
     this.logger.setContext(SeederService.name);
   }
@@ -26,30 +28,30 @@ export class SeederService {
         'Database seeding is disabled. Set the SEED_DATABASE environment variable to true to enable seeding.',
       );
       return;
-    // } else if (!SeedData.roles || !SeedData.users || !SeedData.permissions) {
-    //   this.logger.debug('No roles, users, or permissions to seed.');
-    //   return;
+    } else if (!SeedData.roles || !SeedData.users || !SeedData.permissions) {
+      this.logger.debug('No roles, users, or permissions to seed.');
+      return;
     } else {
       // first seed permissions
-      // await this._seedPermissions(SeedData.permissions)
-      //   .then(async (permissions: Permission[]) => {
-      //     this.logger.debug(`${permissions.length} Permissions seeded.`);
-      //   })
-      //   .catch((err) => {
-      //     this.logger.error('Error seeding permissions:', err);
-      //   });
+      await this._seedPermissions(SeedData.permissions)
+        .then(async (permissions: Permission[]) => {
+          this.logger.debug(`${permissions.length} Permissions seeded.`);
+        })
+        .catch((err) => {
+          this.logger.error('Error seeding permissions:', err);
+        });
         
       // // seed userRoles, pass in the user roles to seed, and return the user roles that were created.
-      // await this._seedRoles(SeedData.roles)
-      //   .then(async (roles: Role[]) => {
-      //     this.logger.debug(`${roles.length} Roles seeded.`);
+      await this._seedRoles(SeedData.roles)
+        .then(async (roles: Role[]) => {
+          this.logger.debug(`${roles.length} Roles seeded.`);
 
-      //     let users: User[] = await this._seedUsers(SeedData.users);
-      //     this.logger.debug(`${users.length} Users seeded.`);
-      //   })
-      //   .catch((err) => {
-      //     this.logger.error('Error seeding user roles:', err);
-      //   });
+          let users: User[] = await this._seedUsers(SeedData.users);
+          this.logger.debug(`${users.length} Users seeded.`);
+        })
+        .catch((err) => {
+          this.logger.error('Error seeding user roles:', err);
+        });
 
       // then seed worlds
       await this._seedWorlds(SeedData.worlds)
@@ -88,11 +90,11 @@ export class SeederService {
 
       // then print a message that seeding is complete with the number of users and roles created.
       this.logger.debug('Seeding complete.');
+
     }
   }
 
-  /**
-  private async _seedPermissions(seedPermissions: CreatePermissionDto[]) {
+  private async _seedPermissions(seedPermissions: Prisma.PermissionCreateInput[]) {
     return new Promise(async (resolve, reject) => {
       if (!seedPermissions || seedPermissions.length === 0) {
         this.logger.debug('No permissions to seed.');
@@ -105,7 +107,7 @@ export class SeederService {
       // iterate over the permissions and seed them one by one.
       eachOfSeries(
         seedPermissions,
-        async (createPermission: CreatePermissionDto, i: number) => {
+        async (createPermission: Prisma.PermissionCreateInput, i: number) => {
           this.logger.debug(`Seeding permission ${i + 1} of ${seedPermissions.length}.`);
           const permission: Permission = await this._seedPermission(createPermission);
           permissions.push(permission);
@@ -123,30 +125,31 @@ export class SeederService {
     });
   }
   
-  private async _seedPermission(createPermission: CreatePermissionDto): Promise<Permission> {
+  private async _seedPermission(createPermission: Prisma.PermissionCreateInput): Promise<Permission> {
     return new Promise(async (resolve, reject) => {
       if (!createPermission) {
         this.logger.debug('No permission to seed.');
         return reject('no permission to seed');
       }
 
-      this.logger.debug(`Seeding permission ${createPermission.slug}.`);
-      let permission: Permission|null = await this.permissionRepo.findOne({
+      this.logger.debug(`Seeding permission ${createPermission.Slug}.`);
+      let permission: Permission|null = await this.prisma.permission.findFirst({
         where: {
-          slug: createPermission.slug,
+          Slug: createPermission.Slug,
         },
       });
 
       if (!permission) {
-        permission = new Permission(createPermission);
-        permission = await this.permissionRepo.save(permission);
+        permission = await this.prisma.permission.create({
+          data: createPermission,
+        });
       }
 
       return resolve(permission);
     });
   }
 
-  private async _seedRoles(userRoles: CreateRoleDto[]): Promise<Role[]> {
+  private async _seedRoles(userRoles: Prisma.RoleCreateInput[]): Promise<Role[]> {
     return new Promise(async (resolve, reject) => {
     if (!userRoles || userRoles.length === 0) {
       this.logger.debug('No user roles to seed.');
@@ -158,7 +161,7 @@ export class SeederService {
       // iterate over the user roles and seed them one by one.
       eachOfSeries(
         userRoles,
-        async (userRole: CreateRoleDto) => {
+        async (userRole: Prisma.RoleCreateInput) => {
           const role: Role|null = await this._seedRole(userRole);
           if (role) {
             roles.push(role);
@@ -179,7 +182,7 @@ export class SeederService {
     })
   }
 
-  private async _seedUsers(seedUsers: CreateUserDto[]): Promise<User[]> {
+  private async _seedUsers(seedUsers: Prisma.UserCreateInput[]): Promise<User[]> {
     return new Promise(async (resolve, reject) => {
       if (!seedUsers || seedUsers.length === 0) {
         this.logger.debug('No users to seed.');
@@ -192,7 +195,7 @@ export class SeederService {
       // iterate over the user roles and seed them one by one.
       eachOfSeries(
         seedUsers,
-        async (createUser: CreateUserDto, i: number) => {
+        async (createUser: Prisma.UserCreateInput, i: number) => {
           this.logger.debug(`Seeding user ${i + 1} of ${seedUsers.length}.`);
 
           const user: User = await this._seedUser(createUser);
@@ -214,88 +217,99 @@ export class SeederService {
     });
   }
 
-  private async _seedRole(userRoleDto: CreateRoleDto) {
+  private async _seedRole(userRoleDto: Prisma.RoleCreateInput) {
     // see if the role exists in the database.
     this.logger.debug(
-      `Checking if role '${userRoleDto.slug}' exists in the database.`,
+      `Checking if role '${userRoleDto.Slug}' exists in the database.`,
     );
-    let role: Role | null = await this.roleRepo.findOne({
+    let role: Role | null = await this.prisma.role.findFirst({
       where: {
-        slug: userRoleDto.slug,
+        Slug: userRoleDto.Slug,
       },
     });
 
     if (!role) {
       this.logger.debug(
-        `Role '${userRoleDto.slug}' does not exist in the database. Creating it now.`,
+        `Role '${userRoleDto.Slug}' does not exist in the database. Creating it now.`,
       );
-      role = new Role(userRoleDto);
+      role = await this.prisma.role.create({
+        data: userRoleDto,
+      });
 
-      if (userRoleDto.permissions) {
-        const permissions = await this.permissionRepo.find({
-          where: {
-            slug: In(userRoleDto.permissions),
-          },
-        });
-
-        role.permissions = permissions;
-      }
-
-      role = await this.roleRepo.save(role);
     }
 
-    this.logger.debug(`Role '${role.slug}' has been created.`);
+    this.logger.debug(`Role '${role.Slug}' has been created.`);
 
     return role;
   }
 
-  private async _seedUser(user: CreateUserDto) {
+  private async _seedUser(user: Prisma.UserCreateInput) {
     this.logger.debug(
-      `Checking if user '${user.username}' exists in the database.`,
+      `Checking if user '${user.Username}' exists in the database.`,
     );
     // see if the user exists in the database.
-    let dbUser: User | null = await this.userRepo.findOne({
+    let dbUser: User | null = await this.prisma.user.findFirst({
       where: {
-        username: user.username,
+        Username: user.Username,
       },
     });
 
     // if the user does not exist, create it.
     if (!dbUser) {
       this.logger.debug(
-        `User '${user.username}' does not exist in the database. Creating it now.`,
+        `User '${user.Username}' does not exist in the database. Creating it now.`,
       );
-      const hash = user.password ? await this.hashService.hash(user.password) : undefined;
-      const roles = await this.roleRepo
-        .createQueryBuilder('roles')
-        .where('roles.slug IN (:...slugs)', { slugs: user.roles })
-        .getMany();
+      const hash = user.Password ? await this.hashService.hash(user.Password) : undefined;
 
-      console.log(roles);
+      if (!hash) {
+        this.logger.error('Error seeding user:', 'No password hash found.');
+        return Promise.reject('no password hash found');
+      }
 
-      dbUser = this.userRepo.create({
-        username: user.username,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
-        password: hash,
-        firstLoginCompleted: user.firstLoginCompleted || false,
-        roles: roles,
+      dbUser = await this.prisma.user.create({
+        data: {
+          Username: user.Username,
+          FirstName: user.FirstName,
+          LastName: user.LastName,
+          Email: user.Email,
+          Password: hash,
+          FirstLoginCompleted: user.FirstLoginCompleted || false,
+          Roles: {
+            connect: user.Roles?.connect,
+          },
+          PrivacySettings: {
+            create: user.PrivacySettings?.create,
+          },
+        },
       });
 
-      dbUser = await this.userRepo.save(dbUser);
+      let rolesString = '';
+      if (user.Roles && user.Roles.connect) {
+        const rolesConnect = user.Roles.connect;
+        let roleSlugs: string[] = [];
+        if (Array.isArray(rolesConnect)) {
+          roleSlugs = rolesConnect.map((role) => role.Slug).filter((slug): slug is string => !!slug);
+        } else if (rolesConnect && typeof rolesConnect === 'object' && 'Slug' in rolesConnect) {
+          if (rolesConnect.Slug) {
+            roleSlugs = [rolesConnect.Slug];
+          }
+        }
+        if (roleSlugs.length > 0) {
+          rolesString = ` and roles ${roleSlugs.join(', ')}`;
+        }
+      }
+
       this.logger.log(
-        `User '${dbUser.username}' has been created with password '${user.password}'${(user.roles && user.roles.length > 0) ? ` and roles ${user.roles.join(', ')}` : ''}.`,
+        `User '${dbUser.Username}' has been created with password '${user.Password}'${rolesString}.`,
       );
     } else {
       this.logger.debug(
-        `User '${user.username}' already exists in the database.`,
+        `User '${user.Username}' already exists in the database.`,
       );
     }
 
     return dbUser;
   }
- */
 
   private async _seedWorlds(seedWorlds: Prisma.WorldCreateInput[]): Promise<World[]> {
     return new Promise(async (resolve, reject) => {

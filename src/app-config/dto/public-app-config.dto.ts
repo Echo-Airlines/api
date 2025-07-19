@@ -17,6 +17,7 @@ export class PublicAppConfigDto {
     AcceptingNewMembers: boolean;
     DiscordAuthEnabled: boolean;
     LocalAuthEnabled: boolean;  
+    VirtualAirlineInitiated: boolean;
 
     constructor(appConfig: AppConfig) {
         this.OnAirSyncEnabled = appConfig.OnAirSyncEnabled;
@@ -28,5 +29,6 @@ export class PublicAppConfigDto {
         this.AcceptingNewMembers = appConfig.AcceptingNewMembers;
         this.DiscordAuthEnabled = appConfig.DiscordAuthEnabled;
         this.LocalAuthEnabled = appConfig.LocalAuthEnabled;
+        this.VirtualAirlineInitiated = appConfig.VirtualAirlineInitiated ?? false;
     }
 }

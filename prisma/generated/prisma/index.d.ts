@@ -19,6 +19,26 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type AppConfig = $Result.DefaultSelection<Prisma.$AppConfigPayload>
 /**
+ * Model User
+ * 
+ */
+export type User = $Result.DefaultSelection<Prisma.$UserPayload>
+/**
+ * Model UserPrivacySettings
+ * 
+ */
+export type UserPrivacySettings = $Result.DefaultSelection<Prisma.$UserPrivacySettingsPayload>
+/**
+ * Model Role
+ * 
+ */
+export type Role = $Result.DefaultSelection<Prisma.$RolePayload>
+/**
+ * Model Permission
+ * 
+ */
+export type Permission = $Result.DefaultSelection<Prisma.$PermissionPayload>
+/**
  * Model Livery
  * 
  */
@@ -29,10 +49,20 @@ export type Livery = $Result.DefaultSelection<Prisma.$LiveryPayload>
  */
 export type VirtualAirline = $Result.DefaultSelection<Prisma.$VirtualAirlinePayload>
 /**
+ * Model VirtualAirlineRole
+ * 
+ */
+export type VirtualAirlineRole = $Result.DefaultSelection<Prisma.$VirtualAirlineRolePayload>
+/**
  * Model World
  * 
  */
 export type World = $Result.DefaultSelection<Prisma.$WorldPayload>
+/**
+ * Model Member
+ * 
+ */
+export type Member = $Result.DefaultSelection<Prisma.$MemberPayload>
 /**
  * Model Job
  * 
@@ -44,7 +74,8 @@ export type Job = $Result.DefaultSelection<Prisma.$JobPayload>
  */
 export namespace $Enums {
   export const JobType: {
-  VIRTUAL_AIRLINE_SYNC: 'VIRTUAL_AIRLINE_SYNC'
+  VIRTUAL_AIRLINE_SYNC: 'VIRTUAL_AIRLINE_SYNC',
+  VIRTUAL_AIRLINE_MEMBERS_SYNC: 'VIRTUAL_AIRLINE_MEMBERS_SYNC'
 };
 
 export type JobType = (typeof JobType)[keyof typeof JobType]
@@ -227,6 +258,46 @@ export class PrismaClient<
   get appConfig(): Prisma.AppConfigDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.user`: Exposes CRUD operations for the **User** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Users
+    * const users = await prisma.user.findMany()
+    * ```
+    */
+  get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.userPrivacySettings`: Exposes CRUD operations for the **UserPrivacySettings** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UserPrivacySettings
+    * const userPrivacySettings = await prisma.userPrivacySettings.findMany()
+    * ```
+    */
+  get userPrivacySettings(): Prisma.UserPrivacySettingsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.role`: Exposes CRUD operations for the **Role** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Roles
+    * const roles = await prisma.role.findMany()
+    * ```
+    */
+  get role(): Prisma.RoleDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.permission`: Exposes CRUD operations for the **Permission** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Permissions
+    * const permissions = await prisma.permission.findMany()
+    * ```
+    */
+  get permission(): Prisma.PermissionDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.livery`: Exposes CRUD operations for the **Livery** model.
     * Example usage:
     * ```ts
@@ -247,6 +318,16 @@ export class PrismaClient<
   get virtualAirline(): Prisma.VirtualAirlineDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.virtualAirlineRole`: Exposes CRUD operations for the **VirtualAirlineRole** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more VirtualAirlineRoles
+    * const virtualAirlineRoles = await prisma.virtualAirlineRole.findMany()
+    * ```
+    */
+  get virtualAirlineRole(): Prisma.VirtualAirlineRoleDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.world`: Exposes CRUD operations for the **World** model.
     * Example usage:
     * ```ts
@@ -255,6 +336,16 @@ export class PrismaClient<
     * ```
     */
   get world(): Prisma.WorldDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.member`: Exposes CRUD operations for the **Member** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Members
+    * const members = await prisma.member.findMany()
+    * ```
+    */
+  get member(): Prisma.MemberDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.job`: Exposes CRUD operations for the **Job** model.
@@ -323,8 +414,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.11.0
-   * Query Engine version: 9c30299f5a0ea26a96790e13f796dc6094db3173
+   * Prisma Client JS version: 6.12.0
+   * Query Engine version: 8047c96bbd92db98a2abc7c9323ce77c02c89dbc
    */
   export type PrismaVersion = {
     client: string
@@ -706,9 +797,15 @@ export namespace Prisma {
 
   export const ModelName: {
     AppConfig: 'AppConfig',
+    User: 'User',
+    UserPrivacySettings: 'UserPrivacySettings',
+    Role: 'Role',
+    Permission: 'Permission',
     Livery: 'Livery',
     VirtualAirline: 'VirtualAirline',
+    VirtualAirlineRole: 'VirtualAirlineRole',
     World: 'World',
+    Member: 'Member',
     Job: 'Job'
   };
 
@@ -728,7 +825,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "appConfig" | "livery" | "virtualAirline" | "world" | "job"
+      modelProps: "appConfig" | "user" | "userPrivacySettings" | "role" | "permission" | "livery" | "virtualAirline" | "virtualAirlineRole" | "world" | "member" | "job"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -803,6 +900,302 @@ export namespace Prisma {
           count: {
             args: Prisma.AppConfigCountArgs<ExtArgs>
             result: $Utils.Optional<AppConfigCountAggregateOutputType> | number
+          }
+        }
+      }
+      User: {
+        payload: Prisma.$UserPayload<ExtArgs>
+        fields: Prisma.UserFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UserFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UserFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+          }
+          findFirst: {
+            args: Prisma.UserFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UserFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+          }
+          findMany: {
+            args: Prisma.UserFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
+          }
+          create: {
+            args: Prisma.UserCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+          }
+          createMany: {
+            args: Prisma.UserCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.UserCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
+          }
+          delete: {
+            args: Prisma.UserDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+          }
+          update: {
+            args: Prisma.UserUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+          }
+          deleteMany: {
+            args: Prisma.UserDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UserUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.UserUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
+          }
+          upsert: {
+            args: Prisma.UserUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+          }
+          aggregate: {
+            args: Prisma.UserAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUser>
+          }
+          groupBy: {
+            args: Prisma.UserGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UserGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UserCountArgs<ExtArgs>
+            result: $Utils.Optional<UserCountAggregateOutputType> | number
+          }
+        }
+      }
+      UserPrivacySettings: {
+        payload: Prisma.$UserPrivacySettingsPayload<ExtArgs>
+        fields: Prisma.UserPrivacySettingsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UserPrivacySettingsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPrivacySettingsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UserPrivacySettingsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPrivacySettingsPayload>
+          }
+          findFirst: {
+            args: Prisma.UserPrivacySettingsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPrivacySettingsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UserPrivacySettingsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPrivacySettingsPayload>
+          }
+          findMany: {
+            args: Prisma.UserPrivacySettingsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPrivacySettingsPayload>[]
+          }
+          create: {
+            args: Prisma.UserPrivacySettingsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPrivacySettingsPayload>
+          }
+          createMany: {
+            args: Prisma.UserPrivacySettingsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.UserPrivacySettingsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPrivacySettingsPayload>[]
+          }
+          delete: {
+            args: Prisma.UserPrivacySettingsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPrivacySettingsPayload>
+          }
+          update: {
+            args: Prisma.UserPrivacySettingsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPrivacySettingsPayload>
+          }
+          deleteMany: {
+            args: Prisma.UserPrivacySettingsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UserPrivacySettingsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.UserPrivacySettingsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPrivacySettingsPayload>[]
+          }
+          upsert: {
+            args: Prisma.UserPrivacySettingsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPrivacySettingsPayload>
+          }
+          aggregate: {
+            args: Prisma.UserPrivacySettingsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUserPrivacySettings>
+          }
+          groupBy: {
+            args: Prisma.UserPrivacySettingsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UserPrivacySettingsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UserPrivacySettingsCountArgs<ExtArgs>
+            result: $Utils.Optional<UserPrivacySettingsCountAggregateOutputType> | number
+          }
+        }
+      }
+      Role: {
+        payload: Prisma.$RolePayload<ExtArgs>
+        fields: Prisma.RoleFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.RoleFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RolePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.RoleFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RolePayload>
+          }
+          findFirst: {
+            args: Prisma.RoleFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RolePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.RoleFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RolePayload>
+          }
+          findMany: {
+            args: Prisma.RoleFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RolePayload>[]
+          }
+          create: {
+            args: Prisma.RoleCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RolePayload>
+          }
+          createMany: {
+            args: Prisma.RoleCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.RoleCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RolePayload>[]
+          }
+          delete: {
+            args: Prisma.RoleDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RolePayload>
+          }
+          update: {
+            args: Prisma.RoleUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RolePayload>
+          }
+          deleteMany: {
+            args: Prisma.RoleDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.RoleUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.RoleUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RolePayload>[]
+          }
+          upsert: {
+            args: Prisma.RoleUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RolePayload>
+          }
+          aggregate: {
+            args: Prisma.RoleAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateRole>
+          }
+          groupBy: {
+            args: Prisma.RoleGroupByArgs<ExtArgs>
+            result: $Utils.Optional<RoleGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.RoleCountArgs<ExtArgs>
+            result: $Utils.Optional<RoleCountAggregateOutputType> | number
+          }
+        }
+      }
+      Permission: {
+        payload: Prisma.$PermissionPayload<ExtArgs>
+        fields: Prisma.PermissionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PermissionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PermissionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PermissionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PermissionPayload>
+          }
+          findFirst: {
+            args: Prisma.PermissionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PermissionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PermissionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PermissionPayload>
+          }
+          findMany: {
+            args: Prisma.PermissionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PermissionPayload>[]
+          }
+          create: {
+            args: Prisma.PermissionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PermissionPayload>
+          }
+          createMany: {
+            args: Prisma.PermissionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PermissionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PermissionPayload>[]
+          }
+          delete: {
+            args: Prisma.PermissionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PermissionPayload>
+          }
+          update: {
+            args: Prisma.PermissionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PermissionPayload>
+          }
+          deleteMany: {
+            args: Prisma.PermissionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PermissionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PermissionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PermissionPayload>[]
+          }
+          upsert: {
+            args: Prisma.PermissionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PermissionPayload>
+          }
+          aggregate: {
+            args: Prisma.PermissionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePermission>
+          }
+          groupBy: {
+            args: Prisma.PermissionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PermissionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PermissionCountArgs<ExtArgs>
+            result: $Utils.Optional<PermissionCountAggregateOutputType> | number
           }
         }
       }
@@ -954,6 +1347,80 @@ export namespace Prisma {
           }
         }
       }
+      VirtualAirlineRole: {
+        payload: Prisma.$VirtualAirlineRolePayload<ExtArgs>
+        fields: Prisma.VirtualAirlineRoleFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.VirtualAirlineRoleFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VirtualAirlineRolePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.VirtualAirlineRoleFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VirtualAirlineRolePayload>
+          }
+          findFirst: {
+            args: Prisma.VirtualAirlineRoleFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VirtualAirlineRolePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.VirtualAirlineRoleFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VirtualAirlineRolePayload>
+          }
+          findMany: {
+            args: Prisma.VirtualAirlineRoleFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VirtualAirlineRolePayload>[]
+          }
+          create: {
+            args: Prisma.VirtualAirlineRoleCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VirtualAirlineRolePayload>
+          }
+          createMany: {
+            args: Prisma.VirtualAirlineRoleCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.VirtualAirlineRoleCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VirtualAirlineRolePayload>[]
+          }
+          delete: {
+            args: Prisma.VirtualAirlineRoleDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VirtualAirlineRolePayload>
+          }
+          update: {
+            args: Prisma.VirtualAirlineRoleUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VirtualAirlineRolePayload>
+          }
+          deleteMany: {
+            args: Prisma.VirtualAirlineRoleDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.VirtualAirlineRoleUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.VirtualAirlineRoleUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VirtualAirlineRolePayload>[]
+          }
+          upsert: {
+            args: Prisma.VirtualAirlineRoleUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VirtualAirlineRolePayload>
+          }
+          aggregate: {
+            args: Prisma.VirtualAirlineRoleAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateVirtualAirlineRole>
+          }
+          groupBy: {
+            args: Prisma.VirtualAirlineRoleGroupByArgs<ExtArgs>
+            result: $Utils.Optional<VirtualAirlineRoleGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.VirtualAirlineRoleCountArgs<ExtArgs>
+            result: $Utils.Optional<VirtualAirlineRoleCountAggregateOutputType> | number
+          }
+        }
+      }
       World: {
         payload: Prisma.$WorldPayload<ExtArgs>
         fields: Prisma.WorldFieldRefs
@@ -1025,6 +1492,80 @@ export namespace Prisma {
           count: {
             args: Prisma.WorldCountArgs<ExtArgs>
             result: $Utils.Optional<WorldCountAggregateOutputType> | number
+          }
+        }
+      }
+      Member: {
+        payload: Prisma.$MemberPayload<ExtArgs>
+        fields: Prisma.MemberFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MemberFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MemberPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MemberFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MemberPayload>
+          }
+          findFirst: {
+            args: Prisma.MemberFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MemberPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MemberFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MemberPayload>
+          }
+          findMany: {
+            args: Prisma.MemberFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MemberPayload>[]
+          }
+          create: {
+            args: Prisma.MemberCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MemberPayload>
+          }
+          createMany: {
+            args: Prisma.MemberCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MemberCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MemberPayload>[]
+          }
+          delete: {
+            args: Prisma.MemberDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MemberPayload>
+          }
+          update: {
+            args: Prisma.MemberUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MemberPayload>
+          }
+          deleteMany: {
+            args: Prisma.MemberDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MemberUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MemberUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MemberPayload>[]
+          }
+          upsert: {
+            args: Prisma.MemberUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MemberPayload>
+          }
+          aggregate: {
+            args: Prisma.MemberAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMember>
+          }
+          groupBy: {
+            args: Prisma.MemberGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MemberGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MemberCountArgs<ExtArgs>
+            result: $Utils.Optional<MemberCountAggregateOutputType> | number
           }
         }
       }
@@ -1187,9 +1728,15 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     appConfig?: AppConfigOmit
+    user?: UserOmit
+    userPrivacySettings?: UserPrivacySettingsOmit
+    role?: RoleOmit
+    permission?: PermissionOmit
     livery?: LiveryOmit
     virtualAirline?: VirtualAirlineOmit
+    virtualAirlineRole?: VirtualAirlineRoleOmit
     world?: WorldOmit
+    member?: MemberOmit
     job?: JobOmit
   }
 
@@ -1281,6 +1828,179 @@ export namespace Prisma {
 
 
   /**
+   * Count Type UserCountOutputType
+   */
+
+  export type UserCountOutputType = {
+    Roles: number
+  }
+
+  export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Roles?: boolean | UserCountOutputTypeCountRolesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserCountOutputType
+     */
+    select?: UserCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountRolesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RoleWhereInput
+  }
+
+
+  /**
+   * Count Type RoleCountOutputType
+   */
+
+  export type RoleCountOutputType = {
+    Permissions: number
+    Users: number
+  }
+
+  export type RoleCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Permissions?: boolean | RoleCountOutputTypeCountPermissionsArgs
+    Users?: boolean | RoleCountOutputTypeCountUsersArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * RoleCountOutputType without action
+   */
+  export type RoleCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoleCountOutputType
+     */
+    select?: RoleCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * RoleCountOutputType without action
+   */
+  export type RoleCountOutputTypeCountPermissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PermissionWhereInput
+  }
+
+  /**
+   * RoleCountOutputType without action
+   */
+  export type RoleCountOutputTypeCountUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserWhereInput
+  }
+
+
+  /**
+   * Count Type PermissionCountOutputType
+   */
+
+  export type PermissionCountOutputType = {
+    Roles: number
+  }
+
+  export type PermissionCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Roles?: boolean | PermissionCountOutputTypeCountRolesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PermissionCountOutputType without action
+   */
+  export type PermissionCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PermissionCountOutputType
+     */
+    select?: PermissionCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PermissionCountOutputType without action
+   */
+  export type PermissionCountOutputTypeCountRolesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RoleWhereInput
+  }
+
+
+  /**
+   * Count Type VirtualAirlineCountOutputType
+   */
+
+  export type VirtualAirlineCountOutputType = {
+    VARoles: number
+    Members: number
+  }
+
+  export type VirtualAirlineCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    VARoles?: boolean | VirtualAirlineCountOutputTypeCountVARolesArgs
+    Members?: boolean | VirtualAirlineCountOutputTypeCountMembersArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * VirtualAirlineCountOutputType without action
+   */
+  export type VirtualAirlineCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VirtualAirlineCountOutputType
+     */
+    select?: VirtualAirlineCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * VirtualAirlineCountOutputType without action
+   */
+  export type VirtualAirlineCountOutputTypeCountVARolesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VirtualAirlineRoleWhereInput
+  }
+
+  /**
+   * VirtualAirlineCountOutputType without action
+   */
+  export type VirtualAirlineCountOutputTypeCountMembersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MemberWhereInput
+  }
+
+
+  /**
+   * Count Type VirtualAirlineRoleCountOutputType
+   */
+
+  export type VirtualAirlineRoleCountOutputType = {
+    Members: number
+  }
+
+  export type VirtualAirlineRoleCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Members?: boolean | VirtualAirlineRoleCountOutputTypeCountMembersArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * VirtualAirlineRoleCountOutputType without action
+   */
+  export type VirtualAirlineRoleCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VirtualAirlineRoleCountOutputType
+     */
+    select?: VirtualAirlineRoleCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * VirtualAirlineRoleCountOutputType without action
+   */
+  export type VirtualAirlineRoleCountOutputTypeCountMembersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MemberWhereInput
+  }
+
+
+  /**
    * Count Type WorldCountOutputType
    */
 
@@ -1346,6 +2066,7 @@ export namespace Prisma {
     AcceptingNewMembers: boolean | null
     DiscordAuthEnabled: boolean | null
     LocalAuthEnabled: boolean | null
+    VirtualAirlineInitiated: boolean | null
     CreatedAt: Date | null
     UpdatedAt: Date | null
   }
@@ -1361,6 +2082,7 @@ export namespace Prisma {
     AcceptingNewMembers: boolean | null
     DiscordAuthEnabled: boolean | null
     LocalAuthEnabled: boolean | null
+    VirtualAirlineInitiated: boolean | null
     CreatedAt: Date | null
     UpdatedAt: Date | null
   }
@@ -1376,6 +2098,7 @@ export namespace Prisma {
     AcceptingNewMembers: number
     DiscordAuthEnabled: number
     LocalAuthEnabled: number
+    VirtualAirlineInitiated: number
     CreatedAt: number
     UpdatedAt: number
     _all: number
@@ -1401,6 +2124,7 @@ export namespace Prisma {
     AcceptingNewMembers?: true
     DiscordAuthEnabled?: true
     LocalAuthEnabled?: true
+    VirtualAirlineInitiated?: true
     CreatedAt?: true
     UpdatedAt?: true
   }
@@ -1416,6 +2140,7 @@ export namespace Prisma {
     AcceptingNewMembers?: true
     DiscordAuthEnabled?: true
     LocalAuthEnabled?: true
+    VirtualAirlineInitiated?: true
     CreatedAt?: true
     UpdatedAt?: true
   }
@@ -1431,6 +2156,7 @@ export namespace Prisma {
     AcceptingNewMembers?: true
     DiscordAuthEnabled?: true
     LocalAuthEnabled?: true
+    VirtualAirlineInitiated?: true
     CreatedAt?: true
     UpdatedAt?: true
     _all?: true
@@ -1533,6 +2259,7 @@ export namespace Prisma {
     AcceptingNewMembers: boolean
     DiscordAuthEnabled: boolean
     LocalAuthEnabled: boolean
+    VirtualAirlineInitiated: boolean
     CreatedAt: Date
     UpdatedAt: Date
     _count: AppConfigCountAggregateOutputType | null
@@ -1567,6 +2294,7 @@ export namespace Prisma {
     AcceptingNewMembers?: boolean
     DiscordAuthEnabled?: boolean
     LocalAuthEnabled?: boolean
+    VirtualAirlineInitiated?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
   }, ExtArgs["result"]["appConfig"]>
@@ -1582,6 +2310,7 @@ export namespace Prisma {
     AcceptingNewMembers?: boolean
     DiscordAuthEnabled?: boolean
     LocalAuthEnabled?: boolean
+    VirtualAirlineInitiated?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
   }, ExtArgs["result"]["appConfig"]>
@@ -1597,6 +2326,7 @@ export namespace Prisma {
     AcceptingNewMembers?: boolean
     DiscordAuthEnabled?: boolean
     LocalAuthEnabled?: boolean
+    VirtualAirlineInitiated?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
   }, ExtArgs["result"]["appConfig"]>
@@ -1612,11 +2342,12 @@ export namespace Prisma {
     AcceptingNewMembers?: boolean
     DiscordAuthEnabled?: boolean
     LocalAuthEnabled?: boolean
+    VirtualAirlineInitiated?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
   }
 
-  export type AppConfigOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "OnAirSyncEnabled" | "OnAirVASyncEnabled" | "OnAirVAMembersSyncEnabled" | "OnAirCompanySyncEnabled" | "DiscordServerInviteLink" | "DiscordServerInviteLinkEnabled" | "AcceptingNewMembers" | "DiscordAuthEnabled" | "LocalAuthEnabled" | "CreatedAt" | "UpdatedAt", ExtArgs["result"]["appConfig"]>
+  export type AppConfigOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "OnAirSyncEnabled" | "OnAirVASyncEnabled" | "OnAirVAMembersSyncEnabled" | "OnAirCompanySyncEnabled" | "DiscordServerInviteLink" | "DiscordServerInviteLinkEnabled" | "AcceptingNewMembers" | "DiscordAuthEnabled" | "LocalAuthEnabled" | "VirtualAirlineInitiated" | "CreatedAt" | "UpdatedAt", ExtArgs["result"]["appConfig"]>
 
   export type $AppConfigPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "AppConfig"
@@ -1632,6 +2363,7 @@ export namespace Prisma {
       AcceptingNewMembers: boolean
       DiscordAuthEnabled: boolean
       LocalAuthEnabled: boolean
+      VirtualAirlineInitiated: boolean
       CreatedAt: Date
       UpdatedAt: Date
     }, ExtArgs["result"]["appConfig"]>
@@ -2067,6 +2799,7 @@ export namespace Prisma {
     readonly AcceptingNewMembers: FieldRef<"AppConfig", 'Boolean'>
     readonly DiscordAuthEnabled: FieldRef<"AppConfig", 'Boolean'>
     readonly LocalAuthEnabled: FieldRef<"AppConfig", 'Boolean'>
+    readonly VirtualAirlineInitiated: FieldRef<"AppConfig", 'Boolean'>
     readonly CreatedAt: FieldRef<"AppConfig", 'DateTime'>
     readonly UpdatedAt: FieldRef<"AppConfig", 'DateTime'>
   }
@@ -2432,6 +3165,4588 @@ export namespace Prisma {
      * Omit specific fields from the AppConfig
      */
     omit?: AppConfigOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model User
+   */
+
+  export type AggregateUser = {
+    _count: UserCountAggregateOutputType | null
+    _min: UserMinAggregateOutputType | null
+    _max: UserMaxAggregateOutputType | null
+  }
+
+  export type UserMinAggregateOutputType = {
+    Id: string | null
+    Username: string | null
+    Password: string | null
+    Email: string | null
+    FirstName: string | null
+    LastName: string | null
+    FirstLoginCompleted: boolean | null
+    IsOnline: boolean | null
+    IsBanned: boolean | null
+    BanReason: string | null
+    BanExpiresAt: Date | null
+    IsVerified: boolean | null
+    LastLogin: Date | null
+    CreatedAt: Date | null
+    UpdatedAt: Date | null
+  }
+
+  export type UserMaxAggregateOutputType = {
+    Id: string | null
+    Username: string | null
+    Password: string | null
+    Email: string | null
+    FirstName: string | null
+    LastName: string | null
+    FirstLoginCompleted: boolean | null
+    IsOnline: boolean | null
+    IsBanned: boolean | null
+    BanReason: string | null
+    BanExpiresAt: Date | null
+    IsVerified: boolean | null
+    LastLogin: Date | null
+    CreatedAt: Date | null
+    UpdatedAt: Date | null
+  }
+
+  export type UserCountAggregateOutputType = {
+    Id: number
+    Username: number
+    Password: number
+    Email: number
+    FirstName: number
+    LastName: number
+    FirstLoginCompleted: number
+    IsOnline: number
+    IsBanned: number
+    BanReason: number
+    BanExpiresAt: number
+    IsVerified: number
+    LastLogin: number
+    CreatedAt: number
+    UpdatedAt: number
+    _all: number
+  }
+
+
+  export type UserMinAggregateInputType = {
+    Id?: true
+    Username?: true
+    Password?: true
+    Email?: true
+    FirstName?: true
+    LastName?: true
+    FirstLoginCompleted?: true
+    IsOnline?: true
+    IsBanned?: true
+    BanReason?: true
+    BanExpiresAt?: true
+    IsVerified?: true
+    LastLogin?: true
+    CreatedAt?: true
+    UpdatedAt?: true
+  }
+
+  export type UserMaxAggregateInputType = {
+    Id?: true
+    Username?: true
+    Password?: true
+    Email?: true
+    FirstName?: true
+    LastName?: true
+    FirstLoginCompleted?: true
+    IsOnline?: true
+    IsBanned?: true
+    BanReason?: true
+    BanExpiresAt?: true
+    IsVerified?: true
+    LastLogin?: true
+    CreatedAt?: true
+    UpdatedAt?: true
+  }
+
+  export type UserCountAggregateInputType = {
+    Id?: true
+    Username?: true
+    Password?: true
+    Email?: true
+    FirstName?: true
+    LastName?: true
+    FirstLoginCompleted?: true
+    IsOnline?: true
+    IsBanned?: true
+    BanReason?: true
+    BanExpiresAt?: true
+    IsVerified?: true
+    LastLogin?: true
+    CreatedAt?: true
+    UpdatedAt?: true
+    _all?: true
+  }
+
+  export type UserAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which User to aggregate.
+     */
+    where?: UserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Users to fetch.
+     */
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Users from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Users.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Users
+    **/
+    _count?: true | UserCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UserMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UserMaxAggregateInputType
+  }
+
+  export type GetUserAggregateType<T extends UserAggregateArgs> = {
+        [P in keyof T & keyof AggregateUser]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUser[P]>
+      : GetScalarType<T[P], AggregateUser[P]>
+  }
+
+
+
+
+  export type UserGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserWhereInput
+    orderBy?: UserOrderByWithAggregationInput | UserOrderByWithAggregationInput[]
+    by: UserScalarFieldEnum[] | UserScalarFieldEnum
+    having?: UserScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UserCountAggregateInputType | true
+    _min?: UserMinAggregateInputType
+    _max?: UserMaxAggregateInputType
+  }
+
+  export type UserGroupByOutputType = {
+    Id: string
+    Username: string
+    Password: string
+    Email: string | null
+    FirstName: string | null
+    LastName: string | null
+    FirstLoginCompleted: boolean
+    IsOnline: boolean
+    IsBanned: boolean
+    BanReason: string | null
+    BanExpiresAt: Date | null
+    IsVerified: boolean
+    LastLogin: Date | null
+    CreatedAt: Date
+    UpdatedAt: Date
+    _count: UserCountAggregateOutputType | null
+    _min: UserMinAggregateOutputType | null
+    _max: UserMaxAggregateOutputType | null
+  }
+
+  type GetUserGroupByPayload<T extends UserGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserGroupByOutputType[P]>
+            : GetScalarType<T[P], UserGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    Id?: boolean
+    Username?: boolean
+    Password?: boolean
+    Email?: boolean
+    FirstName?: boolean
+    LastName?: boolean
+    FirstLoginCompleted?: boolean
+    IsOnline?: boolean
+    IsBanned?: boolean
+    BanReason?: boolean
+    BanExpiresAt?: boolean
+    IsVerified?: boolean
+    LastLogin?: boolean
+    CreatedAt?: boolean
+    UpdatedAt?: boolean
+    Roles?: boolean | User$RolesArgs<ExtArgs>
+    PrivacySettings?: boolean | User$PrivacySettingsArgs<ExtArgs>
+    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["user"]>
+
+  export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    Id?: boolean
+    Username?: boolean
+    Password?: boolean
+    Email?: boolean
+    FirstName?: boolean
+    LastName?: boolean
+    FirstLoginCompleted?: boolean
+    IsOnline?: boolean
+    IsBanned?: boolean
+    BanReason?: boolean
+    BanExpiresAt?: boolean
+    IsVerified?: boolean
+    LastLogin?: boolean
+    CreatedAt?: boolean
+    UpdatedAt?: boolean
+  }, ExtArgs["result"]["user"]>
+
+  export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    Id?: boolean
+    Username?: boolean
+    Password?: boolean
+    Email?: boolean
+    FirstName?: boolean
+    LastName?: boolean
+    FirstLoginCompleted?: boolean
+    IsOnline?: boolean
+    IsBanned?: boolean
+    BanReason?: boolean
+    BanExpiresAt?: boolean
+    IsVerified?: boolean
+    LastLogin?: boolean
+    CreatedAt?: boolean
+    UpdatedAt?: boolean
+  }, ExtArgs["result"]["user"]>
+
+  export type UserSelectScalar = {
+    Id?: boolean
+    Username?: boolean
+    Password?: boolean
+    Email?: boolean
+    FirstName?: boolean
+    LastName?: boolean
+    FirstLoginCompleted?: boolean
+    IsOnline?: boolean
+    IsBanned?: boolean
+    BanReason?: boolean
+    BanExpiresAt?: boolean
+    IsVerified?: boolean
+    LastLogin?: boolean
+    CreatedAt?: boolean
+    UpdatedAt?: boolean
+  }
+
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "Username" | "Password" | "Email" | "FirstName" | "LastName" | "FirstLoginCompleted" | "IsOnline" | "IsBanned" | "BanReason" | "BanExpiresAt" | "IsVerified" | "LastLogin" | "CreatedAt" | "UpdatedAt", ExtArgs["result"]["user"]>
+  export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Roles?: boolean | User$RolesArgs<ExtArgs>
+    PrivacySettings?: boolean | User$PrivacySettingsArgs<ExtArgs>
+    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type UserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "User"
+    objects: {
+      Roles: Prisma.$RolePayload<ExtArgs>[]
+      PrivacySettings: Prisma.$UserPrivacySettingsPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      Id: string
+      Username: string
+      Password: string
+      Email: string | null
+      FirstName: string | null
+      LastName: string | null
+      FirstLoginCompleted: boolean
+      IsOnline: boolean
+      IsBanned: boolean
+      BanReason: string | null
+      BanExpiresAt: Date | null
+      IsVerified: boolean
+      LastLogin: Date | null
+      CreatedAt: Date
+      UpdatedAt: Date
+    }, ExtArgs["result"]["user"]>
+    composites: {}
+  }
+
+  type UserGetPayload<S extends boolean | null | undefined | UserDefaultArgs> = $Result.GetResult<Prisma.$UserPayload, S>
+
+  type UserCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UserFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UserCountAggregateInputType | true
+    }
+
+  export interface UserDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['User'], meta: { name: 'User' } }
+    /**
+     * Find zero or one User that matches the filter.
+     * @param {UserFindUniqueArgs} args - Arguments to find a User
+     * @example
+     * // Get one User
+     * const user = await prisma.user.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UserFindUniqueArgs>(args: SelectSubset<T, UserFindUniqueArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one User that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {UserFindUniqueOrThrowArgs} args - Arguments to find a User
+     * @example
+     * // Get one User
+     * const user = await prisma.user.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UserFindUniqueOrThrowArgs>(args: SelectSubset<T, UserFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first User that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFindFirstArgs} args - Arguments to find a User
+     * @example
+     * // Get one User
+     * const user = await prisma.user.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UserFindFirstArgs>(args?: SelectSubset<T, UserFindFirstArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first User that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFindFirstOrThrowArgs} args - Arguments to find a User
+     * @example
+     * // Get one User
+     * const user = await prisma.user.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UserFindFirstOrThrowArgs>(args?: SelectSubset<T, UserFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Users that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Users
+     * const users = await prisma.user.findMany()
+     * 
+     * // Get first 10 Users
+     * const users = await prisma.user.findMany({ take: 10 })
+     * 
+     * // Only select the `Id`
+     * const userWithIdOnly = await prisma.user.findMany({ select: { Id: true } })
+     * 
+     */
+    findMany<T extends UserFindManyArgs>(args?: SelectSubset<T, UserFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a User.
+     * @param {UserCreateArgs} args - Arguments to create a User.
+     * @example
+     * // Create one User
+     * const User = await prisma.user.create({
+     *   data: {
+     *     // ... data to create a User
+     *   }
+     * })
+     * 
+     */
+    create<T extends UserCreateArgs>(args: SelectSubset<T, UserCreateArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Users.
+     * @param {UserCreateManyArgs} args - Arguments to create many Users.
+     * @example
+     * // Create many Users
+     * const user = await prisma.user.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UserCreateManyArgs>(args?: SelectSubset<T, UserCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Users and returns the data saved in the database.
+     * @param {UserCreateManyAndReturnArgs} args - Arguments to create many Users.
+     * @example
+     * // Create many Users
+     * const user = await prisma.user.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Users and only return the `Id`
+     * const userWithIdOnly = await prisma.user.createManyAndReturn({
+     *   select: { Id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends UserCreateManyAndReturnArgs>(args?: SelectSubset<T, UserCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a User.
+     * @param {UserDeleteArgs} args - Arguments to delete one User.
+     * @example
+     * // Delete one User
+     * const User = await prisma.user.delete({
+     *   where: {
+     *     // ... filter to delete one User
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UserDeleteArgs>(args: SelectSubset<T, UserDeleteArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one User.
+     * @param {UserUpdateArgs} args - Arguments to update one User.
+     * @example
+     * // Update one User
+     * const user = await prisma.user.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UserUpdateArgs>(args: SelectSubset<T, UserUpdateArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Users.
+     * @param {UserDeleteManyArgs} args - Arguments to filter Users to delete.
+     * @example
+     * // Delete a few Users
+     * const { count } = await prisma.user.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UserDeleteManyArgs>(args?: SelectSubset<T, UserDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Users.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Users
+     * const user = await prisma.user.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UserUpdateManyArgs>(args: SelectSubset<T, UserUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Users and returns the data updated in the database.
+     * @param {UserUpdateManyAndReturnArgs} args - Arguments to update many Users.
+     * @example
+     * // Update many Users
+     * const user = await prisma.user.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Users and only return the `Id`
+     * const userWithIdOnly = await prisma.user.updateManyAndReturn({
+     *   select: { Id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends UserUpdateManyAndReturnArgs>(args: SelectSubset<T, UserUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one User.
+     * @param {UserUpsertArgs} args - Arguments to update or create a User.
+     * @example
+     * // Update or create a User
+     * const user = await prisma.user.upsert({
+     *   create: {
+     *     // ... data to create a User
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the User we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UserUpsertArgs>(args: SelectSubset<T, UserUpsertArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Users.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserCountArgs} args - Arguments to filter Users to count.
+     * @example
+     * // Count the number of Users
+     * const count = await prisma.user.count({
+     *   where: {
+     *     // ... the filter for the Users we want to count
+     *   }
+     * })
+    **/
+    count<T extends UserCountArgs>(
+      args?: Subset<T, UserCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a User.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UserAggregateArgs>(args: Subset<T, UserAggregateArgs>): Prisma.PrismaPromise<GetUserAggregateType<T>>
+
+    /**
+     * Group by User.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UserGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserGroupByArgs['orderBy'] }
+        : { orderBy?: UserGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UserGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the User model
+   */
+  readonly fields: UserFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for User.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    Roles<T extends User$RolesArgs<ExtArgs> = {}>(args?: Subset<T, User$RolesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    PrivacySettings<T extends User$PrivacySettingsArgs<ExtArgs> = {}>(args?: Subset<T, User$PrivacySettingsArgs<ExtArgs>>): Prisma__UserPrivacySettingsClient<$Result.GetResult<Prisma.$UserPrivacySettingsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the User model
+   */
+  interface UserFieldRefs {
+    readonly Id: FieldRef<"User", 'String'>
+    readonly Username: FieldRef<"User", 'String'>
+    readonly Password: FieldRef<"User", 'String'>
+    readonly Email: FieldRef<"User", 'String'>
+    readonly FirstName: FieldRef<"User", 'String'>
+    readonly LastName: FieldRef<"User", 'String'>
+    readonly FirstLoginCompleted: FieldRef<"User", 'Boolean'>
+    readonly IsOnline: FieldRef<"User", 'Boolean'>
+    readonly IsBanned: FieldRef<"User", 'Boolean'>
+    readonly BanReason: FieldRef<"User", 'String'>
+    readonly BanExpiresAt: FieldRef<"User", 'DateTime'>
+    readonly IsVerified: FieldRef<"User", 'Boolean'>
+    readonly LastLogin: FieldRef<"User", 'DateTime'>
+    readonly CreatedAt: FieldRef<"User", 'DateTime'>
+    readonly UpdatedAt: FieldRef<"User", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * User findUnique
+   */
+  export type UserFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * Filter, which User to fetch.
+     */
+    where: UserWhereUniqueInput
+  }
+
+  /**
+   * User findUniqueOrThrow
+   */
+  export type UserFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * Filter, which User to fetch.
+     */
+    where: UserWhereUniqueInput
+  }
+
+  /**
+   * User findFirst
+   */
+  export type UserFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * Filter, which User to fetch.
+     */
+    where?: UserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Users to fetch.
+     */
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Users.
+     */
+    cursor?: UserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Users from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Users.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Users.
+     */
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+  }
+
+  /**
+   * User findFirstOrThrow
+   */
+  export type UserFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * Filter, which User to fetch.
+     */
+    where?: UserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Users to fetch.
+     */
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Users.
+     */
+    cursor?: UserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Users from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Users.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Users.
+     */
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+  }
+
+  /**
+   * User findMany
+   */
+  export type UserFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * Filter, which Users to fetch.
+     */
+    where?: UserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Users to fetch.
+     */
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Users.
+     */
+    cursor?: UserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Users from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Users.
+     */
+    skip?: number
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+  }
+
+  /**
+   * User create
+   */
+  export type UserCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * The data needed to create a User.
+     */
+    data: XOR<UserCreateInput, UserUncheckedCreateInput>
+  }
+
+  /**
+   * User createMany
+   */
+  export type UserCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Users.
+     */
+    data: UserCreateManyInput | UserCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * User createManyAndReturn
+   */
+  export type UserCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * The data used to create many Users.
+     */
+    data: UserCreateManyInput | UserCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * User update
+   */
+  export type UserUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * The data needed to update a User.
+     */
+    data: XOR<UserUpdateInput, UserUncheckedUpdateInput>
+    /**
+     * Choose, which User to update.
+     */
+    where: UserWhereUniqueInput
+  }
+
+  /**
+   * User updateMany
+   */
+  export type UserUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Users.
+     */
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyInput>
+    /**
+     * Filter which Users to update
+     */
+    where?: UserWhereInput
+    /**
+     * Limit how many Users to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * User updateManyAndReturn
+   */
+  export type UserUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * The data used to update Users.
+     */
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyInput>
+    /**
+     * Filter which Users to update
+     */
+    where?: UserWhereInput
+    /**
+     * Limit how many Users to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * User upsert
+   */
+  export type UserUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * The filter to search for the User to update in case it exists.
+     */
+    where: UserWhereUniqueInput
+    /**
+     * In case the User found by the `where` argument doesn't exist, create a new User with this data.
+     */
+    create: XOR<UserCreateInput, UserUncheckedCreateInput>
+    /**
+     * In case the User was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserUpdateInput, UserUncheckedUpdateInput>
+  }
+
+  /**
+   * User delete
+   */
+  export type UserDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * Filter which User to delete.
+     */
+    where: UserWhereUniqueInput
+  }
+
+  /**
+   * User deleteMany
+   */
+  export type UserDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Users to delete
+     */
+    where?: UserWhereInput
+    /**
+     * Limit how many Users to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * User.Roles
+   */
+  export type User$RolesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Role
+     */
+    select?: RoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Role
+     */
+    omit?: RoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoleInclude<ExtArgs> | null
+    where?: RoleWhereInput
+    orderBy?: RoleOrderByWithRelationInput | RoleOrderByWithRelationInput[]
+    cursor?: RoleWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RoleScalarFieldEnum | RoleScalarFieldEnum[]
+  }
+
+  /**
+   * User.PrivacySettings
+   */
+  export type User$PrivacySettingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserPrivacySettings
+     */
+    select?: UserPrivacySettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserPrivacySettings
+     */
+    omit?: UserPrivacySettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserPrivacySettingsInclude<ExtArgs> | null
+    where?: UserPrivacySettingsWhereInput
+  }
+
+  /**
+   * User without action
+   */
+  export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model UserPrivacySettings
+   */
+
+  export type AggregateUserPrivacySettings = {
+    _count: UserPrivacySettingsCountAggregateOutputType | null
+    _min: UserPrivacySettingsMinAggregateOutputType | null
+    _max: UserPrivacySettingsMaxAggregateOutputType | null
+  }
+
+  export type UserPrivacySettingsMinAggregateOutputType = {
+    Id: string | null
+    UserId: string | null
+    ShowOnlineStatus: boolean | null
+    ShowFirstName: boolean | null
+    ShowLastName: boolean | null
+    ShowLastNameInitial: boolean | null
+    ShowLastLogin: Date | null
+    CreatedAt: Date | null
+  }
+
+  export type UserPrivacySettingsMaxAggregateOutputType = {
+    Id: string | null
+    UserId: string | null
+    ShowOnlineStatus: boolean | null
+    ShowFirstName: boolean | null
+    ShowLastName: boolean | null
+    ShowLastNameInitial: boolean | null
+    ShowLastLogin: Date | null
+    CreatedAt: Date | null
+  }
+
+  export type UserPrivacySettingsCountAggregateOutputType = {
+    Id: number
+    UserId: number
+    ShowOnlineStatus: number
+    ShowFirstName: number
+    ShowLastName: number
+    ShowLastNameInitial: number
+    ShowLastLogin: number
+    CreatedAt: number
+    _all: number
+  }
+
+
+  export type UserPrivacySettingsMinAggregateInputType = {
+    Id?: true
+    UserId?: true
+    ShowOnlineStatus?: true
+    ShowFirstName?: true
+    ShowLastName?: true
+    ShowLastNameInitial?: true
+    ShowLastLogin?: true
+    CreatedAt?: true
+  }
+
+  export type UserPrivacySettingsMaxAggregateInputType = {
+    Id?: true
+    UserId?: true
+    ShowOnlineStatus?: true
+    ShowFirstName?: true
+    ShowLastName?: true
+    ShowLastNameInitial?: true
+    ShowLastLogin?: true
+    CreatedAt?: true
+  }
+
+  export type UserPrivacySettingsCountAggregateInputType = {
+    Id?: true
+    UserId?: true
+    ShowOnlineStatus?: true
+    ShowFirstName?: true
+    ShowLastName?: true
+    ShowLastNameInitial?: true
+    ShowLastLogin?: true
+    CreatedAt?: true
+    _all?: true
+  }
+
+  export type UserPrivacySettingsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserPrivacySettings to aggregate.
+     */
+    where?: UserPrivacySettingsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserPrivacySettings to fetch.
+     */
+    orderBy?: UserPrivacySettingsOrderByWithRelationInput | UserPrivacySettingsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UserPrivacySettingsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserPrivacySettings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserPrivacySettings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned UserPrivacySettings
+    **/
+    _count?: true | UserPrivacySettingsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UserPrivacySettingsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UserPrivacySettingsMaxAggregateInputType
+  }
+
+  export type GetUserPrivacySettingsAggregateType<T extends UserPrivacySettingsAggregateArgs> = {
+        [P in keyof T & keyof AggregateUserPrivacySettings]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUserPrivacySettings[P]>
+      : GetScalarType<T[P], AggregateUserPrivacySettings[P]>
+  }
+
+
+
+
+  export type UserPrivacySettingsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserPrivacySettingsWhereInput
+    orderBy?: UserPrivacySettingsOrderByWithAggregationInput | UserPrivacySettingsOrderByWithAggregationInput[]
+    by: UserPrivacySettingsScalarFieldEnum[] | UserPrivacySettingsScalarFieldEnum
+    having?: UserPrivacySettingsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UserPrivacySettingsCountAggregateInputType | true
+    _min?: UserPrivacySettingsMinAggregateInputType
+    _max?: UserPrivacySettingsMaxAggregateInputType
+  }
+
+  export type UserPrivacySettingsGroupByOutputType = {
+    Id: string
+    UserId: string
+    ShowOnlineStatus: boolean
+    ShowFirstName: boolean
+    ShowLastName: boolean
+    ShowLastNameInitial: boolean
+    ShowLastLogin: Date | null
+    CreatedAt: Date
+    _count: UserPrivacySettingsCountAggregateOutputType | null
+    _min: UserPrivacySettingsMinAggregateOutputType | null
+    _max: UserPrivacySettingsMaxAggregateOutputType | null
+  }
+
+  type GetUserPrivacySettingsGroupByPayload<T extends UserPrivacySettingsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserPrivacySettingsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserPrivacySettingsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserPrivacySettingsGroupByOutputType[P]>
+            : GetScalarType<T[P], UserPrivacySettingsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UserPrivacySettingsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    Id?: boolean
+    UserId?: boolean
+    ShowOnlineStatus?: boolean
+    ShowFirstName?: boolean
+    ShowLastName?: boolean
+    ShowLastNameInitial?: boolean
+    ShowLastLogin?: boolean
+    CreatedAt?: boolean
+    User?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userPrivacySettings"]>
+
+  export type UserPrivacySettingsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    Id?: boolean
+    UserId?: boolean
+    ShowOnlineStatus?: boolean
+    ShowFirstName?: boolean
+    ShowLastName?: boolean
+    ShowLastNameInitial?: boolean
+    ShowLastLogin?: boolean
+    CreatedAt?: boolean
+    User?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userPrivacySettings"]>
+
+  export type UserPrivacySettingsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    Id?: boolean
+    UserId?: boolean
+    ShowOnlineStatus?: boolean
+    ShowFirstName?: boolean
+    ShowLastName?: boolean
+    ShowLastNameInitial?: boolean
+    ShowLastLogin?: boolean
+    CreatedAt?: boolean
+    User?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userPrivacySettings"]>
+
+  export type UserPrivacySettingsSelectScalar = {
+    Id?: boolean
+    UserId?: boolean
+    ShowOnlineStatus?: boolean
+    ShowFirstName?: boolean
+    ShowLastName?: boolean
+    ShowLastNameInitial?: boolean
+    ShowLastLogin?: boolean
+    CreatedAt?: boolean
+  }
+
+  export type UserPrivacySettingsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "UserId" | "ShowOnlineStatus" | "ShowFirstName" | "ShowLastName" | "ShowLastNameInitial" | "ShowLastLogin" | "CreatedAt", ExtArgs["result"]["userPrivacySettings"]>
+  export type UserPrivacySettingsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    User?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type UserPrivacySettingsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    User?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type UserPrivacySettingsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    User?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $UserPrivacySettingsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "UserPrivacySettings"
+    objects: {
+      User: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      Id: string
+      UserId: string
+      ShowOnlineStatus: boolean
+      ShowFirstName: boolean
+      ShowLastName: boolean
+      ShowLastNameInitial: boolean
+      ShowLastLogin: Date | null
+      CreatedAt: Date
+    }, ExtArgs["result"]["userPrivacySettings"]>
+    composites: {}
+  }
+
+  type UserPrivacySettingsGetPayload<S extends boolean | null | undefined | UserPrivacySettingsDefaultArgs> = $Result.GetResult<Prisma.$UserPrivacySettingsPayload, S>
+
+  type UserPrivacySettingsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UserPrivacySettingsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UserPrivacySettingsCountAggregateInputType | true
+    }
+
+  export interface UserPrivacySettingsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UserPrivacySettings'], meta: { name: 'UserPrivacySettings' } }
+    /**
+     * Find zero or one UserPrivacySettings that matches the filter.
+     * @param {UserPrivacySettingsFindUniqueArgs} args - Arguments to find a UserPrivacySettings
+     * @example
+     * // Get one UserPrivacySettings
+     * const userPrivacySettings = await prisma.userPrivacySettings.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UserPrivacySettingsFindUniqueArgs>(args: SelectSubset<T, UserPrivacySettingsFindUniqueArgs<ExtArgs>>): Prisma__UserPrivacySettingsClient<$Result.GetResult<Prisma.$UserPrivacySettingsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one UserPrivacySettings that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {UserPrivacySettingsFindUniqueOrThrowArgs} args - Arguments to find a UserPrivacySettings
+     * @example
+     * // Get one UserPrivacySettings
+     * const userPrivacySettings = await prisma.userPrivacySettings.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UserPrivacySettingsFindUniqueOrThrowArgs>(args: SelectSubset<T, UserPrivacySettingsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserPrivacySettingsClient<$Result.GetResult<Prisma.$UserPrivacySettingsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserPrivacySettings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserPrivacySettingsFindFirstArgs} args - Arguments to find a UserPrivacySettings
+     * @example
+     * // Get one UserPrivacySettings
+     * const userPrivacySettings = await prisma.userPrivacySettings.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UserPrivacySettingsFindFirstArgs>(args?: SelectSubset<T, UserPrivacySettingsFindFirstArgs<ExtArgs>>): Prisma__UserPrivacySettingsClient<$Result.GetResult<Prisma.$UserPrivacySettingsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserPrivacySettings that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserPrivacySettingsFindFirstOrThrowArgs} args - Arguments to find a UserPrivacySettings
+     * @example
+     * // Get one UserPrivacySettings
+     * const userPrivacySettings = await prisma.userPrivacySettings.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UserPrivacySettingsFindFirstOrThrowArgs>(args?: SelectSubset<T, UserPrivacySettingsFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserPrivacySettingsClient<$Result.GetResult<Prisma.$UserPrivacySettingsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more UserPrivacySettings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserPrivacySettingsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UserPrivacySettings
+     * const userPrivacySettings = await prisma.userPrivacySettings.findMany()
+     * 
+     * // Get first 10 UserPrivacySettings
+     * const userPrivacySettings = await prisma.userPrivacySettings.findMany({ take: 10 })
+     * 
+     * // Only select the `Id`
+     * const userPrivacySettingsWithIdOnly = await prisma.userPrivacySettings.findMany({ select: { Id: true } })
+     * 
+     */
+    findMany<T extends UserPrivacySettingsFindManyArgs>(args?: SelectSubset<T, UserPrivacySettingsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPrivacySettingsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a UserPrivacySettings.
+     * @param {UserPrivacySettingsCreateArgs} args - Arguments to create a UserPrivacySettings.
+     * @example
+     * // Create one UserPrivacySettings
+     * const UserPrivacySettings = await prisma.userPrivacySettings.create({
+     *   data: {
+     *     // ... data to create a UserPrivacySettings
+     *   }
+     * })
+     * 
+     */
+    create<T extends UserPrivacySettingsCreateArgs>(args: SelectSubset<T, UserPrivacySettingsCreateArgs<ExtArgs>>): Prisma__UserPrivacySettingsClient<$Result.GetResult<Prisma.$UserPrivacySettingsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many UserPrivacySettings.
+     * @param {UserPrivacySettingsCreateManyArgs} args - Arguments to create many UserPrivacySettings.
+     * @example
+     * // Create many UserPrivacySettings
+     * const userPrivacySettings = await prisma.userPrivacySettings.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UserPrivacySettingsCreateManyArgs>(args?: SelectSubset<T, UserPrivacySettingsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many UserPrivacySettings and returns the data saved in the database.
+     * @param {UserPrivacySettingsCreateManyAndReturnArgs} args - Arguments to create many UserPrivacySettings.
+     * @example
+     * // Create many UserPrivacySettings
+     * const userPrivacySettings = await prisma.userPrivacySettings.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many UserPrivacySettings and only return the `Id`
+     * const userPrivacySettingsWithIdOnly = await prisma.userPrivacySettings.createManyAndReturn({
+     *   select: { Id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends UserPrivacySettingsCreateManyAndReturnArgs>(args?: SelectSubset<T, UserPrivacySettingsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPrivacySettingsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a UserPrivacySettings.
+     * @param {UserPrivacySettingsDeleteArgs} args - Arguments to delete one UserPrivacySettings.
+     * @example
+     * // Delete one UserPrivacySettings
+     * const UserPrivacySettings = await prisma.userPrivacySettings.delete({
+     *   where: {
+     *     // ... filter to delete one UserPrivacySettings
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UserPrivacySettingsDeleteArgs>(args: SelectSubset<T, UserPrivacySettingsDeleteArgs<ExtArgs>>): Prisma__UserPrivacySettingsClient<$Result.GetResult<Prisma.$UserPrivacySettingsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one UserPrivacySettings.
+     * @param {UserPrivacySettingsUpdateArgs} args - Arguments to update one UserPrivacySettings.
+     * @example
+     * // Update one UserPrivacySettings
+     * const userPrivacySettings = await prisma.userPrivacySettings.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UserPrivacySettingsUpdateArgs>(args: SelectSubset<T, UserPrivacySettingsUpdateArgs<ExtArgs>>): Prisma__UserPrivacySettingsClient<$Result.GetResult<Prisma.$UserPrivacySettingsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more UserPrivacySettings.
+     * @param {UserPrivacySettingsDeleteManyArgs} args - Arguments to filter UserPrivacySettings to delete.
+     * @example
+     * // Delete a few UserPrivacySettings
+     * const { count } = await prisma.userPrivacySettings.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UserPrivacySettingsDeleteManyArgs>(args?: SelectSubset<T, UserPrivacySettingsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserPrivacySettings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserPrivacySettingsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UserPrivacySettings
+     * const userPrivacySettings = await prisma.userPrivacySettings.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UserPrivacySettingsUpdateManyArgs>(args: SelectSubset<T, UserPrivacySettingsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserPrivacySettings and returns the data updated in the database.
+     * @param {UserPrivacySettingsUpdateManyAndReturnArgs} args - Arguments to update many UserPrivacySettings.
+     * @example
+     * // Update many UserPrivacySettings
+     * const userPrivacySettings = await prisma.userPrivacySettings.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more UserPrivacySettings and only return the `Id`
+     * const userPrivacySettingsWithIdOnly = await prisma.userPrivacySettings.updateManyAndReturn({
+     *   select: { Id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends UserPrivacySettingsUpdateManyAndReturnArgs>(args: SelectSubset<T, UserPrivacySettingsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPrivacySettingsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one UserPrivacySettings.
+     * @param {UserPrivacySettingsUpsertArgs} args - Arguments to update or create a UserPrivacySettings.
+     * @example
+     * // Update or create a UserPrivacySettings
+     * const userPrivacySettings = await prisma.userPrivacySettings.upsert({
+     *   create: {
+     *     // ... data to create a UserPrivacySettings
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UserPrivacySettings we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UserPrivacySettingsUpsertArgs>(args: SelectSubset<T, UserPrivacySettingsUpsertArgs<ExtArgs>>): Prisma__UserPrivacySettingsClient<$Result.GetResult<Prisma.$UserPrivacySettingsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of UserPrivacySettings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserPrivacySettingsCountArgs} args - Arguments to filter UserPrivacySettings to count.
+     * @example
+     * // Count the number of UserPrivacySettings
+     * const count = await prisma.userPrivacySettings.count({
+     *   where: {
+     *     // ... the filter for the UserPrivacySettings we want to count
+     *   }
+     * })
+    **/
+    count<T extends UserPrivacySettingsCountArgs>(
+      args?: Subset<T, UserPrivacySettingsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserPrivacySettingsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UserPrivacySettings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserPrivacySettingsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UserPrivacySettingsAggregateArgs>(args: Subset<T, UserPrivacySettingsAggregateArgs>): Prisma.PrismaPromise<GetUserPrivacySettingsAggregateType<T>>
+
+    /**
+     * Group by UserPrivacySettings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserPrivacySettingsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UserPrivacySettingsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserPrivacySettingsGroupByArgs['orderBy'] }
+        : { orderBy?: UserPrivacySettingsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UserPrivacySettingsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserPrivacySettingsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the UserPrivacySettings model
+   */
+  readonly fields: UserPrivacySettingsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UserPrivacySettings.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserPrivacySettingsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    User<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the UserPrivacySettings model
+   */
+  interface UserPrivacySettingsFieldRefs {
+    readonly Id: FieldRef<"UserPrivacySettings", 'String'>
+    readonly UserId: FieldRef<"UserPrivacySettings", 'String'>
+    readonly ShowOnlineStatus: FieldRef<"UserPrivacySettings", 'Boolean'>
+    readonly ShowFirstName: FieldRef<"UserPrivacySettings", 'Boolean'>
+    readonly ShowLastName: FieldRef<"UserPrivacySettings", 'Boolean'>
+    readonly ShowLastNameInitial: FieldRef<"UserPrivacySettings", 'Boolean'>
+    readonly ShowLastLogin: FieldRef<"UserPrivacySettings", 'DateTime'>
+    readonly CreatedAt: FieldRef<"UserPrivacySettings", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * UserPrivacySettings findUnique
+   */
+  export type UserPrivacySettingsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserPrivacySettings
+     */
+    select?: UserPrivacySettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserPrivacySettings
+     */
+    omit?: UserPrivacySettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserPrivacySettingsInclude<ExtArgs> | null
+    /**
+     * Filter, which UserPrivacySettings to fetch.
+     */
+    where: UserPrivacySettingsWhereUniqueInput
+  }
+
+  /**
+   * UserPrivacySettings findUniqueOrThrow
+   */
+  export type UserPrivacySettingsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserPrivacySettings
+     */
+    select?: UserPrivacySettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserPrivacySettings
+     */
+    omit?: UserPrivacySettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserPrivacySettingsInclude<ExtArgs> | null
+    /**
+     * Filter, which UserPrivacySettings to fetch.
+     */
+    where: UserPrivacySettingsWhereUniqueInput
+  }
+
+  /**
+   * UserPrivacySettings findFirst
+   */
+  export type UserPrivacySettingsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserPrivacySettings
+     */
+    select?: UserPrivacySettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserPrivacySettings
+     */
+    omit?: UserPrivacySettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserPrivacySettingsInclude<ExtArgs> | null
+    /**
+     * Filter, which UserPrivacySettings to fetch.
+     */
+    where?: UserPrivacySettingsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserPrivacySettings to fetch.
+     */
+    orderBy?: UserPrivacySettingsOrderByWithRelationInput | UserPrivacySettingsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserPrivacySettings.
+     */
+    cursor?: UserPrivacySettingsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserPrivacySettings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserPrivacySettings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserPrivacySettings.
+     */
+    distinct?: UserPrivacySettingsScalarFieldEnum | UserPrivacySettingsScalarFieldEnum[]
+  }
+
+  /**
+   * UserPrivacySettings findFirstOrThrow
+   */
+  export type UserPrivacySettingsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserPrivacySettings
+     */
+    select?: UserPrivacySettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserPrivacySettings
+     */
+    omit?: UserPrivacySettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserPrivacySettingsInclude<ExtArgs> | null
+    /**
+     * Filter, which UserPrivacySettings to fetch.
+     */
+    where?: UserPrivacySettingsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserPrivacySettings to fetch.
+     */
+    orderBy?: UserPrivacySettingsOrderByWithRelationInput | UserPrivacySettingsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserPrivacySettings.
+     */
+    cursor?: UserPrivacySettingsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserPrivacySettings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserPrivacySettings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserPrivacySettings.
+     */
+    distinct?: UserPrivacySettingsScalarFieldEnum | UserPrivacySettingsScalarFieldEnum[]
+  }
+
+  /**
+   * UserPrivacySettings findMany
+   */
+  export type UserPrivacySettingsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserPrivacySettings
+     */
+    select?: UserPrivacySettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserPrivacySettings
+     */
+    omit?: UserPrivacySettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserPrivacySettingsInclude<ExtArgs> | null
+    /**
+     * Filter, which UserPrivacySettings to fetch.
+     */
+    where?: UserPrivacySettingsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserPrivacySettings to fetch.
+     */
+    orderBy?: UserPrivacySettingsOrderByWithRelationInput | UserPrivacySettingsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing UserPrivacySettings.
+     */
+    cursor?: UserPrivacySettingsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserPrivacySettings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserPrivacySettings.
+     */
+    skip?: number
+    distinct?: UserPrivacySettingsScalarFieldEnum | UserPrivacySettingsScalarFieldEnum[]
+  }
+
+  /**
+   * UserPrivacySettings create
+   */
+  export type UserPrivacySettingsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserPrivacySettings
+     */
+    select?: UserPrivacySettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserPrivacySettings
+     */
+    omit?: UserPrivacySettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserPrivacySettingsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a UserPrivacySettings.
+     */
+    data: XOR<UserPrivacySettingsCreateInput, UserPrivacySettingsUncheckedCreateInput>
+  }
+
+  /**
+   * UserPrivacySettings createMany
+   */
+  export type UserPrivacySettingsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many UserPrivacySettings.
+     */
+    data: UserPrivacySettingsCreateManyInput | UserPrivacySettingsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * UserPrivacySettings createManyAndReturn
+   */
+  export type UserPrivacySettingsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserPrivacySettings
+     */
+    select?: UserPrivacySettingsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserPrivacySettings
+     */
+    omit?: UserPrivacySettingsOmit<ExtArgs> | null
+    /**
+     * The data used to create many UserPrivacySettings.
+     */
+    data: UserPrivacySettingsCreateManyInput | UserPrivacySettingsCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserPrivacySettingsIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserPrivacySettings update
+   */
+  export type UserPrivacySettingsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserPrivacySettings
+     */
+    select?: UserPrivacySettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserPrivacySettings
+     */
+    omit?: UserPrivacySettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserPrivacySettingsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a UserPrivacySettings.
+     */
+    data: XOR<UserPrivacySettingsUpdateInput, UserPrivacySettingsUncheckedUpdateInput>
+    /**
+     * Choose, which UserPrivacySettings to update.
+     */
+    where: UserPrivacySettingsWhereUniqueInput
+  }
+
+  /**
+   * UserPrivacySettings updateMany
+   */
+  export type UserPrivacySettingsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update UserPrivacySettings.
+     */
+    data: XOR<UserPrivacySettingsUpdateManyMutationInput, UserPrivacySettingsUncheckedUpdateManyInput>
+    /**
+     * Filter which UserPrivacySettings to update
+     */
+    where?: UserPrivacySettingsWhereInput
+    /**
+     * Limit how many UserPrivacySettings to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserPrivacySettings updateManyAndReturn
+   */
+  export type UserPrivacySettingsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserPrivacySettings
+     */
+    select?: UserPrivacySettingsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserPrivacySettings
+     */
+    omit?: UserPrivacySettingsOmit<ExtArgs> | null
+    /**
+     * The data used to update UserPrivacySettings.
+     */
+    data: XOR<UserPrivacySettingsUpdateManyMutationInput, UserPrivacySettingsUncheckedUpdateManyInput>
+    /**
+     * Filter which UserPrivacySettings to update
+     */
+    where?: UserPrivacySettingsWhereInput
+    /**
+     * Limit how many UserPrivacySettings to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserPrivacySettingsIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserPrivacySettings upsert
+   */
+  export type UserPrivacySettingsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserPrivacySettings
+     */
+    select?: UserPrivacySettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserPrivacySettings
+     */
+    omit?: UserPrivacySettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserPrivacySettingsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the UserPrivacySettings to update in case it exists.
+     */
+    where: UserPrivacySettingsWhereUniqueInput
+    /**
+     * In case the UserPrivacySettings found by the `where` argument doesn't exist, create a new UserPrivacySettings with this data.
+     */
+    create: XOR<UserPrivacySettingsCreateInput, UserPrivacySettingsUncheckedCreateInput>
+    /**
+     * In case the UserPrivacySettings was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserPrivacySettingsUpdateInput, UserPrivacySettingsUncheckedUpdateInput>
+  }
+
+  /**
+   * UserPrivacySettings delete
+   */
+  export type UserPrivacySettingsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserPrivacySettings
+     */
+    select?: UserPrivacySettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserPrivacySettings
+     */
+    omit?: UserPrivacySettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserPrivacySettingsInclude<ExtArgs> | null
+    /**
+     * Filter which UserPrivacySettings to delete.
+     */
+    where: UserPrivacySettingsWhereUniqueInput
+  }
+
+  /**
+   * UserPrivacySettings deleteMany
+   */
+  export type UserPrivacySettingsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserPrivacySettings to delete
+     */
+    where?: UserPrivacySettingsWhereInput
+    /**
+     * Limit how many UserPrivacySettings to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserPrivacySettings without action
+   */
+  export type UserPrivacySettingsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserPrivacySettings
+     */
+    select?: UserPrivacySettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserPrivacySettings
+     */
+    omit?: UserPrivacySettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserPrivacySettingsInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Role
+   */
+
+  export type AggregateRole = {
+    _count: RoleCountAggregateOutputType | null
+    _avg: RoleAvgAggregateOutputType | null
+    _sum: RoleSumAggregateOutputType | null
+    _min: RoleMinAggregateOutputType | null
+    _max: RoleMaxAggregateOutputType | null
+  }
+
+  export type RoleAvgAggregateOutputType = {
+    Id: number | null
+  }
+
+  export type RoleSumAggregateOutputType = {
+    Id: number | null
+  }
+
+  export type RoleMinAggregateOutputType = {
+    Id: number | null
+    Name: string | null
+    Description: string | null
+    Slug: string | null
+    CreatedAt: Date | null
+    UpdatedAt: Date | null
+  }
+
+  export type RoleMaxAggregateOutputType = {
+    Id: number | null
+    Name: string | null
+    Description: string | null
+    Slug: string | null
+    CreatedAt: Date | null
+    UpdatedAt: Date | null
+  }
+
+  export type RoleCountAggregateOutputType = {
+    Id: number
+    Name: number
+    Description: number
+    Slug: number
+    CreatedAt: number
+    UpdatedAt: number
+    _all: number
+  }
+
+
+  export type RoleAvgAggregateInputType = {
+    Id?: true
+  }
+
+  export type RoleSumAggregateInputType = {
+    Id?: true
+  }
+
+  export type RoleMinAggregateInputType = {
+    Id?: true
+    Name?: true
+    Description?: true
+    Slug?: true
+    CreatedAt?: true
+    UpdatedAt?: true
+  }
+
+  export type RoleMaxAggregateInputType = {
+    Id?: true
+    Name?: true
+    Description?: true
+    Slug?: true
+    CreatedAt?: true
+    UpdatedAt?: true
+  }
+
+  export type RoleCountAggregateInputType = {
+    Id?: true
+    Name?: true
+    Description?: true
+    Slug?: true
+    CreatedAt?: true
+    UpdatedAt?: true
+    _all?: true
+  }
+
+  export type RoleAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Role to aggregate.
+     */
+    where?: RoleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Roles to fetch.
+     */
+    orderBy?: RoleOrderByWithRelationInput | RoleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: RoleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Roles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Roles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Roles
+    **/
+    _count?: true | RoleCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: RoleAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: RoleSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: RoleMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: RoleMaxAggregateInputType
+  }
+
+  export type GetRoleAggregateType<T extends RoleAggregateArgs> = {
+        [P in keyof T & keyof AggregateRole]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateRole[P]>
+      : GetScalarType<T[P], AggregateRole[P]>
+  }
+
+
+
+
+  export type RoleGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RoleWhereInput
+    orderBy?: RoleOrderByWithAggregationInput | RoleOrderByWithAggregationInput[]
+    by: RoleScalarFieldEnum[] | RoleScalarFieldEnum
+    having?: RoleScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: RoleCountAggregateInputType | true
+    _avg?: RoleAvgAggregateInputType
+    _sum?: RoleSumAggregateInputType
+    _min?: RoleMinAggregateInputType
+    _max?: RoleMaxAggregateInputType
+  }
+
+  export type RoleGroupByOutputType = {
+    Id: number
+    Name: string
+    Description: string | null
+    Slug: string
+    CreatedAt: Date
+    UpdatedAt: Date
+    _count: RoleCountAggregateOutputType | null
+    _avg: RoleAvgAggregateOutputType | null
+    _sum: RoleSumAggregateOutputType | null
+    _min: RoleMinAggregateOutputType | null
+    _max: RoleMaxAggregateOutputType | null
+  }
+
+  type GetRoleGroupByPayload<T extends RoleGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<RoleGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof RoleGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], RoleGroupByOutputType[P]>
+            : GetScalarType<T[P], RoleGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type RoleSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    Id?: boolean
+    Name?: boolean
+    Description?: boolean
+    Slug?: boolean
+    CreatedAt?: boolean
+    UpdatedAt?: boolean
+    Permissions?: boolean | Role$PermissionsArgs<ExtArgs>
+    Users?: boolean | Role$UsersArgs<ExtArgs>
+    _count?: boolean | RoleCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["role"]>
+
+  export type RoleSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    Id?: boolean
+    Name?: boolean
+    Description?: boolean
+    Slug?: boolean
+    CreatedAt?: boolean
+    UpdatedAt?: boolean
+  }, ExtArgs["result"]["role"]>
+
+  export type RoleSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    Id?: boolean
+    Name?: boolean
+    Description?: boolean
+    Slug?: boolean
+    CreatedAt?: boolean
+    UpdatedAt?: boolean
+  }, ExtArgs["result"]["role"]>
+
+  export type RoleSelectScalar = {
+    Id?: boolean
+    Name?: boolean
+    Description?: boolean
+    Slug?: boolean
+    CreatedAt?: boolean
+    UpdatedAt?: boolean
+  }
+
+  export type RoleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "Name" | "Description" | "Slug" | "CreatedAt" | "UpdatedAt", ExtArgs["result"]["role"]>
+  export type RoleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Permissions?: boolean | Role$PermissionsArgs<ExtArgs>
+    Users?: boolean | Role$UsersArgs<ExtArgs>
+    _count?: boolean | RoleCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type RoleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type RoleIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $RolePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Role"
+    objects: {
+      Permissions: Prisma.$PermissionPayload<ExtArgs>[]
+      Users: Prisma.$UserPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      Id: number
+      Name: string
+      Description: string | null
+      Slug: string
+      CreatedAt: Date
+      UpdatedAt: Date
+    }, ExtArgs["result"]["role"]>
+    composites: {}
+  }
+
+  type RoleGetPayload<S extends boolean | null | undefined | RoleDefaultArgs> = $Result.GetResult<Prisma.$RolePayload, S>
+
+  type RoleCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<RoleFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: RoleCountAggregateInputType | true
+    }
+
+  export interface RoleDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Role'], meta: { name: 'Role' } }
+    /**
+     * Find zero or one Role that matches the filter.
+     * @param {RoleFindUniqueArgs} args - Arguments to find a Role
+     * @example
+     * // Get one Role
+     * const role = await prisma.role.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends RoleFindUniqueArgs>(args: SelectSubset<T, RoleFindUniqueArgs<ExtArgs>>): Prisma__RoleClient<$Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Role that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {RoleFindUniqueOrThrowArgs} args - Arguments to find a Role
+     * @example
+     * // Get one Role
+     * const role = await prisma.role.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends RoleFindUniqueOrThrowArgs>(args: SelectSubset<T, RoleFindUniqueOrThrowArgs<ExtArgs>>): Prisma__RoleClient<$Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Role that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoleFindFirstArgs} args - Arguments to find a Role
+     * @example
+     * // Get one Role
+     * const role = await prisma.role.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends RoleFindFirstArgs>(args?: SelectSubset<T, RoleFindFirstArgs<ExtArgs>>): Prisma__RoleClient<$Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Role that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoleFindFirstOrThrowArgs} args - Arguments to find a Role
+     * @example
+     * // Get one Role
+     * const role = await prisma.role.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends RoleFindFirstOrThrowArgs>(args?: SelectSubset<T, RoleFindFirstOrThrowArgs<ExtArgs>>): Prisma__RoleClient<$Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Roles that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoleFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Roles
+     * const roles = await prisma.role.findMany()
+     * 
+     * // Get first 10 Roles
+     * const roles = await prisma.role.findMany({ take: 10 })
+     * 
+     * // Only select the `Id`
+     * const roleWithIdOnly = await prisma.role.findMany({ select: { Id: true } })
+     * 
+     */
+    findMany<T extends RoleFindManyArgs>(args?: SelectSubset<T, RoleFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Role.
+     * @param {RoleCreateArgs} args - Arguments to create a Role.
+     * @example
+     * // Create one Role
+     * const Role = await prisma.role.create({
+     *   data: {
+     *     // ... data to create a Role
+     *   }
+     * })
+     * 
+     */
+    create<T extends RoleCreateArgs>(args: SelectSubset<T, RoleCreateArgs<ExtArgs>>): Prisma__RoleClient<$Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Roles.
+     * @param {RoleCreateManyArgs} args - Arguments to create many Roles.
+     * @example
+     * // Create many Roles
+     * const role = await prisma.role.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends RoleCreateManyArgs>(args?: SelectSubset<T, RoleCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Roles and returns the data saved in the database.
+     * @param {RoleCreateManyAndReturnArgs} args - Arguments to create many Roles.
+     * @example
+     * // Create many Roles
+     * const role = await prisma.role.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Roles and only return the `Id`
+     * const roleWithIdOnly = await prisma.role.createManyAndReturn({
+     *   select: { Id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends RoleCreateManyAndReturnArgs>(args?: SelectSubset<T, RoleCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Role.
+     * @param {RoleDeleteArgs} args - Arguments to delete one Role.
+     * @example
+     * // Delete one Role
+     * const Role = await prisma.role.delete({
+     *   where: {
+     *     // ... filter to delete one Role
+     *   }
+     * })
+     * 
+     */
+    delete<T extends RoleDeleteArgs>(args: SelectSubset<T, RoleDeleteArgs<ExtArgs>>): Prisma__RoleClient<$Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Role.
+     * @param {RoleUpdateArgs} args - Arguments to update one Role.
+     * @example
+     * // Update one Role
+     * const role = await prisma.role.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends RoleUpdateArgs>(args: SelectSubset<T, RoleUpdateArgs<ExtArgs>>): Prisma__RoleClient<$Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Roles.
+     * @param {RoleDeleteManyArgs} args - Arguments to filter Roles to delete.
+     * @example
+     * // Delete a few Roles
+     * const { count } = await prisma.role.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends RoleDeleteManyArgs>(args?: SelectSubset<T, RoleDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Roles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoleUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Roles
+     * const role = await prisma.role.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends RoleUpdateManyArgs>(args: SelectSubset<T, RoleUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Roles and returns the data updated in the database.
+     * @param {RoleUpdateManyAndReturnArgs} args - Arguments to update many Roles.
+     * @example
+     * // Update many Roles
+     * const role = await prisma.role.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Roles and only return the `Id`
+     * const roleWithIdOnly = await prisma.role.updateManyAndReturn({
+     *   select: { Id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends RoleUpdateManyAndReturnArgs>(args: SelectSubset<T, RoleUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Role.
+     * @param {RoleUpsertArgs} args - Arguments to update or create a Role.
+     * @example
+     * // Update or create a Role
+     * const role = await prisma.role.upsert({
+     *   create: {
+     *     // ... data to create a Role
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Role we want to update
+     *   }
+     * })
+     */
+    upsert<T extends RoleUpsertArgs>(args: SelectSubset<T, RoleUpsertArgs<ExtArgs>>): Prisma__RoleClient<$Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Roles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoleCountArgs} args - Arguments to filter Roles to count.
+     * @example
+     * // Count the number of Roles
+     * const count = await prisma.role.count({
+     *   where: {
+     *     // ... the filter for the Roles we want to count
+     *   }
+     * })
+    **/
+    count<T extends RoleCountArgs>(
+      args?: Subset<T, RoleCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], RoleCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Role.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoleAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends RoleAggregateArgs>(args: Subset<T, RoleAggregateArgs>): Prisma.PrismaPromise<GetRoleAggregateType<T>>
+
+    /**
+     * Group by Role.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoleGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends RoleGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: RoleGroupByArgs['orderBy'] }
+        : { orderBy?: RoleGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, RoleGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRoleGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Role model
+   */
+  readonly fields: RoleFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Role.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__RoleClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    Permissions<T extends Role$PermissionsArgs<ExtArgs> = {}>(args?: Subset<T, Role$PermissionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PermissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Users<T extends Role$UsersArgs<ExtArgs> = {}>(args?: Subset<T, Role$UsersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Role model
+   */
+  interface RoleFieldRefs {
+    readonly Id: FieldRef<"Role", 'Int'>
+    readonly Name: FieldRef<"Role", 'String'>
+    readonly Description: FieldRef<"Role", 'String'>
+    readonly Slug: FieldRef<"Role", 'String'>
+    readonly CreatedAt: FieldRef<"Role", 'DateTime'>
+    readonly UpdatedAt: FieldRef<"Role", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Role findUnique
+   */
+  export type RoleFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Role
+     */
+    select?: RoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Role
+     */
+    omit?: RoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoleInclude<ExtArgs> | null
+    /**
+     * Filter, which Role to fetch.
+     */
+    where: RoleWhereUniqueInput
+  }
+
+  /**
+   * Role findUniqueOrThrow
+   */
+  export type RoleFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Role
+     */
+    select?: RoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Role
+     */
+    omit?: RoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoleInclude<ExtArgs> | null
+    /**
+     * Filter, which Role to fetch.
+     */
+    where: RoleWhereUniqueInput
+  }
+
+  /**
+   * Role findFirst
+   */
+  export type RoleFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Role
+     */
+    select?: RoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Role
+     */
+    omit?: RoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoleInclude<ExtArgs> | null
+    /**
+     * Filter, which Role to fetch.
+     */
+    where?: RoleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Roles to fetch.
+     */
+    orderBy?: RoleOrderByWithRelationInput | RoleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Roles.
+     */
+    cursor?: RoleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Roles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Roles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Roles.
+     */
+    distinct?: RoleScalarFieldEnum | RoleScalarFieldEnum[]
+  }
+
+  /**
+   * Role findFirstOrThrow
+   */
+  export type RoleFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Role
+     */
+    select?: RoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Role
+     */
+    omit?: RoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoleInclude<ExtArgs> | null
+    /**
+     * Filter, which Role to fetch.
+     */
+    where?: RoleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Roles to fetch.
+     */
+    orderBy?: RoleOrderByWithRelationInput | RoleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Roles.
+     */
+    cursor?: RoleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Roles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Roles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Roles.
+     */
+    distinct?: RoleScalarFieldEnum | RoleScalarFieldEnum[]
+  }
+
+  /**
+   * Role findMany
+   */
+  export type RoleFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Role
+     */
+    select?: RoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Role
+     */
+    omit?: RoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoleInclude<ExtArgs> | null
+    /**
+     * Filter, which Roles to fetch.
+     */
+    where?: RoleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Roles to fetch.
+     */
+    orderBy?: RoleOrderByWithRelationInput | RoleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Roles.
+     */
+    cursor?: RoleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Roles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Roles.
+     */
+    skip?: number
+    distinct?: RoleScalarFieldEnum | RoleScalarFieldEnum[]
+  }
+
+  /**
+   * Role create
+   */
+  export type RoleCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Role
+     */
+    select?: RoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Role
+     */
+    omit?: RoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoleInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Role.
+     */
+    data: XOR<RoleCreateInput, RoleUncheckedCreateInput>
+  }
+
+  /**
+   * Role createMany
+   */
+  export type RoleCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Roles.
+     */
+    data: RoleCreateManyInput | RoleCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Role createManyAndReturn
+   */
+  export type RoleCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Role
+     */
+    select?: RoleSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Role
+     */
+    omit?: RoleOmit<ExtArgs> | null
+    /**
+     * The data used to create many Roles.
+     */
+    data: RoleCreateManyInput | RoleCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Role update
+   */
+  export type RoleUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Role
+     */
+    select?: RoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Role
+     */
+    omit?: RoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoleInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Role.
+     */
+    data: XOR<RoleUpdateInput, RoleUncheckedUpdateInput>
+    /**
+     * Choose, which Role to update.
+     */
+    where: RoleWhereUniqueInput
+  }
+
+  /**
+   * Role updateMany
+   */
+  export type RoleUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Roles.
+     */
+    data: XOR<RoleUpdateManyMutationInput, RoleUncheckedUpdateManyInput>
+    /**
+     * Filter which Roles to update
+     */
+    where?: RoleWhereInput
+    /**
+     * Limit how many Roles to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Role updateManyAndReturn
+   */
+  export type RoleUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Role
+     */
+    select?: RoleSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Role
+     */
+    omit?: RoleOmit<ExtArgs> | null
+    /**
+     * The data used to update Roles.
+     */
+    data: XOR<RoleUpdateManyMutationInput, RoleUncheckedUpdateManyInput>
+    /**
+     * Filter which Roles to update
+     */
+    where?: RoleWhereInput
+    /**
+     * Limit how many Roles to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Role upsert
+   */
+  export type RoleUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Role
+     */
+    select?: RoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Role
+     */
+    omit?: RoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoleInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Role to update in case it exists.
+     */
+    where: RoleWhereUniqueInput
+    /**
+     * In case the Role found by the `where` argument doesn't exist, create a new Role with this data.
+     */
+    create: XOR<RoleCreateInput, RoleUncheckedCreateInput>
+    /**
+     * In case the Role was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<RoleUpdateInput, RoleUncheckedUpdateInput>
+  }
+
+  /**
+   * Role delete
+   */
+  export type RoleDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Role
+     */
+    select?: RoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Role
+     */
+    omit?: RoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoleInclude<ExtArgs> | null
+    /**
+     * Filter which Role to delete.
+     */
+    where: RoleWhereUniqueInput
+  }
+
+  /**
+   * Role deleteMany
+   */
+  export type RoleDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Roles to delete
+     */
+    where?: RoleWhereInput
+    /**
+     * Limit how many Roles to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Role.Permissions
+   */
+  export type Role$PermissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Permission
+     */
+    select?: PermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Permission
+     */
+    omit?: PermissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PermissionInclude<ExtArgs> | null
+    where?: PermissionWhereInput
+    orderBy?: PermissionOrderByWithRelationInput | PermissionOrderByWithRelationInput[]
+    cursor?: PermissionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PermissionScalarFieldEnum | PermissionScalarFieldEnum[]
+  }
+
+  /**
+   * Role.Users
+   */
+  export type Role$UsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    cursor?: UserWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+  }
+
+  /**
+   * Role without action
+   */
+  export type RoleDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Role
+     */
+    select?: RoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Role
+     */
+    omit?: RoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoleInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Permission
+   */
+
+  export type AggregatePermission = {
+    _count: PermissionCountAggregateOutputType | null
+    _avg: PermissionAvgAggregateOutputType | null
+    _sum: PermissionSumAggregateOutputType | null
+    _min: PermissionMinAggregateOutputType | null
+    _max: PermissionMaxAggregateOutputType | null
+  }
+
+  export type PermissionAvgAggregateOutputType = {
+    Id: number | null
+  }
+
+  export type PermissionSumAggregateOutputType = {
+    Id: number | null
+  }
+
+  export type PermissionMinAggregateOutputType = {
+    Id: number | null
+    Name: string | null
+    Description: string | null
+    Slug: string | null
+    Entity: string | null
+    Action: string | null
+  }
+
+  export type PermissionMaxAggregateOutputType = {
+    Id: number | null
+    Name: string | null
+    Description: string | null
+    Slug: string | null
+    Entity: string | null
+    Action: string | null
+  }
+
+  export type PermissionCountAggregateOutputType = {
+    Id: number
+    Name: number
+    Description: number
+    Slug: number
+    Entity: number
+    Action: number
+    _all: number
+  }
+
+
+  export type PermissionAvgAggregateInputType = {
+    Id?: true
+  }
+
+  export type PermissionSumAggregateInputType = {
+    Id?: true
+  }
+
+  export type PermissionMinAggregateInputType = {
+    Id?: true
+    Name?: true
+    Description?: true
+    Slug?: true
+    Entity?: true
+    Action?: true
+  }
+
+  export type PermissionMaxAggregateInputType = {
+    Id?: true
+    Name?: true
+    Description?: true
+    Slug?: true
+    Entity?: true
+    Action?: true
+  }
+
+  export type PermissionCountAggregateInputType = {
+    Id?: true
+    Name?: true
+    Description?: true
+    Slug?: true
+    Entity?: true
+    Action?: true
+    _all?: true
+  }
+
+  export type PermissionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Permission to aggregate.
+     */
+    where?: PermissionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Permissions to fetch.
+     */
+    orderBy?: PermissionOrderByWithRelationInput | PermissionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PermissionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Permissions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Permissions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Permissions
+    **/
+    _count?: true | PermissionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PermissionAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PermissionSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PermissionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PermissionMaxAggregateInputType
+  }
+
+  export type GetPermissionAggregateType<T extends PermissionAggregateArgs> = {
+        [P in keyof T & keyof AggregatePermission]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePermission[P]>
+      : GetScalarType<T[P], AggregatePermission[P]>
+  }
+
+
+
+
+  export type PermissionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PermissionWhereInput
+    orderBy?: PermissionOrderByWithAggregationInput | PermissionOrderByWithAggregationInput[]
+    by: PermissionScalarFieldEnum[] | PermissionScalarFieldEnum
+    having?: PermissionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PermissionCountAggregateInputType | true
+    _avg?: PermissionAvgAggregateInputType
+    _sum?: PermissionSumAggregateInputType
+    _min?: PermissionMinAggregateInputType
+    _max?: PermissionMaxAggregateInputType
+  }
+
+  export type PermissionGroupByOutputType = {
+    Id: number
+    Name: string
+    Description: string | null
+    Slug: string
+    Entity: string
+    Action: string
+    _count: PermissionCountAggregateOutputType | null
+    _avg: PermissionAvgAggregateOutputType | null
+    _sum: PermissionSumAggregateOutputType | null
+    _min: PermissionMinAggregateOutputType | null
+    _max: PermissionMaxAggregateOutputType | null
+  }
+
+  type GetPermissionGroupByPayload<T extends PermissionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PermissionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PermissionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PermissionGroupByOutputType[P]>
+            : GetScalarType<T[P], PermissionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PermissionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    Id?: boolean
+    Name?: boolean
+    Description?: boolean
+    Slug?: boolean
+    Entity?: boolean
+    Action?: boolean
+    Roles?: boolean | Permission$RolesArgs<ExtArgs>
+    _count?: boolean | PermissionCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["permission"]>
+
+  export type PermissionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    Id?: boolean
+    Name?: boolean
+    Description?: boolean
+    Slug?: boolean
+    Entity?: boolean
+    Action?: boolean
+  }, ExtArgs["result"]["permission"]>
+
+  export type PermissionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    Id?: boolean
+    Name?: boolean
+    Description?: boolean
+    Slug?: boolean
+    Entity?: boolean
+    Action?: boolean
+  }, ExtArgs["result"]["permission"]>
+
+  export type PermissionSelectScalar = {
+    Id?: boolean
+    Name?: boolean
+    Description?: boolean
+    Slug?: boolean
+    Entity?: boolean
+    Action?: boolean
+  }
+
+  export type PermissionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "Name" | "Description" | "Slug" | "Entity" | "Action", ExtArgs["result"]["permission"]>
+  export type PermissionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Roles?: boolean | Permission$RolesArgs<ExtArgs>
+    _count?: boolean | PermissionCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type PermissionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type PermissionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $PermissionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Permission"
+    objects: {
+      Roles: Prisma.$RolePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      Id: number
+      Name: string
+      Description: string | null
+      Slug: string
+      Entity: string
+      Action: string
+    }, ExtArgs["result"]["permission"]>
+    composites: {}
+  }
+
+  type PermissionGetPayload<S extends boolean | null | undefined | PermissionDefaultArgs> = $Result.GetResult<Prisma.$PermissionPayload, S>
+
+  type PermissionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PermissionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PermissionCountAggregateInputType | true
+    }
+
+  export interface PermissionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Permission'], meta: { name: 'Permission' } }
+    /**
+     * Find zero or one Permission that matches the filter.
+     * @param {PermissionFindUniqueArgs} args - Arguments to find a Permission
+     * @example
+     * // Get one Permission
+     * const permission = await prisma.permission.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PermissionFindUniqueArgs>(args: SelectSubset<T, PermissionFindUniqueArgs<ExtArgs>>): Prisma__PermissionClient<$Result.GetResult<Prisma.$PermissionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Permission that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PermissionFindUniqueOrThrowArgs} args - Arguments to find a Permission
+     * @example
+     * // Get one Permission
+     * const permission = await prisma.permission.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PermissionFindUniqueOrThrowArgs>(args: SelectSubset<T, PermissionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PermissionClient<$Result.GetResult<Prisma.$PermissionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Permission that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PermissionFindFirstArgs} args - Arguments to find a Permission
+     * @example
+     * // Get one Permission
+     * const permission = await prisma.permission.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PermissionFindFirstArgs>(args?: SelectSubset<T, PermissionFindFirstArgs<ExtArgs>>): Prisma__PermissionClient<$Result.GetResult<Prisma.$PermissionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Permission that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PermissionFindFirstOrThrowArgs} args - Arguments to find a Permission
+     * @example
+     * // Get one Permission
+     * const permission = await prisma.permission.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PermissionFindFirstOrThrowArgs>(args?: SelectSubset<T, PermissionFindFirstOrThrowArgs<ExtArgs>>): Prisma__PermissionClient<$Result.GetResult<Prisma.$PermissionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Permissions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PermissionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Permissions
+     * const permissions = await prisma.permission.findMany()
+     * 
+     * // Get first 10 Permissions
+     * const permissions = await prisma.permission.findMany({ take: 10 })
+     * 
+     * // Only select the `Id`
+     * const permissionWithIdOnly = await prisma.permission.findMany({ select: { Id: true } })
+     * 
+     */
+    findMany<T extends PermissionFindManyArgs>(args?: SelectSubset<T, PermissionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PermissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Permission.
+     * @param {PermissionCreateArgs} args - Arguments to create a Permission.
+     * @example
+     * // Create one Permission
+     * const Permission = await prisma.permission.create({
+     *   data: {
+     *     // ... data to create a Permission
+     *   }
+     * })
+     * 
+     */
+    create<T extends PermissionCreateArgs>(args: SelectSubset<T, PermissionCreateArgs<ExtArgs>>): Prisma__PermissionClient<$Result.GetResult<Prisma.$PermissionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Permissions.
+     * @param {PermissionCreateManyArgs} args - Arguments to create many Permissions.
+     * @example
+     * // Create many Permissions
+     * const permission = await prisma.permission.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PermissionCreateManyArgs>(args?: SelectSubset<T, PermissionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Permissions and returns the data saved in the database.
+     * @param {PermissionCreateManyAndReturnArgs} args - Arguments to create many Permissions.
+     * @example
+     * // Create many Permissions
+     * const permission = await prisma.permission.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Permissions and only return the `Id`
+     * const permissionWithIdOnly = await prisma.permission.createManyAndReturn({
+     *   select: { Id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PermissionCreateManyAndReturnArgs>(args?: SelectSubset<T, PermissionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PermissionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Permission.
+     * @param {PermissionDeleteArgs} args - Arguments to delete one Permission.
+     * @example
+     * // Delete one Permission
+     * const Permission = await prisma.permission.delete({
+     *   where: {
+     *     // ... filter to delete one Permission
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PermissionDeleteArgs>(args: SelectSubset<T, PermissionDeleteArgs<ExtArgs>>): Prisma__PermissionClient<$Result.GetResult<Prisma.$PermissionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Permission.
+     * @param {PermissionUpdateArgs} args - Arguments to update one Permission.
+     * @example
+     * // Update one Permission
+     * const permission = await prisma.permission.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PermissionUpdateArgs>(args: SelectSubset<T, PermissionUpdateArgs<ExtArgs>>): Prisma__PermissionClient<$Result.GetResult<Prisma.$PermissionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Permissions.
+     * @param {PermissionDeleteManyArgs} args - Arguments to filter Permissions to delete.
+     * @example
+     * // Delete a few Permissions
+     * const { count } = await prisma.permission.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PermissionDeleteManyArgs>(args?: SelectSubset<T, PermissionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Permissions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PermissionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Permissions
+     * const permission = await prisma.permission.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PermissionUpdateManyArgs>(args: SelectSubset<T, PermissionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Permissions and returns the data updated in the database.
+     * @param {PermissionUpdateManyAndReturnArgs} args - Arguments to update many Permissions.
+     * @example
+     * // Update many Permissions
+     * const permission = await prisma.permission.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Permissions and only return the `Id`
+     * const permissionWithIdOnly = await prisma.permission.updateManyAndReturn({
+     *   select: { Id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PermissionUpdateManyAndReturnArgs>(args: SelectSubset<T, PermissionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PermissionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Permission.
+     * @param {PermissionUpsertArgs} args - Arguments to update or create a Permission.
+     * @example
+     * // Update or create a Permission
+     * const permission = await prisma.permission.upsert({
+     *   create: {
+     *     // ... data to create a Permission
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Permission we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PermissionUpsertArgs>(args: SelectSubset<T, PermissionUpsertArgs<ExtArgs>>): Prisma__PermissionClient<$Result.GetResult<Prisma.$PermissionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Permissions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PermissionCountArgs} args - Arguments to filter Permissions to count.
+     * @example
+     * // Count the number of Permissions
+     * const count = await prisma.permission.count({
+     *   where: {
+     *     // ... the filter for the Permissions we want to count
+     *   }
+     * })
+    **/
+    count<T extends PermissionCountArgs>(
+      args?: Subset<T, PermissionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PermissionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Permission.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PermissionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PermissionAggregateArgs>(args: Subset<T, PermissionAggregateArgs>): Prisma.PrismaPromise<GetPermissionAggregateType<T>>
+
+    /**
+     * Group by Permission.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PermissionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PermissionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PermissionGroupByArgs['orderBy'] }
+        : { orderBy?: PermissionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PermissionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPermissionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Permission model
+   */
+  readonly fields: PermissionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Permission.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PermissionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    Roles<T extends Permission$RolesArgs<ExtArgs> = {}>(args?: Subset<T, Permission$RolesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Permission model
+   */
+  interface PermissionFieldRefs {
+    readonly Id: FieldRef<"Permission", 'Int'>
+    readonly Name: FieldRef<"Permission", 'String'>
+    readonly Description: FieldRef<"Permission", 'String'>
+    readonly Slug: FieldRef<"Permission", 'String'>
+    readonly Entity: FieldRef<"Permission", 'String'>
+    readonly Action: FieldRef<"Permission", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Permission findUnique
+   */
+  export type PermissionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Permission
+     */
+    select?: PermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Permission
+     */
+    omit?: PermissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PermissionInclude<ExtArgs> | null
+    /**
+     * Filter, which Permission to fetch.
+     */
+    where: PermissionWhereUniqueInput
+  }
+
+  /**
+   * Permission findUniqueOrThrow
+   */
+  export type PermissionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Permission
+     */
+    select?: PermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Permission
+     */
+    omit?: PermissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PermissionInclude<ExtArgs> | null
+    /**
+     * Filter, which Permission to fetch.
+     */
+    where: PermissionWhereUniqueInput
+  }
+
+  /**
+   * Permission findFirst
+   */
+  export type PermissionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Permission
+     */
+    select?: PermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Permission
+     */
+    omit?: PermissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PermissionInclude<ExtArgs> | null
+    /**
+     * Filter, which Permission to fetch.
+     */
+    where?: PermissionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Permissions to fetch.
+     */
+    orderBy?: PermissionOrderByWithRelationInput | PermissionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Permissions.
+     */
+    cursor?: PermissionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Permissions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Permissions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Permissions.
+     */
+    distinct?: PermissionScalarFieldEnum | PermissionScalarFieldEnum[]
+  }
+
+  /**
+   * Permission findFirstOrThrow
+   */
+  export type PermissionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Permission
+     */
+    select?: PermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Permission
+     */
+    omit?: PermissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PermissionInclude<ExtArgs> | null
+    /**
+     * Filter, which Permission to fetch.
+     */
+    where?: PermissionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Permissions to fetch.
+     */
+    orderBy?: PermissionOrderByWithRelationInput | PermissionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Permissions.
+     */
+    cursor?: PermissionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Permissions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Permissions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Permissions.
+     */
+    distinct?: PermissionScalarFieldEnum | PermissionScalarFieldEnum[]
+  }
+
+  /**
+   * Permission findMany
+   */
+  export type PermissionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Permission
+     */
+    select?: PermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Permission
+     */
+    omit?: PermissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PermissionInclude<ExtArgs> | null
+    /**
+     * Filter, which Permissions to fetch.
+     */
+    where?: PermissionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Permissions to fetch.
+     */
+    orderBy?: PermissionOrderByWithRelationInput | PermissionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Permissions.
+     */
+    cursor?: PermissionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Permissions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Permissions.
+     */
+    skip?: number
+    distinct?: PermissionScalarFieldEnum | PermissionScalarFieldEnum[]
+  }
+
+  /**
+   * Permission create
+   */
+  export type PermissionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Permission
+     */
+    select?: PermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Permission
+     */
+    omit?: PermissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PermissionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Permission.
+     */
+    data: XOR<PermissionCreateInput, PermissionUncheckedCreateInput>
+  }
+
+  /**
+   * Permission createMany
+   */
+  export type PermissionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Permissions.
+     */
+    data: PermissionCreateManyInput | PermissionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Permission createManyAndReturn
+   */
+  export type PermissionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Permission
+     */
+    select?: PermissionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Permission
+     */
+    omit?: PermissionOmit<ExtArgs> | null
+    /**
+     * The data used to create many Permissions.
+     */
+    data: PermissionCreateManyInput | PermissionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Permission update
+   */
+  export type PermissionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Permission
+     */
+    select?: PermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Permission
+     */
+    omit?: PermissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PermissionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Permission.
+     */
+    data: XOR<PermissionUpdateInput, PermissionUncheckedUpdateInput>
+    /**
+     * Choose, which Permission to update.
+     */
+    where: PermissionWhereUniqueInput
+  }
+
+  /**
+   * Permission updateMany
+   */
+  export type PermissionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Permissions.
+     */
+    data: XOR<PermissionUpdateManyMutationInput, PermissionUncheckedUpdateManyInput>
+    /**
+     * Filter which Permissions to update
+     */
+    where?: PermissionWhereInput
+    /**
+     * Limit how many Permissions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Permission updateManyAndReturn
+   */
+  export type PermissionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Permission
+     */
+    select?: PermissionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Permission
+     */
+    omit?: PermissionOmit<ExtArgs> | null
+    /**
+     * The data used to update Permissions.
+     */
+    data: XOR<PermissionUpdateManyMutationInput, PermissionUncheckedUpdateManyInput>
+    /**
+     * Filter which Permissions to update
+     */
+    where?: PermissionWhereInput
+    /**
+     * Limit how many Permissions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Permission upsert
+   */
+  export type PermissionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Permission
+     */
+    select?: PermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Permission
+     */
+    omit?: PermissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PermissionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Permission to update in case it exists.
+     */
+    where: PermissionWhereUniqueInput
+    /**
+     * In case the Permission found by the `where` argument doesn't exist, create a new Permission with this data.
+     */
+    create: XOR<PermissionCreateInput, PermissionUncheckedCreateInput>
+    /**
+     * In case the Permission was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PermissionUpdateInput, PermissionUncheckedUpdateInput>
+  }
+
+  /**
+   * Permission delete
+   */
+  export type PermissionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Permission
+     */
+    select?: PermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Permission
+     */
+    omit?: PermissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PermissionInclude<ExtArgs> | null
+    /**
+     * Filter which Permission to delete.
+     */
+    where: PermissionWhereUniqueInput
+  }
+
+  /**
+   * Permission deleteMany
+   */
+  export type PermissionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Permissions to delete
+     */
+    where?: PermissionWhereInput
+    /**
+     * Limit how many Permissions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Permission.Roles
+   */
+  export type Permission$RolesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Role
+     */
+    select?: RoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Role
+     */
+    omit?: RoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoleInclude<ExtArgs> | null
+    where?: RoleWhereInput
+    orderBy?: RoleOrderByWithRelationInput | RoleOrderByWithRelationInput[]
+    cursor?: RoleWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RoleScalarFieldEnum | RoleScalarFieldEnum[]
+  }
+
+  /**
+   * Permission without action
+   */
+  export type PermissionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Permission
+     */
+    select?: PermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Permission
+     */
+    omit?: PermissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PermissionInclude<ExtArgs> | null
   }
 
 
@@ -3932,6 +9247,9 @@ export namespace Prisma {
     CreatedAt?: boolean
     UpdatedAt?: boolean
     World?: boolean | VirtualAirline$WorldArgs<ExtArgs>
+    VARoles?: boolean | VirtualAirline$VARolesArgs<ExtArgs>
+    Members?: boolean | VirtualAirline$MembersArgs<ExtArgs>
+    _count?: boolean | VirtualAirlineCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["virtualAirline"]>
 
   export type VirtualAirlineSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4026,6 +9344,9 @@ export namespace Prisma {
   export type VirtualAirlineOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "ApiKey" | "IsPrimary" | "Identifier" | "Name" | "Description" | "WorldId" | "LastDividendsDistribution" | "LastComputationDate" | "ComputedMemberCount" | "ComputedAircraftsCount" | "ComputedNumberOfFlights30Days" | "ComputedNumberOfFlightHours30Days" | "ComputedMostUsedAirports" | "LastConnection" | "LastReportDate" | "Reputation" | "CreationDate" | "DifficultyLevel" | "Level" | "LevelXP" | "TotalContractsCompleted" | "TotalContractsEarnedCredits" | "LastRefresh" | "CreatedAt" | "UpdatedAt", ExtArgs["result"]["virtualAirline"]>
   export type VirtualAirlineInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     World?: boolean | VirtualAirline$WorldArgs<ExtArgs>
+    VARoles?: boolean | VirtualAirline$VARolesArgs<ExtArgs>
+    Members?: boolean | VirtualAirline$MembersArgs<ExtArgs>
+    _count?: boolean | VirtualAirlineCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type VirtualAirlineIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     World?: boolean | VirtualAirline$WorldArgs<ExtArgs>
@@ -4038,6 +9359,8 @@ export namespace Prisma {
     name: "VirtualAirline"
     objects: {
       World: Prisma.$WorldPayload<ExtArgs> | null
+      VARoles: Prisma.$VirtualAirlineRolePayload<ExtArgs>[]
+      Members: Prisma.$MemberPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       Id: string
@@ -4461,6 +9784,8 @@ export namespace Prisma {
   export interface Prisma__VirtualAirlineClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     World<T extends VirtualAirline$WorldArgs<ExtArgs> = {}>(args?: Subset<T, VirtualAirline$WorldArgs<ExtArgs>>): Prisma__WorldClient<$Result.GetResult<Prisma.$WorldPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    VARoles<T extends VirtualAirline$VARolesArgs<ExtArgs> = {}>(args?: Subset<T, VirtualAirline$VARolesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VirtualAirlineRolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Members<T extends VirtualAirline$MembersArgs<ExtArgs> = {}>(args?: Subset<T, VirtualAirline$MembersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4931,6 +10256,54 @@ export namespace Prisma {
   }
 
   /**
+   * VirtualAirline.VARoles
+   */
+  export type VirtualAirline$VARolesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VirtualAirlineRole
+     */
+    select?: VirtualAirlineRoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VirtualAirlineRole
+     */
+    omit?: VirtualAirlineRoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VirtualAirlineRoleInclude<ExtArgs> | null
+    where?: VirtualAirlineRoleWhereInput
+    orderBy?: VirtualAirlineRoleOrderByWithRelationInput | VirtualAirlineRoleOrderByWithRelationInput[]
+    cursor?: VirtualAirlineRoleWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: VirtualAirlineRoleScalarFieldEnum | VirtualAirlineRoleScalarFieldEnum[]
+  }
+
+  /**
+   * VirtualAirline.Members
+   */
+  export type VirtualAirline$MembersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Member
+     */
+    select?: MemberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Member
+     */
+    omit?: MemberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MemberInclude<ExtArgs> | null
+    where?: MemberWhereInput
+    orderBy?: MemberOrderByWithRelationInput | MemberOrderByWithRelationInput[]
+    cursor?: MemberWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MemberScalarFieldEnum | MemberScalarFieldEnum[]
+  }
+
+  /**
    * VirtualAirline without action
    */
   export type VirtualAirlineDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4946,6 +10319,1270 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: VirtualAirlineInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model VirtualAirlineRole
+   */
+
+  export type AggregateVirtualAirlineRole = {
+    _count: VirtualAirlineRoleCountAggregateOutputType | null
+    _avg: VirtualAirlineRoleAvgAggregateOutputType | null
+    _sum: VirtualAirlineRoleSumAggregateOutputType | null
+    _min: VirtualAirlineRoleMinAggregateOutputType | null
+    _max: VirtualAirlineRoleMaxAggregateOutputType | null
+  }
+
+  export type VirtualAirlineRoleAvgAggregateOutputType = {
+    Permission: number | null
+    PayPercent: Decimal | null
+    PayWeekly: Decimal | null
+    PayPerFlightHour: Decimal | null
+  }
+
+  export type VirtualAirlineRoleSumAggregateOutputType = {
+    Permission: number | null
+    PayPercent: Decimal | null
+    PayWeekly: Decimal | null
+    PayPerFlightHour: Decimal | null
+  }
+
+  export type VirtualAirlineRoleMinAggregateOutputType = {
+    Id: string | null
+    VAId: string | null
+    Name: string | null
+    Permission: number | null
+    IsDefaultNewRole: boolean | null
+    Color: string | null
+    PayPercent: Decimal | null
+    IsHidden: boolean | null
+    RestrictLoadingVAJobsIntoNonVAAircraft: boolean | null
+    RestrictLoadingNonVAJobsIntoVAAircraft: boolean | null
+    PayWeekly: Decimal | null
+    PayPerFlightHour: Decimal | null
+    LastRefresh: Date | null
+    CreatedAt: Date | null
+    UpdatedAt: Date | null
+  }
+
+  export type VirtualAirlineRoleMaxAggregateOutputType = {
+    Id: string | null
+    VAId: string | null
+    Name: string | null
+    Permission: number | null
+    IsDefaultNewRole: boolean | null
+    Color: string | null
+    PayPercent: Decimal | null
+    IsHidden: boolean | null
+    RestrictLoadingVAJobsIntoNonVAAircraft: boolean | null
+    RestrictLoadingNonVAJobsIntoVAAircraft: boolean | null
+    PayWeekly: Decimal | null
+    PayPerFlightHour: Decimal | null
+    LastRefresh: Date | null
+    CreatedAt: Date | null
+    UpdatedAt: Date | null
+  }
+
+  export type VirtualAirlineRoleCountAggregateOutputType = {
+    Id: number
+    VAId: number
+    Name: number
+    Permission: number
+    IsDefaultNewRole: number
+    Color: number
+    PayPercent: number
+    IsHidden: number
+    RestrictLoadingVAJobsIntoNonVAAircraft: number
+    RestrictLoadingNonVAJobsIntoVAAircraft: number
+    PayWeekly: number
+    PayPerFlightHour: number
+    LastRefresh: number
+    CreatedAt: number
+    UpdatedAt: number
+    _all: number
+  }
+
+
+  export type VirtualAirlineRoleAvgAggregateInputType = {
+    Permission?: true
+    PayPercent?: true
+    PayWeekly?: true
+    PayPerFlightHour?: true
+  }
+
+  export type VirtualAirlineRoleSumAggregateInputType = {
+    Permission?: true
+    PayPercent?: true
+    PayWeekly?: true
+    PayPerFlightHour?: true
+  }
+
+  export type VirtualAirlineRoleMinAggregateInputType = {
+    Id?: true
+    VAId?: true
+    Name?: true
+    Permission?: true
+    IsDefaultNewRole?: true
+    Color?: true
+    PayPercent?: true
+    IsHidden?: true
+    RestrictLoadingVAJobsIntoNonVAAircraft?: true
+    RestrictLoadingNonVAJobsIntoVAAircraft?: true
+    PayWeekly?: true
+    PayPerFlightHour?: true
+    LastRefresh?: true
+    CreatedAt?: true
+    UpdatedAt?: true
+  }
+
+  export type VirtualAirlineRoleMaxAggregateInputType = {
+    Id?: true
+    VAId?: true
+    Name?: true
+    Permission?: true
+    IsDefaultNewRole?: true
+    Color?: true
+    PayPercent?: true
+    IsHidden?: true
+    RestrictLoadingVAJobsIntoNonVAAircraft?: true
+    RestrictLoadingNonVAJobsIntoVAAircraft?: true
+    PayWeekly?: true
+    PayPerFlightHour?: true
+    LastRefresh?: true
+    CreatedAt?: true
+    UpdatedAt?: true
+  }
+
+  export type VirtualAirlineRoleCountAggregateInputType = {
+    Id?: true
+    VAId?: true
+    Name?: true
+    Permission?: true
+    IsDefaultNewRole?: true
+    Color?: true
+    PayPercent?: true
+    IsHidden?: true
+    RestrictLoadingVAJobsIntoNonVAAircraft?: true
+    RestrictLoadingNonVAJobsIntoVAAircraft?: true
+    PayWeekly?: true
+    PayPerFlightHour?: true
+    LastRefresh?: true
+    CreatedAt?: true
+    UpdatedAt?: true
+    _all?: true
+  }
+
+  export type VirtualAirlineRoleAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which VirtualAirlineRole to aggregate.
+     */
+    where?: VirtualAirlineRoleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of VirtualAirlineRoles to fetch.
+     */
+    orderBy?: VirtualAirlineRoleOrderByWithRelationInput | VirtualAirlineRoleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: VirtualAirlineRoleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` VirtualAirlineRoles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` VirtualAirlineRoles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned VirtualAirlineRoles
+    **/
+    _count?: true | VirtualAirlineRoleCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: VirtualAirlineRoleAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: VirtualAirlineRoleSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: VirtualAirlineRoleMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: VirtualAirlineRoleMaxAggregateInputType
+  }
+
+  export type GetVirtualAirlineRoleAggregateType<T extends VirtualAirlineRoleAggregateArgs> = {
+        [P in keyof T & keyof AggregateVirtualAirlineRole]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateVirtualAirlineRole[P]>
+      : GetScalarType<T[P], AggregateVirtualAirlineRole[P]>
+  }
+
+
+
+
+  export type VirtualAirlineRoleGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VirtualAirlineRoleWhereInput
+    orderBy?: VirtualAirlineRoleOrderByWithAggregationInput | VirtualAirlineRoleOrderByWithAggregationInput[]
+    by: VirtualAirlineRoleScalarFieldEnum[] | VirtualAirlineRoleScalarFieldEnum
+    having?: VirtualAirlineRoleScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: VirtualAirlineRoleCountAggregateInputType | true
+    _avg?: VirtualAirlineRoleAvgAggregateInputType
+    _sum?: VirtualAirlineRoleSumAggregateInputType
+    _min?: VirtualAirlineRoleMinAggregateInputType
+    _max?: VirtualAirlineRoleMaxAggregateInputType
+  }
+
+  export type VirtualAirlineRoleGroupByOutputType = {
+    Id: string
+    VAId: string
+    Name: string
+    Permission: number
+    IsDefaultNewRole: boolean
+    Color: string
+    PayPercent: Decimal
+    IsHidden: boolean
+    RestrictLoadingVAJobsIntoNonVAAircraft: boolean
+    RestrictLoadingNonVAJobsIntoVAAircraft: boolean
+    PayWeekly: Decimal
+    PayPerFlightHour: Decimal
+    LastRefresh: Date | null
+    CreatedAt: Date
+    UpdatedAt: Date
+    _count: VirtualAirlineRoleCountAggregateOutputType | null
+    _avg: VirtualAirlineRoleAvgAggregateOutputType | null
+    _sum: VirtualAirlineRoleSumAggregateOutputType | null
+    _min: VirtualAirlineRoleMinAggregateOutputType | null
+    _max: VirtualAirlineRoleMaxAggregateOutputType | null
+  }
+
+  type GetVirtualAirlineRoleGroupByPayload<T extends VirtualAirlineRoleGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<VirtualAirlineRoleGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof VirtualAirlineRoleGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], VirtualAirlineRoleGroupByOutputType[P]>
+            : GetScalarType<T[P], VirtualAirlineRoleGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type VirtualAirlineRoleSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    Id?: boolean
+    VAId?: boolean
+    Name?: boolean
+    Permission?: boolean
+    IsDefaultNewRole?: boolean
+    Color?: boolean
+    PayPercent?: boolean
+    IsHidden?: boolean
+    RestrictLoadingVAJobsIntoNonVAAircraft?: boolean
+    RestrictLoadingNonVAJobsIntoVAAircraft?: boolean
+    PayWeekly?: boolean
+    PayPerFlightHour?: boolean
+    LastRefresh?: boolean
+    CreatedAt?: boolean
+    UpdatedAt?: boolean
+    VirtualAirline?: boolean | VirtualAirlineDefaultArgs<ExtArgs>
+    Members?: boolean | VirtualAirlineRole$MembersArgs<ExtArgs>
+    _count?: boolean | VirtualAirlineRoleCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["virtualAirlineRole"]>
+
+  export type VirtualAirlineRoleSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    Id?: boolean
+    VAId?: boolean
+    Name?: boolean
+    Permission?: boolean
+    IsDefaultNewRole?: boolean
+    Color?: boolean
+    PayPercent?: boolean
+    IsHidden?: boolean
+    RestrictLoadingVAJobsIntoNonVAAircraft?: boolean
+    RestrictLoadingNonVAJobsIntoVAAircraft?: boolean
+    PayWeekly?: boolean
+    PayPerFlightHour?: boolean
+    LastRefresh?: boolean
+    CreatedAt?: boolean
+    UpdatedAt?: boolean
+    VirtualAirline?: boolean | VirtualAirlineDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["virtualAirlineRole"]>
+
+  export type VirtualAirlineRoleSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    Id?: boolean
+    VAId?: boolean
+    Name?: boolean
+    Permission?: boolean
+    IsDefaultNewRole?: boolean
+    Color?: boolean
+    PayPercent?: boolean
+    IsHidden?: boolean
+    RestrictLoadingVAJobsIntoNonVAAircraft?: boolean
+    RestrictLoadingNonVAJobsIntoVAAircraft?: boolean
+    PayWeekly?: boolean
+    PayPerFlightHour?: boolean
+    LastRefresh?: boolean
+    CreatedAt?: boolean
+    UpdatedAt?: boolean
+    VirtualAirline?: boolean | VirtualAirlineDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["virtualAirlineRole"]>
+
+  export type VirtualAirlineRoleSelectScalar = {
+    Id?: boolean
+    VAId?: boolean
+    Name?: boolean
+    Permission?: boolean
+    IsDefaultNewRole?: boolean
+    Color?: boolean
+    PayPercent?: boolean
+    IsHidden?: boolean
+    RestrictLoadingVAJobsIntoNonVAAircraft?: boolean
+    RestrictLoadingNonVAJobsIntoVAAircraft?: boolean
+    PayWeekly?: boolean
+    PayPerFlightHour?: boolean
+    LastRefresh?: boolean
+    CreatedAt?: boolean
+    UpdatedAt?: boolean
+  }
+
+  export type VirtualAirlineRoleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "VAId" | "Name" | "Permission" | "IsDefaultNewRole" | "Color" | "PayPercent" | "IsHidden" | "RestrictLoadingVAJobsIntoNonVAAircraft" | "RestrictLoadingNonVAJobsIntoVAAircraft" | "PayWeekly" | "PayPerFlightHour" | "LastRefresh" | "CreatedAt" | "UpdatedAt", ExtArgs["result"]["virtualAirlineRole"]>
+  export type VirtualAirlineRoleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    VirtualAirline?: boolean | VirtualAirlineDefaultArgs<ExtArgs>
+    Members?: boolean | VirtualAirlineRole$MembersArgs<ExtArgs>
+    _count?: boolean | VirtualAirlineRoleCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type VirtualAirlineRoleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    VirtualAirline?: boolean | VirtualAirlineDefaultArgs<ExtArgs>
+  }
+  export type VirtualAirlineRoleIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    VirtualAirline?: boolean | VirtualAirlineDefaultArgs<ExtArgs>
+  }
+
+  export type $VirtualAirlineRolePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "VirtualAirlineRole"
+    objects: {
+      VirtualAirline: Prisma.$VirtualAirlinePayload<ExtArgs>
+      Members: Prisma.$MemberPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      Id: string
+      VAId: string
+      Name: string
+      Permission: number
+      IsDefaultNewRole: boolean
+      Color: string
+      PayPercent: Prisma.Decimal
+      IsHidden: boolean
+      RestrictLoadingVAJobsIntoNonVAAircraft: boolean
+      RestrictLoadingNonVAJobsIntoVAAircraft: boolean
+      PayWeekly: Prisma.Decimal
+      PayPerFlightHour: Prisma.Decimal
+      LastRefresh: Date | null
+      CreatedAt: Date
+      UpdatedAt: Date
+    }, ExtArgs["result"]["virtualAirlineRole"]>
+    composites: {}
+  }
+
+  type VirtualAirlineRoleGetPayload<S extends boolean | null | undefined | VirtualAirlineRoleDefaultArgs> = $Result.GetResult<Prisma.$VirtualAirlineRolePayload, S>
+
+  type VirtualAirlineRoleCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<VirtualAirlineRoleFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: VirtualAirlineRoleCountAggregateInputType | true
+    }
+
+  export interface VirtualAirlineRoleDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['VirtualAirlineRole'], meta: { name: 'VirtualAirlineRole' } }
+    /**
+     * Find zero or one VirtualAirlineRole that matches the filter.
+     * @param {VirtualAirlineRoleFindUniqueArgs} args - Arguments to find a VirtualAirlineRole
+     * @example
+     * // Get one VirtualAirlineRole
+     * const virtualAirlineRole = await prisma.virtualAirlineRole.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends VirtualAirlineRoleFindUniqueArgs>(args: SelectSubset<T, VirtualAirlineRoleFindUniqueArgs<ExtArgs>>): Prisma__VirtualAirlineRoleClient<$Result.GetResult<Prisma.$VirtualAirlineRolePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one VirtualAirlineRole that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {VirtualAirlineRoleFindUniqueOrThrowArgs} args - Arguments to find a VirtualAirlineRole
+     * @example
+     * // Get one VirtualAirlineRole
+     * const virtualAirlineRole = await prisma.virtualAirlineRole.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends VirtualAirlineRoleFindUniqueOrThrowArgs>(args: SelectSubset<T, VirtualAirlineRoleFindUniqueOrThrowArgs<ExtArgs>>): Prisma__VirtualAirlineRoleClient<$Result.GetResult<Prisma.$VirtualAirlineRolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first VirtualAirlineRole that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VirtualAirlineRoleFindFirstArgs} args - Arguments to find a VirtualAirlineRole
+     * @example
+     * // Get one VirtualAirlineRole
+     * const virtualAirlineRole = await prisma.virtualAirlineRole.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends VirtualAirlineRoleFindFirstArgs>(args?: SelectSubset<T, VirtualAirlineRoleFindFirstArgs<ExtArgs>>): Prisma__VirtualAirlineRoleClient<$Result.GetResult<Prisma.$VirtualAirlineRolePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first VirtualAirlineRole that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VirtualAirlineRoleFindFirstOrThrowArgs} args - Arguments to find a VirtualAirlineRole
+     * @example
+     * // Get one VirtualAirlineRole
+     * const virtualAirlineRole = await prisma.virtualAirlineRole.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends VirtualAirlineRoleFindFirstOrThrowArgs>(args?: SelectSubset<T, VirtualAirlineRoleFindFirstOrThrowArgs<ExtArgs>>): Prisma__VirtualAirlineRoleClient<$Result.GetResult<Prisma.$VirtualAirlineRolePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more VirtualAirlineRoles that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VirtualAirlineRoleFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all VirtualAirlineRoles
+     * const virtualAirlineRoles = await prisma.virtualAirlineRole.findMany()
+     * 
+     * // Get first 10 VirtualAirlineRoles
+     * const virtualAirlineRoles = await prisma.virtualAirlineRole.findMany({ take: 10 })
+     * 
+     * // Only select the `Id`
+     * const virtualAirlineRoleWithIdOnly = await prisma.virtualAirlineRole.findMany({ select: { Id: true } })
+     * 
+     */
+    findMany<T extends VirtualAirlineRoleFindManyArgs>(args?: SelectSubset<T, VirtualAirlineRoleFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VirtualAirlineRolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a VirtualAirlineRole.
+     * @param {VirtualAirlineRoleCreateArgs} args - Arguments to create a VirtualAirlineRole.
+     * @example
+     * // Create one VirtualAirlineRole
+     * const VirtualAirlineRole = await prisma.virtualAirlineRole.create({
+     *   data: {
+     *     // ... data to create a VirtualAirlineRole
+     *   }
+     * })
+     * 
+     */
+    create<T extends VirtualAirlineRoleCreateArgs>(args: SelectSubset<T, VirtualAirlineRoleCreateArgs<ExtArgs>>): Prisma__VirtualAirlineRoleClient<$Result.GetResult<Prisma.$VirtualAirlineRolePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many VirtualAirlineRoles.
+     * @param {VirtualAirlineRoleCreateManyArgs} args - Arguments to create many VirtualAirlineRoles.
+     * @example
+     * // Create many VirtualAirlineRoles
+     * const virtualAirlineRole = await prisma.virtualAirlineRole.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends VirtualAirlineRoleCreateManyArgs>(args?: SelectSubset<T, VirtualAirlineRoleCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many VirtualAirlineRoles and returns the data saved in the database.
+     * @param {VirtualAirlineRoleCreateManyAndReturnArgs} args - Arguments to create many VirtualAirlineRoles.
+     * @example
+     * // Create many VirtualAirlineRoles
+     * const virtualAirlineRole = await prisma.virtualAirlineRole.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many VirtualAirlineRoles and only return the `Id`
+     * const virtualAirlineRoleWithIdOnly = await prisma.virtualAirlineRole.createManyAndReturn({
+     *   select: { Id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends VirtualAirlineRoleCreateManyAndReturnArgs>(args?: SelectSubset<T, VirtualAirlineRoleCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VirtualAirlineRolePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a VirtualAirlineRole.
+     * @param {VirtualAirlineRoleDeleteArgs} args - Arguments to delete one VirtualAirlineRole.
+     * @example
+     * // Delete one VirtualAirlineRole
+     * const VirtualAirlineRole = await prisma.virtualAirlineRole.delete({
+     *   where: {
+     *     // ... filter to delete one VirtualAirlineRole
+     *   }
+     * })
+     * 
+     */
+    delete<T extends VirtualAirlineRoleDeleteArgs>(args: SelectSubset<T, VirtualAirlineRoleDeleteArgs<ExtArgs>>): Prisma__VirtualAirlineRoleClient<$Result.GetResult<Prisma.$VirtualAirlineRolePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one VirtualAirlineRole.
+     * @param {VirtualAirlineRoleUpdateArgs} args - Arguments to update one VirtualAirlineRole.
+     * @example
+     * // Update one VirtualAirlineRole
+     * const virtualAirlineRole = await prisma.virtualAirlineRole.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends VirtualAirlineRoleUpdateArgs>(args: SelectSubset<T, VirtualAirlineRoleUpdateArgs<ExtArgs>>): Prisma__VirtualAirlineRoleClient<$Result.GetResult<Prisma.$VirtualAirlineRolePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more VirtualAirlineRoles.
+     * @param {VirtualAirlineRoleDeleteManyArgs} args - Arguments to filter VirtualAirlineRoles to delete.
+     * @example
+     * // Delete a few VirtualAirlineRoles
+     * const { count } = await prisma.virtualAirlineRole.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends VirtualAirlineRoleDeleteManyArgs>(args?: SelectSubset<T, VirtualAirlineRoleDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more VirtualAirlineRoles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VirtualAirlineRoleUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many VirtualAirlineRoles
+     * const virtualAirlineRole = await prisma.virtualAirlineRole.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends VirtualAirlineRoleUpdateManyArgs>(args: SelectSubset<T, VirtualAirlineRoleUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more VirtualAirlineRoles and returns the data updated in the database.
+     * @param {VirtualAirlineRoleUpdateManyAndReturnArgs} args - Arguments to update many VirtualAirlineRoles.
+     * @example
+     * // Update many VirtualAirlineRoles
+     * const virtualAirlineRole = await prisma.virtualAirlineRole.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more VirtualAirlineRoles and only return the `Id`
+     * const virtualAirlineRoleWithIdOnly = await prisma.virtualAirlineRole.updateManyAndReturn({
+     *   select: { Id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends VirtualAirlineRoleUpdateManyAndReturnArgs>(args: SelectSubset<T, VirtualAirlineRoleUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VirtualAirlineRolePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one VirtualAirlineRole.
+     * @param {VirtualAirlineRoleUpsertArgs} args - Arguments to update or create a VirtualAirlineRole.
+     * @example
+     * // Update or create a VirtualAirlineRole
+     * const virtualAirlineRole = await prisma.virtualAirlineRole.upsert({
+     *   create: {
+     *     // ... data to create a VirtualAirlineRole
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the VirtualAirlineRole we want to update
+     *   }
+     * })
+     */
+    upsert<T extends VirtualAirlineRoleUpsertArgs>(args: SelectSubset<T, VirtualAirlineRoleUpsertArgs<ExtArgs>>): Prisma__VirtualAirlineRoleClient<$Result.GetResult<Prisma.$VirtualAirlineRolePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of VirtualAirlineRoles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VirtualAirlineRoleCountArgs} args - Arguments to filter VirtualAirlineRoles to count.
+     * @example
+     * // Count the number of VirtualAirlineRoles
+     * const count = await prisma.virtualAirlineRole.count({
+     *   where: {
+     *     // ... the filter for the VirtualAirlineRoles we want to count
+     *   }
+     * })
+    **/
+    count<T extends VirtualAirlineRoleCountArgs>(
+      args?: Subset<T, VirtualAirlineRoleCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], VirtualAirlineRoleCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a VirtualAirlineRole.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VirtualAirlineRoleAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends VirtualAirlineRoleAggregateArgs>(args: Subset<T, VirtualAirlineRoleAggregateArgs>): Prisma.PrismaPromise<GetVirtualAirlineRoleAggregateType<T>>
+
+    /**
+     * Group by VirtualAirlineRole.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VirtualAirlineRoleGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends VirtualAirlineRoleGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: VirtualAirlineRoleGroupByArgs['orderBy'] }
+        : { orderBy?: VirtualAirlineRoleGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, VirtualAirlineRoleGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetVirtualAirlineRoleGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the VirtualAirlineRole model
+   */
+  readonly fields: VirtualAirlineRoleFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for VirtualAirlineRole.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__VirtualAirlineRoleClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    VirtualAirline<T extends VirtualAirlineDefaultArgs<ExtArgs> = {}>(args?: Subset<T, VirtualAirlineDefaultArgs<ExtArgs>>): Prisma__VirtualAirlineClient<$Result.GetResult<Prisma.$VirtualAirlinePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    Members<T extends VirtualAirlineRole$MembersArgs<ExtArgs> = {}>(args?: Subset<T, VirtualAirlineRole$MembersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the VirtualAirlineRole model
+   */
+  interface VirtualAirlineRoleFieldRefs {
+    readonly Id: FieldRef<"VirtualAirlineRole", 'String'>
+    readonly VAId: FieldRef<"VirtualAirlineRole", 'String'>
+    readonly Name: FieldRef<"VirtualAirlineRole", 'String'>
+    readonly Permission: FieldRef<"VirtualAirlineRole", 'Int'>
+    readonly IsDefaultNewRole: FieldRef<"VirtualAirlineRole", 'Boolean'>
+    readonly Color: FieldRef<"VirtualAirlineRole", 'String'>
+    readonly PayPercent: FieldRef<"VirtualAirlineRole", 'Decimal'>
+    readonly IsHidden: FieldRef<"VirtualAirlineRole", 'Boolean'>
+    readonly RestrictLoadingVAJobsIntoNonVAAircraft: FieldRef<"VirtualAirlineRole", 'Boolean'>
+    readonly RestrictLoadingNonVAJobsIntoVAAircraft: FieldRef<"VirtualAirlineRole", 'Boolean'>
+    readonly PayWeekly: FieldRef<"VirtualAirlineRole", 'Decimal'>
+    readonly PayPerFlightHour: FieldRef<"VirtualAirlineRole", 'Decimal'>
+    readonly LastRefresh: FieldRef<"VirtualAirlineRole", 'DateTime'>
+    readonly CreatedAt: FieldRef<"VirtualAirlineRole", 'DateTime'>
+    readonly UpdatedAt: FieldRef<"VirtualAirlineRole", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * VirtualAirlineRole findUnique
+   */
+  export type VirtualAirlineRoleFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VirtualAirlineRole
+     */
+    select?: VirtualAirlineRoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VirtualAirlineRole
+     */
+    omit?: VirtualAirlineRoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VirtualAirlineRoleInclude<ExtArgs> | null
+    /**
+     * Filter, which VirtualAirlineRole to fetch.
+     */
+    where: VirtualAirlineRoleWhereUniqueInput
+  }
+
+  /**
+   * VirtualAirlineRole findUniqueOrThrow
+   */
+  export type VirtualAirlineRoleFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VirtualAirlineRole
+     */
+    select?: VirtualAirlineRoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VirtualAirlineRole
+     */
+    omit?: VirtualAirlineRoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VirtualAirlineRoleInclude<ExtArgs> | null
+    /**
+     * Filter, which VirtualAirlineRole to fetch.
+     */
+    where: VirtualAirlineRoleWhereUniqueInput
+  }
+
+  /**
+   * VirtualAirlineRole findFirst
+   */
+  export type VirtualAirlineRoleFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VirtualAirlineRole
+     */
+    select?: VirtualAirlineRoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VirtualAirlineRole
+     */
+    omit?: VirtualAirlineRoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VirtualAirlineRoleInclude<ExtArgs> | null
+    /**
+     * Filter, which VirtualAirlineRole to fetch.
+     */
+    where?: VirtualAirlineRoleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of VirtualAirlineRoles to fetch.
+     */
+    orderBy?: VirtualAirlineRoleOrderByWithRelationInput | VirtualAirlineRoleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for VirtualAirlineRoles.
+     */
+    cursor?: VirtualAirlineRoleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` VirtualAirlineRoles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` VirtualAirlineRoles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of VirtualAirlineRoles.
+     */
+    distinct?: VirtualAirlineRoleScalarFieldEnum | VirtualAirlineRoleScalarFieldEnum[]
+  }
+
+  /**
+   * VirtualAirlineRole findFirstOrThrow
+   */
+  export type VirtualAirlineRoleFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VirtualAirlineRole
+     */
+    select?: VirtualAirlineRoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VirtualAirlineRole
+     */
+    omit?: VirtualAirlineRoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VirtualAirlineRoleInclude<ExtArgs> | null
+    /**
+     * Filter, which VirtualAirlineRole to fetch.
+     */
+    where?: VirtualAirlineRoleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of VirtualAirlineRoles to fetch.
+     */
+    orderBy?: VirtualAirlineRoleOrderByWithRelationInput | VirtualAirlineRoleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for VirtualAirlineRoles.
+     */
+    cursor?: VirtualAirlineRoleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` VirtualAirlineRoles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` VirtualAirlineRoles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of VirtualAirlineRoles.
+     */
+    distinct?: VirtualAirlineRoleScalarFieldEnum | VirtualAirlineRoleScalarFieldEnum[]
+  }
+
+  /**
+   * VirtualAirlineRole findMany
+   */
+  export type VirtualAirlineRoleFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VirtualAirlineRole
+     */
+    select?: VirtualAirlineRoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VirtualAirlineRole
+     */
+    omit?: VirtualAirlineRoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VirtualAirlineRoleInclude<ExtArgs> | null
+    /**
+     * Filter, which VirtualAirlineRoles to fetch.
+     */
+    where?: VirtualAirlineRoleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of VirtualAirlineRoles to fetch.
+     */
+    orderBy?: VirtualAirlineRoleOrderByWithRelationInput | VirtualAirlineRoleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing VirtualAirlineRoles.
+     */
+    cursor?: VirtualAirlineRoleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` VirtualAirlineRoles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` VirtualAirlineRoles.
+     */
+    skip?: number
+    distinct?: VirtualAirlineRoleScalarFieldEnum | VirtualAirlineRoleScalarFieldEnum[]
+  }
+
+  /**
+   * VirtualAirlineRole create
+   */
+  export type VirtualAirlineRoleCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VirtualAirlineRole
+     */
+    select?: VirtualAirlineRoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VirtualAirlineRole
+     */
+    omit?: VirtualAirlineRoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VirtualAirlineRoleInclude<ExtArgs> | null
+    /**
+     * The data needed to create a VirtualAirlineRole.
+     */
+    data: XOR<VirtualAirlineRoleCreateInput, VirtualAirlineRoleUncheckedCreateInput>
+  }
+
+  /**
+   * VirtualAirlineRole createMany
+   */
+  export type VirtualAirlineRoleCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many VirtualAirlineRoles.
+     */
+    data: VirtualAirlineRoleCreateManyInput | VirtualAirlineRoleCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * VirtualAirlineRole createManyAndReturn
+   */
+  export type VirtualAirlineRoleCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VirtualAirlineRole
+     */
+    select?: VirtualAirlineRoleSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the VirtualAirlineRole
+     */
+    omit?: VirtualAirlineRoleOmit<ExtArgs> | null
+    /**
+     * The data used to create many VirtualAirlineRoles.
+     */
+    data: VirtualAirlineRoleCreateManyInput | VirtualAirlineRoleCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VirtualAirlineRoleIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * VirtualAirlineRole update
+   */
+  export type VirtualAirlineRoleUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VirtualAirlineRole
+     */
+    select?: VirtualAirlineRoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VirtualAirlineRole
+     */
+    omit?: VirtualAirlineRoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VirtualAirlineRoleInclude<ExtArgs> | null
+    /**
+     * The data needed to update a VirtualAirlineRole.
+     */
+    data: XOR<VirtualAirlineRoleUpdateInput, VirtualAirlineRoleUncheckedUpdateInput>
+    /**
+     * Choose, which VirtualAirlineRole to update.
+     */
+    where: VirtualAirlineRoleWhereUniqueInput
+  }
+
+  /**
+   * VirtualAirlineRole updateMany
+   */
+  export type VirtualAirlineRoleUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update VirtualAirlineRoles.
+     */
+    data: XOR<VirtualAirlineRoleUpdateManyMutationInput, VirtualAirlineRoleUncheckedUpdateManyInput>
+    /**
+     * Filter which VirtualAirlineRoles to update
+     */
+    where?: VirtualAirlineRoleWhereInput
+    /**
+     * Limit how many VirtualAirlineRoles to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * VirtualAirlineRole updateManyAndReturn
+   */
+  export type VirtualAirlineRoleUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VirtualAirlineRole
+     */
+    select?: VirtualAirlineRoleSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the VirtualAirlineRole
+     */
+    omit?: VirtualAirlineRoleOmit<ExtArgs> | null
+    /**
+     * The data used to update VirtualAirlineRoles.
+     */
+    data: XOR<VirtualAirlineRoleUpdateManyMutationInput, VirtualAirlineRoleUncheckedUpdateManyInput>
+    /**
+     * Filter which VirtualAirlineRoles to update
+     */
+    where?: VirtualAirlineRoleWhereInput
+    /**
+     * Limit how many VirtualAirlineRoles to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VirtualAirlineRoleIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * VirtualAirlineRole upsert
+   */
+  export type VirtualAirlineRoleUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VirtualAirlineRole
+     */
+    select?: VirtualAirlineRoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VirtualAirlineRole
+     */
+    omit?: VirtualAirlineRoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VirtualAirlineRoleInclude<ExtArgs> | null
+    /**
+     * The filter to search for the VirtualAirlineRole to update in case it exists.
+     */
+    where: VirtualAirlineRoleWhereUniqueInput
+    /**
+     * In case the VirtualAirlineRole found by the `where` argument doesn't exist, create a new VirtualAirlineRole with this data.
+     */
+    create: XOR<VirtualAirlineRoleCreateInput, VirtualAirlineRoleUncheckedCreateInput>
+    /**
+     * In case the VirtualAirlineRole was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<VirtualAirlineRoleUpdateInput, VirtualAirlineRoleUncheckedUpdateInput>
+  }
+
+  /**
+   * VirtualAirlineRole delete
+   */
+  export type VirtualAirlineRoleDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VirtualAirlineRole
+     */
+    select?: VirtualAirlineRoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VirtualAirlineRole
+     */
+    omit?: VirtualAirlineRoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VirtualAirlineRoleInclude<ExtArgs> | null
+    /**
+     * Filter which VirtualAirlineRole to delete.
+     */
+    where: VirtualAirlineRoleWhereUniqueInput
+  }
+
+  /**
+   * VirtualAirlineRole deleteMany
+   */
+  export type VirtualAirlineRoleDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which VirtualAirlineRoles to delete
+     */
+    where?: VirtualAirlineRoleWhereInput
+    /**
+     * Limit how many VirtualAirlineRoles to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * VirtualAirlineRole.Members
+   */
+  export type VirtualAirlineRole$MembersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Member
+     */
+    select?: MemberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Member
+     */
+    omit?: MemberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MemberInclude<ExtArgs> | null
+    where?: MemberWhereInput
+    orderBy?: MemberOrderByWithRelationInput | MemberOrderByWithRelationInput[]
+    cursor?: MemberWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MemberScalarFieldEnum | MemberScalarFieldEnum[]
+  }
+
+  /**
+   * VirtualAirlineRole without action
+   */
+  export type VirtualAirlineRoleDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VirtualAirlineRole
+     */
+    select?: VirtualAirlineRoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VirtualAirlineRole
+     */
+    omit?: VirtualAirlineRoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VirtualAirlineRoleInclude<ExtArgs> | null
   }
 
 
@@ -6029,6 +12666,1376 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: WorldInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Member
+   */
+
+  export type AggregateMember = {
+    _count: MemberCountAggregateOutputType | null
+    _avg: MemberAvgAggregateOutputType | null
+    _sum: MemberSumAggregateOutputType | null
+    _min: MemberMinAggregateOutputType | null
+    _max: MemberMaxAggregateOutputType | null
+  }
+
+  export type MemberAvgAggregateOutputType = {
+    Reputation: Decimal | null
+    CompanyLevel: number | null
+    CompanyLevelXP: number | null
+    TotalCargosTransportedLbs: number | null
+    TotalPAXsTransported: number | null
+    TotalEarnedCredits: Decimal | null
+    TotalSpentCredits: Decimal | null
+    NumberOfFlights: number | null
+    FlightHours: Decimal | null
+    ReputationImpact: Decimal | null
+  }
+
+  export type MemberSumAggregateOutputType = {
+    Reputation: Decimal | null
+    CompanyLevel: number | null
+    CompanyLevelXP: number | null
+    TotalCargosTransportedLbs: number | null
+    TotalPAXsTransported: number | null
+    TotalEarnedCredits: Decimal | null
+    TotalSpentCredits: Decimal | null
+    NumberOfFlights: number | null
+    FlightHours: Decimal | null
+    ReputationImpact: Decimal | null
+  }
+
+  export type MemberMinAggregateOutputType = {
+    Id: string | null
+    VAId: string | null
+    CompanyId: string | null
+    CompanyName: string | null
+    AirlineCode: string | null
+    LastConnection: Date | null
+    Reputation: Decimal | null
+    CompanyCreationDate: Date | null
+    CompanyLevel: number | null
+    CompanyLevelXP: number | null
+    VARoleId: string | null
+    TotalCargosTransportedLbs: number | null
+    TotalPAXsTransported: number | null
+    TotalEarnedCredits: Decimal | null
+    TotalSpentCredits: Decimal | null
+    NumberOfFlights: number | null
+    FlightHours: Decimal | null
+    Color: string | null
+    ReputationImpact: Decimal | null
+    LastVAFlightDate: Date | null
+    LastRefresh: Date | null
+    CreatedAt: Date | null
+    UpdatedAt: Date | null
+  }
+
+  export type MemberMaxAggregateOutputType = {
+    Id: string | null
+    VAId: string | null
+    CompanyId: string | null
+    CompanyName: string | null
+    AirlineCode: string | null
+    LastConnection: Date | null
+    Reputation: Decimal | null
+    CompanyCreationDate: Date | null
+    CompanyLevel: number | null
+    CompanyLevelXP: number | null
+    VARoleId: string | null
+    TotalCargosTransportedLbs: number | null
+    TotalPAXsTransported: number | null
+    TotalEarnedCredits: Decimal | null
+    TotalSpentCredits: Decimal | null
+    NumberOfFlights: number | null
+    FlightHours: Decimal | null
+    Color: string | null
+    ReputationImpact: Decimal | null
+    LastVAFlightDate: Date | null
+    LastRefresh: Date | null
+    CreatedAt: Date | null
+    UpdatedAt: Date | null
+  }
+
+  export type MemberCountAggregateOutputType = {
+    Id: number
+    VAId: number
+    CompanyId: number
+    CompanyName: number
+    AirlineCode: number
+    LastConnection: number
+    Reputation: number
+    CompanyCreationDate: number
+    CompanyLevel: number
+    CompanyLevelXP: number
+    VARoleId: number
+    TotalCargosTransportedLbs: number
+    TotalPAXsTransported: number
+    TotalEarnedCredits: number
+    TotalSpentCredits: number
+    NumberOfFlights: number
+    FlightHours: number
+    Color: number
+    ReputationImpact: number
+    LastVAFlightDate: number
+    LastRefresh: number
+    CreatedAt: number
+    UpdatedAt: number
+    _all: number
+  }
+
+
+  export type MemberAvgAggregateInputType = {
+    Reputation?: true
+    CompanyLevel?: true
+    CompanyLevelXP?: true
+    TotalCargosTransportedLbs?: true
+    TotalPAXsTransported?: true
+    TotalEarnedCredits?: true
+    TotalSpentCredits?: true
+    NumberOfFlights?: true
+    FlightHours?: true
+    ReputationImpact?: true
+  }
+
+  export type MemberSumAggregateInputType = {
+    Reputation?: true
+    CompanyLevel?: true
+    CompanyLevelXP?: true
+    TotalCargosTransportedLbs?: true
+    TotalPAXsTransported?: true
+    TotalEarnedCredits?: true
+    TotalSpentCredits?: true
+    NumberOfFlights?: true
+    FlightHours?: true
+    ReputationImpact?: true
+  }
+
+  export type MemberMinAggregateInputType = {
+    Id?: true
+    VAId?: true
+    CompanyId?: true
+    CompanyName?: true
+    AirlineCode?: true
+    LastConnection?: true
+    Reputation?: true
+    CompanyCreationDate?: true
+    CompanyLevel?: true
+    CompanyLevelXP?: true
+    VARoleId?: true
+    TotalCargosTransportedLbs?: true
+    TotalPAXsTransported?: true
+    TotalEarnedCredits?: true
+    TotalSpentCredits?: true
+    NumberOfFlights?: true
+    FlightHours?: true
+    Color?: true
+    ReputationImpact?: true
+    LastVAFlightDate?: true
+    LastRefresh?: true
+    CreatedAt?: true
+    UpdatedAt?: true
+  }
+
+  export type MemberMaxAggregateInputType = {
+    Id?: true
+    VAId?: true
+    CompanyId?: true
+    CompanyName?: true
+    AirlineCode?: true
+    LastConnection?: true
+    Reputation?: true
+    CompanyCreationDate?: true
+    CompanyLevel?: true
+    CompanyLevelXP?: true
+    VARoleId?: true
+    TotalCargosTransportedLbs?: true
+    TotalPAXsTransported?: true
+    TotalEarnedCredits?: true
+    TotalSpentCredits?: true
+    NumberOfFlights?: true
+    FlightHours?: true
+    Color?: true
+    ReputationImpact?: true
+    LastVAFlightDate?: true
+    LastRefresh?: true
+    CreatedAt?: true
+    UpdatedAt?: true
+  }
+
+  export type MemberCountAggregateInputType = {
+    Id?: true
+    VAId?: true
+    CompanyId?: true
+    CompanyName?: true
+    AirlineCode?: true
+    LastConnection?: true
+    Reputation?: true
+    CompanyCreationDate?: true
+    CompanyLevel?: true
+    CompanyLevelXP?: true
+    VARoleId?: true
+    TotalCargosTransportedLbs?: true
+    TotalPAXsTransported?: true
+    TotalEarnedCredits?: true
+    TotalSpentCredits?: true
+    NumberOfFlights?: true
+    FlightHours?: true
+    Color?: true
+    ReputationImpact?: true
+    LastVAFlightDate?: true
+    LastRefresh?: true
+    CreatedAt?: true
+    UpdatedAt?: true
+    _all?: true
+  }
+
+  export type MemberAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Member to aggregate.
+     */
+    where?: MemberWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Members to fetch.
+     */
+    orderBy?: MemberOrderByWithRelationInput | MemberOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MemberWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Members from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Members.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Members
+    **/
+    _count?: true | MemberCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: MemberAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: MemberSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MemberMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MemberMaxAggregateInputType
+  }
+
+  export type GetMemberAggregateType<T extends MemberAggregateArgs> = {
+        [P in keyof T & keyof AggregateMember]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMember[P]>
+      : GetScalarType<T[P], AggregateMember[P]>
+  }
+
+
+
+
+  export type MemberGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MemberWhereInput
+    orderBy?: MemberOrderByWithAggregationInput | MemberOrderByWithAggregationInput[]
+    by: MemberScalarFieldEnum[] | MemberScalarFieldEnum
+    having?: MemberScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MemberCountAggregateInputType | true
+    _avg?: MemberAvgAggregateInputType
+    _sum?: MemberSumAggregateInputType
+    _min?: MemberMinAggregateInputType
+    _max?: MemberMaxAggregateInputType
+  }
+
+  export type MemberGroupByOutputType = {
+    Id: string
+    VAId: string
+    CompanyId: string
+    CompanyName: string
+    AirlineCode: string
+    LastConnection: Date | null
+    Reputation: Decimal
+    CompanyCreationDate: Date
+    CompanyLevel: number
+    CompanyLevelXP: number
+    VARoleId: string
+    TotalCargosTransportedLbs: number
+    TotalPAXsTransported: number
+    TotalEarnedCredits: Decimal
+    TotalSpentCredits: Decimal
+    NumberOfFlights: number
+    FlightHours: Decimal
+    Color: string
+    ReputationImpact: Decimal
+    LastVAFlightDate: Date | null
+    LastRefresh: Date | null
+    CreatedAt: Date
+    UpdatedAt: Date
+    _count: MemberCountAggregateOutputType | null
+    _avg: MemberAvgAggregateOutputType | null
+    _sum: MemberSumAggregateOutputType | null
+    _min: MemberMinAggregateOutputType | null
+    _max: MemberMaxAggregateOutputType | null
+  }
+
+  type GetMemberGroupByPayload<T extends MemberGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MemberGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MemberGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MemberGroupByOutputType[P]>
+            : GetScalarType<T[P], MemberGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MemberSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    Id?: boolean
+    VAId?: boolean
+    CompanyId?: boolean
+    CompanyName?: boolean
+    AirlineCode?: boolean
+    LastConnection?: boolean
+    Reputation?: boolean
+    CompanyCreationDate?: boolean
+    CompanyLevel?: boolean
+    CompanyLevelXP?: boolean
+    VARoleId?: boolean
+    TotalCargosTransportedLbs?: boolean
+    TotalPAXsTransported?: boolean
+    TotalEarnedCredits?: boolean
+    TotalSpentCredits?: boolean
+    NumberOfFlights?: boolean
+    FlightHours?: boolean
+    Color?: boolean
+    ReputationImpact?: boolean
+    LastVAFlightDate?: boolean
+    LastRefresh?: boolean
+    CreatedAt?: boolean
+    UpdatedAt?: boolean
+    VirtualAirline?: boolean | VirtualAirlineDefaultArgs<ExtArgs>
+    VARole?: boolean | VirtualAirlineRoleDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["member"]>
+
+  export type MemberSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    Id?: boolean
+    VAId?: boolean
+    CompanyId?: boolean
+    CompanyName?: boolean
+    AirlineCode?: boolean
+    LastConnection?: boolean
+    Reputation?: boolean
+    CompanyCreationDate?: boolean
+    CompanyLevel?: boolean
+    CompanyLevelXP?: boolean
+    VARoleId?: boolean
+    TotalCargosTransportedLbs?: boolean
+    TotalPAXsTransported?: boolean
+    TotalEarnedCredits?: boolean
+    TotalSpentCredits?: boolean
+    NumberOfFlights?: boolean
+    FlightHours?: boolean
+    Color?: boolean
+    ReputationImpact?: boolean
+    LastVAFlightDate?: boolean
+    LastRefresh?: boolean
+    CreatedAt?: boolean
+    UpdatedAt?: boolean
+    VirtualAirline?: boolean | VirtualAirlineDefaultArgs<ExtArgs>
+    VARole?: boolean | VirtualAirlineRoleDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["member"]>
+
+  export type MemberSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    Id?: boolean
+    VAId?: boolean
+    CompanyId?: boolean
+    CompanyName?: boolean
+    AirlineCode?: boolean
+    LastConnection?: boolean
+    Reputation?: boolean
+    CompanyCreationDate?: boolean
+    CompanyLevel?: boolean
+    CompanyLevelXP?: boolean
+    VARoleId?: boolean
+    TotalCargosTransportedLbs?: boolean
+    TotalPAXsTransported?: boolean
+    TotalEarnedCredits?: boolean
+    TotalSpentCredits?: boolean
+    NumberOfFlights?: boolean
+    FlightHours?: boolean
+    Color?: boolean
+    ReputationImpact?: boolean
+    LastVAFlightDate?: boolean
+    LastRefresh?: boolean
+    CreatedAt?: boolean
+    UpdatedAt?: boolean
+    VirtualAirline?: boolean | VirtualAirlineDefaultArgs<ExtArgs>
+    VARole?: boolean | VirtualAirlineRoleDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["member"]>
+
+  export type MemberSelectScalar = {
+    Id?: boolean
+    VAId?: boolean
+    CompanyId?: boolean
+    CompanyName?: boolean
+    AirlineCode?: boolean
+    LastConnection?: boolean
+    Reputation?: boolean
+    CompanyCreationDate?: boolean
+    CompanyLevel?: boolean
+    CompanyLevelXP?: boolean
+    VARoleId?: boolean
+    TotalCargosTransportedLbs?: boolean
+    TotalPAXsTransported?: boolean
+    TotalEarnedCredits?: boolean
+    TotalSpentCredits?: boolean
+    NumberOfFlights?: boolean
+    FlightHours?: boolean
+    Color?: boolean
+    ReputationImpact?: boolean
+    LastVAFlightDate?: boolean
+    LastRefresh?: boolean
+    CreatedAt?: boolean
+    UpdatedAt?: boolean
+  }
+
+  export type MemberOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "VAId" | "CompanyId" | "CompanyName" | "AirlineCode" | "LastConnection" | "Reputation" | "CompanyCreationDate" | "CompanyLevel" | "CompanyLevelXP" | "VARoleId" | "TotalCargosTransportedLbs" | "TotalPAXsTransported" | "TotalEarnedCredits" | "TotalSpentCredits" | "NumberOfFlights" | "FlightHours" | "Color" | "ReputationImpact" | "LastVAFlightDate" | "LastRefresh" | "CreatedAt" | "UpdatedAt", ExtArgs["result"]["member"]>
+  export type MemberInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    VirtualAirline?: boolean | VirtualAirlineDefaultArgs<ExtArgs>
+    VARole?: boolean | VirtualAirlineRoleDefaultArgs<ExtArgs>
+  }
+  export type MemberIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    VirtualAirline?: boolean | VirtualAirlineDefaultArgs<ExtArgs>
+    VARole?: boolean | VirtualAirlineRoleDefaultArgs<ExtArgs>
+  }
+  export type MemberIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    VirtualAirline?: boolean | VirtualAirlineDefaultArgs<ExtArgs>
+    VARole?: boolean | VirtualAirlineRoleDefaultArgs<ExtArgs>
+  }
+
+  export type $MemberPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Member"
+    objects: {
+      VirtualAirline: Prisma.$VirtualAirlinePayload<ExtArgs>
+      VARole: Prisma.$VirtualAirlineRolePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      Id: string
+      VAId: string
+      CompanyId: string
+      CompanyName: string
+      AirlineCode: string
+      LastConnection: Date | null
+      Reputation: Prisma.Decimal
+      CompanyCreationDate: Date
+      CompanyLevel: number
+      CompanyLevelXP: number
+      VARoleId: string
+      TotalCargosTransportedLbs: number
+      TotalPAXsTransported: number
+      TotalEarnedCredits: Prisma.Decimal
+      TotalSpentCredits: Prisma.Decimal
+      NumberOfFlights: number
+      FlightHours: Prisma.Decimal
+      Color: string
+      ReputationImpact: Prisma.Decimal
+      LastVAFlightDate: Date | null
+      LastRefresh: Date | null
+      CreatedAt: Date
+      UpdatedAt: Date
+    }, ExtArgs["result"]["member"]>
+    composites: {}
+  }
+
+  type MemberGetPayload<S extends boolean | null | undefined | MemberDefaultArgs> = $Result.GetResult<Prisma.$MemberPayload, S>
+
+  type MemberCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MemberFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MemberCountAggregateInputType | true
+    }
+
+  export interface MemberDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Member'], meta: { name: 'Member' } }
+    /**
+     * Find zero or one Member that matches the filter.
+     * @param {MemberFindUniqueArgs} args - Arguments to find a Member
+     * @example
+     * // Get one Member
+     * const member = await prisma.member.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MemberFindUniqueArgs>(args: SelectSubset<T, MemberFindUniqueArgs<ExtArgs>>): Prisma__MemberClient<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Member that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MemberFindUniqueOrThrowArgs} args - Arguments to find a Member
+     * @example
+     * // Get one Member
+     * const member = await prisma.member.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MemberFindUniqueOrThrowArgs>(args: SelectSubset<T, MemberFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MemberClient<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Member that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MemberFindFirstArgs} args - Arguments to find a Member
+     * @example
+     * // Get one Member
+     * const member = await prisma.member.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MemberFindFirstArgs>(args?: SelectSubset<T, MemberFindFirstArgs<ExtArgs>>): Prisma__MemberClient<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Member that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MemberFindFirstOrThrowArgs} args - Arguments to find a Member
+     * @example
+     * // Get one Member
+     * const member = await prisma.member.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MemberFindFirstOrThrowArgs>(args?: SelectSubset<T, MemberFindFirstOrThrowArgs<ExtArgs>>): Prisma__MemberClient<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Members that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MemberFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Members
+     * const members = await prisma.member.findMany()
+     * 
+     * // Get first 10 Members
+     * const members = await prisma.member.findMany({ take: 10 })
+     * 
+     * // Only select the `Id`
+     * const memberWithIdOnly = await prisma.member.findMany({ select: { Id: true } })
+     * 
+     */
+    findMany<T extends MemberFindManyArgs>(args?: SelectSubset<T, MemberFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Member.
+     * @param {MemberCreateArgs} args - Arguments to create a Member.
+     * @example
+     * // Create one Member
+     * const Member = await prisma.member.create({
+     *   data: {
+     *     // ... data to create a Member
+     *   }
+     * })
+     * 
+     */
+    create<T extends MemberCreateArgs>(args: SelectSubset<T, MemberCreateArgs<ExtArgs>>): Prisma__MemberClient<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Members.
+     * @param {MemberCreateManyArgs} args - Arguments to create many Members.
+     * @example
+     * // Create many Members
+     * const member = await prisma.member.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MemberCreateManyArgs>(args?: SelectSubset<T, MemberCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Members and returns the data saved in the database.
+     * @param {MemberCreateManyAndReturnArgs} args - Arguments to create many Members.
+     * @example
+     * // Create many Members
+     * const member = await prisma.member.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Members and only return the `Id`
+     * const memberWithIdOnly = await prisma.member.createManyAndReturn({
+     *   select: { Id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MemberCreateManyAndReturnArgs>(args?: SelectSubset<T, MemberCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Member.
+     * @param {MemberDeleteArgs} args - Arguments to delete one Member.
+     * @example
+     * // Delete one Member
+     * const Member = await prisma.member.delete({
+     *   where: {
+     *     // ... filter to delete one Member
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MemberDeleteArgs>(args: SelectSubset<T, MemberDeleteArgs<ExtArgs>>): Prisma__MemberClient<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Member.
+     * @param {MemberUpdateArgs} args - Arguments to update one Member.
+     * @example
+     * // Update one Member
+     * const member = await prisma.member.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MemberUpdateArgs>(args: SelectSubset<T, MemberUpdateArgs<ExtArgs>>): Prisma__MemberClient<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Members.
+     * @param {MemberDeleteManyArgs} args - Arguments to filter Members to delete.
+     * @example
+     * // Delete a few Members
+     * const { count } = await prisma.member.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MemberDeleteManyArgs>(args?: SelectSubset<T, MemberDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Members.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MemberUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Members
+     * const member = await prisma.member.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MemberUpdateManyArgs>(args: SelectSubset<T, MemberUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Members and returns the data updated in the database.
+     * @param {MemberUpdateManyAndReturnArgs} args - Arguments to update many Members.
+     * @example
+     * // Update many Members
+     * const member = await prisma.member.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Members and only return the `Id`
+     * const memberWithIdOnly = await prisma.member.updateManyAndReturn({
+     *   select: { Id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MemberUpdateManyAndReturnArgs>(args: SelectSubset<T, MemberUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Member.
+     * @param {MemberUpsertArgs} args - Arguments to update or create a Member.
+     * @example
+     * // Update or create a Member
+     * const member = await prisma.member.upsert({
+     *   create: {
+     *     // ... data to create a Member
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Member we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MemberUpsertArgs>(args: SelectSubset<T, MemberUpsertArgs<ExtArgs>>): Prisma__MemberClient<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Members.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MemberCountArgs} args - Arguments to filter Members to count.
+     * @example
+     * // Count the number of Members
+     * const count = await prisma.member.count({
+     *   where: {
+     *     // ... the filter for the Members we want to count
+     *   }
+     * })
+    **/
+    count<T extends MemberCountArgs>(
+      args?: Subset<T, MemberCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MemberCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Member.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MemberAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MemberAggregateArgs>(args: Subset<T, MemberAggregateArgs>): Prisma.PrismaPromise<GetMemberAggregateType<T>>
+
+    /**
+     * Group by Member.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MemberGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MemberGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MemberGroupByArgs['orderBy'] }
+        : { orderBy?: MemberGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MemberGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMemberGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Member model
+   */
+  readonly fields: MemberFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Member.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MemberClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    VirtualAirline<T extends VirtualAirlineDefaultArgs<ExtArgs> = {}>(args?: Subset<T, VirtualAirlineDefaultArgs<ExtArgs>>): Prisma__VirtualAirlineClient<$Result.GetResult<Prisma.$VirtualAirlinePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    VARole<T extends VirtualAirlineRoleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, VirtualAirlineRoleDefaultArgs<ExtArgs>>): Prisma__VirtualAirlineRoleClient<$Result.GetResult<Prisma.$VirtualAirlineRolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Member model
+   */
+  interface MemberFieldRefs {
+    readonly Id: FieldRef<"Member", 'String'>
+    readonly VAId: FieldRef<"Member", 'String'>
+    readonly CompanyId: FieldRef<"Member", 'String'>
+    readonly CompanyName: FieldRef<"Member", 'String'>
+    readonly AirlineCode: FieldRef<"Member", 'String'>
+    readonly LastConnection: FieldRef<"Member", 'DateTime'>
+    readonly Reputation: FieldRef<"Member", 'Decimal'>
+    readonly CompanyCreationDate: FieldRef<"Member", 'DateTime'>
+    readonly CompanyLevel: FieldRef<"Member", 'Int'>
+    readonly CompanyLevelXP: FieldRef<"Member", 'Int'>
+    readonly VARoleId: FieldRef<"Member", 'String'>
+    readonly TotalCargosTransportedLbs: FieldRef<"Member", 'Int'>
+    readonly TotalPAXsTransported: FieldRef<"Member", 'Int'>
+    readonly TotalEarnedCredits: FieldRef<"Member", 'Decimal'>
+    readonly TotalSpentCredits: FieldRef<"Member", 'Decimal'>
+    readonly NumberOfFlights: FieldRef<"Member", 'Int'>
+    readonly FlightHours: FieldRef<"Member", 'Decimal'>
+    readonly Color: FieldRef<"Member", 'String'>
+    readonly ReputationImpact: FieldRef<"Member", 'Decimal'>
+    readonly LastVAFlightDate: FieldRef<"Member", 'DateTime'>
+    readonly LastRefresh: FieldRef<"Member", 'DateTime'>
+    readonly CreatedAt: FieldRef<"Member", 'DateTime'>
+    readonly UpdatedAt: FieldRef<"Member", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Member findUnique
+   */
+  export type MemberFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Member
+     */
+    select?: MemberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Member
+     */
+    omit?: MemberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MemberInclude<ExtArgs> | null
+    /**
+     * Filter, which Member to fetch.
+     */
+    where: MemberWhereUniqueInput
+  }
+
+  /**
+   * Member findUniqueOrThrow
+   */
+  export type MemberFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Member
+     */
+    select?: MemberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Member
+     */
+    omit?: MemberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MemberInclude<ExtArgs> | null
+    /**
+     * Filter, which Member to fetch.
+     */
+    where: MemberWhereUniqueInput
+  }
+
+  /**
+   * Member findFirst
+   */
+  export type MemberFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Member
+     */
+    select?: MemberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Member
+     */
+    omit?: MemberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MemberInclude<ExtArgs> | null
+    /**
+     * Filter, which Member to fetch.
+     */
+    where?: MemberWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Members to fetch.
+     */
+    orderBy?: MemberOrderByWithRelationInput | MemberOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Members.
+     */
+    cursor?: MemberWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Members from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Members.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Members.
+     */
+    distinct?: MemberScalarFieldEnum | MemberScalarFieldEnum[]
+  }
+
+  /**
+   * Member findFirstOrThrow
+   */
+  export type MemberFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Member
+     */
+    select?: MemberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Member
+     */
+    omit?: MemberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MemberInclude<ExtArgs> | null
+    /**
+     * Filter, which Member to fetch.
+     */
+    where?: MemberWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Members to fetch.
+     */
+    orderBy?: MemberOrderByWithRelationInput | MemberOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Members.
+     */
+    cursor?: MemberWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Members from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Members.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Members.
+     */
+    distinct?: MemberScalarFieldEnum | MemberScalarFieldEnum[]
+  }
+
+  /**
+   * Member findMany
+   */
+  export type MemberFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Member
+     */
+    select?: MemberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Member
+     */
+    omit?: MemberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MemberInclude<ExtArgs> | null
+    /**
+     * Filter, which Members to fetch.
+     */
+    where?: MemberWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Members to fetch.
+     */
+    orderBy?: MemberOrderByWithRelationInput | MemberOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Members.
+     */
+    cursor?: MemberWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Members from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Members.
+     */
+    skip?: number
+    distinct?: MemberScalarFieldEnum | MemberScalarFieldEnum[]
+  }
+
+  /**
+   * Member create
+   */
+  export type MemberCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Member
+     */
+    select?: MemberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Member
+     */
+    omit?: MemberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MemberInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Member.
+     */
+    data: XOR<MemberCreateInput, MemberUncheckedCreateInput>
+  }
+
+  /**
+   * Member createMany
+   */
+  export type MemberCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Members.
+     */
+    data: MemberCreateManyInput | MemberCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Member createManyAndReturn
+   */
+  export type MemberCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Member
+     */
+    select?: MemberSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Member
+     */
+    omit?: MemberOmit<ExtArgs> | null
+    /**
+     * The data used to create many Members.
+     */
+    data: MemberCreateManyInput | MemberCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MemberIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Member update
+   */
+  export type MemberUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Member
+     */
+    select?: MemberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Member
+     */
+    omit?: MemberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MemberInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Member.
+     */
+    data: XOR<MemberUpdateInput, MemberUncheckedUpdateInput>
+    /**
+     * Choose, which Member to update.
+     */
+    where: MemberWhereUniqueInput
+  }
+
+  /**
+   * Member updateMany
+   */
+  export type MemberUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Members.
+     */
+    data: XOR<MemberUpdateManyMutationInput, MemberUncheckedUpdateManyInput>
+    /**
+     * Filter which Members to update
+     */
+    where?: MemberWhereInput
+    /**
+     * Limit how many Members to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Member updateManyAndReturn
+   */
+  export type MemberUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Member
+     */
+    select?: MemberSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Member
+     */
+    omit?: MemberOmit<ExtArgs> | null
+    /**
+     * The data used to update Members.
+     */
+    data: XOR<MemberUpdateManyMutationInput, MemberUncheckedUpdateManyInput>
+    /**
+     * Filter which Members to update
+     */
+    where?: MemberWhereInput
+    /**
+     * Limit how many Members to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MemberIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Member upsert
+   */
+  export type MemberUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Member
+     */
+    select?: MemberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Member
+     */
+    omit?: MemberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MemberInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Member to update in case it exists.
+     */
+    where: MemberWhereUniqueInput
+    /**
+     * In case the Member found by the `where` argument doesn't exist, create a new Member with this data.
+     */
+    create: XOR<MemberCreateInput, MemberUncheckedCreateInput>
+    /**
+     * In case the Member was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MemberUpdateInput, MemberUncheckedUpdateInput>
+  }
+
+  /**
+   * Member delete
+   */
+  export type MemberDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Member
+     */
+    select?: MemberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Member
+     */
+    omit?: MemberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MemberInclude<ExtArgs> | null
+    /**
+     * Filter which Member to delete.
+     */
+    where: MemberWhereUniqueInput
+  }
+
+  /**
+   * Member deleteMany
+   */
+  export type MemberDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Members to delete
+     */
+    where?: MemberWhereInput
+    /**
+     * Limit how many Members to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Member without action
+   */
+  export type MemberDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Member
+     */
+    select?: MemberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Member
+     */
+    omit?: MemberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MemberInclude<ExtArgs> | null
   }
 
 
@@ -7212,11 +15219,71 @@ export namespace Prisma {
     AcceptingNewMembers: 'AcceptingNewMembers',
     DiscordAuthEnabled: 'DiscordAuthEnabled',
     LocalAuthEnabled: 'LocalAuthEnabled',
+    VirtualAirlineInitiated: 'VirtualAirlineInitiated',
     CreatedAt: 'CreatedAt',
     UpdatedAt: 'UpdatedAt'
   };
 
   export type AppConfigScalarFieldEnum = (typeof AppConfigScalarFieldEnum)[keyof typeof AppConfigScalarFieldEnum]
+
+
+  export const UserScalarFieldEnum: {
+    Id: 'Id',
+    Username: 'Username',
+    Password: 'Password',
+    Email: 'Email',
+    FirstName: 'FirstName',
+    LastName: 'LastName',
+    FirstLoginCompleted: 'FirstLoginCompleted',
+    IsOnline: 'IsOnline',
+    IsBanned: 'IsBanned',
+    BanReason: 'BanReason',
+    BanExpiresAt: 'BanExpiresAt',
+    IsVerified: 'IsVerified',
+    LastLogin: 'LastLogin',
+    CreatedAt: 'CreatedAt',
+    UpdatedAt: 'UpdatedAt'
+  };
+
+  export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+  export const UserPrivacySettingsScalarFieldEnum: {
+    Id: 'Id',
+    UserId: 'UserId',
+    ShowOnlineStatus: 'ShowOnlineStatus',
+    ShowFirstName: 'ShowFirstName',
+    ShowLastName: 'ShowLastName',
+    ShowLastNameInitial: 'ShowLastNameInitial',
+    ShowLastLogin: 'ShowLastLogin',
+    CreatedAt: 'CreatedAt'
+  };
+
+  export type UserPrivacySettingsScalarFieldEnum = (typeof UserPrivacySettingsScalarFieldEnum)[keyof typeof UserPrivacySettingsScalarFieldEnum]
+
+
+  export const RoleScalarFieldEnum: {
+    Id: 'Id',
+    Name: 'Name',
+    Description: 'Description',
+    Slug: 'Slug',
+    CreatedAt: 'CreatedAt',
+    UpdatedAt: 'UpdatedAt'
+  };
+
+  export type RoleScalarFieldEnum = (typeof RoleScalarFieldEnum)[keyof typeof RoleScalarFieldEnum]
+
+
+  export const PermissionScalarFieldEnum: {
+    Id: 'Id',
+    Name: 'Name',
+    Description: 'Description',
+    Slug: 'Slug',
+    Entity: 'Entity',
+    Action: 'Action'
+  };
+
+  export type PermissionScalarFieldEnum = (typeof PermissionScalarFieldEnum)[keyof typeof PermissionScalarFieldEnum]
 
 
   export const LiveryScalarFieldEnum: {
@@ -7267,6 +15334,27 @@ export namespace Prisma {
   export type VirtualAirlineScalarFieldEnum = (typeof VirtualAirlineScalarFieldEnum)[keyof typeof VirtualAirlineScalarFieldEnum]
 
 
+  export const VirtualAirlineRoleScalarFieldEnum: {
+    Id: 'Id',
+    VAId: 'VAId',
+    Name: 'Name',
+    Permission: 'Permission',
+    IsDefaultNewRole: 'IsDefaultNewRole',
+    Color: 'Color',
+    PayPercent: 'PayPercent',
+    IsHidden: 'IsHidden',
+    RestrictLoadingVAJobsIntoNonVAAircraft: 'RestrictLoadingVAJobsIntoNonVAAircraft',
+    RestrictLoadingNonVAJobsIntoVAAircraft: 'RestrictLoadingNonVAJobsIntoVAAircraft',
+    PayWeekly: 'PayWeekly',
+    PayPerFlightHour: 'PayPerFlightHour',
+    LastRefresh: 'LastRefresh',
+    CreatedAt: 'CreatedAt',
+    UpdatedAt: 'UpdatedAt'
+  };
+
+  export type VirtualAirlineRoleScalarFieldEnum = (typeof VirtualAirlineRoleScalarFieldEnum)[keyof typeof VirtualAirlineRoleScalarFieldEnum]
+
+
   export const WorldScalarFieldEnum: {
     Id: 'Id',
     Name: 'Name',
@@ -7277,6 +15365,35 @@ export namespace Prisma {
   };
 
   export type WorldScalarFieldEnum = (typeof WorldScalarFieldEnum)[keyof typeof WorldScalarFieldEnum]
+
+
+  export const MemberScalarFieldEnum: {
+    Id: 'Id',
+    VAId: 'VAId',
+    CompanyId: 'CompanyId',
+    CompanyName: 'CompanyName',
+    AirlineCode: 'AirlineCode',
+    LastConnection: 'LastConnection',
+    Reputation: 'Reputation',
+    CompanyCreationDate: 'CompanyCreationDate',
+    CompanyLevel: 'CompanyLevel',
+    CompanyLevelXP: 'CompanyLevelXP',
+    VARoleId: 'VARoleId',
+    TotalCargosTransportedLbs: 'TotalCargosTransportedLbs',
+    TotalPAXsTransported: 'TotalPAXsTransported',
+    TotalEarnedCredits: 'TotalEarnedCredits',
+    TotalSpentCredits: 'TotalSpentCredits',
+    NumberOfFlights: 'NumberOfFlights',
+    FlightHours: 'FlightHours',
+    Color: 'Color',
+    ReputationImpact: 'ReputationImpact',
+    LastVAFlightDate: 'LastVAFlightDate',
+    LastRefresh: 'LastRefresh',
+    CreatedAt: 'CreatedAt',
+    UpdatedAt: 'UpdatedAt'
+  };
+
+  export type MemberScalarFieldEnum = (typeof MemberScalarFieldEnum)[keyof typeof MemberScalarFieldEnum]
 
 
   export const JobScalarFieldEnum: {
@@ -7496,6 +15613,7 @@ export namespace Prisma {
     AcceptingNewMembers?: BoolFilter<"AppConfig"> | boolean
     DiscordAuthEnabled?: BoolFilter<"AppConfig"> | boolean
     LocalAuthEnabled?: BoolFilter<"AppConfig"> | boolean
+    VirtualAirlineInitiated?: BoolFilter<"AppConfig"> | boolean
     CreatedAt?: DateTimeFilter<"AppConfig"> | Date | string
     UpdatedAt?: DateTimeFilter<"AppConfig"> | Date | string
   }
@@ -7511,6 +15629,7 @@ export namespace Prisma {
     AcceptingNewMembers?: SortOrder
     DiscordAuthEnabled?: SortOrder
     LocalAuthEnabled?: SortOrder
+    VirtualAirlineInitiated?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
   }
@@ -7529,6 +15648,7 @@ export namespace Prisma {
     AcceptingNewMembers?: BoolFilter<"AppConfig"> | boolean
     DiscordAuthEnabled?: BoolFilter<"AppConfig"> | boolean
     LocalAuthEnabled?: BoolFilter<"AppConfig"> | boolean
+    VirtualAirlineInitiated?: BoolFilter<"AppConfig"> | boolean
     CreatedAt?: DateTimeFilter<"AppConfig"> | Date | string
     UpdatedAt?: DateTimeFilter<"AppConfig"> | Date | string
   }, "Id">
@@ -7544,6 +15664,7 @@ export namespace Prisma {
     AcceptingNewMembers?: SortOrder
     DiscordAuthEnabled?: SortOrder
     LocalAuthEnabled?: SortOrder
+    VirtualAirlineInitiated?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
     _count?: AppConfigCountOrderByAggregateInput
@@ -7567,8 +15688,314 @@ export namespace Prisma {
     AcceptingNewMembers?: BoolWithAggregatesFilter<"AppConfig"> | boolean
     DiscordAuthEnabled?: BoolWithAggregatesFilter<"AppConfig"> | boolean
     LocalAuthEnabled?: BoolWithAggregatesFilter<"AppConfig"> | boolean
+    VirtualAirlineInitiated?: BoolWithAggregatesFilter<"AppConfig"> | boolean
     CreatedAt?: DateTimeWithAggregatesFilter<"AppConfig"> | Date | string
     UpdatedAt?: DateTimeWithAggregatesFilter<"AppConfig"> | Date | string
+  }
+
+  export type UserWhereInput = {
+    AND?: UserWhereInput | UserWhereInput[]
+    OR?: UserWhereInput[]
+    NOT?: UserWhereInput | UserWhereInput[]
+    Id?: UuidFilter<"User"> | string
+    Username?: StringFilter<"User"> | string
+    Password?: StringFilter<"User"> | string
+    Email?: StringNullableFilter<"User"> | string | null
+    FirstName?: StringNullableFilter<"User"> | string | null
+    LastName?: StringNullableFilter<"User"> | string | null
+    FirstLoginCompleted?: BoolFilter<"User"> | boolean
+    IsOnline?: BoolFilter<"User"> | boolean
+    IsBanned?: BoolFilter<"User"> | boolean
+    BanReason?: StringNullableFilter<"User"> | string | null
+    BanExpiresAt?: DateTimeNullableFilter<"User"> | Date | string | null
+    IsVerified?: BoolFilter<"User"> | boolean
+    LastLogin?: DateTimeNullableFilter<"User"> | Date | string | null
+    CreatedAt?: DateTimeFilter<"User"> | Date | string
+    UpdatedAt?: DateTimeFilter<"User"> | Date | string
+    Roles?: RoleListRelationFilter
+    PrivacySettings?: XOR<UserPrivacySettingsNullableScalarRelationFilter, UserPrivacySettingsWhereInput> | null
+  }
+
+  export type UserOrderByWithRelationInput = {
+    Id?: SortOrder
+    Username?: SortOrder
+    Password?: SortOrder
+    Email?: SortOrderInput | SortOrder
+    FirstName?: SortOrderInput | SortOrder
+    LastName?: SortOrderInput | SortOrder
+    FirstLoginCompleted?: SortOrder
+    IsOnline?: SortOrder
+    IsBanned?: SortOrder
+    BanReason?: SortOrderInput | SortOrder
+    BanExpiresAt?: SortOrderInput | SortOrder
+    IsVerified?: SortOrder
+    LastLogin?: SortOrderInput | SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+    Roles?: RoleOrderByRelationAggregateInput
+    PrivacySettings?: UserPrivacySettingsOrderByWithRelationInput
+  }
+
+  export type UserWhereUniqueInput = Prisma.AtLeast<{
+    Id?: string
+    Username?: string
+    Email?: string
+    AND?: UserWhereInput | UserWhereInput[]
+    OR?: UserWhereInput[]
+    NOT?: UserWhereInput | UserWhereInput[]
+    Password?: StringFilter<"User"> | string
+    FirstName?: StringNullableFilter<"User"> | string | null
+    LastName?: StringNullableFilter<"User"> | string | null
+    FirstLoginCompleted?: BoolFilter<"User"> | boolean
+    IsOnline?: BoolFilter<"User"> | boolean
+    IsBanned?: BoolFilter<"User"> | boolean
+    BanReason?: StringNullableFilter<"User"> | string | null
+    BanExpiresAt?: DateTimeNullableFilter<"User"> | Date | string | null
+    IsVerified?: BoolFilter<"User"> | boolean
+    LastLogin?: DateTimeNullableFilter<"User"> | Date | string | null
+    CreatedAt?: DateTimeFilter<"User"> | Date | string
+    UpdatedAt?: DateTimeFilter<"User"> | Date | string
+    Roles?: RoleListRelationFilter
+    PrivacySettings?: XOR<UserPrivacySettingsNullableScalarRelationFilter, UserPrivacySettingsWhereInput> | null
+  }, "Id" | "Id" | "Username" | "Email">
+
+  export type UserOrderByWithAggregationInput = {
+    Id?: SortOrder
+    Username?: SortOrder
+    Password?: SortOrder
+    Email?: SortOrderInput | SortOrder
+    FirstName?: SortOrderInput | SortOrder
+    LastName?: SortOrderInput | SortOrder
+    FirstLoginCompleted?: SortOrder
+    IsOnline?: SortOrder
+    IsBanned?: SortOrder
+    BanReason?: SortOrderInput | SortOrder
+    BanExpiresAt?: SortOrderInput | SortOrder
+    IsVerified?: SortOrder
+    LastLogin?: SortOrderInput | SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+    _count?: UserCountOrderByAggregateInput
+    _max?: UserMaxOrderByAggregateInput
+    _min?: UserMinOrderByAggregateInput
+  }
+
+  export type UserScalarWhereWithAggregatesInput = {
+    AND?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
+    OR?: UserScalarWhereWithAggregatesInput[]
+    NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
+    Id?: UuidWithAggregatesFilter<"User"> | string
+    Username?: StringWithAggregatesFilter<"User"> | string
+    Password?: StringWithAggregatesFilter<"User"> | string
+    Email?: StringNullableWithAggregatesFilter<"User"> | string | null
+    FirstName?: StringNullableWithAggregatesFilter<"User"> | string | null
+    LastName?: StringNullableWithAggregatesFilter<"User"> | string | null
+    FirstLoginCompleted?: BoolWithAggregatesFilter<"User"> | boolean
+    IsOnline?: BoolWithAggregatesFilter<"User"> | boolean
+    IsBanned?: BoolWithAggregatesFilter<"User"> | boolean
+    BanReason?: StringNullableWithAggregatesFilter<"User"> | string | null
+    BanExpiresAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+    IsVerified?: BoolWithAggregatesFilter<"User"> | boolean
+    LastLogin?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+    CreatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+    UpdatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+  }
+
+  export type UserPrivacySettingsWhereInput = {
+    AND?: UserPrivacySettingsWhereInput | UserPrivacySettingsWhereInput[]
+    OR?: UserPrivacySettingsWhereInput[]
+    NOT?: UserPrivacySettingsWhereInput | UserPrivacySettingsWhereInput[]
+    Id?: UuidFilter<"UserPrivacySettings"> | string
+    UserId?: UuidFilter<"UserPrivacySettings"> | string
+    ShowOnlineStatus?: BoolFilter<"UserPrivacySettings"> | boolean
+    ShowFirstName?: BoolFilter<"UserPrivacySettings"> | boolean
+    ShowLastName?: BoolFilter<"UserPrivacySettings"> | boolean
+    ShowLastNameInitial?: BoolFilter<"UserPrivacySettings"> | boolean
+    ShowLastLogin?: DateTimeNullableFilter<"UserPrivacySettings"> | Date | string | null
+    CreatedAt?: DateTimeFilter<"UserPrivacySettings"> | Date | string
+    User?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type UserPrivacySettingsOrderByWithRelationInput = {
+    Id?: SortOrder
+    UserId?: SortOrder
+    ShowOnlineStatus?: SortOrder
+    ShowFirstName?: SortOrder
+    ShowLastName?: SortOrder
+    ShowLastNameInitial?: SortOrder
+    ShowLastLogin?: SortOrderInput | SortOrder
+    CreatedAt?: SortOrder
+    User?: UserOrderByWithRelationInput
+  }
+
+  export type UserPrivacySettingsWhereUniqueInput = Prisma.AtLeast<{
+    Id?: string
+    UserId?: string
+    AND?: UserPrivacySettingsWhereInput | UserPrivacySettingsWhereInput[]
+    OR?: UserPrivacySettingsWhereInput[]
+    NOT?: UserPrivacySettingsWhereInput | UserPrivacySettingsWhereInput[]
+    ShowOnlineStatus?: BoolFilter<"UserPrivacySettings"> | boolean
+    ShowFirstName?: BoolFilter<"UserPrivacySettings"> | boolean
+    ShowLastName?: BoolFilter<"UserPrivacySettings"> | boolean
+    ShowLastNameInitial?: BoolFilter<"UserPrivacySettings"> | boolean
+    ShowLastLogin?: DateTimeNullableFilter<"UserPrivacySettings"> | Date | string | null
+    CreatedAt?: DateTimeFilter<"UserPrivacySettings"> | Date | string
+    User?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "Id" | "Id" | "UserId">
+
+  export type UserPrivacySettingsOrderByWithAggregationInput = {
+    Id?: SortOrder
+    UserId?: SortOrder
+    ShowOnlineStatus?: SortOrder
+    ShowFirstName?: SortOrder
+    ShowLastName?: SortOrder
+    ShowLastNameInitial?: SortOrder
+    ShowLastLogin?: SortOrderInput | SortOrder
+    CreatedAt?: SortOrder
+    _count?: UserPrivacySettingsCountOrderByAggregateInput
+    _max?: UserPrivacySettingsMaxOrderByAggregateInput
+    _min?: UserPrivacySettingsMinOrderByAggregateInput
+  }
+
+  export type UserPrivacySettingsScalarWhereWithAggregatesInput = {
+    AND?: UserPrivacySettingsScalarWhereWithAggregatesInput | UserPrivacySettingsScalarWhereWithAggregatesInput[]
+    OR?: UserPrivacySettingsScalarWhereWithAggregatesInput[]
+    NOT?: UserPrivacySettingsScalarWhereWithAggregatesInput | UserPrivacySettingsScalarWhereWithAggregatesInput[]
+    Id?: UuidWithAggregatesFilter<"UserPrivacySettings"> | string
+    UserId?: UuidWithAggregatesFilter<"UserPrivacySettings"> | string
+    ShowOnlineStatus?: BoolWithAggregatesFilter<"UserPrivacySettings"> | boolean
+    ShowFirstName?: BoolWithAggregatesFilter<"UserPrivacySettings"> | boolean
+    ShowLastName?: BoolWithAggregatesFilter<"UserPrivacySettings"> | boolean
+    ShowLastNameInitial?: BoolWithAggregatesFilter<"UserPrivacySettings"> | boolean
+    ShowLastLogin?: DateTimeNullableWithAggregatesFilter<"UserPrivacySettings"> | Date | string | null
+    CreatedAt?: DateTimeWithAggregatesFilter<"UserPrivacySettings"> | Date | string
+  }
+
+  export type RoleWhereInput = {
+    AND?: RoleWhereInput | RoleWhereInput[]
+    OR?: RoleWhereInput[]
+    NOT?: RoleWhereInput | RoleWhereInput[]
+    Id?: IntFilter<"Role"> | number
+    Name?: StringFilter<"Role"> | string
+    Description?: StringNullableFilter<"Role"> | string | null
+    Slug?: StringFilter<"Role"> | string
+    CreatedAt?: DateTimeFilter<"Role"> | Date | string
+    UpdatedAt?: DateTimeFilter<"Role"> | Date | string
+    Permissions?: PermissionListRelationFilter
+    Users?: UserListRelationFilter
+  }
+
+  export type RoleOrderByWithRelationInput = {
+    Id?: SortOrder
+    Name?: SortOrder
+    Description?: SortOrderInput | SortOrder
+    Slug?: SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+    Permissions?: PermissionOrderByRelationAggregateInput
+    Users?: UserOrderByRelationAggregateInput
+  }
+
+  export type RoleWhereUniqueInput = Prisma.AtLeast<{
+    Id?: number
+    Slug?: string
+    AND?: RoleWhereInput | RoleWhereInput[]
+    OR?: RoleWhereInput[]
+    NOT?: RoleWhereInput | RoleWhereInput[]
+    Name?: StringFilter<"Role"> | string
+    Description?: StringNullableFilter<"Role"> | string | null
+    CreatedAt?: DateTimeFilter<"Role"> | Date | string
+    UpdatedAt?: DateTimeFilter<"Role"> | Date | string
+    Permissions?: PermissionListRelationFilter
+    Users?: UserListRelationFilter
+  }, "Id" | "Slug">
+
+  export type RoleOrderByWithAggregationInput = {
+    Id?: SortOrder
+    Name?: SortOrder
+    Description?: SortOrderInput | SortOrder
+    Slug?: SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+    _count?: RoleCountOrderByAggregateInput
+    _avg?: RoleAvgOrderByAggregateInput
+    _max?: RoleMaxOrderByAggregateInput
+    _min?: RoleMinOrderByAggregateInput
+    _sum?: RoleSumOrderByAggregateInput
+  }
+
+  export type RoleScalarWhereWithAggregatesInput = {
+    AND?: RoleScalarWhereWithAggregatesInput | RoleScalarWhereWithAggregatesInput[]
+    OR?: RoleScalarWhereWithAggregatesInput[]
+    NOT?: RoleScalarWhereWithAggregatesInput | RoleScalarWhereWithAggregatesInput[]
+    Id?: IntWithAggregatesFilter<"Role"> | number
+    Name?: StringWithAggregatesFilter<"Role"> | string
+    Description?: StringNullableWithAggregatesFilter<"Role"> | string | null
+    Slug?: StringWithAggregatesFilter<"Role"> | string
+    CreatedAt?: DateTimeWithAggregatesFilter<"Role"> | Date | string
+    UpdatedAt?: DateTimeWithAggregatesFilter<"Role"> | Date | string
+  }
+
+  export type PermissionWhereInput = {
+    AND?: PermissionWhereInput | PermissionWhereInput[]
+    OR?: PermissionWhereInput[]
+    NOT?: PermissionWhereInput | PermissionWhereInput[]
+    Id?: IntFilter<"Permission"> | number
+    Name?: StringFilter<"Permission"> | string
+    Description?: StringNullableFilter<"Permission"> | string | null
+    Slug?: StringFilter<"Permission"> | string
+    Entity?: StringFilter<"Permission"> | string
+    Action?: StringFilter<"Permission"> | string
+    Roles?: RoleListRelationFilter
+  }
+
+  export type PermissionOrderByWithRelationInput = {
+    Id?: SortOrder
+    Name?: SortOrder
+    Description?: SortOrderInput | SortOrder
+    Slug?: SortOrder
+    Entity?: SortOrder
+    Action?: SortOrder
+    Roles?: RoleOrderByRelationAggregateInput
+  }
+
+  export type PermissionWhereUniqueInput = Prisma.AtLeast<{
+    Id?: number
+    Slug?: string
+    AND?: PermissionWhereInput | PermissionWhereInput[]
+    OR?: PermissionWhereInput[]
+    NOT?: PermissionWhereInput | PermissionWhereInput[]
+    Name?: StringFilter<"Permission"> | string
+    Description?: StringNullableFilter<"Permission"> | string | null
+    Entity?: StringFilter<"Permission"> | string
+    Action?: StringFilter<"Permission"> | string
+    Roles?: RoleListRelationFilter
+  }, "Id" | "Slug">
+
+  export type PermissionOrderByWithAggregationInput = {
+    Id?: SortOrder
+    Name?: SortOrder
+    Description?: SortOrderInput | SortOrder
+    Slug?: SortOrder
+    Entity?: SortOrder
+    Action?: SortOrder
+    _count?: PermissionCountOrderByAggregateInput
+    _avg?: PermissionAvgOrderByAggregateInput
+    _max?: PermissionMaxOrderByAggregateInput
+    _min?: PermissionMinOrderByAggregateInput
+    _sum?: PermissionSumOrderByAggregateInput
+  }
+
+  export type PermissionScalarWhereWithAggregatesInput = {
+    AND?: PermissionScalarWhereWithAggregatesInput | PermissionScalarWhereWithAggregatesInput[]
+    OR?: PermissionScalarWhereWithAggregatesInput[]
+    NOT?: PermissionScalarWhereWithAggregatesInput | PermissionScalarWhereWithAggregatesInput[]
+    Id?: IntWithAggregatesFilter<"Permission"> | number
+    Name?: StringWithAggregatesFilter<"Permission"> | string
+    Description?: StringNullableWithAggregatesFilter<"Permission"> | string | null
+    Slug?: StringWithAggregatesFilter<"Permission"> | string
+    Entity?: StringWithAggregatesFilter<"Permission"> | string
+    Action?: StringWithAggregatesFilter<"Permission"> | string
   }
 
   export type LiveryWhereInput = {
@@ -7681,6 +16108,8 @@ export namespace Prisma {
     CreatedAt?: DateTimeFilter<"VirtualAirline"> | Date | string
     UpdatedAt?: DateTimeFilter<"VirtualAirline"> | Date | string
     World?: XOR<WorldNullableScalarRelationFilter, WorldWhereInput> | null
+    VARoles?: VirtualAirlineRoleListRelationFilter
+    Members?: MemberListRelationFilter
   }
 
   export type VirtualAirlineOrderByWithRelationInput = {
@@ -7711,6 +16140,8 @@ export namespace Prisma {
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
     World?: WorldOrderByWithRelationInput
+    VARoles?: VirtualAirlineRoleOrderByRelationAggregateInput
+    Members?: MemberOrderByRelationAggregateInput
   }
 
   export type VirtualAirlineWhereUniqueInput = Prisma.AtLeast<{
@@ -7744,6 +16175,8 @@ export namespace Prisma {
     CreatedAt?: DateTimeFilter<"VirtualAirline"> | Date | string
     UpdatedAt?: DateTimeFilter<"VirtualAirline"> | Date | string
     World?: XOR<WorldNullableScalarRelationFilter, WorldWhereInput> | null
+    VARoles?: VirtualAirlineRoleListRelationFilter
+    Members?: MemberListRelationFilter
   }, "Id" | "ApiKey" | "Identifier">
 
   export type VirtualAirlineOrderByWithAggregationInput = {
@@ -7812,6 +16245,116 @@ export namespace Prisma {
     UpdatedAt?: DateTimeWithAggregatesFilter<"VirtualAirline"> | Date | string
   }
 
+  export type VirtualAirlineRoleWhereInput = {
+    AND?: VirtualAirlineRoleWhereInput | VirtualAirlineRoleWhereInput[]
+    OR?: VirtualAirlineRoleWhereInput[]
+    NOT?: VirtualAirlineRoleWhereInput | VirtualAirlineRoleWhereInput[]
+    Id?: UuidFilter<"VirtualAirlineRole"> | string
+    VAId?: UuidFilter<"VirtualAirlineRole"> | string
+    Name?: StringFilter<"VirtualAirlineRole"> | string
+    Permission?: IntFilter<"VirtualAirlineRole"> | number
+    IsDefaultNewRole?: BoolFilter<"VirtualAirlineRole"> | boolean
+    Color?: StringFilter<"VirtualAirlineRole"> | string
+    PayPercent?: DecimalFilter<"VirtualAirlineRole"> | Decimal | DecimalJsLike | number | string
+    IsHidden?: BoolFilter<"VirtualAirlineRole"> | boolean
+    RestrictLoadingVAJobsIntoNonVAAircraft?: BoolFilter<"VirtualAirlineRole"> | boolean
+    RestrictLoadingNonVAJobsIntoVAAircraft?: BoolFilter<"VirtualAirlineRole"> | boolean
+    PayWeekly?: DecimalFilter<"VirtualAirlineRole"> | Decimal | DecimalJsLike | number | string
+    PayPerFlightHour?: DecimalFilter<"VirtualAirlineRole"> | Decimal | DecimalJsLike | number | string
+    LastRefresh?: DateTimeNullableFilter<"VirtualAirlineRole"> | Date | string | null
+    CreatedAt?: DateTimeFilter<"VirtualAirlineRole"> | Date | string
+    UpdatedAt?: DateTimeFilter<"VirtualAirlineRole"> | Date | string
+    VirtualAirline?: XOR<VirtualAirlineScalarRelationFilter, VirtualAirlineWhereInput>
+    Members?: MemberListRelationFilter
+  }
+
+  export type VirtualAirlineRoleOrderByWithRelationInput = {
+    Id?: SortOrder
+    VAId?: SortOrder
+    Name?: SortOrder
+    Permission?: SortOrder
+    IsDefaultNewRole?: SortOrder
+    Color?: SortOrder
+    PayPercent?: SortOrder
+    IsHidden?: SortOrder
+    RestrictLoadingVAJobsIntoNonVAAircraft?: SortOrder
+    RestrictLoadingNonVAJobsIntoVAAircraft?: SortOrder
+    PayWeekly?: SortOrder
+    PayPerFlightHour?: SortOrder
+    LastRefresh?: SortOrderInput | SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+    VirtualAirline?: VirtualAirlineOrderByWithRelationInput
+    Members?: MemberOrderByRelationAggregateInput
+  }
+
+  export type VirtualAirlineRoleWhereUniqueInput = Prisma.AtLeast<{
+    Id?: string
+    AND?: VirtualAirlineRoleWhereInput | VirtualAirlineRoleWhereInput[]
+    OR?: VirtualAirlineRoleWhereInput[]
+    NOT?: VirtualAirlineRoleWhereInput | VirtualAirlineRoleWhereInput[]
+    VAId?: UuidFilter<"VirtualAirlineRole"> | string
+    Name?: StringFilter<"VirtualAirlineRole"> | string
+    Permission?: IntFilter<"VirtualAirlineRole"> | number
+    IsDefaultNewRole?: BoolFilter<"VirtualAirlineRole"> | boolean
+    Color?: StringFilter<"VirtualAirlineRole"> | string
+    PayPercent?: DecimalFilter<"VirtualAirlineRole"> | Decimal | DecimalJsLike | number | string
+    IsHidden?: BoolFilter<"VirtualAirlineRole"> | boolean
+    RestrictLoadingVAJobsIntoNonVAAircraft?: BoolFilter<"VirtualAirlineRole"> | boolean
+    RestrictLoadingNonVAJobsIntoVAAircraft?: BoolFilter<"VirtualAirlineRole"> | boolean
+    PayWeekly?: DecimalFilter<"VirtualAirlineRole"> | Decimal | DecimalJsLike | number | string
+    PayPerFlightHour?: DecimalFilter<"VirtualAirlineRole"> | Decimal | DecimalJsLike | number | string
+    LastRefresh?: DateTimeNullableFilter<"VirtualAirlineRole"> | Date | string | null
+    CreatedAt?: DateTimeFilter<"VirtualAirlineRole"> | Date | string
+    UpdatedAt?: DateTimeFilter<"VirtualAirlineRole"> | Date | string
+    VirtualAirline?: XOR<VirtualAirlineScalarRelationFilter, VirtualAirlineWhereInput>
+    Members?: MemberListRelationFilter
+  }, "Id">
+
+  export type VirtualAirlineRoleOrderByWithAggregationInput = {
+    Id?: SortOrder
+    VAId?: SortOrder
+    Name?: SortOrder
+    Permission?: SortOrder
+    IsDefaultNewRole?: SortOrder
+    Color?: SortOrder
+    PayPercent?: SortOrder
+    IsHidden?: SortOrder
+    RestrictLoadingVAJobsIntoNonVAAircraft?: SortOrder
+    RestrictLoadingNonVAJobsIntoVAAircraft?: SortOrder
+    PayWeekly?: SortOrder
+    PayPerFlightHour?: SortOrder
+    LastRefresh?: SortOrderInput | SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+    _count?: VirtualAirlineRoleCountOrderByAggregateInput
+    _avg?: VirtualAirlineRoleAvgOrderByAggregateInput
+    _max?: VirtualAirlineRoleMaxOrderByAggregateInput
+    _min?: VirtualAirlineRoleMinOrderByAggregateInput
+    _sum?: VirtualAirlineRoleSumOrderByAggregateInput
+  }
+
+  export type VirtualAirlineRoleScalarWhereWithAggregatesInput = {
+    AND?: VirtualAirlineRoleScalarWhereWithAggregatesInput | VirtualAirlineRoleScalarWhereWithAggregatesInput[]
+    OR?: VirtualAirlineRoleScalarWhereWithAggregatesInput[]
+    NOT?: VirtualAirlineRoleScalarWhereWithAggregatesInput | VirtualAirlineRoleScalarWhereWithAggregatesInput[]
+    Id?: UuidWithAggregatesFilter<"VirtualAirlineRole"> | string
+    VAId?: UuidWithAggregatesFilter<"VirtualAirlineRole"> | string
+    Name?: StringWithAggregatesFilter<"VirtualAirlineRole"> | string
+    Permission?: IntWithAggregatesFilter<"VirtualAirlineRole"> | number
+    IsDefaultNewRole?: BoolWithAggregatesFilter<"VirtualAirlineRole"> | boolean
+    Color?: StringWithAggregatesFilter<"VirtualAirlineRole"> | string
+    PayPercent?: DecimalWithAggregatesFilter<"VirtualAirlineRole"> | Decimal | DecimalJsLike | number | string
+    IsHidden?: BoolWithAggregatesFilter<"VirtualAirlineRole"> | boolean
+    RestrictLoadingVAJobsIntoNonVAAircraft?: BoolWithAggregatesFilter<"VirtualAirlineRole"> | boolean
+    RestrictLoadingNonVAJobsIntoVAAircraft?: BoolWithAggregatesFilter<"VirtualAirlineRole"> | boolean
+    PayWeekly?: DecimalWithAggregatesFilter<"VirtualAirlineRole"> | Decimal | DecimalJsLike | number | string
+    PayPerFlightHour?: DecimalWithAggregatesFilter<"VirtualAirlineRole"> | Decimal | DecimalJsLike | number | string
+    LastRefresh?: DateTimeNullableWithAggregatesFilter<"VirtualAirlineRole"> | Date | string | null
+    CreatedAt?: DateTimeWithAggregatesFilter<"VirtualAirlineRole"> | Date | string
+    UpdatedAt?: DateTimeWithAggregatesFilter<"VirtualAirlineRole"> | Date | string
+  }
+
   export type WorldWhereInput = {
     AND?: WorldWhereInput | WorldWhereInput[]
     OR?: WorldWhereInput[]
@@ -7870,6 +16413,156 @@ export namespace Prisma {
     Description?: StringNullableWithAggregatesFilter<"World"> | string | null
     CreatedAt?: DateTimeWithAggregatesFilter<"World"> | Date | string
     UpdatedAt?: DateTimeWithAggregatesFilter<"World"> | Date | string
+  }
+
+  export type MemberWhereInput = {
+    AND?: MemberWhereInput | MemberWhereInput[]
+    OR?: MemberWhereInput[]
+    NOT?: MemberWhereInput | MemberWhereInput[]
+    Id?: UuidFilter<"Member"> | string
+    VAId?: UuidFilter<"Member"> | string
+    CompanyId?: UuidFilter<"Member"> | string
+    CompanyName?: StringFilter<"Member"> | string
+    AirlineCode?: StringFilter<"Member"> | string
+    LastConnection?: DateTimeNullableFilter<"Member"> | Date | string | null
+    Reputation?: DecimalFilter<"Member"> | Decimal | DecimalJsLike | number | string
+    CompanyCreationDate?: DateTimeFilter<"Member"> | Date | string
+    CompanyLevel?: IntFilter<"Member"> | number
+    CompanyLevelXP?: IntFilter<"Member"> | number
+    VARoleId?: UuidFilter<"Member"> | string
+    TotalCargosTransportedLbs?: IntFilter<"Member"> | number
+    TotalPAXsTransported?: IntFilter<"Member"> | number
+    TotalEarnedCredits?: DecimalFilter<"Member"> | Decimal | DecimalJsLike | number | string
+    TotalSpentCredits?: DecimalFilter<"Member"> | Decimal | DecimalJsLike | number | string
+    NumberOfFlights?: IntFilter<"Member"> | number
+    FlightHours?: DecimalFilter<"Member"> | Decimal | DecimalJsLike | number | string
+    Color?: StringFilter<"Member"> | string
+    ReputationImpact?: DecimalFilter<"Member"> | Decimal | DecimalJsLike | number | string
+    LastVAFlightDate?: DateTimeNullableFilter<"Member"> | Date | string | null
+    LastRefresh?: DateTimeNullableFilter<"Member"> | Date | string | null
+    CreatedAt?: DateTimeFilter<"Member"> | Date | string
+    UpdatedAt?: DateTimeFilter<"Member"> | Date | string
+    VirtualAirline?: XOR<VirtualAirlineScalarRelationFilter, VirtualAirlineWhereInput>
+    VARole?: XOR<VirtualAirlineRoleScalarRelationFilter, VirtualAirlineRoleWhereInput>
+  }
+
+  export type MemberOrderByWithRelationInput = {
+    Id?: SortOrder
+    VAId?: SortOrder
+    CompanyId?: SortOrder
+    CompanyName?: SortOrder
+    AirlineCode?: SortOrder
+    LastConnection?: SortOrderInput | SortOrder
+    Reputation?: SortOrder
+    CompanyCreationDate?: SortOrder
+    CompanyLevel?: SortOrder
+    CompanyLevelXP?: SortOrder
+    VARoleId?: SortOrder
+    TotalCargosTransportedLbs?: SortOrder
+    TotalPAXsTransported?: SortOrder
+    TotalEarnedCredits?: SortOrder
+    TotalSpentCredits?: SortOrder
+    NumberOfFlights?: SortOrder
+    FlightHours?: SortOrder
+    Color?: SortOrder
+    ReputationImpact?: SortOrder
+    LastVAFlightDate?: SortOrderInput | SortOrder
+    LastRefresh?: SortOrderInput | SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+    VirtualAirline?: VirtualAirlineOrderByWithRelationInput
+    VARole?: VirtualAirlineRoleOrderByWithRelationInput
+  }
+
+  export type MemberWhereUniqueInput = Prisma.AtLeast<{
+    Id?: string
+    AirlineCode?: string
+    AND?: MemberWhereInput | MemberWhereInput[]
+    OR?: MemberWhereInput[]
+    NOT?: MemberWhereInput | MemberWhereInput[]
+    VAId?: UuidFilter<"Member"> | string
+    CompanyId?: UuidFilter<"Member"> | string
+    CompanyName?: StringFilter<"Member"> | string
+    LastConnection?: DateTimeNullableFilter<"Member"> | Date | string | null
+    Reputation?: DecimalFilter<"Member"> | Decimal | DecimalJsLike | number | string
+    CompanyCreationDate?: DateTimeFilter<"Member"> | Date | string
+    CompanyLevel?: IntFilter<"Member"> | number
+    CompanyLevelXP?: IntFilter<"Member"> | number
+    VARoleId?: UuidFilter<"Member"> | string
+    TotalCargosTransportedLbs?: IntFilter<"Member"> | number
+    TotalPAXsTransported?: IntFilter<"Member"> | number
+    TotalEarnedCredits?: DecimalFilter<"Member"> | Decimal | DecimalJsLike | number | string
+    TotalSpentCredits?: DecimalFilter<"Member"> | Decimal | DecimalJsLike | number | string
+    NumberOfFlights?: IntFilter<"Member"> | number
+    FlightHours?: DecimalFilter<"Member"> | Decimal | DecimalJsLike | number | string
+    Color?: StringFilter<"Member"> | string
+    ReputationImpact?: DecimalFilter<"Member"> | Decimal | DecimalJsLike | number | string
+    LastVAFlightDate?: DateTimeNullableFilter<"Member"> | Date | string | null
+    LastRefresh?: DateTimeNullableFilter<"Member"> | Date | string | null
+    CreatedAt?: DateTimeFilter<"Member"> | Date | string
+    UpdatedAt?: DateTimeFilter<"Member"> | Date | string
+    VirtualAirline?: XOR<VirtualAirlineScalarRelationFilter, VirtualAirlineWhereInput>
+    VARole?: XOR<VirtualAirlineRoleScalarRelationFilter, VirtualAirlineRoleWhereInput>
+  }, "Id" | "AirlineCode">
+
+  export type MemberOrderByWithAggregationInput = {
+    Id?: SortOrder
+    VAId?: SortOrder
+    CompanyId?: SortOrder
+    CompanyName?: SortOrder
+    AirlineCode?: SortOrder
+    LastConnection?: SortOrderInput | SortOrder
+    Reputation?: SortOrder
+    CompanyCreationDate?: SortOrder
+    CompanyLevel?: SortOrder
+    CompanyLevelXP?: SortOrder
+    VARoleId?: SortOrder
+    TotalCargosTransportedLbs?: SortOrder
+    TotalPAXsTransported?: SortOrder
+    TotalEarnedCredits?: SortOrder
+    TotalSpentCredits?: SortOrder
+    NumberOfFlights?: SortOrder
+    FlightHours?: SortOrder
+    Color?: SortOrder
+    ReputationImpact?: SortOrder
+    LastVAFlightDate?: SortOrderInput | SortOrder
+    LastRefresh?: SortOrderInput | SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+    _count?: MemberCountOrderByAggregateInput
+    _avg?: MemberAvgOrderByAggregateInput
+    _max?: MemberMaxOrderByAggregateInput
+    _min?: MemberMinOrderByAggregateInput
+    _sum?: MemberSumOrderByAggregateInput
+  }
+
+  export type MemberScalarWhereWithAggregatesInput = {
+    AND?: MemberScalarWhereWithAggregatesInput | MemberScalarWhereWithAggregatesInput[]
+    OR?: MemberScalarWhereWithAggregatesInput[]
+    NOT?: MemberScalarWhereWithAggregatesInput | MemberScalarWhereWithAggregatesInput[]
+    Id?: UuidWithAggregatesFilter<"Member"> | string
+    VAId?: UuidWithAggregatesFilter<"Member"> | string
+    CompanyId?: UuidWithAggregatesFilter<"Member"> | string
+    CompanyName?: StringWithAggregatesFilter<"Member"> | string
+    AirlineCode?: StringWithAggregatesFilter<"Member"> | string
+    LastConnection?: DateTimeNullableWithAggregatesFilter<"Member"> | Date | string | null
+    Reputation?: DecimalWithAggregatesFilter<"Member"> | Decimal | DecimalJsLike | number | string
+    CompanyCreationDate?: DateTimeWithAggregatesFilter<"Member"> | Date | string
+    CompanyLevel?: IntWithAggregatesFilter<"Member"> | number
+    CompanyLevelXP?: IntWithAggregatesFilter<"Member"> | number
+    VARoleId?: UuidWithAggregatesFilter<"Member"> | string
+    TotalCargosTransportedLbs?: IntWithAggregatesFilter<"Member"> | number
+    TotalPAXsTransported?: IntWithAggregatesFilter<"Member"> | number
+    TotalEarnedCredits?: DecimalWithAggregatesFilter<"Member"> | Decimal | DecimalJsLike | number | string
+    TotalSpentCredits?: DecimalWithAggregatesFilter<"Member"> | Decimal | DecimalJsLike | number | string
+    NumberOfFlights?: IntWithAggregatesFilter<"Member"> | number
+    FlightHours?: DecimalWithAggregatesFilter<"Member"> | Decimal | DecimalJsLike | number | string
+    Color?: StringWithAggregatesFilter<"Member"> | string
+    ReputationImpact?: DecimalWithAggregatesFilter<"Member"> | Decimal | DecimalJsLike | number | string
+    LastVAFlightDate?: DateTimeNullableWithAggregatesFilter<"Member"> | Date | string | null
+    LastRefresh?: DateTimeNullableWithAggregatesFilter<"Member"> | Date | string | null
+    CreatedAt?: DateTimeWithAggregatesFilter<"Member"> | Date | string
+    UpdatedAt?: DateTimeWithAggregatesFilter<"Member"> | Date | string
   }
 
   export type JobWhereInput = {
@@ -7986,6 +16679,7 @@ export namespace Prisma {
     AcceptingNewMembers?: boolean
     DiscordAuthEnabled?: boolean
     LocalAuthEnabled?: boolean
+    VirtualAirlineInitiated?: boolean
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
   }
@@ -8001,6 +16695,7 @@ export namespace Prisma {
     AcceptingNewMembers?: boolean
     DiscordAuthEnabled?: boolean
     LocalAuthEnabled?: boolean
+    VirtualAirlineInitiated?: boolean
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
   }
@@ -8015,6 +16710,7 @@ export namespace Prisma {
     AcceptingNewMembers?: BoolFieldUpdateOperationsInput | boolean
     DiscordAuthEnabled?: BoolFieldUpdateOperationsInput | boolean
     LocalAuthEnabled?: BoolFieldUpdateOperationsInput | boolean
+    VirtualAirlineInitiated?: BoolFieldUpdateOperationsInput | boolean
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -8030,6 +16726,7 @@ export namespace Prisma {
     AcceptingNewMembers?: BoolFieldUpdateOperationsInput | boolean
     DiscordAuthEnabled?: BoolFieldUpdateOperationsInput | boolean
     LocalAuthEnabled?: BoolFieldUpdateOperationsInput | boolean
+    VirtualAirlineInitiated?: BoolFieldUpdateOperationsInput | boolean
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -8045,6 +16742,7 @@ export namespace Prisma {
     AcceptingNewMembers?: boolean
     DiscordAuthEnabled?: boolean
     LocalAuthEnabled?: boolean
+    VirtualAirlineInitiated?: boolean
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
   }
@@ -8059,6 +16757,7 @@ export namespace Prisma {
     AcceptingNewMembers?: BoolFieldUpdateOperationsInput | boolean
     DiscordAuthEnabled?: BoolFieldUpdateOperationsInput | boolean
     LocalAuthEnabled?: BoolFieldUpdateOperationsInput | boolean
+    VirtualAirlineInitiated?: BoolFieldUpdateOperationsInput | boolean
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -8074,8 +16773,351 @@ export namespace Prisma {
     AcceptingNewMembers?: BoolFieldUpdateOperationsInput | boolean
     DiscordAuthEnabled?: BoolFieldUpdateOperationsInput | boolean
     LocalAuthEnabled?: BoolFieldUpdateOperationsInput | boolean
+    VirtualAirlineInitiated?: BoolFieldUpdateOperationsInput | boolean
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserCreateInput = {
+    Id?: string
+    Username: string
+    Password: string
+    Email?: string | null
+    FirstName?: string | null
+    LastName?: string | null
+    FirstLoginCompleted?: boolean
+    IsOnline?: boolean
+    IsBanned?: boolean
+    BanReason?: string | null
+    BanExpiresAt?: Date | string | null
+    IsVerified?: boolean
+    LastLogin?: Date | string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    Roles?: RoleCreateNestedManyWithoutUsersInput
+    PrivacySettings?: UserPrivacySettingsCreateNestedOneWithoutUserInput
+  }
+
+  export type UserUncheckedCreateInput = {
+    Id?: string
+    Username: string
+    Password: string
+    Email?: string | null
+    FirstName?: string | null
+    LastName?: string | null
+    FirstLoginCompleted?: boolean
+    IsOnline?: boolean
+    IsBanned?: boolean
+    BanReason?: string | null
+    BanExpiresAt?: Date | string | null
+    IsVerified?: boolean
+    LastLogin?: Date | string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    Roles?: RoleUncheckedCreateNestedManyWithoutUsersInput
+    PrivacySettings?: UserPrivacySettingsUncheckedCreateNestedOneWithoutUserInput
+  }
+
+  export type UserUpdateInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Username?: StringFieldUpdateOperationsInput | string
+    Password?: StringFieldUpdateOperationsInput | string
+    Email?: NullableStringFieldUpdateOperationsInput | string | null
+    FirstName?: NullableStringFieldUpdateOperationsInput | string | null
+    LastName?: NullableStringFieldUpdateOperationsInput | string | null
+    FirstLoginCompleted?: BoolFieldUpdateOperationsInput | boolean
+    IsOnline?: BoolFieldUpdateOperationsInput | boolean
+    IsBanned?: BoolFieldUpdateOperationsInput | boolean
+    BanReason?: NullableStringFieldUpdateOperationsInput | string | null
+    BanExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    IsVerified?: BoolFieldUpdateOperationsInput | boolean
+    LastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Roles?: RoleUpdateManyWithoutUsersNestedInput
+    PrivacySettings?: UserPrivacySettingsUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Username?: StringFieldUpdateOperationsInput | string
+    Password?: StringFieldUpdateOperationsInput | string
+    Email?: NullableStringFieldUpdateOperationsInput | string | null
+    FirstName?: NullableStringFieldUpdateOperationsInput | string | null
+    LastName?: NullableStringFieldUpdateOperationsInput | string | null
+    FirstLoginCompleted?: BoolFieldUpdateOperationsInput | boolean
+    IsOnline?: BoolFieldUpdateOperationsInput | boolean
+    IsBanned?: BoolFieldUpdateOperationsInput | boolean
+    BanReason?: NullableStringFieldUpdateOperationsInput | string | null
+    BanExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    IsVerified?: BoolFieldUpdateOperationsInput | boolean
+    LastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Roles?: RoleUncheckedUpdateManyWithoutUsersNestedInput
+    PrivacySettings?: UserPrivacySettingsUncheckedUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserCreateManyInput = {
+    Id?: string
+    Username: string
+    Password: string
+    Email?: string | null
+    FirstName?: string | null
+    LastName?: string | null
+    FirstLoginCompleted?: boolean
+    IsOnline?: boolean
+    IsBanned?: boolean
+    BanReason?: string | null
+    BanExpiresAt?: Date | string | null
+    IsVerified?: boolean
+    LastLogin?: Date | string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+  }
+
+  export type UserUpdateManyMutationInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Username?: StringFieldUpdateOperationsInput | string
+    Password?: StringFieldUpdateOperationsInput | string
+    Email?: NullableStringFieldUpdateOperationsInput | string | null
+    FirstName?: NullableStringFieldUpdateOperationsInput | string | null
+    LastName?: NullableStringFieldUpdateOperationsInput | string | null
+    FirstLoginCompleted?: BoolFieldUpdateOperationsInput | boolean
+    IsOnline?: BoolFieldUpdateOperationsInput | boolean
+    IsBanned?: BoolFieldUpdateOperationsInput | boolean
+    BanReason?: NullableStringFieldUpdateOperationsInput | string | null
+    BanExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    IsVerified?: BoolFieldUpdateOperationsInput | boolean
+    LastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserUncheckedUpdateManyInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Username?: StringFieldUpdateOperationsInput | string
+    Password?: StringFieldUpdateOperationsInput | string
+    Email?: NullableStringFieldUpdateOperationsInput | string | null
+    FirstName?: NullableStringFieldUpdateOperationsInput | string | null
+    LastName?: NullableStringFieldUpdateOperationsInput | string | null
+    FirstLoginCompleted?: BoolFieldUpdateOperationsInput | boolean
+    IsOnline?: BoolFieldUpdateOperationsInput | boolean
+    IsBanned?: BoolFieldUpdateOperationsInput | boolean
+    BanReason?: NullableStringFieldUpdateOperationsInput | string | null
+    BanExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    IsVerified?: BoolFieldUpdateOperationsInput | boolean
+    LastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserPrivacySettingsCreateInput = {
+    Id?: string
+    ShowOnlineStatus?: boolean
+    ShowFirstName?: boolean
+    ShowLastName?: boolean
+    ShowLastNameInitial?: boolean
+    ShowLastLogin?: Date | string | null
+    CreatedAt?: Date | string
+    User: UserCreateNestedOneWithoutPrivacySettingsInput
+  }
+
+  export type UserPrivacySettingsUncheckedCreateInput = {
+    Id?: string
+    UserId: string
+    ShowOnlineStatus?: boolean
+    ShowFirstName?: boolean
+    ShowLastName?: boolean
+    ShowLastNameInitial?: boolean
+    ShowLastLogin?: Date | string | null
+    CreatedAt?: Date | string
+  }
+
+  export type UserPrivacySettingsUpdateInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    ShowOnlineStatus?: BoolFieldUpdateOperationsInput | boolean
+    ShowFirstName?: BoolFieldUpdateOperationsInput | boolean
+    ShowLastName?: BoolFieldUpdateOperationsInput | boolean
+    ShowLastNameInitial?: BoolFieldUpdateOperationsInput | boolean
+    ShowLastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    User?: UserUpdateOneRequiredWithoutPrivacySettingsNestedInput
+  }
+
+  export type UserPrivacySettingsUncheckedUpdateInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    UserId?: StringFieldUpdateOperationsInput | string
+    ShowOnlineStatus?: BoolFieldUpdateOperationsInput | boolean
+    ShowFirstName?: BoolFieldUpdateOperationsInput | boolean
+    ShowLastName?: BoolFieldUpdateOperationsInput | boolean
+    ShowLastNameInitial?: BoolFieldUpdateOperationsInput | boolean
+    ShowLastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserPrivacySettingsCreateManyInput = {
+    Id?: string
+    UserId: string
+    ShowOnlineStatus?: boolean
+    ShowFirstName?: boolean
+    ShowLastName?: boolean
+    ShowLastNameInitial?: boolean
+    ShowLastLogin?: Date | string | null
+    CreatedAt?: Date | string
+  }
+
+  export type UserPrivacySettingsUpdateManyMutationInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    ShowOnlineStatus?: BoolFieldUpdateOperationsInput | boolean
+    ShowFirstName?: BoolFieldUpdateOperationsInput | boolean
+    ShowLastName?: BoolFieldUpdateOperationsInput | boolean
+    ShowLastNameInitial?: BoolFieldUpdateOperationsInput | boolean
+    ShowLastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserPrivacySettingsUncheckedUpdateManyInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    UserId?: StringFieldUpdateOperationsInput | string
+    ShowOnlineStatus?: BoolFieldUpdateOperationsInput | boolean
+    ShowFirstName?: BoolFieldUpdateOperationsInput | boolean
+    ShowLastName?: BoolFieldUpdateOperationsInput | boolean
+    ShowLastNameInitial?: BoolFieldUpdateOperationsInput | boolean
+    ShowLastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RoleCreateInput = {
+    Name: string
+    Description?: string | null
+    Slug: string
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    Permissions?: PermissionCreateNestedManyWithoutRolesInput
+    Users?: UserCreateNestedManyWithoutRolesInput
+  }
+
+  export type RoleUncheckedCreateInput = {
+    Id?: number
+    Name: string
+    Description?: string | null
+    Slug: string
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    Permissions?: PermissionUncheckedCreateNestedManyWithoutRolesInput
+    Users?: UserUncheckedCreateNestedManyWithoutRolesInput
+  }
+
+  export type RoleUpdateInput = {
+    Name?: StringFieldUpdateOperationsInput | string
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
+    Slug?: StringFieldUpdateOperationsInput | string
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Permissions?: PermissionUpdateManyWithoutRolesNestedInput
+    Users?: UserUpdateManyWithoutRolesNestedInput
+  }
+
+  export type RoleUncheckedUpdateInput = {
+    Id?: IntFieldUpdateOperationsInput | number
+    Name?: StringFieldUpdateOperationsInput | string
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
+    Slug?: StringFieldUpdateOperationsInput | string
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Permissions?: PermissionUncheckedUpdateManyWithoutRolesNestedInput
+    Users?: UserUncheckedUpdateManyWithoutRolesNestedInput
+  }
+
+  export type RoleCreateManyInput = {
+    Id?: number
+    Name: string
+    Description?: string | null
+    Slug: string
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+  }
+
+  export type RoleUpdateManyMutationInput = {
+    Name?: StringFieldUpdateOperationsInput | string
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
+    Slug?: StringFieldUpdateOperationsInput | string
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RoleUncheckedUpdateManyInput = {
+    Id?: IntFieldUpdateOperationsInput | number
+    Name?: StringFieldUpdateOperationsInput | string
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
+    Slug?: StringFieldUpdateOperationsInput | string
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PermissionCreateInput = {
+    Name: string
+    Description?: string | null
+    Slug: string
+    Entity: string
+    Action: string
+    Roles?: RoleCreateNestedManyWithoutPermissionsInput
+  }
+
+  export type PermissionUncheckedCreateInput = {
+    Id?: number
+    Name: string
+    Description?: string | null
+    Slug: string
+    Entity: string
+    Action: string
+    Roles?: RoleUncheckedCreateNestedManyWithoutPermissionsInput
+  }
+
+  export type PermissionUpdateInput = {
+    Name?: StringFieldUpdateOperationsInput | string
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
+    Slug?: StringFieldUpdateOperationsInput | string
+    Entity?: StringFieldUpdateOperationsInput | string
+    Action?: StringFieldUpdateOperationsInput | string
+    Roles?: RoleUpdateManyWithoutPermissionsNestedInput
+  }
+
+  export type PermissionUncheckedUpdateInput = {
+    Id?: IntFieldUpdateOperationsInput | number
+    Name?: StringFieldUpdateOperationsInput | string
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
+    Slug?: StringFieldUpdateOperationsInput | string
+    Entity?: StringFieldUpdateOperationsInput | string
+    Action?: StringFieldUpdateOperationsInput | string
+    Roles?: RoleUncheckedUpdateManyWithoutPermissionsNestedInput
+  }
+
+  export type PermissionCreateManyInput = {
+    Id?: number
+    Name: string
+    Description?: string | null
+    Slug: string
+    Entity: string
+    Action: string
+  }
+
+  export type PermissionUpdateManyMutationInput = {
+    Name?: StringFieldUpdateOperationsInput | string
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
+    Slug?: StringFieldUpdateOperationsInput | string
+    Entity?: StringFieldUpdateOperationsInput | string
+    Action?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PermissionUncheckedUpdateManyInput = {
+    Id?: IntFieldUpdateOperationsInput | number
+    Name?: StringFieldUpdateOperationsInput | string
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
+    Slug?: StringFieldUpdateOperationsInput | string
+    Entity?: StringFieldUpdateOperationsInput | string
+    Action?: StringFieldUpdateOperationsInput | string
   }
 
   export type LiveryCreateInput = {
@@ -8196,6 +17238,8 @@ export namespace Prisma {
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
     World?: WorldCreateNestedOneWithoutVirtualAirlinesInput
+    VARoles?: VirtualAirlineRoleCreateNestedManyWithoutVirtualAirlineInput
+    Members?: MemberCreateNestedManyWithoutVirtualAirlineInput
   }
 
   export type VirtualAirlineUncheckedCreateInput = {
@@ -8225,6 +17269,8 @@ export namespace Prisma {
     LastRefresh?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    VARoles?: VirtualAirlineRoleUncheckedCreateNestedManyWithoutVirtualAirlineInput
+    Members?: MemberUncheckedCreateNestedManyWithoutVirtualAirlineInput
   }
 
   export type VirtualAirlineUpdateInput = {
@@ -8254,6 +17300,8 @@ export namespace Prisma {
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     World?: WorldUpdateOneWithoutVirtualAirlinesNestedInput
+    VARoles?: VirtualAirlineRoleUpdateManyWithoutVirtualAirlineNestedInput
+    Members?: MemberUpdateManyWithoutVirtualAirlineNestedInput
   }
 
   export type VirtualAirlineUncheckedUpdateInput = {
@@ -8283,6 +17331,8 @@ export namespace Prisma {
     LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    VARoles?: VirtualAirlineRoleUncheckedUpdateManyWithoutVirtualAirlineNestedInput
+    Members?: MemberUncheckedUpdateManyWithoutVirtualAirlineNestedInput
   }
 
   export type VirtualAirlineCreateManyInput = {
@@ -8371,6 +17421,135 @@ export namespace Prisma {
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type VirtualAirlineRoleCreateInput = {
+    Id?: string
+    Name: string
+    Permission: number
+    IsDefaultNewRole: boolean
+    Color: string
+    PayPercent: Decimal | DecimalJsLike | number | string
+    IsHidden: boolean
+    RestrictLoadingVAJobsIntoNonVAAircraft: boolean
+    RestrictLoadingNonVAJobsIntoVAAircraft: boolean
+    PayWeekly: Decimal | DecimalJsLike | number | string
+    PayPerFlightHour: Decimal | DecimalJsLike | number | string
+    LastRefresh?: Date | string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    VirtualAirline: VirtualAirlineCreateNestedOneWithoutVARolesInput
+    Members?: MemberCreateNestedManyWithoutVARoleInput
+  }
+
+  export type VirtualAirlineRoleUncheckedCreateInput = {
+    Id?: string
+    VAId: string
+    Name: string
+    Permission: number
+    IsDefaultNewRole: boolean
+    Color: string
+    PayPercent: Decimal | DecimalJsLike | number | string
+    IsHidden: boolean
+    RestrictLoadingVAJobsIntoNonVAAircraft: boolean
+    RestrictLoadingNonVAJobsIntoVAAircraft: boolean
+    PayWeekly: Decimal | DecimalJsLike | number | string
+    PayPerFlightHour: Decimal | DecimalJsLike | number | string
+    LastRefresh?: Date | string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    Members?: MemberUncheckedCreateNestedManyWithoutVARoleInput
+  }
+
+  export type VirtualAirlineRoleUpdateInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    Permission?: IntFieldUpdateOperationsInput | number
+    IsDefaultNewRole?: BoolFieldUpdateOperationsInput | boolean
+    Color?: StringFieldUpdateOperationsInput | string
+    PayPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    IsHidden?: BoolFieldUpdateOperationsInput | boolean
+    RestrictLoadingVAJobsIntoNonVAAircraft?: BoolFieldUpdateOperationsInput | boolean
+    RestrictLoadingNonVAJobsIntoVAAircraft?: BoolFieldUpdateOperationsInput | boolean
+    PayWeekly?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    PayPerFlightHour?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    VirtualAirline?: VirtualAirlineUpdateOneRequiredWithoutVARolesNestedInput
+    Members?: MemberUpdateManyWithoutVARoleNestedInput
+  }
+
+  export type VirtualAirlineRoleUncheckedUpdateInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    VAId?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    Permission?: IntFieldUpdateOperationsInput | number
+    IsDefaultNewRole?: BoolFieldUpdateOperationsInput | boolean
+    Color?: StringFieldUpdateOperationsInput | string
+    PayPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    IsHidden?: BoolFieldUpdateOperationsInput | boolean
+    RestrictLoadingVAJobsIntoNonVAAircraft?: BoolFieldUpdateOperationsInput | boolean
+    RestrictLoadingNonVAJobsIntoVAAircraft?: BoolFieldUpdateOperationsInput | boolean
+    PayWeekly?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    PayPerFlightHour?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Members?: MemberUncheckedUpdateManyWithoutVARoleNestedInput
+  }
+
+  export type VirtualAirlineRoleCreateManyInput = {
+    Id?: string
+    VAId: string
+    Name: string
+    Permission: number
+    IsDefaultNewRole: boolean
+    Color: string
+    PayPercent: Decimal | DecimalJsLike | number | string
+    IsHidden: boolean
+    RestrictLoadingVAJobsIntoNonVAAircraft: boolean
+    RestrictLoadingNonVAJobsIntoVAAircraft: boolean
+    PayWeekly: Decimal | DecimalJsLike | number | string
+    PayPerFlightHour: Decimal | DecimalJsLike | number | string
+    LastRefresh?: Date | string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+  }
+
+  export type VirtualAirlineRoleUpdateManyMutationInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    Permission?: IntFieldUpdateOperationsInput | number
+    IsDefaultNewRole?: BoolFieldUpdateOperationsInput | boolean
+    Color?: StringFieldUpdateOperationsInput | string
+    PayPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    IsHidden?: BoolFieldUpdateOperationsInput | boolean
+    RestrictLoadingVAJobsIntoNonVAAircraft?: BoolFieldUpdateOperationsInput | boolean
+    RestrictLoadingNonVAJobsIntoVAAircraft?: BoolFieldUpdateOperationsInput | boolean
+    PayWeekly?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    PayPerFlightHour?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VirtualAirlineRoleUncheckedUpdateManyInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    VAId?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    Permission?: IntFieldUpdateOperationsInput | number
+    IsDefaultNewRole?: BoolFieldUpdateOperationsInput | boolean
+    Color?: StringFieldUpdateOperationsInput | string
+    PayPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    IsHidden?: BoolFieldUpdateOperationsInput | boolean
+    RestrictLoadingVAJobsIntoNonVAAircraft?: BoolFieldUpdateOperationsInput | boolean
+    RestrictLoadingNonVAJobsIntoVAAircraft?: BoolFieldUpdateOperationsInput | boolean
+    PayWeekly?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    PayPerFlightHour?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type WorldCreateInput = {
     Id: string
     Name: string
@@ -8434,6 +17613,186 @@ export namespace Prisma {
     Name?: StringFieldUpdateOperationsInput | string
     Slug?: StringFieldUpdateOperationsInput | string
     Description?: NullableStringFieldUpdateOperationsInput | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MemberCreateInput = {
+    Id?: string
+    CompanyId: string
+    CompanyName: string
+    AirlineCode: string
+    LastConnection?: Date | string | null
+    Reputation: Decimal | DecimalJsLike | number | string
+    CompanyCreationDate: Date | string
+    CompanyLevel: number
+    CompanyLevelXP: number
+    TotalCargosTransportedLbs: number
+    TotalPAXsTransported: number
+    TotalEarnedCredits: Decimal | DecimalJsLike | number | string
+    TotalSpentCredits: Decimal | DecimalJsLike | number | string
+    NumberOfFlights: number
+    FlightHours: Decimal | DecimalJsLike | number | string
+    Color: string
+    ReputationImpact: Decimal | DecimalJsLike | number | string
+    LastVAFlightDate?: Date | string | null
+    LastRefresh?: Date | string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    VirtualAirline: VirtualAirlineCreateNestedOneWithoutMembersInput
+    VARole: VirtualAirlineRoleCreateNestedOneWithoutMembersInput
+  }
+
+  export type MemberUncheckedCreateInput = {
+    Id?: string
+    VAId: string
+    CompanyId: string
+    CompanyName: string
+    AirlineCode: string
+    LastConnection?: Date | string | null
+    Reputation: Decimal | DecimalJsLike | number | string
+    CompanyCreationDate: Date | string
+    CompanyLevel: number
+    CompanyLevelXP: number
+    VARoleId: string
+    TotalCargosTransportedLbs: number
+    TotalPAXsTransported: number
+    TotalEarnedCredits: Decimal | DecimalJsLike | number | string
+    TotalSpentCredits: Decimal | DecimalJsLike | number | string
+    NumberOfFlights: number
+    FlightHours: Decimal | DecimalJsLike | number | string
+    Color: string
+    ReputationImpact: Decimal | DecimalJsLike | number | string
+    LastVAFlightDate?: Date | string | null
+    LastRefresh?: Date | string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+  }
+
+  export type MemberUpdateInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    CompanyId?: StringFieldUpdateOperationsInput | string
+    CompanyName?: StringFieldUpdateOperationsInput | string
+    AirlineCode?: StringFieldUpdateOperationsInput | string
+    LastConnection?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Reputation?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    CompanyCreationDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    CompanyLevel?: IntFieldUpdateOperationsInput | number
+    CompanyLevelXP?: IntFieldUpdateOperationsInput | number
+    TotalCargosTransportedLbs?: IntFieldUpdateOperationsInput | number
+    TotalPAXsTransported?: IntFieldUpdateOperationsInput | number
+    TotalEarnedCredits?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    TotalSpentCredits?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    NumberOfFlights?: IntFieldUpdateOperationsInput | number
+    FlightHours?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    Color?: StringFieldUpdateOperationsInput | string
+    ReputationImpact?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    LastVAFlightDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    VirtualAirline?: VirtualAirlineUpdateOneRequiredWithoutMembersNestedInput
+    VARole?: VirtualAirlineRoleUpdateOneRequiredWithoutMembersNestedInput
+  }
+
+  export type MemberUncheckedUpdateInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    VAId?: StringFieldUpdateOperationsInput | string
+    CompanyId?: StringFieldUpdateOperationsInput | string
+    CompanyName?: StringFieldUpdateOperationsInput | string
+    AirlineCode?: StringFieldUpdateOperationsInput | string
+    LastConnection?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Reputation?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    CompanyCreationDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    CompanyLevel?: IntFieldUpdateOperationsInput | number
+    CompanyLevelXP?: IntFieldUpdateOperationsInput | number
+    VARoleId?: StringFieldUpdateOperationsInput | string
+    TotalCargosTransportedLbs?: IntFieldUpdateOperationsInput | number
+    TotalPAXsTransported?: IntFieldUpdateOperationsInput | number
+    TotalEarnedCredits?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    TotalSpentCredits?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    NumberOfFlights?: IntFieldUpdateOperationsInput | number
+    FlightHours?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    Color?: StringFieldUpdateOperationsInput | string
+    ReputationImpact?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    LastVAFlightDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MemberCreateManyInput = {
+    Id?: string
+    VAId: string
+    CompanyId: string
+    CompanyName: string
+    AirlineCode: string
+    LastConnection?: Date | string | null
+    Reputation: Decimal | DecimalJsLike | number | string
+    CompanyCreationDate: Date | string
+    CompanyLevel: number
+    CompanyLevelXP: number
+    VARoleId: string
+    TotalCargosTransportedLbs: number
+    TotalPAXsTransported: number
+    TotalEarnedCredits: Decimal | DecimalJsLike | number | string
+    TotalSpentCredits: Decimal | DecimalJsLike | number | string
+    NumberOfFlights: number
+    FlightHours: Decimal | DecimalJsLike | number | string
+    Color: string
+    ReputationImpact: Decimal | DecimalJsLike | number | string
+    LastVAFlightDate?: Date | string | null
+    LastRefresh?: Date | string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+  }
+
+  export type MemberUpdateManyMutationInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    CompanyId?: StringFieldUpdateOperationsInput | string
+    CompanyName?: StringFieldUpdateOperationsInput | string
+    AirlineCode?: StringFieldUpdateOperationsInput | string
+    LastConnection?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Reputation?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    CompanyCreationDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    CompanyLevel?: IntFieldUpdateOperationsInput | number
+    CompanyLevelXP?: IntFieldUpdateOperationsInput | number
+    TotalCargosTransportedLbs?: IntFieldUpdateOperationsInput | number
+    TotalPAXsTransported?: IntFieldUpdateOperationsInput | number
+    TotalEarnedCredits?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    TotalSpentCredits?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    NumberOfFlights?: IntFieldUpdateOperationsInput | number
+    FlightHours?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    Color?: StringFieldUpdateOperationsInput | string
+    ReputationImpact?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    LastVAFlightDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MemberUncheckedUpdateManyInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    VAId?: StringFieldUpdateOperationsInput | string
+    CompanyId?: StringFieldUpdateOperationsInput | string
+    CompanyName?: StringFieldUpdateOperationsInput | string
+    AirlineCode?: StringFieldUpdateOperationsInput | string
+    LastConnection?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Reputation?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    CompanyCreationDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    CompanyLevel?: IntFieldUpdateOperationsInput | number
+    CompanyLevelXP?: IntFieldUpdateOperationsInput | number
+    VARoleId?: StringFieldUpdateOperationsInput | string
+    TotalCargosTransportedLbs?: IntFieldUpdateOperationsInput | number
+    TotalPAXsTransported?: IntFieldUpdateOperationsInput | number
+    TotalEarnedCredits?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    TotalSpentCredits?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    NumberOfFlights?: IntFieldUpdateOperationsInput | number
+    FlightHours?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    Color?: StringFieldUpdateOperationsInput | string
+    ReputationImpact?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    LastVAFlightDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -8622,6 +17981,7 @@ export namespace Prisma {
     AcceptingNewMembers?: SortOrder
     DiscordAuthEnabled?: SortOrder
     LocalAuthEnabled?: SortOrder
+    VirtualAirlineInitiated?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
   }
@@ -8641,6 +18001,7 @@ export namespace Prisma {
     AcceptingNewMembers?: SortOrder
     DiscordAuthEnabled?: SortOrder
     LocalAuthEnabled?: SortOrder
+    VirtualAirlineInitiated?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
   }
@@ -8656,6 +18017,7 @@ export namespace Prisma {
     AcceptingNewMembers?: SortOrder
     DiscordAuthEnabled?: SortOrder
     LocalAuthEnabled?: SortOrder
+    VirtualAirlineInitiated?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
   }
@@ -8747,6 +18109,261 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type RoleListRelationFilter = {
+    every?: RoleWhereInput
+    some?: RoleWhereInput
+    none?: RoleWhereInput
+  }
+
+  export type UserPrivacySettingsNullableScalarRelationFilter = {
+    is?: UserPrivacySettingsWhereInput | null
+    isNot?: UserPrivacySettingsWhereInput | null
+  }
+
+  export type RoleOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type UserCountOrderByAggregateInput = {
+    Id?: SortOrder
+    Username?: SortOrder
+    Password?: SortOrder
+    Email?: SortOrder
+    FirstName?: SortOrder
+    LastName?: SortOrder
+    FirstLoginCompleted?: SortOrder
+    IsOnline?: SortOrder
+    IsBanned?: SortOrder
+    BanReason?: SortOrder
+    BanExpiresAt?: SortOrder
+    IsVerified?: SortOrder
+    LastLogin?: SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+  }
+
+  export type UserMaxOrderByAggregateInput = {
+    Id?: SortOrder
+    Username?: SortOrder
+    Password?: SortOrder
+    Email?: SortOrder
+    FirstName?: SortOrder
+    LastName?: SortOrder
+    FirstLoginCompleted?: SortOrder
+    IsOnline?: SortOrder
+    IsBanned?: SortOrder
+    BanReason?: SortOrder
+    BanExpiresAt?: SortOrder
+    IsVerified?: SortOrder
+    LastLogin?: SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+  }
+
+  export type UserMinOrderByAggregateInput = {
+    Id?: SortOrder
+    Username?: SortOrder
+    Password?: SortOrder
+    Email?: SortOrder
+    FirstName?: SortOrder
+    LastName?: SortOrder
+    FirstLoginCompleted?: SortOrder
+    IsOnline?: SortOrder
+    IsBanned?: SortOrder
+    BanReason?: SortOrder
+    BanExpiresAt?: SortOrder
+    IsVerified?: SortOrder
+    LastLogin?: SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+  }
+
+  export type UuidWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedUuidWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type StringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type UserScalarRelationFilter = {
+    is?: UserWhereInput
+    isNot?: UserWhereInput
+  }
+
+  export type UserPrivacySettingsCountOrderByAggregateInput = {
+    Id?: SortOrder
+    UserId?: SortOrder
+    ShowOnlineStatus?: SortOrder
+    ShowFirstName?: SortOrder
+    ShowLastName?: SortOrder
+    ShowLastNameInitial?: SortOrder
+    ShowLastLogin?: SortOrder
+    CreatedAt?: SortOrder
+  }
+
+  export type UserPrivacySettingsMaxOrderByAggregateInput = {
+    Id?: SortOrder
+    UserId?: SortOrder
+    ShowOnlineStatus?: SortOrder
+    ShowFirstName?: SortOrder
+    ShowLastName?: SortOrder
+    ShowLastNameInitial?: SortOrder
+    ShowLastLogin?: SortOrder
+    CreatedAt?: SortOrder
+  }
+
+  export type UserPrivacySettingsMinOrderByAggregateInput = {
+    Id?: SortOrder
+    UserId?: SortOrder
+    ShowOnlineStatus?: SortOrder
+    ShowFirstName?: SortOrder
+    ShowLastName?: SortOrder
+    ShowLastNameInitial?: SortOrder
+    ShowLastLogin?: SortOrder
+    CreatedAt?: SortOrder
+  }
+
+  export type PermissionListRelationFilter = {
+    every?: PermissionWhereInput
+    some?: PermissionWhereInput
+    none?: PermissionWhereInput
+  }
+
+  export type UserListRelationFilter = {
+    every?: UserWhereInput
+    some?: UserWhereInput
+    none?: UserWhereInput
+  }
+
+  export type PermissionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type UserOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type RoleCountOrderByAggregateInput = {
+    Id?: SortOrder
+    Name?: SortOrder
+    Description?: SortOrder
+    Slug?: SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+  }
+
+  export type RoleAvgOrderByAggregateInput = {
+    Id?: SortOrder
+  }
+
+  export type RoleMaxOrderByAggregateInput = {
+    Id?: SortOrder
+    Name?: SortOrder
+    Description?: SortOrder
+    Slug?: SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+  }
+
+  export type RoleMinOrderByAggregateInput = {
+    Id?: SortOrder
+    Name?: SortOrder
+    Description?: SortOrder
+    Slug?: SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+  }
+
+  export type RoleSumOrderByAggregateInput = {
+    Id?: SortOrder
+  }
+
+  export type PermissionCountOrderByAggregateInput = {
+    Id?: SortOrder
+    Name?: SortOrder
+    Description?: SortOrder
+    Slug?: SortOrder
+    Entity?: SortOrder
+    Action?: SortOrder
+  }
+
+  export type PermissionAvgOrderByAggregateInput = {
+    Id?: SortOrder
+  }
+
+  export type PermissionMaxOrderByAggregateInput = {
+    Id?: SortOrder
+    Name?: SortOrder
+    Description?: SortOrder
+    Slug?: SortOrder
+    Entity?: SortOrder
+    Action?: SortOrder
+  }
+
+  export type PermissionMinOrderByAggregateInput = {
+    Id?: SortOrder
+    Name?: SortOrder
+    Description?: SortOrder
+    Slug?: SortOrder
+    Entity?: SortOrder
+    Action?: SortOrder
+  }
+
+  export type PermissionSumOrderByAggregateInput = {
+    Id?: SortOrder
+  }
+
   export type LiveryCountOrderByAggregateInput = {
     Id?: SortOrder
     Name?: SortOrder
@@ -8794,39 +18411,6 @@ export namespace Prisma {
     DownloadCount?: SortOrder
   }
 
-  export type UuidWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedUuidWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
-  }
-
-  export type StringWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
-  }
-
   export type UuidNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -8837,17 +18421,6 @@ export namespace Prisma {
     gte?: string | StringFieldRefInput<$PrismaModel>
     mode?: QueryMode
     not?: NestedUuidNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type DateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type IntNullableFilter<$PrismaModel = never> = {
@@ -8875,6 +18448,26 @@ export namespace Prisma {
   export type WorldNullableScalarRelationFilter = {
     is?: WorldWhereInput | null
     isNot?: WorldWhereInput | null
+  }
+
+  export type VirtualAirlineRoleListRelationFilter = {
+    every?: VirtualAirlineRoleWhereInput
+    some?: VirtualAirlineRoleWhereInput
+    none?: VirtualAirlineRoleWhereInput
+  }
+
+  export type MemberListRelationFilter = {
+    every?: MemberWhereInput
+    some?: MemberWhereInput
+    none?: MemberWhereInput
+  }
+
+  export type VirtualAirlineRoleOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type MemberOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type VirtualAirlineCountOrderByAggregateInput = {
@@ -9005,20 +18598,6 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
   export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -9049,6 +18628,106 @@ export namespace Prisma {
     _sum?: NestedDecimalNullableFilter<$PrismaModel>
     _min?: NestedDecimalNullableFilter<$PrismaModel>
     _max?: NestedDecimalNullableFilter<$PrismaModel>
+  }
+
+  export type DecimalFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+  }
+
+  export type VirtualAirlineScalarRelationFilter = {
+    is?: VirtualAirlineWhereInput
+    isNot?: VirtualAirlineWhereInput
+  }
+
+  export type VirtualAirlineRoleCountOrderByAggregateInput = {
+    Id?: SortOrder
+    VAId?: SortOrder
+    Name?: SortOrder
+    Permission?: SortOrder
+    IsDefaultNewRole?: SortOrder
+    Color?: SortOrder
+    PayPercent?: SortOrder
+    IsHidden?: SortOrder
+    RestrictLoadingVAJobsIntoNonVAAircraft?: SortOrder
+    RestrictLoadingNonVAJobsIntoVAAircraft?: SortOrder
+    PayWeekly?: SortOrder
+    PayPerFlightHour?: SortOrder
+    LastRefresh?: SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+  }
+
+  export type VirtualAirlineRoleAvgOrderByAggregateInput = {
+    Permission?: SortOrder
+    PayPercent?: SortOrder
+    PayWeekly?: SortOrder
+    PayPerFlightHour?: SortOrder
+  }
+
+  export type VirtualAirlineRoleMaxOrderByAggregateInput = {
+    Id?: SortOrder
+    VAId?: SortOrder
+    Name?: SortOrder
+    Permission?: SortOrder
+    IsDefaultNewRole?: SortOrder
+    Color?: SortOrder
+    PayPercent?: SortOrder
+    IsHidden?: SortOrder
+    RestrictLoadingVAJobsIntoNonVAAircraft?: SortOrder
+    RestrictLoadingNonVAJobsIntoVAAircraft?: SortOrder
+    PayWeekly?: SortOrder
+    PayPerFlightHour?: SortOrder
+    LastRefresh?: SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+  }
+
+  export type VirtualAirlineRoleMinOrderByAggregateInput = {
+    Id?: SortOrder
+    VAId?: SortOrder
+    Name?: SortOrder
+    Permission?: SortOrder
+    IsDefaultNewRole?: SortOrder
+    Color?: SortOrder
+    PayPercent?: SortOrder
+    IsHidden?: SortOrder
+    RestrictLoadingVAJobsIntoNonVAAircraft?: SortOrder
+    RestrictLoadingNonVAJobsIntoVAAircraft?: SortOrder
+    PayWeekly?: SortOrder
+    PayPerFlightHour?: SortOrder
+    LastRefresh?: SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+  }
+
+  export type VirtualAirlineRoleSumOrderByAggregateInput = {
+    Permission?: SortOrder
+    PayPercent?: SortOrder
+    PayWeekly?: SortOrder
+    PayPerFlightHour?: SortOrder
+  }
+
+  export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedDecimalFilter<$PrismaModel>
+    _sum?: NestedDecimalFilter<$PrismaModel>
+    _min?: NestedDecimalFilter<$PrismaModel>
+    _max?: NestedDecimalFilter<$PrismaModel>
   }
 
   export type VirtualAirlineListRelationFilter = {
@@ -9086,6 +18765,115 @@ export namespace Prisma {
     Description?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
+  }
+
+  export type VirtualAirlineRoleScalarRelationFilter = {
+    is?: VirtualAirlineRoleWhereInput
+    isNot?: VirtualAirlineRoleWhereInput
+  }
+
+  export type MemberCountOrderByAggregateInput = {
+    Id?: SortOrder
+    VAId?: SortOrder
+    CompanyId?: SortOrder
+    CompanyName?: SortOrder
+    AirlineCode?: SortOrder
+    LastConnection?: SortOrder
+    Reputation?: SortOrder
+    CompanyCreationDate?: SortOrder
+    CompanyLevel?: SortOrder
+    CompanyLevelXP?: SortOrder
+    VARoleId?: SortOrder
+    TotalCargosTransportedLbs?: SortOrder
+    TotalPAXsTransported?: SortOrder
+    TotalEarnedCredits?: SortOrder
+    TotalSpentCredits?: SortOrder
+    NumberOfFlights?: SortOrder
+    FlightHours?: SortOrder
+    Color?: SortOrder
+    ReputationImpact?: SortOrder
+    LastVAFlightDate?: SortOrder
+    LastRefresh?: SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+  }
+
+  export type MemberAvgOrderByAggregateInput = {
+    Reputation?: SortOrder
+    CompanyLevel?: SortOrder
+    CompanyLevelXP?: SortOrder
+    TotalCargosTransportedLbs?: SortOrder
+    TotalPAXsTransported?: SortOrder
+    TotalEarnedCredits?: SortOrder
+    TotalSpentCredits?: SortOrder
+    NumberOfFlights?: SortOrder
+    FlightHours?: SortOrder
+    ReputationImpact?: SortOrder
+  }
+
+  export type MemberMaxOrderByAggregateInput = {
+    Id?: SortOrder
+    VAId?: SortOrder
+    CompanyId?: SortOrder
+    CompanyName?: SortOrder
+    AirlineCode?: SortOrder
+    LastConnection?: SortOrder
+    Reputation?: SortOrder
+    CompanyCreationDate?: SortOrder
+    CompanyLevel?: SortOrder
+    CompanyLevelXP?: SortOrder
+    VARoleId?: SortOrder
+    TotalCargosTransportedLbs?: SortOrder
+    TotalPAXsTransported?: SortOrder
+    TotalEarnedCredits?: SortOrder
+    TotalSpentCredits?: SortOrder
+    NumberOfFlights?: SortOrder
+    FlightHours?: SortOrder
+    Color?: SortOrder
+    ReputationImpact?: SortOrder
+    LastVAFlightDate?: SortOrder
+    LastRefresh?: SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+  }
+
+  export type MemberMinOrderByAggregateInput = {
+    Id?: SortOrder
+    VAId?: SortOrder
+    CompanyId?: SortOrder
+    CompanyName?: SortOrder
+    AirlineCode?: SortOrder
+    LastConnection?: SortOrder
+    Reputation?: SortOrder
+    CompanyCreationDate?: SortOrder
+    CompanyLevel?: SortOrder
+    CompanyLevelXP?: SortOrder
+    VARoleId?: SortOrder
+    TotalCargosTransportedLbs?: SortOrder
+    TotalPAXsTransported?: SortOrder
+    TotalEarnedCredits?: SortOrder
+    TotalSpentCredits?: SortOrder
+    NumberOfFlights?: SortOrder
+    FlightHours?: SortOrder
+    Color?: SortOrder
+    ReputationImpact?: SortOrder
+    LastVAFlightDate?: SortOrder
+    LastRefresh?: SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+  }
+
+  export type MemberSumOrderByAggregateInput = {
+    Reputation?: SortOrder
+    CompanyLevel?: SortOrder
+    CompanyLevelXP?: SortOrder
+    TotalCargosTransportedLbs?: SortOrder
+    TotalPAXsTransported?: SortOrder
+    TotalEarnedCredits?: SortOrder
+    TotalSpentCredits?: SortOrder
+    NumberOfFlights?: SortOrder
+    FlightHours?: SortOrder
+    ReputationImpact?: SortOrder
   }
 
   export type EnumJobTypeFilter<$PrismaModel = never> = {
@@ -9268,8 +19056,210 @@ export namespace Prisma {
     divide?: number
   }
 
+  export type RoleCreateNestedManyWithoutUsersInput = {
+    create?: XOR<RoleCreateWithoutUsersInput, RoleUncheckedCreateWithoutUsersInput> | RoleCreateWithoutUsersInput[] | RoleUncheckedCreateWithoutUsersInput[]
+    connectOrCreate?: RoleCreateOrConnectWithoutUsersInput | RoleCreateOrConnectWithoutUsersInput[]
+    connect?: RoleWhereUniqueInput | RoleWhereUniqueInput[]
+  }
+
+  export type UserPrivacySettingsCreateNestedOneWithoutUserInput = {
+    create?: XOR<UserPrivacySettingsCreateWithoutUserInput, UserPrivacySettingsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserPrivacySettingsCreateOrConnectWithoutUserInput
+    connect?: UserPrivacySettingsWhereUniqueInput
+  }
+
+  export type RoleUncheckedCreateNestedManyWithoutUsersInput = {
+    create?: XOR<RoleCreateWithoutUsersInput, RoleUncheckedCreateWithoutUsersInput> | RoleCreateWithoutUsersInput[] | RoleUncheckedCreateWithoutUsersInput[]
+    connectOrCreate?: RoleCreateOrConnectWithoutUsersInput | RoleCreateOrConnectWithoutUsersInput[]
+    connect?: RoleWhereUniqueInput | RoleWhereUniqueInput[]
+  }
+
+  export type UserPrivacySettingsUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<UserPrivacySettingsCreateWithoutUserInput, UserPrivacySettingsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserPrivacySettingsCreateOrConnectWithoutUserInput
+    connect?: UserPrivacySettingsWhereUniqueInput
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
+  export type RoleUpdateManyWithoutUsersNestedInput = {
+    create?: XOR<RoleCreateWithoutUsersInput, RoleUncheckedCreateWithoutUsersInput> | RoleCreateWithoutUsersInput[] | RoleUncheckedCreateWithoutUsersInput[]
+    connectOrCreate?: RoleCreateOrConnectWithoutUsersInput | RoleCreateOrConnectWithoutUsersInput[]
+    upsert?: RoleUpsertWithWhereUniqueWithoutUsersInput | RoleUpsertWithWhereUniqueWithoutUsersInput[]
+    set?: RoleWhereUniqueInput | RoleWhereUniqueInput[]
+    disconnect?: RoleWhereUniqueInput | RoleWhereUniqueInput[]
+    delete?: RoleWhereUniqueInput | RoleWhereUniqueInput[]
+    connect?: RoleWhereUniqueInput | RoleWhereUniqueInput[]
+    update?: RoleUpdateWithWhereUniqueWithoutUsersInput | RoleUpdateWithWhereUniqueWithoutUsersInput[]
+    updateMany?: RoleUpdateManyWithWhereWithoutUsersInput | RoleUpdateManyWithWhereWithoutUsersInput[]
+    deleteMany?: RoleScalarWhereInput | RoleScalarWhereInput[]
+  }
+
+  export type UserPrivacySettingsUpdateOneWithoutUserNestedInput = {
+    create?: XOR<UserPrivacySettingsCreateWithoutUserInput, UserPrivacySettingsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserPrivacySettingsCreateOrConnectWithoutUserInput
+    upsert?: UserPrivacySettingsUpsertWithoutUserInput
+    disconnect?: UserPrivacySettingsWhereInput | boolean
+    delete?: UserPrivacySettingsWhereInput | boolean
+    connect?: UserPrivacySettingsWhereUniqueInput
+    update?: XOR<XOR<UserPrivacySettingsUpdateToOneWithWhereWithoutUserInput, UserPrivacySettingsUpdateWithoutUserInput>, UserPrivacySettingsUncheckedUpdateWithoutUserInput>
+  }
+
+  export type RoleUncheckedUpdateManyWithoutUsersNestedInput = {
+    create?: XOR<RoleCreateWithoutUsersInput, RoleUncheckedCreateWithoutUsersInput> | RoleCreateWithoutUsersInput[] | RoleUncheckedCreateWithoutUsersInput[]
+    connectOrCreate?: RoleCreateOrConnectWithoutUsersInput | RoleCreateOrConnectWithoutUsersInput[]
+    upsert?: RoleUpsertWithWhereUniqueWithoutUsersInput | RoleUpsertWithWhereUniqueWithoutUsersInput[]
+    set?: RoleWhereUniqueInput | RoleWhereUniqueInput[]
+    disconnect?: RoleWhereUniqueInput | RoleWhereUniqueInput[]
+    delete?: RoleWhereUniqueInput | RoleWhereUniqueInput[]
+    connect?: RoleWhereUniqueInput | RoleWhereUniqueInput[]
+    update?: RoleUpdateWithWhereUniqueWithoutUsersInput | RoleUpdateWithWhereUniqueWithoutUsersInput[]
+    updateMany?: RoleUpdateManyWithWhereWithoutUsersInput | RoleUpdateManyWithWhereWithoutUsersInput[]
+    deleteMany?: RoleScalarWhereInput | RoleScalarWhereInput[]
+  }
+
+  export type UserPrivacySettingsUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<UserPrivacySettingsCreateWithoutUserInput, UserPrivacySettingsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserPrivacySettingsCreateOrConnectWithoutUserInput
+    upsert?: UserPrivacySettingsUpsertWithoutUserInput
+    disconnect?: UserPrivacySettingsWhereInput | boolean
+    delete?: UserPrivacySettingsWhereInput | boolean
+    connect?: UserPrivacySettingsWhereUniqueInput
+    update?: XOR<XOR<UserPrivacySettingsUpdateToOneWithWhereWithoutUserInput, UserPrivacySettingsUpdateWithoutUserInput>, UserPrivacySettingsUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UserCreateNestedOneWithoutPrivacySettingsInput = {
+    create?: XOR<UserCreateWithoutPrivacySettingsInput, UserUncheckedCreateWithoutPrivacySettingsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPrivacySettingsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutPrivacySettingsNestedInput = {
+    create?: XOR<UserCreateWithoutPrivacySettingsInput, UserUncheckedCreateWithoutPrivacySettingsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPrivacySettingsInput
+    upsert?: UserUpsertWithoutPrivacySettingsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPrivacySettingsInput, UserUpdateWithoutPrivacySettingsInput>, UserUncheckedUpdateWithoutPrivacySettingsInput>
+  }
+
+  export type PermissionCreateNestedManyWithoutRolesInput = {
+    create?: XOR<PermissionCreateWithoutRolesInput, PermissionUncheckedCreateWithoutRolesInput> | PermissionCreateWithoutRolesInput[] | PermissionUncheckedCreateWithoutRolesInput[]
+    connectOrCreate?: PermissionCreateOrConnectWithoutRolesInput | PermissionCreateOrConnectWithoutRolesInput[]
+    connect?: PermissionWhereUniqueInput | PermissionWhereUniqueInput[]
+  }
+
+  export type UserCreateNestedManyWithoutRolesInput = {
+    create?: XOR<UserCreateWithoutRolesInput, UserUncheckedCreateWithoutRolesInput> | UserCreateWithoutRolesInput[] | UserUncheckedCreateWithoutRolesInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutRolesInput | UserCreateOrConnectWithoutRolesInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type PermissionUncheckedCreateNestedManyWithoutRolesInput = {
+    create?: XOR<PermissionCreateWithoutRolesInput, PermissionUncheckedCreateWithoutRolesInput> | PermissionCreateWithoutRolesInput[] | PermissionUncheckedCreateWithoutRolesInput[]
+    connectOrCreate?: PermissionCreateOrConnectWithoutRolesInput | PermissionCreateOrConnectWithoutRolesInput[]
+    connect?: PermissionWhereUniqueInput | PermissionWhereUniqueInput[]
+  }
+
+  export type UserUncheckedCreateNestedManyWithoutRolesInput = {
+    create?: XOR<UserCreateWithoutRolesInput, UserUncheckedCreateWithoutRolesInput> | UserCreateWithoutRolesInput[] | UserUncheckedCreateWithoutRolesInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutRolesInput | UserCreateOrConnectWithoutRolesInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type PermissionUpdateManyWithoutRolesNestedInput = {
+    create?: XOR<PermissionCreateWithoutRolesInput, PermissionUncheckedCreateWithoutRolesInput> | PermissionCreateWithoutRolesInput[] | PermissionUncheckedCreateWithoutRolesInput[]
+    connectOrCreate?: PermissionCreateOrConnectWithoutRolesInput | PermissionCreateOrConnectWithoutRolesInput[]
+    upsert?: PermissionUpsertWithWhereUniqueWithoutRolesInput | PermissionUpsertWithWhereUniqueWithoutRolesInput[]
+    set?: PermissionWhereUniqueInput | PermissionWhereUniqueInput[]
+    disconnect?: PermissionWhereUniqueInput | PermissionWhereUniqueInput[]
+    delete?: PermissionWhereUniqueInput | PermissionWhereUniqueInput[]
+    connect?: PermissionWhereUniqueInput | PermissionWhereUniqueInput[]
+    update?: PermissionUpdateWithWhereUniqueWithoutRolesInput | PermissionUpdateWithWhereUniqueWithoutRolesInput[]
+    updateMany?: PermissionUpdateManyWithWhereWithoutRolesInput | PermissionUpdateManyWithWhereWithoutRolesInput[]
+    deleteMany?: PermissionScalarWhereInput | PermissionScalarWhereInput[]
+  }
+
+  export type UserUpdateManyWithoutRolesNestedInput = {
+    create?: XOR<UserCreateWithoutRolesInput, UserUncheckedCreateWithoutRolesInput> | UserCreateWithoutRolesInput[] | UserUncheckedCreateWithoutRolesInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutRolesInput | UserCreateOrConnectWithoutRolesInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutRolesInput | UserUpsertWithWhereUniqueWithoutRolesInput[]
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutRolesInput | UserUpdateWithWhereUniqueWithoutRolesInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutRolesInput | UserUpdateManyWithWhereWithoutRolesInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type PermissionUncheckedUpdateManyWithoutRolesNestedInput = {
+    create?: XOR<PermissionCreateWithoutRolesInput, PermissionUncheckedCreateWithoutRolesInput> | PermissionCreateWithoutRolesInput[] | PermissionUncheckedCreateWithoutRolesInput[]
+    connectOrCreate?: PermissionCreateOrConnectWithoutRolesInput | PermissionCreateOrConnectWithoutRolesInput[]
+    upsert?: PermissionUpsertWithWhereUniqueWithoutRolesInput | PermissionUpsertWithWhereUniqueWithoutRolesInput[]
+    set?: PermissionWhereUniqueInput | PermissionWhereUniqueInput[]
+    disconnect?: PermissionWhereUniqueInput | PermissionWhereUniqueInput[]
+    delete?: PermissionWhereUniqueInput | PermissionWhereUniqueInput[]
+    connect?: PermissionWhereUniqueInput | PermissionWhereUniqueInput[]
+    update?: PermissionUpdateWithWhereUniqueWithoutRolesInput | PermissionUpdateWithWhereUniqueWithoutRolesInput[]
+    updateMany?: PermissionUpdateManyWithWhereWithoutRolesInput | PermissionUpdateManyWithWhereWithoutRolesInput[]
+    deleteMany?: PermissionScalarWhereInput | PermissionScalarWhereInput[]
+  }
+
+  export type UserUncheckedUpdateManyWithoutRolesNestedInput = {
+    create?: XOR<UserCreateWithoutRolesInput, UserUncheckedCreateWithoutRolesInput> | UserCreateWithoutRolesInput[] | UserUncheckedCreateWithoutRolesInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutRolesInput | UserCreateOrConnectWithoutRolesInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutRolesInput | UserUpsertWithWhereUniqueWithoutRolesInput[]
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutRolesInput | UserUpdateWithWhereUniqueWithoutRolesInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutRolesInput | UserUpdateManyWithWhereWithoutRolesInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type RoleCreateNestedManyWithoutPermissionsInput = {
+    create?: XOR<RoleCreateWithoutPermissionsInput, RoleUncheckedCreateWithoutPermissionsInput> | RoleCreateWithoutPermissionsInput[] | RoleUncheckedCreateWithoutPermissionsInput[]
+    connectOrCreate?: RoleCreateOrConnectWithoutPermissionsInput | RoleCreateOrConnectWithoutPermissionsInput[]
+    connect?: RoleWhereUniqueInput | RoleWhereUniqueInput[]
+  }
+
+  export type RoleUncheckedCreateNestedManyWithoutPermissionsInput = {
+    create?: XOR<RoleCreateWithoutPermissionsInput, RoleUncheckedCreateWithoutPermissionsInput> | RoleCreateWithoutPermissionsInput[] | RoleUncheckedCreateWithoutPermissionsInput[]
+    connectOrCreate?: RoleCreateOrConnectWithoutPermissionsInput | RoleCreateOrConnectWithoutPermissionsInput[]
+    connect?: RoleWhereUniqueInput | RoleWhereUniqueInput[]
+  }
+
+  export type RoleUpdateManyWithoutPermissionsNestedInput = {
+    create?: XOR<RoleCreateWithoutPermissionsInput, RoleUncheckedCreateWithoutPermissionsInput> | RoleCreateWithoutPermissionsInput[] | RoleUncheckedCreateWithoutPermissionsInput[]
+    connectOrCreate?: RoleCreateOrConnectWithoutPermissionsInput | RoleCreateOrConnectWithoutPermissionsInput[]
+    upsert?: RoleUpsertWithWhereUniqueWithoutPermissionsInput | RoleUpsertWithWhereUniqueWithoutPermissionsInput[]
+    set?: RoleWhereUniqueInput | RoleWhereUniqueInput[]
+    disconnect?: RoleWhereUniqueInput | RoleWhereUniqueInput[]
+    delete?: RoleWhereUniqueInput | RoleWhereUniqueInput[]
+    connect?: RoleWhereUniqueInput | RoleWhereUniqueInput[]
+    update?: RoleUpdateWithWhereUniqueWithoutPermissionsInput | RoleUpdateWithWhereUniqueWithoutPermissionsInput[]
+    updateMany?: RoleUpdateManyWithWhereWithoutPermissionsInput | RoleUpdateManyWithWhereWithoutPermissionsInput[]
+    deleteMany?: RoleScalarWhereInput | RoleScalarWhereInput[]
+  }
+
+  export type RoleUncheckedUpdateManyWithoutPermissionsNestedInput = {
+    create?: XOR<RoleCreateWithoutPermissionsInput, RoleUncheckedCreateWithoutPermissionsInput> | RoleCreateWithoutPermissionsInput[] | RoleUncheckedCreateWithoutPermissionsInput[]
+    connectOrCreate?: RoleCreateOrConnectWithoutPermissionsInput | RoleCreateOrConnectWithoutPermissionsInput[]
+    upsert?: RoleUpsertWithWhereUniqueWithoutPermissionsInput | RoleUpsertWithWhereUniqueWithoutPermissionsInput[]
+    set?: RoleWhereUniqueInput | RoleWhereUniqueInput[]
+    disconnect?: RoleWhereUniqueInput | RoleWhereUniqueInput[]
+    delete?: RoleWhereUniqueInput | RoleWhereUniqueInput[]
+    connect?: RoleWhereUniqueInput | RoleWhereUniqueInput[]
+    update?: RoleUpdateWithWhereUniqueWithoutPermissionsInput | RoleUpdateWithWhereUniqueWithoutPermissionsInput[]
+    updateMany?: RoleUpdateManyWithWhereWithoutPermissionsInput | RoleUpdateManyWithWhereWithoutPermissionsInput[]
+    deleteMany?: RoleScalarWhereInput | RoleScalarWhereInput[]
   }
 
   export type WorldCreateNestedOneWithoutVirtualAirlinesInput = {
@@ -9278,8 +19268,32 @@ export namespace Prisma {
     connect?: WorldWhereUniqueInput
   }
 
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
+  export type VirtualAirlineRoleCreateNestedManyWithoutVirtualAirlineInput = {
+    create?: XOR<VirtualAirlineRoleCreateWithoutVirtualAirlineInput, VirtualAirlineRoleUncheckedCreateWithoutVirtualAirlineInput> | VirtualAirlineRoleCreateWithoutVirtualAirlineInput[] | VirtualAirlineRoleUncheckedCreateWithoutVirtualAirlineInput[]
+    connectOrCreate?: VirtualAirlineRoleCreateOrConnectWithoutVirtualAirlineInput | VirtualAirlineRoleCreateOrConnectWithoutVirtualAirlineInput[]
+    createMany?: VirtualAirlineRoleCreateManyVirtualAirlineInputEnvelope
+    connect?: VirtualAirlineRoleWhereUniqueInput | VirtualAirlineRoleWhereUniqueInput[]
+  }
+
+  export type MemberCreateNestedManyWithoutVirtualAirlineInput = {
+    create?: XOR<MemberCreateWithoutVirtualAirlineInput, MemberUncheckedCreateWithoutVirtualAirlineInput> | MemberCreateWithoutVirtualAirlineInput[] | MemberUncheckedCreateWithoutVirtualAirlineInput[]
+    connectOrCreate?: MemberCreateOrConnectWithoutVirtualAirlineInput | MemberCreateOrConnectWithoutVirtualAirlineInput[]
+    createMany?: MemberCreateManyVirtualAirlineInputEnvelope
+    connect?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+  }
+
+  export type VirtualAirlineRoleUncheckedCreateNestedManyWithoutVirtualAirlineInput = {
+    create?: XOR<VirtualAirlineRoleCreateWithoutVirtualAirlineInput, VirtualAirlineRoleUncheckedCreateWithoutVirtualAirlineInput> | VirtualAirlineRoleCreateWithoutVirtualAirlineInput[] | VirtualAirlineRoleUncheckedCreateWithoutVirtualAirlineInput[]
+    connectOrCreate?: VirtualAirlineRoleCreateOrConnectWithoutVirtualAirlineInput | VirtualAirlineRoleCreateOrConnectWithoutVirtualAirlineInput[]
+    createMany?: VirtualAirlineRoleCreateManyVirtualAirlineInputEnvelope
+    connect?: VirtualAirlineRoleWhereUniqueInput | VirtualAirlineRoleWhereUniqueInput[]
+  }
+
+  export type MemberUncheckedCreateNestedManyWithoutVirtualAirlineInput = {
+    create?: XOR<MemberCreateWithoutVirtualAirlineInput, MemberUncheckedCreateWithoutVirtualAirlineInput> | MemberCreateWithoutVirtualAirlineInput[] | MemberUncheckedCreateWithoutVirtualAirlineInput[]
+    connectOrCreate?: MemberCreateOrConnectWithoutVirtualAirlineInput | MemberCreateOrConnectWithoutVirtualAirlineInput[]
+    createMany?: MemberCreateManyVirtualAirlineInputEnvelope
+    connect?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
   }
 
   export type NullableIntFieldUpdateOperationsInput = {
@@ -9306,6 +19320,126 @@ export namespace Prisma {
     delete?: WorldWhereInput | boolean
     connect?: WorldWhereUniqueInput
     update?: XOR<XOR<WorldUpdateToOneWithWhereWithoutVirtualAirlinesInput, WorldUpdateWithoutVirtualAirlinesInput>, WorldUncheckedUpdateWithoutVirtualAirlinesInput>
+  }
+
+  export type VirtualAirlineRoleUpdateManyWithoutVirtualAirlineNestedInput = {
+    create?: XOR<VirtualAirlineRoleCreateWithoutVirtualAirlineInput, VirtualAirlineRoleUncheckedCreateWithoutVirtualAirlineInput> | VirtualAirlineRoleCreateWithoutVirtualAirlineInput[] | VirtualAirlineRoleUncheckedCreateWithoutVirtualAirlineInput[]
+    connectOrCreate?: VirtualAirlineRoleCreateOrConnectWithoutVirtualAirlineInput | VirtualAirlineRoleCreateOrConnectWithoutVirtualAirlineInput[]
+    upsert?: VirtualAirlineRoleUpsertWithWhereUniqueWithoutVirtualAirlineInput | VirtualAirlineRoleUpsertWithWhereUniqueWithoutVirtualAirlineInput[]
+    createMany?: VirtualAirlineRoleCreateManyVirtualAirlineInputEnvelope
+    set?: VirtualAirlineRoleWhereUniqueInput | VirtualAirlineRoleWhereUniqueInput[]
+    disconnect?: VirtualAirlineRoleWhereUniqueInput | VirtualAirlineRoleWhereUniqueInput[]
+    delete?: VirtualAirlineRoleWhereUniqueInput | VirtualAirlineRoleWhereUniqueInput[]
+    connect?: VirtualAirlineRoleWhereUniqueInput | VirtualAirlineRoleWhereUniqueInput[]
+    update?: VirtualAirlineRoleUpdateWithWhereUniqueWithoutVirtualAirlineInput | VirtualAirlineRoleUpdateWithWhereUniqueWithoutVirtualAirlineInput[]
+    updateMany?: VirtualAirlineRoleUpdateManyWithWhereWithoutVirtualAirlineInput | VirtualAirlineRoleUpdateManyWithWhereWithoutVirtualAirlineInput[]
+    deleteMany?: VirtualAirlineRoleScalarWhereInput | VirtualAirlineRoleScalarWhereInput[]
+  }
+
+  export type MemberUpdateManyWithoutVirtualAirlineNestedInput = {
+    create?: XOR<MemberCreateWithoutVirtualAirlineInput, MemberUncheckedCreateWithoutVirtualAirlineInput> | MemberCreateWithoutVirtualAirlineInput[] | MemberUncheckedCreateWithoutVirtualAirlineInput[]
+    connectOrCreate?: MemberCreateOrConnectWithoutVirtualAirlineInput | MemberCreateOrConnectWithoutVirtualAirlineInput[]
+    upsert?: MemberUpsertWithWhereUniqueWithoutVirtualAirlineInput | MemberUpsertWithWhereUniqueWithoutVirtualAirlineInput[]
+    createMany?: MemberCreateManyVirtualAirlineInputEnvelope
+    set?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+    disconnect?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+    delete?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+    connect?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+    update?: MemberUpdateWithWhereUniqueWithoutVirtualAirlineInput | MemberUpdateWithWhereUniqueWithoutVirtualAirlineInput[]
+    updateMany?: MemberUpdateManyWithWhereWithoutVirtualAirlineInput | MemberUpdateManyWithWhereWithoutVirtualAirlineInput[]
+    deleteMany?: MemberScalarWhereInput | MemberScalarWhereInput[]
+  }
+
+  export type VirtualAirlineRoleUncheckedUpdateManyWithoutVirtualAirlineNestedInput = {
+    create?: XOR<VirtualAirlineRoleCreateWithoutVirtualAirlineInput, VirtualAirlineRoleUncheckedCreateWithoutVirtualAirlineInput> | VirtualAirlineRoleCreateWithoutVirtualAirlineInput[] | VirtualAirlineRoleUncheckedCreateWithoutVirtualAirlineInput[]
+    connectOrCreate?: VirtualAirlineRoleCreateOrConnectWithoutVirtualAirlineInput | VirtualAirlineRoleCreateOrConnectWithoutVirtualAirlineInput[]
+    upsert?: VirtualAirlineRoleUpsertWithWhereUniqueWithoutVirtualAirlineInput | VirtualAirlineRoleUpsertWithWhereUniqueWithoutVirtualAirlineInput[]
+    createMany?: VirtualAirlineRoleCreateManyVirtualAirlineInputEnvelope
+    set?: VirtualAirlineRoleWhereUniqueInput | VirtualAirlineRoleWhereUniqueInput[]
+    disconnect?: VirtualAirlineRoleWhereUniqueInput | VirtualAirlineRoleWhereUniqueInput[]
+    delete?: VirtualAirlineRoleWhereUniqueInput | VirtualAirlineRoleWhereUniqueInput[]
+    connect?: VirtualAirlineRoleWhereUniqueInput | VirtualAirlineRoleWhereUniqueInput[]
+    update?: VirtualAirlineRoleUpdateWithWhereUniqueWithoutVirtualAirlineInput | VirtualAirlineRoleUpdateWithWhereUniqueWithoutVirtualAirlineInput[]
+    updateMany?: VirtualAirlineRoleUpdateManyWithWhereWithoutVirtualAirlineInput | VirtualAirlineRoleUpdateManyWithWhereWithoutVirtualAirlineInput[]
+    deleteMany?: VirtualAirlineRoleScalarWhereInput | VirtualAirlineRoleScalarWhereInput[]
+  }
+
+  export type MemberUncheckedUpdateManyWithoutVirtualAirlineNestedInput = {
+    create?: XOR<MemberCreateWithoutVirtualAirlineInput, MemberUncheckedCreateWithoutVirtualAirlineInput> | MemberCreateWithoutVirtualAirlineInput[] | MemberUncheckedCreateWithoutVirtualAirlineInput[]
+    connectOrCreate?: MemberCreateOrConnectWithoutVirtualAirlineInput | MemberCreateOrConnectWithoutVirtualAirlineInput[]
+    upsert?: MemberUpsertWithWhereUniqueWithoutVirtualAirlineInput | MemberUpsertWithWhereUniqueWithoutVirtualAirlineInput[]
+    createMany?: MemberCreateManyVirtualAirlineInputEnvelope
+    set?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+    disconnect?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+    delete?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+    connect?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+    update?: MemberUpdateWithWhereUniqueWithoutVirtualAirlineInput | MemberUpdateWithWhereUniqueWithoutVirtualAirlineInput[]
+    updateMany?: MemberUpdateManyWithWhereWithoutVirtualAirlineInput | MemberUpdateManyWithWhereWithoutVirtualAirlineInput[]
+    deleteMany?: MemberScalarWhereInput | MemberScalarWhereInput[]
+  }
+
+  export type VirtualAirlineCreateNestedOneWithoutVARolesInput = {
+    create?: XOR<VirtualAirlineCreateWithoutVARolesInput, VirtualAirlineUncheckedCreateWithoutVARolesInput>
+    connectOrCreate?: VirtualAirlineCreateOrConnectWithoutVARolesInput
+    connect?: VirtualAirlineWhereUniqueInput
+  }
+
+  export type MemberCreateNestedManyWithoutVARoleInput = {
+    create?: XOR<MemberCreateWithoutVARoleInput, MemberUncheckedCreateWithoutVARoleInput> | MemberCreateWithoutVARoleInput[] | MemberUncheckedCreateWithoutVARoleInput[]
+    connectOrCreate?: MemberCreateOrConnectWithoutVARoleInput | MemberCreateOrConnectWithoutVARoleInput[]
+    createMany?: MemberCreateManyVARoleInputEnvelope
+    connect?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+  }
+
+  export type MemberUncheckedCreateNestedManyWithoutVARoleInput = {
+    create?: XOR<MemberCreateWithoutVARoleInput, MemberUncheckedCreateWithoutVARoleInput> | MemberCreateWithoutVARoleInput[] | MemberUncheckedCreateWithoutVARoleInput[]
+    connectOrCreate?: MemberCreateOrConnectWithoutVARoleInput | MemberCreateOrConnectWithoutVARoleInput[]
+    createMany?: MemberCreateManyVARoleInputEnvelope
+    connect?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+  }
+
+  export type DecimalFieldUpdateOperationsInput = {
+    set?: Decimal | DecimalJsLike | number | string
+    increment?: Decimal | DecimalJsLike | number | string
+    decrement?: Decimal | DecimalJsLike | number | string
+    multiply?: Decimal | DecimalJsLike | number | string
+    divide?: Decimal | DecimalJsLike | number | string
+  }
+
+  export type VirtualAirlineUpdateOneRequiredWithoutVARolesNestedInput = {
+    create?: XOR<VirtualAirlineCreateWithoutVARolesInput, VirtualAirlineUncheckedCreateWithoutVARolesInput>
+    connectOrCreate?: VirtualAirlineCreateOrConnectWithoutVARolesInput
+    upsert?: VirtualAirlineUpsertWithoutVARolesInput
+    connect?: VirtualAirlineWhereUniqueInput
+    update?: XOR<XOR<VirtualAirlineUpdateToOneWithWhereWithoutVARolesInput, VirtualAirlineUpdateWithoutVARolesInput>, VirtualAirlineUncheckedUpdateWithoutVARolesInput>
+  }
+
+  export type MemberUpdateManyWithoutVARoleNestedInput = {
+    create?: XOR<MemberCreateWithoutVARoleInput, MemberUncheckedCreateWithoutVARoleInput> | MemberCreateWithoutVARoleInput[] | MemberUncheckedCreateWithoutVARoleInput[]
+    connectOrCreate?: MemberCreateOrConnectWithoutVARoleInput | MemberCreateOrConnectWithoutVARoleInput[]
+    upsert?: MemberUpsertWithWhereUniqueWithoutVARoleInput | MemberUpsertWithWhereUniqueWithoutVARoleInput[]
+    createMany?: MemberCreateManyVARoleInputEnvelope
+    set?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+    disconnect?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+    delete?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+    connect?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+    update?: MemberUpdateWithWhereUniqueWithoutVARoleInput | MemberUpdateWithWhereUniqueWithoutVARoleInput[]
+    updateMany?: MemberUpdateManyWithWhereWithoutVARoleInput | MemberUpdateManyWithWhereWithoutVARoleInput[]
+    deleteMany?: MemberScalarWhereInput | MemberScalarWhereInput[]
+  }
+
+  export type MemberUncheckedUpdateManyWithoutVARoleNestedInput = {
+    create?: XOR<MemberCreateWithoutVARoleInput, MemberUncheckedCreateWithoutVARoleInput> | MemberCreateWithoutVARoleInput[] | MemberUncheckedCreateWithoutVARoleInput[]
+    connectOrCreate?: MemberCreateOrConnectWithoutVARoleInput | MemberCreateOrConnectWithoutVARoleInput[]
+    upsert?: MemberUpsertWithWhereUniqueWithoutVARoleInput | MemberUpsertWithWhereUniqueWithoutVARoleInput[]
+    createMany?: MemberCreateManyVARoleInputEnvelope
+    set?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+    disconnect?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+    delete?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+    connect?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+    update?: MemberUpdateWithWhereUniqueWithoutVARoleInput | MemberUpdateWithWhereUniqueWithoutVARoleInput[]
+    updateMany?: MemberUpdateManyWithWhereWithoutVARoleInput | MemberUpdateManyWithWhereWithoutVARoleInput[]
+    deleteMany?: MemberScalarWhereInput | MemberScalarWhereInput[]
   }
 
   export type VirtualAirlineCreateNestedManyWithoutWorldInput = {
@@ -9348,6 +19482,34 @@ export namespace Prisma {
     update?: VirtualAirlineUpdateWithWhereUniqueWithoutWorldInput | VirtualAirlineUpdateWithWhereUniqueWithoutWorldInput[]
     updateMany?: VirtualAirlineUpdateManyWithWhereWithoutWorldInput | VirtualAirlineUpdateManyWithWhereWithoutWorldInput[]
     deleteMany?: VirtualAirlineScalarWhereInput | VirtualAirlineScalarWhereInput[]
+  }
+
+  export type VirtualAirlineCreateNestedOneWithoutMembersInput = {
+    create?: XOR<VirtualAirlineCreateWithoutMembersInput, VirtualAirlineUncheckedCreateWithoutMembersInput>
+    connectOrCreate?: VirtualAirlineCreateOrConnectWithoutMembersInput
+    connect?: VirtualAirlineWhereUniqueInput
+  }
+
+  export type VirtualAirlineRoleCreateNestedOneWithoutMembersInput = {
+    create?: XOR<VirtualAirlineRoleCreateWithoutMembersInput, VirtualAirlineRoleUncheckedCreateWithoutMembersInput>
+    connectOrCreate?: VirtualAirlineRoleCreateOrConnectWithoutMembersInput
+    connect?: VirtualAirlineRoleWhereUniqueInput
+  }
+
+  export type VirtualAirlineUpdateOneRequiredWithoutMembersNestedInput = {
+    create?: XOR<VirtualAirlineCreateWithoutMembersInput, VirtualAirlineUncheckedCreateWithoutMembersInput>
+    connectOrCreate?: VirtualAirlineCreateOrConnectWithoutMembersInput
+    upsert?: VirtualAirlineUpsertWithoutMembersInput
+    connect?: VirtualAirlineWhereUniqueInput
+    update?: XOR<XOR<VirtualAirlineUpdateToOneWithWhereWithoutMembersInput, VirtualAirlineUpdateWithoutMembersInput>, VirtualAirlineUncheckedUpdateWithoutMembersInput>
+  }
+
+  export type VirtualAirlineRoleUpdateOneRequiredWithoutMembersNestedInput = {
+    create?: XOR<VirtualAirlineRoleCreateWithoutMembersInput, VirtualAirlineRoleUncheckedCreateWithoutMembersInput>
+    connectOrCreate?: VirtualAirlineRoleCreateOrConnectWithoutMembersInput
+    upsert?: VirtualAirlineRoleUpsertWithoutMembersInput
+    connect?: VirtualAirlineRoleWhereUniqueInput
+    update?: XOR<XOR<VirtualAirlineRoleUpdateToOneWithWhereWithoutMembersInput, VirtualAirlineRoleUpdateWithoutMembersInput>, VirtualAirlineRoleUncheckedUpdateWithoutMembersInput>
   }
 
   export type EnumJobTypeFieldUpdateOperationsInput = {
@@ -9505,6 +19667,17 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type NestedUuidWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -9536,6 +19709,20 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
   export type NestedUuidNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -9545,17 +19732,6 @@ export namespace Prisma {
     gt?: string | StringFieldRefInput<$PrismaModel>
     gte?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedUuidNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type NestedDecimalNullableFilter<$PrismaModel = never> = {
@@ -9581,20 +19757,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -9638,6 +19800,33 @@ export namespace Prisma {
     _sum?: NestedDecimalNullableFilter<$PrismaModel>
     _min?: NestedDecimalNullableFilter<$PrismaModel>
     _max?: NestedDecimalNullableFilter<$PrismaModel>
+  }
+
+  export type NestedDecimalFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+  }
+
+  export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedDecimalFilter<$PrismaModel>
+    _sum?: NestedDecimalFilter<$PrismaModel>
+    _min?: NestedDecimalFilter<$PrismaModel>
+    _max?: NestedDecimalFilter<$PrismaModel>
   }
 
   export type NestedEnumJobTypeFilter<$PrismaModel = never> = {
@@ -9714,6 +19903,376 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
+  export type RoleCreateWithoutUsersInput = {
+    Name: string
+    Description?: string | null
+    Slug: string
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    Permissions?: PermissionCreateNestedManyWithoutRolesInput
+  }
+
+  export type RoleUncheckedCreateWithoutUsersInput = {
+    Id?: number
+    Name: string
+    Description?: string | null
+    Slug: string
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    Permissions?: PermissionUncheckedCreateNestedManyWithoutRolesInput
+  }
+
+  export type RoleCreateOrConnectWithoutUsersInput = {
+    where: RoleWhereUniqueInput
+    create: XOR<RoleCreateWithoutUsersInput, RoleUncheckedCreateWithoutUsersInput>
+  }
+
+  export type UserPrivacySettingsCreateWithoutUserInput = {
+    Id?: string
+    ShowOnlineStatus?: boolean
+    ShowFirstName?: boolean
+    ShowLastName?: boolean
+    ShowLastNameInitial?: boolean
+    ShowLastLogin?: Date | string | null
+    CreatedAt?: Date | string
+  }
+
+  export type UserPrivacySettingsUncheckedCreateWithoutUserInput = {
+    Id?: string
+    ShowOnlineStatus?: boolean
+    ShowFirstName?: boolean
+    ShowLastName?: boolean
+    ShowLastNameInitial?: boolean
+    ShowLastLogin?: Date | string | null
+    CreatedAt?: Date | string
+  }
+
+  export type UserPrivacySettingsCreateOrConnectWithoutUserInput = {
+    where: UserPrivacySettingsWhereUniqueInput
+    create: XOR<UserPrivacySettingsCreateWithoutUserInput, UserPrivacySettingsUncheckedCreateWithoutUserInput>
+  }
+
+  export type RoleUpsertWithWhereUniqueWithoutUsersInput = {
+    where: RoleWhereUniqueInput
+    update: XOR<RoleUpdateWithoutUsersInput, RoleUncheckedUpdateWithoutUsersInput>
+    create: XOR<RoleCreateWithoutUsersInput, RoleUncheckedCreateWithoutUsersInput>
+  }
+
+  export type RoleUpdateWithWhereUniqueWithoutUsersInput = {
+    where: RoleWhereUniqueInput
+    data: XOR<RoleUpdateWithoutUsersInput, RoleUncheckedUpdateWithoutUsersInput>
+  }
+
+  export type RoleUpdateManyWithWhereWithoutUsersInput = {
+    where: RoleScalarWhereInput
+    data: XOR<RoleUpdateManyMutationInput, RoleUncheckedUpdateManyWithoutUsersInput>
+  }
+
+  export type RoleScalarWhereInput = {
+    AND?: RoleScalarWhereInput | RoleScalarWhereInput[]
+    OR?: RoleScalarWhereInput[]
+    NOT?: RoleScalarWhereInput | RoleScalarWhereInput[]
+    Id?: IntFilter<"Role"> | number
+    Name?: StringFilter<"Role"> | string
+    Description?: StringNullableFilter<"Role"> | string | null
+    Slug?: StringFilter<"Role"> | string
+    CreatedAt?: DateTimeFilter<"Role"> | Date | string
+    UpdatedAt?: DateTimeFilter<"Role"> | Date | string
+  }
+
+  export type UserPrivacySettingsUpsertWithoutUserInput = {
+    update: XOR<UserPrivacySettingsUpdateWithoutUserInput, UserPrivacySettingsUncheckedUpdateWithoutUserInput>
+    create: XOR<UserPrivacySettingsCreateWithoutUserInput, UserPrivacySettingsUncheckedCreateWithoutUserInput>
+    where?: UserPrivacySettingsWhereInput
+  }
+
+  export type UserPrivacySettingsUpdateToOneWithWhereWithoutUserInput = {
+    where?: UserPrivacySettingsWhereInput
+    data: XOR<UserPrivacySettingsUpdateWithoutUserInput, UserPrivacySettingsUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UserPrivacySettingsUpdateWithoutUserInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    ShowOnlineStatus?: BoolFieldUpdateOperationsInput | boolean
+    ShowFirstName?: BoolFieldUpdateOperationsInput | boolean
+    ShowLastName?: BoolFieldUpdateOperationsInput | boolean
+    ShowLastNameInitial?: BoolFieldUpdateOperationsInput | boolean
+    ShowLastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserPrivacySettingsUncheckedUpdateWithoutUserInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    ShowOnlineStatus?: BoolFieldUpdateOperationsInput | boolean
+    ShowFirstName?: BoolFieldUpdateOperationsInput | boolean
+    ShowLastName?: BoolFieldUpdateOperationsInput | boolean
+    ShowLastNameInitial?: BoolFieldUpdateOperationsInput | boolean
+    ShowLastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserCreateWithoutPrivacySettingsInput = {
+    Id?: string
+    Username: string
+    Password: string
+    Email?: string | null
+    FirstName?: string | null
+    LastName?: string | null
+    FirstLoginCompleted?: boolean
+    IsOnline?: boolean
+    IsBanned?: boolean
+    BanReason?: string | null
+    BanExpiresAt?: Date | string | null
+    IsVerified?: boolean
+    LastLogin?: Date | string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    Roles?: RoleCreateNestedManyWithoutUsersInput
+  }
+
+  export type UserUncheckedCreateWithoutPrivacySettingsInput = {
+    Id?: string
+    Username: string
+    Password: string
+    Email?: string | null
+    FirstName?: string | null
+    LastName?: string | null
+    FirstLoginCompleted?: boolean
+    IsOnline?: boolean
+    IsBanned?: boolean
+    BanReason?: string | null
+    BanExpiresAt?: Date | string | null
+    IsVerified?: boolean
+    LastLogin?: Date | string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    Roles?: RoleUncheckedCreateNestedManyWithoutUsersInput
+  }
+
+  export type UserCreateOrConnectWithoutPrivacySettingsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutPrivacySettingsInput, UserUncheckedCreateWithoutPrivacySettingsInput>
+  }
+
+  export type UserUpsertWithoutPrivacySettingsInput = {
+    update: XOR<UserUpdateWithoutPrivacySettingsInput, UserUncheckedUpdateWithoutPrivacySettingsInput>
+    create: XOR<UserCreateWithoutPrivacySettingsInput, UserUncheckedCreateWithoutPrivacySettingsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutPrivacySettingsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutPrivacySettingsInput, UserUncheckedUpdateWithoutPrivacySettingsInput>
+  }
+
+  export type UserUpdateWithoutPrivacySettingsInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Username?: StringFieldUpdateOperationsInput | string
+    Password?: StringFieldUpdateOperationsInput | string
+    Email?: NullableStringFieldUpdateOperationsInput | string | null
+    FirstName?: NullableStringFieldUpdateOperationsInput | string | null
+    LastName?: NullableStringFieldUpdateOperationsInput | string | null
+    FirstLoginCompleted?: BoolFieldUpdateOperationsInput | boolean
+    IsOnline?: BoolFieldUpdateOperationsInput | boolean
+    IsBanned?: BoolFieldUpdateOperationsInput | boolean
+    BanReason?: NullableStringFieldUpdateOperationsInput | string | null
+    BanExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    IsVerified?: BoolFieldUpdateOperationsInput | boolean
+    LastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Roles?: RoleUpdateManyWithoutUsersNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutPrivacySettingsInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Username?: StringFieldUpdateOperationsInput | string
+    Password?: StringFieldUpdateOperationsInput | string
+    Email?: NullableStringFieldUpdateOperationsInput | string | null
+    FirstName?: NullableStringFieldUpdateOperationsInput | string | null
+    LastName?: NullableStringFieldUpdateOperationsInput | string | null
+    FirstLoginCompleted?: BoolFieldUpdateOperationsInput | boolean
+    IsOnline?: BoolFieldUpdateOperationsInput | boolean
+    IsBanned?: BoolFieldUpdateOperationsInput | boolean
+    BanReason?: NullableStringFieldUpdateOperationsInput | string | null
+    BanExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    IsVerified?: BoolFieldUpdateOperationsInput | boolean
+    LastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Roles?: RoleUncheckedUpdateManyWithoutUsersNestedInput
+  }
+
+  export type PermissionCreateWithoutRolesInput = {
+    Name: string
+    Description?: string | null
+    Slug: string
+    Entity: string
+    Action: string
+  }
+
+  export type PermissionUncheckedCreateWithoutRolesInput = {
+    Id?: number
+    Name: string
+    Description?: string | null
+    Slug: string
+    Entity: string
+    Action: string
+  }
+
+  export type PermissionCreateOrConnectWithoutRolesInput = {
+    where: PermissionWhereUniqueInput
+    create: XOR<PermissionCreateWithoutRolesInput, PermissionUncheckedCreateWithoutRolesInput>
+  }
+
+  export type UserCreateWithoutRolesInput = {
+    Id?: string
+    Username: string
+    Password: string
+    Email?: string | null
+    FirstName?: string | null
+    LastName?: string | null
+    FirstLoginCompleted?: boolean
+    IsOnline?: boolean
+    IsBanned?: boolean
+    BanReason?: string | null
+    BanExpiresAt?: Date | string | null
+    IsVerified?: boolean
+    LastLogin?: Date | string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    PrivacySettings?: UserPrivacySettingsCreateNestedOneWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutRolesInput = {
+    Id?: string
+    Username: string
+    Password: string
+    Email?: string | null
+    FirstName?: string | null
+    LastName?: string | null
+    FirstLoginCompleted?: boolean
+    IsOnline?: boolean
+    IsBanned?: boolean
+    BanReason?: string | null
+    BanExpiresAt?: Date | string | null
+    IsVerified?: boolean
+    LastLogin?: Date | string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    PrivacySettings?: UserPrivacySettingsUncheckedCreateNestedOneWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutRolesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutRolesInput, UserUncheckedCreateWithoutRolesInput>
+  }
+
+  export type PermissionUpsertWithWhereUniqueWithoutRolesInput = {
+    where: PermissionWhereUniqueInput
+    update: XOR<PermissionUpdateWithoutRolesInput, PermissionUncheckedUpdateWithoutRolesInput>
+    create: XOR<PermissionCreateWithoutRolesInput, PermissionUncheckedCreateWithoutRolesInput>
+  }
+
+  export type PermissionUpdateWithWhereUniqueWithoutRolesInput = {
+    where: PermissionWhereUniqueInput
+    data: XOR<PermissionUpdateWithoutRolesInput, PermissionUncheckedUpdateWithoutRolesInput>
+  }
+
+  export type PermissionUpdateManyWithWhereWithoutRolesInput = {
+    where: PermissionScalarWhereInput
+    data: XOR<PermissionUpdateManyMutationInput, PermissionUncheckedUpdateManyWithoutRolesInput>
+  }
+
+  export type PermissionScalarWhereInput = {
+    AND?: PermissionScalarWhereInput | PermissionScalarWhereInput[]
+    OR?: PermissionScalarWhereInput[]
+    NOT?: PermissionScalarWhereInput | PermissionScalarWhereInput[]
+    Id?: IntFilter<"Permission"> | number
+    Name?: StringFilter<"Permission"> | string
+    Description?: StringNullableFilter<"Permission"> | string | null
+    Slug?: StringFilter<"Permission"> | string
+    Entity?: StringFilter<"Permission"> | string
+    Action?: StringFilter<"Permission"> | string
+  }
+
+  export type UserUpsertWithWhereUniqueWithoutRolesInput = {
+    where: UserWhereUniqueInput
+    update: XOR<UserUpdateWithoutRolesInput, UserUncheckedUpdateWithoutRolesInput>
+    create: XOR<UserCreateWithoutRolesInput, UserUncheckedCreateWithoutRolesInput>
+  }
+
+  export type UserUpdateWithWhereUniqueWithoutRolesInput = {
+    where: UserWhereUniqueInput
+    data: XOR<UserUpdateWithoutRolesInput, UserUncheckedUpdateWithoutRolesInput>
+  }
+
+  export type UserUpdateManyWithWhereWithoutRolesInput = {
+    where: UserScalarWhereInput
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutRolesInput>
+  }
+
+  export type UserScalarWhereInput = {
+    AND?: UserScalarWhereInput | UserScalarWhereInput[]
+    OR?: UserScalarWhereInput[]
+    NOT?: UserScalarWhereInput | UserScalarWhereInput[]
+    Id?: UuidFilter<"User"> | string
+    Username?: StringFilter<"User"> | string
+    Password?: StringFilter<"User"> | string
+    Email?: StringNullableFilter<"User"> | string | null
+    FirstName?: StringNullableFilter<"User"> | string | null
+    LastName?: StringNullableFilter<"User"> | string | null
+    FirstLoginCompleted?: BoolFilter<"User"> | boolean
+    IsOnline?: BoolFilter<"User"> | boolean
+    IsBanned?: BoolFilter<"User"> | boolean
+    BanReason?: StringNullableFilter<"User"> | string | null
+    BanExpiresAt?: DateTimeNullableFilter<"User"> | Date | string | null
+    IsVerified?: BoolFilter<"User"> | boolean
+    LastLogin?: DateTimeNullableFilter<"User"> | Date | string | null
+    CreatedAt?: DateTimeFilter<"User"> | Date | string
+    UpdatedAt?: DateTimeFilter<"User"> | Date | string
+  }
+
+  export type RoleCreateWithoutPermissionsInput = {
+    Name: string
+    Description?: string | null
+    Slug: string
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    Users?: UserCreateNestedManyWithoutRolesInput
+  }
+
+  export type RoleUncheckedCreateWithoutPermissionsInput = {
+    Id?: number
+    Name: string
+    Description?: string | null
+    Slug: string
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    Users?: UserUncheckedCreateNestedManyWithoutRolesInput
+  }
+
+  export type RoleCreateOrConnectWithoutPermissionsInput = {
+    where: RoleWhereUniqueInput
+    create: XOR<RoleCreateWithoutPermissionsInput, RoleUncheckedCreateWithoutPermissionsInput>
+  }
+
+  export type RoleUpsertWithWhereUniqueWithoutPermissionsInput = {
+    where: RoleWhereUniqueInput
+    update: XOR<RoleUpdateWithoutPermissionsInput, RoleUncheckedUpdateWithoutPermissionsInput>
+    create: XOR<RoleCreateWithoutPermissionsInput, RoleUncheckedCreateWithoutPermissionsInput>
+  }
+
+  export type RoleUpdateWithWhereUniqueWithoutPermissionsInput = {
+    where: RoleWhereUniqueInput
+    data: XOR<RoleUpdateWithoutPermissionsInput, RoleUncheckedUpdateWithoutPermissionsInput>
+  }
+
+  export type RoleUpdateManyWithWhereWithoutPermissionsInput = {
+    where: RoleScalarWhereInput
+    data: XOR<RoleUpdateManyMutationInput, RoleUncheckedUpdateManyWithoutPermissionsInput>
+  }
+
   export type WorldCreateWithoutVirtualAirlinesInput = {
     Id: string
     Name: string
@@ -9735,6 +20294,112 @@ export namespace Prisma {
   export type WorldCreateOrConnectWithoutVirtualAirlinesInput = {
     where: WorldWhereUniqueInput
     create: XOR<WorldCreateWithoutVirtualAirlinesInput, WorldUncheckedCreateWithoutVirtualAirlinesInput>
+  }
+
+  export type VirtualAirlineRoleCreateWithoutVirtualAirlineInput = {
+    Id?: string
+    Name: string
+    Permission: number
+    IsDefaultNewRole: boolean
+    Color: string
+    PayPercent: Decimal | DecimalJsLike | number | string
+    IsHidden: boolean
+    RestrictLoadingVAJobsIntoNonVAAircraft: boolean
+    RestrictLoadingNonVAJobsIntoVAAircraft: boolean
+    PayWeekly: Decimal | DecimalJsLike | number | string
+    PayPerFlightHour: Decimal | DecimalJsLike | number | string
+    LastRefresh?: Date | string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    Members?: MemberCreateNestedManyWithoutVARoleInput
+  }
+
+  export type VirtualAirlineRoleUncheckedCreateWithoutVirtualAirlineInput = {
+    Id?: string
+    Name: string
+    Permission: number
+    IsDefaultNewRole: boolean
+    Color: string
+    PayPercent: Decimal | DecimalJsLike | number | string
+    IsHidden: boolean
+    RestrictLoadingVAJobsIntoNonVAAircraft: boolean
+    RestrictLoadingNonVAJobsIntoVAAircraft: boolean
+    PayWeekly: Decimal | DecimalJsLike | number | string
+    PayPerFlightHour: Decimal | DecimalJsLike | number | string
+    LastRefresh?: Date | string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    Members?: MemberUncheckedCreateNestedManyWithoutVARoleInput
+  }
+
+  export type VirtualAirlineRoleCreateOrConnectWithoutVirtualAirlineInput = {
+    where: VirtualAirlineRoleWhereUniqueInput
+    create: XOR<VirtualAirlineRoleCreateWithoutVirtualAirlineInput, VirtualAirlineRoleUncheckedCreateWithoutVirtualAirlineInput>
+  }
+
+  export type VirtualAirlineRoleCreateManyVirtualAirlineInputEnvelope = {
+    data: VirtualAirlineRoleCreateManyVirtualAirlineInput | VirtualAirlineRoleCreateManyVirtualAirlineInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MemberCreateWithoutVirtualAirlineInput = {
+    Id?: string
+    CompanyId: string
+    CompanyName: string
+    AirlineCode: string
+    LastConnection?: Date | string | null
+    Reputation: Decimal | DecimalJsLike | number | string
+    CompanyCreationDate: Date | string
+    CompanyLevel: number
+    CompanyLevelXP: number
+    TotalCargosTransportedLbs: number
+    TotalPAXsTransported: number
+    TotalEarnedCredits: Decimal | DecimalJsLike | number | string
+    TotalSpentCredits: Decimal | DecimalJsLike | number | string
+    NumberOfFlights: number
+    FlightHours: Decimal | DecimalJsLike | number | string
+    Color: string
+    ReputationImpact: Decimal | DecimalJsLike | number | string
+    LastVAFlightDate?: Date | string | null
+    LastRefresh?: Date | string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    VARole: VirtualAirlineRoleCreateNestedOneWithoutMembersInput
+  }
+
+  export type MemberUncheckedCreateWithoutVirtualAirlineInput = {
+    Id?: string
+    CompanyId: string
+    CompanyName: string
+    AirlineCode: string
+    LastConnection?: Date | string | null
+    Reputation: Decimal | DecimalJsLike | number | string
+    CompanyCreationDate: Date | string
+    CompanyLevel: number
+    CompanyLevelXP: number
+    VARoleId: string
+    TotalCargosTransportedLbs: number
+    TotalPAXsTransported: number
+    TotalEarnedCredits: Decimal | DecimalJsLike | number | string
+    TotalSpentCredits: Decimal | DecimalJsLike | number | string
+    NumberOfFlights: number
+    FlightHours: Decimal | DecimalJsLike | number | string
+    Color: string
+    ReputationImpact: Decimal | DecimalJsLike | number | string
+    LastVAFlightDate?: Date | string | null
+    LastRefresh?: Date | string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+  }
+
+  export type MemberCreateOrConnectWithoutVirtualAirlineInput = {
+    where: MemberWhereUniqueInput
+    create: XOR<MemberCreateWithoutVirtualAirlineInput, MemberUncheckedCreateWithoutVirtualAirlineInput>
+  }
+
+  export type MemberCreateManyVirtualAirlineInputEnvelope = {
+    data: MemberCreateManyVirtualAirlineInput | MemberCreateManyVirtualAirlineInput[]
+    skipDuplicates?: boolean
   }
 
   export type WorldUpsertWithoutVirtualAirlinesInput = {
@@ -9766,6 +20431,300 @@ export namespace Prisma {
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type VirtualAirlineRoleUpsertWithWhereUniqueWithoutVirtualAirlineInput = {
+    where: VirtualAirlineRoleWhereUniqueInput
+    update: XOR<VirtualAirlineRoleUpdateWithoutVirtualAirlineInput, VirtualAirlineRoleUncheckedUpdateWithoutVirtualAirlineInput>
+    create: XOR<VirtualAirlineRoleCreateWithoutVirtualAirlineInput, VirtualAirlineRoleUncheckedCreateWithoutVirtualAirlineInput>
+  }
+
+  export type VirtualAirlineRoleUpdateWithWhereUniqueWithoutVirtualAirlineInput = {
+    where: VirtualAirlineRoleWhereUniqueInput
+    data: XOR<VirtualAirlineRoleUpdateWithoutVirtualAirlineInput, VirtualAirlineRoleUncheckedUpdateWithoutVirtualAirlineInput>
+  }
+
+  export type VirtualAirlineRoleUpdateManyWithWhereWithoutVirtualAirlineInput = {
+    where: VirtualAirlineRoleScalarWhereInput
+    data: XOR<VirtualAirlineRoleUpdateManyMutationInput, VirtualAirlineRoleUncheckedUpdateManyWithoutVirtualAirlineInput>
+  }
+
+  export type VirtualAirlineRoleScalarWhereInput = {
+    AND?: VirtualAirlineRoleScalarWhereInput | VirtualAirlineRoleScalarWhereInput[]
+    OR?: VirtualAirlineRoleScalarWhereInput[]
+    NOT?: VirtualAirlineRoleScalarWhereInput | VirtualAirlineRoleScalarWhereInput[]
+    Id?: UuidFilter<"VirtualAirlineRole"> | string
+    VAId?: UuidFilter<"VirtualAirlineRole"> | string
+    Name?: StringFilter<"VirtualAirlineRole"> | string
+    Permission?: IntFilter<"VirtualAirlineRole"> | number
+    IsDefaultNewRole?: BoolFilter<"VirtualAirlineRole"> | boolean
+    Color?: StringFilter<"VirtualAirlineRole"> | string
+    PayPercent?: DecimalFilter<"VirtualAirlineRole"> | Decimal | DecimalJsLike | number | string
+    IsHidden?: BoolFilter<"VirtualAirlineRole"> | boolean
+    RestrictLoadingVAJobsIntoNonVAAircraft?: BoolFilter<"VirtualAirlineRole"> | boolean
+    RestrictLoadingNonVAJobsIntoVAAircraft?: BoolFilter<"VirtualAirlineRole"> | boolean
+    PayWeekly?: DecimalFilter<"VirtualAirlineRole"> | Decimal | DecimalJsLike | number | string
+    PayPerFlightHour?: DecimalFilter<"VirtualAirlineRole"> | Decimal | DecimalJsLike | number | string
+    LastRefresh?: DateTimeNullableFilter<"VirtualAirlineRole"> | Date | string | null
+    CreatedAt?: DateTimeFilter<"VirtualAirlineRole"> | Date | string
+    UpdatedAt?: DateTimeFilter<"VirtualAirlineRole"> | Date | string
+  }
+
+  export type MemberUpsertWithWhereUniqueWithoutVirtualAirlineInput = {
+    where: MemberWhereUniqueInput
+    update: XOR<MemberUpdateWithoutVirtualAirlineInput, MemberUncheckedUpdateWithoutVirtualAirlineInput>
+    create: XOR<MemberCreateWithoutVirtualAirlineInput, MemberUncheckedCreateWithoutVirtualAirlineInput>
+  }
+
+  export type MemberUpdateWithWhereUniqueWithoutVirtualAirlineInput = {
+    where: MemberWhereUniqueInput
+    data: XOR<MemberUpdateWithoutVirtualAirlineInput, MemberUncheckedUpdateWithoutVirtualAirlineInput>
+  }
+
+  export type MemberUpdateManyWithWhereWithoutVirtualAirlineInput = {
+    where: MemberScalarWhereInput
+    data: XOR<MemberUpdateManyMutationInput, MemberUncheckedUpdateManyWithoutVirtualAirlineInput>
+  }
+
+  export type MemberScalarWhereInput = {
+    AND?: MemberScalarWhereInput | MemberScalarWhereInput[]
+    OR?: MemberScalarWhereInput[]
+    NOT?: MemberScalarWhereInput | MemberScalarWhereInput[]
+    Id?: UuidFilter<"Member"> | string
+    VAId?: UuidFilter<"Member"> | string
+    CompanyId?: UuidFilter<"Member"> | string
+    CompanyName?: StringFilter<"Member"> | string
+    AirlineCode?: StringFilter<"Member"> | string
+    LastConnection?: DateTimeNullableFilter<"Member"> | Date | string | null
+    Reputation?: DecimalFilter<"Member"> | Decimal | DecimalJsLike | number | string
+    CompanyCreationDate?: DateTimeFilter<"Member"> | Date | string
+    CompanyLevel?: IntFilter<"Member"> | number
+    CompanyLevelXP?: IntFilter<"Member"> | number
+    VARoleId?: UuidFilter<"Member"> | string
+    TotalCargosTransportedLbs?: IntFilter<"Member"> | number
+    TotalPAXsTransported?: IntFilter<"Member"> | number
+    TotalEarnedCredits?: DecimalFilter<"Member"> | Decimal | DecimalJsLike | number | string
+    TotalSpentCredits?: DecimalFilter<"Member"> | Decimal | DecimalJsLike | number | string
+    NumberOfFlights?: IntFilter<"Member"> | number
+    FlightHours?: DecimalFilter<"Member"> | Decimal | DecimalJsLike | number | string
+    Color?: StringFilter<"Member"> | string
+    ReputationImpact?: DecimalFilter<"Member"> | Decimal | DecimalJsLike | number | string
+    LastVAFlightDate?: DateTimeNullableFilter<"Member"> | Date | string | null
+    LastRefresh?: DateTimeNullableFilter<"Member"> | Date | string | null
+    CreatedAt?: DateTimeFilter<"Member"> | Date | string
+    UpdatedAt?: DateTimeFilter<"Member"> | Date | string
+  }
+
+  export type VirtualAirlineCreateWithoutVARolesInput = {
+    Id: string
+    ApiKey: string
+    IsPrimary?: boolean
+    Identifier?: string | null
+    Name?: string | null
+    Description?: string | null
+    LastDividendsDistribution?: Date | string | null
+    LastComputationDate?: Date | string | null
+    ComputedMemberCount?: number | null
+    ComputedAircraftsCount?: number | null
+    ComputedNumberOfFlights30Days?: number | null
+    ComputedNumberOfFlightHours30Days?: number | null
+    ComputedMostUsedAirports?: string | null
+    LastConnection?: Date | string | null
+    LastReportDate?: Date | string | null
+    Reputation?: Decimal | DecimalJsLike | number | string | null
+    CreationDate?: Date | string | null
+    DifficultyLevel?: number | null
+    Level?: number | null
+    LevelXP?: number | null
+    TotalContractsCompleted?: number | null
+    TotalContractsEarnedCredits?: number | null
+    LastRefresh?: Date | string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    World?: WorldCreateNestedOneWithoutVirtualAirlinesInput
+    Members?: MemberCreateNestedManyWithoutVirtualAirlineInput
+  }
+
+  export type VirtualAirlineUncheckedCreateWithoutVARolesInput = {
+    Id: string
+    ApiKey: string
+    IsPrimary?: boolean
+    Identifier?: string | null
+    Name?: string | null
+    Description?: string | null
+    WorldId?: string | null
+    LastDividendsDistribution?: Date | string | null
+    LastComputationDate?: Date | string | null
+    ComputedMemberCount?: number | null
+    ComputedAircraftsCount?: number | null
+    ComputedNumberOfFlights30Days?: number | null
+    ComputedNumberOfFlightHours30Days?: number | null
+    ComputedMostUsedAirports?: string | null
+    LastConnection?: Date | string | null
+    LastReportDate?: Date | string | null
+    Reputation?: Decimal | DecimalJsLike | number | string | null
+    CreationDate?: Date | string | null
+    DifficultyLevel?: number | null
+    Level?: number | null
+    LevelXP?: number | null
+    TotalContractsCompleted?: number | null
+    TotalContractsEarnedCredits?: number | null
+    LastRefresh?: Date | string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    Members?: MemberUncheckedCreateNestedManyWithoutVirtualAirlineInput
+  }
+
+  export type VirtualAirlineCreateOrConnectWithoutVARolesInput = {
+    where: VirtualAirlineWhereUniqueInput
+    create: XOR<VirtualAirlineCreateWithoutVARolesInput, VirtualAirlineUncheckedCreateWithoutVARolesInput>
+  }
+
+  export type MemberCreateWithoutVARoleInput = {
+    Id?: string
+    CompanyId: string
+    CompanyName: string
+    AirlineCode: string
+    LastConnection?: Date | string | null
+    Reputation: Decimal | DecimalJsLike | number | string
+    CompanyCreationDate: Date | string
+    CompanyLevel: number
+    CompanyLevelXP: number
+    TotalCargosTransportedLbs: number
+    TotalPAXsTransported: number
+    TotalEarnedCredits: Decimal | DecimalJsLike | number | string
+    TotalSpentCredits: Decimal | DecimalJsLike | number | string
+    NumberOfFlights: number
+    FlightHours: Decimal | DecimalJsLike | number | string
+    Color: string
+    ReputationImpact: Decimal | DecimalJsLike | number | string
+    LastVAFlightDate?: Date | string | null
+    LastRefresh?: Date | string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    VirtualAirline: VirtualAirlineCreateNestedOneWithoutMembersInput
+  }
+
+  export type MemberUncheckedCreateWithoutVARoleInput = {
+    Id?: string
+    VAId: string
+    CompanyId: string
+    CompanyName: string
+    AirlineCode: string
+    LastConnection?: Date | string | null
+    Reputation: Decimal | DecimalJsLike | number | string
+    CompanyCreationDate: Date | string
+    CompanyLevel: number
+    CompanyLevelXP: number
+    TotalCargosTransportedLbs: number
+    TotalPAXsTransported: number
+    TotalEarnedCredits: Decimal | DecimalJsLike | number | string
+    TotalSpentCredits: Decimal | DecimalJsLike | number | string
+    NumberOfFlights: number
+    FlightHours: Decimal | DecimalJsLike | number | string
+    Color: string
+    ReputationImpact: Decimal | DecimalJsLike | number | string
+    LastVAFlightDate?: Date | string | null
+    LastRefresh?: Date | string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+  }
+
+  export type MemberCreateOrConnectWithoutVARoleInput = {
+    where: MemberWhereUniqueInput
+    create: XOR<MemberCreateWithoutVARoleInput, MemberUncheckedCreateWithoutVARoleInput>
+  }
+
+  export type MemberCreateManyVARoleInputEnvelope = {
+    data: MemberCreateManyVARoleInput | MemberCreateManyVARoleInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type VirtualAirlineUpsertWithoutVARolesInput = {
+    update: XOR<VirtualAirlineUpdateWithoutVARolesInput, VirtualAirlineUncheckedUpdateWithoutVARolesInput>
+    create: XOR<VirtualAirlineCreateWithoutVARolesInput, VirtualAirlineUncheckedCreateWithoutVARolesInput>
+    where?: VirtualAirlineWhereInput
+  }
+
+  export type VirtualAirlineUpdateToOneWithWhereWithoutVARolesInput = {
+    where?: VirtualAirlineWhereInput
+    data: XOR<VirtualAirlineUpdateWithoutVARolesInput, VirtualAirlineUncheckedUpdateWithoutVARolesInput>
+  }
+
+  export type VirtualAirlineUpdateWithoutVARolesInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    ApiKey?: StringFieldUpdateOperationsInput | string
+    IsPrimary?: BoolFieldUpdateOperationsInput | boolean
+    Identifier?: NullableStringFieldUpdateOperationsInput | string | null
+    Name?: NullableStringFieldUpdateOperationsInput | string | null
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
+    LastDividendsDistribution?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    LastComputationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ComputedMemberCount?: NullableIntFieldUpdateOperationsInput | number | null
+    ComputedAircraftsCount?: NullableIntFieldUpdateOperationsInput | number | null
+    ComputedNumberOfFlights30Days?: NullableIntFieldUpdateOperationsInput | number | null
+    ComputedNumberOfFlightHours30Days?: NullableIntFieldUpdateOperationsInput | number | null
+    ComputedMostUsedAirports?: NullableStringFieldUpdateOperationsInput | string | null
+    LastConnection?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    LastReportDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Reputation?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    CreationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    DifficultyLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    Level?: NullableIntFieldUpdateOperationsInput | number | null
+    LevelXP?: NullableIntFieldUpdateOperationsInput | number | null
+    TotalContractsCompleted?: NullableIntFieldUpdateOperationsInput | number | null
+    TotalContractsEarnedCredits?: NullableIntFieldUpdateOperationsInput | number | null
+    LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    World?: WorldUpdateOneWithoutVirtualAirlinesNestedInput
+    Members?: MemberUpdateManyWithoutVirtualAirlineNestedInput
+  }
+
+  export type VirtualAirlineUncheckedUpdateWithoutVARolesInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    ApiKey?: StringFieldUpdateOperationsInput | string
+    IsPrimary?: BoolFieldUpdateOperationsInput | boolean
+    Identifier?: NullableStringFieldUpdateOperationsInput | string | null
+    Name?: NullableStringFieldUpdateOperationsInput | string | null
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
+    WorldId?: NullableStringFieldUpdateOperationsInput | string | null
+    LastDividendsDistribution?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    LastComputationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ComputedMemberCount?: NullableIntFieldUpdateOperationsInput | number | null
+    ComputedAircraftsCount?: NullableIntFieldUpdateOperationsInput | number | null
+    ComputedNumberOfFlights30Days?: NullableIntFieldUpdateOperationsInput | number | null
+    ComputedNumberOfFlightHours30Days?: NullableIntFieldUpdateOperationsInput | number | null
+    ComputedMostUsedAirports?: NullableStringFieldUpdateOperationsInput | string | null
+    LastConnection?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    LastReportDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Reputation?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    CreationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    DifficultyLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    Level?: NullableIntFieldUpdateOperationsInput | number | null
+    LevelXP?: NullableIntFieldUpdateOperationsInput | number | null
+    TotalContractsCompleted?: NullableIntFieldUpdateOperationsInput | number | null
+    TotalContractsEarnedCredits?: NullableIntFieldUpdateOperationsInput | number | null
+    LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Members?: MemberUncheckedUpdateManyWithoutVirtualAirlineNestedInput
+  }
+
+  export type MemberUpsertWithWhereUniqueWithoutVARoleInput = {
+    where: MemberWhereUniqueInput
+    update: XOR<MemberUpdateWithoutVARoleInput, MemberUncheckedUpdateWithoutVARoleInput>
+    create: XOR<MemberCreateWithoutVARoleInput, MemberUncheckedCreateWithoutVARoleInput>
+  }
+
+  export type MemberUpdateWithWhereUniqueWithoutVARoleInput = {
+    where: MemberWhereUniqueInput
+    data: XOR<MemberUpdateWithoutVARoleInput, MemberUncheckedUpdateWithoutVARoleInput>
+  }
+
+  export type MemberUpdateManyWithWhereWithoutVARoleInput = {
+    where: MemberScalarWhereInput
+    data: XOR<MemberUpdateManyMutationInput, MemberUncheckedUpdateManyWithoutVARoleInput>
+  }
+
   export type VirtualAirlineCreateWithoutWorldInput = {
     Id: string
     ApiKey: string
@@ -9792,6 +20751,8 @@ export namespace Prisma {
     LastRefresh?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    VARoles?: VirtualAirlineRoleCreateNestedManyWithoutVirtualAirlineInput
+    Members?: MemberCreateNestedManyWithoutVirtualAirlineInput
   }
 
   export type VirtualAirlineUncheckedCreateWithoutWorldInput = {
@@ -9820,6 +20781,8 @@ export namespace Prisma {
     LastRefresh?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    VARoles?: VirtualAirlineRoleUncheckedCreateNestedManyWithoutVirtualAirlineInput
+    Members?: MemberUncheckedCreateNestedManyWithoutVirtualAirlineInput
   }
 
   export type VirtualAirlineCreateOrConnectWithoutWorldInput = {
@@ -9880,6 +20843,638 @@ export namespace Prisma {
     UpdatedAt?: DateTimeFilter<"VirtualAirline"> | Date | string
   }
 
+  export type VirtualAirlineCreateWithoutMembersInput = {
+    Id: string
+    ApiKey: string
+    IsPrimary?: boolean
+    Identifier?: string | null
+    Name?: string | null
+    Description?: string | null
+    LastDividendsDistribution?: Date | string | null
+    LastComputationDate?: Date | string | null
+    ComputedMemberCount?: number | null
+    ComputedAircraftsCount?: number | null
+    ComputedNumberOfFlights30Days?: number | null
+    ComputedNumberOfFlightHours30Days?: number | null
+    ComputedMostUsedAirports?: string | null
+    LastConnection?: Date | string | null
+    LastReportDate?: Date | string | null
+    Reputation?: Decimal | DecimalJsLike | number | string | null
+    CreationDate?: Date | string | null
+    DifficultyLevel?: number | null
+    Level?: number | null
+    LevelXP?: number | null
+    TotalContractsCompleted?: number | null
+    TotalContractsEarnedCredits?: number | null
+    LastRefresh?: Date | string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    World?: WorldCreateNestedOneWithoutVirtualAirlinesInput
+    VARoles?: VirtualAirlineRoleCreateNestedManyWithoutVirtualAirlineInput
+  }
+
+  export type VirtualAirlineUncheckedCreateWithoutMembersInput = {
+    Id: string
+    ApiKey: string
+    IsPrimary?: boolean
+    Identifier?: string | null
+    Name?: string | null
+    Description?: string | null
+    WorldId?: string | null
+    LastDividendsDistribution?: Date | string | null
+    LastComputationDate?: Date | string | null
+    ComputedMemberCount?: number | null
+    ComputedAircraftsCount?: number | null
+    ComputedNumberOfFlights30Days?: number | null
+    ComputedNumberOfFlightHours30Days?: number | null
+    ComputedMostUsedAirports?: string | null
+    LastConnection?: Date | string | null
+    LastReportDate?: Date | string | null
+    Reputation?: Decimal | DecimalJsLike | number | string | null
+    CreationDate?: Date | string | null
+    DifficultyLevel?: number | null
+    Level?: number | null
+    LevelXP?: number | null
+    TotalContractsCompleted?: number | null
+    TotalContractsEarnedCredits?: number | null
+    LastRefresh?: Date | string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    VARoles?: VirtualAirlineRoleUncheckedCreateNestedManyWithoutVirtualAirlineInput
+  }
+
+  export type VirtualAirlineCreateOrConnectWithoutMembersInput = {
+    where: VirtualAirlineWhereUniqueInput
+    create: XOR<VirtualAirlineCreateWithoutMembersInput, VirtualAirlineUncheckedCreateWithoutMembersInput>
+  }
+
+  export type VirtualAirlineRoleCreateWithoutMembersInput = {
+    Id?: string
+    Name: string
+    Permission: number
+    IsDefaultNewRole: boolean
+    Color: string
+    PayPercent: Decimal | DecimalJsLike | number | string
+    IsHidden: boolean
+    RestrictLoadingVAJobsIntoNonVAAircraft: boolean
+    RestrictLoadingNonVAJobsIntoVAAircraft: boolean
+    PayWeekly: Decimal | DecimalJsLike | number | string
+    PayPerFlightHour: Decimal | DecimalJsLike | number | string
+    LastRefresh?: Date | string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    VirtualAirline: VirtualAirlineCreateNestedOneWithoutVARolesInput
+  }
+
+  export type VirtualAirlineRoleUncheckedCreateWithoutMembersInput = {
+    Id?: string
+    VAId: string
+    Name: string
+    Permission: number
+    IsDefaultNewRole: boolean
+    Color: string
+    PayPercent: Decimal | DecimalJsLike | number | string
+    IsHidden: boolean
+    RestrictLoadingVAJobsIntoNonVAAircraft: boolean
+    RestrictLoadingNonVAJobsIntoVAAircraft: boolean
+    PayWeekly: Decimal | DecimalJsLike | number | string
+    PayPerFlightHour: Decimal | DecimalJsLike | number | string
+    LastRefresh?: Date | string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+  }
+
+  export type VirtualAirlineRoleCreateOrConnectWithoutMembersInput = {
+    where: VirtualAirlineRoleWhereUniqueInput
+    create: XOR<VirtualAirlineRoleCreateWithoutMembersInput, VirtualAirlineRoleUncheckedCreateWithoutMembersInput>
+  }
+
+  export type VirtualAirlineUpsertWithoutMembersInput = {
+    update: XOR<VirtualAirlineUpdateWithoutMembersInput, VirtualAirlineUncheckedUpdateWithoutMembersInput>
+    create: XOR<VirtualAirlineCreateWithoutMembersInput, VirtualAirlineUncheckedCreateWithoutMembersInput>
+    where?: VirtualAirlineWhereInput
+  }
+
+  export type VirtualAirlineUpdateToOneWithWhereWithoutMembersInput = {
+    where?: VirtualAirlineWhereInput
+    data: XOR<VirtualAirlineUpdateWithoutMembersInput, VirtualAirlineUncheckedUpdateWithoutMembersInput>
+  }
+
+  export type VirtualAirlineUpdateWithoutMembersInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    ApiKey?: StringFieldUpdateOperationsInput | string
+    IsPrimary?: BoolFieldUpdateOperationsInput | boolean
+    Identifier?: NullableStringFieldUpdateOperationsInput | string | null
+    Name?: NullableStringFieldUpdateOperationsInput | string | null
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
+    LastDividendsDistribution?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    LastComputationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ComputedMemberCount?: NullableIntFieldUpdateOperationsInput | number | null
+    ComputedAircraftsCount?: NullableIntFieldUpdateOperationsInput | number | null
+    ComputedNumberOfFlights30Days?: NullableIntFieldUpdateOperationsInput | number | null
+    ComputedNumberOfFlightHours30Days?: NullableIntFieldUpdateOperationsInput | number | null
+    ComputedMostUsedAirports?: NullableStringFieldUpdateOperationsInput | string | null
+    LastConnection?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    LastReportDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Reputation?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    CreationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    DifficultyLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    Level?: NullableIntFieldUpdateOperationsInput | number | null
+    LevelXP?: NullableIntFieldUpdateOperationsInput | number | null
+    TotalContractsCompleted?: NullableIntFieldUpdateOperationsInput | number | null
+    TotalContractsEarnedCredits?: NullableIntFieldUpdateOperationsInput | number | null
+    LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    World?: WorldUpdateOneWithoutVirtualAirlinesNestedInput
+    VARoles?: VirtualAirlineRoleUpdateManyWithoutVirtualAirlineNestedInput
+  }
+
+  export type VirtualAirlineUncheckedUpdateWithoutMembersInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    ApiKey?: StringFieldUpdateOperationsInput | string
+    IsPrimary?: BoolFieldUpdateOperationsInput | boolean
+    Identifier?: NullableStringFieldUpdateOperationsInput | string | null
+    Name?: NullableStringFieldUpdateOperationsInput | string | null
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
+    WorldId?: NullableStringFieldUpdateOperationsInput | string | null
+    LastDividendsDistribution?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    LastComputationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ComputedMemberCount?: NullableIntFieldUpdateOperationsInput | number | null
+    ComputedAircraftsCount?: NullableIntFieldUpdateOperationsInput | number | null
+    ComputedNumberOfFlights30Days?: NullableIntFieldUpdateOperationsInput | number | null
+    ComputedNumberOfFlightHours30Days?: NullableIntFieldUpdateOperationsInput | number | null
+    ComputedMostUsedAirports?: NullableStringFieldUpdateOperationsInput | string | null
+    LastConnection?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    LastReportDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Reputation?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    CreationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    DifficultyLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    Level?: NullableIntFieldUpdateOperationsInput | number | null
+    LevelXP?: NullableIntFieldUpdateOperationsInput | number | null
+    TotalContractsCompleted?: NullableIntFieldUpdateOperationsInput | number | null
+    TotalContractsEarnedCredits?: NullableIntFieldUpdateOperationsInput | number | null
+    LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    VARoles?: VirtualAirlineRoleUncheckedUpdateManyWithoutVirtualAirlineNestedInput
+  }
+
+  export type VirtualAirlineRoleUpsertWithoutMembersInput = {
+    update: XOR<VirtualAirlineRoleUpdateWithoutMembersInput, VirtualAirlineRoleUncheckedUpdateWithoutMembersInput>
+    create: XOR<VirtualAirlineRoleCreateWithoutMembersInput, VirtualAirlineRoleUncheckedCreateWithoutMembersInput>
+    where?: VirtualAirlineRoleWhereInput
+  }
+
+  export type VirtualAirlineRoleUpdateToOneWithWhereWithoutMembersInput = {
+    where?: VirtualAirlineRoleWhereInput
+    data: XOR<VirtualAirlineRoleUpdateWithoutMembersInput, VirtualAirlineRoleUncheckedUpdateWithoutMembersInput>
+  }
+
+  export type VirtualAirlineRoleUpdateWithoutMembersInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    Permission?: IntFieldUpdateOperationsInput | number
+    IsDefaultNewRole?: BoolFieldUpdateOperationsInput | boolean
+    Color?: StringFieldUpdateOperationsInput | string
+    PayPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    IsHidden?: BoolFieldUpdateOperationsInput | boolean
+    RestrictLoadingVAJobsIntoNonVAAircraft?: BoolFieldUpdateOperationsInput | boolean
+    RestrictLoadingNonVAJobsIntoVAAircraft?: BoolFieldUpdateOperationsInput | boolean
+    PayWeekly?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    PayPerFlightHour?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    VirtualAirline?: VirtualAirlineUpdateOneRequiredWithoutVARolesNestedInput
+  }
+
+  export type VirtualAirlineRoleUncheckedUpdateWithoutMembersInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    VAId?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    Permission?: IntFieldUpdateOperationsInput | number
+    IsDefaultNewRole?: BoolFieldUpdateOperationsInput | boolean
+    Color?: StringFieldUpdateOperationsInput | string
+    PayPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    IsHidden?: BoolFieldUpdateOperationsInput | boolean
+    RestrictLoadingVAJobsIntoNonVAAircraft?: BoolFieldUpdateOperationsInput | boolean
+    RestrictLoadingNonVAJobsIntoVAAircraft?: BoolFieldUpdateOperationsInput | boolean
+    PayWeekly?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    PayPerFlightHour?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RoleUpdateWithoutUsersInput = {
+    Name?: StringFieldUpdateOperationsInput | string
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
+    Slug?: StringFieldUpdateOperationsInput | string
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Permissions?: PermissionUpdateManyWithoutRolesNestedInput
+  }
+
+  export type RoleUncheckedUpdateWithoutUsersInput = {
+    Id?: IntFieldUpdateOperationsInput | number
+    Name?: StringFieldUpdateOperationsInput | string
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
+    Slug?: StringFieldUpdateOperationsInput | string
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Permissions?: PermissionUncheckedUpdateManyWithoutRolesNestedInput
+  }
+
+  export type RoleUncheckedUpdateManyWithoutUsersInput = {
+    Id?: IntFieldUpdateOperationsInput | number
+    Name?: StringFieldUpdateOperationsInput | string
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
+    Slug?: StringFieldUpdateOperationsInput | string
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PermissionUpdateWithoutRolesInput = {
+    Name?: StringFieldUpdateOperationsInput | string
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
+    Slug?: StringFieldUpdateOperationsInput | string
+    Entity?: StringFieldUpdateOperationsInput | string
+    Action?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PermissionUncheckedUpdateWithoutRolesInput = {
+    Id?: IntFieldUpdateOperationsInput | number
+    Name?: StringFieldUpdateOperationsInput | string
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
+    Slug?: StringFieldUpdateOperationsInput | string
+    Entity?: StringFieldUpdateOperationsInput | string
+    Action?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PermissionUncheckedUpdateManyWithoutRolesInput = {
+    Id?: IntFieldUpdateOperationsInput | number
+    Name?: StringFieldUpdateOperationsInput | string
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
+    Slug?: StringFieldUpdateOperationsInput | string
+    Entity?: StringFieldUpdateOperationsInput | string
+    Action?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type UserUpdateWithoutRolesInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Username?: StringFieldUpdateOperationsInput | string
+    Password?: StringFieldUpdateOperationsInput | string
+    Email?: NullableStringFieldUpdateOperationsInput | string | null
+    FirstName?: NullableStringFieldUpdateOperationsInput | string | null
+    LastName?: NullableStringFieldUpdateOperationsInput | string | null
+    FirstLoginCompleted?: BoolFieldUpdateOperationsInput | boolean
+    IsOnline?: BoolFieldUpdateOperationsInput | boolean
+    IsBanned?: BoolFieldUpdateOperationsInput | boolean
+    BanReason?: NullableStringFieldUpdateOperationsInput | string | null
+    BanExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    IsVerified?: BoolFieldUpdateOperationsInput | boolean
+    LastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    PrivacySettings?: UserPrivacySettingsUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutRolesInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Username?: StringFieldUpdateOperationsInput | string
+    Password?: StringFieldUpdateOperationsInput | string
+    Email?: NullableStringFieldUpdateOperationsInput | string | null
+    FirstName?: NullableStringFieldUpdateOperationsInput | string | null
+    LastName?: NullableStringFieldUpdateOperationsInput | string | null
+    FirstLoginCompleted?: BoolFieldUpdateOperationsInput | boolean
+    IsOnline?: BoolFieldUpdateOperationsInput | boolean
+    IsBanned?: BoolFieldUpdateOperationsInput | boolean
+    BanReason?: NullableStringFieldUpdateOperationsInput | string | null
+    BanExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    IsVerified?: BoolFieldUpdateOperationsInput | boolean
+    LastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    PrivacySettings?: UserPrivacySettingsUncheckedUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateManyWithoutRolesInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Username?: StringFieldUpdateOperationsInput | string
+    Password?: StringFieldUpdateOperationsInput | string
+    Email?: NullableStringFieldUpdateOperationsInput | string | null
+    FirstName?: NullableStringFieldUpdateOperationsInput | string | null
+    LastName?: NullableStringFieldUpdateOperationsInput | string | null
+    FirstLoginCompleted?: BoolFieldUpdateOperationsInput | boolean
+    IsOnline?: BoolFieldUpdateOperationsInput | boolean
+    IsBanned?: BoolFieldUpdateOperationsInput | boolean
+    BanReason?: NullableStringFieldUpdateOperationsInput | string | null
+    BanExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    IsVerified?: BoolFieldUpdateOperationsInput | boolean
+    LastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RoleUpdateWithoutPermissionsInput = {
+    Name?: StringFieldUpdateOperationsInput | string
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
+    Slug?: StringFieldUpdateOperationsInput | string
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Users?: UserUpdateManyWithoutRolesNestedInput
+  }
+
+  export type RoleUncheckedUpdateWithoutPermissionsInput = {
+    Id?: IntFieldUpdateOperationsInput | number
+    Name?: StringFieldUpdateOperationsInput | string
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
+    Slug?: StringFieldUpdateOperationsInput | string
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Users?: UserUncheckedUpdateManyWithoutRolesNestedInput
+  }
+
+  export type RoleUncheckedUpdateManyWithoutPermissionsInput = {
+    Id?: IntFieldUpdateOperationsInput | number
+    Name?: StringFieldUpdateOperationsInput | string
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
+    Slug?: StringFieldUpdateOperationsInput | string
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VirtualAirlineRoleCreateManyVirtualAirlineInput = {
+    Id?: string
+    Name: string
+    Permission: number
+    IsDefaultNewRole: boolean
+    Color: string
+    PayPercent: Decimal | DecimalJsLike | number | string
+    IsHidden: boolean
+    RestrictLoadingVAJobsIntoNonVAAircraft: boolean
+    RestrictLoadingNonVAJobsIntoVAAircraft: boolean
+    PayWeekly: Decimal | DecimalJsLike | number | string
+    PayPerFlightHour: Decimal | DecimalJsLike | number | string
+    LastRefresh?: Date | string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+  }
+
+  export type MemberCreateManyVirtualAirlineInput = {
+    Id?: string
+    CompanyId: string
+    CompanyName: string
+    AirlineCode: string
+    LastConnection?: Date | string | null
+    Reputation: Decimal | DecimalJsLike | number | string
+    CompanyCreationDate: Date | string
+    CompanyLevel: number
+    CompanyLevelXP: number
+    VARoleId: string
+    TotalCargosTransportedLbs: number
+    TotalPAXsTransported: number
+    TotalEarnedCredits: Decimal | DecimalJsLike | number | string
+    TotalSpentCredits: Decimal | DecimalJsLike | number | string
+    NumberOfFlights: number
+    FlightHours: Decimal | DecimalJsLike | number | string
+    Color: string
+    ReputationImpact: Decimal | DecimalJsLike | number | string
+    LastVAFlightDate?: Date | string | null
+    LastRefresh?: Date | string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+  }
+
+  export type VirtualAirlineRoleUpdateWithoutVirtualAirlineInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    Permission?: IntFieldUpdateOperationsInput | number
+    IsDefaultNewRole?: BoolFieldUpdateOperationsInput | boolean
+    Color?: StringFieldUpdateOperationsInput | string
+    PayPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    IsHidden?: BoolFieldUpdateOperationsInput | boolean
+    RestrictLoadingVAJobsIntoNonVAAircraft?: BoolFieldUpdateOperationsInput | boolean
+    RestrictLoadingNonVAJobsIntoVAAircraft?: BoolFieldUpdateOperationsInput | boolean
+    PayWeekly?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    PayPerFlightHour?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Members?: MemberUpdateManyWithoutVARoleNestedInput
+  }
+
+  export type VirtualAirlineRoleUncheckedUpdateWithoutVirtualAirlineInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    Permission?: IntFieldUpdateOperationsInput | number
+    IsDefaultNewRole?: BoolFieldUpdateOperationsInput | boolean
+    Color?: StringFieldUpdateOperationsInput | string
+    PayPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    IsHidden?: BoolFieldUpdateOperationsInput | boolean
+    RestrictLoadingVAJobsIntoNonVAAircraft?: BoolFieldUpdateOperationsInput | boolean
+    RestrictLoadingNonVAJobsIntoVAAircraft?: BoolFieldUpdateOperationsInput | boolean
+    PayWeekly?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    PayPerFlightHour?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Members?: MemberUncheckedUpdateManyWithoutVARoleNestedInput
+  }
+
+  export type VirtualAirlineRoleUncheckedUpdateManyWithoutVirtualAirlineInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    Permission?: IntFieldUpdateOperationsInput | number
+    IsDefaultNewRole?: BoolFieldUpdateOperationsInput | boolean
+    Color?: StringFieldUpdateOperationsInput | string
+    PayPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    IsHidden?: BoolFieldUpdateOperationsInput | boolean
+    RestrictLoadingVAJobsIntoNonVAAircraft?: BoolFieldUpdateOperationsInput | boolean
+    RestrictLoadingNonVAJobsIntoVAAircraft?: BoolFieldUpdateOperationsInput | boolean
+    PayWeekly?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    PayPerFlightHour?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MemberUpdateWithoutVirtualAirlineInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    CompanyId?: StringFieldUpdateOperationsInput | string
+    CompanyName?: StringFieldUpdateOperationsInput | string
+    AirlineCode?: StringFieldUpdateOperationsInput | string
+    LastConnection?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Reputation?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    CompanyCreationDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    CompanyLevel?: IntFieldUpdateOperationsInput | number
+    CompanyLevelXP?: IntFieldUpdateOperationsInput | number
+    TotalCargosTransportedLbs?: IntFieldUpdateOperationsInput | number
+    TotalPAXsTransported?: IntFieldUpdateOperationsInput | number
+    TotalEarnedCredits?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    TotalSpentCredits?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    NumberOfFlights?: IntFieldUpdateOperationsInput | number
+    FlightHours?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    Color?: StringFieldUpdateOperationsInput | string
+    ReputationImpact?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    LastVAFlightDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    VARole?: VirtualAirlineRoleUpdateOneRequiredWithoutMembersNestedInput
+  }
+
+  export type MemberUncheckedUpdateWithoutVirtualAirlineInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    CompanyId?: StringFieldUpdateOperationsInput | string
+    CompanyName?: StringFieldUpdateOperationsInput | string
+    AirlineCode?: StringFieldUpdateOperationsInput | string
+    LastConnection?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Reputation?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    CompanyCreationDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    CompanyLevel?: IntFieldUpdateOperationsInput | number
+    CompanyLevelXP?: IntFieldUpdateOperationsInput | number
+    VARoleId?: StringFieldUpdateOperationsInput | string
+    TotalCargosTransportedLbs?: IntFieldUpdateOperationsInput | number
+    TotalPAXsTransported?: IntFieldUpdateOperationsInput | number
+    TotalEarnedCredits?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    TotalSpentCredits?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    NumberOfFlights?: IntFieldUpdateOperationsInput | number
+    FlightHours?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    Color?: StringFieldUpdateOperationsInput | string
+    ReputationImpact?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    LastVAFlightDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MemberUncheckedUpdateManyWithoutVirtualAirlineInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    CompanyId?: StringFieldUpdateOperationsInput | string
+    CompanyName?: StringFieldUpdateOperationsInput | string
+    AirlineCode?: StringFieldUpdateOperationsInput | string
+    LastConnection?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Reputation?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    CompanyCreationDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    CompanyLevel?: IntFieldUpdateOperationsInput | number
+    CompanyLevelXP?: IntFieldUpdateOperationsInput | number
+    VARoleId?: StringFieldUpdateOperationsInput | string
+    TotalCargosTransportedLbs?: IntFieldUpdateOperationsInput | number
+    TotalPAXsTransported?: IntFieldUpdateOperationsInput | number
+    TotalEarnedCredits?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    TotalSpentCredits?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    NumberOfFlights?: IntFieldUpdateOperationsInput | number
+    FlightHours?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    Color?: StringFieldUpdateOperationsInput | string
+    ReputationImpact?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    LastVAFlightDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MemberCreateManyVARoleInput = {
+    Id?: string
+    VAId: string
+    CompanyId: string
+    CompanyName: string
+    AirlineCode: string
+    LastConnection?: Date | string | null
+    Reputation: Decimal | DecimalJsLike | number | string
+    CompanyCreationDate: Date | string
+    CompanyLevel: number
+    CompanyLevelXP: number
+    TotalCargosTransportedLbs: number
+    TotalPAXsTransported: number
+    TotalEarnedCredits: Decimal | DecimalJsLike | number | string
+    TotalSpentCredits: Decimal | DecimalJsLike | number | string
+    NumberOfFlights: number
+    FlightHours: Decimal | DecimalJsLike | number | string
+    Color: string
+    ReputationImpact: Decimal | DecimalJsLike | number | string
+    LastVAFlightDate?: Date | string | null
+    LastRefresh?: Date | string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+  }
+
+  export type MemberUpdateWithoutVARoleInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    CompanyId?: StringFieldUpdateOperationsInput | string
+    CompanyName?: StringFieldUpdateOperationsInput | string
+    AirlineCode?: StringFieldUpdateOperationsInput | string
+    LastConnection?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Reputation?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    CompanyCreationDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    CompanyLevel?: IntFieldUpdateOperationsInput | number
+    CompanyLevelXP?: IntFieldUpdateOperationsInput | number
+    TotalCargosTransportedLbs?: IntFieldUpdateOperationsInput | number
+    TotalPAXsTransported?: IntFieldUpdateOperationsInput | number
+    TotalEarnedCredits?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    TotalSpentCredits?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    NumberOfFlights?: IntFieldUpdateOperationsInput | number
+    FlightHours?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    Color?: StringFieldUpdateOperationsInput | string
+    ReputationImpact?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    LastVAFlightDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    VirtualAirline?: VirtualAirlineUpdateOneRequiredWithoutMembersNestedInput
+  }
+
+  export type MemberUncheckedUpdateWithoutVARoleInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    VAId?: StringFieldUpdateOperationsInput | string
+    CompanyId?: StringFieldUpdateOperationsInput | string
+    CompanyName?: StringFieldUpdateOperationsInput | string
+    AirlineCode?: StringFieldUpdateOperationsInput | string
+    LastConnection?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Reputation?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    CompanyCreationDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    CompanyLevel?: IntFieldUpdateOperationsInput | number
+    CompanyLevelXP?: IntFieldUpdateOperationsInput | number
+    TotalCargosTransportedLbs?: IntFieldUpdateOperationsInput | number
+    TotalPAXsTransported?: IntFieldUpdateOperationsInput | number
+    TotalEarnedCredits?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    TotalSpentCredits?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    NumberOfFlights?: IntFieldUpdateOperationsInput | number
+    FlightHours?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    Color?: StringFieldUpdateOperationsInput | string
+    ReputationImpact?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    LastVAFlightDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MemberUncheckedUpdateManyWithoutVARoleInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    VAId?: StringFieldUpdateOperationsInput | string
+    CompanyId?: StringFieldUpdateOperationsInput | string
+    CompanyName?: StringFieldUpdateOperationsInput | string
+    AirlineCode?: StringFieldUpdateOperationsInput | string
+    LastConnection?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Reputation?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    CompanyCreationDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    CompanyLevel?: IntFieldUpdateOperationsInput | number
+    CompanyLevelXP?: IntFieldUpdateOperationsInput | number
+    TotalCargosTransportedLbs?: IntFieldUpdateOperationsInput | number
+    TotalPAXsTransported?: IntFieldUpdateOperationsInput | number
+    TotalEarnedCredits?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    TotalSpentCredits?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    NumberOfFlights?: IntFieldUpdateOperationsInput | number
+    FlightHours?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    Color?: StringFieldUpdateOperationsInput | string
+    ReputationImpact?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    LastVAFlightDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type VirtualAirlineCreateManyWorldInput = {
     Id: string
     ApiKey: string
@@ -9934,6 +21529,8 @@ export namespace Prisma {
     LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    VARoles?: VirtualAirlineRoleUpdateManyWithoutVirtualAirlineNestedInput
+    Members?: MemberUpdateManyWithoutVirtualAirlineNestedInput
   }
 
   export type VirtualAirlineUncheckedUpdateWithoutWorldInput = {
@@ -9962,6 +21559,8 @@ export namespace Prisma {
     LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    VARoles?: VirtualAirlineRoleUncheckedUpdateManyWithoutVirtualAirlineNestedInput
+    Members?: MemberUncheckedUpdateManyWithoutVirtualAirlineNestedInput
   }
 
   export type VirtualAirlineUncheckedUpdateManyWithoutWorldInput = {

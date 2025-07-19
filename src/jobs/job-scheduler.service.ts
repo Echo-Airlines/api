@@ -9,6 +9,7 @@ import { executeAllVirtualAirlinesSync } from './schedules/executeVirtualAirline
 // import { executeVirtualAirlineMembersSync } from './schedules/executeVirtualAirlineMembersSync';
 import { AppConfig, Job, JobType, CronExpression } from 'prisma/generated/prisma';
 import { ConfigService } from '@nestjs/config';
+import { executeVirtualAirlinesMembersSync } from './schedules/executeVirtualAirlinesMembersSync';
 
 export interface IJobSchedulerServices {
     VirtualAirline: VirtualAirlineService;
@@ -168,17 +169,15 @@ export class JobSchedulerService implements OnModuleInit {
 
             switch (job.Type) {
                 case JobType.VIRTUAL_AIRLINE_SYNC:
-                    const results = await executeAllVirtualAirlinesSync(this);
+                    await executeAllVirtualAirlinesSync(this);
 
                     // update the job status to completed
                     break;
-                // case JobType.VIRTUAL_AIRLINE_MEMBERS_SYNC:
-                //     if (!this.config.VirtualAirlineId) {
-                //         throw new Error('Virtual airline ID is not set in app config');
-                //     }
+                case JobType.VIRTUAL_AIRLINE_MEMBERS_SYNC:
+                    await executeVirtualAirlinesMembersSync(this);
 
-                //     await executeVirtualAirlineMembersSync(this.config.VirtualAirlineId, this.services);
-                //     break;
+                    // update the job status to completed
+                    break;
                 default:
                     throw new Error(`Unknown job type: ${job.Type}`);
             }

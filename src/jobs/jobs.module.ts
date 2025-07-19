@@ -6,6 +6,7 @@ import { OnAirModule } from '../on-air/on-air.module';
 import { VirtualAirlineModule } from '../virtual-airline/virtual-airline.module';
 import { AppConfigModule } from '../app-config/app-config.module';
 import { PrismaModule } from '@prisma/prisma.module';
+import { JobsController } from './jobs.controller';
 
 @Module({
     imports: [
@@ -15,7 +16,7 @@ import { PrismaModule } from '@prisma/prisma.module';
         AppConfigModule,
         PrismaModule,
     ],
-    controllers: [],
+    controllers: [JobsController],
     providers: [JobsService, JobSchedulerService],
     exports: [JobsService, JobSchedulerService],
 })

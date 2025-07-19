@@ -1,21 +1,32 @@
 import { Injectable, Logger, NotFoundException, BadRequestException } from '@nestjs/common';
 import { CronExpression } from '@nestjs/schedule';
 import { PrismaService } from '@prisma/prisma.service';
-import { JobStatus, JobType, type Job, type Prisma } from 'prisma/generated/prisma';
+import { $Enums, JobStatus, JobType, type Job, type Prisma } from 'prisma/generated/prisma';
+import { CreateJobDto } from './dto/create-job.dto';
+import { UpdateJobDto } from './dto/update-job.dto';
 
 export type CronInterval = {
     Label: string;
     Key: keyof typeof CronExpression;
     Value: CronExpression;
 }
+
 @Injectable()
 export class JobsService {
     private readonly logger = new Logger(JobsService.name);
     constructor(private prisma: PrismaService) {}
 
-    async create(dto: Prisma.JobCreateInput) {
+    async create(dto: CreateJobDto) {
+        const data: Prisma.JobCreateInput = {
+            Name: dto.Name,
+            Description: dto.Description,
+            CronExpression: dto.CronExpression as unknown as $Enums.CronExpression,
+            IsEnabled: dto.IsEnabled ?? false,
+            Type: dto.Type as unknown as $Enums.JobType,
+        }
+
         return await this.prisma.job.create({
-            data: dto
+            data
         });
     }
 
@@ -31,8 +42,16 @@ export class JobsService {
         return await this.prisma.job.findUnique({ where: { Id: id } });
     }
 
-    async update(id: string, dto: Prisma.JobUpdateInput) {
-        await this.prisma.job.update({ where: { Id: id }, data: dto });
+    async update(id: string, dto: UpdateJobDto) {
+        const data: Prisma.JobUpdateInput = {
+            Name: dto.Name,
+            Description: dto.Description,
+            CronExpression: dto.CronExpression as unknown as $Enums.CronExpression,
+            IsEnabled: dto.IsEnabled ?? false,
+        }
+
+        await this.prisma.job.update({ where: { Id: id }, data });
+        
         return await this.findOneById(id);
     }
 

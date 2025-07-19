@@ -76,6 +76,19 @@ export class AppConfigService {
             where: { Id: appConfig.Id }
         });
     }
+    
+    async setVirtualAirlineInitiated(VirtualAirlineInitiated: boolean) {
+        const appConfig = await this.getLatest();
+
+        if (!appConfig) {
+            throw new NotFoundException('App config not found');
+        }
+
+        return this.prisma.appConfig.update({
+            where: { Id: appConfig.Id },
+            data: { VirtualAirlineInitiated }
+        });
+    }
 
     // Livery
 

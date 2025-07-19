@@ -13,20 +13,20 @@ export class OnAirApiService implements OnModuleInit {
     constructor(
         private readonly virtualAirlineService: VirtualAirlineService,
     ) {
-        this._initialize();
+        this.initialize();
     }
 
     async onModuleInit() {
-        await this._initialize();
+        await this.initialize();
         // this should also run an interval to check if there are any jobs that are now active and should be scheduled
         // setInterval(async () => {
         //     if (!this.onAirApi) {
-        //         this._initialize();
+        //         this.initialize();
         //     }
         // }, 60000); // run every 60 seconds
     }
     
-    private async _initialize() {
+    public async initialize() {
         const virtualAirline: VirtualAirline|null = await this.virtualAirlineService.getPrimaryVirtualAirline();
 
         if (!virtualAirline) {

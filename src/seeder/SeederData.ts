@@ -1,71 +1,94 @@
 import { CronExpression, JobType, Prisma } from "prisma/generated/prisma";
 
 export type SeedData = {
-    // roles: CreateRoleDto[];
-    // permissions: CreatePermissionDto[];
-    // users: CreateUserDto[];
+    roles: Prisma.RoleCreateInput[];
+    permissions: Prisma.PermissionCreateInput[];
+    users: Prisma.UserCreateInput[];
     worlds: Prisma.WorldCreateInput[];
     liveries: Prisma.LiveryCreateInput[];
     jobs: Prisma.JobCreateInput[];
     appConfig: Prisma.AppConfigCreateInput;
 };
-/**
-export const SeedData_Permissions: CreatePermissionDto[] = [
+
+export const SeedData_Permissions: Prisma.PermissionCreateInput[] = [
     {
-        slug: 'my-profile-view',
-        name: 'View My Profile',
-        entity: 'user',
-        action: 'view',
+        Slug: 'my-profile-view',
+        Name: 'View My Profile',
+        Entity: 'user',
+        Action: 'view',
     },
     {
-        slug: 'my-profile-update',
-        name: 'Update My Profile',
-        entity: 'user',
-        action: 'update',
+        Slug: 'my-profile-update',
+        Name: 'Update My Profile',
+        Entity: 'user',
+        Action: 'update',
     },
 ];
 
-export const SeedData_UserRoles: CreateRoleDto[] = [
+export const SeedData_UserRoles: Prisma.RoleCreateInput[] = [
     {
-        slug: 'admin',
-        name: 'Admin',
+        Slug: 'admin',
+        Name: 'Admin',
     },
     {
-        slug: 'user',
-        name: 'User',
-        permissions: ['my-profile-view', 'my-profile-update'],
+        Slug: 'user',
+        Name: 'User',
+        Permissions: {
+            connect: [
+                { Slug: 'my-profile-view' },
+                { Slug: 'my-profile-update' }
+            ]
+        },
     },
     {
-        slug: 'member',
-        name: 'Member',
+        Slug: 'member',
+        Name: 'Member',
     },
     {
-        slug: 'premium',
-        name: 'Premium Member',
+        Slug: 'premium',
+        Name: 'Premium Member',
     },
 ];
 
-export const SeedData_Users: CreateUserDto[] = [
+export const SeedData_Users: Prisma.UserCreateInput[] = [
     {
-        username: 'admin',
-        password: 'password',
-        email: 'admin@echoairlines.com',
-        firstName: 'Gordon',
-        lastName: 'Freeman',
-        firstLoginCompleted: true,
-        roles: ['admin', 'user'],
+        Username: 'admin',
+        Password: 'password',
+        Email: 'admin@echoairlines.com',
+        FirstName: 'Gordon',
+        LastName: 'Freeman',
+        FirstLoginCompleted: true,
+        IsVerified: true,
+        Roles: {
+            connect: [{ Slug: 'admin' }, { Slug: 'user' }]
+        },
+        PrivacySettings: {
+            create: {
+                ShowOnlineStatus: false,
+                ShowFirstName: false,
+                ShowLastNameInitial: false,
+            }
+        }
     },
     {
-        username: 'johndoe',
-        password: 'password',
-        email: 'johndoe@echoairlines.com',
-        firstName: 'John',
-        lastName: 'Doe',
-        firstLoginCompleted: false,
-        roles: ['user'],
+        Username: 'johndoe',
+        Password: 'password',
+        Email: 'johndoe@echoairlines.com',
+        FirstName: 'John',
+        LastName: 'Doe',
+        FirstLoginCompleted: false,
+        Roles: {
+            connect: [{ Slug: 'user' }]
+        },
+        PrivacySettings: {
+            create: {
+                ShowOnlineStatus: true,
+                ShowFirstName: true,
+                ShowLastNameInitial: true,
+            }
+        }
     },
 ];
- */
 
 export const SeedData_Worlds: Prisma.WorldCreateInput[] = [
     {
@@ -148,13 +171,13 @@ export const SeedData_Jobs: Prisma.JobCreateInput[] = [
         IsEnabled: true,
         Type: JobType.VIRTUAL_AIRLINE_SYNC,
     },
-    // {
-    //     Name: 'Virtual Airline Members Sync',
-    //     Description: 'Syncs virtual airline members data from OnAir',
-    //     CronExpression: CronExpression.EVERY_HOUR,
-    //     IsEnabled: false,
-    //     Type: JobType.VIRTUAL_AIRLINE_MEMBERS_SYNC,
-    // },
+    {
+        Name: 'Virtual Airline Members Sync',
+        Description: 'Syncs virtual airline members data from OnAir',
+        CronExpression: CronExpression.EVERY_HOUR,
+        IsEnabled: true,
+        Type: JobType.VIRTUAL_AIRLINE_MEMBERS_SYNC,
+    },
 ];
 
 export const SeedData_AppConfig: Prisma.AppConfigCreateInput = {
@@ -170,9 +193,9 @@ export const SeedData_AppConfig: Prisma.AppConfigCreateInput = {
 };
 
 const SeedData: SeedData = {
-    // roles: SeedData_UserRoles,
-    // permissions: SeedData_Permissions,
-    // users: SeedData_Users,
+    roles: SeedData_UserRoles,
+    permissions: SeedData_Permissions,
+    users: SeedData_Users,
     worlds: SeedData_Worlds,
     liveries: SeedData_Liveries,
     jobs: SeedData_Jobs,

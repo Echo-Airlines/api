@@ -8,15 +8,17 @@ import { PrismaModule } from '@prisma/prisma.module';
 import { jwtConstants } from './constants';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './jwt.strategy';
+import { DiscordStrategy } from './discord.strategy';
+import { AppConfigModule } from '../app-config/app-config.module';
 
 @Module({
-  imports: [HashModule, PrismaModule, PassportModule,
+  imports: [HashModule, PrismaModule, PassportModule, AppConfigModule,
     JwtModule.register({
       secret: jwtConstants.secret,
       signOptions: { expiresIn: '30d' },
     }),],
   controllers: [AuthController],
-  providers: [AuthService, LocalStrategy, JwtStrategy],
+  providers: [AuthService, LocalStrategy, JwtStrategy, DiscordStrategy],
   exports: [AuthService, PassportModule],
 })
 export class AuthModule {}

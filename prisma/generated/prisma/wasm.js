@@ -20,12 +20,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.12.0
- * Query Engine version: 8047c96bbd92db98a2abc7c9323ce77c02c89dbc
+ * Prisma Client JS version: 6.14.0
+ * Query Engine version: 717184b7b35ea05dfa71a3236b7af656013e1e49
  */
 Prisma.prismaVersion = {
-  client: "6.12.0",
-  engine: "8047c96bbd92db98a2abc7c9323ce77c02c89dbc"
+  client: "6.14.0",
+  engine: "717184b7b35ea05dfa71a3236b7af656013e1e49"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -130,8 +130,60 @@ exports.Prisma.AppConfigScalarFieldEnum = {
   DiscordServerInviteLinkEnabled: 'DiscordServerInviteLinkEnabled',
   AcceptingNewMembers: 'AcceptingNewMembers',
   DiscordAuthEnabled: 'DiscordAuthEnabled',
+  DiscordAuthCreateUser: 'DiscordAuthCreateUser',
   LocalAuthEnabled: 'LocalAuthEnabled',
   VirtualAirlineInitiated: 'VirtualAirlineInitiated',
+  CreatedAt: 'CreatedAt',
+  UpdatedAt: 'UpdatedAt'
+};
+
+exports.Prisma.InviteCodeScalarFieldEnum = {
+  Id: 'Id',
+  Code: 'Code',
+  IsUsed: 'IsUsed',
+  UsedAt: 'UsedAt',
+  CreatedAt: 'CreatedAt',
+  UpdatedAt: 'UpdatedAt'
+};
+
+exports.Prisma.DiscordMessageScalarFieldEnum = {
+  Id: 'Id',
+  ChannelId: 'ChannelId',
+  MessageId: 'MessageId',
+  Content: 'Content',
+  DiscordMessageTypeId: 'DiscordMessageTypeId',
+  DiscordChannelWebhookId: 'DiscordChannelWebhookId',
+  CreatedAt: 'CreatedAt',
+  UpdatedAt: 'UpdatedAt'
+};
+
+exports.Prisma.DiscordMessageTypeScalarFieldEnum = {
+  Id: 'Id',
+  Name: 'Name',
+  Description: 'Description',
+  Slug: 'Slug',
+  CreatedAt: 'CreatedAt',
+  UpdatedAt: 'UpdatedAt'
+};
+
+exports.Prisma.DiscordChannelWebhookScalarFieldEnum = {
+  Id: 'Id',
+  ChannelId: 'ChannelId',
+  WebhookUrl: 'WebhookUrl',
+  IsActive: 'IsActive',
+  CreatedAt: 'CreatedAt',
+  UpdatedAt: 'UpdatedAt'
+};
+
+exports.Prisma.ListenerEventScalarFieldEnum = {
+  Id: 'Id',
+  Variant: 'Variant',
+  Type: 'Type',
+  SentAt: 'SentAt',
+  Status: 'Status',
+  Error: 'Error',
+  Data: 'Data',
+  DiscordMessageId: 'DiscordMessageId',
   CreatedAt: 'CreatedAt',
   UpdatedAt: 'UpdatedAt'
 };
@@ -150,8 +202,13 @@ exports.Prisma.UserScalarFieldEnum = {
   BanExpiresAt: 'BanExpiresAt',
   IsVerified: 'IsVerified',
   LastLogin: 'LastLogin',
+  InviteCodeId: 'InviteCodeId',
   CreatedAt: 'CreatedAt',
-  UpdatedAt: 'UpdatedAt'
+  UpdatedAt: 'UpdatedAt',
+  DiscordId: 'DiscordId',
+  DiscordUsername: 'DiscordUsername',
+  DiscordAvatar: 'DiscordAvatar',
+  DiscordEmail: 'DiscordEmail'
 };
 
 exports.Prisma.UserPrivacySettingsScalarFieldEnum = {
@@ -171,7 +228,8 @@ exports.Prisma.RoleScalarFieldEnum = {
   Description: 'Description',
   Slug: 'Slug',
   CreatedAt: 'CreatedAt',
-  UpdatedAt: 'UpdatedAt'
+  UpdatedAt: 'UpdatedAt',
+  VirtualAirlineRoleId: 'VirtualAirlineRoleId'
 };
 
 exports.Prisma.PermissionScalarFieldEnum = {
@@ -253,16 +311,11 @@ exports.Prisma.WorldScalarFieldEnum = {
 };
 
 exports.Prisma.MemberScalarFieldEnum = {
+  IsActive: 'IsActive',
+  DeactivatedAt: 'DeactivatedAt',
   Id: 'Id',
   VAId: 'VAId',
   CompanyId: 'CompanyId',
-  CompanyName: 'CompanyName',
-  AirlineCode: 'AirlineCode',
-  LastConnection: 'LastConnection',
-  Reputation: 'Reputation',
-  CompanyCreationDate: 'CompanyCreationDate',
-  CompanyLevel: 'CompanyLevel',
-  CompanyLevelXP: 'CompanyLevelXP',
   VARoleId: 'VARoleId',
   TotalCargosTransportedLbs: 'TotalCargosTransportedLbs',
   TotalPAXsTransported: 'TotalPAXsTransported',
@@ -274,6 +327,162 @@ exports.Prisma.MemberScalarFieldEnum = {
   ReputationImpact: 'ReputationImpact',
   LastVAFlightDate: 'LastVAFlightDate',
   LastRefresh: 'LastRefresh',
+  UserId: 'UserId',
+  CreatedAt: 'CreatedAt',
+  UpdatedAt: 'UpdatedAt'
+};
+
+exports.Prisma.CompanyScalarFieldEnum = {
+  Id: 'Id',
+  Name: 'Name',
+  AirlineCode: 'AirlineCode',
+  CreationDate: 'CreationDate',
+  Level: 'Level',
+  LevelXP: 'LevelXP',
+  Reputation: 'Reputation',
+  Paused: 'Paused',
+  LastConnection: 'LastConnection',
+  LastReportDate: 'LastReportDate',
+  DifficultyLevel: 'DifficultyLevel',
+  WorldId: 'WorldId',
+  OwnerId: 'OwnerId',
+  LastRefresh: 'LastRefresh',
+  CreatedAt: 'CreatedAt',
+  UpdatedAt: 'UpdatedAt'
+};
+
+exports.Prisma.AircraftScalarFieldEnum = {
+  Id: 'Id',
+  Identifier: 'Identifier',
+  DisplayName: 'DisplayName',
+  AircraftStatusId: 'AircraftStatusId',
+  AircraftClassId: 'AircraftClassId',
+  VirtualAirlineId: 'VirtualAirlineId',
+  CurrentAirportId: 'CurrentAirportId',
+  LastRefresh: 'LastRefresh',
+  CreatedAt: 'CreatedAt',
+  UpdatedAt: 'UpdatedAt'
+};
+
+exports.Prisma.AircraftClassScalarFieldEnum = {
+  Id: 'Id',
+  ShortName: 'ShortName',
+  Name: 'Name'
+};
+
+exports.Prisma.AircraftMaintenanceScalarFieldEnum = {
+  Id: 'Id',
+  AircraftId: 'AircraftId',
+  AnnualCheckup: 'AnnualCheckup',
+  Inspection100Hours: 'Inspection100Hours',
+  FailuresRepair: 'FailuresRepair',
+  AirframeRepair: 'AirframeRepair',
+  AirframeReplace: 'AirframeReplace',
+  EcoSeats: 'EcoSeats',
+  BusSeats: 'BusSeats',
+  FirstClassSeats: 'FirstClassSeats',
+  AirframeRepairCondition: 'AirframeRepairCondition',
+  MaintenanceFBOId: 'MaintenanceFBOId',
+  RemainingMaintenanceWorkHours: 'RemainingMaintenanceWorkHours',
+  Amount: 'Amount',
+  CreatedAt: 'CreatedAt',
+  UpdatedAt: 'UpdatedAt'
+};
+
+exports.Prisma.AircraftStatusScalarFieldEnum = {
+  Id: 'Id',
+  Name: 'Name'
+};
+
+exports.Prisma.AirportScalarFieldEnum = {
+  Id: 'Id',
+  ICAO: 'ICAO',
+  IATA: 'IATA',
+  Name: 'Name',
+  Size: 'Size',
+  City: 'City',
+  State: 'State',
+  CountryCode: 'CountryCode',
+  CountryName: 'CountryName',
+  Latitude: 'Latitude',
+  Longitude: 'Longitude',
+  HomeWebSiteUrl: 'HomeWebSiteUrl',
+  WikiUrl: 'WikiUrl',
+  CreatedAt: 'CreatedAt',
+  UpdatedAt: 'UpdatedAt'
+};
+
+exports.Prisma.FlightScalarFieldEnum = {
+  Id: 'Id',
+  AircraftId: 'AircraftId',
+  CompanyId: 'CompanyId',
+  Registered: 'Registered',
+  Category: 'Category',
+  ResultComments: 'ResultComments',
+  StartTime: 'StartTime',
+  EndTime: 'EndTime',
+  EngineOnTime: 'EngineOnTime',
+  EngineOffTime: 'EngineOffTime',
+  AirborneTime: 'AirborneTime',
+  LandedTime: 'LandedTime',
+  IntendedFlightLevel: 'IntendedFlightLevel',
+  Passengers: 'Passengers',
+  Cargo: 'Cargo',
+  AddedFuelQty: 'AddedFuelQty',
+  IsAI: 'IsAI',
+  VerticalSpeedAtTouchdownMpS: 'VerticalSpeedAtTouchdownMpS',
+  MaxGForce: 'MaxGForce',
+  MinGForce: 'MinGForce',
+  MaxBank: 'MaxBank',
+  MaxPitch: 'MaxPitch',
+  HasStalled: 'HasStalled',
+  HasOverspeeded: 'HasOverspeeded',
+  XPFlight: 'XPFlight',
+  XPFlightBonus: 'XPFlightBonus',
+  XPMissions: 'XPMissions',
+  CargosTotalWeight: 'CargosTotalWeight',
+  PAXCount: 'PAXCount',
+  AircraftCurrentFOB: 'AircraftCurrentFOB',
+  AircraftCurrentAltitude: 'AircraftCurrentAltitude',
+  ActualCruiseAltitude: 'ActualCruiseAltitude',
+  ActualConsumptionAtCruiseLevelInLbsPerHour: 'ActualConsumptionAtCruiseLevelInLbsPerHour',
+  ActualTotalFuelConsumptionInLbs: 'ActualTotalFuelConsumptionInLbs',
+  ActualConsumptionAtCruiseLevelInGalPerHour: 'ActualConsumptionAtCruiseLevelInGalPerHour',
+  ActualTASAtCruiseLevel: 'ActualTASAtCruiseLevel',
+  ActualCruiseTimeInMinutes: 'ActualCruiseTimeInMinutes',
+  ActualPressureAltitude: 'ActualPressureAltitude',
+  RegisterState: 'RegisterState',
+  WrongFuelDetected: 'WrongFuelDetected',
+  WrongWeightDetected: 'WrongWeightDetected',
+  TimeOffset: 'TimeOffset',
+  StartLatitude: 'StartLatitude',
+  StartLongitude: 'StartLongitude',
+  StartHeading: 'StartHeading',
+  UseFreelanceRouteSchedule: 'UseFreelanceRouteSchedule',
+  RestCrewAfterWarp: 'RestCrewAfterWarp',
+  Score: 'Score',
+  CanResumeOrAbort: 'CanResumeOrAbort',
+  EngineOnRealTime: 'EngineOnRealTime',
+  EngineOffRealTime: 'EngineOffRealTime',
+  LandedRealTime: 'LandedRealTime',
+  AirborneRealTime: 'AirborneRealTime',
+  DepartureAirportId: 'DepartureAirportId',
+  ArrivalIntendedAirportId: 'ArrivalIntendedAirportId',
+  ArrivalAlternateAirportId: 'ArrivalAlternateAirportId',
+  ArrivalActualAirportId: 'ArrivalActualAirportId',
+  VAId: 'VAId',
+  MemberId: 'MemberId',
+  LastRefresh: 'LastRefresh',
+  CreatedAt: 'CreatedAt',
+  UpdatedAt: 'UpdatedAt',
+  FlightStatus: 'FlightStatus'
+};
+
+exports.Prisma.FlightRouteScalarFieldEnum = {
+  Id: 'Id',
+  FlightId: 'FlightId',
+  MemberId: 'MemberId',
+  Route: 'Route',
   CreatedAt: 'CreatedAt',
   UpdatedAt: 'UpdatedAt'
 };
@@ -321,9 +530,26 @@ exports.Prisma.JsonNullValueFilter = {
   JsonNull: Prisma.JsonNull,
   AnyNull: Prisma.AnyNull
 };
+exports.ListenerEventStatus = exports.$Enums.ListenerEventStatus = {
+  PENDING: 'PENDING',
+  PROCESSING: 'PROCESSING',
+  COMPLETED: 'COMPLETED',
+  FAILED: 'FAILED'
+};
+
+exports.FlightStatus = exports.$Enums.FlightStatus = {
+  PENDING: 'PENDING',
+  FLIGHT: 'FLIGHT',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED',
+  WARP: 'WARP'
+};
+
 exports.JobType = exports.$Enums.JobType = {
   VIRTUAL_AIRLINE_SYNC: 'VIRTUAL_AIRLINE_SYNC',
-  VIRTUAL_AIRLINE_MEMBERS_SYNC: 'VIRTUAL_AIRLINE_MEMBERS_SYNC'
+  VIRTUAL_AIRLINE_MEMBERS_SYNC: 'VIRTUAL_AIRLINE_MEMBERS_SYNC',
+  VIRTUAL_AIRLINE_FLEET_SYNC: 'VIRTUAL_AIRLINE_FLEET_SYNC',
+  VIRTUAL_AIRLINE_FLIGHTS_SYNC: 'VIRTUAL_AIRLINE_FLIGHTS_SYNC'
 };
 
 exports.JobStatus = exports.$Enums.JobStatus = {
@@ -343,13 +569,18 @@ exports.CronExpression = exports.$Enums.CronExpression = {
   EVERY_HOUR: 'EVERY_HOUR',
   EVERY_6_HOURS: 'EVERY_6_HOURS',
   EVERY_12_HOURS: 'EVERY_12_HOURS',
-  EVERY_DAY: 'EVERY_DAY',
+  EVERY_DAY_AT_MIDNIGHT: 'EVERY_DAY_AT_MIDNIGHT',
   EVERY_WEEK: 'EVERY_WEEK',
   EVERY_MONTH: 'EVERY_MONTH'
 };
 
 exports.Prisma.ModelName = {
   AppConfig: 'AppConfig',
+  InviteCode: 'InviteCode',
+  DiscordMessage: 'DiscordMessage',
+  DiscordMessageType: 'DiscordMessageType',
+  DiscordChannelWebhook: 'DiscordChannelWebhook',
+  ListenerEvent: 'ListenerEvent',
   User: 'User',
   UserPrivacySettings: 'UserPrivacySettings',
   Role: 'Role',
@@ -359,6 +590,14 @@ exports.Prisma.ModelName = {
   VirtualAirlineRole: 'VirtualAirlineRole',
   World: 'World',
   Member: 'Member',
+  Company: 'Company',
+  Aircraft: 'Aircraft',
+  AircraftClass: 'AircraftClass',
+  AircraftMaintenance: 'AircraftMaintenance',
+  AircraftStatus: 'AircraftStatus',
+  Airport: 'Airport',
+  Flight: 'Flight',
+  FlightRoute: 'FlightRoute',
   Job: 'Job'
 };
 

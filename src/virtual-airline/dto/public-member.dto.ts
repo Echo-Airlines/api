@@ -1,5 +1,6 @@
 import { Decimal } from "@prisma/client/runtime/library";
 import { Member as PrismaMember, VirtualAirlineRole } from "prisma/generated/prisma";
+import { MemberWithRelations } from "src/member/dto/member-witth-relations";
 
 export type Member = PrismaMember & {
     VARole?: VirtualAirlineRole;
@@ -20,11 +21,11 @@ export class PublicMemberDto {
     TotalEarnedCredits: number;
     LastRefresh: Date|null;
 
-    constructor(member: Member) {
+    constructor(member: MemberWithRelations) {
         this.Id = member.Id;
-        this.CompanyName = member.CompanyName;
-        this.AirlineCode = member.AirlineCode;
-        this.Reputation = member.Reputation.toNumber();
+        this.CompanyName = member.Company?.Name ?? '';
+        this.AirlineCode = member.Company?.AirlineCode ?? '';
+        this.Reputation = member.Company?.Reputation?.toNumber() ?? 0;
         this.VARole = member.VARole?.Name;
         this.Flights = member.NumberOfFlights;
         this.Hours = member.FlightHours.toNumber();

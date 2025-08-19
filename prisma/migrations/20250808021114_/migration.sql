@@ -1,0 +1,2 @@
+-- AlterEnum
+ALTER TYPE "public"."JobType" ADD VALUE 'VIRTUAL_AIRLINE_FLIGHTS_SYNC';

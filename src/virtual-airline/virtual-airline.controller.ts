@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { VirtualAirlineService } from './virtual-airline.service';
-import { Member, Prisma, VirtualAirline } from 'prisma/generated/prisma';
+import { Member, Prisma, VirtualAirlineRole, VirtualAirline } from 'prisma/generated/prisma';
 import { AppConfigService } from '@app-config/app-config.service';
 import { PublicMemberDto } from './dto/public-member.dto';
 
@@ -39,18 +39,27 @@ export class VirtualAirlineController {
   @Get('leaderboard')
   async getLeaderboard() {
     const result: PublicMemberDto[] = await this.virtualAirlineService.getPrimaryLeaderboard()
-    .then((members) => members.filter((member) => member.VARole.Name !== 'Invitation Request'))
+    .then((members) => members.filter((member) => member.VARoleId !== '1'))
     .then((members) => members.map((member) => new PublicMemberDto(member)));
     
     return result;
   }
 
-  @Get(':id')
-  async getById(@Param('id') id: string) {
-    const result: VirtualAirline|null = await this.virtualAirlineService.getVirtualAirlineById(id);
-    
+  @Get('members')
+  async getPrimaryVirtualAirlineMembers() {
+    const result: PublicMemberDto[] = await this.virtualAirlineService.getPrimaryVirtualAirlineMembers()
+      .then((members) => members.filter((member) => member.VARoleId !== '1'))
+      .then((members) => members.map((member) => new PublicMemberDto(member)));
+
     return result;
-  } 
+  }
+
+  @Get('roles')
+  async getVARoles() {
+    const result: VirtualAirlineRole[] = await this.virtualAirlineService.getVARoles();
+
+    return result;
+  }
 
   @Post('create')
   async create(@Body() body: Prisma.VirtualAirlineCreateInput) {

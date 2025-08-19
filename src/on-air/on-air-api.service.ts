@@ -1,6 +1,6 @@
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import OnAirApi from 'onair-api';
-import { OnAirCompany, OnAirMember, OnAirVirtualAirline, OnAirVirtualAirlineRole } from './types';
+import { OnAirAircraft, OnAirAirport, OnAirCompany, OnAirFlight, OnAirMember, OnAirVirtualAirline, OnAirVirtualAirlineRole } from './types';
 import { AppConfig, VirtualAirline } from 'prisma/generated/prisma';
 import { VirtualAirlineService } from '@/virtual-airline/virtual-airline.service';
 
@@ -81,6 +81,39 @@ export class OnAirApiService implements OnModuleInit {
         }
 
         const result: OnAirVirtualAirlineRole[] = await this.onAirApi.getVirtualAirlineRoles(virtualAirlineId);
+
+        return result;
+    }
+
+    public async getVirtualAirlineFleet(virtualAirlineId?: string) {
+        if (!this.onAirApi) {
+            this.logger.warn('OnAir API not initialized. Please set the config in the admin panel.');
+            throw new Error('OnAir API not initialized. Please set the config in the admin panel.');
+        }
+
+        const result: OnAirAircraft[] = await this.onAirApi.getVirtualAirlineFleet(virtualAirlineId) as OnAirAircraft[];
+
+        return result;
+    }
+
+    public async getVirtualAirlineFlights(virtualAirlineId?: string) {
+        if (!this.onAirApi) {
+            this.logger.warn('OnAir API not initialized. Please set the config in the admin panel.');
+            throw new Error('OnAir API not initialized. Please set the config in the admin panel.');
+        }
+
+        const result: OnAirFlight[] = await this.onAirApi.getVirtualAirlineFlights(virtualAirlineId) as OnAirFlight[];
+
+        return result;
+    }
+
+    public async getAirportByICAO(icao: string) {
+        if (!this.onAirApi) {
+            this.logger.warn('OnAir API not initialized. Please set the config in the admin panel.');
+            throw new Error('OnAir API not initialized. Please set the config in the admin panel.');
+        }
+
+        const result: OnAirAirport|null = await this.onAirApi.getAirport(icao);
 
         return result;
     }

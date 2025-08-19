@@ -16,64 +16,85 @@ export class JobsController {
 
     @Post()
     @UseGuards(JwtAuthGuard, IsAdminGuard)
-    create(@Body() createJobDto: CreateJobDto) {
-        return this.jobsService.create(createJobDto);
+    async create(@Body() createJobDto: CreateJobDto) {
+        const job = await this.jobsService.create(createJobDto);
+
+
+        return job;
     }
 
     @Get('valid-intervals')
     @UseGuards(JwtAuthGuard, IsAdminGuard)
-    findValidIntervals() {
-        return this.jobsService.findValidIntervals();
+    async findValidIntervals() {
+        const result = await this.jobsService.findValidIntervals();
+
+        return result;
     }
 
     @Get()
     @UseGuards(JwtAuthGuard, IsAdminGuard)
     async findAll() {
-        return await this.jobsService.findAll();
+        const jobs = await this.jobsService.findAll();
+
+        return jobs;
     }
 
     @Get(':id')
     @UseGuards(JwtAuthGuard, IsAdminGuard)
-    findOneById(@Param('id') id: string) {
-        return this.jobsService.findOneById(id);
+    async findOneById(@Param('id') id: string) {
+        const job = await this.jobsService.findOneById(id);
+
+        return job;
     }
 
     @Put(':id')
     @UseGuards(JwtAuthGuard, IsAdminGuard)
-    update(@Param('id') id: string, @Body() updateJobDto: UpdateJobDto) {
-        return this.jobsService.update(id, updateJobDto);
+    async update(@Param('id') id: string, @Body() updateJobDto: UpdateJobDto) {
+        const job = await this.jobsService.update(id, updateJobDto);
+
+        return job;
     }
 
     @Delete(':id')
     @UseGuards(JwtAuthGuard, IsAdminGuard)
-    remove(@Param('id') id: string) {
-        return this.jobsService.remove(id);
+    async remove(@Param('id') id: string) {
+        const job = await this.jobsService.remove(id);
+
+        return job;
     }
 
     @Post(':id/status')
     @UseGuards(JwtAuthGuard, IsAdminGuard)
-    updateStatus(
+    async updateStatus(
         @Param('id') id: string,
         @Body('status') status: JobStatus,
     ) {
-        return this.jobsService.updateStatus(id, status);
+        const job = await this.jobsService.updateStatus(id, status);
+
+        return job;
     }
 
     @Post(':id/enable')
     @UseGuards(JwtAuthGuard, IsAdminGuard)
-    enable(@Param('id') id: string) {
-        return this.jobsService.update(id, { IsEnabled: true });
+    async enable(@Param('id') id: string) {
+        const job = await this.jobsService.update(id, { IsEnabled: true });
+
+        return job;
     }
 
     @Post(':id/disable')
     @UseGuards(JwtAuthGuard, IsAdminGuard)
-    disable(@Param('id') id: string) {
-        return this.jobsService.update(id, { IsEnabled: false });
+    async disable(@Param('id') id: string) {
+        const job = await this.jobsService.update(id, { IsEnabled: false });
+
+        return job;
     }
 
     @Post(':id/execute')
     @UseGuards(JwtAuthGuard, IsAdminGuard)
-    execute(@Param('id') id: string) {
-        return this.jobSchedulerService.executeJobById(id);
+    async execute(@Param('id') id: string) {
+        const result = await this.jobSchedulerService.executeJobById(id);
+
+        return result;
     }
 } 

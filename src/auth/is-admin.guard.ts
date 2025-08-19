@@ -10,7 +10,7 @@ export class IsAdminGuard implements CanActivate {
 
     let isAdmin = false;
 
-    if (user && user.roles.includes('admin')) {
+    if (user && user.Roles.includes('admin')) {
       isAdmin = true;
     }
 

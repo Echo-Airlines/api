@@ -2,7 +2,7 @@ import { Controller, Get, NotFoundException, Param, UseGuards } from '@nestjs/co
 import { JwtAuthGuard } from '@auth/jwt-auth.guard';
 import { IsAdminGuard } from '@auth/is-admin.guard';
 import { AdminVirtualAirlineService } from './admin-virtual-airline.service';
-import { VirtualAirline } from 'prisma/generated/prisma';
+import { VirtualAirline, VirtualAirlineRole } from 'prisma/generated/prisma';
 
 @Controller(['admin/va', 'admin/vas'])
 export class AdminVirtualAirlineController {
@@ -12,6 +12,22 @@ export class AdminVirtualAirlineController {
     @UseGuards(JwtAuthGuard, IsAdminGuard)
     async getAll() {
         const data: VirtualAirline[] = await this.virtualAirlineService.findAll();
+
+        return data;
+    }
+
+    @Get('roles')
+    @UseGuards(JwtAuthGuard, IsAdminGuard)
+    async getVARoles() {
+        const data: VirtualAirlineRole[] = await this.virtualAirlineService.getPrimaryVARoles();
+
+        return data;
+    }
+
+    @Get('roles/unlinked')
+    @UseGuards(JwtAuthGuard, IsAdminGuard)
+    async getUnlinkedVARoles() {
+        const data: VirtualAirlineRole[] = await this.virtualAirlineService.getUnlinkedVARoles();
 
         return data;
     }

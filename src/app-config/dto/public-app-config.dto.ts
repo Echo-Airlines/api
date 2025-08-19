@@ -16,6 +16,7 @@ export class PublicAppConfigDto {
     DiscordServerInviteLinkEnabled: boolean;
     AcceptingNewMembers: boolean;
     DiscordAuthEnabled: boolean;
+    DiscordAuthCreateUser: boolean;
     LocalAuthEnabled: boolean;  
     VirtualAirlineInitiated: boolean;
 
@@ -30,5 +31,6 @@ export class PublicAppConfigDto {
         this.DiscordAuthEnabled = appConfig.DiscordAuthEnabled;
         this.LocalAuthEnabled = appConfig.LocalAuthEnabled;
         this.VirtualAirlineInitiated = appConfig.VirtualAirlineInitiated ?? false;
+        this.DiscordAuthCreateUser = appConfig.DiscordAuthCreateUser;
     }
 }

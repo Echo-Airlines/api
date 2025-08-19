@@ -14,6 +14,12 @@ import { LoggerModule } from '@logger/logger.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { AdminModule } from './admin/admin.module';
+import { MemberModule } from './member/member.module';
+import { AircraftModule } from './aircraft/aircraft.module';
+import { AirportModule } from './airport/airport.module';
+import { FlightModule } from './flight/flight.module';
+import { DiscordModule } from './discord/discord.module';
+import { ListenerModule } from './listener/listener.module';
 
 @Module({
   imports: [
@@ -31,6 +37,12 @@ import { AdminModule } from './admin/admin.module';
     UserModule,
     AuthModule,
     AdminModule,
+    MemberModule,
+    AircraftModule,
+    AirportModule,
+    FlightModule,
+    DiscordModule,
+    ListenerModule,
   ],
   controllers: [AppController],
   providers: [AppService],

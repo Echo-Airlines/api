@@ -82,4 +82,24 @@ export class UserService {
 
         return entity;
     }
+
+    async setUserFirstLoginCompleted(UserId: string) {
+        const result = await this.prisma.user.update({
+            where: { Id: UserId },
+            data: {
+                FirstLoginCompleted: true,
+            }
+        });
+
+        return result;
+    }
+
+    async updateById(Id: string, data: Prisma.UserUpdateInput) {
+        const result = await this.prisma.user.update({
+            where: { Id },
+            data,
+        });
+
+        return result;
+    }
 }

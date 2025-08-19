@@ -28,7 +28,9 @@ export class AdminVirtualAirlineService {
                 IsPrimary: true
             },
             include: {
-                World: true
+                World: true,
+                VARoles: true,
+                Members: true,
             },
             orderBy: {
                 UpdatedAt: 'desc'
@@ -53,6 +55,26 @@ export class AdminVirtualAirlineService {
         }
 
         return entity;
+    }
+
+    async getPrimaryVARoles() {
+        const entities: VirtualAirlineRole[] = await this.prisma.virtualAirlineRole.findMany({
+            where: {
+                VirtualAirline: { IsPrimary: true }
+            }
+        });
+
+        return entities;
+    }
+
+    async getUnlinkedVARoles() {
+        const entities: VirtualAirlineRole[] = await this.prisma.virtualAirlineRole.findMany({
+            where: {
+                Role: null
+            }
+        });
+
+        return entities;
     }
 
     async getVirtualAirlineByIdentifier(Identifier: string) {

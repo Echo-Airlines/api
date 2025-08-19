@@ -37,8 +37,8 @@ async function bootstrap() {
 bootstrap()
 .then(({ app, apiBaseUrl}) => {  
 setTimeout(() => {
-  const admingUser = SeedData.users[0].Username;
+  const adminUser = SeedData.users[0].Username;
   const adminPassword = SeedData.users[0].Password;
-  logger.printStartupBanner(apiBaseUrl, admingUser, adminPassword);
+  logger.printStartupBanner(apiBaseUrl, adminUser, adminPassword || '');
 }, 500);
 });

@@ -48,13 +48,27 @@ export class JobsService {
             Description: dto.Description,
             CronExpression: dto.CronExpression as unknown as $Enums.CronExpression,
             IsEnabled: dto.IsEnabled ?? false,
+            Type: dto.Type as unknown as $Enums.JobType,
+            NextRunAt: dto.NextRunAt ?? undefined,
         }
 
-        await this.prisma.job.update({ where: { Id: id }, data });
+        const results = await this.prisma.job.update({ where: { Id: id }, data });
         
-        return await this.findOneById(id);
+        return results;
     }
 
+    async setFirstRunCompleted(Id: string) {
+        if (!Id) {
+            throw new BadRequestException('Job ID is required');
+        }
+
+        const results = await this.prisma.job.update({ where: { Id }, data: {
+            FirstRunCompleted: true,
+        }});
+
+        return results;
+    }
+    
     async remove(id: string) {
         const job = await this.findOneById(id);
         if (job) {
@@ -69,12 +83,14 @@ export class JobsService {
     }
 
     async updateLastRun(id: string, lastRunAt: Date, nextRunAt: Date, error?: string) {
-        await this.prisma.job.update({ where: { Id: id }, data: {
+        const results = await this.prisma.job.update({ where: { Id: id }, data: {
             LastRunAt: lastRunAt,
             NextRunAt: nextRunAt,
             LastError: error,
             Status: error ? JobStatus.FAILED : JobStatus.COMPLETED,
         }});
+
+        return results;
     }
 
     formatCronLabel(cronExpression: CronExpression) {

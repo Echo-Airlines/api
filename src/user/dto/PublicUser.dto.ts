@@ -1,4 +1,4 @@
-import { Role, UserPrivacySettings } from "prisma/generated/prisma";
+import { Member, Role, UserPrivacySettings } from "prisma/generated/prisma";
 
 export type User = {
     Id: string
@@ -16,6 +16,7 @@ export type User = {
     PrivacySettings: UserPrivacySettings | null
     Roles?: Role[]
     LastLogin: Date | null
+    Members?: Member[]
 };
 
 export type AuthUser = {
@@ -34,8 +35,13 @@ export type AuthUser = {
     IsBanned: boolean;
     BanReason: string|null;
     BanExpiresAt: Date|null;
-    Password: string;
+    Password: string|null;
     LastLogin: Date|null;
+    DiscordId?: string|null;
+    DiscordUsername?: string|null;
+    DiscordAvatar?: string|null;
+    DiscordEmail?: string|null;
+    Members?: Member[]
 }
 
 export class PublicUserDto {

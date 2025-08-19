@@ -1,4 +1,6 @@
+import { generatePassword } from "@utils";
 import { CronExpression, JobType, Prisma } from "prisma/generated/prisma";
+
 
 export type SeedData = {
     roles: Prisma.RoleCreateInput[];
@@ -8,6 +10,8 @@ export type SeedData = {
     liveries: Prisma.LiveryCreateInput[];
     jobs: Prisma.JobCreateInput[];
     appConfig: Prisma.AppConfigCreateInput;
+    aircraftStatuses: Prisma.AircraftStatusCreateInput[];
+    aircraftClasses: Prisma.AircraftClassCreateInput[];
 };
 
 export const SeedData_Permissions: Prisma.PermissionCreateInput[] = [
@@ -48,6 +52,14 @@ export const SeedData_UserRoles: Prisma.RoleCreateInput[] = [
         Slug: 'premium',
         Name: 'Premium Member',
     },
+    {
+        Slug: 'owner',
+        Name: 'Owner',
+    },
+    {
+        Slug: 'manager',
+        Name: 'Manager',
+    }
 ];
 
 export const SeedData_Users: Prisma.UserCreateInput[] = [
@@ -167,7 +179,7 @@ export const SeedData_Jobs: Prisma.JobCreateInput[] = [
     {
         Name: 'Virtual Airline Sync',
         Description: 'Syncs virtual airline data from OnAir',
-        CronExpression: CronExpression.EVERY_HOUR,
+        CronExpression: CronExpression.EVERY_DAY_AT_MIDNIGHT,
         IsEnabled: true,
         Type: JobType.VIRTUAL_AIRLINE_SYNC,
     },
@@ -177,6 +189,65 @@ export const SeedData_Jobs: Prisma.JobCreateInput[] = [
         CronExpression: CronExpression.EVERY_HOUR,
         IsEnabled: true,
         Type: JobType.VIRTUAL_AIRLINE_MEMBERS_SYNC,
+    },
+    {
+        Name: 'Virtual Airline Fleet Sync',
+        Description: 'Syncs virtual airline fleet data from OnAir',
+        CronExpression: CronExpression.EVERY_HOUR,
+        IsEnabled: true,
+        Type: JobType.VIRTUAL_AIRLINE_FLEET_SYNC,
+    },
+    {
+        Name: 'Virtual Airline Flights Sync',
+        Description: 'Syncs virtual airline flights data from OnAir',
+        CronExpression: CronExpression.EVERY_MINUTE,
+        IsEnabled: true,
+        Type: JobType.VIRTUAL_AIRLINE_FLIGHTS_SYNC,
+    }
+];
+
+export const SeedData_AircraftStatuses: Prisma.AircraftStatusCreateInput[] = [
+    {
+        Id: 0,
+        Name: 'Idle',
+    },
+    {
+        Id: 1,
+        Name: 'Maintenance',
+    },
+    {
+        Id: 2,
+        Name: 'Apron Work',
+    },
+    {
+        Id: 3,
+        Name: 'In Flight',
+    },
+    {
+        Id: 4,
+        Name: 'Warp',
+    },
+    {
+        Id: 5,
+        Name: 'Ferry',
+    },
+];
+
+export const SeedData_AircraftClasses: Prisma.AircraftClassCreateInput[] = [
+    {
+        Id: '3460504f-db41-4ea6-a765-2a6867a2f88d',
+        ShortName: 'JET',
+        Name: 'Jet',
+    },
+    {
+        Id: "4d1ce4cb-9005-4c33-a919-cfe3697eaf5d",
+        ShortName: "MEPS",
+        Name: "Multi-engine Piston Sea",
+    },
+    {
+        Id: "b4a35db6-f20a-4320-8f0c-ec9956da11a6",
+        ShortName: "SETL",
+        Name: "Single Engine TurboProp Land",
     },
 ];
 
@@ -190,6 +261,7 @@ export const SeedData_AppConfig: Prisma.AppConfigCreateInput = {
     AcceptingNewMembers: process.env.ACCEPTINGNEWMEMBERS === 'true',
     DiscordAuthEnabled: process.env.DISCORDAUTHENABLED === 'true',
     LocalAuthEnabled: process.env.LOCALAUTHENABLED === 'true',
+    DiscordAuthCreateUser: process.env.DISCORDAUTHCREATEUSER === 'true',
 };
 
 const SeedData: SeedData = {
@@ -200,6 +272,8 @@ const SeedData: SeedData = {
     liveries: SeedData_Liveries,
     jobs: SeedData_Jobs,
     appConfig: SeedData_AppConfig,
+    aircraftStatuses: SeedData_AircraftStatuses,
+    aircraftClasses: SeedData_AircraftClasses,
 };
 
 export default SeedData

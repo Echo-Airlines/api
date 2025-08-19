@@ -10,10 +10,18 @@ import { executeAllVirtualAirlinesSync } from './schedules/executeVirtualAirline
 import { AppConfig, Job, JobType, CronExpression } from 'prisma/generated/prisma';
 import { ConfigService } from '@nestjs/config';
 import { executeVirtualAirlinesMembersSync } from './schedules/executeVirtualAirlinesMembersSync';
+import { AircraftService } from '@aircraft/aircraft.service';
+import { executeVirtualAirlinesFleetSync } from './schedules/executeVirtualAirlinesFleetSync';
+import { AirportService } from '@airport/airport.service';
+import { FlightService } from '@flight/flight.service';
+import { executeVirtualAirlinesFlightsSync } from './schedules/executeVirtualAirlinesFlightsSync';
 
 export interface IJobSchedulerServices {
     VirtualAirline: VirtualAirlineService;
     OnAir: OnAirApiService;
+    Aircraft: AircraftService;
+    Airport: AirportService;
+    Flight: FlightService;
 }
 
 @Injectable()
@@ -27,12 +35,18 @@ export class JobSchedulerService implements OnModuleInit {
         private readonly schedulerRegistry: SchedulerRegistry,
         private readonly onAirApiService: OnAirApiService,
         private readonly virtualAirlineService: VirtualAirlineService,
+        private readonly aircraftService: AircraftService,
         private readonly appConfigService: AppConfigService,
         private readonly configService: ConfigService,
+        private readonly airportService: AirportService,
+        private readonly flightService: FlightService,
     ) {
         this.services = {
             VirtualAirline: this.virtualAirlineService,
             OnAir: this.onAirApiService,
+            Aircraft: this.aircraftService,
+            Airport: this.airportService,
+            Flight: this.flightService,
         }
     }
 
@@ -54,9 +68,9 @@ export class JobSchedulerService implements OnModuleInit {
         }
 
         // this should also run an interval to check if there are any jobs that are now active and should be scheduled)
-        // setInterval(async () => {
-        //     this._loadJobs();
-        // }, 60000); // run every 1 minute
+        setInterval(async () => {
+            this._loadJobs();
+        }, 60000); // run every 1 minute
     }
 
     public async unscheduleJob(job: Job) {
@@ -70,7 +84,9 @@ export class JobSchedulerService implements OnModuleInit {
             throw new Error(`Job ${id} not found`);
         }
 
-        await this.executeJob(job);
+        const result = await this.executeJob(job);
+
+        return result;
     }
 
     public async scheduleJob(job: Job) {
@@ -96,7 +112,7 @@ export class JobSchedulerService implements OnModuleInit {
 
     public matchCronExpression(cronExpression: CronExpression): NestCronExpression {
         const nestCronExpression: NestCronExpression = NestCronExpression[cronExpression];
-
+        console.log(NestCronExpression);
         if (!nestCronExpression) {
             throw new Error(`Invalid cron expression: ${cronExpression}`);
         }
@@ -153,8 +169,7 @@ export class JobSchedulerService implements OnModuleInit {
     }
 
     public async executeJob(job: Job) {
-        const now = new Date();
-        this.logger.log(`Executing job ${job.Name} (${job.Id}) at ${now.toISOString()}`);
+        const startTime = new Date();
         
         try {
             if (!this.config) {
@@ -166,6 +181,8 @@ export class JobSchedulerService implements OnModuleInit {
                 this.logger.log(`OnAir sync is not enabled in app config, skipping job ${job.Name} (${job.Id})`);
                 return;
             }
+            
+            this.logger.log(`Executing job ${job.Name} (${job.Id}) at ${startTime.toISOString()}`);
 
             switch (job.Type) {
                 case JobType.VIRTUAL_AIRLINE_SYNC:
@@ -178,25 +195,57 @@ export class JobSchedulerService implements OnModuleInit {
 
                     // update the job status to completed
                     break;
+                case JobType.VIRTUAL_AIRLINE_FLEET_SYNC:
+                    await executeVirtualAirlinesFleetSync(this);
+
+                    // update the job status to completed
+                    break;
+                case JobType.VIRTUAL_AIRLINE_FLIGHTS_SYNC:
+                    await executeVirtualAirlinesFlightsSync(this);
+
+                    // update the job status to completed
+                    break;
                 default:
                     throw new Error(`Unknown job type: ${job.Type}`);
             }
 
-            if (!job.FirstRunCompleted) {
-                await this.jobsService.update(job.Id, {
-                    FirstRunCompleted: true,
-                });
-            }
+            const endTime = new Date();
+            const duration = endTime.getTime() - startTime.getTime();
+
+            this.logger.log(`Job ${job.Name} finished at ${endTime.toISOString()}. Duration: ${duration/1000}s`);
 
             // Calculate next run time
             const cronJob = this.schedulerRegistry.getCronJob(job.Id);
             const nextRunAt = cronJob.nextDate().toJSDate();
 
+            let updatedJob: Job = job;
+            if (job.FirstRunCompleted === false) {
+                updatedJob = await this.jobsService.setFirstRunCompleted(job.Id);
+            }
+
             // Update job status
-            await this.jobsService.updateLastRun(job.Id, now, nextRunAt);
+            updatedJob = await this.jobsService.updateLastRun(job.Id, startTime, nextRunAt);
+
+            return {
+                success: true,
+                message: `Job executed successfully. Duration: ${duration/1000}s`,
+                duration: duration,
+                nextRunAt: nextRunAt,
+                job: updatedJob,
+            };
         } catch (error) {
-            this.logger.error(`Error executing job ${job.Name} (${job.Id}): ${error.message}`);
-            await this.jobsService.updateLastRun(job.Id, now, now, error.message);
+            if (error instanceof Error) {
+                this.logger.error(`Error executing job ${job.Name} (${job.Id}): ${error.message}`);
+                await this.jobsService.updateLastRun(job.Id, startTime, startTime, error.message);
+            } else {
+                this.logger.error(`Error executing job ${job.Name} (${job.Id}): ${error.message}`);
+                await this.jobsService.updateLastRun(job.Id, startTime, startTime, error.message);
+            }
+
+            return {
+                success: false,
+                message: error instanceof Error ? error.message : 'Unknown error',
+            };
         }
     }
 } 

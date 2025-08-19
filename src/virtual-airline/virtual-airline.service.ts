@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '@prisma/prisma.service';
 import { Member, Prisma, VirtualAirline, VirtualAirlineRole } from 'prisma/generated/prisma';
 
@@ -21,16 +21,16 @@ export class VirtualAirlineService {
         return entities;
     }
 
-    async getPrimaryVirtualAirline() {
+    async getPrimaryVirtualAirline(query?: Prisma.VirtualAirlineFindFirstArgs) {
         const entity: VirtualAirline | null = await this.prisma.virtualAirline.findFirst({
-            where: {
+            where: (query?.where) ? query.where : {
                 IsPrimary: true
             },
-            include: {
-                World: true
+            include: (query?.include) ? query.include : {
+                World: true,
             },
-            orderBy: {
-                UpdatedAt: 'desc'
+            orderBy: (query?.orderBy) ? query.orderBy : {
+                UpdatedAt: 'desc',
             }
         });
 
@@ -38,18 +38,22 @@ export class VirtualAirlineService {
     }
 
     async getPrimaryLeaderboard(sortColumn: 'reputation' | 'flights' | 'hours' | 'earnings' = 'earnings') {
-        const entity = await this.prisma.virtualAirline.findFirst({
+        const va = await this.getPrimaryVirtualAirline();
+
+        if (!va) {
+            throw new NotFoundException('Virtual airline not found');
+        }
+
+        const entity = await this.prisma.member.findMany({
             where: {
-                IsPrimary: true
+                IsActive: true,
+                VirtualAirline: {
+                    Id: va.Id,
+                },
             },
             include: {
-                World: true,
-                Members: {
-                    include: {
-                        VARole: true,
-                    },
-                },
-
+                Company: true,
+                VARole: true
             },
             orderBy: {
                 UpdatedAt: 'desc'
@@ -60,20 +64,36 @@ export class VirtualAirlineService {
             throw new NotFoundException('Virtual airline not found');
         }
 
-        const leaderboard = entity.Members.sort((a:Member, b:Member) => {
+        const leaderboard = entity.sort((a, b) => {
             switch(sortColumn) {
                 case 'earnings':
                     return b.TotalEarnedCredits.toNumber() - a.TotalEarnedCredits.toNumber();
                 default:
-                    return a.CompanyName.localeCompare(b.CompanyName);
+                    return a.Company.Name.localeCompare(b.Company.Name);
             }
         });
 
         return leaderboard;
 
     }
+
+    async getPrimaryVirtualAirlineMembers() {
+        const members = await this.prisma.member.findMany({
+            where: {
+                VirtualAirline: {
+                    IsPrimary: true,
+                }
+            }
+        });
+
+        return members;
+    }
     
     async getVirtualAirlineById(Id: string, query?: Prisma.VirtualAirlineFindUniqueArgs) {
+        if (!Id) {
+            throw new BadRequestException('Virtual airline ID is required');
+        }
+
         const entity: VirtualAirline | null = await this.prisma.virtualAirline.findUnique({
             ...query,
             include: {
@@ -144,6 +164,27 @@ export class VirtualAirlineService {
         return entity;
     }
 
+    async getVARoles() {
+        const va = await this.getPrimaryVirtualAirline();
+
+        if (!va) {
+            throw new NotFoundException('Virtual airline not found');
+        }
+
+        const roles: VirtualAirlineRole[] = await this.prisma.virtualAirlineRole.findMany({
+            where: {
+                VirtualAirline: {
+                    Id: va.Id
+                }
+            },
+            orderBy: {
+                Name: 'asc',
+            }
+        }); 
+
+        return roles;
+    }
+
     // roles
     async VARole_findAll(query?: Prisma.VirtualAirlineRoleFindManyArgs) {
         const entities: VirtualAirlineRole[] = await this.prisma.virtualAirlineRole.findMany({
@@ -207,13 +248,52 @@ export class VirtualAirlineService {
         return entity;
     }
 
-    async Member_upsert(member: Prisma.MemberCreateInput) {
-        const entity = await this.prisma.member.upsert({
+    async Member_upsert(dto: Prisma.MemberCreateInput) {
+        try {
+            if (!dto.Id) {
+                throw new BadRequestException('Member ID is required');
+            }
+            
+            let entity: Member|null = await this.Member_findById(dto.Id);
+
+            if (!entity) {
+                entity = await this.prisma.member.create({
+                    data: dto
+                });
+            } else {
+                entity = await this.prisma.member.update({
+                    where: {
+                        Id: dto.Id
+                    },
+                    data: dto
+                });
+            }
+
+            return entity;
+            
+        } catch (error) {
+            console.error(error);
+            throw new BadRequestException('Failed to upsert member');
+        }
+    }
+
+    async Member_deactivate(Id: string) {
+        if (!Id) {
+            throw new BadRequestException('Member ID is required');
+        }
+
+        const entity = await this.prisma.member.update({
             where: {
-                Id: member.Id
+                Id
             },
-            update: member,
-            create: member
+            data: {
+                IsActive: false,
+                DeactivatedAt: new Date()
+            },
+            include: {
+                Company: true,
+                VARole: true
+            }
         });
 
         return entity;

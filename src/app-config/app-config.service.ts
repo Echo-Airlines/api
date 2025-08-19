@@ -153,4 +153,35 @@ export class AppConfigService {
 
         return result;
     }
+
+    // Discord OAuth2 Configuration methods
+    async updateDiscordConfig(config: {
+        DiscordClientId?: string;
+        DiscordClientSecret?: string;
+        DiscordCallbackUrl?: string;
+        DiscordAuthEnabled?: boolean;
+    }) {
+        const appConfig = await this.getLatest();
+
+        if (!appConfig) {
+            throw new NotFoundException('App config not found');
+        }
+
+        return this.prisma.appConfig.update({
+            where: { Id: appConfig.Id },
+            data: config
+        });
+    }
+
+    async getDiscordConfig() {
+        const appConfig = await this.getLatest();
+
+        if (!appConfig) {
+            return null;
+        }
+
+        return {
+            DiscordAuthEnabled: appConfig.DiscordAuthEnabled,
+        };
+    }
 }

@@ -18,16 +18,90 @@ model AppConfig {
   DiscordServerInviteLinkEnabled Boolean  @default(false)
   AcceptingNewMembers            Boolean  @default(false)
   DiscordAuthEnabled             Boolean  @default(false)
+  DiscordAuthCreateUser          Boolean  @default(false)
   LocalAuthEnabled               Boolean  @default(true)
   VirtualAirlineInitiated        Boolean  @default(false)
   CreatedAt                      DateTime @default(now()) @db.Timestamp(6)
   UpdatedAt                      DateTime @default(now()) @db.Timestamp(6)
 }
 
+model InviteCode {
+  Id        String    @id() @unique() @default(uuid()) @db.Uuid
+  Code      String    @unique() @db.VarChar
+  IsUsed    Boolean   @default(false)
+  UsedAt    DateTime? @db.Timestamp(6)
+  CreatedAt DateTime  @default(now()) @db.Timestamp(6)
+  UpdatedAt DateTime  @default(now()) @db.Timestamp(6)
+  User      User?
+}
+
+model DiscordMessage {
+  Id                      String   @id() @unique() @default(uuid()) @db.Uuid
+  ChannelId               String   @db.VarChar
+  MessageId               String   @db.VarChar
+  Content                 String   @db.VarChar
+  DiscordMessageTypeId    Int
+  DiscordChannelWebhookId String?  @db.Uuid
+  CreatedAt               DateTime @default(now()) @db.Timestamp(6)
+  UpdatedAt               DateTime @default(now()) @db.Timestamp(6)
+
+  // relations
+  DiscordMessageType    DiscordMessageType     @relation(fields: [DiscordMessageTypeId], references: [Id])
+  DiscordChannelWebhook DiscordChannelWebhook? @relation(fields: [DiscordChannelWebhookId], references: [Id])
+  ListenerEvents        ListenerEvent[]
+}
+
+model DiscordMessageType {
+  Id          Int      @id() @unique() @default(autoincrement())
+  Name        String   @db.VarChar
+  Description String?  @db.VarChar
+  Slug        String   @unique() @db.VarChar
+  CreatedAt   DateTime @default(now()) @db.Timestamp(6)
+  UpdatedAt   DateTime @default(now()) @db.Timestamp(6)
+
+  // relations
+  DiscordMessages DiscordMessage[]
+}
+
+model DiscordChannelWebhook {
+  Id         String   @id() @unique() @default(uuid()) @db.Uuid
+  ChannelId  String   @db.VarChar
+  WebhookUrl String   @db.VarChar
+  IsActive   Boolean  @default(true)
+  CreatedAt  DateTime @default(now()) @db.Timestamp(6)
+  UpdatedAt  DateTime @default(now()) @db.Timestamp(6)
+
+  // relations
+  DiscordMessages DiscordMessage[]
+}
+
+model ListenerEvent {
+  Id               Int                 @id() @unique() @default(autoincrement())
+  Variant          String              @db.VarChar
+  Type             String              @db.VarChar
+  SentAt           DateTime            @db.Timestamp(6)
+  Status           ListenerEventStatus @default(PENDING)
+  Error            String?             @db.VarChar
+  Data             Json?
+  DiscordMessageId String?             @db.Uuid
+  CreatedAt        DateTime            @default(now()) @db.Timestamp(6)
+  UpdatedAt        DateTime            @default(now()) @db.Timestamp(6)
+
+  // relations
+  DiscordMessage DiscordMessage? @relation(fields: [DiscordMessageId], references: [Id])
+}
+
+enum ListenerEventStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+}
+
 model User {
   Id                  String    @id() @unique() @default(uuid()) @db.Uuid
   Username            String    @unique() @db.VarChar
-  Password            String    @db.VarChar
+  Password            String?   @db.VarChar
   Email               String?   @unique() @db.VarChar
   FirstName           String?   @db.VarChar
   LastName            String?   @db.VarChar
@@ -38,42 +112,60 @@ model User {
   BanExpiresAt        DateTime? @db.Timestamp(6)
   IsVerified          Boolean   @default(false)
   LastLogin           DateTime? @db.Timestamp(6)
+  InviteCodeId        String?   @unique() @db.Uuid
   CreatedAt           DateTime  @default(now()) @db.Timestamp(6)
   UpdatedAt           DateTime  @default(now()) @db.Timestamp(6)
+
+  // Discord OAuth2 fields
+  DiscordId       String? @unique() @db.VarChar
+  DiscordUsername String? @db.VarChar
+  DiscordAvatar   String? @db.VarChar
+  DiscordEmail    String? @db.VarChar
+
   // user has many roles
-  Roles               Role[]    @relation("UserRoles")
+  Roles Role[] @relation("UserRoles")
 
   // user has one privacy settings
   PrivacySettings UserPrivacySettings?
+
+  // user belongs to multiple VAs through Member
+  Members Member[]
+
+  // user can be invited by an invite code
+  InviteCode InviteCode? @relation(fields: [InviteCodeId], references: [Id])
 }
 
 model UserPrivacySettings {
-  Id                  String    @id() @unique() @default(uuid()) @db.Uuid
-  UserId              String    @unique() @db.Uuid
-  ShowOnlineStatus    Boolean   @default(true)
-  ShowFirstName       Boolean   @default(false)
-  ShowLastName        Boolean   @default(false)
-  ShowLastNameInitial Boolean   @default(false)
-  ShowLastLogin       DateTime? @db.Timestamp(6)
-  CreatedAt           DateTime  @default(now()) @db.Timestamp(6)
+  Id                  String   @id() @unique() @default(uuid()) @db.Uuid
+  UserId              String   @unique() @db.Uuid
+  ShowOnlineStatus    Boolean  @default(true)
+  ShowFirstName       Boolean  @default(false)
+  ShowLastName        Boolean  @default(false)
+  ShowLastNameInitial Boolean  @default(false)
+  ShowLastLogin       Boolean  @default(false)
+  CreatedAt           DateTime @default(now()) @db.Timestamp(6)
 
   // relations
   User User @relation(fields: [UserId], references: [Id])
 }
 
 model Role {
-  Id          Int      @id() @default(autoincrement())
-  Name        String   @db.VarChar
-  Description String?  @db.VarChar
-  Slug        String   @unique() @db.VarChar
-  CreatedAt   DateTime @default(now()) @db.Timestamp(6)
-  UpdatedAt   DateTime @default(now()) @db.Timestamp(6)
+  Id                   Int      @id() @unique() @default(autoincrement())
+  Name                 String   @db.VarChar
+  Description          String?  @db.VarChar
+  Slug                 String   @unique() @db.VarChar
+  CreatedAt            DateTime @default(now()) @db.Timestamp(6)
+  UpdatedAt            DateTime @default(now()) @db.Timestamp(6)
+  VirtualAirlineRoleId String?  @unique() @db.Uuid
 
   // role has many permissions
   Permissions Permission[] @relation("RolePermissions")
 
   // role has many users
   Users User[] @relation("UserRoles")
+
+  // role can have one virtual airline role
+  VirtualAirlineRole VirtualAirlineRole? @relation(fields: [VirtualAirlineRoleId], references: [Id])
 }
 
 model Permission {
@@ -136,6 +228,8 @@ model VirtualAirline {
   // relations
   VARoles VirtualAirlineRole[]
   Members Member[]
+  Fleet   Aircraft[]
+  Flights Flight[]
 }
 
 model VirtualAirlineRole {
@@ -156,6 +250,7 @@ model VirtualAirlineRole {
   UpdatedAt                              DateTime  @default(now()) @db.Timestamp(6)
 
   // relations
+  Role           Role?
   VirtualAirline VirtualAirline @relation(fields: [VAId], references: [Id])
   Members        Member[]
 }
@@ -170,19 +265,15 @@ model World {
 
   // relations
   VirtualAirlines VirtualAirline[]
+  Companies       Company[]
 }
 
 model Member {
+  IsActive                  Boolean   @default(true)
+  DeactivatedAt             DateTime? @db.Timestamp(6)
   Id                        String    @id() @default(uuid()) @db.Uuid
   VAId                      String    @db.Uuid
-  CompanyId                 String    @db.Uuid
-  CompanyName               String    @db.VarChar
-  AirlineCode               String    @unique() @db.VarChar
-  LastConnection            DateTime? @db.Timestamp(6)
-  Reputation                Decimal   @db.Decimal(10, 3)
-  CompanyCreationDate       DateTime  @db.Timestamp(6)
-  CompanyLevel              Int
-  CompanyLevelXP            Int
+  CompanyId                 String    @unique() @db.Uuid
   VARoleId                  String    @db.Uuid
   TotalCargosTransportedLbs Int
   TotalPAXsTransported      Int
@@ -194,12 +285,235 @@ model Member {
   ReputationImpact          Decimal
   LastVAFlightDate          DateTime? @db.Timestamp(6)
   LastRefresh               DateTime? @db.Timestamp(6)
+  UserId                    String?   @db.Uuid
   CreatedAt                 DateTime  @default(now()) @db.Timestamp(6)
   UpdatedAt                 DateTime  @default(now()) @db.Timestamp(6)
 
   // relations
+  Company        Company            @relation(fields: [CompanyId], references: [Id])
   VirtualAirline VirtualAirline     @relation(fields: [VAId], references: [Id])
   VARole         VirtualAirlineRole @relation(fields: [VARoleId], references: [Id])
+  Flights        Flight[]
+
+  // user belongs to multiple VAs through Member
+  User         User?         @relation(fields: [UserId], references: [Id])
+  FlightRoutes FlightRoute[]
+}
+
+model Company {
+  Id              String    @id() @default(uuid()) @db.Uuid
+  Name            String    @db.VarChar
+  AirlineCode     String    @unique() @db.VarChar
+  CreationDate    DateTime  @db.Timestamp(6)
+  Level           Int
+  LevelXP         Int
+  Reputation      Decimal   @db.Decimal(10, 3)
+  Paused          Boolean   @default(false)
+  LastConnection  DateTime? @db.Timestamp(6)
+  LastReportDate  DateTime? @db.Timestamp(6)
+  DifficultyLevel Int
+  WorldId         String    @db.Uuid
+  OwnerId         String    @db.Uuid
+
+  LastRefresh DateTime? @db.Timestamp(6)
+  CreatedAt   DateTime  @default(now()) @db.Timestamp(6)
+  UpdatedAt   DateTime  @default(now()) @db.Timestamp(6)
+
+  // relations
+
+  World   World    @relation(fields: [WorldId], references: [Id])
+  Owner   Member?
+  Flights Flight[]
+}
+
+model Aircraft {
+  Id               String @id() @unique() @db.Uuid
+  Identifier       String @unique() @db.VarChar
+  DisplayName      String @db.VarChar
+  AircraftStatusId Int
+
+  AircraftClassId  String    @db.Uuid
+  VirtualAirlineId String    @db.Uuid
+  CurrentAirportId String?   @db.Uuid
+  LastRefresh      DateTime? @db.Timestamp(6)
+  CreatedAt        DateTime  @default(now()) @db.Timestamp(6)
+  UpdatedAt        DateTime  @default(now()) @db.Timestamp(6)
+
+  // relations
+  AircraftClass       AircraftClass         @relation(fields: [AircraftClassId], references: [Id])
+  VirtualAirline      VirtualAirline        @relation(fields: [VirtualAirlineId], references: [Id])
+  AircraftStatus      AircraftStatus        @relation(fields: [AircraftStatusId], references: [Id])
+  CurrentAirport      Airport?              @relation("AircraftAtAirport", fields: [CurrentAirportId], references: [Id])
+  AircraftMaintenance AircraftMaintenance[]
+  Flights             Flight[]
+}
+
+model AircraftClass {
+  Id        String @id() @unique() @db.Uuid
+  ShortName String @unique() @db.VarChar
+  Name      String @db.VarChar
+
+  // relations
+  Aircrafts Aircraft[]
+}
+
+model AircraftMaintenance {
+  Id                            String   @id() @default(uuid()) @db.Uuid
+  AircraftId                    String   @db.Uuid
+  AnnualCheckup                 Boolean
+  Inspection100Hours            Boolean
+  FailuresRepair                Boolean
+  AirframeRepair                Boolean
+  AirframeReplace               Boolean
+  EcoSeats                      Int
+  BusSeats                      Int
+  FirstClassSeats               Int
+  AirframeRepairCondition       Decimal  @db.Decimal(10, 6)
+  MaintenanceFBOId              String   @db.Uuid
+  RemainingMaintenanceWorkHours Decimal  @db.Decimal(10, 6)
+  Amount                        Decimal  @db.Decimal(10, 2)
+  CreatedAt                     DateTime @default(now()) @db.Timestamp(6)
+  UpdatedAt                     DateTime @default(now()) @db.Timestamp(6)
+
+  // relations
+  Aircraft Aircraft @relation(fields: [AircraftId], references: [Id])
+}
+
+// 0: Idle
+// 1: Maintenance
+// 2: Apron Work
+// 3: In Flight
+// 4: Warp
+// 5: Ferry
+model AircraftStatus {
+  Id   Int    @id() @unique()
+  Name String @db.VarChar
+
+  // relations
+  Aircrafts Aircraft[]
+}
+
+model Airport {
+  Id             String   @id() @unique() @db.Uuid
+  ICAO           String   @unique() @db.VarChar
+  IATA           String?  @unique() @db.VarChar
+  Name           String   @db.VarChar
+  Size           Int      @default(9)
+  City           String?  @db.VarChar
+  State          String?  @db.VarChar
+  CountryCode    String?  @db.VarChar
+  CountryName    String?  @db.VarChar
+  Latitude       Decimal  @db.Decimal(10, 6)
+  Longitude      Decimal  @db.Decimal(10, 6)
+  HomeWebSiteUrl String?  @db.VarChar
+  WikiUrl        String?  @db.VarChar
+  CreatedAt      DateTime @default(now()) @db.Timestamp(6)
+  UpdatedAt      DateTime @default(now()) @db.Timestamp(6)
+
+  // relations
+  AircraftAtAirport        Aircraft[] @relation("AircraftAtAirport")
+  DepartingFlights         Flight[]   @relation("DepartureAirport")
+  ArrivingFlights          Flight[]   @relation("ArrivalIntendedAirport")
+  ArrivingAlternateFlights Flight[]   @relation("ArrivalAlternateAirport")
+  ArrivingActualFlights    Flight[]   @relation("ArrivalActualAirport")
+}
+
+model Flight {
+  Id                                         String    @id() @unique() @db.Uuid
+  AircraftId                                 String?   @db.Uuid
+  CompanyId                                  String    @db.Uuid
+  Registered                                 Boolean
+  Category                                   Int
+  ResultComments                             String
+  StartTime                                  DateTime?
+  EndTime                                    DateTime?
+  EngineOnTime                               DateTime?
+  EngineOffTime                              DateTime?
+  AirborneTime                               DateTime?
+  LandedTime                                 DateTime?
+  IntendedFlightLevel                        Int?
+  Passengers                                 Int?
+  Cargo                                      Int?
+  AddedFuelQty                               Decimal?
+  IsAI                                       Boolean
+  VerticalSpeedAtTouchdownMpS                Decimal?
+  MaxGForce                                  Decimal?
+  MinGForce                                  Decimal?
+  MaxBank                                    Decimal?
+  MaxPitch                                   Decimal?
+  HasStalled                                 Boolean   @default(false)
+  HasOverspeeded                             Boolean   @default(false)
+  XPFlight                                   Int?
+  XPFlightBonus                              Decimal?
+  XPMissions                                 Int?
+  CargosTotalWeight                          Decimal?
+  PAXCount                                   Int?
+  AircraftCurrentFOB                         Decimal?
+  AircraftCurrentAltitude                    Decimal?
+  ActualCruiseAltitude                       Decimal?
+  ActualConsumptionAtCruiseLevelInLbsPerHour Decimal?
+  ActualTotalFuelConsumptionInLbs            Decimal?
+  ActualConsumptionAtCruiseLevelInGalPerHour Decimal?
+  ActualTASAtCruiseLevel                     Decimal?
+  ActualCruiseTimeInMinutes                  Decimal?
+  ActualPressureAltitude                     Decimal?
+  RegisterState                              Int?
+  WrongFuelDetected                          Boolean   @default(false)
+  WrongWeightDetected                        Boolean   @default(false)
+  TimeOffset                                 Decimal?
+  StartLatitude                              Decimal?
+  StartLongitude                             Decimal?
+  StartHeading                               Decimal?
+  UseFreelanceRouteSchedule                  Boolean   @default(false)
+  RestCrewAfterWarp                          Boolean   @default(false)
+  Score                                      Decimal?
+  CanResumeOrAbort                           Boolean   @default(false)
+  EngineOnRealTime                           DateTime? @db.Timestamp(6)
+  EngineOffRealTime                          DateTime? @db.Timestamp(6)
+  LandedRealTime                             DateTime? @db.Timestamp(6)
+  AirborneRealTime                           DateTime? @db.Timestamp(6)
+  DepartureAirportId                         String?   @db.Uuid
+  ArrivalIntendedAirportId                   String?   @db.Uuid
+  ArrivalAlternateAirportId                  String?   @db.Uuid
+  ArrivalActualAirportId                     String?   @db.Uuid
+  VAId                                       String?   @db.Uuid
+  MemberId                                   String?   @db.Uuid
+  LastRefresh                                DateTime? @db.Timestamp(6)
+  CreatedAt                                  DateTime  @default(now()) @db.Timestamp(6)
+  UpdatedAt                                  DateTime  @default(now()) @db.Timestamp(6)
+
+  // relations
+  FlightStatus            FlightStatus    @default(PENDING)
+  Company                 Company         @relation(fields: [CompanyId], references: [Id])
+  VirtualAirline          VirtualAirline? @relation(fields: [VAId], references: [Id])
+  Aircraft                Aircraft?       @relation(fields: [AircraftId], references: [Id])
+  FlightRoute             FlightRoute[]
+  DepartureAirport        Airport?        @relation("DepartureAirport", fields: [DepartureAirportId], references: [Id])
+  ArrivalIntendedAirport  Airport?        @relation("ArrivalIntendedAirport", fields: [ArrivalIntendedAirportId], references: [Id])
+  ArrivalAlternateAirport Airport?        @relation("ArrivalAlternateAirport", fields: [ArrivalAlternateAirportId], references: [Id])
+  ArrivalActualAirport    Airport?        @relation("ArrivalActualAirport", fields: [ArrivalActualAirportId], references: [Id])
+  Member                  Member?         @relation(fields: [MemberId], references: [Id])
+}
+
+enum FlightStatus {
+  PENDING
+  FLIGHT
+  COMPLETED
+  CANCELLED
+  WARP
+}
+
+model FlightRoute {
+  Id        String   @id() @default(uuid()) @db.Uuid
+  FlightId  String?  @db.Uuid
+  MemberId  String   @db.Uuid
+  Route     String   @db.VarChar
+  CreatedAt DateTime @default(now()) @db.Timestamp(6)
+  UpdatedAt DateTime @default(now()) @db.Timestamp(6)
+
+  // relations
+  Flight Flight? @relation(fields: [FlightId], references: [Id])
+  Member Member  @relation(fields: [MemberId], references: [Id])
 }
 
 model Job {
@@ -223,6 +537,8 @@ model Job {
 enum JobType {
   VIRTUAL_AIRLINE_SYNC
   VIRTUAL_AIRLINE_MEMBERS_SYNC
+  VIRTUAL_AIRLINE_FLEET_SYNC
+  VIRTUAL_AIRLINE_FLIGHTS_SYNC
 }
 
 enum JobStatus {
@@ -242,7 +558,7 @@ enum CronExpression {
   EVERY_HOUR
   EVERY_6_HOURS
   EVERY_12_HOURS
-  EVERY_DAY
+  EVERY_DAY_AT_MIDNIGHT
   EVERY_WEEK
   EVERY_MONTH
 }

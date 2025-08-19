@@ -112,7 +112,7 @@ export class JobSchedulerService implements OnModuleInit {
 
     public matchCronExpression(cronExpression: CronExpression): NestCronExpression {
         const nestCronExpression: NestCronExpression = NestCronExpression[cronExpression];
-        console.log(NestCronExpression);
+
         if (!nestCronExpression) {
             throw new Error(`Invalid cron expression: ${cronExpression}`);
         }

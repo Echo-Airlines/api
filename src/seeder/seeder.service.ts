@@ -4,7 +4,7 @@ import { eachOfSeries } from 'async';
 import { LoggerService } from '@/logger/logger.service';
 import SeedData from './SeederData';
 import { PrismaService } from '@prisma/prisma.service';
-import { AircraftClass, AircraftStatus, AppConfig, Job, Livery, Permission, Prisma, Role, User, World } from 'prisma/generated/prisma';
+import { AircraftClass, AircraftStatus, AppConfig, Job, Livery, Permission, Prisma, Role, User, VirtualAirline, World } from 'prisma/generated/prisma';
 import { HashService } from '@/hash/hash.service';
 
 @Injectable()
@@ -27,9 +27,6 @@ export class SeederService {
       this.logger.debug(
         'Database seeding is disabled. Set the SEED_DATABASE environment variable to true to enable seeding.',
       );
-      return;
-    } else if (!SeedData.roles || !SeedData.users || !SeedData.permissions) {
-      this.logger.debug('No roles, users, or permissions to seed.');
       return;
     } else {
       // first seed permissions
@@ -105,6 +102,16 @@ export class SeederService {
         .catch((err) => {
           this.logger.error('Error seeding liveries:', err);
         });
+
+      if (SeedData.virtualAirline) {
+        await this._seedVirtualAirline(SeedData.virtualAirline)
+          .then(async (virtualAirline: VirtualAirline) => {
+            
+          })
+          .catch((err) => {
+            this.logger.error('Error seeding virtual airline:', err);
+          });
+      }
 
       // then print a message that seeding is complete with the number of users and roles created.
       this.logger.debug('Seeding complete.');
@@ -633,6 +640,35 @@ export class SeederService {
       }
 
       return resolve(entity);
+    });
+  }
+
+  private async _seedVirtualAirline(dto: Prisma.VirtualAirlineCreateInput): Promise<VirtualAirline> {
+    return new Promise(async (resolve, reject) => {
+      if (!dto) {
+        this.logger.debug('No virtual airline to seed.');
+        return reject('no virtual airline to seed');
+      }
+
+    this.logger.debug(`Seeding virtual airline ${dto.Name}.`);
+
+    let entity: VirtualAirline|null = await this.prisma.virtualAirline.findFirst({
+      where: {
+        Id: dto.Id,
+      },
+    });
+
+    if (!entity) {
+      entity = await this.prisma.virtualAirline.create({
+        data: dto,
+      });
+
+      this.logger.debug(`Virtual airline ${dto.Id} has been created.`);
+    } else {
+      this.logger.debug(`Virtual airline ${dto.Id} already exists in the database, skipping.`);
+    }
+
+    return resolve(entity);
     });
   }
 }

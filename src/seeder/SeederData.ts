@@ -12,6 +12,7 @@ export type SeedData = {
     appConfig: Prisma.AppConfigCreateInput;
     aircraftStatuses: Prisma.AircraftStatusCreateInput[];
     aircraftClasses: Prisma.AircraftClassCreateInput[];
+    virtualAirline: Prisma.VirtualAirlineCreateInput|undefined;
 };
 
 export const SeedData_Permissions: Prisma.PermissionCreateInput[] = [
@@ -264,6 +265,12 @@ export const SeedData_AppConfig: Prisma.AppConfigCreateInput = {
     DiscordAuthCreateUser: process.env.DISCORDAUTHCREATEUSER === 'true',
 };
 
+export const SeedData_VirtualAirline: Prisma.VirtualAirlineCreateInput|undefined = ((process.env.ONAIRVIRTUALAIRLINEID && process.env.ONAIRAPIKEY) ? {
+        Id: process.env.ONAIRVIRTUALAIRLINEID,
+        ApiKey: process.env.ONAIRAPIKEY,
+        IsPrimary: true
+    } : undefined);
+
 const SeedData: SeedData = {
     roles: SeedData_UserRoles,
     permissions: SeedData_Permissions,
@@ -274,6 +281,7 @@ const SeedData: SeedData = {
     appConfig: SeedData_AppConfig,
     aircraftStatuses: SeedData_AircraftStatuses,
     aircraftClasses: SeedData_AircraftClasses,
+    virtualAirline: SeedData_VirtualAirline,
 };
 
 export default SeedData

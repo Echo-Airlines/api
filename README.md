@@ -1,98 +1,253 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Echo Airlines API v2
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A comprehensive NestJS-based REST API for managing virtual airline operations, flight tracking, and Discord integration.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 🚀 Features
 
-## Description
+- **Virtual Airline Management** - Complete VA operations with member management
+- **Flight Tracking** - Integration with OnAir and FSHub APIs for real-time flight data
+- **Discord Integration** - OAuth2 authentication and webhook messaging system
+- **User Management** - Role-based access control with Discord and local authentication
+- **Job Scheduling** - Background task processing with BullMQ
+- **Database Management** - PostgreSQL with Prisma ORM
+- **Real-time Notifications** - Event-driven notification system
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## 🏗️ Architecture
 
-## Project setup
+Built with modern technologies and best practices:
 
-```bash
-$ npm install
+- **Framework**: NestJS 11 (Node.js)
+- **Database**: PostgreSQL with Prisma ORM
+- **Authentication**: JWT, Discord OAuth2, Local authentication
+- **Job Queue**: BullMQ with Redis
+- **API Integration**: OnAir API, FSHub API
+- **Validation**: Class-validator with DTOs
+- **Testing**: Jest for unit and e2e tests
+
+## 📋 Prerequisites
+
+- Node.js 18+ 
+- PostgreSQL database
+- Redis (for job queue)
+- Discord Developer Application (for OAuth2)
+
+## 🛠️ Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd api-v2
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Environment setup**
+   ```bash
+   cp sample.env .env
+   # Edit .env with your configuration
+   ```
+
+4. **Database setup**
+   ```bash
+   # Generate Prisma client
+   npx prisma generate
+   
+   # Run migrations
+   npx prisma migrate dev
+   
+   # Seed database with base data
+   npm run prisma:seed
+   ```
+
+5. **Start the application**
+   ```bash
+   # Development
+   npm run start:dev
+   
+   # Production build
+   npm run build
+   npm run start:prod
+   ```
+
+## ⚙️ Configuration
+
+### Environment Variables
+
+Key environment variables (see `sample.env` for complete list):
+
+```env
+# Database
+DATABASE_URL=postgresql://user:password@localhost:5432/database
+
+# API Configuration
+API_HOST=localhost
+API_PORT=3001
+API_PREFIX=api
+
+# Discord OAuth2
+DISCORD_CLIENT_ID=your_discord_client_id
+DISCORD_CLIENT_SECRET=your_discord_client_secret
+DISCORD_CALLBACK_URL=http://localhost:3001/api/auth/discord/callback
+
+# OnAir Integration
+ONAIRAPIKEY=your_onair_api_key
+ONAIRVIRTUALAIRLINEID=your_va_id
+
+# Frontend URLs
+FRONTEND_URL=https://www.echoairlines.com
 ```
 
-## Compile and run the project
+### Discord Setup
+
+For Discord OAuth2 authentication setup, see [DISCORD_AUTH_SETUP.md](./DISCORD_AUTH_SETUP.md).
+
+## 🗄️ Database Schema
+
+The API uses PostgreSQL with the following main entities:
+
+- **Users** - User accounts with role-based permissions
+- **Virtual Airlines** - VA information and configuration
+- **Members** - VA membership and roles
+- **Flights** - Flight tracking and statistics
+- **Aircraft** - Fleet management
+- **Airports** - Airport database
+- **Discord Integration** - Webhooks, message templates, events
+- **Jobs** - Background task management
+
+## 📡 API Endpoints
+
+### Core Modules
+
+- **`/api/auth`** - Authentication (Discord OAuth2, Local)
+- **`/api/users`** - User management
+- **`/api/admin`** - Administrative functions
+- **`/api/va`** - Virtual airline operations
+- **`/api/flights`** - Flight tracking
+- **`/api/aircraft`** - Fleet management
+- **`/api/airports`** - Airport information
+- **`/api/discord`** - Discord integration
+- **`/api/jobs`** - Job management
+
+### Authentication Flow
+
+1. **Discord OAuth2**: `/api/auth/discord` → Discord → Callback → JWT Token
+2. **Local Auth**: `/api/auth/login` → Username/Password → JWT Token
+3. **Protected Routes**: Include `Authorization: Bearer <token>` header
+
+## 🔧 Development
+
+### Available Scripts
 
 ```bash
-# development
-$ npm run start
+# Development
+npm run start:dev          # Start with watch mode
+npm run start:debug        # Start with debug mode
 
-# watch mode
-$ npm run start:dev
+# Building
+npm run build              # Build for production
+npm run start:prod         # Start production build
 
-# production mode
-$ npm run start:prod
+# Testing
+npm run test               # Run unit tests
+npm run test:watch         # Run tests in watch mode
+npm run test:e2e           # Run end-to-end tests
+npm run test:cov           # Run tests with coverage
+
+# Code Quality
+npm run lint               # Run ESLint
+npm run format             # Format code with Prettier
 ```
 
-## Run tests
+### Project Structure
+
+```
+src/
+├── admin/                 # Administrative functions
+├── aircraft/              # Aircraft management
+├── airport/               # Airport operations
+├── auth/                  # Authentication system
+├── discord/               # Discord integration
+├── flight/                # Flight tracking
+├── fshub/                 # FSHub API integration
+├── jobs/                  # Background job processing
+├── listener/              # Event listening system
+├── member/                # VA membership management
+├── on-air/                # OnAir API integration
+├── prisma/                # Database client and utilities
+├── user/                  # User management
+├── virtual-airline/       # Virtual airline operations
+└── app.module.ts          # Main application module
+```
+
+## 🧪 Testing
+
+The project includes comprehensive testing setup:
+
+- **Unit Tests**: Jest with NestJS testing utilities
+- **E2E Tests**: End-to-end API testing
+- **Coverage**: Code coverage reporting
+
+Run tests with:
+```bash
+npm run test              # Unit tests
+npm run test:e2e          # E2E tests
+npm run test:cov          # Coverage report
+```
+
+## 🚀 Deployment
+
+### Production Build
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm run build
+npm run start:prod
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### Docker (if applicable)
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+docker build -t echo-airlines-api .
+docker run -p 3001:3001 echo-airlines-api
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### Environment Considerations
 
-## Resources
+- Set `NODE_ENV=production`
+- Configure production database URLs
+- Set secure JWT secrets
+- Enable HTTPS in production
+- Configure proper CORS settings
 
-Check out a few resources that may come in handy when working with NestJS:
+## 📊 Monitoring & Logging
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+- **Logging**: Structured logging with configurable levels
+- **Job Monitoring**: BullMQ dashboard for background jobs
+- **Health Checks**: Built-in health check endpoints
 
-## Support
+## 🤝 Contributing
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests for new functionality
+5. Ensure all tests pass
+6. Submit a pull request
 
-## Stay in touch
+## 📝 License
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+This project is private and proprietary to Echo Airlines.
 
-## License
+## 🆘 Support
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+For support and questions:
+- Check the [Discord Auth Setup Guide](./DISCORD_AUTH_SETUP.md)
+- Review the API documentation
+- Contact the development team
+
+---
+
+**Version**: 0.5.0  
+**Last Updated**: 2024

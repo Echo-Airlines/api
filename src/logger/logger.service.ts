@@ -26,6 +26,10 @@ export class LoggerService extends ConsoleLogger implements _LoggerService {
     this.options.logLevels = logLevels;
   }
 
+  public setLogLevels(levels: LogLevel[]) {
+    this.options.logLevels = levels;
+  }
+
   public printStartupBanner(apiUrl: string, adminUser?: string, adminPassword?: string) {
     const padString = (str: string, length: number) => str.padEnd(length, ' ');
     const bannerWidth = 60;

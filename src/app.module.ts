@@ -20,6 +20,8 @@ import { AirportModule } from './airport/airport.module';
 import { FlightModule } from './flight/flight.module';
 import { DiscordModule } from './discord/discord.module';
 import { ListenerModule } from './listener/listener.module';
+import { FshubModule } from './fshub/fshub.module';
+import { NotifierModule } from './notifier/notifier.module';
 
 @Module({
   imports: [
@@ -43,6 +45,8 @@ import { ListenerModule } from './listener/listener.module';
     FlightModule,
     DiscordModule,
     ListenerModule,
+    FshubModule,
+    NotifierModule,
   ],
   controllers: [AppController],
   providers: [AppService],
@@ -56,12 +60,6 @@ export class AppModule implements OnModuleInit {
   ) {}
 
   async onModuleInit() {   
-    const seedDatabase =
-      this.configService.get<string>('SEED_DATABASE') || 'false';
-
-    if (seedDatabase === 'true') {
-      await this.seederService.run();
-    }
      
   }
 }

@@ -111,7 +111,7 @@ async function executeVirtualAirlineFlightSync(dto: OnAirFlight, virtualAirline:
                     Identifier: dto.Aircraft.Identifier,
                 },
                 create: {
-                    Id: dto.Id,
+                    Id: dto.Aircraft.Id,
                     Identifier: dto.Aircraft.Identifier,
                     DisplayName: dto.Aircraft.AircraftType.DisplayName,
                     LastRefresh: new Date(),
@@ -169,6 +169,7 @@ async function executeVirtualAirlineFlightSync(dto: OnAirFlight, virtualAirline:
                     Id: dto.Company.Id,
                 },
                 create: {
+                    Id: dto.Company.Id,
                     Name: dto.Company.Name,
                     AirlineCode: dto.Company.AirlineCode,
                     CreationDate: (dto.Company.CreationDate) ? new Date(dto.Company.CreationDate) : new Date(),

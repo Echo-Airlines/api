@@ -29,10 +29,10 @@ export type InviteCode = $Result.DefaultSelection<Prisma.$InviteCodePayload>
  */
 export type DiscordMessage = $Result.DefaultSelection<Prisma.$DiscordMessagePayload>
 /**
- * Model DiscordMessageType
+ * Model DiscordMessageTemplate
  * 
  */
-export type DiscordMessageType = $Result.DefaultSelection<Prisma.$DiscordMessageTypePayload>
+export type DiscordMessageTemplate = $Result.DefaultSelection<Prisma.$DiscordMessageTemplatePayload>
 /**
  * Model DiscordChannelWebhook
  * 
@@ -43,6 +43,11 @@ export type DiscordChannelWebhook = $Result.DefaultSelection<Prisma.$DiscordChan
  * 
  */
 export type ListenerEvent = $Result.DefaultSelection<Prisma.$ListenerEventPayload>
+/**
+ * Model ListenerEventSender
+ * 
+ */
+export type ListenerEventSender = $Result.DefaultSelection<Prisma.$ListenerEventSenderPayload>
 /**
  * Model User
  * 
@@ -367,14 +372,14 @@ export class PrismaClient<
   get discordMessage(): Prisma.DiscordMessageDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.discordMessageType`: Exposes CRUD operations for the **DiscordMessageType** model.
+   * `prisma.discordMessageTemplate`: Exposes CRUD operations for the **DiscordMessageTemplate** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more DiscordMessageTypes
-    * const discordMessageTypes = await prisma.discordMessageType.findMany()
+    * // Fetch zero or more DiscordMessageTemplates
+    * const discordMessageTemplates = await prisma.discordMessageTemplate.findMany()
     * ```
     */
-  get discordMessageType(): Prisma.DiscordMessageTypeDelegate<ExtArgs, ClientOptions>;
+  get discordMessageTemplate(): Prisma.DiscordMessageTemplateDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.discordChannelWebhook`: Exposes CRUD operations for the **DiscordChannelWebhook** model.
@@ -395,6 +400,16 @@ export class PrismaClient<
     * ```
     */
   get listenerEvent(): Prisma.ListenerEventDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.listenerEventSender`: Exposes CRUD operations for the **ListenerEventSender** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ListenerEventSenders
+    * const listenerEventSenders = await prisma.listenerEventSender.findMany()
+    * ```
+    */
+  get listenerEventSender(): Prisma.ListenerEventSenderDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.user`: Exposes CRUD operations for the **User** model.
@@ -1018,9 +1033,10 @@ export namespace Prisma {
     AppConfig: 'AppConfig',
     InviteCode: 'InviteCode',
     DiscordMessage: 'DiscordMessage',
-    DiscordMessageType: 'DiscordMessageType',
+    DiscordMessageTemplate: 'DiscordMessageTemplate',
     DiscordChannelWebhook: 'DiscordChannelWebhook',
     ListenerEvent: 'ListenerEvent',
+    ListenerEventSender: 'ListenerEventSender',
     User: 'User',
     UserPrivacySettings: 'UserPrivacySettings',
     Role: 'Role',
@@ -1057,7 +1073,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "appConfig" | "inviteCode" | "discordMessage" | "discordMessageType" | "discordChannelWebhook" | "listenerEvent" | "user" | "userPrivacySettings" | "role" | "permission" | "livery" | "virtualAirline" | "virtualAirlineRole" | "world" | "member" | "company" | "aircraft" | "aircraftClass" | "aircraftMaintenance" | "aircraftStatus" | "airport" | "flight" | "flightRoute" | "job"
+      modelProps: "appConfig" | "inviteCode" | "discordMessage" | "discordMessageTemplate" | "discordChannelWebhook" | "listenerEvent" | "listenerEventSender" | "user" | "userPrivacySettings" | "role" | "permission" | "livery" | "virtualAirline" | "virtualAirlineRole" | "world" | "member" | "company" | "aircraft" | "aircraftClass" | "aircraftMaintenance" | "aircraftStatus" | "airport" | "flight" | "flightRoute" | "job"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1283,77 +1299,77 @@ export namespace Prisma {
           }
         }
       }
-      DiscordMessageType: {
-        payload: Prisma.$DiscordMessageTypePayload<ExtArgs>
-        fields: Prisma.DiscordMessageTypeFieldRefs
+      DiscordMessageTemplate: {
+        payload: Prisma.$DiscordMessageTemplatePayload<ExtArgs>
+        fields: Prisma.DiscordMessageTemplateFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.DiscordMessageTypeFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DiscordMessageTypePayload> | null
+            args: Prisma.DiscordMessageTemplateFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DiscordMessageTemplatePayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.DiscordMessageTypeFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DiscordMessageTypePayload>
+            args: Prisma.DiscordMessageTemplateFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DiscordMessageTemplatePayload>
           }
           findFirst: {
-            args: Prisma.DiscordMessageTypeFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DiscordMessageTypePayload> | null
+            args: Prisma.DiscordMessageTemplateFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DiscordMessageTemplatePayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.DiscordMessageTypeFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DiscordMessageTypePayload>
+            args: Prisma.DiscordMessageTemplateFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DiscordMessageTemplatePayload>
           }
           findMany: {
-            args: Prisma.DiscordMessageTypeFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DiscordMessageTypePayload>[]
+            args: Prisma.DiscordMessageTemplateFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DiscordMessageTemplatePayload>[]
           }
           create: {
-            args: Prisma.DiscordMessageTypeCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DiscordMessageTypePayload>
+            args: Prisma.DiscordMessageTemplateCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DiscordMessageTemplatePayload>
           }
           createMany: {
-            args: Prisma.DiscordMessageTypeCreateManyArgs<ExtArgs>
+            args: Prisma.DiscordMessageTemplateCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.DiscordMessageTypeCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DiscordMessageTypePayload>[]
+            args: Prisma.DiscordMessageTemplateCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DiscordMessageTemplatePayload>[]
           }
           delete: {
-            args: Prisma.DiscordMessageTypeDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DiscordMessageTypePayload>
+            args: Prisma.DiscordMessageTemplateDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DiscordMessageTemplatePayload>
           }
           update: {
-            args: Prisma.DiscordMessageTypeUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DiscordMessageTypePayload>
+            args: Prisma.DiscordMessageTemplateUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DiscordMessageTemplatePayload>
           }
           deleteMany: {
-            args: Prisma.DiscordMessageTypeDeleteManyArgs<ExtArgs>
+            args: Prisma.DiscordMessageTemplateDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.DiscordMessageTypeUpdateManyArgs<ExtArgs>
+            args: Prisma.DiscordMessageTemplateUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.DiscordMessageTypeUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DiscordMessageTypePayload>[]
+            args: Prisma.DiscordMessageTemplateUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DiscordMessageTemplatePayload>[]
           }
           upsert: {
-            args: Prisma.DiscordMessageTypeUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DiscordMessageTypePayload>
+            args: Prisma.DiscordMessageTemplateUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DiscordMessageTemplatePayload>
           }
           aggregate: {
-            args: Prisma.DiscordMessageTypeAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateDiscordMessageType>
+            args: Prisma.DiscordMessageTemplateAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDiscordMessageTemplate>
           }
           groupBy: {
-            args: Prisma.DiscordMessageTypeGroupByArgs<ExtArgs>
-            result: $Utils.Optional<DiscordMessageTypeGroupByOutputType>[]
+            args: Prisma.DiscordMessageTemplateGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DiscordMessageTemplateGroupByOutputType>[]
           }
           count: {
-            args: Prisma.DiscordMessageTypeCountArgs<ExtArgs>
-            result: $Utils.Optional<DiscordMessageTypeCountAggregateOutputType> | number
+            args: Prisma.DiscordMessageTemplateCountArgs<ExtArgs>
+            result: $Utils.Optional<DiscordMessageTemplateCountAggregateOutputType> | number
           }
         }
       }
@@ -1502,6 +1518,80 @@ export namespace Prisma {
           count: {
             args: Prisma.ListenerEventCountArgs<ExtArgs>
             result: $Utils.Optional<ListenerEventCountAggregateOutputType> | number
+          }
+        }
+      }
+      ListenerEventSender: {
+        payload: Prisma.$ListenerEventSenderPayload<ExtArgs>
+        fields: Prisma.ListenerEventSenderFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ListenerEventSenderFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ListenerEventSenderPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ListenerEventSenderFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ListenerEventSenderPayload>
+          }
+          findFirst: {
+            args: Prisma.ListenerEventSenderFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ListenerEventSenderPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ListenerEventSenderFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ListenerEventSenderPayload>
+          }
+          findMany: {
+            args: Prisma.ListenerEventSenderFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ListenerEventSenderPayload>[]
+          }
+          create: {
+            args: Prisma.ListenerEventSenderCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ListenerEventSenderPayload>
+          }
+          createMany: {
+            args: Prisma.ListenerEventSenderCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ListenerEventSenderCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ListenerEventSenderPayload>[]
+          }
+          delete: {
+            args: Prisma.ListenerEventSenderDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ListenerEventSenderPayload>
+          }
+          update: {
+            args: Prisma.ListenerEventSenderUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ListenerEventSenderPayload>
+          }
+          deleteMany: {
+            args: Prisma.ListenerEventSenderDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ListenerEventSenderUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ListenerEventSenderUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ListenerEventSenderPayload>[]
+          }
+          upsert: {
+            args: Prisma.ListenerEventSenderUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ListenerEventSenderPayload>
+          }
+          aggregate: {
+            args: Prisma.ListenerEventSenderAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateListenerEventSender>
+          }
+          groupBy: {
+            args: Prisma.ListenerEventSenderGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ListenerEventSenderGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ListenerEventSenderCountArgs<ExtArgs>
+            result: $Utils.Optional<ListenerEventSenderCountAggregateOutputType> | number
           }
         }
       }
@@ -2932,9 +3022,10 @@ export namespace Prisma {
     appConfig?: AppConfigOmit
     inviteCode?: InviteCodeOmit
     discordMessage?: DiscordMessageOmit
-    discordMessageType?: DiscordMessageTypeOmit
+    discordMessageTemplate?: DiscordMessageTemplateOmit
     discordChannelWebhook?: DiscordChannelWebhookOmit
     listenerEvent?: ListenerEventOmit
+    listenerEventSender?: ListenerEventSenderOmit
     user?: UserOmit
     userPrivacySettings?: UserPrivacySettingsOmit
     role?: RoleOmit
@@ -3060,32 +3151,32 @@ export namespace Prisma {
 
 
   /**
-   * Count Type DiscordMessageTypeCountOutputType
+   * Count Type DiscordMessageTemplateCountOutputType
    */
 
-  export type DiscordMessageTypeCountOutputType = {
+  export type DiscordMessageTemplateCountOutputType = {
     DiscordMessages: number
   }
 
-  export type DiscordMessageTypeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    DiscordMessages?: boolean | DiscordMessageTypeCountOutputTypeCountDiscordMessagesArgs
+  export type DiscordMessageTemplateCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    DiscordMessages?: boolean | DiscordMessageTemplateCountOutputTypeCountDiscordMessagesArgs
   }
 
   // Custom InputTypes
   /**
-   * DiscordMessageTypeCountOutputType without action
+   * DiscordMessageTemplateCountOutputType without action
    */
-  export type DiscordMessageTypeCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DiscordMessageTemplateCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the DiscordMessageTypeCountOutputType
+     * Select specific fields to fetch from the DiscordMessageTemplateCountOutputType
      */
-    select?: DiscordMessageTypeCountOutputTypeSelect<ExtArgs> | null
+    select?: DiscordMessageTemplateCountOutputTypeSelect<ExtArgs> | null
   }
 
   /**
-   * DiscordMessageTypeCountOutputType without action
+   * DiscordMessageTemplateCountOutputType without action
    */
-  export type DiscordMessageTypeCountOutputTypeCountDiscordMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DiscordMessageTemplateCountOutputTypeCountDiscordMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: DiscordMessageWhereInput
   }
 
@@ -3096,10 +3187,12 @@ export namespace Prisma {
 
   export type DiscordChannelWebhookCountOutputType = {
     DiscordMessages: number
+    ListenerEventSenders: number
   }
 
   export type DiscordChannelWebhookCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     DiscordMessages?: boolean | DiscordChannelWebhookCountOutputTypeCountDiscordMessagesArgs
+    ListenerEventSenders?: boolean | DiscordChannelWebhookCountOutputTypeCountListenerEventSendersArgs
   }
 
   // Custom InputTypes
@@ -3118,6 +3211,44 @@ export namespace Prisma {
    */
   export type DiscordChannelWebhookCountOutputTypeCountDiscordMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: DiscordMessageWhereInput
+  }
+
+  /**
+   * DiscordChannelWebhookCountOutputType without action
+   */
+  export type DiscordChannelWebhookCountOutputTypeCountListenerEventSendersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ListenerEventSenderWhereInput
+  }
+
+
+  /**
+   * Count Type ListenerEventSenderCountOutputType
+   */
+
+  export type ListenerEventSenderCountOutputType = {
+    ListenerEvents: number
+  }
+
+  export type ListenerEventSenderCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    ListenerEvents?: boolean | ListenerEventSenderCountOutputTypeCountListenerEventsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ListenerEventSenderCountOutputType without action
+   */
+  export type ListenerEventSenderCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ListenerEventSenderCountOutputType
+     */
+    select?: ListenerEventSenderCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ListenerEventSenderCountOutputType without action
+   */
+  export type ListenerEventSenderCountOutputTypeCountListenerEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ListenerEventWhereInput
   }
 
 
@@ -5871,20 +6002,20 @@ export namespace Prisma {
   }
 
   export type DiscordMessageAvgAggregateOutputType = {
-    DiscordMessageTypeId: number | null
+    DiscordMessageTemplateId: number | null
   }
 
   export type DiscordMessageSumAggregateOutputType = {
-    DiscordMessageTypeId: number | null
+    DiscordMessageTemplateId: number | null
   }
 
   export type DiscordMessageMinAggregateOutputType = {
     Id: string | null
     ChannelId: string | null
-    MessageId: string | null
     Content: string | null
-    DiscordMessageTypeId: number | null
+    DiscordMessageTemplateId: number | null
     DiscordChannelWebhookId: string | null
+    DiscordMessageSentAt: Date | null
     CreatedAt: Date | null
     UpdatedAt: Date | null
   }
@@ -5892,10 +6023,10 @@ export namespace Prisma {
   export type DiscordMessageMaxAggregateOutputType = {
     Id: string | null
     ChannelId: string | null
-    MessageId: string | null
     Content: string | null
-    DiscordMessageTypeId: number | null
+    DiscordMessageTemplateId: number | null
     DiscordChannelWebhookId: string | null
+    DiscordMessageSentAt: Date | null
     CreatedAt: Date | null
     UpdatedAt: Date | null
   }
@@ -5903,10 +6034,10 @@ export namespace Prisma {
   export type DiscordMessageCountAggregateOutputType = {
     Id: number
     ChannelId: number
-    MessageId: number
     Content: number
-    DiscordMessageTypeId: number
+    DiscordMessageTemplateId: number
     DiscordChannelWebhookId: number
+    DiscordMessageSentAt: number
     CreatedAt: number
     UpdatedAt: number
     _all: number
@@ -5914,20 +6045,20 @@ export namespace Prisma {
 
 
   export type DiscordMessageAvgAggregateInputType = {
-    DiscordMessageTypeId?: true
+    DiscordMessageTemplateId?: true
   }
 
   export type DiscordMessageSumAggregateInputType = {
-    DiscordMessageTypeId?: true
+    DiscordMessageTemplateId?: true
   }
 
   export type DiscordMessageMinAggregateInputType = {
     Id?: true
     ChannelId?: true
-    MessageId?: true
     Content?: true
-    DiscordMessageTypeId?: true
+    DiscordMessageTemplateId?: true
     DiscordChannelWebhookId?: true
+    DiscordMessageSentAt?: true
     CreatedAt?: true
     UpdatedAt?: true
   }
@@ -5935,10 +6066,10 @@ export namespace Prisma {
   export type DiscordMessageMaxAggregateInputType = {
     Id?: true
     ChannelId?: true
-    MessageId?: true
     Content?: true
-    DiscordMessageTypeId?: true
+    DiscordMessageTemplateId?: true
     DiscordChannelWebhookId?: true
+    DiscordMessageSentAt?: true
     CreatedAt?: true
     UpdatedAt?: true
   }
@@ -5946,10 +6077,10 @@ export namespace Prisma {
   export type DiscordMessageCountAggregateInputType = {
     Id?: true
     ChannelId?: true
-    MessageId?: true
     Content?: true
-    DiscordMessageTypeId?: true
+    DiscordMessageTemplateId?: true
     DiscordChannelWebhookId?: true
+    DiscordMessageSentAt?: true
     CreatedAt?: true
     UpdatedAt?: true
     _all?: true
@@ -6044,10 +6175,10 @@ export namespace Prisma {
   export type DiscordMessageGroupByOutputType = {
     Id: string
     ChannelId: string
-    MessageId: string
     Content: string
-    DiscordMessageTypeId: number
+    DiscordMessageTemplateId: number | null
     DiscordChannelWebhookId: string | null
+    DiscordMessageSentAt: Date | null
     CreatedAt: Date
     UpdatedAt: Date
     _count: DiscordMessageCountAggregateOutputType | null
@@ -6074,13 +6205,13 @@ export namespace Prisma {
   export type DiscordMessageSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     Id?: boolean
     ChannelId?: boolean
-    MessageId?: boolean
     Content?: boolean
-    DiscordMessageTypeId?: boolean
+    DiscordMessageTemplateId?: boolean
     DiscordChannelWebhookId?: boolean
+    DiscordMessageSentAt?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
-    DiscordMessageType?: boolean | DiscordMessageTypeDefaultArgs<ExtArgs>
+    DiscordMessageTemplate?: boolean | DiscordMessage$DiscordMessageTemplateArgs<ExtArgs>
     DiscordChannelWebhook?: boolean | DiscordMessage$DiscordChannelWebhookArgs<ExtArgs>
     ListenerEvents?: boolean | DiscordMessage$ListenerEventsArgs<ExtArgs>
     _count?: boolean | DiscordMessageCountOutputTypeDefaultArgs<ExtArgs>
@@ -6089,70 +6220,70 @@ export namespace Prisma {
   export type DiscordMessageSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     Id?: boolean
     ChannelId?: boolean
-    MessageId?: boolean
     Content?: boolean
-    DiscordMessageTypeId?: boolean
+    DiscordMessageTemplateId?: boolean
     DiscordChannelWebhookId?: boolean
+    DiscordMessageSentAt?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
-    DiscordMessageType?: boolean | DiscordMessageTypeDefaultArgs<ExtArgs>
+    DiscordMessageTemplate?: boolean | DiscordMessage$DiscordMessageTemplateArgs<ExtArgs>
     DiscordChannelWebhook?: boolean | DiscordMessage$DiscordChannelWebhookArgs<ExtArgs>
   }, ExtArgs["result"]["discordMessage"]>
 
   export type DiscordMessageSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     Id?: boolean
     ChannelId?: boolean
-    MessageId?: boolean
     Content?: boolean
-    DiscordMessageTypeId?: boolean
+    DiscordMessageTemplateId?: boolean
     DiscordChannelWebhookId?: boolean
+    DiscordMessageSentAt?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
-    DiscordMessageType?: boolean | DiscordMessageTypeDefaultArgs<ExtArgs>
+    DiscordMessageTemplate?: boolean | DiscordMessage$DiscordMessageTemplateArgs<ExtArgs>
     DiscordChannelWebhook?: boolean | DiscordMessage$DiscordChannelWebhookArgs<ExtArgs>
   }, ExtArgs["result"]["discordMessage"]>
 
   export type DiscordMessageSelectScalar = {
     Id?: boolean
     ChannelId?: boolean
-    MessageId?: boolean
     Content?: boolean
-    DiscordMessageTypeId?: boolean
+    DiscordMessageTemplateId?: boolean
     DiscordChannelWebhookId?: boolean
+    DiscordMessageSentAt?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
   }
 
-  export type DiscordMessageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "ChannelId" | "MessageId" | "Content" | "DiscordMessageTypeId" | "DiscordChannelWebhookId" | "CreatedAt" | "UpdatedAt", ExtArgs["result"]["discordMessage"]>
+  export type DiscordMessageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "ChannelId" | "Content" | "DiscordMessageTemplateId" | "DiscordChannelWebhookId" | "DiscordMessageSentAt" | "CreatedAt" | "UpdatedAt", ExtArgs["result"]["discordMessage"]>
   export type DiscordMessageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    DiscordMessageType?: boolean | DiscordMessageTypeDefaultArgs<ExtArgs>
+    DiscordMessageTemplate?: boolean | DiscordMessage$DiscordMessageTemplateArgs<ExtArgs>
     DiscordChannelWebhook?: boolean | DiscordMessage$DiscordChannelWebhookArgs<ExtArgs>
     ListenerEvents?: boolean | DiscordMessage$ListenerEventsArgs<ExtArgs>
     _count?: boolean | DiscordMessageCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type DiscordMessageIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    DiscordMessageType?: boolean | DiscordMessageTypeDefaultArgs<ExtArgs>
+    DiscordMessageTemplate?: boolean | DiscordMessage$DiscordMessageTemplateArgs<ExtArgs>
     DiscordChannelWebhook?: boolean | DiscordMessage$DiscordChannelWebhookArgs<ExtArgs>
   }
   export type DiscordMessageIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    DiscordMessageType?: boolean | DiscordMessageTypeDefaultArgs<ExtArgs>
+    DiscordMessageTemplate?: boolean | DiscordMessage$DiscordMessageTemplateArgs<ExtArgs>
     DiscordChannelWebhook?: boolean | DiscordMessage$DiscordChannelWebhookArgs<ExtArgs>
   }
 
   export type $DiscordMessagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "DiscordMessage"
     objects: {
-      DiscordMessageType: Prisma.$DiscordMessageTypePayload<ExtArgs>
+      DiscordMessageTemplate: Prisma.$DiscordMessageTemplatePayload<ExtArgs> | null
       DiscordChannelWebhook: Prisma.$DiscordChannelWebhookPayload<ExtArgs> | null
       ListenerEvents: Prisma.$ListenerEventPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       Id: string
       ChannelId: string
-      MessageId: string
       Content: string
-      DiscordMessageTypeId: number
+      DiscordMessageTemplateId: number | null
       DiscordChannelWebhookId: string | null
+      DiscordMessageSentAt: Date | null
       CreatedAt: Date
       UpdatedAt: Date
     }, ExtArgs["result"]["discordMessage"]>
@@ -6549,7 +6680,7 @@ export namespace Prisma {
    */
   export interface Prisma__DiscordMessageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    DiscordMessageType<T extends DiscordMessageTypeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DiscordMessageTypeDefaultArgs<ExtArgs>>): Prisma__DiscordMessageTypeClient<$Result.GetResult<Prisma.$DiscordMessageTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    DiscordMessageTemplate<T extends DiscordMessage$DiscordMessageTemplateArgs<ExtArgs> = {}>(args?: Subset<T, DiscordMessage$DiscordMessageTemplateArgs<ExtArgs>>): Prisma__DiscordMessageTemplateClient<$Result.GetResult<Prisma.$DiscordMessageTemplatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     DiscordChannelWebhook<T extends DiscordMessage$DiscordChannelWebhookArgs<ExtArgs> = {}>(args?: Subset<T, DiscordMessage$DiscordChannelWebhookArgs<ExtArgs>>): Prisma__DiscordChannelWebhookClient<$Result.GetResult<Prisma.$DiscordChannelWebhookPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     ListenerEvents<T extends DiscordMessage$ListenerEventsArgs<ExtArgs> = {}>(args?: Subset<T, DiscordMessage$ListenerEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ListenerEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -6583,10 +6714,10 @@ export namespace Prisma {
   interface DiscordMessageFieldRefs {
     readonly Id: FieldRef<"DiscordMessage", 'String'>
     readonly ChannelId: FieldRef<"DiscordMessage", 'String'>
-    readonly MessageId: FieldRef<"DiscordMessage", 'String'>
     readonly Content: FieldRef<"DiscordMessage", 'String'>
-    readonly DiscordMessageTypeId: FieldRef<"DiscordMessage", 'Int'>
+    readonly DiscordMessageTemplateId: FieldRef<"DiscordMessage", 'Int'>
     readonly DiscordChannelWebhookId: FieldRef<"DiscordMessage", 'String'>
+    readonly DiscordMessageSentAt: FieldRef<"DiscordMessage", 'DateTime'>
     readonly CreatedAt: FieldRef<"DiscordMessage", 'DateTime'>
     readonly UpdatedAt: FieldRef<"DiscordMessage", 'DateTime'>
   }
@@ -6985,6 +7116,25 @@ export namespace Prisma {
   }
 
   /**
+   * DiscordMessage.DiscordMessageTemplate
+   */
+  export type DiscordMessage$DiscordMessageTemplateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DiscordMessageTemplate
+     */
+    select?: DiscordMessageTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DiscordMessageTemplate
+     */
+    omit?: DiscordMessageTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DiscordMessageTemplateInclude<ExtArgs> | null
+    where?: DiscordMessageTemplateWhereInput
+  }
+
+  /**
    * DiscordMessage.DiscordChannelWebhook
    */
   export type DiscordMessage$DiscordChannelWebhookArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7047,392 +7197,404 @@ export namespace Prisma {
 
 
   /**
-   * Model DiscordMessageType
+   * Model DiscordMessageTemplate
    */
 
-  export type AggregateDiscordMessageType = {
-    _count: DiscordMessageTypeCountAggregateOutputType | null
-    _avg: DiscordMessageTypeAvgAggregateOutputType | null
-    _sum: DiscordMessageTypeSumAggregateOutputType | null
-    _min: DiscordMessageTypeMinAggregateOutputType | null
-    _max: DiscordMessageTypeMaxAggregateOutputType | null
+  export type AggregateDiscordMessageTemplate = {
+    _count: DiscordMessageTemplateCountAggregateOutputType | null
+    _avg: DiscordMessageTemplateAvgAggregateOutputType | null
+    _sum: DiscordMessageTemplateSumAggregateOutputType | null
+    _min: DiscordMessageTemplateMinAggregateOutputType | null
+    _max: DiscordMessageTemplateMaxAggregateOutputType | null
   }
 
-  export type DiscordMessageTypeAvgAggregateOutputType = {
+  export type DiscordMessageTemplateAvgAggregateOutputType = {
     Id: number | null
   }
 
-  export type DiscordMessageTypeSumAggregateOutputType = {
+  export type DiscordMessageTemplateSumAggregateOutputType = {
     Id: number | null
   }
 
-  export type DiscordMessageTypeMinAggregateOutputType = {
+  export type DiscordMessageTemplateMinAggregateOutputType = {
     Id: number | null
+    Slug: string | null
     Name: string | null
     Description: string | null
-    Slug: string | null
+    Content: string | null
     CreatedAt: Date | null
     UpdatedAt: Date | null
   }
 
-  export type DiscordMessageTypeMaxAggregateOutputType = {
+  export type DiscordMessageTemplateMaxAggregateOutputType = {
     Id: number | null
+    Slug: string | null
     Name: string | null
     Description: string | null
-    Slug: string | null
+    Content: string | null
     CreatedAt: Date | null
     UpdatedAt: Date | null
   }
 
-  export type DiscordMessageTypeCountAggregateOutputType = {
+  export type DiscordMessageTemplateCountAggregateOutputType = {
     Id: number
+    Slug: number
     Name: number
     Description: number
-    Slug: number
+    Content: number
     CreatedAt: number
     UpdatedAt: number
     _all: number
   }
 
 
-  export type DiscordMessageTypeAvgAggregateInputType = {
+  export type DiscordMessageTemplateAvgAggregateInputType = {
     Id?: true
   }
 
-  export type DiscordMessageTypeSumAggregateInputType = {
+  export type DiscordMessageTemplateSumAggregateInputType = {
     Id?: true
   }
 
-  export type DiscordMessageTypeMinAggregateInputType = {
+  export type DiscordMessageTemplateMinAggregateInputType = {
     Id?: true
+    Slug?: true
     Name?: true
     Description?: true
-    Slug?: true
+    Content?: true
     CreatedAt?: true
     UpdatedAt?: true
   }
 
-  export type DiscordMessageTypeMaxAggregateInputType = {
+  export type DiscordMessageTemplateMaxAggregateInputType = {
     Id?: true
+    Slug?: true
     Name?: true
     Description?: true
-    Slug?: true
+    Content?: true
     CreatedAt?: true
     UpdatedAt?: true
   }
 
-  export type DiscordMessageTypeCountAggregateInputType = {
+  export type DiscordMessageTemplateCountAggregateInputType = {
     Id?: true
+    Slug?: true
     Name?: true
     Description?: true
-    Slug?: true
+    Content?: true
     CreatedAt?: true
     UpdatedAt?: true
     _all?: true
   }
 
-  export type DiscordMessageTypeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DiscordMessageTemplateAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which DiscordMessageType to aggregate.
+     * Filter which DiscordMessageTemplate to aggregate.
      */
-    where?: DiscordMessageTypeWhereInput
+    where?: DiscordMessageTemplateWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of DiscordMessageTypes to fetch.
+     * Determine the order of DiscordMessageTemplates to fetch.
      */
-    orderBy?: DiscordMessageTypeOrderByWithRelationInput | DiscordMessageTypeOrderByWithRelationInput[]
+    orderBy?: DiscordMessageTemplateOrderByWithRelationInput | DiscordMessageTemplateOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: DiscordMessageTypeWhereUniqueInput
+    cursor?: DiscordMessageTemplateWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` DiscordMessageTypes from the position of the cursor.
+     * Take `±n` DiscordMessageTemplates from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` DiscordMessageTypes.
+     * Skip the first `n` DiscordMessageTemplates.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned DiscordMessageTypes
+     * Count returned DiscordMessageTemplates
     **/
-    _count?: true | DiscordMessageTypeCountAggregateInputType
+    _count?: true | DiscordMessageTemplateCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: DiscordMessageTypeAvgAggregateInputType
+    _avg?: DiscordMessageTemplateAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: DiscordMessageTypeSumAggregateInputType
+    _sum?: DiscordMessageTemplateSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: DiscordMessageTypeMinAggregateInputType
+    _min?: DiscordMessageTemplateMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: DiscordMessageTypeMaxAggregateInputType
+    _max?: DiscordMessageTemplateMaxAggregateInputType
   }
 
-  export type GetDiscordMessageTypeAggregateType<T extends DiscordMessageTypeAggregateArgs> = {
-        [P in keyof T & keyof AggregateDiscordMessageType]: P extends '_count' | 'count'
+  export type GetDiscordMessageTemplateAggregateType<T extends DiscordMessageTemplateAggregateArgs> = {
+        [P in keyof T & keyof AggregateDiscordMessageTemplate]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateDiscordMessageType[P]>
-      : GetScalarType<T[P], AggregateDiscordMessageType[P]>
+        : GetScalarType<T[P], AggregateDiscordMessageTemplate[P]>
+      : GetScalarType<T[P], AggregateDiscordMessageTemplate[P]>
   }
 
 
 
 
-  export type DiscordMessageTypeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: DiscordMessageTypeWhereInput
-    orderBy?: DiscordMessageTypeOrderByWithAggregationInput | DiscordMessageTypeOrderByWithAggregationInput[]
-    by: DiscordMessageTypeScalarFieldEnum[] | DiscordMessageTypeScalarFieldEnum
-    having?: DiscordMessageTypeScalarWhereWithAggregatesInput
+  export type DiscordMessageTemplateGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DiscordMessageTemplateWhereInput
+    orderBy?: DiscordMessageTemplateOrderByWithAggregationInput | DiscordMessageTemplateOrderByWithAggregationInput[]
+    by: DiscordMessageTemplateScalarFieldEnum[] | DiscordMessageTemplateScalarFieldEnum
+    having?: DiscordMessageTemplateScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: DiscordMessageTypeCountAggregateInputType | true
-    _avg?: DiscordMessageTypeAvgAggregateInputType
-    _sum?: DiscordMessageTypeSumAggregateInputType
-    _min?: DiscordMessageTypeMinAggregateInputType
-    _max?: DiscordMessageTypeMaxAggregateInputType
+    _count?: DiscordMessageTemplateCountAggregateInputType | true
+    _avg?: DiscordMessageTemplateAvgAggregateInputType
+    _sum?: DiscordMessageTemplateSumAggregateInputType
+    _min?: DiscordMessageTemplateMinAggregateInputType
+    _max?: DiscordMessageTemplateMaxAggregateInputType
   }
 
-  export type DiscordMessageTypeGroupByOutputType = {
+  export type DiscordMessageTemplateGroupByOutputType = {
     Id: number
+    Slug: string
     Name: string
     Description: string | null
-    Slug: string
+    Content: string
     CreatedAt: Date
     UpdatedAt: Date
-    _count: DiscordMessageTypeCountAggregateOutputType | null
-    _avg: DiscordMessageTypeAvgAggregateOutputType | null
-    _sum: DiscordMessageTypeSumAggregateOutputType | null
-    _min: DiscordMessageTypeMinAggregateOutputType | null
-    _max: DiscordMessageTypeMaxAggregateOutputType | null
+    _count: DiscordMessageTemplateCountAggregateOutputType | null
+    _avg: DiscordMessageTemplateAvgAggregateOutputType | null
+    _sum: DiscordMessageTemplateSumAggregateOutputType | null
+    _min: DiscordMessageTemplateMinAggregateOutputType | null
+    _max: DiscordMessageTemplateMaxAggregateOutputType | null
   }
 
-  type GetDiscordMessageTypeGroupByPayload<T extends DiscordMessageTypeGroupByArgs> = Prisma.PrismaPromise<
+  type GetDiscordMessageTemplateGroupByPayload<T extends DiscordMessageTemplateGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<DiscordMessageTypeGroupByOutputType, T['by']> &
+      PickEnumerable<DiscordMessageTemplateGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof DiscordMessageTypeGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof DiscordMessageTemplateGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], DiscordMessageTypeGroupByOutputType[P]>
-            : GetScalarType<T[P], DiscordMessageTypeGroupByOutputType[P]>
+              : GetScalarType<T[P], DiscordMessageTemplateGroupByOutputType[P]>
+            : GetScalarType<T[P], DiscordMessageTemplateGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type DiscordMessageTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type DiscordMessageTemplateSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     Id?: boolean
+    Slug?: boolean
     Name?: boolean
     Description?: boolean
-    Slug?: boolean
+    Content?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
-    DiscordMessages?: boolean | DiscordMessageType$DiscordMessagesArgs<ExtArgs>
-    _count?: boolean | DiscordMessageTypeCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["discordMessageType"]>
+    DiscordMessages?: boolean | DiscordMessageTemplate$DiscordMessagesArgs<ExtArgs>
+    _count?: boolean | DiscordMessageTemplateCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["discordMessageTemplate"]>
 
-  export type DiscordMessageTypeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type DiscordMessageTemplateSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     Id?: boolean
+    Slug?: boolean
     Name?: boolean
     Description?: boolean
-    Slug?: boolean
+    Content?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
-  }, ExtArgs["result"]["discordMessageType"]>
+  }, ExtArgs["result"]["discordMessageTemplate"]>
 
-  export type DiscordMessageTypeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type DiscordMessageTemplateSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     Id?: boolean
+    Slug?: boolean
     Name?: boolean
     Description?: boolean
-    Slug?: boolean
+    Content?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
-  }, ExtArgs["result"]["discordMessageType"]>
+  }, ExtArgs["result"]["discordMessageTemplate"]>
 
-  export type DiscordMessageTypeSelectScalar = {
+  export type DiscordMessageTemplateSelectScalar = {
     Id?: boolean
+    Slug?: boolean
     Name?: boolean
     Description?: boolean
-    Slug?: boolean
+    Content?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
   }
 
-  export type DiscordMessageTypeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "Name" | "Description" | "Slug" | "CreatedAt" | "UpdatedAt", ExtArgs["result"]["discordMessageType"]>
-  export type DiscordMessageTypeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    DiscordMessages?: boolean | DiscordMessageType$DiscordMessagesArgs<ExtArgs>
-    _count?: boolean | DiscordMessageTypeCountOutputTypeDefaultArgs<ExtArgs>
+  export type DiscordMessageTemplateOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "Slug" | "Name" | "Description" | "Content" | "CreatedAt" | "UpdatedAt", ExtArgs["result"]["discordMessageTemplate"]>
+  export type DiscordMessageTemplateInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    DiscordMessages?: boolean | DiscordMessageTemplate$DiscordMessagesArgs<ExtArgs>
+    _count?: boolean | DiscordMessageTemplateCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type DiscordMessageTypeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type DiscordMessageTypeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type DiscordMessageTemplateIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type DiscordMessageTemplateIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
-  export type $DiscordMessageTypePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "DiscordMessageType"
+  export type $DiscordMessageTemplatePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "DiscordMessageTemplate"
     objects: {
       DiscordMessages: Prisma.$DiscordMessagePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       Id: number
+      Slug: string
       Name: string
       Description: string | null
-      Slug: string
+      Content: string
       CreatedAt: Date
       UpdatedAt: Date
-    }, ExtArgs["result"]["discordMessageType"]>
+    }, ExtArgs["result"]["discordMessageTemplate"]>
     composites: {}
   }
 
-  type DiscordMessageTypeGetPayload<S extends boolean | null | undefined | DiscordMessageTypeDefaultArgs> = $Result.GetResult<Prisma.$DiscordMessageTypePayload, S>
+  type DiscordMessageTemplateGetPayload<S extends boolean | null | undefined | DiscordMessageTemplateDefaultArgs> = $Result.GetResult<Prisma.$DiscordMessageTemplatePayload, S>
 
-  type DiscordMessageTypeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<DiscordMessageTypeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: DiscordMessageTypeCountAggregateInputType | true
+  type DiscordMessageTemplateCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DiscordMessageTemplateFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DiscordMessageTemplateCountAggregateInputType | true
     }
 
-  export interface DiscordMessageTypeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['DiscordMessageType'], meta: { name: 'DiscordMessageType' } }
+  export interface DiscordMessageTemplateDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['DiscordMessageTemplate'], meta: { name: 'DiscordMessageTemplate' } }
     /**
-     * Find zero or one DiscordMessageType that matches the filter.
-     * @param {DiscordMessageTypeFindUniqueArgs} args - Arguments to find a DiscordMessageType
+     * Find zero or one DiscordMessageTemplate that matches the filter.
+     * @param {DiscordMessageTemplateFindUniqueArgs} args - Arguments to find a DiscordMessageTemplate
      * @example
-     * // Get one DiscordMessageType
-     * const discordMessageType = await prisma.discordMessageType.findUnique({
+     * // Get one DiscordMessageTemplate
+     * const discordMessageTemplate = await prisma.discordMessageTemplate.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends DiscordMessageTypeFindUniqueArgs>(args: SelectSubset<T, DiscordMessageTypeFindUniqueArgs<ExtArgs>>): Prisma__DiscordMessageTypeClient<$Result.GetResult<Prisma.$DiscordMessageTypePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends DiscordMessageTemplateFindUniqueArgs>(args: SelectSubset<T, DiscordMessageTemplateFindUniqueArgs<ExtArgs>>): Prisma__DiscordMessageTemplateClient<$Result.GetResult<Prisma.$DiscordMessageTemplatePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one DiscordMessageType that matches the filter or throw an error with `error.code='P2025'`
+     * Find one DiscordMessageTemplate that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {DiscordMessageTypeFindUniqueOrThrowArgs} args - Arguments to find a DiscordMessageType
+     * @param {DiscordMessageTemplateFindUniqueOrThrowArgs} args - Arguments to find a DiscordMessageTemplate
      * @example
-     * // Get one DiscordMessageType
-     * const discordMessageType = await prisma.discordMessageType.findUniqueOrThrow({
+     * // Get one DiscordMessageTemplate
+     * const discordMessageTemplate = await prisma.discordMessageTemplate.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends DiscordMessageTypeFindUniqueOrThrowArgs>(args: SelectSubset<T, DiscordMessageTypeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DiscordMessageTypeClient<$Result.GetResult<Prisma.$DiscordMessageTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends DiscordMessageTemplateFindUniqueOrThrowArgs>(args: SelectSubset<T, DiscordMessageTemplateFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DiscordMessageTemplateClient<$Result.GetResult<Prisma.$DiscordMessageTemplatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first DiscordMessageType that matches the filter.
+     * Find the first DiscordMessageTemplate that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {DiscordMessageTypeFindFirstArgs} args - Arguments to find a DiscordMessageType
+     * @param {DiscordMessageTemplateFindFirstArgs} args - Arguments to find a DiscordMessageTemplate
      * @example
-     * // Get one DiscordMessageType
-     * const discordMessageType = await prisma.discordMessageType.findFirst({
+     * // Get one DiscordMessageTemplate
+     * const discordMessageTemplate = await prisma.discordMessageTemplate.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends DiscordMessageTypeFindFirstArgs>(args?: SelectSubset<T, DiscordMessageTypeFindFirstArgs<ExtArgs>>): Prisma__DiscordMessageTypeClient<$Result.GetResult<Prisma.$DiscordMessageTypePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends DiscordMessageTemplateFindFirstArgs>(args?: SelectSubset<T, DiscordMessageTemplateFindFirstArgs<ExtArgs>>): Prisma__DiscordMessageTemplateClient<$Result.GetResult<Prisma.$DiscordMessageTemplatePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first DiscordMessageType that matches the filter or
+     * Find the first DiscordMessageTemplate that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {DiscordMessageTypeFindFirstOrThrowArgs} args - Arguments to find a DiscordMessageType
+     * @param {DiscordMessageTemplateFindFirstOrThrowArgs} args - Arguments to find a DiscordMessageTemplate
      * @example
-     * // Get one DiscordMessageType
-     * const discordMessageType = await prisma.discordMessageType.findFirstOrThrow({
+     * // Get one DiscordMessageTemplate
+     * const discordMessageTemplate = await prisma.discordMessageTemplate.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends DiscordMessageTypeFindFirstOrThrowArgs>(args?: SelectSubset<T, DiscordMessageTypeFindFirstOrThrowArgs<ExtArgs>>): Prisma__DiscordMessageTypeClient<$Result.GetResult<Prisma.$DiscordMessageTypePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends DiscordMessageTemplateFindFirstOrThrowArgs>(args?: SelectSubset<T, DiscordMessageTemplateFindFirstOrThrowArgs<ExtArgs>>): Prisma__DiscordMessageTemplateClient<$Result.GetResult<Prisma.$DiscordMessageTemplatePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more DiscordMessageTypes that matches the filter.
+     * Find zero or more DiscordMessageTemplates that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {DiscordMessageTypeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {DiscordMessageTemplateFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all DiscordMessageTypes
-     * const discordMessageTypes = await prisma.discordMessageType.findMany()
+     * // Get all DiscordMessageTemplates
+     * const discordMessageTemplates = await prisma.discordMessageTemplate.findMany()
      * 
-     * // Get first 10 DiscordMessageTypes
-     * const discordMessageTypes = await prisma.discordMessageType.findMany({ take: 10 })
+     * // Get first 10 DiscordMessageTemplates
+     * const discordMessageTemplates = await prisma.discordMessageTemplate.findMany({ take: 10 })
      * 
      * // Only select the `Id`
-     * const discordMessageTypeWithIdOnly = await prisma.discordMessageType.findMany({ select: { Id: true } })
+     * const discordMessageTemplateWithIdOnly = await prisma.discordMessageTemplate.findMany({ select: { Id: true } })
      * 
      */
-    findMany<T extends DiscordMessageTypeFindManyArgs>(args?: SelectSubset<T, DiscordMessageTypeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DiscordMessageTypePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends DiscordMessageTemplateFindManyArgs>(args?: SelectSubset<T, DiscordMessageTemplateFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DiscordMessageTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a DiscordMessageType.
-     * @param {DiscordMessageTypeCreateArgs} args - Arguments to create a DiscordMessageType.
+     * Create a DiscordMessageTemplate.
+     * @param {DiscordMessageTemplateCreateArgs} args - Arguments to create a DiscordMessageTemplate.
      * @example
-     * // Create one DiscordMessageType
-     * const DiscordMessageType = await prisma.discordMessageType.create({
+     * // Create one DiscordMessageTemplate
+     * const DiscordMessageTemplate = await prisma.discordMessageTemplate.create({
      *   data: {
-     *     // ... data to create a DiscordMessageType
+     *     // ... data to create a DiscordMessageTemplate
      *   }
      * })
      * 
      */
-    create<T extends DiscordMessageTypeCreateArgs>(args: SelectSubset<T, DiscordMessageTypeCreateArgs<ExtArgs>>): Prisma__DiscordMessageTypeClient<$Result.GetResult<Prisma.$DiscordMessageTypePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends DiscordMessageTemplateCreateArgs>(args: SelectSubset<T, DiscordMessageTemplateCreateArgs<ExtArgs>>): Prisma__DiscordMessageTemplateClient<$Result.GetResult<Prisma.$DiscordMessageTemplatePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many DiscordMessageTypes.
-     * @param {DiscordMessageTypeCreateManyArgs} args - Arguments to create many DiscordMessageTypes.
+     * Create many DiscordMessageTemplates.
+     * @param {DiscordMessageTemplateCreateManyArgs} args - Arguments to create many DiscordMessageTemplates.
      * @example
-     * // Create many DiscordMessageTypes
-     * const discordMessageType = await prisma.discordMessageType.createMany({
+     * // Create many DiscordMessageTemplates
+     * const discordMessageTemplate = await prisma.discordMessageTemplate.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends DiscordMessageTypeCreateManyArgs>(args?: SelectSubset<T, DiscordMessageTypeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends DiscordMessageTemplateCreateManyArgs>(args?: SelectSubset<T, DiscordMessageTemplateCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many DiscordMessageTypes and returns the data saved in the database.
-     * @param {DiscordMessageTypeCreateManyAndReturnArgs} args - Arguments to create many DiscordMessageTypes.
+     * Create many DiscordMessageTemplates and returns the data saved in the database.
+     * @param {DiscordMessageTemplateCreateManyAndReturnArgs} args - Arguments to create many DiscordMessageTemplates.
      * @example
-     * // Create many DiscordMessageTypes
-     * const discordMessageType = await prisma.discordMessageType.createManyAndReturn({
+     * // Create many DiscordMessageTemplates
+     * const discordMessageTemplate = await prisma.discordMessageTemplate.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many DiscordMessageTypes and only return the `Id`
-     * const discordMessageTypeWithIdOnly = await prisma.discordMessageType.createManyAndReturn({
+     * // Create many DiscordMessageTemplates and only return the `Id`
+     * const discordMessageTemplateWithIdOnly = await prisma.discordMessageTemplate.createManyAndReturn({
      *   select: { Id: true },
      *   data: [
      *     // ... provide data here
@@ -7442,28 +7604,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends DiscordMessageTypeCreateManyAndReturnArgs>(args?: SelectSubset<T, DiscordMessageTypeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DiscordMessageTypePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends DiscordMessageTemplateCreateManyAndReturnArgs>(args?: SelectSubset<T, DiscordMessageTemplateCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DiscordMessageTemplatePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a DiscordMessageType.
-     * @param {DiscordMessageTypeDeleteArgs} args - Arguments to delete one DiscordMessageType.
+     * Delete a DiscordMessageTemplate.
+     * @param {DiscordMessageTemplateDeleteArgs} args - Arguments to delete one DiscordMessageTemplate.
      * @example
-     * // Delete one DiscordMessageType
-     * const DiscordMessageType = await prisma.discordMessageType.delete({
+     * // Delete one DiscordMessageTemplate
+     * const DiscordMessageTemplate = await prisma.discordMessageTemplate.delete({
      *   where: {
-     *     // ... filter to delete one DiscordMessageType
+     *     // ... filter to delete one DiscordMessageTemplate
      *   }
      * })
      * 
      */
-    delete<T extends DiscordMessageTypeDeleteArgs>(args: SelectSubset<T, DiscordMessageTypeDeleteArgs<ExtArgs>>): Prisma__DiscordMessageTypeClient<$Result.GetResult<Prisma.$DiscordMessageTypePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends DiscordMessageTemplateDeleteArgs>(args: SelectSubset<T, DiscordMessageTemplateDeleteArgs<ExtArgs>>): Prisma__DiscordMessageTemplateClient<$Result.GetResult<Prisma.$DiscordMessageTemplatePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one DiscordMessageType.
-     * @param {DiscordMessageTypeUpdateArgs} args - Arguments to update one DiscordMessageType.
+     * Update one DiscordMessageTemplate.
+     * @param {DiscordMessageTemplateUpdateArgs} args - Arguments to update one DiscordMessageTemplate.
      * @example
-     * // Update one DiscordMessageType
-     * const discordMessageType = await prisma.discordMessageType.update({
+     * // Update one DiscordMessageTemplate
+     * const discordMessageTemplate = await prisma.discordMessageTemplate.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -7473,30 +7635,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends DiscordMessageTypeUpdateArgs>(args: SelectSubset<T, DiscordMessageTypeUpdateArgs<ExtArgs>>): Prisma__DiscordMessageTypeClient<$Result.GetResult<Prisma.$DiscordMessageTypePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends DiscordMessageTemplateUpdateArgs>(args: SelectSubset<T, DiscordMessageTemplateUpdateArgs<ExtArgs>>): Prisma__DiscordMessageTemplateClient<$Result.GetResult<Prisma.$DiscordMessageTemplatePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more DiscordMessageTypes.
-     * @param {DiscordMessageTypeDeleteManyArgs} args - Arguments to filter DiscordMessageTypes to delete.
+     * Delete zero or more DiscordMessageTemplates.
+     * @param {DiscordMessageTemplateDeleteManyArgs} args - Arguments to filter DiscordMessageTemplates to delete.
      * @example
-     * // Delete a few DiscordMessageTypes
-     * const { count } = await prisma.discordMessageType.deleteMany({
+     * // Delete a few DiscordMessageTemplates
+     * const { count } = await prisma.discordMessageTemplate.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends DiscordMessageTypeDeleteManyArgs>(args?: SelectSubset<T, DiscordMessageTypeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends DiscordMessageTemplateDeleteManyArgs>(args?: SelectSubset<T, DiscordMessageTemplateDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more DiscordMessageTypes.
+     * Update zero or more DiscordMessageTemplates.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {DiscordMessageTypeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {DiscordMessageTemplateUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many DiscordMessageTypes
-     * const discordMessageType = await prisma.discordMessageType.updateMany({
+     * // Update many DiscordMessageTemplates
+     * const discordMessageTemplate = await prisma.discordMessageTemplate.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -7506,14 +7668,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends DiscordMessageTypeUpdateManyArgs>(args: SelectSubset<T, DiscordMessageTypeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends DiscordMessageTemplateUpdateManyArgs>(args: SelectSubset<T, DiscordMessageTemplateUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more DiscordMessageTypes and returns the data updated in the database.
-     * @param {DiscordMessageTypeUpdateManyAndReturnArgs} args - Arguments to update many DiscordMessageTypes.
+     * Update zero or more DiscordMessageTemplates and returns the data updated in the database.
+     * @param {DiscordMessageTemplateUpdateManyAndReturnArgs} args - Arguments to update many DiscordMessageTemplates.
      * @example
-     * // Update many DiscordMessageTypes
-     * const discordMessageType = await prisma.discordMessageType.updateManyAndReturn({
+     * // Update many DiscordMessageTemplates
+     * const discordMessageTemplate = await prisma.discordMessageTemplate.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -7522,8 +7684,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more DiscordMessageTypes and only return the `Id`
-     * const discordMessageTypeWithIdOnly = await prisma.discordMessageType.updateManyAndReturn({
+     * // Update zero or more DiscordMessageTemplates and only return the `Id`
+     * const discordMessageTemplateWithIdOnly = await prisma.discordMessageTemplate.updateManyAndReturn({
      *   select: { Id: true },
      *   where: {
      *     // ... provide filter here
@@ -7536,56 +7698,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends DiscordMessageTypeUpdateManyAndReturnArgs>(args: SelectSubset<T, DiscordMessageTypeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DiscordMessageTypePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends DiscordMessageTemplateUpdateManyAndReturnArgs>(args: SelectSubset<T, DiscordMessageTemplateUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DiscordMessageTemplatePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one DiscordMessageType.
-     * @param {DiscordMessageTypeUpsertArgs} args - Arguments to update or create a DiscordMessageType.
+     * Create or update one DiscordMessageTemplate.
+     * @param {DiscordMessageTemplateUpsertArgs} args - Arguments to update or create a DiscordMessageTemplate.
      * @example
-     * // Update or create a DiscordMessageType
-     * const discordMessageType = await prisma.discordMessageType.upsert({
+     * // Update or create a DiscordMessageTemplate
+     * const discordMessageTemplate = await prisma.discordMessageTemplate.upsert({
      *   create: {
-     *     // ... data to create a DiscordMessageType
+     *     // ... data to create a DiscordMessageTemplate
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the DiscordMessageType we want to update
+     *     // ... the filter for the DiscordMessageTemplate we want to update
      *   }
      * })
      */
-    upsert<T extends DiscordMessageTypeUpsertArgs>(args: SelectSubset<T, DiscordMessageTypeUpsertArgs<ExtArgs>>): Prisma__DiscordMessageTypeClient<$Result.GetResult<Prisma.$DiscordMessageTypePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends DiscordMessageTemplateUpsertArgs>(args: SelectSubset<T, DiscordMessageTemplateUpsertArgs<ExtArgs>>): Prisma__DiscordMessageTemplateClient<$Result.GetResult<Prisma.$DiscordMessageTemplatePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of DiscordMessageTypes.
+     * Count the number of DiscordMessageTemplates.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {DiscordMessageTypeCountArgs} args - Arguments to filter DiscordMessageTypes to count.
+     * @param {DiscordMessageTemplateCountArgs} args - Arguments to filter DiscordMessageTemplates to count.
      * @example
-     * // Count the number of DiscordMessageTypes
-     * const count = await prisma.discordMessageType.count({
+     * // Count the number of DiscordMessageTemplates
+     * const count = await prisma.discordMessageTemplate.count({
      *   where: {
-     *     // ... the filter for the DiscordMessageTypes we want to count
+     *     // ... the filter for the DiscordMessageTemplates we want to count
      *   }
      * })
     **/
-    count<T extends DiscordMessageTypeCountArgs>(
-      args?: Subset<T, DiscordMessageTypeCountArgs>,
+    count<T extends DiscordMessageTemplateCountArgs>(
+      args?: Subset<T, DiscordMessageTemplateCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], DiscordMessageTypeCountAggregateOutputType>
+          : GetScalarType<T['select'], DiscordMessageTemplateCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a DiscordMessageType.
+     * Allows you to perform aggregations operations on a DiscordMessageTemplate.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {DiscordMessageTypeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {DiscordMessageTemplateAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -7605,13 +7767,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends DiscordMessageTypeAggregateArgs>(args: Subset<T, DiscordMessageTypeAggregateArgs>): Prisma.PrismaPromise<GetDiscordMessageTypeAggregateType<T>>
+    aggregate<T extends DiscordMessageTemplateAggregateArgs>(args: Subset<T, DiscordMessageTemplateAggregateArgs>): Prisma.PrismaPromise<GetDiscordMessageTemplateAggregateType<T>>
 
     /**
-     * Group by DiscordMessageType.
+     * Group by DiscordMessageTemplate.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {DiscordMessageTypeGroupByArgs} args - Group by arguments.
+     * @param {DiscordMessageTemplateGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -7626,14 +7788,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends DiscordMessageTypeGroupByArgs,
+      T extends DiscordMessageTemplateGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: DiscordMessageTypeGroupByArgs['orderBy'] }
-        : { orderBy?: DiscordMessageTypeGroupByArgs['orderBy'] },
+        ? { orderBy: DiscordMessageTemplateGroupByArgs['orderBy'] }
+        : { orderBy?: DiscordMessageTemplateGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -7682,22 +7844,22 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, DiscordMessageTypeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDiscordMessageTypeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, DiscordMessageTemplateGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDiscordMessageTemplateGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the DiscordMessageType model
+   * Fields of the DiscordMessageTemplate model
    */
-  readonly fields: DiscordMessageTypeFieldRefs;
+  readonly fields: DiscordMessageTemplateFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for DiscordMessageType.
+   * The delegate class that acts as a "Promise-like" for DiscordMessageTemplate.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__DiscordMessageTypeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__DiscordMessageTemplateClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    DiscordMessages<T extends DiscordMessageType$DiscordMessagesArgs<ExtArgs> = {}>(args?: Subset<T, DiscordMessageType$DiscordMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DiscordMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    DiscordMessages<T extends DiscordMessageTemplate$DiscordMessagesArgs<ExtArgs> = {}>(args?: Subset<T, DiscordMessageTemplate$DiscordMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DiscordMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7724,406 +7886,407 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the DiscordMessageType model
+   * Fields of the DiscordMessageTemplate model
    */
-  interface DiscordMessageTypeFieldRefs {
-    readonly Id: FieldRef<"DiscordMessageType", 'Int'>
-    readonly Name: FieldRef<"DiscordMessageType", 'String'>
-    readonly Description: FieldRef<"DiscordMessageType", 'String'>
-    readonly Slug: FieldRef<"DiscordMessageType", 'String'>
-    readonly CreatedAt: FieldRef<"DiscordMessageType", 'DateTime'>
-    readonly UpdatedAt: FieldRef<"DiscordMessageType", 'DateTime'>
+  interface DiscordMessageTemplateFieldRefs {
+    readonly Id: FieldRef<"DiscordMessageTemplate", 'Int'>
+    readonly Slug: FieldRef<"DiscordMessageTemplate", 'String'>
+    readonly Name: FieldRef<"DiscordMessageTemplate", 'String'>
+    readonly Description: FieldRef<"DiscordMessageTemplate", 'String'>
+    readonly Content: FieldRef<"DiscordMessageTemplate", 'String'>
+    readonly CreatedAt: FieldRef<"DiscordMessageTemplate", 'DateTime'>
+    readonly UpdatedAt: FieldRef<"DiscordMessageTemplate", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * DiscordMessageType findUnique
+   * DiscordMessageTemplate findUnique
    */
-  export type DiscordMessageTypeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DiscordMessageTemplateFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the DiscordMessageType
+     * Select specific fields to fetch from the DiscordMessageTemplate
      */
-    select?: DiscordMessageTypeSelect<ExtArgs> | null
+    select?: DiscordMessageTemplateSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the DiscordMessageType
+     * Omit specific fields from the DiscordMessageTemplate
      */
-    omit?: DiscordMessageTypeOmit<ExtArgs> | null
+    omit?: DiscordMessageTemplateOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: DiscordMessageTypeInclude<ExtArgs> | null
+    include?: DiscordMessageTemplateInclude<ExtArgs> | null
     /**
-     * Filter, which DiscordMessageType to fetch.
+     * Filter, which DiscordMessageTemplate to fetch.
      */
-    where: DiscordMessageTypeWhereUniqueInput
+    where: DiscordMessageTemplateWhereUniqueInput
   }
 
   /**
-   * DiscordMessageType findUniqueOrThrow
+   * DiscordMessageTemplate findUniqueOrThrow
    */
-  export type DiscordMessageTypeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DiscordMessageTemplateFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the DiscordMessageType
+     * Select specific fields to fetch from the DiscordMessageTemplate
      */
-    select?: DiscordMessageTypeSelect<ExtArgs> | null
+    select?: DiscordMessageTemplateSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the DiscordMessageType
+     * Omit specific fields from the DiscordMessageTemplate
      */
-    omit?: DiscordMessageTypeOmit<ExtArgs> | null
+    omit?: DiscordMessageTemplateOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: DiscordMessageTypeInclude<ExtArgs> | null
+    include?: DiscordMessageTemplateInclude<ExtArgs> | null
     /**
-     * Filter, which DiscordMessageType to fetch.
+     * Filter, which DiscordMessageTemplate to fetch.
      */
-    where: DiscordMessageTypeWhereUniqueInput
+    where: DiscordMessageTemplateWhereUniqueInput
   }
 
   /**
-   * DiscordMessageType findFirst
+   * DiscordMessageTemplate findFirst
    */
-  export type DiscordMessageTypeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DiscordMessageTemplateFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the DiscordMessageType
+     * Select specific fields to fetch from the DiscordMessageTemplate
      */
-    select?: DiscordMessageTypeSelect<ExtArgs> | null
+    select?: DiscordMessageTemplateSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the DiscordMessageType
+     * Omit specific fields from the DiscordMessageTemplate
      */
-    omit?: DiscordMessageTypeOmit<ExtArgs> | null
+    omit?: DiscordMessageTemplateOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: DiscordMessageTypeInclude<ExtArgs> | null
+    include?: DiscordMessageTemplateInclude<ExtArgs> | null
     /**
-     * Filter, which DiscordMessageType to fetch.
+     * Filter, which DiscordMessageTemplate to fetch.
      */
-    where?: DiscordMessageTypeWhereInput
+    where?: DiscordMessageTemplateWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of DiscordMessageTypes to fetch.
+     * Determine the order of DiscordMessageTemplates to fetch.
      */
-    orderBy?: DiscordMessageTypeOrderByWithRelationInput | DiscordMessageTypeOrderByWithRelationInput[]
+    orderBy?: DiscordMessageTemplateOrderByWithRelationInput | DiscordMessageTemplateOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for DiscordMessageTypes.
+     * Sets the position for searching for DiscordMessageTemplates.
      */
-    cursor?: DiscordMessageTypeWhereUniqueInput
+    cursor?: DiscordMessageTemplateWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` DiscordMessageTypes from the position of the cursor.
+     * Take `±n` DiscordMessageTemplates from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` DiscordMessageTypes.
+     * Skip the first `n` DiscordMessageTemplates.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of DiscordMessageTypes.
+     * Filter by unique combinations of DiscordMessageTemplates.
      */
-    distinct?: DiscordMessageTypeScalarFieldEnum | DiscordMessageTypeScalarFieldEnum[]
+    distinct?: DiscordMessageTemplateScalarFieldEnum | DiscordMessageTemplateScalarFieldEnum[]
   }
 
   /**
-   * DiscordMessageType findFirstOrThrow
+   * DiscordMessageTemplate findFirstOrThrow
    */
-  export type DiscordMessageTypeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DiscordMessageTemplateFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the DiscordMessageType
+     * Select specific fields to fetch from the DiscordMessageTemplate
      */
-    select?: DiscordMessageTypeSelect<ExtArgs> | null
+    select?: DiscordMessageTemplateSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the DiscordMessageType
+     * Omit specific fields from the DiscordMessageTemplate
      */
-    omit?: DiscordMessageTypeOmit<ExtArgs> | null
+    omit?: DiscordMessageTemplateOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: DiscordMessageTypeInclude<ExtArgs> | null
+    include?: DiscordMessageTemplateInclude<ExtArgs> | null
     /**
-     * Filter, which DiscordMessageType to fetch.
+     * Filter, which DiscordMessageTemplate to fetch.
      */
-    where?: DiscordMessageTypeWhereInput
+    where?: DiscordMessageTemplateWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of DiscordMessageTypes to fetch.
+     * Determine the order of DiscordMessageTemplates to fetch.
      */
-    orderBy?: DiscordMessageTypeOrderByWithRelationInput | DiscordMessageTypeOrderByWithRelationInput[]
+    orderBy?: DiscordMessageTemplateOrderByWithRelationInput | DiscordMessageTemplateOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for DiscordMessageTypes.
+     * Sets the position for searching for DiscordMessageTemplates.
      */
-    cursor?: DiscordMessageTypeWhereUniqueInput
+    cursor?: DiscordMessageTemplateWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` DiscordMessageTypes from the position of the cursor.
+     * Take `±n` DiscordMessageTemplates from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` DiscordMessageTypes.
+     * Skip the first `n` DiscordMessageTemplates.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of DiscordMessageTypes.
+     * Filter by unique combinations of DiscordMessageTemplates.
      */
-    distinct?: DiscordMessageTypeScalarFieldEnum | DiscordMessageTypeScalarFieldEnum[]
+    distinct?: DiscordMessageTemplateScalarFieldEnum | DiscordMessageTemplateScalarFieldEnum[]
   }
 
   /**
-   * DiscordMessageType findMany
+   * DiscordMessageTemplate findMany
    */
-  export type DiscordMessageTypeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DiscordMessageTemplateFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the DiscordMessageType
+     * Select specific fields to fetch from the DiscordMessageTemplate
      */
-    select?: DiscordMessageTypeSelect<ExtArgs> | null
+    select?: DiscordMessageTemplateSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the DiscordMessageType
+     * Omit specific fields from the DiscordMessageTemplate
      */
-    omit?: DiscordMessageTypeOmit<ExtArgs> | null
+    omit?: DiscordMessageTemplateOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: DiscordMessageTypeInclude<ExtArgs> | null
+    include?: DiscordMessageTemplateInclude<ExtArgs> | null
     /**
-     * Filter, which DiscordMessageTypes to fetch.
+     * Filter, which DiscordMessageTemplates to fetch.
      */
-    where?: DiscordMessageTypeWhereInput
+    where?: DiscordMessageTemplateWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of DiscordMessageTypes to fetch.
+     * Determine the order of DiscordMessageTemplates to fetch.
      */
-    orderBy?: DiscordMessageTypeOrderByWithRelationInput | DiscordMessageTypeOrderByWithRelationInput[]
+    orderBy?: DiscordMessageTemplateOrderByWithRelationInput | DiscordMessageTemplateOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing DiscordMessageTypes.
+     * Sets the position for listing DiscordMessageTemplates.
      */
-    cursor?: DiscordMessageTypeWhereUniqueInput
+    cursor?: DiscordMessageTemplateWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` DiscordMessageTypes from the position of the cursor.
+     * Take `±n` DiscordMessageTemplates from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` DiscordMessageTypes.
+     * Skip the first `n` DiscordMessageTemplates.
      */
     skip?: number
-    distinct?: DiscordMessageTypeScalarFieldEnum | DiscordMessageTypeScalarFieldEnum[]
+    distinct?: DiscordMessageTemplateScalarFieldEnum | DiscordMessageTemplateScalarFieldEnum[]
   }
 
   /**
-   * DiscordMessageType create
+   * DiscordMessageTemplate create
    */
-  export type DiscordMessageTypeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DiscordMessageTemplateCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the DiscordMessageType
+     * Select specific fields to fetch from the DiscordMessageTemplate
      */
-    select?: DiscordMessageTypeSelect<ExtArgs> | null
+    select?: DiscordMessageTemplateSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the DiscordMessageType
+     * Omit specific fields from the DiscordMessageTemplate
      */
-    omit?: DiscordMessageTypeOmit<ExtArgs> | null
+    omit?: DiscordMessageTemplateOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: DiscordMessageTypeInclude<ExtArgs> | null
+    include?: DiscordMessageTemplateInclude<ExtArgs> | null
     /**
-     * The data needed to create a DiscordMessageType.
+     * The data needed to create a DiscordMessageTemplate.
      */
-    data: XOR<DiscordMessageTypeCreateInput, DiscordMessageTypeUncheckedCreateInput>
+    data: XOR<DiscordMessageTemplateCreateInput, DiscordMessageTemplateUncheckedCreateInput>
   }
 
   /**
-   * DiscordMessageType createMany
+   * DiscordMessageTemplate createMany
    */
-  export type DiscordMessageTypeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DiscordMessageTemplateCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many DiscordMessageTypes.
+     * The data used to create many DiscordMessageTemplates.
      */
-    data: DiscordMessageTypeCreateManyInput | DiscordMessageTypeCreateManyInput[]
+    data: DiscordMessageTemplateCreateManyInput | DiscordMessageTemplateCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * DiscordMessageType createManyAndReturn
+   * DiscordMessageTemplate createManyAndReturn
    */
-  export type DiscordMessageTypeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DiscordMessageTemplateCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the DiscordMessageType
+     * Select specific fields to fetch from the DiscordMessageTemplate
      */
-    select?: DiscordMessageTypeSelectCreateManyAndReturn<ExtArgs> | null
+    select?: DiscordMessageTemplateSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the DiscordMessageType
+     * Omit specific fields from the DiscordMessageTemplate
      */
-    omit?: DiscordMessageTypeOmit<ExtArgs> | null
+    omit?: DiscordMessageTemplateOmit<ExtArgs> | null
     /**
-     * The data used to create many DiscordMessageTypes.
+     * The data used to create many DiscordMessageTemplates.
      */
-    data: DiscordMessageTypeCreateManyInput | DiscordMessageTypeCreateManyInput[]
+    data: DiscordMessageTemplateCreateManyInput | DiscordMessageTemplateCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * DiscordMessageType update
+   * DiscordMessageTemplate update
    */
-  export type DiscordMessageTypeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DiscordMessageTemplateUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the DiscordMessageType
+     * Select specific fields to fetch from the DiscordMessageTemplate
      */
-    select?: DiscordMessageTypeSelect<ExtArgs> | null
+    select?: DiscordMessageTemplateSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the DiscordMessageType
+     * Omit specific fields from the DiscordMessageTemplate
      */
-    omit?: DiscordMessageTypeOmit<ExtArgs> | null
+    omit?: DiscordMessageTemplateOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: DiscordMessageTypeInclude<ExtArgs> | null
+    include?: DiscordMessageTemplateInclude<ExtArgs> | null
     /**
-     * The data needed to update a DiscordMessageType.
+     * The data needed to update a DiscordMessageTemplate.
      */
-    data: XOR<DiscordMessageTypeUpdateInput, DiscordMessageTypeUncheckedUpdateInput>
+    data: XOR<DiscordMessageTemplateUpdateInput, DiscordMessageTemplateUncheckedUpdateInput>
     /**
-     * Choose, which DiscordMessageType to update.
+     * Choose, which DiscordMessageTemplate to update.
      */
-    where: DiscordMessageTypeWhereUniqueInput
+    where: DiscordMessageTemplateWhereUniqueInput
   }
 
   /**
-   * DiscordMessageType updateMany
+   * DiscordMessageTemplate updateMany
    */
-  export type DiscordMessageTypeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DiscordMessageTemplateUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update DiscordMessageTypes.
+     * The data used to update DiscordMessageTemplates.
      */
-    data: XOR<DiscordMessageTypeUpdateManyMutationInput, DiscordMessageTypeUncheckedUpdateManyInput>
+    data: XOR<DiscordMessageTemplateUpdateManyMutationInput, DiscordMessageTemplateUncheckedUpdateManyInput>
     /**
-     * Filter which DiscordMessageTypes to update
+     * Filter which DiscordMessageTemplates to update
      */
-    where?: DiscordMessageTypeWhereInput
+    where?: DiscordMessageTemplateWhereInput
     /**
-     * Limit how many DiscordMessageTypes to update.
+     * Limit how many DiscordMessageTemplates to update.
      */
     limit?: number
   }
 
   /**
-   * DiscordMessageType updateManyAndReturn
+   * DiscordMessageTemplate updateManyAndReturn
    */
-  export type DiscordMessageTypeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DiscordMessageTemplateUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the DiscordMessageType
+     * Select specific fields to fetch from the DiscordMessageTemplate
      */
-    select?: DiscordMessageTypeSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: DiscordMessageTemplateSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the DiscordMessageType
+     * Omit specific fields from the DiscordMessageTemplate
      */
-    omit?: DiscordMessageTypeOmit<ExtArgs> | null
+    omit?: DiscordMessageTemplateOmit<ExtArgs> | null
     /**
-     * The data used to update DiscordMessageTypes.
+     * The data used to update DiscordMessageTemplates.
      */
-    data: XOR<DiscordMessageTypeUpdateManyMutationInput, DiscordMessageTypeUncheckedUpdateManyInput>
+    data: XOR<DiscordMessageTemplateUpdateManyMutationInput, DiscordMessageTemplateUncheckedUpdateManyInput>
     /**
-     * Filter which DiscordMessageTypes to update
+     * Filter which DiscordMessageTemplates to update
      */
-    where?: DiscordMessageTypeWhereInput
+    where?: DiscordMessageTemplateWhereInput
     /**
-     * Limit how many DiscordMessageTypes to update.
+     * Limit how many DiscordMessageTemplates to update.
      */
     limit?: number
   }
 
   /**
-   * DiscordMessageType upsert
+   * DiscordMessageTemplate upsert
    */
-  export type DiscordMessageTypeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DiscordMessageTemplateUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the DiscordMessageType
+     * Select specific fields to fetch from the DiscordMessageTemplate
      */
-    select?: DiscordMessageTypeSelect<ExtArgs> | null
+    select?: DiscordMessageTemplateSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the DiscordMessageType
+     * Omit specific fields from the DiscordMessageTemplate
      */
-    omit?: DiscordMessageTypeOmit<ExtArgs> | null
+    omit?: DiscordMessageTemplateOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: DiscordMessageTypeInclude<ExtArgs> | null
+    include?: DiscordMessageTemplateInclude<ExtArgs> | null
     /**
-     * The filter to search for the DiscordMessageType to update in case it exists.
+     * The filter to search for the DiscordMessageTemplate to update in case it exists.
      */
-    where: DiscordMessageTypeWhereUniqueInput
+    where: DiscordMessageTemplateWhereUniqueInput
     /**
-     * In case the DiscordMessageType found by the `where` argument doesn't exist, create a new DiscordMessageType with this data.
+     * In case the DiscordMessageTemplate found by the `where` argument doesn't exist, create a new DiscordMessageTemplate with this data.
      */
-    create: XOR<DiscordMessageTypeCreateInput, DiscordMessageTypeUncheckedCreateInput>
+    create: XOR<DiscordMessageTemplateCreateInput, DiscordMessageTemplateUncheckedCreateInput>
     /**
-     * In case the DiscordMessageType was found with the provided `where` argument, update it with this data.
+     * In case the DiscordMessageTemplate was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<DiscordMessageTypeUpdateInput, DiscordMessageTypeUncheckedUpdateInput>
+    update: XOR<DiscordMessageTemplateUpdateInput, DiscordMessageTemplateUncheckedUpdateInput>
   }
 
   /**
-   * DiscordMessageType delete
+   * DiscordMessageTemplate delete
    */
-  export type DiscordMessageTypeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DiscordMessageTemplateDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the DiscordMessageType
+     * Select specific fields to fetch from the DiscordMessageTemplate
      */
-    select?: DiscordMessageTypeSelect<ExtArgs> | null
+    select?: DiscordMessageTemplateSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the DiscordMessageType
+     * Omit specific fields from the DiscordMessageTemplate
      */
-    omit?: DiscordMessageTypeOmit<ExtArgs> | null
+    omit?: DiscordMessageTemplateOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: DiscordMessageTypeInclude<ExtArgs> | null
+    include?: DiscordMessageTemplateInclude<ExtArgs> | null
     /**
-     * Filter which DiscordMessageType to delete.
+     * Filter which DiscordMessageTemplate to delete.
      */
-    where: DiscordMessageTypeWhereUniqueInput
+    where: DiscordMessageTemplateWhereUniqueInput
   }
 
   /**
-   * DiscordMessageType deleteMany
+   * DiscordMessageTemplate deleteMany
    */
-  export type DiscordMessageTypeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DiscordMessageTemplateDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which DiscordMessageTypes to delete
+     * Filter which DiscordMessageTemplates to delete
      */
-    where?: DiscordMessageTypeWhereInput
+    where?: DiscordMessageTemplateWhereInput
     /**
-     * Limit how many DiscordMessageTypes to delete.
+     * Limit how many DiscordMessageTemplates to delete.
      */
     limit?: number
   }
 
   /**
-   * DiscordMessageType.DiscordMessages
+   * DiscordMessageTemplate.DiscordMessages
    */
-  export type DiscordMessageType$DiscordMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DiscordMessageTemplate$DiscordMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the DiscordMessage
      */
@@ -8145,21 +8308,21 @@ export namespace Prisma {
   }
 
   /**
-   * DiscordMessageType without action
+   * DiscordMessageTemplate without action
    */
-  export type DiscordMessageTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DiscordMessageTemplateDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the DiscordMessageType
+     * Select specific fields to fetch from the DiscordMessageTemplate
      */
-    select?: DiscordMessageTypeSelect<ExtArgs> | null
+    select?: DiscordMessageTemplateSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the DiscordMessageType
+     * Omit specific fields from the DiscordMessageTemplate
      */
-    omit?: DiscordMessageTypeOmit<ExtArgs> | null
+    omit?: DiscordMessageTemplateOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: DiscordMessageTypeInclude<ExtArgs> | null
+    include?: DiscordMessageTemplateInclude<ExtArgs> | null
   }
 
 
@@ -8175,8 +8338,11 @@ export namespace Prisma {
 
   export type DiscordChannelWebhookMinAggregateOutputType = {
     Id: string | null
-    ChannelId: string | null
+    Name: string | null
+    Description: string | null
     WebhookUrl: string | null
+    ChannelId: string | null
+    Token: string | null
     IsActive: boolean | null
     CreatedAt: Date | null
     UpdatedAt: Date | null
@@ -8184,8 +8350,11 @@ export namespace Prisma {
 
   export type DiscordChannelWebhookMaxAggregateOutputType = {
     Id: string | null
-    ChannelId: string | null
+    Name: string | null
+    Description: string | null
     WebhookUrl: string | null
+    ChannelId: string | null
+    Token: string | null
     IsActive: boolean | null
     CreatedAt: Date | null
     UpdatedAt: Date | null
@@ -8193,8 +8362,11 @@ export namespace Prisma {
 
   export type DiscordChannelWebhookCountAggregateOutputType = {
     Id: number
-    ChannelId: number
+    Name: number
+    Description: number
     WebhookUrl: number
+    ChannelId: number
+    Token: number
     IsActive: number
     CreatedAt: number
     UpdatedAt: number
@@ -8204,8 +8376,11 @@ export namespace Prisma {
 
   export type DiscordChannelWebhookMinAggregateInputType = {
     Id?: true
-    ChannelId?: true
+    Name?: true
+    Description?: true
     WebhookUrl?: true
+    ChannelId?: true
+    Token?: true
     IsActive?: true
     CreatedAt?: true
     UpdatedAt?: true
@@ -8213,8 +8388,11 @@ export namespace Prisma {
 
   export type DiscordChannelWebhookMaxAggregateInputType = {
     Id?: true
-    ChannelId?: true
+    Name?: true
+    Description?: true
     WebhookUrl?: true
+    ChannelId?: true
+    Token?: true
     IsActive?: true
     CreatedAt?: true
     UpdatedAt?: true
@@ -8222,8 +8400,11 @@ export namespace Prisma {
 
   export type DiscordChannelWebhookCountAggregateInputType = {
     Id?: true
-    ChannelId?: true
+    Name?: true
+    Description?: true
     WebhookUrl?: true
+    ChannelId?: true
+    Token?: true
     IsActive?: true
     CreatedAt?: true
     UpdatedAt?: true
@@ -8304,8 +8485,11 @@ export namespace Prisma {
 
   export type DiscordChannelWebhookGroupByOutputType = {
     Id: string
-    ChannelId: string
+    Name: string
+    Description: string | null
     WebhookUrl: string
+    ChannelId: string
+    Token: string
     IsActive: boolean
     CreatedAt: Date
     UpdatedAt: Date
@@ -8330,19 +8514,26 @@ export namespace Prisma {
 
   export type DiscordChannelWebhookSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     Id?: boolean
-    ChannelId?: boolean
+    Name?: boolean
+    Description?: boolean
     WebhookUrl?: boolean
+    ChannelId?: boolean
+    Token?: boolean
     IsActive?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
     DiscordMessages?: boolean | DiscordChannelWebhook$DiscordMessagesArgs<ExtArgs>
+    ListenerEventSenders?: boolean | DiscordChannelWebhook$ListenerEventSendersArgs<ExtArgs>
     _count?: boolean | DiscordChannelWebhookCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["discordChannelWebhook"]>
 
   export type DiscordChannelWebhookSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     Id?: boolean
-    ChannelId?: boolean
+    Name?: boolean
+    Description?: boolean
     WebhookUrl?: boolean
+    ChannelId?: boolean
+    Token?: boolean
     IsActive?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
@@ -8350,8 +8541,11 @@ export namespace Prisma {
 
   export type DiscordChannelWebhookSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     Id?: boolean
-    ChannelId?: boolean
+    Name?: boolean
+    Description?: boolean
     WebhookUrl?: boolean
+    ChannelId?: boolean
+    Token?: boolean
     IsActive?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
@@ -8359,16 +8553,20 @@ export namespace Prisma {
 
   export type DiscordChannelWebhookSelectScalar = {
     Id?: boolean
-    ChannelId?: boolean
+    Name?: boolean
+    Description?: boolean
     WebhookUrl?: boolean
+    ChannelId?: boolean
+    Token?: boolean
     IsActive?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
   }
 
-  export type DiscordChannelWebhookOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "ChannelId" | "WebhookUrl" | "IsActive" | "CreatedAt" | "UpdatedAt", ExtArgs["result"]["discordChannelWebhook"]>
+  export type DiscordChannelWebhookOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "Name" | "Description" | "WebhookUrl" | "ChannelId" | "Token" | "IsActive" | "CreatedAt" | "UpdatedAt", ExtArgs["result"]["discordChannelWebhook"]>
   export type DiscordChannelWebhookInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     DiscordMessages?: boolean | DiscordChannelWebhook$DiscordMessagesArgs<ExtArgs>
+    ListenerEventSenders?: boolean | DiscordChannelWebhook$ListenerEventSendersArgs<ExtArgs>
     _count?: boolean | DiscordChannelWebhookCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type DiscordChannelWebhookIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -8378,11 +8576,15 @@ export namespace Prisma {
     name: "DiscordChannelWebhook"
     objects: {
       DiscordMessages: Prisma.$DiscordMessagePayload<ExtArgs>[]
+      ListenerEventSenders: Prisma.$ListenerEventSenderPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       Id: string
-      ChannelId: string
+      Name: string
+      Description: string | null
       WebhookUrl: string
+      ChannelId: string
+      Token: string
       IsActive: boolean
       CreatedAt: Date
       UpdatedAt: Date
@@ -8781,6 +8983,7 @@ export namespace Prisma {
   export interface Prisma__DiscordChannelWebhookClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     DiscordMessages<T extends DiscordChannelWebhook$DiscordMessagesArgs<ExtArgs> = {}>(args?: Subset<T, DiscordChannelWebhook$DiscordMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DiscordMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    ListenerEventSenders<T extends DiscordChannelWebhook$ListenerEventSendersArgs<ExtArgs> = {}>(args?: Subset<T, DiscordChannelWebhook$ListenerEventSendersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ListenerEventSenderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8811,8 +9014,11 @@ export namespace Prisma {
    */
   interface DiscordChannelWebhookFieldRefs {
     readonly Id: FieldRef<"DiscordChannelWebhook", 'String'>
-    readonly ChannelId: FieldRef<"DiscordChannelWebhook", 'String'>
+    readonly Name: FieldRef<"DiscordChannelWebhook", 'String'>
+    readonly Description: FieldRef<"DiscordChannelWebhook", 'String'>
     readonly WebhookUrl: FieldRef<"DiscordChannelWebhook", 'String'>
+    readonly ChannelId: FieldRef<"DiscordChannelWebhook", 'String'>
+    readonly Token: FieldRef<"DiscordChannelWebhook", 'String'>
     readonly IsActive: FieldRef<"DiscordChannelWebhook", 'Boolean'>
     readonly CreatedAt: FieldRef<"DiscordChannelWebhook", 'DateTime'>
     readonly UpdatedAt: FieldRef<"DiscordChannelWebhook", 'DateTime'>
@@ -9228,6 +9434,30 @@ export namespace Prisma {
   }
 
   /**
+   * DiscordChannelWebhook.ListenerEventSenders
+   */
+  export type DiscordChannelWebhook$ListenerEventSendersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ListenerEventSender
+     */
+    select?: ListenerEventSenderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ListenerEventSender
+     */
+    omit?: ListenerEventSenderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ListenerEventSenderInclude<ExtArgs> | null
+    where?: ListenerEventSenderWhereInput
+    orderBy?: ListenerEventSenderOrderByWithRelationInput | ListenerEventSenderOrderByWithRelationInput[]
+    cursor?: ListenerEventSenderWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ListenerEventSenderScalarFieldEnum | ListenerEventSenderScalarFieldEnum[]
+  }
+
+  /**
    * DiscordChannelWebhook without action
    */
   export type DiscordChannelWebhookDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9272,8 +9502,10 @@ export namespace Prisma {
     Type: string | null
     SentAt: Date | null
     Status: $Enums.ListenerEventStatus | null
+    SenderId: string | null
     Error: string | null
     DiscordMessageId: string | null
+    DeliveredAt: Date | null
     CreatedAt: Date | null
     UpdatedAt: Date | null
   }
@@ -9284,8 +9516,10 @@ export namespace Prisma {
     Type: string | null
     SentAt: Date | null
     Status: $Enums.ListenerEventStatus | null
+    SenderId: string | null
     Error: string | null
     DiscordMessageId: string | null
+    DeliveredAt: Date | null
     CreatedAt: Date | null
     UpdatedAt: Date | null
   }
@@ -9296,9 +9530,11 @@ export namespace Prisma {
     Type: number
     SentAt: number
     Status: number
+    SenderId: number
     Error: number
     Data: number
     DiscordMessageId: number
+    DeliveredAt: number
     CreatedAt: number
     UpdatedAt: number
     _all: number
@@ -9319,8 +9555,10 @@ export namespace Prisma {
     Type?: true
     SentAt?: true
     Status?: true
+    SenderId?: true
     Error?: true
     DiscordMessageId?: true
+    DeliveredAt?: true
     CreatedAt?: true
     UpdatedAt?: true
   }
@@ -9331,8 +9569,10 @@ export namespace Prisma {
     Type?: true
     SentAt?: true
     Status?: true
+    SenderId?: true
     Error?: true
     DiscordMessageId?: true
+    DeliveredAt?: true
     CreatedAt?: true
     UpdatedAt?: true
   }
@@ -9343,9 +9583,11 @@ export namespace Prisma {
     Type?: true
     SentAt?: true
     Status?: true
+    SenderId?: true
     Error?: true
     Data?: true
     DiscordMessageId?: true
+    DeliveredAt?: true
     CreatedAt?: true
     UpdatedAt?: true
     _all?: true
@@ -9443,9 +9685,11 @@ export namespace Prisma {
     Type: string
     SentAt: Date
     Status: $Enums.ListenerEventStatus
+    SenderId: string
     Error: string | null
     Data: JsonValue | null
     DiscordMessageId: string | null
+    DeliveredAt: Date | null
     CreatedAt: Date
     UpdatedAt: Date
     _count: ListenerEventCountAggregateOutputType | null
@@ -9475,12 +9719,15 @@ export namespace Prisma {
     Type?: boolean
     SentAt?: boolean
     Status?: boolean
+    SenderId?: boolean
     Error?: boolean
     Data?: boolean
     DiscordMessageId?: boolean
+    DeliveredAt?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
     DiscordMessage?: boolean | ListenerEvent$DiscordMessageArgs<ExtArgs>
+    Sender?: boolean | ListenerEventSenderDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["listenerEvent"]>
 
   export type ListenerEventSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -9489,12 +9736,15 @@ export namespace Prisma {
     Type?: boolean
     SentAt?: boolean
     Status?: boolean
+    SenderId?: boolean
     Error?: boolean
     Data?: boolean
     DiscordMessageId?: boolean
+    DeliveredAt?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
     DiscordMessage?: boolean | ListenerEvent$DiscordMessageArgs<ExtArgs>
+    Sender?: boolean | ListenerEventSenderDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["listenerEvent"]>
 
   export type ListenerEventSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -9503,12 +9753,15 @@ export namespace Prisma {
     Type?: boolean
     SentAt?: boolean
     Status?: boolean
+    SenderId?: boolean
     Error?: boolean
     Data?: boolean
     DiscordMessageId?: boolean
+    DeliveredAt?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
     DiscordMessage?: boolean | ListenerEvent$DiscordMessageArgs<ExtArgs>
+    Sender?: boolean | ListenerEventSenderDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["listenerEvent"]>
 
   export type ListenerEventSelectScalar = {
@@ -9517,28 +9770,34 @@ export namespace Prisma {
     Type?: boolean
     SentAt?: boolean
     Status?: boolean
+    SenderId?: boolean
     Error?: boolean
     Data?: boolean
     DiscordMessageId?: boolean
+    DeliveredAt?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
   }
 
-  export type ListenerEventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "Variant" | "Type" | "SentAt" | "Status" | "Error" | "Data" | "DiscordMessageId" | "CreatedAt" | "UpdatedAt", ExtArgs["result"]["listenerEvent"]>
+  export type ListenerEventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "Variant" | "Type" | "SentAt" | "Status" | "SenderId" | "Error" | "Data" | "DiscordMessageId" | "DeliveredAt" | "CreatedAt" | "UpdatedAt", ExtArgs["result"]["listenerEvent"]>
   export type ListenerEventInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     DiscordMessage?: boolean | ListenerEvent$DiscordMessageArgs<ExtArgs>
+    Sender?: boolean | ListenerEventSenderDefaultArgs<ExtArgs>
   }
   export type ListenerEventIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     DiscordMessage?: boolean | ListenerEvent$DiscordMessageArgs<ExtArgs>
+    Sender?: boolean | ListenerEventSenderDefaultArgs<ExtArgs>
   }
   export type ListenerEventIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     DiscordMessage?: boolean | ListenerEvent$DiscordMessageArgs<ExtArgs>
+    Sender?: boolean | ListenerEventSenderDefaultArgs<ExtArgs>
   }
 
   export type $ListenerEventPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "ListenerEvent"
     objects: {
       DiscordMessage: Prisma.$DiscordMessagePayload<ExtArgs> | null
+      Sender: Prisma.$ListenerEventSenderPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       Id: number
@@ -9546,9 +9805,11 @@ export namespace Prisma {
       Type: string
       SentAt: Date
       Status: $Enums.ListenerEventStatus
+      SenderId: string
       Error: string | null
       Data: Prisma.JsonValue | null
       DiscordMessageId: string | null
+      DeliveredAt: Date | null
       CreatedAt: Date
       UpdatedAt: Date
     }, ExtArgs["result"]["listenerEvent"]>
@@ -9946,6 +10207,7 @@ export namespace Prisma {
   export interface Prisma__ListenerEventClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     DiscordMessage<T extends ListenerEvent$DiscordMessageArgs<ExtArgs> = {}>(args?: Subset<T, ListenerEvent$DiscordMessageArgs<ExtArgs>>): Prisma__DiscordMessageClient<$Result.GetResult<Prisma.$DiscordMessagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    Sender<T extends ListenerEventSenderDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ListenerEventSenderDefaultArgs<ExtArgs>>): Prisma__ListenerEventSenderClient<$Result.GetResult<Prisma.$ListenerEventSenderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9980,9 +10242,11 @@ export namespace Prisma {
     readonly Type: FieldRef<"ListenerEvent", 'String'>
     readonly SentAt: FieldRef<"ListenerEvent", 'DateTime'>
     readonly Status: FieldRef<"ListenerEvent", 'ListenerEventStatus'>
+    readonly SenderId: FieldRef<"ListenerEvent", 'String'>
     readonly Error: FieldRef<"ListenerEvent", 'String'>
     readonly Data: FieldRef<"ListenerEvent", 'Json'>
     readonly DiscordMessageId: FieldRef<"ListenerEvent", 'String'>
+    readonly DeliveredAt: FieldRef<"ListenerEvent", 'DateTime'>
     readonly CreatedAt: FieldRef<"ListenerEvent", 'DateTime'>
     readonly UpdatedAt: FieldRef<"ListenerEvent", 'DateTime'>
   }
@@ -10415,6 +10679,1152 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: ListenerEventInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ListenerEventSender
+   */
+
+  export type AggregateListenerEventSender = {
+    _count: ListenerEventSenderCountAggregateOutputType | null
+    _min: ListenerEventSenderMinAggregateOutputType | null
+    _max: ListenerEventSenderMaxAggregateOutputType | null
+  }
+
+  export type ListenerEventSenderMinAggregateOutputType = {
+    Id: string | null
+    Name: string | null
+    Slug: string | null
+    Token: string | null
+    IsActive: boolean | null
+    DiscordChannelWebhookId: string | null
+    CreatedAt: Date | null
+    UpdatedAt: Date | null
+  }
+
+  export type ListenerEventSenderMaxAggregateOutputType = {
+    Id: string | null
+    Name: string | null
+    Slug: string | null
+    Token: string | null
+    IsActive: boolean | null
+    DiscordChannelWebhookId: string | null
+    CreatedAt: Date | null
+    UpdatedAt: Date | null
+  }
+
+  export type ListenerEventSenderCountAggregateOutputType = {
+    Id: number
+    Name: number
+    Slug: number
+    Token: number
+    IsActive: number
+    DiscordChannelWebhookId: number
+    CreatedAt: number
+    UpdatedAt: number
+    _all: number
+  }
+
+
+  export type ListenerEventSenderMinAggregateInputType = {
+    Id?: true
+    Name?: true
+    Slug?: true
+    Token?: true
+    IsActive?: true
+    DiscordChannelWebhookId?: true
+    CreatedAt?: true
+    UpdatedAt?: true
+  }
+
+  export type ListenerEventSenderMaxAggregateInputType = {
+    Id?: true
+    Name?: true
+    Slug?: true
+    Token?: true
+    IsActive?: true
+    DiscordChannelWebhookId?: true
+    CreatedAt?: true
+    UpdatedAt?: true
+  }
+
+  export type ListenerEventSenderCountAggregateInputType = {
+    Id?: true
+    Name?: true
+    Slug?: true
+    Token?: true
+    IsActive?: true
+    DiscordChannelWebhookId?: true
+    CreatedAt?: true
+    UpdatedAt?: true
+    _all?: true
+  }
+
+  export type ListenerEventSenderAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ListenerEventSender to aggregate.
+     */
+    where?: ListenerEventSenderWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ListenerEventSenders to fetch.
+     */
+    orderBy?: ListenerEventSenderOrderByWithRelationInput | ListenerEventSenderOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ListenerEventSenderWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ListenerEventSenders from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ListenerEventSenders.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ListenerEventSenders
+    **/
+    _count?: true | ListenerEventSenderCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ListenerEventSenderMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ListenerEventSenderMaxAggregateInputType
+  }
+
+  export type GetListenerEventSenderAggregateType<T extends ListenerEventSenderAggregateArgs> = {
+        [P in keyof T & keyof AggregateListenerEventSender]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateListenerEventSender[P]>
+      : GetScalarType<T[P], AggregateListenerEventSender[P]>
+  }
+
+
+
+
+  export type ListenerEventSenderGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ListenerEventSenderWhereInput
+    orderBy?: ListenerEventSenderOrderByWithAggregationInput | ListenerEventSenderOrderByWithAggregationInput[]
+    by: ListenerEventSenderScalarFieldEnum[] | ListenerEventSenderScalarFieldEnum
+    having?: ListenerEventSenderScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ListenerEventSenderCountAggregateInputType | true
+    _min?: ListenerEventSenderMinAggregateInputType
+    _max?: ListenerEventSenderMaxAggregateInputType
+  }
+
+  export type ListenerEventSenderGroupByOutputType = {
+    Id: string
+    Name: string
+    Slug: string
+    Token: string
+    IsActive: boolean
+    DiscordChannelWebhookId: string | null
+    CreatedAt: Date
+    UpdatedAt: Date
+    _count: ListenerEventSenderCountAggregateOutputType | null
+    _min: ListenerEventSenderMinAggregateOutputType | null
+    _max: ListenerEventSenderMaxAggregateOutputType | null
+  }
+
+  type GetListenerEventSenderGroupByPayload<T extends ListenerEventSenderGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ListenerEventSenderGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ListenerEventSenderGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ListenerEventSenderGroupByOutputType[P]>
+            : GetScalarType<T[P], ListenerEventSenderGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ListenerEventSenderSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    Id?: boolean
+    Name?: boolean
+    Slug?: boolean
+    Token?: boolean
+    IsActive?: boolean
+    DiscordChannelWebhookId?: boolean
+    CreatedAt?: boolean
+    UpdatedAt?: boolean
+    ListenerEvents?: boolean | ListenerEventSender$ListenerEventsArgs<ExtArgs>
+    DiscordChannelWebhook?: boolean | ListenerEventSender$DiscordChannelWebhookArgs<ExtArgs>
+    _count?: boolean | ListenerEventSenderCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["listenerEventSender"]>
+
+  export type ListenerEventSenderSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    Id?: boolean
+    Name?: boolean
+    Slug?: boolean
+    Token?: boolean
+    IsActive?: boolean
+    DiscordChannelWebhookId?: boolean
+    CreatedAt?: boolean
+    UpdatedAt?: boolean
+    DiscordChannelWebhook?: boolean | ListenerEventSender$DiscordChannelWebhookArgs<ExtArgs>
+  }, ExtArgs["result"]["listenerEventSender"]>
+
+  export type ListenerEventSenderSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    Id?: boolean
+    Name?: boolean
+    Slug?: boolean
+    Token?: boolean
+    IsActive?: boolean
+    DiscordChannelWebhookId?: boolean
+    CreatedAt?: boolean
+    UpdatedAt?: boolean
+    DiscordChannelWebhook?: boolean | ListenerEventSender$DiscordChannelWebhookArgs<ExtArgs>
+  }, ExtArgs["result"]["listenerEventSender"]>
+
+  export type ListenerEventSenderSelectScalar = {
+    Id?: boolean
+    Name?: boolean
+    Slug?: boolean
+    Token?: boolean
+    IsActive?: boolean
+    DiscordChannelWebhookId?: boolean
+    CreatedAt?: boolean
+    UpdatedAt?: boolean
+  }
+
+  export type ListenerEventSenderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "Name" | "Slug" | "Token" | "IsActive" | "DiscordChannelWebhookId" | "CreatedAt" | "UpdatedAt", ExtArgs["result"]["listenerEventSender"]>
+  export type ListenerEventSenderInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    ListenerEvents?: boolean | ListenerEventSender$ListenerEventsArgs<ExtArgs>
+    DiscordChannelWebhook?: boolean | ListenerEventSender$DiscordChannelWebhookArgs<ExtArgs>
+    _count?: boolean | ListenerEventSenderCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ListenerEventSenderIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    DiscordChannelWebhook?: boolean | ListenerEventSender$DiscordChannelWebhookArgs<ExtArgs>
+  }
+  export type ListenerEventSenderIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    DiscordChannelWebhook?: boolean | ListenerEventSender$DiscordChannelWebhookArgs<ExtArgs>
+  }
+
+  export type $ListenerEventSenderPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ListenerEventSender"
+    objects: {
+      ListenerEvents: Prisma.$ListenerEventPayload<ExtArgs>[]
+      DiscordChannelWebhook: Prisma.$DiscordChannelWebhookPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      Id: string
+      Name: string
+      Slug: string
+      Token: string
+      IsActive: boolean
+      DiscordChannelWebhookId: string | null
+      CreatedAt: Date
+      UpdatedAt: Date
+    }, ExtArgs["result"]["listenerEventSender"]>
+    composites: {}
+  }
+
+  type ListenerEventSenderGetPayload<S extends boolean | null | undefined | ListenerEventSenderDefaultArgs> = $Result.GetResult<Prisma.$ListenerEventSenderPayload, S>
+
+  type ListenerEventSenderCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ListenerEventSenderFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ListenerEventSenderCountAggregateInputType | true
+    }
+
+  export interface ListenerEventSenderDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ListenerEventSender'], meta: { name: 'ListenerEventSender' } }
+    /**
+     * Find zero or one ListenerEventSender that matches the filter.
+     * @param {ListenerEventSenderFindUniqueArgs} args - Arguments to find a ListenerEventSender
+     * @example
+     * // Get one ListenerEventSender
+     * const listenerEventSender = await prisma.listenerEventSender.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ListenerEventSenderFindUniqueArgs>(args: SelectSubset<T, ListenerEventSenderFindUniqueArgs<ExtArgs>>): Prisma__ListenerEventSenderClient<$Result.GetResult<Prisma.$ListenerEventSenderPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ListenerEventSender that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ListenerEventSenderFindUniqueOrThrowArgs} args - Arguments to find a ListenerEventSender
+     * @example
+     * // Get one ListenerEventSender
+     * const listenerEventSender = await prisma.listenerEventSender.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ListenerEventSenderFindUniqueOrThrowArgs>(args: SelectSubset<T, ListenerEventSenderFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ListenerEventSenderClient<$Result.GetResult<Prisma.$ListenerEventSenderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ListenerEventSender that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ListenerEventSenderFindFirstArgs} args - Arguments to find a ListenerEventSender
+     * @example
+     * // Get one ListenerEventSender
+     * const listenerEventSender = await prisma.listenerEventSender.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ListenerEventSenderFindFirstArgs>(args?: SelectSubset<T, ListenerEventSenderFindFirstArgs<ExtArgs>>): Prisma__ListenerEventSenderClient<$Result.GetResult<Prisma.$ListenerEventSenderPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ListenerEventSender that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ListenerEventSenderFindFirstOrThrowArgs} args - Arguments to find a ListenerEventSender
+     * @example
+     * // Get one ListenerEventSender
+     * const listenerEventSender = await prisma.listenerEventSender.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ListenerEventSenderFindFirstOrThrowArgs>(args?: SelectSubset<T, ListenerEventSenderFindFirstOrThrowArgs<ExtArgs>>): Prisma__ListenerEventSenderClient<$Result.GetResult<Prisma.$ListenerEventSenderPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ListenerEventSenders that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ListenerEventSenderFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ListenerEventSenders
+     * const listenerEventSenders = await prisma.listenerEventSender.findMany()
+     * 
+     * // Get first 10 ListenerEventSenders
+     * const listenerEventSenders = await prisma.listenerEventSender.findMany({ take: 10 })
+     * 
+     * // Only select the `Id`
+     * const listenerEventSenderWithIdOnly = await prisma.listenerEventSender.findMany({ select: { Id: true } })
+     * 
+     */
+    findMany<T extends ListenerEventSenderFindManyArgs>(args?: SelectSubset<T, ListenerEventSenderFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ListenerEventSenderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ListenerEventSender.
+     * @param {ListenerEventSenderCreateArgs} args - Arguments to create a ListenerEventSender.
+     * @example
+     * // Create one ListenerEventSender
+     * const ListenerEventSender = await prisma.listenerEventSender.create({
+     *   data: {
+     *     // ... data to create a ListenerEventSender
+     *   }
+     * })
+     * 
+     */
+    create<T extends ListenerEventSenderCreateArgs>(args: SelectSubset<T, ListenerEventSenderCreateArgs<ExtArgs>>): Prisma__ListenerEventSenderClient<$Result.GetResult<Prisma.$ListenerEventSenderPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ListenerEventSenders.
+     * @param {ListenerEventSenderCreateManyArgs} args - Arguments to create many ListenerEventSenders.
+     * @example
+     * // Create many ListenerEventSenders
+     * const listenerEventSender = await prisma.listenerEventSender.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ListenerEventSenderCreateManyArgs>(args?: SelectSubset<T, ListenerEventSenderCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ListenerEventSenders and returns the data saved in the database.
+     * @param {ListenerEventSenderCreateManyAndReturnArgs} args - Arguments to create many ListenerEventSenders.
+     * @example
+     * // Create many ListenerEventSenders
+     * const listenerEventSender = await prisma.listenerEventSender.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ListenerEventSenders and only return the `Id`
+     * const listenerEventSenderWithIdOnly = await prisma.listenerEventSender.createManyAndReturn({
+     *   select: { Id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ListenerEventSenderCreateManyAndReturnArgs>(args?: SelectSubset<T, ListenerEventSenderCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ListenerEventSenderPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ListenerEventSender.
+     * @param {ListenerEventSenderDeleteArgs} args - Arguments to delete one ListenerEventSender.
+     * @example
+     * // Delete one ListenerEventSender
+     * const ListenerEventSender = await prisma.listenerEventSender.delete({
+     *   where: {
+     *     // ... filter to delete one ListenerEventSender
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ListenerEventSenderDeleteArgs>(args: SelectSubset<T, ListenerEventSenderDeleteArgs<ExtArgs>>): Prisma__ListenerEventSenderClient<$Result.GetResult<Prisma.$ListenerEventSenderPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ListenerEventSender.
+     * @param {ListenerEventSenderUpdateArgs} args - Arguments to update one ListenerEventSender.
+     * @example
+     * // Update one ListenerEventSender
+     * const listenerEventSender = await prisma.listenerEventSender.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ListenerEventSenderUpdateArgs>(args: SelectSubset<T, ListenerEventSenderUpdateArgs<ExtArgs>>): Prisma__ListenerEventSenderClient<$Result.GetResult<Prisma.$ListenerEventSenderPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ListenerEventSenders.
+     * @param {ListenerEventSenderDeleteManyArgs} args - Arguments to filter ListenerEventSenders to delete.
+     * @example
+     * // Delete a few ListenerEventSenders
+     * const { count } = await prisma.listenerEventSender.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ListenerEventSenderDeleteManyArgs>(args?: SelectSubset<T, ListenerEventSenderDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ListenerEventSenders.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ListenerEventSenderUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ListenerEventSenders
+     * const listenerEventSender = await prisma.listenerEventSender.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ListenerEventSenderUpdateManyArgs>(args: SelectSubset<T, ListenerEventSenderUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ListenerEventSenders and returns the data updated in the database.
+     * @param {ListenerEventSenderUpdateManyAndReturnArgs} args - Arguments to update many ListenerEventSenders.
+     * @example
+     * // Update many ListenerEventSenders
+     * const listenerEventSender = await prisma.listenerEventSender.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ListenerEventSenders and only return the `Id`
+     * const listenerEventSenderWithIdOnly = await prisma.listenerEventSender.updateManyAndReturn({
+     *   select: { Id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ListenerEventSenderUpdateManyAndReturnArgs>(args: SelectSubset<T, ListenerEventSenderUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ListenerEventSenderPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ListenerEventSender.
+     * @param {ListenerEventSenderUpsertArgs} args - Arguments to update or create a ListenerEventSender.
+     * @example
+     * // Update or create a ListenerEventSender
+     * const listenerEventSender = await prisma.listenerEventSender.upsert({
+     *   create: {
+     *     // ... data to create a ListenerEventSender
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ListenerEventSender we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ListenerEventSenderUpsertArgs>(args: SelectSubset<T, ListenerEventSenderUpsertArgs<ExtArgs>>): Prisma__ListenerEventSenderClient<$Result.GetResult<Prisma.$ListenerEventSenderPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ListenerEventSenders.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ListenerEventSenderCountArgs} args - Arguments to filter ListenerEventSenders to count.
+     * @example
+     * // Count the number of ListenerEventSenders
+     * const count = await prisma.listenerEventSender.count({
+     *   where: {
+     *     // ... the filter for the ListenerEventSenders we want to count
+     *   }
+     * })
+    **/
+    count<T extends ListenerEventSenderCountArgs>(
+      args?: Subset<T, ListenerEventSenderCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ListenerEventSenderCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ListenerEventSender.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ListenerEventSenderAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ListenerEventSenderAggregateArgs>(args: Subset<T, ListenerEventSenderAggregateArgs>): Prisma.PrismaPromise<GetListenerEventSenderAggregateType<T>>
+
+    /**
+     * Group by ListenerEventSender.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ListenerEventSenderGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ListenerEventSenderGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ListenerEventSenderGroupByArgs['orderBy'] }
+        : { orderBy?: ListenerEventSenderGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ListenerEventSenderGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetListenerEventSenderGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ListenerEventSender model
+   */
+  readonly fields: ListenerEventSenderFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ListenerEventSender.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ListenerEventSenderClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    ListenerEvents<T extends ListenerEventSender$ListenerEventsArgs<ExtArgs> = {}>(args?: Subset<T, ListenerEventSender$ListenerEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ListenerEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    DiscordChannelWebhook<T extends ListenerEventSender$DiscordChannelWebhookArgs<ExtArgs> = {}>(args?: Subset<T, ListenerEventSender$DiscordChannelWebhookArgs<ExtArgs>>): Prisma__DiscordChannelWebhookClient<$Result.GetResult<Prisma.$DiscordChannelWebhookPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ListenerEventSender model
+   */
+  interface ListenerEventSenderFieldRefs {
+    readonly Id: FieldRef<"ListenerEventSender", 'String'>
+    readonly Name: FieldRef<"ListenerEventSender", 'String'>
+    readonly Slug: FieldRef<"ListenerEventSender", 'String'>
+    readonly Token: FieldRef<"ListenerEventSender", 'String'>
+    readonly IsActive: FieldRef<"ListenerEventSender", 'Boolean'>
+    readonly DiscordChannelWebhookId: FieldRef<"ListenerEventSender", 'String'>
+    readonly CreatedAt: FieldRef<"ListenerEventSender", 'DateTime'>
+    readonly UpdatedAt: FieldRef<"ListenerEventSender", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ListenerEventSender findUnique
+   */
+  export type ListenerEventSenderFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ListenerEventSender
+     */
+    select?: ListenerEventSenderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ListenerEventSender
+     */
+    omit?: ListenerEventSenderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ListenerEventSenderInclude<ExtArgs> | null
+    /**
+     * Filter, which ListenerEventSender to fetch.
+     */
+    where: ListenerEventSenderWhereUniqueInput
+  }
+
+  /**
+   * ListenerEventSender findUniqueOrThrow
+   */
+  export type ListenerEventSenderFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ListenerEventSender
+     */
+    select?: ListenerEventSenderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ListenerEventSender
+     */
+    omit?: ListenerEventSenderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ListenerEventSenderInclude<ExtArgs> | null
+    /**
+     * Filter, which ListenerEventSender to fetch.
+     */
+    where: ListenerEventSenderWhereUniqueInput
+  }
+
+  /**
+   * ListenerEventSender findFirst
+   */
+  export type ListenerEventSenderFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ListenerEventSender
+     */
+    select?: ListenerEventSenderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ListenerEventSender
+     */
+    omit?: ListenerEventSenderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ListenerEventSenderInclude<ExtArgs> | null
+    /**
+     * Filter, which ListenerEventSender to fetch.
+     */
+    where?: ListenerEventSenderWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ListenerEventSenders to fetch.
+     */
+    orderBy?: ListenerEventSenderOrderByWithRelationInput | ListenerEventSenderOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ListenerEventSenders.
+     */
+    cursor?: ListenerEventSenderWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ListenerEventSenders from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ListenerEventSenders.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ListenerEventSenders.
+     */
+    distinct?: ListenerEventSenderScalarFieldEnum | ListenerEventSenderScalarFieldEnum[]
+  }
+
+  /**
+   * ListenerEventSender findFirstOrThrow
+   */
+  export type ListenerEventSenderFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ListenerEventSender
+     */
+    select?: ListenerEventSenderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ListenerEventSender
+     */
+    omit?: ListenerEventSenderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ListenerEventSenderInclude<ExtArgs> | null
+    /**
+     * Filter, which ListenerEventSender to fetch.
+     */
+    where?: ListenerEventSenderWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ListenerEventSenders to fetch.
+     */
+    orderBy?: ListenerEventSenderOrderByWithRelationInput | ListenerEventSenderOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ListenerEventSenders.
+     */
+    cursor?: ListenerEventSenderWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ListenerEventSenders from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ListenerEventSenders.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ListenerEventSenders.
+     */
+    distinct?: ListenerEventSenderScalarFieldEnum | ListenerEventSenderScalarFieldEnum[]
+  }
+
+  /**
+   * ListenerEventSender findMany
+   */
+  export type ListenerEventSenderFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ListenerEventSender
+     */
+    select?: ListenerEventSenderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ListenerEventSender
+     */
+    omit?: ListenerEventSenderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ListenerEventSenderInclude<ExtArgs> | null
+    /**
+     * Filter, which ListenerEventSenders to fetch.
+     */
+    where?: ListenerEventSenderWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ListenerEventSenders to fetch.
+     */
+    orderBy?: ListenerEventSenderOrderByWithRelationInput | ListenerEventSenderOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ListenerEventSenders.
+     */
+    cursor?: ListenerEventSenderWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ListenerEventSenders from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ListenerEventSenders.
+     */
+    skip?: number
+    distinct?: ListenerEventSenderScalarFieldEnum | ListenerEventSenderScalarFieldEnum[]
+  }
+
+  /**
+   * ListenerEventSender create
+   */
+  export type ListenerEventSenderCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ListenerEventSender
+     */
+    select?: ListenerEventSenderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ListenerEventSender
+     */
+    omit?: ListenerEventSenderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ListenerEventSenderInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ListenerEventSender.
+     */
+    data: XOR<ListenerEventSenderCreateInput, ListenerEventSenderUncheckedCreateInput>
+  }
+
+  /**
+   * ListenerEventSender createMany
+   */
+  export type ListenerEventSenderCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ListenerEventSenders.
+     */
+    data: ListenerEventSenderCreateManyInput | ListenerEventSenderCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ListenerEventSender createManyAndReturn
+   */
+  export type ListenerEventSenderCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ListenerEventSender
+     */
+    select?: ListenerEventSenderSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ListenerEventSender
+     */
+    omit?: ListenerEventSenderOmit<ExtArgs> | null
+    /**
+     * The data used to create many ListenerEventSenders.
+     */
+    data: ListenerEventSenderCreateManyInput | ListenerEventSenderCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ListenerEventSenderIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ListenerEventSender update
+   */
+  export type ListenerEventSenderUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ListenerEventSender
+     */
+    select?: ListenerEventSenderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ListenerEventSender
+     */
+    omit?: ListenerEventSenderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ListenerEventSenderInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ListenerEventSender.
+     */
+    data: XOR<ListenerEventSenderUpdateInput, ListenerEventSenderUncheckedUpdateInput>
+    /**
+     * Choose, which ListenerEventSender to update.
+     */
+    where: ListenerEventSenderWhereUniqueInput
+  }
+
+  /**
+   * ListenerEventSender updateMany
+   */
+  export type ListenerEventSenderUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ListenerEventSenders.
+     */
+    data: XOR<ListenerEventSenderUpdateManyMutationInput, ListenerEventSenderUncheckedUpdateManyInput>
+    /**
+     * Filter which ListenerEventSenders to update
+     */
+    where?: ListenerEventSenderWhereInput
+    /**
+     * Limit how many ListenerEventSenders to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ListenerEventSender updateManyAndReturn
+   */
+  export type ListenerEventSenderUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ListenerEventSender
+     */
+    select?: ListenerEventSenderSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ListenerEventSender
+     */
+    omit?: ListenerEventSenderOmit<ExtArgs> | null
+    /**
+     * The data used to update ListenerEventSenders.
+     */
+    data: XOR<ListenerEventSenderUpdateManyMutationInput, ListenerEventSenderUncheckedUpdateManyInput>
+    /**
+     * Filter which ListenerEventSenders to update
+     */
+    where?: ListenerEventSenderWhereInput
+    /**
+     * Limit how many ListenerEventSenders to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ListenerEventSenderIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ListenerEventSender upsert
+   */
+  export type ListenerEventSenderUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ListenerEventSender
+     */
+    select?: ListenerEventSenderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ListenerEventSender
+     */
+    omit?: ListenerEventSenderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ListenerEventSenderInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ListenerEventSender to update in case it exists.
+     */
+    where: ListenerEventSenderWhereUniqueInput
+    /**
+     * In case the ListenerEventSender found by the `where` argument doesn't exist, create a new ListenerEventSender with this data.
+     */
+    create: XOR<ListenerEventSenderCreateInput, ListenerEventSenderUncheckedCreateInput>
+    /**
+     * In case the ListenerEventSender was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ListenerEventSenderUpdateInput, ListenerEventSenderUncheckedUpdateInput>
+  }
+
+  /**
+   * ListenerEventSender delete
+   */
+  export type ListenerEventSenderDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ListenerEventSender
+     */
+    select?: ListenerEventSenderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ListenerEventSender
+     */
+    omit?: ListenerEventSenderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ListenerEventSenderInclude<ExtArgs> | null
+    /**
+     * Filter which ListenerEventSender to delete.
+     */
+    where: ListenerEventSenderWhereUniqueInput
+  }
+
+  /**
+   * ListenerEventSender deleteMany
+   */
+  export type ListenerEventSenderDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ListenerEventSenders to delete
+     */
+    where?: ListenerEventSenderWhereInput
+    /**
+     * Limit how many ListenerEventSenders to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ListenerEventSender.ListenerEvents
+   */
+  export type ListenerEventSender$ListenerEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ListenerEvent
+     */
+    select?: ListenerEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ListenerEvent
+     */
+    omit?: ListenerEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ListenerEventInclude<ExtArgs> | null
+    where?: ListenerEventWhereInput
+    orderBy?: ListenerEventOrderByWithRelationInput | ListenerEventOrderByWithRelationInput[]
+    cursor?: ListenerEventWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ListenerEventScalarFieldEnum | ListenerEventScalarFieldEnum[]
+  }
+
+  /**
+   * ListenerEventSender.DiscordChannelWebhook
+   */
+  export type ListenerEventSender$DiscordChannelWebhookArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DiscordChannelWebhook
+     */
+    select?: DiscordChannelWebhookSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DiscordChannelWebhook
+     */
+    omit?: DiscordChannelWebhookOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DiscordChannelWebhookInclude<ExtArgs> | null
+    where?: DiscordChannelWebhookWhereInput
+  }
+
+  /**
+   * ListenerEventSender without action
+   */
+  export type ListenerEventSenderDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ListenerEventSender
+     */
+    select?: ListenerEventSenderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ListenerEventSender
+     */
+    omit?: ListenerEventSenderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ListenerEventSenderInclude<ExtArgs> | null
   }
 
 
@@ -20239,9 +21649,9 @@ export namespace Prisma {
   }
 
   export type MemberMinAggregateOutputType = {
+    Id: string | null
     IsActive: boolean | null
     DeactivatedAt: Date | null
-    Id: string | null
     VAId: string | null
     CompanyId: string | null
     VARoleId: string | null
@@ -20261,9 +21671,9 @@ export namespace Prisma {
   }
 
   export type MemberMaxAggregateOutputType = {
+    Id: string | null
     IsActive: boolean | null
     DeactivatedAt: Date | null
-    Id: string | null
     VAId: string | null
     CompanyId: string | null
     VARoleId: string | null
@@ -20283,9 +21693,9 @@ export namespace Prisma {
   }
 
   export type MemberCountAggregateOutputType = {
+    Id: number
     IsActive: number
     DeactivatedAt: number
-    Id: number
     VAId: number
     CompanyId: number
     VARoleId: number
@@ -20327,9 +21737,9 @@ export namespace Prisma {
   }
 
   export type MemberMinAggregateInputType = {
+    Id?: true
     IsActive?: true
     DeactivatedAt?: true
-    Id?: true
     VAId?: true
     CompanyId?: true
     VARoleId?: true
@@ -20349,9 +21759,9 @@ export namespace Prisma {
   }
 
   export type MemberMaxAggregateInputType = {
+    Id?: true
     IsActive?: true
     DeactivatedAt?: true
-    Id?: true
     VAId?: true
     CompanyId?: true
     VARoleId?: true
@@ -20371,9 +21781,9 @@ export namespace Prisma {
   }
 
   export type MemberCountAggregateInputType = {
+    Id?: true
     IsActive?: true
     DeactivatedAt?: true
-    Id?: true
     VAId?: true
     CompanyId?: true
     VARoleId?: true
@@ -20480,9 +21890,9 @@ export namespace Prisma {
   }
 
   export type MemberGroupByOutputType = {
+    Id: string
     IsActive: boolean
     DeactivatedAt: Date | null
-    Id: string
     VAId: string
     CompanyId: string
     VARoleId: string
@@ -20521,9 +21931,9 @@ export namespace Prisma {
 
 
   export type MemberSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    Id?: boolean
     IsActive?: boolean
     DeactivatedAt?: boolean
-    Id?: boolean
     VAId?: boolean
     CompanyId?: boolean
     VARoleId?: boolean
@@ -20550,9 +21960,9 @@ export namespace Prisma {
   }, ExtArgs["result"]["member"]>
 
   export type MemberSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    Id?: boolean
     IsActive?: boolean
     DeactivatedAt?: boolean
-    Id?: boolean
     VAId?: boolean
     CompanyId?: boolean
     VARoleId?: boolean
@@ -20576,9 +21986,9 @@ export namespace Prisma {
   }, ExtArgs["result"]["member"]>
 
   export type MemberSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    Id?: boolean
     IsActive?: boolean
     DeactivatedAt?: boolean
-    Id?: boolean
     VAId?: boolean
     CompanyId?: boolean
     VARoleId?: boolean
@@ -20602,9 +22012,9 @@ export namespace Prisma {
   }, ExtArgs["result"]["member"]>
 
   export type MemberSelectScalar = {
+    Id?: boolean
     IsActive?: boolean
     DeactivatedAt?: boolean
-    Id?: boolean
     VAId?: boolean
     CompanyId?: boolean
     VARoleId?: boolean
@@ -20623,7 +22033,7 @@ export namespace Prisma {
     UpdatedAt?: boolean
   }
 
-  export type MemberOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"IsActive" | "DeactivatedAt" | "Id" | "VAId" | "CompanyId" | "VARoleId" | "TotalCargosTransportedLbs" | "TotalPAXsTransported" | "TotalEarnedCredits" | "TotalSpentCredits" | "NumberOfFlights" | "FlightHours" | "Color" | "ReputationImpact" | "LastVAFlightDate" | "LastRefresh" | "UserId" | "CreatedAt" | "UpdatedAt", ExtArgs["result"]["member"]>
+  export type MemberOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "IsActive" | "DeactivatedAt" | "VAId" | "CompanyId" | "VARoleId" | "TotalCargosTransportedLbs" | "TotalPAXsTransported" | "TotalEarnedCredits" | "TotalSpentCredits" | "NumberOfFlights" | "FlightHours" | "Color" | "ReputationImpact" | "LastVAFlightDate" | "LastRefresh" | "UserId" | "CreatedAt" | "UpdatedAt", ExtArgs["result"]["member"]>
   export type MemberInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Company?: boolean | CompanyDefaultArgs<ExtArgs>
     VirtualAirline?: boolean | VirtualAirlineDefaultArgs<ExtArgs>
@@ -20657,9 +22067,9 @@ export namespace Prisma {
       FlightRoutes: Prisma.$FlightRoutePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
+      Id: string
       IsActive: boolean
       DeactivatedAt: Date | null
-      Id: string
       VAId: string
       CompanyId: string
       VARoleId: string
@@ -20759,8 +22169,8 @@ export namespace Prisma {
      * // Get first 10 Members
      * const members = await prisma.member.findMany({ take: 10 })
      * 
-     * // Only select the `IsActive`
-     * const memberWithIsActiveOnly = await prisma.member.findMany({ select: { IsActive: true } })
+     * // Only select the `Id`
+     * const memberWithIdOnly = await prisma.member.findMany({ select: { Id: true } })
      * 
      */
     findMany<T extends MemberFindManyArgs>(args?: SelectSubset<T, MemberFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -20804,9 +22214,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Create many Members and only return the `IsActive`
-     * const memberWithIsActiveOnly = await prisma.member.createManyAndReturn({
-     *   select: { IsActive: true },
+     * // Create many Members and only return the `Id`
+     * const memberWithIdOnly = await prisma.member.createManyAndReturn({
+     *   select: { Id: true },
      *   data: [
      *     // ... provide data here
      *   ]
@@ -20895,9 +22305,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Members and only return the `IsActive`
-     * const memberWithIsActiveOnly = await prisma.member.updateManyAndReturn({
-     *   select: { IsActive: true },
+     * // Update zero or more Members and only return the `Id`
+     * const memberWithIdOnly = await prisma.member.updateManyAndReturn({
+     *   select: { Id: true },
      *   where: {
      *     // ... provide filter here
      *   },
@@ -21105,9 +22515,9 @@ export namespace Prisma {
    * Fields of the Member model
    */
   interface MemberFieldRefs {
+    readonly Id: FieldRef<"Member", 'String'>
     readonly IsActive: FieldRef<"Member", 'Boolean'>
     readonly DeactivatedAt: FieldRef<"Member", 'DateTime'>
-    readonly Id: FieldRef<"Member", 'String'>
     readonly VAId: FieldRef<"Member", 'String'>
     readonly CompanyId: FieldRef<"Member", 'String'>
     readonly VARoleId: FieldRef<"Member", 'String'>
@@ -33364,10 +34774,10 @@ export namespace Prisma {
   export const DiscordMessageScalarFieldEnum: {
     Id: 'Id',
     ChannelId: 'ChannelId',
-    MessageId: 'MessageId',
     Content: 'Content',
-    DiscordMessageTypeId: 'DiscordMessageTypeId',
+    DiscordMessageTemplateId: 'DiscordMessageTemplateId',
     DiscordChannelWebhookId: 'DiscordChannelWebhookId',
+    DiscordMessageSentAt: 'DiscordMessageSentAt',
     CreatedAt: 'CreatedAt',
     UpdatedAt: 'UpdatedAt'
   };
@@ -33375,22 +34785,26 @@ export namespace Prisma {
   export type DiscordMessageScalarFieldEnum = (typeof DiscordMessageScalarFieldEnum)[keyof typeof DiscordMessageScalarFieldEnum]
 
 
-  export const DiscordMessageTypeScalarFieldEnum: {
+  export const DiscordMessageTemplateScalarFieldEnum: {
     Id: 'Id',
+    Slug: 'Slug',
     Name: 'Name',
     Description: 'Description',
-    Slug: 'Slug',
+    Content: 'Content',
     CreatedAt: 'CreatedAt',
     UpdatedAt: 'UpdatedAt'
   };
 
-  export type DiscordMessageTypeScalarFieldEnum = (typeof DiscordMessageTypeScalarFieldEnum)[keyof typeof DiscordMessageTypeScalarFieldEnum]
+  export type DiscordMessageTemplateScalarFieldEnum = (typeof DiscordMessageTemplateScalarFieldEnum)[keyof typeof DiscordMessageTemplateScalarFieldEnum]
 
 
   export const DiscordChannelWebhookScalarFieldEnum: {
     Id: 'Id',
-    ChannelId: 'ChannelId',
+    Name: 'Name',
+    Description: 'Description',
     WebhookUrl: 'WebhookUrl',
+    ChannelId: 'ChannelId',
+    Token: 'Token',
     IsActive: 'IsActive',
     CreatedAt: 'CreatedAt',
     UpdatedAt: 'UpdatedAt'
@@ -33405,14 +34819,30 @@ export namespace Prisma {
     Type: 'Type',
     SentAt: 'SentAt',
     Status: 'Status',
+    SenderId: 'SenderId',
     Error: 'Error',
     Data: 'Data',
     DiscordMessageId: 'DiscordMessageId',
+    DeliveredAt: 'DeliveredAt',
     CreatedAt: 'CreatedAt',
     UpdatedAt: 'UpdatedAt'
   };
 
   export type ListenerEventScalarFieldEnum = (typeof ListenerEventScalarFieldEnum)[keyof typeof ListenerEventScalarFieldEnum]
+
+
+  export const ListenerEventSenderScalarFieldEnum: {
+    Id: 'Id',
+    Name: 'Name',
+    Slug: 'Slug',
+    Token: 'Token',
+    IsActive: 'IsActive',
+    DiscordChannelWebhookId: 'DiscordChannelWebhookId',
+    CreatedAt: 'CreatedAt',
+    UpdatedAt: 'UpdatedAt'
+  };
+
+  export type ListenerEventSenderScalarFieldEnum = (typeof ListenerEventSenderScalarFieldEnum)[keyof typeof ListenerEventSenderScalarFieldEnum]
 
 
   export const UserScalarFieldEnum: {
@@ -33562,9 +34992,9 @@ export namespace Prisma {
 
 
   export const MemberScalarFieldEnum: {
+    Id: 'Id',
     IsActive: 'IsActive',
     DeactivatedAt: 'DeactivatedAt',
-    Id: 'Id',
     VAId: 'VAId',
     CompanyId: 'CompanyId',
     VARoleId: 'VARoleId',
@@ -34161,13 +35591,13 @@ export namespace Prisma {
     NOT?: DiscordMessageWhereInput | DiscordMessageWhereInput[]
     Id?: UuidFilter<"DiscordMessage"> | string
     ChannelId?: StringFilter<"DiscordMessage"> | string
-    MessageId?: StringFilter<"DiscordMessage"> | string
     Content?: StringFilter<"DiscordMessage"> | string
-    DiscordMessageTypeId?: IntFilter<"DiscordMessage"> | number
+    DiscordMessageTemplateId?: IntNullableFilter<"DiscordMessage"> | number | null
     DiscordChannelWebhookId?: UuidNullableFilter<"DiscordMessage"> | string | null
+    DiscordMessageSentAt?: DateTimeNullableFilter<"DiscordMessage"> | Date | string | null
     CreatedAt?: DateTimeFilter<"DiscordMessage"> | Date | string
     UpdatedAt?: DateTimeFilter<"DiscordMessage"> | Date | string
-    DiscordMessageType?: XOR<DiscordMessageTypeScalarRelationFilter, DiscordMessageTypeWhereInput>
+    DiscordMessageTemplate?: XOR<DiscordMessageTemplateNullableScalarRelationFilter, DiscordMessageTemplateWhereInput> | null
     DiscordChannelWebhook?: XOR<DiscordChannelWebhookNullableScalarRelationFilter, DiscordChannelWebhookWhereInput> | null
     ListenerEvents?: ListenerEventListRelationFilter
   }
@@ -34175,13 +35605,13 @@ export namespace Prisma {
   export type DiscordMessageOrderByWithRelationInput = {
     Id?: SortOrder
     ChannelId?: SortOrder
-    MessageId?: SortOrder
     Content?: SortOrder
-    DiscordMessageTypeId?: SortOrder
+    DiscordMessageTemplateId?: SortOrderInput | SortOrder
     DiscordChannelWebhookId?: SortOrderInput | SortOrder
+    DiscordMessageSentAt?: SortOrderInput | SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
-    DiscordMessageType?: DiscordMessageTypeOrderByWithRelationInput
+    DiscordMessageTemplate?: DiscordMessageTemplateOrderByWithRelationInput
     DiscordChannelWebhook?: DiscordChannelWebhookOrderByWithRelationInput
     ListenerEvents?: ListenerEventOrderByRelationAggregateInput
   }
@@ -34192,13 +35622,13 @@ export namespace Prisma {
     OR?: DiscordMessageWhereInput[]
     NOT?: DiscordMessageWhereInput | DiscordMessageWhereInput[]
     ChannelId?: StringFilter<"DiscordMessage"> | string
-    MessageId?: StringFilter<"DiscordMessage"> | string
     Content?: StringFilter<"DiscordMessage"> | string
-    DiscordMessageTypeId?: IntFilter<"DiscordMessage"> | number
+    DiscordMessageTemplateId?: IntNullableFilter<"DiscordMessage"> | number | null
     DiscordChannelWebhookId?: UuidNullableFilter<"DiscordMessage"> | string | null
+    DiscordMessageSentAt?: DateTimeNullableFilter<"DiscordMessage"> | Date | string | null
     CreatedAt?: DateTimeFilter<"DiscordMessage"> | Date | string
     UpdatedAt?: DateTimeFilter<"DiscordMessage"> | Date | string
-    DiscordMessageType?: XOR<DiscordMessageTypeScalarRelationFilter, DiscordMessageTypeWhereInput>
+    DiscordMessageTemplate?: XOR<DiscordMessageTemplateNullableScalarRelationFilter, DiscordMessageTemplateWhereInput> | null
     DiscordChannelWebhook?: XOR<DiscordChannelWebhookNullableScalarRelationFilter, DiscordChannelWebhookWhereInput> | null
     ListenerEvents?: ListenerEventListRelationFilter
   }, "Id" | "Id">
@@ -34206,10 +35636,10 @@ export namespace Prisma {
   export type DiscordMessageOrderByWithAggregationInput = {
     Id?: SortOrder
     ChannelId?: SortOrder
-    MessageId?: SortOrder
     Content?: SortOrder
-    DiscordMessageTypeId?: SortOrder
+    DiscordMessageTemplateId?: SortOrderInput | SortOrder
     DiscordChannelWebhookId?: SortOrderInput | SortOrder
+    DiscordMessageSentAt?: SortOrderInput | SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
     _count?: DiscordMessageCountOrderByAggregateInput
@@ -34225,74 +35655,79 @@ export namespace Prisma {
     NOT?: DiscordMessageScalarWhereWithAggregatesInput | DiscordMessageScalarWhereWithAggregatesInput[]
     Id?: UuidWithAggregatesFilter<"DiscordMessage"> | string
     ChannelId?: StringWithAggregatesFilter<"DiscordMessage"> | string
-    MessageId?: StringWithAggregatesFilter<"DiscordMessage"> | string
     Content?: StringWithAggregatesFilter<"DiscordMessage"> | string
-    DiscordMessageTypeId?: IntWithAggregatesFilter<"DiscordMessage"> | number
+    DiscordMessageTemplateId?: IntNullableWithAggregatesFilter<"DiscordMessage"> | number | null
     DiscordChannelWebhookId?: UuidNullableWithAggregatesFilter<"DiscordMessage"> | string | null
+    DiscordMessageSentAt?: DateTimeNullableWithAggregatesFilter<"DiscordMessage"> | Date | string | null
     CreatedAt?: DateTimeWithAggregatesFilter<"DiscordMessage"> | Date | string
     UpdatedAt?: DateTimeWithAggregatesFilter<"DiscordMessage"> | Date | string
   }
 
-  export type DiscordMessageTypeWhereInput = {
-    AND?: DiscordMessageTypeWhereInput | DiscordMessageTypeWhereInput[]
-    OR?: DiscordMessageTypeWhereInput[]
-    NOT?: DiscordMessageTypeWhereInput | DiscordMessageTypeWhereInput[]
-    Id?: IntFilter<"DiscordMessageType"> | number
-    Name?: StringFilter<"DiscordMessageType"> | string
-    Description?: StringNullableFilter<"DiscordMessageType"> | string | null
-    Slug?: StringFilter<"DiscordMessageType"> | string
-    CreatedAt?: DateTimeFilter<"DiscordMessageType"> | Date | string
-    UpdatedAt?: DateTimeFilter<"DiscordMessageType"> | Date | string
+  export type DiscordMessageTemplateWhereInput = {
+    AND?: DiscordMessageTemplateWhereInput | DiscordMessageTemplateWhereInput[]
+    OR?: DiscordMessageTemplateWhereInput[]
+    NOT?: DiscordMessageTemplateWhereInput | DiscordMessageTemplateWhereInput[]
+    Id?: IntFilter<"DiscordMessageTemplate"> | number
+    Slug?: StringFilter<"DiscordMessageTemplate"> | string
+    Name?: StringFilter<"DiscordMessageTemplate"> | string
+    Description?: StringNullableFilter<"DiscordMessageTemplate"> | string | null
+    Content?: StringFilter<"DiscordMessageTemplate"> | string
+    CreatedAt?: DateTimeFilter<"DiscordMessageTemplate"> | Date | string
+    UpdatedAt?: DateTimeFilter<"DiscordMessageTemplate"> | Date | string
     DiscordMessages?: DiscordMessageListRelationFilter
   }
 
-  export type DiscordMessageTypeOrderByWithRelationInput = {
+  export type DiscordMessageTemplateOrderByWithRelationInput = {
     Id?: SortOrder
+    Slug?: SortOrder
     Name?: SortOrder
     Description?: SortOrderInput | SortOrder
-    Slug?: SortOrder
+    Content?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
     DiscordMessages?: DiscordMessageOrderByRelationAggregateInput
   }
 
-  export type DiscordMessageTypeWhereUniqueInput = Prisma.AtLeast<{
+  export type DiscordMessageTemplateWhereUniqueInput = Prisma.AtLeast<{
     Id?: number
     Slug?: string
-    AND?: DiscordMessageTypeWhereInput | DiscordMessageTypeWhereInput[]
-    OR?: DiscordMessageTypeWhereInput[]
-    NOT?: DiscordMessageTypeWhereInput | DiscordMessageTypeWhereInput[]
-    Name?: StringFilter<"DiscordMessageType"> | string
-    Description?: StringNullableFilter<"DiscordMessageType"> | string | null
-    CreatedAt?: DateTimeFilter<"DiscordMessageType"> | Date | string
-    UpdatedAt?: DateTimeFilter<"DiscordMessageType"> | Date | string
+    AND?: DiscordMessageTemplateWhereInput | DiscordMessageTemplateWhereInput[]
+    OR?: DiscordMessageTemplateWhereInput[]
+    NOT?: DiscordMessageTemplateWhereInput | DiscordMessageTemplateWhereInput[]
+    Name?: StringFilter<"DiscordMessageTemplate"> | string
+    Description?: StringNullableFilter<"DiscordMessageTemplate"> | string | null
+    Content?: StringFilter<"DiscordMessageTemplate"> | string
+    CreatedAt?: DateTimeFilter<"DiscordMessageTemplate"> | Date | string
+    UpdatedAt?: DateTimeFilter<"DiscordMessageTemplate"> | Date | string
     DiscordMessages?: DiscordMessageListRelationFilter
   }, "Id" | "Id" | "Slug">
 
-  export type DiscordMessageTypeOrderByWithAggregationInput = {
+  export type DiscordMessageTemplateOrderByWithAggregationInput = {
     Id?: SortOrder
+    Slug?: SortOrder
     Name?: SortOrder
     Description?: SortOrderInput | SortOrder
-    Slug?: SortOrder
+    Content?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
-    _count?: DiscordMessageTypeCountOrderByAggregateInput
-    _avg?: DiscordMessageTypeAvgOrderByAggregateInput
-    _max?: DiscordMessageTypeMaxOrderByAggregateInput
-    _min?: DiscordMessageTypeMinOrderByAggregateInput
-    _sum?: DiscordMessageTypeSumOrderByAggregateInput
+    _count?: DiscordMessageTemplateCountOrderByAggregateInput
+    _avg?: DiscordMessageTemplateAvgOrderByAggregateInput
+    _max?: DiscordMessageTemplateMaxOrderByAggregateInput
+    _min?: DiscordMessageTemplateMinOrderByAggregateInput
+    _sum?: DiscordMessageTemplateSumOrderByAggregateInput
   }
 
-  export type DiscordMessageTypeScalarWhereWithAggregatesInput = {
-    AND?: DiscordMessageTypeScalarWhereWithAggregatesInput | DiscordMessageTypeScalarWhereWithAggregatesInput[]
-    OR?: DiscordMessageTypeScalarWhereWithAggregatesInput[]
-    NOT?: DiscordMessageTypeScalarWhereWithAggregatesInput | DiscordMessageTypeScalarWhereWithAggregatesInput[]
-    Id?: IntWithAggregatesFilter<"DiscordMessageType"> | number
-    Name?: StringWithAggregatesFilter<"DiscordMessageType"> | string
-    Description?: StringNullableWithAggregatesFilter<"DiscordMessageType"> | string | null
-    Slug?: StringWithAggregatesFilter<"DiscordMessageType"> | string
-    CreatedAt?: DateTimeWithAggregatesFilter<"DiscordMessageType"> | Date | string
-    UpdatedAt?: DateTimeWithAggregatesFilter<"DiscordMessageType"> | Date | string
+  export type DiscordMessageTemplateScalarWhereWithAggregatesInput = {
+    AND?: DiscordMessageTemplateScalarWhereWithAggregatesInput | DiscordMessageTemplateScalarWhereWithAggregatesInput[]
+    OR?: DiscordMessageTemplateScalarWhereWithAggregatesInput[]
+    NOT?: DiscordMessageTemplateScalarWhereWithAggregatesInput | DiscordMessageTemplateScalarWhereWithAggregatesInput[]
+    Id?: IntWithAggregatesFilter<"DiscordMessageTemplate"> | number
+    Slug?: StringWithAggregatesFilter<"DiscordMessageTemplate"> | string
+    Name?: StringWithAggregatesFilter<"DiscordMessageTemplate"> | string
+    Description?: StringNullableWithAggregatesFilter<"DiscordMessageTemplate"> | string | null
+    Content?: StringWithAggregatesFilter<"DiscordMessageTemplate"> | string
+    CreatedAt?: DateTimeWithAggregatesFilter<"DiscordMessageTemplate"> | Date | string
+    UpdatedAt?: DateTimeWithAggregatesFilter<"DiscordMessageTemplate"> | Date | string
   }
 
   export type DiscordChannelWebhookWhereInput = {
@@ -34300,41 +35735,56 @@ export namespace Prisma {
     OR?: DiscordChannelWebhookWhereInput[]
     NOT?: DiscordChannelWebhookWhereInput | DiscordChannelWebhookWhereInput[]
     Id?: UuidFilter<"DiscordChannelWebhook"> | string
-    ChannelId?: StringFilter<"DiscordChannelWebhook"> | string
+    Name?: StringFilter<"DiscordChannelWebhook"> | string
+    Description?: StringNullableFilter<"DiscordChannelWebhook"> | string | null
     WebhookUrl?: StringFilter<"DiscordChannelWebhook"> | string
+    ChannelId?: StringFilter<"DiscordChannelWebhook"> | string
+    Token?: StringFilter<"DiscordChannelWebhook"> | string
     IsActive?: BoolFilter<"DiscordChannelWebhook"> | boolean
     CreatedAt?: DateTimeFilter<"DiscordChannelWebhook"> | Date | string
     UpdatedAt?: DateTimeFilter<"DiscordChannelWebhook"> | Date | string
     DiscordMessages?: DiscordMessageListRelationFilter
+    ListenerEventSenders?: ListenerEventSenderListRelationFilter
   }
 
   export type DiscordChannelWebhookOrderByWithRelationInput = {
     Id?: SortOrder
-    ChannelId?: SortOrder
+    Name?: SortOrder
+    Description?: SortOrderInput | SortOrder
     WebhookUrl?: SortOrder
+    ChannelId?: SortOrder
+    Token?: SortOrder
     IsActive?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
     DiscordMessages?: DiscordMessageOrderByRelationAggregateInput
+    ListenerEventSenders?: ListenerEventSenderOrderByRelationAggregateInput
   }
 
   export type DiscordChannelWebhookWhereUniqueInput = Prisma.AtLeast<{
     Id?: string
+    Token?: string
     AND?: DiscordChannelWebhookWhereInput | DiscordChannelWebhookWhereInput[]
     OR?: DiscordChannelWebhookWhereInput[]
     NOT?: DiscordChannelWebhookWhereInput | DiscordChannelWebhookWhereInput[]
-    ChannelId?: StringFilter<"DiscordChannelWebhook"> | string
+    Name?: StringFilter<"DiscordChannelWebhook"> | string
+    Description?: StringNullableFilter<"DiscordChannelWebhook"> | string | null
     WebhookUrl?: StringFilter<"DiscordChannelWebhook"> | string
+    ChannelId?: StringFilter<"DiscordChannelWebhook"> | string
     IsActive?: BoolFilter<"DiscordChannelWebhook"> | boolean
     CreatedAt?: DateTimeFilter<"DiscordChannelWebhook"> | Date | string
     UpdatedAt?: DateTimeFilter<"DiscordChannelWebhook"> | Date | string
     DiscordMessages?: DiscordMessageListRelationFilter
-  }, "Id" | "Id">
+    ListenerEventSenders?: ListenerEventSenderListRelationFilter
+  }, "Id" | "Id" | "Token">
 
   export type DiscordChannelWebhookOrderByWithAggregationInput = {
     Id?: SortOrder
-    ChannelId?: SortOrder
+    Name?: SortOrder
+    Description?: SortOrderInput | SortOrder
     WebhookUrl?: SortOrder
+    ChannelId?: SortOrder
+    Token?: SortOrder
     IsActive?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
@@ -34348,8 +35798,11 @@ export namespace Prisma {
     OR?: DiscordChannelWebhookScalarWhereWithAggregatesInput[]
     NOT?: DiscordChannelWebhookScalarWhereWithAggregatesInput | DiscordChannelWebhookScalarWhereWithAggregatesInput[]
     Id?: UuidWithAggregatesFilter<"DiscordChannelWebhook"> | string
-    ChannelId?: StringWithAggregatesFilter<"DiscordChannelWebhook"> | string
+    Name?: StringWithAggregatesFilter<"DiscordChannelWebhook"> | string
+    Description?: StringNullableWithAggregatesFilter<"DiscordChannelWebhook"> | string | null
     WebhookUrl?: StringWithAggregatesFilter<"DiscordChannelWebhook"> | string
+    ChannelId?: StringWithAggregatesFilter<"DiscordChannelWebhook"> | string
+    Token?: StringWithAggregatesFilter<"DiscordChannelWebhook"> | string
     IsActive?: BoolWithAggregatesFilter<"DiscordChannelWebhook"> | boolean
     CreatedAt?: DateTimeWithAggregatesFilter<"DiscordChannelWebhook"> | Date | string
     UpdatedAt?: DateTimeWithAggregatesFilter<"DiscordChannelWebhook"> | Date | string
@@ -34364,12 +35817,15 @@ export namespace Prisma {
     Type?: StringFilter<"ListenerEvent"> | string
     SentAt?: DateTimeFilter<"ListenerEvent"> | Date | string
     Status?: EnumListenerEventStatusFilter<"ListenerEvent"> | $Enums.ListenerEventStatus
+    SenderId?: UuidFilter<"ListenerEvent"> | string
     Error?: StringNullableFilter<"ListenerEvent"> | string | null
     Data?: JsonNullableFilter<"ListenerEvent">
     DiscordMessageId?: UuidNullableFilter<"ListenerEvent"> | string | null
+    DeliveredAt?: DateTimeNullableFilter<"ListenerEvent"> | Date | string | null
     CreatedAt?: DateTimeFilter<"ListenerEvent"> | Date | string
     UpdatedAt?: DateTimeFilter<"ListenerEvent"> | Date | string
     DiscordMessage?: XOR<DiscordMessageNullableScalarRelationFilter, DiscordMessageWhereInput> | null
+    Sender?: XOR<ListenerEventSenderScalarRelationFilter, ListenerEventSenderWhereInput>
   }
 
   export type ListenerEventOrderByWithRelationInput = {
@@ -34378,12 +35834,15 @@ export namespace Prisma {
     Type?: SortOrder
     SentAt?: SortOrder
     Status?: SortOrder
+    SenderId?: SortOrder
     Error?: SortOrderInput | SortOrder
     Data?: SortOrderInput | SortOrder
     DiscordMessageId?: SortOrderInput | SortOrder
+    DeliveredAt?: SortOrderInput | SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
     DiscordMessage?: DiscordMessageOrderByWithRelationInput
+    Sender?: ListenerEventSenderOrderByWithRelationInput
   }
 
   export type ListenerEventWhereUniqueInput = Prisma.AtLeast<{
@@ -34395,12 +35854,15 @@ export namespace Prisma {
     Type?: StringFilter<"ListenerEvent"> | string
     SentAt?: DateTimeFilter<"ListenerEvent"> | Date | string
     Status?: EnumListenerEventStatusFilter<"ListenerEvent"> | $Enums.ListenerEventStatus
+    SenderId?: UuidFilter<"ListenerEvent"> | string
     Error?: StringNullableFilter<"ListenerEvent"> | string | null
     Data?: JsonNullableFilter<"ListenerEvent">
     DiscordMessageId?: UuidNullableFilter<"ListenerEvent"> | string | null
+    DeliveredAt?: DateTimeNullableFilter<"ListenerEvent"> | Date | string | null
     CreatedAt?: DateTimeFilter<"ListenerEvent"> | Date | string
     UpdatedAt?: DateTimeFilter<"ListenerEvent"> | Date | string
     DiscordMessage?: XOR<DiscordMessageNullableScalarRelationFilter, DiscordMessageWhereInput> | null
+    Sender?: XOR<ListenerEventSenderScalarRelationFilter, ListenerEventSenderWhereInput>
   }, "Id" | "Id">
 
   export type ListenerEventOrderByWithAggregationInput = {
@@ -34409,9 +35871,11 @@ export namespace Prisma {
     Type?: SortOrder
     SentAt?: SortOrder
     Status?: SortOrder
+    SenderId?: SortOrder
     Error?: SortOrderInput | SortOrder
     Data?: SortOrderInput | SortOrder
     DiscordMessageId?: SortOrderInput | SortOrder
+    DeliveredAt?: SortOrderInput | SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
     _count?: ListenerEventCountOrderByAggregateInput
@@ -34430,11 +35894,86 @@ export namespace Prisma {
     Type?: StringWithAggregatesFilter<"ListenerEvent"> | string
     SentAt?: DateTimeWithAggregatesFilter<"ListenerEvent"> | Date | string
     Status?: EnumListenerEventStatusWithAggregatesFilter<"ListenerEvent"> | $Enums.ListenerEventStatus
+    SenderId?: UuidWithAggregatesFilter<"ListenerEvent"> | string
     Error?: StringNullableWithAggregatesFilter<"ListenerEvent"> | string | null
     Data?: JsonNullableWithAggregatesFilter<"ListenerEvent">
     DiscordMessageId?: UuidNullableWithAggregatesFilter<"ListenerEvent"> | string | null
+    DeliveredAt?: DateTimeNullableWithAggregatesFilter<"ListenerEvent"> | Date | string | null
     CreatedAt?: DateTimeWithAggregatesFilter<"ListenerEvent"> | Date | string
     UpdatedAt?: DateTimeWithAggregatesFilter<"ListenerEvent"> | Date | string
+  }
+
+  export type ListenerEventSenderWhereInput = {
+    AND?: ListenerEventSenderWhereInput | ListenerEventSenderWhereInput[]
+    OR?: ListenerEventSenderWhereInput[]
+    NOT?: ListenerEventSenderWhereInput | ListenerEventSenderWhereInput[]
+    Id?: UuidFilter<"ListenerEventSender"> | string
+    Name?: StringFilter<"ListenerEventSender"> | string
+    Slug?: StringFilter<"ListenerEventSender"> | string
+    Token?: StringFilter<"ListenerEventSender"> | string
+    IsActive?: BoolFilter<"ListenerEventSender"> | boolean
+    DiscordChannelWebhookId?: UuidNullableFilter<"ListenerEventSender"> | string | null
+    CreatedAt?: DateTimeFilter<"ListenerEventSender"> | Date | string
+    UpdatedAt?: DateTimeFilter<"ListenerEventSender"> | Date | string
+    ListenerEvents?: ListenerEventListRelationFilter
+    DiscordChannelWebhook?: XOR<DiscordChannelWebhookNullableScalarRelationFilter, DiscordChannelWebhookWhereInput> | null
+  }
+
+  export type ListenerEventSenderOrderByWithRelationInput = {
+    Id?: SortOrder
+    Name?: SortOrder
+    Slug?: SortOrder
+    Token?: SortOrder
+    IsActive?: SortOrder
+    DiscordChannelWebhookId?: SortOrderInput | SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+    ListenerEvents?: ListenerEventOrderByRelationAggregateInput
+    DiscordChannelWebhook?: DiscordChannelWebhookOrderByWithRelationInput
+  }
+
+  export type ListenerEventSenderWhereUniqueInput = Prisma.AtLeast<{
+    Id?: string
+    Slug?: string
+    Token?: string
+    AND?: ListenerEventSenderWhereInput | ListenerEventSenderWhereInput[]
+    OR?: ListenerEventSenderWhereInput[]
+    NOT?: ListenerEventSenderWhereInput | ListenerEventSenderWhereInput[]
+    Name?: StringFilter<"ListenerEventSender"> | string
+    IsActive?: BoolFilter<"ListenerEventSender"> | boolean
+    DiscordChannelWebhookId?: UuidNullableFilter<"ListenerEventSender"> | string | null
+    CreatedAt?: DateTimeFilter<"ListenerEventSender"> | Date | string
+    UpdatedAt?: DateTimeFilter<"ListenerEventSender"> | Date | string
+    ListenerEvents?: ListenerEventListRelationFilter
+    DiscordChannelWebhook?: XOR<DiscordChannelWebhookNullableScalarRelationFilter, DiscordChannelWebhookWhereInput> | null
+  }, "Id" | "Id" | "Slug" | "Token">
+
+  export type ListenerEventSenderOrderByWithAggregationInput = {
+    Id?: SortOrder
+    Name?: SortOrder
+    Slug?: SortOrder
+    Token?: SortOrder
+    IsActive?: SortOrder
+    DiscordChannelWebhookId?: SortOrderInput | SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+    _count?: ListenerEventSenderCountOrderByAggregateInput
+    _max?: ListenerEventSenderMaxOrderByAggregateInput
+    _min?: ListenerEventSenderMinOrderByAggregateInput
+  }
+
+  export type ListenerEventSenderScalarWhereWithAggregatesInput = {
+    AND?: ListenerEventSenderScalarWhereWithAggregatesInput | ListenerEventSenderScalarWhereWithAggregatesInput[]
+    OR?: ListenerEventSenderScalarWhereWithAggregatesInput[]
+    NOT?: ListenerEventSenderScalarWhereWithAggregatesInput | ListenerEventSenderScalarWhereWithAggregatesInput[]
+    Id?: UuidWithAggregatesFilter<"ListenerEventSender"> | string
+    Name?: StringWithAggregatesFilter<"ListenerEventSender"> | string
+    Slug?: StringWithAggregatesFilter<"ListenerEventSender"> | string
+    Token?: StringWithAggregatesFilter<"ListenerEventSender"> | string
+    IsActive?: BoolWithAggregatesFilter<"ListenerEventSender"> | boolean
+    DiscordChannelWebhookId?: UuidNullableWithAggregatesFilter<"ListenerEventSender"> | string | null
+    CreatedAt?: DateTimeWithAggregatesFilter<"ListenerEventSender"> | Date | string
+    UpdatedAt?: DateTimeWithAggregatesFilter<"ListenerEventSender"> | Date | string
   }
 
   export type UserWhereInput = {
@@ -35214,9 +36753,9 @@ export namespace Prisma {
     AND?: MemberWhereInput | MemberWhereInput[]
     OR?: MemberWhereInput[]
     NOT?: MemberWhereInput | MemberWhereInput[]
+    Id?: UuidFilter<"Member"> | string
     IsActive?: BoolFilter<"Member"> | boolean
     DeactivatedAt?: DateTimeNullableFilter<"Member"> | Date | string | null
-    Id?: UuidFilter<"Member"> | string
     VAId?: UuidFilter<"Member"> | string
     CompanyId?: UuidFilter<"Member"> | string
     VARoleId?: UuidFilter<"Member"> | string
@@ -35242,9 +36781,9 @@ export namespace Prisma {
   }
 
   export type MemberOrderByWithRelationInput = {
+    Id?: SortOrder
     IsActive?: SortOrder
     DeactivatedAt?: SortOrderInput | SortOrder
-    Id?: SortOrder
     VAId?: SortOrder
     CompanyId?: SortOrder
     VARoleId?: SortOrder
@@ -35301,9 +36840,9 @@ export namespace Prisma {
   }, "Id" | "CompanyId">
 
   export type MemberOrderByWithAggregationInput = {
+    Id?: SortOrder
     IsActive?: SortOrder
     DeactivatedAt?: SortOrderInput | SortOrder
-    Id?: SortOrder
     VAId?: SortOrder
     CompanyId?: SortOrder
     VARoleId?: SortOrder
@@ -35331,9 +36870,9 @@ export namespace Prisma {
     AND?: MemberScalarWhereWithAggregatesInput | MemberScalarWhereWithAggregatesInput[]
     OR?: MemberScalarWhereWithAggregatesInput[]
     NOT?: MemberScalarWhereWithAggregatesInput | MemberScalarWhereWithAggregatesInput[]
+    Id?: UuidWithAggregatesFilter<"Member"> | string
     IsActive?: BoolWithAggregatesFilter<"Member"> | boolean
     DeactivatedAt?: DateTimeNullableWithAggregatesFilter<"Member"> | Date | string | null
-    Id?: UuidWithAggregatesFilter<"Member"> | string
     VAId?: UuidWithAggregatesFilter<"Member"> | string
     CompanyId?: UuidWithAggregatesFilter<"Member"> | string
     VARoleId?: UuidWithAggregatesFilter<"Member"> | string
@@ -35531,7 +37070,7 @@ export namespace Prisma {
     CurrentAirport?: XOR<AirportNullableScalarRelationFilter, AirportWhereInput> | null
     AircraftMaintenance?: AircraftMaintenanceListRelationFilter
     Flights?: FlightListRelationFilter
-  }, "Id" | "Id" | "Identifier">
+  }, "Id" | "Identifier">
 
   export type AircraftOrderByWithAggregationInput = {
     Id?: SortOrder
@@ -35592,7 +37131,7 @@ export namespace Prisma {
     NOT?: AircraftClassWhereInput | AircraftClassWhereInput[]
     Name?: StringFilter<"AircraftClass"> | string
     Aircrafts?: AircraftListRelationFilter
-  }, "Id" | "Id" | "ShortName">
+  }, "Id" | "ShortName">
 
   export type AircraftClassOrderByWithAggregationInput = {
     Id?: SortOrder
@@ -36609,11 +38148,11 @@ export namespace Prisma {
   export type DiscordMessageCreateInput = {
     Id?: string
     ChannelId: string
-    MessageId: string
     Content: string
+    DiscordMessageSentAt?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
-    DiscordMessageType: DiscordMessageTypeCreateNestedOneWithoutDiscordMessagesInput
+    DiscordMessageTemplate?: DiscordMessageTemplateCreateNestedOneWithoutDiscordMessagesInput
     DiscordChannelWebhook?: DiscordChannelWebhookCreateNestedOneWithoutDiscordMessagesInput
     ListenerEvents?: ListenerEventCreateNestedManyWithoutDiscordMessageInput
   }
@@ -36621,10 +38160,10 @@ export namespace Prisma {
   export type DiscordMessageUncheckedCreateInput = {
     Id?: string
     ChannelId: string
-    MessageId: string
     Content: string
-    DiscordMessageTypeId: number
+    DiscordMessageTemplateId?: number | null
     DiscordChannelWebhookId?: string | null
+    DiscordMessageSentAt?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
     ListenerEvents?: ListenerEventUncheckedCreateNestedManyWithoutDiscordMessageInput
@@ -36633,11 +38172,11 @@ export namespace Prisma {
   export type DiscordMessageUpdateInput = {
     Id?: StringFieldUpdateOperationsInput | string
     ChannelId?: StringFieldUpdateOperationsInput | string
-    MessageId?: StringFieldUpdateOperationsInput | string
     Content?: StringFieldUpdateOperationsInput | string
+    DiscordMessageSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    DiscordMessageType?: DiscordMessageTypeUpdateOneRequiredWithoutDiscordMessagesNestedInput
+    DiscordMessageTemplate?: DiscordMessageTemplateUpdateOneWithoutDiscordMessagesNestedInput
     DiscordChannelWebhook?: DiscordChannelWebhookUpdateOneWithoutDiscordMessagesNestedInput
     ListenerEvents?: ListenerEventUpdateManyWithoutDiscordMessageNestedInput
   }
@@ -36645,10 +38184,10 @@ export namespace Prisma {
   export type DiscordMessageUncheckedUpdateInput = {
     Id?: StringFieldUpdateOperationsInput | string
     ChannelId?: StringFieldUpdateOperationsInput | string
-    MessageId?: StringFieldUpdateOperationsInput | string
     Content?: StringFieldUpdateOperationsInput | string
-    DiscordMessageTypeId?: IntFieldUpdateOperationsInput | number
+    DiscordMessageTemplateId?: NullableIntFieldUpdateOperationsInput | number | null
     DiscordChannelWebhookId?: NullableStringFieldUpdateOperationsInput | string | null
+    DiscordMessageSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ListenerEvents?: ListenerEventUncheckedUpdateManyWithoutDiscordMessageNestedInput
@@ -36657,10 +38196,10 @@ export namespace Prisma {
   export type DiscordMessageCreateManyInput = {
     Id?: string
     ChannelId: string
-    MessageId: string
     Content: string
-    DiscordMessageTypeId: number
+    DiscordMessageTemplateId?: number | null
     DiscordChannelWebhookId?: string | null
+    DiscordMessageSentAt?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
   }
@@ -36668,8 +38207,8 @@ export namespace Prisma {
   export type DiscordMessageUpdateManyMutationInput = {
     Id?: StringFieldUpdateOperationsInput | string
     ChannelId?: StringFieldUpdateOperationsInput | string
-    MessageId?: StringFieldUpdateOperationsInput | string
     Content?: StringFieldUpdateOperationsInput | string
+    DiscordMessageSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -36677,122 +38216,148 @@ export namespace Prisma {
   export type DiscordMessageUncheckedUpdateManyInput = {
     Id?: StringFieldUpdateOperationsInput | string
     ChannelId?: StringFieldUpdateOperationsInput | string
-    MessageId?: StringFieldUpdateOperationsInput | string
     Content?: StringFieldUpdateOperationsInput | string
-    DiscordMessageTypeId?: IntFieldUpdateOperationsInput | number
+    DiscordMessageTemplateId?: NullableIntFieldUpdateOperationsInput | number | null
     DiscordChannelWebhookId?: NullableStringFieldUpdateOperationsInput | string | null
+    DiscordMessageSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type DiscordMessageTypeCreateInput = {
+  export type DiscordMessageTemplateCreateInput = {
+    Slug: string
     Name: string
     Description?: string | null
-    Slug: string
+    Content: string
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
-    DiscordMessages?: DiscordMessageCreateNestedManyWithoutDiscordMessageTypeInput
+    DiscordMessages?: DiscordMessageCreateNestedManyWithoutDiscordMessageTemplateInput
   }
 
-  export type DiscordMessageTypeUncheckedCreateInput = {
+  export type DiscordMessageTemplateUncheckedCreateInput = {
     Id?: number
+    Slug: string
     Name: string
     Description?: string | null
-    Slug: string
+    Content: string
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
-    DiscordMessages?: DiscordMessageUncheckedCreateNestedManyWithoutDiscordMessageTypeInput
+    DiscordMessages?: DiscordMessageUncheckedCreateNestedManyWithoutDiscordMessageTemplateInput
   }
 
-  export type DiscordMessageTypeUpdateInput = {
+  export type DiscordMessageTemplateUpdateInput = {
+    Slug?: StringFieldUpdateOperationsInput | string
     Name?: StringFieldUpdateOperationsInput | string
     Description?: NullableStringFieldUpdateOperationsInput | string | null
-    Slug?: StringFieldUpdateOperationsInput | string
+    Content?: StringFieldUpdateOperationsInput | string
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    DiscordMessages?: DiscordMessageUpdateManyWithoutDiscordMessageTypeNestedInput
+    DiscordMessages?: DiscordMessageUpdateManyWithoutDiscordMessageTemplateNestedInput
   }
 
-  export type DiscordMessageTypeUncheckedUpdateInput = {
+  export type DiscordMessageTemplateUncheckedUpdateInput = {
     Id?: IntFieldUpdateOperationsInput | number
+    Slug?: StringFieldUpdateOperationsInput | string
     Name?: StringFieldUpdateOperationsInput | string
     Description?: NullableStringFieldUpdateOperationsInput | string | null
-    Slug?: StringFieldUpdateOperationsInput | string
+    Content?: StringFieldUpdateOperationsInput | string
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    DiscordMessages?: DiscordMessageUncheckedUpdateManyWithoutDiscordMessageTypeNestedInput
+    DiscordMessages?: DiscordMessageUncheckedUpdateManyWithoutDiscordMessageTemplateNestedInput
   }
 
-  export type DiscordMessageTypeCreateManyInput = {
+  export type DiscordMessageTemplateCreateManyInput = {
     Id?: number
+    Slug: string
     Name: string
     Description?: string | null
-    Slug: string
+    Content: string
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
   }
 
-  export type DiscordMessageTypeUpdateManyMutationInput = {
+  export type DiscordMessageTemplateUpdateManyMutationInput = {
+    Slug?: StringFieldUpdateOperationsInput | string
     Name?: StringFieldUpdateOperationsInput | string
     Description?: NullableStringFieldUpdateOperationsInput | string | null
-    Slug?: StringFieldUpdateOperationsInput | string
+    Content?: StringFieldUpdateOperationsInput | string
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type DiscordMessageTypeUncheckedUpdateManyInput = {
+  export type DiscordMessageTemplateUncheckedUpdateManyInput = {
     Id?: IntFieldUpdateOperationsInput | number
+    Slug?: StringFieldUpdateOperationsInput | string
     Name?: StringFieldUpdateOperationsInput | string
     Description?: NullableStringFieldUpdateOperationsInput | string | null
-    Slug?: StringFieldUpdateOperationsInput | string
+    Content?: StringFieldUpdateOperationsInput | string
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type DiscordChannelWebhookCreateInput = {
     Id?: string
-    ChannelId: string
+    Name?: string
+    Description?: string | null
     WebhookUrl: string
+    ChannelId: string
+    Token: string
     IsActive?: boolean
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
     DiscordMessages?: DiscordMessageCreateNestedManyWithoutDiscordChannelWebhookInput
+    ListenerEventSenders?: ListenerEventSenderCreateNestedManyWithoutDiscordChannelWebhookInput
   }
 
   export type DiscordChannelWebhookUncheckedCreateInput = {
     Id?: string
-    ChannelId: string
+    Name?: string
+    Description?: string | null
     WebhookUrl: string
+    ChannelId: string
+    Token: string
     IsActive?: boolean
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
     DiscordMessages?: DiscordMessageUncheckedCreateNestedManyWithoutDiscordChannelWebhookInput
+    ListenerEventSenders?: ListenerEventSenderUncheckedCreateNestedManyWithoutDiscordChannelWebhookInput
   }
 
   export type DiscordChannelWebhookUpdateInput = {
     Id?: StringFieldUpdateOperationsInput | string
-    ChannelId?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
     WebhookUrl?: StringFieldUpdateOperationsInput | string
+    ChannelId?: StringFieldUpdateOperationsInput | string
+    Token?: StringFieldUpdateOperationsInput | string
     IsActive?: BoolFieldUpdateOperationsInput | boolean
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     DiscordMessages?: DiscordMessageUpdateManyWithoutDiscordChannelWebhookNestedInput
+    ListenerEventSenders?: ListenerEventSenderUpdateManyWithoutDiscordChannelWebhookNestedInput
   }
 
   export type DiscordChannelWebhookUncheckedUpdateInput = {
     Id?: StringFieldUpdateOperationsInput | string
-    ChannelId?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
     WebhookUrl?: StringFieldUpdateOperationsInput | string
+    ChannelId?: StringFieldUpdateOperationsInput | string
+    Token?: StringFieldUpdateOperationsInput | string
     IsActive?: BoolFieldUpdateOperationsInput | boolean
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     DiscordMessages?: DiscordMessageUncheckedUpdateManyWithoutDiscordChannelWebhookNestedInput
+    ListenerEventSenders?: ListenerEventSenderUncheckedUpdateManyWithoutDiscordChannelWebhookNestedInput
   }
 
   export type DiscordChannelWebhookCreateManyInput = {
     Id?: string
-    ChannelId: string
+    Name?: string
+    Description?: string | null
     WebhookUrl: string
+    ChannelId: string
+    Token: string
     IsActive?: boolean
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
@@ -36800,8 +38365,11 @@ export namespace Prisma {
 
   export type DiscordChannelWebhookUpdateManyMutationInput = {
     Id?: StringFieldUpdateOperationsInput | string
-    ChannelId?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
     WebhookUrl?: StringFieldUpdateOperationsInput | string
+    ChannelId?: StringFieldUpdateOperationsInput | string
+    Token?: StringFieldUpdateOperationsInput | string
     IsActive?: BoolFieldUpdateOperationsInput | boolean
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -36809,8 +38377,11 @@ export namespace Prisma {
 
   export type DiscordChannelWebhookUncheckedUpdateManyInput = {
     Id?: StringFieldUpdateOperationsInput | string
-    ChannelId?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
     WebhookUrl?: StringFieldUpdateOperationsInput | string
+    ChannelId?: StringFieldUpdateOperationsInput | string
+    Token?: StringFieldUpdateOperationsInput | string
     IsActive?: BoolFieldUpdateOperationsInput | boolean
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -36823,9 +38394,11 @@ export namespace Prisma {
     Status?: $Enums.ListenerEventStatus
     Error?: string | null
     Data?: NullableJsonNullValueInput | InputJsonValue
+    DeliveredAt?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
     DiscordMessage?: DiscordMessageCreateNestedOneWithoutListenerEventsInput
+    Sender: ListenerEventSenderCreateNestedOneWithoutListenerEventsInput
   }
 
   export type ListenerEventUncheckedCreateInput = {
@@ -36834,9 +38407,11 @@ export namespace Prisma {
     Type: string
     SentAt: Date | string
     Status?: $Enums.ListenerEventStatus
+    SenderId: string
     Error?: string | null
     Data?: NullableJsonNullValueInput | InputJsonValue
     DiscordMessageId?: string | null
+    DeliveredAt?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
   }
@@ -36848,9 +38423,11 @@ export namespace Prisma {
     Status?: EnumListenerEventStatusFieldUpdateOperationsInput | $Enums.ListenerEventStatus
     Error?: NullableStringFieldUpdateOperationsInput | string | null
     Data?: NullableJsonNullValueInput | InputJsonValue
+    DeliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     DiscordMessage?: DiscordMessageUpdateOneWithoutListenerEventsNestedInput
+    Sender?: ListenerEventSenderUpdateOneRequiredWithoutListenerEventsNestedInput
   }
 
   export type ListenerEventUncheckedUpdateInput = {
@@ -36859,9 +38436,11 @@ export namespace Prisma {
     Type?: StringFieldUpdateOperationsInput | string
     SentAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Status?: EnumListenerEventStatusFieldUpdateOperationsInput | $Enums.ListenerEventStatus
+    SenderId?: StringFieldUpdateOperationsInput | string
     Error?: NullableStringFieldUpdateOperationsInput | string | null
     Data?: NullableJsonNullValueInput | InputJsonValue
     DiscordMessageId?: NullableStringFieldUpdateOperationsInput | string | null
+    DeliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -36872,9 +38451,11 @@ export namespace Prisma {
     Type: string
     SentAt: Date | string
     Status?: $Enums.ListenerEventStatus
+    SenderId: string
     Error?: string | null
     Data?: NullableJsonNullValueInput | InputJsonValue
     DiscordMessageId?: string | null
+    DeliveredAt?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
   }
@@ -36886,6 +38467,7 @@ export namespace Prisma {
     Status?: EnumListenerEventStatusFieldUpdateOperationsInput | $Enums.ListenerEventStatus
     Error?: NullableStringFieldUpdateOperationsInput | string | null
     Data?: NullableJsonNullValueInput | InputJsonValue
+    DeliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -36896,9 +38478,91 @@ export namespace Prisma {
     Type?: StringFieldUpdateOperationsInput | string
     SentAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Status?: EnumListenerEventStatusFieldUpdateOperationsInput | $Enums.ListenerEventStatus
+    SenderId?: StringFieldUpdateOperationsInput | string
     Error?: NullableStringFieldUpdateOperationsInput | string | null
     Data?: NullableJsonNullValueInput | InputJsonValue
     DiscordMessageId?: NullableStringFieldUpdateOperationsInput | string | null
+    DeliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ListenerEventSenderCreateInput = {
+    Id?: string
+    Name: string
+    Slug: string
+    Token: string
+    IsActive?: boolean
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    ListenerEvents?: ListenerEventCreateNestedManyWithoutSenderInput
+    DiscordChannelWebhook?: DiscordChannelWebhookCreateNestedOneWithoutListenerEventSendersInput
+  }
+
+  export type ListenerEventSenderUncheckedCreateInput = {
+    Id?: string
+    Name: string
+    Slug: string
+    Token: string
+    IsActive?: boolean
+    DiscordChannelWebhookId?: string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    ListenerEvents?: ListenerEventUncheckedCreateNestedManyWithoutSenderInput
+  }
+
+  export type ListenerEventSenderUpdateInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    Slug?: StringFieldUpdateOperationsInput | string
+    Token?: StringFieldUpdateOperationsInput | string
+    IsActive?: BoolFieldUpdateOperationsInput | boolean
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ListenerEvents?: ListenerEventUpdateManyWithoutSenderNestedInput
+    DiscordChannelWebhook?: DiscordChannelWebhookUpdateOneWithoutListenerEventSendersNestedInput
+  }
+
+  export type ListenerEventSenderUncheckedUpdateInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    Slug?: StringFieldUpdateOperationsInput | string
+    Token?: StringFieldUpdateOperationsInput | string
+    IsActive?: BoolFieldUpdateOperationsInput | boolean
+    DiscordChannelWebhookId?: NullableStringFieldUpdateOperationsInput | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ListenerEvents?: ListenerEventUncheckedUpdateManyWithoutSenderNestedInput
+  }
+
+  export type ListenerEventSenderCreateManyInput = {
+    Id?: string
+    Name: string
+    Slug: string
+    Token: string
+    IsActive?: boolean
+    DiscordChannelWebhookId?: string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+  }
+
+  export type ListenerEventSenderUpdateManyMutationInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    Slug?: StringFieldUpdateOperationsInput | string
+    Token?: StringFieldUpdateOperationsInput | string
+    IsActive?: BoolFieldUpdateOperationsInput | boolean
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ListenerEventSenderUncheckedUpdateManyInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    Slug?: StringFieldUpdateOperationsInput | string
+    Token?: StringFieldUpdateOperationsInput | string
+    IsActive?: BoolFieldUpdateOperationsInput | boolean
+    DiscordChannelWebhookId?: NullableStringFieldUpdateOperationsInput | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -37599,7 +39263,7 @@ export namespace Prisma {
   }
 
   export type VirtualAirlineRoleCreateInput = {
-    Id?: string
+    Id: string
     Name: string
     Permission: number
     IsDefaultNewRole: boolean
@@ -37619,7 +39283,7 @@ export namespace Prisma {
   }
 
   export type VirtualAirlineRoleUncheckedCreateInput = {
-    Id?: string
+    Id: string
     VAId: string
     Name: string
     Permission: number
@@ -37679,7 +39343,7 @@ export namespace Prisma {
   }
 
   export type VirtualAirlineRoleCreateManyInput = {
-    Id?: string
+    Id: string
     VAId: string
     Name: string
     Permission: number
@@ -37803,9 +39467,9 @@ export namespace Prisma {
   }
 
   export type MemberCreateInput = {
+    Id: string
     IsActive?: boolean
     DeactivatedAt?: Date | string | null
-    Id?: string
     TotalCargosTransportedLbs: number
     TotalPAXsTransported: number
     TotalEarnedCredits: Decimal | DecimalJsLike | number | string
@@ -37827,9 +39491,9 @@ export namespace Prisma {
   }
 
   export type MemberUncheckedCreateInput = {
+    Id: string
     IsActive?: boolean
     DeactivatedAt?: Date | string | null
-    Id?: string
     VAId: string
     CompanyId: string
     VARoleId: string
@@ -37851,9 +39515,9 @@ export namespace Prisma {
   }
 
   export type MemberUpdateInput = {
+    Id?: StringFieldUpdateOperationsInput | string
     IsActive?: BoolFieldUpdateOperationsInput | boolean
     DeactivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    Id?: StringFieldUpdateOperationsInput | string
     TotalCargosTransportedLbs?: IntFieldUpdateOperationsInput | number
     TotalPAXsTransported?: IntFieldUpdateOperationsInput | number
     TotalEarnedCredits?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -37875,9 +39539,9 @@ export namespace Prisma {
   }
 
   export type MemberUncheckedUpdateInput = {
+    Id?: StringFieldUpdateOperationsInput | string
     IsActive?: BoolFieldUpdateOperationsInput | boolean
     DeactivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    Id?: StringFieldUpdateOperationsInput | string
     VAId?: StringFieldUpdateOperationsInput | string
     CompanyId?: StringFieldUpdateOperationsInput | string
     VARoleId?: StringFieldUpdateOperationsInput | string
@@ -37899,9 +39563,9 @@ export namespace Prisma {
   }
 
   export type MemberCreateManyInput = {
+    Id: string
     IsActive?: boolean
     DeactivatedAt?: Date | string | null
-    Id?: string
     VAId: string
     CompanyId: string
     VARoleId: string
@@ -37921,9 +39585,9 @@ export namespace Prisma {
   }
 
   export type MemberUpdateManyMutationInput = {
+    Id?: StringFieldUpdateOperationsInput | string
     IsActive?: BoolFieldUpdateOperationsInput | boolean
     DeactivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    Id?: StringFieldUpdateOperationsInput | string
     TotalCargosTransportedLbs?: IntFieldUpdateOperationsInput | number
     TotalPAXsTransported?: IntFieldUpdateOperationsInput | number
     TotalEarnedCredits?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -37939,9 +39603,9 @@ export namespace Prisma {
   }
 
   export type MemberUncheckedUpdateManyInput = {
+    Id?: StringFieldUpdateOperationsInput | string
     IsActive?: BoolFieldUpdateOperationsInput | boolean
     DeactivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    Id?: StringFieldUpdateOperationsInput | string
     VAId?: StringFieldUpdateOperationsInput | string
     CompanyId?: StringFieldUpdateOperationsInput | string
     VARoleId?: StringFieldUpdateOperationsInput | string
@@ -37961,7 +39625,7 @@ export namespace Prisma {
   }
 
   export type CompanyCreateInput = {
-    Id?: string
+    Id: string
     Name: string
     AirlineCode: string
     CreationDate: Date | string
@@ -37982,7 +39646,7 @@ export namespace Prisma {
   }
 
   export type CompanyUncheckedCreateInput = {
-    Id?: string
+    Id: string
     Name: string
     AirlineCode: string
     CreationDate: Date | string
@@ -38045,7 +39709,7 @@ export namespace Prisma {
   }
 
   export type CompanyCreateManyInput = {
-    Id?: string
+    Id: string
     Name: string
     AirlineCode: string
     CreationDate: Date | string
@@ -38242,7 +39906,7 @@ export namespace Prisma {
   }
 
   export type AircraftMaintenanceCreateInput = {
-    Id?: string
+    Id: string
     AnnualCheckup: boolean
     Inspection100Hours: boolean
     FailuresRepair: boolean
@@ -38261,7 +39925,7 @@ export namespace Prisma {
   }
 
   export type AircraftMaintenanceUncheckedCreateInput = {
-    Id?: string
+    Id: string
     AircraftId: string
     AnnualCheckup: boolean
     Inspection100Hours: boolean
@@ -38318,7 +39982,7 @@ export namespace Prisma {
   }
 
   export type AircraftMaintenanceCreateManyInput = {
-    Id?: string
+    Id: string
     AircraftId: string
     AnnualCheckup: boolean
     Inspection100Hours: boolean
@@ -39482,6 +41146,17 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type UuidNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -39494,9 +41169,9 @@ export namespace Prisma {
     not?: NestedUuidNullableFilter<$PrismaModel> | string | null
   }
 
-  export type DiscordMessageTypeScalarRelationFilter = {
-    is?: DiscordMessageTypeWhereInput
-    isNot?: DiscordMessageTypeWhereInput
+  export type DiscordMessageTemplateNullableScalarRelationFilter = {
+    is?: DiscordMessageTemplateWhereInput | null
+    isNot?: DiscordMessageTemplateWhereInput | null
   }
 
   export type DiscordChannelWebhookNullableScalarRelationFilter = {
@@ -39517,25 +41192,25 @@ export namespace Prisma {
   export type DiscordMessageCountOrderByAggregateInput = {
     Id?: SortOrder
     ChannelId?: SortOrder
-    MessageId?: SortOrder
     Content?: SortOrder
-    DiscordMessageTypeId?: SortOrder
+    DiscordMessageTemplateId?: SortOrder
     DiscordChannelWebhookId?: SortOrder
+    DiscordMessageSentAt?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
   }
 
   export type DiscordMessageAvgOrderByAggregateInput = {
-    DiscordMessageTypeId?: SortOrder
+    DiscordMessageTemplateId?: SortOrder
   }
 
   export type DiscordMessageMaxOrderByAggregateInput = {
     Id?: SortOrder
     ChannelId?: SortOrder
-    MessageId?: SortOrder
     Content?: SortOrder
-    DiscordMessageTypeId?: SortOrder
+    DiscordMessageTemplateId?: SortOrder
     DiscordChannelWebhookId?: SortOrder
+    DiscordMessageSentAt?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
   }
@@ -39543,16 +41218,32 @@ export namespace Prisma {
   export type DiscordMessageMinOrderByAggregateInput = {
     Id?: SortOrder
     ChannelId?: SortOrder
-    MessageId?: SortOrder
     Content?: SortOrder
-    DiscordMessageTypeId?: SortOrder
+    DiscordMessageTemplateId?: SortOrder
     DiscordChannelWebhookId?: SortOrder
+    DiscordMessageSentAt?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
   }
 
   export type DiscordMessageSumOrderByAggregateInput = {
-    DiscordMessageTypeId?: SortOrder
+    DiscordMessageTemplateId?: SortOrder
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type UuidNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -39580,45 +41271,61 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type DiscordMessageTypeCountOrderByAggregateInput = {
+  export type DiscordMessageTemplateCountOrderByAggregateInput = {
     Id?: SortOrder
+    Slug?: SortOrder
     Name?: SortOrder
     Description?: SortOrder
-    Slug?: SortOrder
+    Content?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
   }
 
-  export type DiscordMessageTypeAvgOrderByAggregateInput = {
+  export type DiscordMessageTemplateAvgOrderByAggregateInput = {
     Id?: SortOrder
   }
 
-  export type DiscordMessageTypeMaxOrderByAggregateInput = {
+  export type DiscordMessageTemplateMaxOrderByAggregateInput = {
     Id?: SortOrder
+    Slug?: SortOrder
     Name?: SortOrder
     Description?: SortOrder
-    Slug?: SortOrder
+    Content?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
   }
 
-  export type DiscordMessageTypeMinOrderByAggregateInput = {
+  export type DiscordMessageTemplateMinOrderByAggregateInput = {
     Id?: SortOrder
+    Slug?: SortOrder
     Name?: SortOrder
     Description?: SortOrder
-    Slug?: SortOrder
+    Content?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
   }
 
-  export type DiscordMessageTypeSumOrderByAggregateInput = {
+  export type DiscordMessageTemplateSumOrderByAggregateInput = {
     Id?: SortOrder
+  }
+
+  export type ListenerEventSenderListRelationFilter = {
+    every?: ListenerEventSenderWhereInput
+    some?: ListenerEventSenderWhereInput
+    none?: ListenerEventSenderWhereInput
+  }
+
+  export type ListenerEventSenderOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type DiscordChannelWebhookCountOrderByAggregateInput = {
     Id?: SortOrder
-    ChannelId?: SortOrder
+    Name?: SortOrder
+    Description?: SortOrder
     WebhookUrl?: SortOrder
+    ChannelId?: SortOrder
+    Token?: SortOrder
     IsActive?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
@@ -39626,8 +41333,11 @@ export namespace Prisma {
 
   export type DiscordChannelWebhookMaxOrderByAggregateInput = {
     Id?: SortOrder
-    ChannelId?: SortOrder
+    Name?: SortOrder
+    Description?: SortOrder
     WebhookUrl?: SortOrder
+    ChannelId?: SortOrder
+    Token?: SortOrder
     IsActive?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
@@ -39635,8 +41345,11 @@ export namespace Prisma {
 
   export type DiscordChannelWebhookMinOrderByAggregateInput = {
     Id?: SortOrder
-    ChannelId?: SortOrder
+    Name?: SortOrder
+    Description?: SortOrder
     WebhookUrl?: SortOrder
+    ChannelId?: SortOrder
+    Token?: SortOrder
     IsActive?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
@@ -39677,15 +41390,22 @@ export namespace Prisma {
     isNot?: DiscordMessageWhereInput | null
   }
 
+  export type ListenerEventSenderScalarRelationFilter = {
+    is?: ListenerEventSenderWhereInput
+    isNot?: ListenerEventSenderWhereInput
+  }
+
   export type ListenerEventCountOrderByAggregateInput = {
     Id?: SortOrder
     Variant?: SortOrder
     Type?: SortOrder
     SentAt?: SortOrder
     Status?: SortOrder
+    SenderId?: SortOrder
     Error?: SortOrder
     Data?: SortOrder
     DiscordMessageId?: SortOrder
+    DeliveredAt?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
   }
@@ -39700,8 +41420,10 @@ export namespace Prisma {
     Type?: SortOrder
     SentAt?: SortOrder
     Status?: SortOrder
+    SenderId?: SortOrder
     Error?: SortOrder
     DiscordMessageId?: SortOrder
+    DeliveredAt?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
   }
@@ -39712,8 +41434,10 @@ export namespace Prisma {
     Type?: SortOrder
     SentAt?: SortOrder
     Status?: SortOrder
+    SenderId?: SortOrder
     Error?: SortOrder
     DiscordMessageId?: SortOrder
+    DeliveredAt?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
   }
@@ -39756,6 +41480,39 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedJsonNullableFilter<$PrismaModel>
     _max?: NestedJsonNullableFilter<$PrismaModel>
+  }
+
+  export type ListenerEventSenderCountOrderByAggregateInput = {
+    Id?: SortOrder
+    Name?: SortOrder
+    Slug?: SortOrder
+    Token?: SortOrder
+    IsActive?: SortOrder
+    DiscordChannelWebhookId?: SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+  }
+
+  export type ListenerEventSenderMaxOrderByAggregateInput = {
+    Id?: SortOrder
+    Name?: SortOrder
+    Slug?: SortOrder
+    Token?: SortOrder
+    IsActive?: SortOrder
+    DiscordChannelWebhookId?: SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+  }
+
+  export type ListenerEventSenderMinOrderByAggregateInput = {
+    Id?: SortOrder
+    Name?: SortOrder
+    Slug?: SortOrder
+    Token?: SortOrder
+    IsActive?: SortOrder
+    DiscordChannelWebhookId?: SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
   }
 
   export type RoleListRelationFilter = {
@@ -40040,17 +41797,6 @@ export namespace Prisma {
     DownloadCount?: SortOrder
   }
 
-  export type IntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
   export type DecimalNullableFilter<$PrismaModel = never> = {
     equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
     in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
@@ -40208,22 +41954,6 @@ export namespace Prisma {
     LevelXP?: SortOrder
     TotalContractsCompleted?: SortOrder
     TotalContractsEarnedCredits?: SortOrder
-  }
-
-  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type DecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -40415,9 +42145,9 @@ export namespace Prisma {
   }
 
   export type MemberCountOrderByAggregateInput = {
+    Id?: SortOrder
     IsActive?: SortOrder
     DeactivatedAt?: SortOrder
-    Id?: SortOrder
     VAId?: SortOrder
     CompanyId?: SortOrder
     VARoleId?: SortOrder
@@ -40447,9 +42177,9 @@ export namespace Prisma {
   }
 
   export type MemberMaxOrderByAggregateInput = {
+    Id?: SortOrder
     IsActive?: SortOrder
     DeactivatedAt?: SortOrder
-    Id?: SortOrder
     VAId?: SortOrder
     CompanyId?: SortOrder
     VARoleId?: SortOrder
@@ -40469,9 +42199,9 @@ export namespace Prisma {
   }
 
   export type MemberMinOrderByAggregateInput = {
+    Id?: SortOrder
     IsActive?: SortOrder
     DeactivatedAt?: SortOrder
-    Id?: SortOrder
     VAId?: SortOrder
     CompanyId?: SortOrder
     VARoleId?: SortOrder
@@ -41339,10 +43069,10 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutInviteCodeInput, UserUpdateWithoutInviteCodeInput>, UserUncheckedUpdateWithoutInviteCodeInput>
   }
 
-  export type DiscordMessageTypeCreateNestedOneWithoutDiscordMessagesInput = {
-    create?: XOR<DiscordMessageTypeCreateWithoutDiscordMessagesInput, DiscordMessageTypeUncheckedCreateWithoutDiscordMessagesInput>
-    connectOrCreate?: DiscordMessageTypeCreateOrConnectWithoutDiscordMessagesInput
-    connect?: DiscordMessageTypeWhereUniqueInput
+  export type DiscordMessageTemplateCreateNestedOneWithoutDiscordMessagesInput = {
+    create?: XOR<DiscordMessageTemplateCreateWithoutDiscordMessagesInput, DiscordMessageTemplateUncheckedCreateWithoutDiscordMessagesInput>
+    connectOrCreate?: DiscordMessageTemplateCreateOrConnectWithoutDiscordMessagesInput
+    connect?: DiscordMessageTemplateWhereUniqueInput
   }
 
   export type DiscordChannelWebhookCreateNestedOneWithoutDiscordMessagesInput = {
@@ -41365,12 +43095,14 @@ export namespace Prisma {
     connect?: ListenerEventWhereUniqueInput | ListenerEventWhereUniqueInput[]
   }
 
-  export type DiscordMessageTypeUpdateOneRequiredWithoutDiscordMessagesNestedInput = {
-    create?: XOR<DiscordMessageTypeCreateWithoutDiscordMessagesInput, DiscordMessageTypeUncheckedCreateWithoutDiscordMessagesInput>
-    connectOrCreate?: DiscordMessageTypeCreateOrConnectWithoutDiscordMessagesInput
-    upsert?: DiscordMessageTypeUpsertWithoutDiscordMessagesInput
-    connect?: DiscordMessageTypeWhereUniqueInput
-    update?: XOR<XOR<DiscordMessageTypeUpdateToOneWithWhereWithoutDiscordMessagesInput, DiscordMessageTypeUpdateWithoutDiscordMessagesInput>, DiscordMessageTypeUncheckedUpdateWithoutDiscordMessagesInput>
+  export type DiscordMessageTemplateUpdateOneWithoutDiscordMessagesNestedInput = {
+    create?: XOR<DiscordMessageTemplateCreateWithoutDiscordMessagesInput, DiscordMessageTemplateUncheckedCreateWithoutDiscordMessagesInput>
+    connectOrCreate?: DiscordMessageTemplateCreateOrConnectWithoutDiscordMessagesInput
+    upsert?: DiscordMessageTemplateUpsertWithoutDiscordMessagesInput
+    disconnect?: DiscordMessageTemplateWhereInput | boolean
+    delete?: DiscordMessageTemplateWhereInput | boolean
+    connect?: DiscordMessageTemplateWhereUniqueInput
+    update?: XOR<XOR<DiscordMessageTemplateUpdateToOneWithWhereWithoutDiscordMessagesInput, DiscordMessageTemplateUpdateWithoutDiscordMessagesInput>, DiscordMessageTemplateUncheckedUpdateWithoutDiscordMessagesInput>
   }
 
   export type DiscordChannelWebhookUpdateOneWithoutDiscordMessagesNestedInput = {
@@ -41397,6 +43129,14 @@ export namespace Prisma {
     deleteMany?: ListenerEventScalarWhereInput | ListenerEventScalarWhereInput[]
   }
 
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type ListenerEventUncheckedUpdateManyWithoutDiscordMessageNestedInput = {
     create?: XOR<ListenerEventCreateWithoutDiscordMessageInput, ListenerEventUncheckedCreateWithoutDiscordMessageInput> | ListenerEventCreateWithoutDiscordMessageInput[] | ListenerEventUncheckedCreateWithoutDiscordMessageInput[]
     connectOrCreate?: ListenerEventCreateOrConnectWithoutDiscordMessageInput | ListenerEventCreateOrConnectWithoutDiscordMessageInput[]
@@ -41411,45 +43151,45 @@ export namespace Prisma {
     deleteMany?: ListenerEventScalarWhereInput | ListenerEventScalarWhereInput[]
   }
 
-  export type DiscordMessageCreateNestedManyWithoutDiscordMessageTypeInput = {
-    create?: XOR<DiscordMessageCreateWithoutDiscordMessageTypeInput, DiscordMessageUncheckedCreateWithoutDiscordMessageTypeInput> | DiscordMessageCreateWithoutDiscordMessageTypeInput[] | DiscordMessageUncheckedCreateWithoutDiscordMessageTypeInput[]
-    connectOrCreate?: DiscordMessageCreateOrConnectWithoutDiscordMessageTypeInput | DiscordMessageCreateOrConnectWithoutDiscordMessageTypeInput[]
-    createMany?: DiscordMessageCreateManyDiscordMessageTypeInputEnvelope
+  export type DiscordMessageCreateNestedManyWithoutDiscordMessageTemplateInput = {
+    create?: XOR<DiscordMessageCreateWithoutDiscordMessageTemplateInput, DiscordMessageUncheckedCreateWithoutDiscordMessageTemplateInput> | DiscordMessageCreateWithoutDiscordMessageTemplateInput[] | DiscordMessageUncheckedCreateWithoutDiscordMessageTemplateInput[]
+    connectOrCreate?: DiscordMessageCreateOrConnectWithoutDiscordMessageTemplateInput | DiscordMessageCreateOrConnectWithoutDiscordMessageTemplateInput[]
+    createMany?: DiscordMessageCreateManyDiscordMessageTemplateInputEnvelope
     connect?: DiscordMessageWhereUniqueInput | DiscordMessageWhereUniqueInput[]
   }
 
-  export type DiscordMessageUncheckedCreateNestedManyWithoutDiscordMessageTypeInput = {
-    create?: XOR<DiscordMessageCreateWithoutDiscordMessageTypeInput, DiscordMessageUncheckedCreateWithoutDiscordMessageTypeInput> | DiscordMessageCreateWithoutDiscordMessageTypeInput[] | DiscordMessageUncheckedCreateWithoutDiscordMessageTypeInput[]
-    connectOrCreate?: DiscordMessageCreateOrConnectWithoutDiscordMessageTypeInput | DiscordMessageCreateOrConnectWithoutDiscordMessageTypeInput[]
-    createMany?: DiscordMessageCreateManyDiscordMessageTypeInputEnvelope
+  export type DiscordMessageUncheckedCreateNestedManyWithoutDiscordMessageTemplateInput = {
+    create?: XOR<DiscordMessageCreateWithoutDiscordMessageTemplateInput, DiscordMessageUncheckedCreateWithoutDiscordMessageTemplateInput> | DiscordMessageCreateWithoutDiscordMessageTemplateInput[] | DiscordMessageUncheckedCreateWithoutDiscordMessageTemplateInput[]
+    connectOrCreate?: DiscordMessageCreateOrConnectWithoutDiscordMessageTemplateInput | DiscordMessageCreateOrConnectWithoutDiscordMessageTemplateInput[]
+    createMany?: DiscordMessageCreateManyDiscordMessageTemplateInputEnvelope
     connect?: DiscordMessageWhereUniqueInput | DiscordMessageWhereUniqueInput[]
   }
 
-  export type DiscordMessageUpdateManyWithoutDiscordMessageTypeNestedInput = {
-    create?: XOR<DiscordMessageCreateWithoutDiscordMessageTypeInput, DiscordMessageUncheckedCreateWithoutDiscordMessageTypeInput> | DiscordMessageCreateWithoutDiscordMessageTypeInput[] | DiscordMessageUncheckedCreateWithoutDiscordMessageTypeInput[]
-    connectOrCreate?: DiscordMessageCreateOrConnectWithoutDiscordMessageTypeInput | DiscordMessageCreateOrConnectWithoutDiscordMessageTypeInput[]
-    upsert?: DiscordMessageUpsertWithWhereUniqueWithoutDiscordMessageTypeInput | DiscordMessageUpsertWithWhereUniqueWithoutDiscordMessageTypeInput[]
-    createMany?: DiscordMessageCreateManyDiscordMessageTypeInputEnvelope
+  export type DiscordMessageUpdateManyWithoutDiscordMessageTemplateNestedInput = {
+    create?: XOR<DiscordMessageCreateWithoutDiscordMessageTemplateInput, DiscordMessageUncheckedCreateWithoutDiscordMessageTemplateInput> | DiscordMessageCreateWithoutDiscordMessageTemplateInput[] | DiscordMessageUncheckedCreateWithoutDiscordMessageTemplateInput[]
+    connectOrCreate?: DiscordMessageCreateOrConnectWithoutDiscordMessageTemplateInput | DiscordMessageCreateOrConnectWithoutDiscordMessageTemplateInput[]
+    upsert?: DiscordMessageUpsertWithWhereUniqueWithoutDiscordMessageTemplateInput | DiscordMessageUpsertWithWhereUniqueWithoutDiscordMessageTemplateInput[]
+    createMany?: DiscordMessageCreateManyDiscordMessageTemplateInputEnvelope
     set?: DiscordMessageWhereUniqueInput | DiscordMessageWhereUniqueInput[]
     disconnect?: DiscordMessageWhereUniqueInput | DiscordMessageWhereUniqueInput[]
     delete?: DiscordMessageWhereUniqueInput | DiscordMessageWhereUniqueInput[]
     connect?: DiscordMessageWhereUniqueInput | DiscordMessageWhereUniqueInput[]
-    update?: DiscordMessageUpdateWithWhereUniqueWithoutDiscordMessageTypeInput | DiscordMessageUpdateWithWhereUniqueWithoutDiscordMessageTypeInput[]
-    updateMany?: DiscordMessageUpdateManyWithWhereWithoutDiscordMessageTypeInput | DiscordMessageUpdateManyWithWhereWithoutDiscordMessageTypeInput[]
+    update?: DiscordMessageUpdateWithWhereUniqueWithoutDiscordMessageTemplateInput | DiscordMessageUpdateWithWhereUniqueWithoutDiscordMessageTemplateInput[]
+    updateMany?: DiscordMessageUpdateManyWithWhereWithoutDiscordMessageTemplateInput | DiscordMessageUpdateManyWithWhereWithoutDiscordMessageTemplateInput[]
     deleteMany?: DiscordMessageScalarWhereInput | DiscordMessageScalarWhereInput[]
   }
 
-  export type DiscordMessageUncheckedUpdateManyWithoutDiscordMessageTypeNestedInput = {
-    create?: XOR<DiscordMessageCreateWithoutDiscordMessageTypeInput, DiscordMessageUncheckedCreateWithoutDiscordMessageTypeInput> | DiscordMessageCreateWithoutDiscordMessageTypeInput[] | DiscordMessageUncheckedCreateWithoutDiscordMessageTypeInput[]
-    connectOrCreate?: DiscordMessageCreateOrConnectWithoutDiscordMessageTypeInput | DiscordMessageCreateOrConnectWithoutDiscordMessageTypeInput[]
-    upsert?: DiscordMessageUpsertWithWhereUniqueWithoutDiscordMessageTypeInput | DiscordMessageUpsertWithWhereUniqueWithoutDiscordMessageTypeInput[]
-    createMany?: DiscordMessageCreateManyDiscordMessageTypeInputEnvelope
+  export type DiscordMessageUncheckedUpdateManyWithoutDiscordMessageTemplateNestedInput = {
+    create?: XOR<DiscordMessageCreateWithoutDiscordMessageTemplateInput, DiscordMessageUncheckedCreateWithoutDiscordMessageTemplateInput> | DiscordMessageCreateWithoutDiscordMessageTemplateInput[] | DiscordMessageUncheckedCreateWithoutDiscordMessageTemplateInput[]
+    connectOrCreate?: DiscordMessageCreateOrConnectWithoutDiscordMessageTemplateInput | DiscordMessageCreateOrConnectWithoutDiscordMessageTemplateInput[]
+    upsert?: DiscordMessageUpsertWithWhereUniqueWithoutDiscordMessageTemplateInput | DiscordMessageUpsertWithWhereUniqueWithoutDiscordMessageTemplateInput[]
+    createMany?: DiscordMessageCreateManyDiscordMessageTemplateInputEnvelope
     set?: DiscordMessageWhereUniqueInput | DiscordMessageWhereUniqueInput[]
     disconnect?: DiscordMessageWhereUniqueInput | DiscordMessageWhereUniqueInput[]
     delete?: DiscordMessageWhereUniqueInput | DiscordMessageWhereUniqueInput[]
     connect?: DiscordMessageWhereUniqueInput | DiscordMessageWhereUniqueInput[]
-    update?: DiscordMessageUpdateWithWhereUniqueWithoutDiscordMessageTypeInput | DiscordMessageUpdateWithWhereUniqueWithoutDiscordMessageTypeInput[]
-    updateMany?: DiscordMessageUpdateManyWithWhereWithoutDiscordMessageTypeInput | DiscordMessageUpdateManyWithWhereWithoutDiscordMessageTypeInput[]
+    update?: DiscordMessageUpdateWithWhereUniqueWithoutDiscordMessageTemplateInput | DiscordMessageUpdateWithWhereUniqueWithoutDiscordMessageTemplateInput[]
+    updateMany?: DiscordMessageUpdateManyWithWhereWithoutDiscordMessageTemplateInput | DiscordMessageUpdateManyWithWhereWithoutDiscordMessageTemplateInput[]
     deleteMany?: DiscordMessageScalarWhereInput | DiscordMessageScalarWhereInput[]
   }
 
@@ -41460,11 +43200,25 @@ export namespace Prisma {
     connect?: DiscordMessageWhereUniqueInput | DiscordMessageWhereUniqueInput[]
   }
 
+  export type ListenerEventSenderCreateNestedManyWithoutDiscordChannelWebhookInput = {
+    create?: XOR<ListenerEventSenderCreateWithoutDiscordChannelWebhookInput, ListenerEventSenderUncheckedCreateWithoutDiscordChannelWebhookInput> | ListenerEventSenderCreateWithoutDiscordChannelWebhookInput[] | ListenerEventSenderUncheckedCreateWithoutDiscordChannelWebhookInput[]
+    connectOrCreate?: ListenerEventSenderCreateOrConnectWithoutDiscordChannelWebhookInput | ListenerEventSenderCreateOrConnectWithoutDiscordChannelWebhookInput[]
+    createMany?: ListenerEventSenderCreateManyDiscordChannelWebhookInputEnvelope
+    connect?: ListenerEventSenderWhereUniqueInput | ListenerEventSenderWhereUniqueInput[]
+  }
+
   export type DiscordMessageUncheckedCreateNestedManyWithoutDiscordChannelWebhookInput = {
     create?: XOR<DiscordMessageCreateWithoutDiscordChannelWebhookInput, DiscordMessageUncheckedCreateWithoutDiscordChannelWebhookInput> | DiscordMessageCreateWithoutDiscordChannelWebhookInput[] | DiscordMessageUncheckedCreateWithoutDiscordChannelWebhookInput[]
     connectOrCreate?: DiscordMessageCreateOrConnectWithoutDiscordChannelWebhookInput | DiscordMessageCreateOrConnectWithoutDiscordChannelWebhookInput[]
     createMany?: DiscordMessageCreateManyDiscordChannelWebhookInputEnvelope
     connect?: DiscordMessageWhereUniqueInput | DiscordMessageWhereUniqueInput[]
+  }
+
+  export type ListenerEventSenderUncheckedCreateNestedManyWithoutDiscordChannelWebhookInput = {
+    create?: XOR<ListenerEventSenderCreateWithoutDiscordChannelWebhookInput, ListenerEventSenderUncheckedCreateWithoutDiscordChannelWebhookInput> | ListenerEventSenderCreateWithoutDiscordChannelWebhookInput[] | ListenerEventSenderUncheckedCreateWithoutDiscordChannelWebhookInput[]
+    connectOrCreate?: ListenerEventSenderCreateOrConnectWithoutDiscordChannelWebhookInput | ListenerEventSenderCreateOrConnectWithoutDiscordChannelWebhookInput[]
+    createMany?: ListenerEventSenderCreateManyDiscordChannelWebhookInputEnvelope
+    connect?: ListenerEventSenderWhereUniqueInput | ListenerEventSenderWhereUniqueInput[]
   }
 
   export type DiscordMessageUpdateManyWithoutDiscordChannelWebhookNestedInput = {
@@ -41481,6 +43235,20 @@ export namespace Prisma {
     deleteMany?: DiscordMessageScalarWhereInput | DiscordMessageScalarWhereInput[]
   }
 
+  export type ListenerEventSenderUpdateManyWithoutDiscordChannelWebhookNestedInput = {
+    create?: XOR<ListenerEventSenderCreateWithoutDiscordChannelWebhookInput, ListenerEventSenderUncheckedCreateWithoutDiscordChannelWebhookInput> | ListenerEventSenderCreateWithoutDiscordChannelWebhookInput[] | ListenerEventSenderUncheckedCreateWithoutDiscordChannelWebhookInput[]
+    connectOrCreate?: ListenerEventSenderCreateOrConnectWithoutDiscordChannelWebhookInput | ListenerEventSenderCreateOrConnectWithoutDiscordChannelWebhookInput[]
+    upsert?: ListenerEventSenderUpsertWithWhereUniqueWithoutDiscordChannelWebhookInput | ListenerEventSenderUpsertWithWhereUniqueWithoutDiscordChannelWebhookInput[]
+    createMany?: ListenerEventSenderCreateManyDiscordChannelWebhookInputEnvelope
+    set?: ListenerEventSenderWhereUniqueInput | ListenerEventSenderWhereUniqueInput[]
+    disconnect?: ListenerEventSenderWhereUniqueInput | ListenerEventSenderWhereUniqueInput[]
+    delete?: ListenerEventSenderWhereUniqueInput | ListenerEventSenderWhereUniqueInput[]
+    connect?: ListenerEventSenderWhereUniqueInput | ListenerEventSenderWhereUniqueInput[]
+    update?: ListenerEventSenderUpdateWithWhereUniqueWithoutDiscordChannelWebhookInput | ListenerEventSenderUpdateWithWhereUniqueWithoutDiscordChannelWebhookInput[]
+    updateMany?: ListenerEventSenderUpdateManyWithWhereWithoutDiscordChannelWebhookInput | ListenerEventSenderUpdateManyWithWhereWithoutDiscordChannelWebhookInput[]
+    deleteMany?: ListenerEventSenderScalarWhereInput | ListenerEventSenderScalarWhereInput[]
+  }
+
   export type DiscordMessageUncheckedUpdateManyWithoutDiscordChannelWebhookNestedInput = {
     create?: XOR<DiscordMessageCreateWithoutDiscordChannelWebhookInput, DiscordMessageUncheckedCreateWithoutDiscordChannelWebhookInput> | DiscordMessageCreateWithoutDiscordChannelWebhookInput[] | DiscordMessageUncheckedCreateWithoutDiscordChannelWebhookInput[]
     connectOrCreate?: DiscordMessageCreateOrConnectWithoutDiscordChannelWebhookInput | DiscordMessageCreateOrConnectWithoutDiscordChannelWebhookInput[]
@@ -41495,10 +43263,30 @@ export namespace Prisma {
     deleteMany?: DiscordMessageScalarWhereInput | DiscordMessageScalarWhereInput[]
   }
 
+  export type ListenerEventSenderUncheckedUpdateManyWithoutDiscordChannelWebhookNestedInput = {
+    create?: XOR<ListenerEventSenderCreateWithoutDiscordChannelWebhookInput, ListenerEventSenderUncheckedCreateWithoutDiscordChannelWebhookInput> | ListenerEventSenderCreateWithoutDiscordChannelWebhookInput[] | ListenerEventSenderUncheckedCreateWithoutDiscordChannelWebhookInput[]
+    connectOrCreate?: ListenerEventSenderCreateOrConnectWithoutDiscordChannelWebhookInput | ListenerEventSenderCreateOrConnectWithoutDiscordChannelWebhookInput[]
+    upsert?: ListenerEventSenderUpsertWithWhereUniqueWithoutDiscordChannelWebhookInput | ListenerEventSenderUpsertWithWhereUniqueWithoutDiscordChannelWebhookInput[]
+    createMany?: ListenerEventSenderCreateManyDiscordChannelWebhookInputEnvelope
+    set?: ListenerEventSenderWhereUniqueInput | ListenerEventSenderWhereUniqueInput[]
+    disconnect?: ListenerEventSenderWhereUniqueInput | ListenerEventSenderWhereUniqueInput[]
+    delete?: ListenerEventSenderWhereUniqueInput | ListenerEventSenderWhereUniqueInput[]
+    connect?: ListenerEventSenderWhereUniqueInput | ListenerEventSenderWhereUniqueInput[]
+    update?: ListenerEventSenderUpdateWithWhereUniqueWithoutDiscordChannelWebhookInput | ListenerEventSenderUpdateWithWhereUniqueWithoutDiscordChannelWebhookInput[]
+    updateMany?: ListenerEventSenderUpdateManyWithWhereWithoutDiscordChannelWebhookInput | ListenerEventSenderUpdateManyWithWhereWithoutDiscordChannelWebhookInput[]
+    deleteMany?: ListenerEventSenderScalarWhereInput | ListenerEventSenderScalarWhereInput[]
+  }
+
   export type DiscordMessageCreateNestedOneWithoutListenerEventsInput = {
     create?: XOR<DiscordMessageCreateWithoutListenerEventsInput, DiscordMessageUncheckedCreateWithoutListenerEventsInput>
     connectOrCreate?: DiscordMessageCreateOrConnectWithoutListenerEventsInput
     connect?: DiscordMessageWhereUniqueInput
+  }
+
+  export type ListenerEventSenderCreateNestedOneWithoutListenerEventsInput = {
+    create?: XOR<ListenerEventSenderCreateWithoutListenerEventsInput, ListenerEventSenderUncheckedCreateWithoutListenerEventsInput>
+    connectOrCreate?: ListenerEventSenderCreateOrConnectWithoutListenerEventsInput
+    connect?: ListenerEventSenderWhereUniqueInput
   }
 
   export type EnumListenerEventStatusFieldUpdateOperationsInput = {
@@ -41513,6 +43301,72 @@ export namespace Prisma {
     delete?: DiscordMessageWhereInput | boolean
     connect?: DiscordMessageWhereUniqueInput
     update?: XOR<XOR<DiscordMessageUpdateToOneWithWhereWithoutListenerEventsInput, DiscordMessageUpdateWithoutListenerEventsInput>, DiscordMessageUncheckedUpdateWithoutListenerEventsInput>
+  }
+
+  export type ListenerEventSenderUpdateOneRequiredWithoutListenerEventsNestedInput = {
+    create?: XOR<ListenerEventSenderCreateWithoutListenerEventsInput, ListenerEventSenderUncheckedCreateWithoutListenerEventsInput>
+    connectOrCreate?: ListenerEventSenderCreateOrConnectWithoutListenerEventsInput
+    upsert?: ListenerEventSenderUpsertWithoutListenerEventsInput
+    connect?: ListenerEventSenderWhereUniqueInput
+    update?: XOR<XOR<ListenerEventSenderUpdateToOneWithWhereWithoutListenerEventsInput, ListenerEventSenderUpdateWithoutListenerEventsInput>, ListenerEventSenderUncheckedUpdateWithoutListenerEventsInput>
+  }
+
+  export type ListenerEventCreateNestedManyWithoutSenderInput = {
+    create?: XOR<ListenerEventCreateWithoutSenderInput, ListenerEventUncheckedCreateWithoutSenderInput> | ListenerEventCreateWithoutSenderInput[] | ListenerEventUncheckedCreateWithoutSenderInput[]
+    connectOrCreate?: ListenerEventCreateOrConnectWithoutSenderInput | ListenerEventCreateOrConnectWithoutSenderInput[]
+    createMany?: ListenerEventCreateManySenderInputEnvelope
+    connect?: ListenerEventWhereUniqueInput | ListenerEventWhereUniqueInput[]
+  }
+
+  export type DiscordChannelWebhookCreateNestedOneWithoutListenerEventSendersInput = {
+    create?: XOR<DiscordChannelWebhookCreateWithoutListenerEventSendersInput, DiscordChannelWebhookUncheckedCreateWithoutListenerEventSendersInput>
+    connectOrCreate?: DiscordChannelWebhookCreateOrConnectWithoutListenerEventSendersInput
+    connect?: DiscordChannelWebhookWhereUniqueInput
+  }
+
+  export type ListenerEventUncheckedCreateNestedManyWithoutSenderInput = {
+    create?: XOR<ListenerEventCreateWithoutSenderInput, ListenerEventUncheckedCreateWithoutSenderInput> | ListenerEventCreateWithoutSenderInput[] | ListenerEventUncheckedCreateWithoutSenderInput[]
+    connectOrCreate?: ListenerEventCreateOrConnectWithoutSenderInput | ListenerEventCreateOrConnectWithoutSenderInput[]
+    createMany?: ListenerEventCreateManySenderInputEnvelope
+    connect?: ListenerEventWhereUniqueInput | ListenerEventWhereUniqueInput[]
+  }
+
+  export type ListenerEventUpdateManyWithoutSenderNestedInput = {
+    create?: XOR<ListenerEventCreateWithoutSenderInput, ListenerEventUncheckedCreateWithoutSenderInput> | ListenerEventCreateWithoutSenderInput[] | ListenerEventUncheckedCreateWithoutSenderInput[]
+    connectOrCreate?: ListenerEventCreateOrConnectWithoutSenderInput | ListenerEventCreateOrConnectWithoutSenderInput[]
+    upsert?: ListenerEventUpsertWithWhereUniqueWithoutSenderInput | ListenerEventUpsertWithWhereUniqueWithoutSenderInput[]
+    createMany?: ListenerEventCreateManySenderInputEnvelope
+    set?: ListenerEventWhereUniqueInput | ListenerEventWhereUniqueInput[]
+    disconnect?: ListenerEventWhereUniqueInput | ListenerEventWhereUniqueInput[]
+    delete?: ListenerEventWhereUniqueInput | ListenerEventWhereUniqueInput[]
+    connect?: ListenerEventWhereUniqueInput | ListenerEventWhereUniqueInput[]
+    update?: ListenerEventUpdateWithWhereUniqueWithoutSenderInput | ListenerEventUpdateWithWhereUniqueWithoutSenderInput[]
+    updateMany?: ListenerEventUpdateManyWithWhereWithoutSenderInput | ListenerEventUpdateManyWithWhereWithoutSenderInput[]
+    deleteMany?: ListenerEventScalarWhereInput | ListenerEventScalarWhereInput[]
+  }
+
+  export type DiscordChannelWebhookUpdateOneWithoutListenerEventSendersNestedInput = {
+    create?: XOR<DiscordChannelWebhookCreateWithoutListenerEventSendersInput, DiscordChannelWebhookUncheckedCreateWithoutListenerEventSendersInput>
+    connectOrCreate?: DiscordChannelWebhookCreateOrConnectWithoutListenerEventSendersInput
+    upsert?: DiscordChannelWebhookUpsertWithoutListenerEventSendersInput
+    disconnect?: DiscordChannelWebhookWhereInput | boolean
+    delete?: DiscordChannelWebhookWhereInput | boolean
+    connect?: DiscordChannelWebhookWhereUniqueInput
+    update?: XOR<XOR<DiscordChannelWebhookUpdateToOneWithWhereWithoutListenerEventSendersInput, DiscordChannelWebhookUpdateWithoutListenerEventSendersInput>, DiscordChannelWebhookUncheckedUpdateWithoutListenerEventSendersInput>
+  }
+
+  export type ListenerEventUncheckedUpdateManyWithoutSenderNestedInput = {
+    create?: XOR<ListenerEventCreateWithoutSenderInput, ListenerEventUncheckedCreateWithoutSenderInput> | ListenerEventCreateWithoutSenderInput[] | ListenerEventUncheckedCreateWithoutSenderInput[]
+    connectOrCreate?: ListenerEventCreateOrConnectWithoutSenderInput | ListenerEventCreateOrConnectWithoutSenderInput[]
+    upsert?: ListenerEventUpsertWithWhereUniqueWithoutSenderInput | ListenerEventUpsertWithWhereUniqueWithoutSenderInput[]
+    createMany?: ListenerEventCreateManySenderInputEnvelope
+    set?: ListenerEventWhereUniqueInput | ListenerEventWhereUniqueInput[]
+    disconnect?: ListenerEventWhereUniqueInput | ListenerEventWhereUniqueInput[]
+    delete?: ListenerEventWhereUniqueInput | ListenerEventWhereUniqueInput[]
+    connect?: ListenerEventWhereUniqueInput | ListenerEventWhereUniqueInput[]
+    update?: ListenerEventUpdateWithWhereUniqueWithoutSenderInput | ListenerEventUpdateWithWhereUniqueWithoutSenderInput[]
+    updateMany?: ListenerEventUpdateManyWithWhereWithoutSenderInput | ListenerEventUpdateManyWithWhereWithoutSenderInput[]
+    deleteMany?: ListenerEventScalarWhereInput | ListenerEventScalarWhereInput[]
   }
 
   export type RoleCreateNestedManyWithoutUsersInput = {
@@ -41847,14 +43701,6 @@ export namespace Prisma {
     connectOrCreate?: FlightCreateOrConnectWithoutVirtualAirlineInput | FlightCreateOrConnectWithoutVirtualAirlineInput[]
     createMany?: FlightCreateManyVirtualAirlineInputEnvelope
     connect?: FlightWhereUniqueInput | FlightWhereUniqueInput[]
-  }
-
-  export type NullableIntFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type NullableDecimalFieldUpdateOperationsInput = {
@@ -43271,6 +45117,33 @@ export namespace Prisma {
     not?: NestedUuidNullableFilter<$PrismaModel> | string | null
   }
 
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedUuidNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -43334,33 +45207,6 @@ export namespace Prisma {
     gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
-  }
-
-  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
-  }
-
-  export type NestedFloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedDecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -43590,44 +45436,54 @@ export namespace Prisma {
     Members?: MemberUncheckedUpdateManyWithoutUserNestedInput
   }
 
-  export type DiscordMessageTypeCreateWithoutDiscordMessagesInput = {
+  export type DiscordMessageTemplateCreateWithoutDiscordMessagesInput = {
+    Slug: string
     Name: string
     Description?: string | null
-    Slug: string
+    Content: string
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
   }
 
-  export type DiscordMessageTypeUncheckedCreateWithoutDiscordMessagesInput = {
+  export type DiscordMessageTemplateUncheckedCreateWithoutDiscordMessagesInput = {
     Id?: number
+    Slug: string
     Name: string
     Description?: string | null
-    Slug: string
+    Content: string
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
   }
 
-  export type DiscordMessageTypeCreateOrConnectWithoutDiscordMessagesInput = {
-    where: DiscordMessageTypeWhereUniqueInput
-    create: XOR<DiscordMessageTypeCreateWithoutDiscordMessagesInput, DiscordMessageTypeUncheckedCreateWithoutDiscordMessagesInput>
+  export type DiscordMessageTemplateCreateOrConnectWithoutDiscordMessagesInput = {
+    where: DiscordMessageTemplateWhereUniqueInput
+    create: XOR<DiscordMessageTemplateCreateWithoutDiscordMessagesInput, DiscordMessageTemplateUncheckedCreateWithoutDiscordMessagesInput>
   }
 
   export type DiscordChannelWebhookCreateWithoutDiscordMessagesInput = {
     Id?: string
-    ChannelId: string
+    Name?: string
+    Description?: string | null
     WebhookUrl: string
+    ChannelId: string
+    Token: string
     IsActive?: boolean
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    ListenerEventSenders?: ListenerEventSenderCreateNestedManyWithoutDiscordChannelWebhookInput
   }
 
   export type DiscordChannelWebhookUncheckedCreateWithoutDiscordMessagesInput = {
     Id?: string
-    ChannelId: string
+    Name?: string
+    Description?: string | null
     WebhookUrl: string
+    ChannelId: string
+    Token: string
     IsActive?: boolean
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    ListenerEventSenders?: ListenerEventSenderUncheckedCreateNestedManyWithoutDiscordChannelWebhookInput
   }
 
   export type DiscordChannelWebhookCreateOrConnectWithoutDiscordMessagesInput = {
@@ -43642,8 +45498,10 @@ export namespace Prisma {
     Status?: $Enums.ListenerEventStatus
     Error?: string | null
     Data?: NullableJsonNullValueInput | InputJsonValue
+    DeliveredAt?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    Sender: ListenerEventSenderCreateNestedOneWithoutListenerEventsInput
   }
 
   export type ListenerEventUncheckedCreateWithoutDiscordMessageInput = {
@@ -43652,8 +45510,10 @@ export namespace Prisma {
     Type: string
     SentAt: Date | string
     Status?: $Enums.ListenerEventStatus
+    SenderId: string
     Error?: string | null
     Data?: NullableJsonNullValueInput | InputJsonValue
+    DeliveredAt?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
   }
@@ -43668,30 +45528,32 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type DiscordMessageTypeUpsertWithoutDiscordMessagesInput = {
-    update: XOR<DiscordMessageTypeUpdateWithoutDiscordMessagesInput, DiscordMessageTypeUncheckedUpdateWithoutDiscordMessagesInput>
-    create: XOR<DiscordMessageTypeCreateWithoutDiscordMessagesInput, DiscordMessageTypeUncheckedCreateWithoutDiscordMessagesInput>
-    where?: DiscordMessageTypeWhereInput
+  export type DiscordMessageTemplateUpsertWithoutDiscordMessagesInput = {
+    update: XOR<DiscordMessageTemplateUpdateWithoutDiscordMessagesInput, DiscordMessageTemplateUncheckedUpdateWithoutDiscordMessagesInput>
+    create: XOR<DiscordMessageTemplateCreateWithoutDiscordMessagesInput, DiscordMessageTemplateUncheckedCreateWithoutDiscordMessagesInput>
+    where?: DiscordMessageTemplateWhereInput
   }
 
-  export type DiscordMessageTypeUpdateToOneWithWhereWithoutDiscordMessagesInput = {
-    where?: DiscordMessageTypeWhereInput
-    data: XOR<DiscordMessageTypeUpdateWithoutDiscordMessagesInput, DiscordMessageTypeUncheckedUpdateWithoutDiscordMessagesInput>
+  export type DiscordMessageTemplateUpdateToOneWithWhereWithoutDiscordMessagesInput = {
+    where?: DiscordMessageTemplateWhereInput
+    data: XOR<DiscordMessageTemplateUpdateWithoutDiscordMessagesInput, DiscordMessageTemplateUncheckedUpdateWithoutDiscordMessagesInput>
   }
 
-  export type DiscordMessageTypeUpdateWithoutDiscordMessagesInput = {
+  export type DiscordMessageTemplateUpdateWithoutDiscordMessagesInput = {
+    Slug?: StringFieldUpdateOperationsInput | string
     Name?: StringFieldUpdateOperationsInput | string
     Description?: NullableStringFieldUpdateOperationsInput | string | null
-    Slug?: StringFieldUpdateOperationsInput | string
+    Content?: StringFieldUpdateOperationsInput | string
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type DiscordMessageTypeUncheckedUpdateWithoutDiscordMessagesInput = {
+  export type DiscordMessageTemplateUncheckedUpdateWithoutDiscordMessagesInput = {
     Id?: IntFieldUpdateOperationsInput | number
+    Slug?: StringFieldUpdateOperationsInput | string
     Name?: StringFieldUpdateOperationsInput | string
     Description?: NullableStringFieldUpdateOperationsInput | string | null
-    Slug?: StringFieldUpdateOperationsInput | string
+    Content?: StringFieldUpdateOperationsInput | string
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -43709,20 +45571,28 @@ export namespace Prisma {
 
   export type DiscordChannelWebhookUpdateWithoutDiscordMessagesInput = {
     Id?: StringFieldUpdateOperationsInput | string
-    ChannelId?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
     WebhookUrl?: StringFieldUpdateOperationsInput | string
+    ChannelId?: StringFieldUpdateOperationsInput | string
+    Token?: StringFieldUpdateOperationsInput | string
     IsActive?: BoolFieldUpdateOperationsInput | boolean
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ListenerEventSenders?: ListenerEventSenderUpdateManyWithoutDiscordChannelWebhookNestedInput
   }
 
   export type DiscordChannelWebhookUncheckedUpdateWithoutDiscordMessagesInput = {
     Id?: StringFieldUpdateOperationsInput | string
-    ChannelId?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
     WebhookUrl?: StringFieldUpdateOperationsInput | string
+    ChannelId?: StringFieldUpdateOperationsInput | string
+    Token?: StringFieldUpdateOperationsInput | string
     IsActive?: BoolFieldUpdateOperationsInput | boolean
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ListenerEventSenders?: ListenerEventSenderUncheckedUpdateManyWithoutDiscordChannelWebhookNestedInput
   }
 
   export type ListenerEventUpsertWithWhereUniqueWithoutDiscordMessageInput = {
@@ -43750,59 +45620,61 @@ export namespace Prisma {
     Type?: StringFilter<"ListenerEvent"> | string
     SentAt?: DateTimeFilter<"ListenerEvent"> | Date | string
     Status?: EnumListenerEventStatusFilter<"ListenerEvent"> | $Enums.ListenerEventStatus
+    SenderId?: UuidFilter<"ListenerEvent"> | string
     Error?: StringNullableFilter<"ListenerEvent"> | string | null
     Data?: JsonNullableFilter<"ListenerEvent">
     DiscordMessageId?: UuidNullableFilter<"ListenerEvent"> | string | null
+    DeliveredAt?: DateTimeNullableFilter<"ListenerEvent"> | Date | string | null
     CreatedAt?: DateTimeFilter<"ListenerEvent"> | Date | string
     UpdatedAt?: DateTimeFilter<"ListenerEvent"> | Date | string
   }
 
-  export type DiscordMessageCreateWithoutDiscordMessageTypeInput = {
+  export type DiscordMessageCreateWithoutDiscordMessageTemplateInput = {
     Id?: string
     ChannelId: string
-    MessageId: string
     Content: string
+    DiscordMessageSentAt?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
     DiscordChannelWebhook?: DiscordChannelWebhookCreateNestedOneWithoutDiscordMessagesInput
     ListenerEvents?: ListenerEventCreateNestedManyWithoutDiscordMessageInput
   }
 
-  export type DiscordMessageUncheckedCreateWithoutDiscordMessageTypeInput = {
+  export type DiscordMessageUncheckedCreateWithoutDiscordMessageTemplateInput = {
     Id?: string
     ChannelId: string
-    MessageId: string
     Content: string
     DiscordChannelWebhookId?: string | null
+    DiscordMessageSentAt?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
     ListenerEvents?: ListenerEventUncheckedCreateNestedManyWithoutDiscordMessageInput
   }
 
-  export type DiscordMessageCreateOrConnectWithoutDiscordMessageTypeInput = {
+  export type DiscordMessageCreateOrConnectWithoutDiscordMessageTemplateInput = {
     where: DiscordMessageWhereUniqueInput
-    create: XOR<DiscordMessageCreateWithoutDiscordMessageTypeInput, DiscordMessageUncheckedCreateWithoutDiscordMessageTypeInput>
+    create: XOR<DiscordMessageCreateWithoutDiscordMessageTemplateInput, DiscordMessageUncheckedCreateWithoutDiscordMessageTemplateInput>
   }
 
-  export type DiscordMessageCreateManyDiscordMessageTypeInputEnvelope = {
-    data: DiscordMessageCreateManyDiscordMessageTypeInput | DiscordMessageCreateManyDiscordMessageTypeInput[]
+  export type DiscordMessageCreateManyDiscordMessageTemplateInputEnvelope = {
+    data: DiscordMessageCreateManyDiscordMessageTemplateInput | DiscordMessageCreateManyDiscordMessageTemplateInput[]
     skipDuplicates?: boolean
   }
 
-  export type DiscordMessageUpsertWithWhereUniqueWithoutDiscordMessageTypeInput = {
+  export type DiscordMessageUpsertWithWhereUniqueWithoutDiscordMessageTemplateInput = {
     where: DiscordMessageWhereUniqueInput
-    update: XOR<DiscordMessageUpdateWithoutDiscordMessageTypeInput, DiscordMessageUncheckedUpdateWithoutDiscordMessageTypeInput>
-    create: XOR<DiscordMessageCreateWithoutDiscordMessageTypeInput, DiscordMessageUncheckedCreateWithoutDiscordMessageTypeInput>
+    update: XOR<DiscordMessageUpdateWithoutDiscordMessageTemplateInput, DiscordMessageUncheckedUpdateWithoutDiscordMessageTemplateInput>
+    create: XOR<DiscordMessageCreateWithoutDiscordMessageTemplateInput, DiscordMessageUncheckedCreateWithoutDiscordMessageTemplateInput>
   }
 
-  export type DiscordMessageUpdateWithWhereUniqueWithoutDiscordMessageTypeInput = {
+  export type DiscordMessageUpdateWithWhereUniqueWithoutDiscordMessageTemplateInput = {
     where: DiscordMessageWhereUniqueInput
-    data: XOR<DiscordMessageUpdateWithoutDiscordMessageTypeInput, DiscordMessageUncheckedUpdateWithoutDiscordMessageTypeInput>
+    data: XOR<DiscordMessageUpdateWithoutDiscordMessageTemplateInput, DiscordMessageUncheckedUpdateWithoutDiscordMessageTemplateInput>
   }
 
-  export type DiscordMessageUpdateManyWithWhereWithoutDiscordMessageTypeInput = {
+  export type DiscordMessageUpdateManyWithWhereWithoutDiscordMessageTemplateInput = {
     where: DiscordMessageScalarWhereInput
-    data: XOR<DiscordMessageUpdateManyMutationInput, DiscordMessageUncheckedUpdateManyWithoutDiscordMessageTypeInput>
+    data: XOR<DiscordMessageUpdateManyMutationInput, DiscordMessageUncheckedUpdateManyWithoutDiscordMessageTemplateInput>
   }
 
   export type DiscordMessageScalarWhereInput = {
@@ -43811,10 +45683,10 @@ export namespace Prisma {
     NOT?: DiscordMessageScalarWhereInput | DiscordMessageScalarWhereInput[]
     Id?: UuidFilter<"DiscordMessage"> | string
     ChannelId?: StringFilter<"DiscordMessage"> | string
-    MessageId?: StringFilter<"DiscordMessage"> | string
     Content?: StringFilter<"DiscordMessage"> | string
-    DiscordMessageTypeId?: IntFilter<"DiscordMessage"> | number
+    DiscordMessageTemplateId?: IntNullableFilter<"DiscordMessage"> | number | null
     DiscordChannelWebhookId?: UuidNullableFilter<"DiscordMessage"> | string | null
+    DiscordMessageSentAt?: DateTimeNullableFilter<"DiscordMessage"> | Date | string | null
     CreatedAt?: DateTimeFilter<"DiscordMessage"> | Date | string
     UpdatedAt?: DateTimeFilter<"DiscordMessage"> | Date | string
   }
@@ -43822,20 +45694,20 @@ export namespace Prisma {
   export type DiscordMessageCreateWithoutDiscordChannelWebhookInput = {
     Id?: string
     ChannelId: string
-    MessageId: string
     Content: string
+    DiscordMessageSentAt?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
-    DiscordMessageType: DiscordMessageTypeCreateNestedOneWithoutDiscordMessagesInput
+    DiscordMessageTemplate?: DiscordMessageTemplateCreateNestedOneWithoutDiscordMessagesInput
     ListenerEvents?: ListenerEventCreateNestedManyWithoutDiscordMessageInput
   }
 
   export type DiscordMessageUncheckedCreateWithoutDiscordChannelWebhookInput = {
     Id?: string
     ChannelId: string
-    MessageId: string
     Content: string
-    DiscordMessageTypeId: number
+    DiscordMessageTemplateId?: number | null
+    DiscordMessageSentAt?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
     ListenerEvents?: ListenerEventUncheckedCreateNestedManyWithoutDiscordMessageInput
@@ -43848,6 +45720,38 @@ export namespace Prisma {
 
   export type DiscordMessageCreateManyDiscordChannelWebhookInputEnvelope = {
     data: DiscordMessageCreateManyDiscordChannelWebhookInput | DiscordMessageCreateManyDiscordChannelWebhookInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ListenerEventSenderCreateWithoutDiscordChannelWebhookInput = {
+    Id?: string
+    Name: string
+    Slug: string
+    Token: string
+    IsActive?: boolean
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    ListenerEvents?: ListenerEventCreateNestedManyWithoutSenderInput
+  }
+
+  export type ListenerEventSenderUncheckedCreateWithoutDiscordChannelWebhookInput = {
+    Id?: string
+    Name: string
+    Slug: string
+    Token: string
+    IsActive?: boolean
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    ListenerEvents?: ListenerEventUncheckedCreateNestedManyWithoutSenderInput
+  }
+
+  export type ListenerEventSenderCreateOrConnectWithoutDiscordChannelWebhookInput = {
+    where: ListenerEventSenderWhereUniqueInput
+    create: XOR<ListenerEventSenderCreateWithoutDiscordChannelWebhookInput, ListenerEventSenderUncheckedCreateWithoutDiscordChannelWebhookInput>
+  }
+
+  export type ListenerEventSenderCreateManyDiscordChannelWebhookInputEnvelope = {
+    data: ListenerEventSenderCreateManyDiscordChannelWebhookInput | ListenerEventSenderCreateManyDiscordChannelWebhookInput[]
     skipDuplicates?: boolean
   }
 
@@ -43867,24 +45771,54 @@ export namespace Prisma {
     data: XOR<DiscordMessageUpdateManyMutationInput, DiscordMessageUncheckedUpdateManyWithoutDiscordChannelWebhookInput>
   }
 
+  export type ListenerEventSenderUpsertWithWhereUniqueWithoutDiscordChannelWebhookInput = {
+    where: ListenerEventSenderWhereUniqueInput
+    update: XOR<ListenerEventSenderUpdateWithoutDiscordChannelWebhookInput, ListenerEventSenderUncheckedUpdateWithoutDiscordChannelWebhookInput>
+    create: XOR<ListenerEventSenderCreateWithoutDiscordChannelWebhookInput, ListenerEventSenderUncheckedCreateWithoutDiscordChannelWebhookInput>
+  }
+
+  export type ListenerEventSenderUpdateWithWhereUniqueWithoutDiscordChannelWebhookInput = {
+    where: ListenerEventSenderWhereUniqueInput
+    data: XOR<ListenerEventSenderUpdateWithoutDiscordChannelWebhookInput, ListenerEventSenderUncheckedUpdateWithoutDiscordChannelWebhookInput>
+  }
+
+  export type ListenerEventSenderUpdateManyWithWhereWithoutDiscordChannelWebhookInput = {
+    where: ListenerEventSenderScalarWhereInput
+    data: XOR<ListenerEventSenderUpdateManyMutationInput, ListenerEventSenderUncheckedUpdateManyWithoutDiscordChannelWebhookInput>
+  }
+
+  export type ListenerEventSenderScalarWhereInput = {
+    AND?: ListenerEventSenderScalarWhereInput | ListenerEventSenderScalarWhereInput[]
+    OR?: ListenerEventSenderScalarWhereInput[]
+    NOT?: ListenerEventSenderScalarWhereInput | ListenerEventSenderScalarWhereInput[]
+    Id?: UuidFilter<"ListenerEventSender"> | string
+    Name?: StringFilter<"ListenerEventSender"> | string
+    Slug?: StringFilter<"ListenerEventSender"> | string
+    Token?: StringFilter<"ListenerEventSender"> | string
+    IsActive?: BoolFilter<"ListenerEventSender"> | boolean
+    DiscordChannelWebhookId?: UuidNullableFilter<"ListenerEventSender"> | string | null
+    CreatedAt?: DateTimeFilter<"ListenerEventSender"> | Date | string
+    UpdatedAt?: DateTimeFilter<"ListenerEventSender"> | Date | string
+  }
+
   export type DiscordMessageCreateWithoutListenerEventsInput = {
     Id?: string
     ChannelId: string
-    MessageId: string
     Content: string
+    DiscordMessageSentAt?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
-    DiscordMessageType: DiscordMessageTypeCreateNestedOneWithoutDiscordMessagesInput
+    DiscordMessageTemplate?: DiscordMessageTemplateCreateNestedOneWithoutDiscordMessagesInput
     DiscordChannelWebhook?: DiscordChannelWebhookCreateNestedOneWithoutDiscordMessagesInput
   }
 
   export type DiscordMessageUncheckedCreateWithoutListenerEventsInput = {
     Id?: string
     ChannelId: string
-    MessageId: string
     Content: string
-    DiscordMessageTypeId: number
+    DiscordMessageTemplateId?: number | null
     DiscordChannelWebhookId?: string | null
+    DiscordMessageSentAt?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
   }
@@ -43892,6 +45826,33 @@ export namespace Prisma {
   export type DiscordMessageCreateOrConnectWithoutListenerEventsInput = {
     where: DiscordMessageWhereUniqueInput
     create: XOR<DiscordMessageCreateWithoutListenerEventsInput, DiscordMessageUncheckedCreateWithoutListenerEventsInput>
+  }
+
+  export type ListenerEventSenderCreateWithoutListenerEventsInput = {
+    Id?: string
+    Name: string
+    Slug: string
+    Token: string
+    IsActive?: boolean
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    DiscordChannelWebhook?: DiscordChannelWebhookCreateNestedOneWithoutListenerEventSendersInput
+  }
+
+  export type ListenerEventSenderUncheckedCreateWithoutListenerEventsInput = {
+    Id?: string
+    Name: string
+    Slug: string
+    Token: string
+    IsActive?: boolean
+    DiscordChannelWebhookId?: string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+  }
+
+  export type ListenerEventSenderCreateOrConnectWithoutListenerEventsInput = {
+    where: ListenerEventSenderWhereUniqueInput
+    create: XOR<ListenerEventSenderCreateWithoutListenerEventsInput, ListenerEventSenderUncheckedCreateWithoutListenerEventsInput>
   }
 
   export type DiscordMessageUpsertWithoutListenerEventsInput = {
@@ -43908,23 +45869,177 @@ export namespace Prisma {
   export type DiscordMessageUpdateWithoutListenerEventsInput = {
     Id?: StringFieldUpdateOperationsInput | string
     ChannelId?: StringFieldUpdateOperationsInput | string
-    MessageId?: StringFieldUpdateOperationsInput | string
     Content?: StringFieldUpdateOperationsInput | string
+    DiscordMessageSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    DiscordMessageType?: DiscordMessageTypeUpdateOneRequiredWithoutDiscordMessagesNestedInput
+    DiscordMessageTemplate?: DiscordMessageTemplateUpdateOneWithoutDiscordMessagesNestedInput
     DiscordChannelWebhook?: DiscordChannelWebhookUpdateOneWithoutDiscordMessagesNestedInput
   }
 
   export type DiscordMessageUncheckedUpdateWithoutListenerEventsInput = {
     Id?: StringFieldUpdateOperationsInput | string
     ChannelId?: StringFieldUpdateOperationsInput | string
-    MessageId?: StringFieldUpdateOperationsInput | string
     Content?: StringFieldUpdateOperationsInput | string
-    DiscordMessageTypeId?: IntFieldUpdateOperationsInput | number
+    DiscordMessageTemplateId?: NullableIntFieldUpdateOperationsInput | number | null
+    DiscordChannelWebhookId?: NullableStringFieldUpdateOperationsInput | string | null
+    DiscordMessageSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ListenerEventSenderUpsertWithoutListenerEventsInput = {
+    update: XOR<ListenerEventSenderUpdateWithoutListenerEventsInput, ListenerEventSenderUncheckedUpdateWithoutListenerEventsInput>
+    create: XOR<ListenerEventSenderCreateWithoutListenerEventsInput, ListenerEventSenderUncheckedCreateWithoutListenerEventsInput>
+    where?: ListenerEventSenderWhereInput
+  }
+
+  export type ListenerEventSenderUpdateToOneWithWhereWithoutListenerEventsInput = {
+    where?: ListenerEventSenderWhereInput
+    data: XOR<ListenerEventSenderUpdateWithoutListenerEventsInput, ListenerEventSenderUncheckedUpdateWithoutListenerEventsInput>
+  }
+
+  export type ListenerEventSenderUpdateWithoutListenerEventsInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    Slug?: StringFieldUpdateOperationsInput | string
+    Token?: StringFieldUpdateOperationsInput | string
+    IsActive?: BoolFieldUpdateOperationsInput | boolean
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    DiscordChannelWebhook?: DiscordChannelWebhookUpdateOneWithoutListenerEventSendersNestedInput
+  }
+
+  export type ListenerEventSenderUncheckedUpdateWithoutListenerEventsInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    Slug?: StringFieldUpdateOperationsInput | string
+    Token?: StringFieldUpdateOperationsInput | string
+    IsActive?: BoolFieldUpdateOperationsInput | boolean
     DiscordChannelWebhookId?: NullableStringFieldUpdateOperationsInput | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ListenerEventCreateWithoutSenderInput = {
+    Variant: string
+    Type: string
+    SentAt: Date | string
+    Status?: $Enums.ListenerEventStatus
+    Error?: string | null
+    Data?: NullableJsonNullValueInput | InputJsonValue
+    DeliveredAt?: Date | string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    DiscordMessage?: DiscordMessageCreateNestedOneWithoutListenerEventsInput
+  }
+
+  export type ListenerEventUncheckedCreateWithoutSenderInput = {
+    Id?: number
+    Variant: string
+    Type: string
+    SentAt: Date | string
+    Status?: $Enums.ListenerEventStatus
+    Error?: string | null
+    Data?: NullableJsonNullValueInput | InputJsonValue
+    DiscordMessageId?: string | null
+    DeliveredAt?: Date | string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+  }
+
+  export type ListenerEventCreateOrConnectWithoutSenderInput = {
+    where: ListenerEventWhereUniqueInput
+    create: XOR<ListenerEventCreateWithoutSenderInput, ListenerEventUncheckedCreateWithoutSenderInput>
+  }
+
+  export type ListenerEventCreateManySenderInputEnvelope = {
+    data: ListenerEventCreateManySenderInput | ListenerEventCreateManySenderInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type DiscordChannelWebhookCreateWithoutListenerEventSendersInput = {
+    Id?: string
+    Name?: string
+    Description?: string | null
+    WebhookUrl: string
+    ChannelId: string
+    Token: string
+    IsActive?: boolean
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    DiscordMessages?: DiscordMessageCreateNestedManyWithoutDiscordChannelWebhookInput
+  }
+
+  export type DiscordChannelWebhookUncheckedCreateWithoutListenerEventSendersInput = {
+    Id?: string
+    Name?: string
+    Description?: string | null
+    WebhookUrl: string
+    ChannelId: string
+    Token: string
+    IsActive?: boolean
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    DiscordMessages?: DiscordMessageUncheckedCreateNestedManyWithoutDiscordChannelWebhookInput
+  }
+
+  export type DiscordChannelWebhookCreateOrConnectWithoutListenerEventSendersInput = {
+    where: DiscordChannelWebhookWhereUniqueInput
+    create: XOR<DiscordChannelWebhookCreateWithoutListenerEventSendersInput, DiscordChannelWebhookUncheckedCreateWithoutListenerEventSendersInput>
+  }
+
+  export type ListenerEventUpsertWithWhereUniqueWithoutSenderInput = {
+    where: ListenerEventWhereUniqueInput
+    update: XOR<ListenerEventUpdateWithoutSenderInput, ListenerEventUncheckedUpdateWithoutSenderInput>
+    create: XOR<ListenerEventCreateWithoutSenderInput, ListenerEventUncheckedCreateWithoutSenderInput>
+  }
+
+  export type ListenerEventUpdateWithWhereUniqueWithoutSenderInput = {
+    where: ListenerEventWhereUniqueInput
+    data: XOR<ListenerEventUpdateWithoutSenderInput, ListenerEventUncheckedUpdateWithoutSenderInput>
+  }
+
+  export type ListenerEventUpdateManyWithWhereWithoutSenderInput = {
+    where: ListenerEventScalarWhereInput
+    data: XOR<ListenerEventUpdateManyMutationInput, ListenerEventUncheckedUpdateManyWithoutSenderInput>
+  }
+
+  export type DiscordChannelWebhookUpsertWithoutListenerEventSendersInput = {
+    update: XOR<DiscordChannelWebhookUpdateWithoutListenerEventSendersInput, DiscordChannelWebhookUncheckedUpdateWithoutListenerEventSendersInput>
+    create: XOR<DiscordChannelWebhookCreateWithoutListenerEventSendersInput, DiscordChannelWebhookUncheckedCreateWithoutListenerEventSendersInput>
+    where?: DiscordChannelWebhookWhereInput
+  }
+
+  export type DiscordChannelWebhookUpdateToOneWithWhereWithoutListenerEventSendersInput = {
+    where?: DiscordChannelWebhookWhereInput
+    data: XOR<DiscordChannelWebhookUpdateWithoutListenerEventSendersInput, DiscordChannelWebhookUncheckedUpdateWithoutListenerEventSendersInput>
+  }
+
+  export type DiscordChannelWebhookUpdateWithoutListenerEventSendersInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
+    WebhookUrl?: StringFieldUpdateOperationsInput | string
+    ChannelId?: StringFieldUpdateOperationsInput | string
+    Token?: StringFieldUpdateOperationsInput | string
+    IsActive?: BoolFieldUpdateOperationsInput | boolean
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    DiscordMessages?: DiscordMessageUpdateManyWithoutDiscordChannelWebhookNestedInput
+  }
+
+  export type DiscordChannelWebhookUncheckedUpdateWithoutListenerEventSendersInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
+    WebhookUrl?: StringFieldUpdateOperationsInput | string
+    ChannelId?: StringFieldUpdateOperationsInput | string
+    Token?: StringFieldUpdateOperationsInput | string
+    IsActive?: BoolFieldUpdateOperationsInput | boolean
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    DiscordMessages?: DiscordMessageUncheckedUpdateManyWithoutDiscordChannelWebhookNestedInput
   }
 
   export type RoleCreateWithoutUsersInput = {
@@ -43979,9 +46094,9 @@ export namespace Prisma {
   }
 
   export type MemberCreateWithoutUserInput = {
+    Id: string
     IsActive?: boolean
     DeactivatedAt?: Date | string | null
-    Id?: string
     TotalCargosTransportedLbs: number
     TotalPAXsTransported: number
     TotalEarnedCredits: Decimal | DecimalJsLike | number | string
@@ -44002,9 +46117,9 @@ export namespace Prisma {
   }
 
   export type MemberUncheckedCreateWithoutUserInput = {
+    Id: string
     IsActive?: boolean
     DeactivatedAt?: Date | string | null
-    Id?: string
     VAId: string
     CompanyId: string
     VARoleId: string
@@ -44137,9 +46252,9 @@ export namespace Prisma {
     AND?: MemberScalarWhereInput | MemberScalarWhereInput[]
     OR?: MemberScalarWhereInput[]
     NOT?: MemberScalarWhereInput | MemberScalarWhereInput[]
+    Id?: UuidFilter<"Member"> | string
     IsActive?: BoolFilter<"Member"> | boolean
     DeactivatedAt?: DateTimeNullableFilter<"Member"> | Date | string | null
-    Id?: UuidFilter<"Member"> | string
     VAId?: UuidFilter<"Member"> | string
     CompanyId?: UuidFilter<"Member"> | string
     VARoleId?: UuidFilter<"Member"> | string
@@ -44381,7 +46496,7 @@ export namespace Prisma {
   }
 
   export type VirtualAirlineRoleCreateWithoutRoleInput = {
-    Id?: string
+    Id: string
     Name: string
     Permission: number
     IsDefaultNewRole: boolean
@@ -44400,7 +46515,7 @@ export namespace Prisma {
   }
 
   export type VirtualAirlineRoleUncheckedCreateWithoutRoleInput = {
-    Id?: string
+    Id: string
     VAId: string
     Name: string
     Permission: number
@@ -44610,7 +46725,7 @@ export namespace Prisma {
   }
 
   export type VirtualAirlineRoleCreateWithoutVirtualAirlineInput = {
-    Id?: string
+    Id: string
     Name: string
     Permission: number
     IsDefaultNewRole: boolean
@@ -44629,7 +46744,7 @@ export namespace Prisma {
   }
 
   export type VirtualAirlineRoleUncheckedCreateWithoutVirtualAirlineInput = {
-    Id?: string
+    Id: string
     Name: string
     Permission: number
     IsDefaultNewRole: boolean
@@ -44658,9 +46773,9 @@ export namespace Prisma {
   }
 
   export type MemberCreateWithoutVirtualAirlineInput = {
+    Id: string
     IsActive?: boolean
     DeactivatedAt?: Date | string | null
-    Id?: string
     TotalCargosTransportedLbs: number
     TotalPAXsTransported: number
     TotalEarnedCredits: Decimal | DecimalJsLike | number | string
@@ -44681,9 +46796,9 @@ export namespace Prisma {
   }
 
   export type MemberUncheckedCreateWithoutVirtualAirlineInput = {
+    Id: string
     IsActive?: boolean
     DeactivatedAt?: Date | string | null
-    Id?: string
     CompanyId: string
     VARoleId: string
     TotalCargosTransportedLbs: number
@@ -45190,9 +47305,9 @@ export namespace Prisma {
   }
 
   export type MemberCreateWithoutVARoleInput = {
+    Id: string
     IsActive?: boolean
     DeactivatedAt?: Date | string | null
-    Id?: string
     TotalCargosTransportedLbs: number
     TotalPAXsTransported: number
     TotalEarnedCredits: Decimal | DecimalJsLike | number | string
@@ -45213,9 +47328,9 @@ export namespace Prisma {
   }
 
   export type MemberUncheckedCreateWithoutVARoleInput = {
+    Id: string
     IsActive?: boolean
     DeactivatedAt?: Date | string | null
-    Id?: string
     VAId: string
     CompanyId: string
     TotalCargosTransportedLbs: number
@@ -45443,7 +47558,7 @@ export namespace Prisma {
   }
 
   export type CompanyCreateWithoutWorldInput = {
-    Id?: string
+    Id: string
     Name: string
     AirlineCode: string
     CreationDate: Date | string
@@ -45463,7 +47578,7 @@ export namespace Prisma {
   }
 
   export type CompanyUncheckedCreateWithoutWorldInput = {
-    Id?: string
+    Id: string
     Name: string
     AirlineCode: string
     CreationDate: Date | string
@@ -45579,7 +47694,7 @@ export namespace Prisma {
   }
 
   export type CompanyCreateWithoutOwnerInput = {
-    Id?: string
+    Id: string
     Name: string
     AirlineCode: string
     CreationDate: Date | string
@@ -45599,7 +47714,7 @@ export namespace Prisma {
   }
 
   export type CompanyUncheckedCreateWithoutOwnerInput = {
-    Id?: string
+    Id: string
     Name: string
     AirlineCode: string
     CreationDate: Date | string
@@ -45693,7 +47808,7 @@ export namespace Prisma {
   }
 
   export type VirtualAirlineRoleCreateWithoutMembersInput = {
-    Id?: string
+    Id: string
     Name: string
     Permission: number
     IsDefaultNewRole: boolean
@@ -45712,7 +47827,7 @@ export namespace Prisma {
   }
 
   export type VirtualAirlineRoleUncheckedCreateWithoutMembersInput = {
-    Id?: string
+    Id: string
     VAId: string
     Name: string
     Permission: number
@@ -46264,9 +48379,9 @@ export namespace Prisma {
   }
 
   export type MemberCreateWithoutCompanyInput = {
+    Id: string
     IsActive?: boolean
     DeactivatedAt?: Date | string | null
-    Id?: string
     TotalCargosTransportedLbs: number
     TotalPAXsTransported: number
     TotalEarnedCredits: Decimal | DecimalJsLike | number | string
@@ -46287,9 +48402,9 @@ export namespace Prisma {
   }
 
   export type MemberUncheckedCreateWithoutCompanyInput = {
+    Id: string
     IsActive?: boolean
     DeactivatedAt?: Date | string | null
-    Id?: string
     VAId: string
     VARoleId: string
     TotalCargosTransportedLbs: number
@@ -46499,9 +48614,9 @@ export namespace Prisma {
   }
 
   export type MemberUpdateWithoutCompanyInput = {
+    Id?: StringFieldUpdateOperationsInput | string
     IsActive?: BoolFieldUpdateOperationsInput | boolean
     DeactivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    Id?: StringFieldUpdateOperationsInput | string
     TotalCargosTransportedLbs?: IntFieldUpdateOperationsInput | number
     TotalPAXsTransported?: IntFieldUpdateOperationsInput | number
     TotalEarnedCredits?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -46522,9 +48637,9 @@ export namespace Prisma {
   }
 
   export type MemberUncheckedUpdateWithoutCompanyInput = {
+    Id?: StringFieldUpdateOperationsInput | string
     IsActive?: BoolFieldUpdateOperationsInput | boolean
     DeactivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    Id?: StringFieldUpdateOperationsInput | string
     VAId?: StringFieldUpdateOperationsInput | string
     VARoleId?: StringFieldUpdateOperationsInput | string
     TotalCargosTransportedLbs?: IntFieldUpdateOperationsInput | number
@@ -46711,7 +48826,7 @@ export namespace Prisma {
   }
 
   export type AircraftMaintenanceCreateWithoutAircraftInput = {
-    Id?: string
+    Id: string
     AnnualCheckup: boolean
     Inspection100Hours: boolean
     FailuresRepair: boolean
@@ -46729,7 +48844,7 @@ export namespace Prisma {
   }
 
   export type AircraftMaintenanceUncheckedCreateWithoutAircraftInput = {
-    Id?: string
+    Id: string
     AnnualCheckup: boolean
     Inspection100Hours: boolean
     FailuresRepair: boolean
@@ -47993,7 +50108,7 @@ export namespace Prisma {
   }
 
   export type CompanyCreateWithoutFlightsInput = {
-    Id?: string
+    Id: string
     Name: string
     AirlineCode: string
     CreationDate: Date | string
@@ -48013,7 +50128,7 @@ export namespace Prisma {
   }
 
   export type CompanyUncheckedCreateWithoutFlightsInput = {
-    Id?: string
+    Id: string
     Name: string
     AirlineCode: string
     CreationDate: Date | string
@@ -48362,9 +50477,9 @@ export namespace Prisma {
   }
 
   export type MemberCreateWithoutFlightsInput = {
+    Id: string
     IsActive?: boolean
     DeactivatedAt?: Date | string | null
-    Id?: string
     TotalCargosTransportedLbs: number
     TotalPAXsTransported: number
     TotalEarnedCredits: Decimal | DecimalJsLike | number | string
@@ -48385,9 +50500,9 @@ export namespace Prisma {
   }
 
   export type MemberUncheckedCreateWithoutFlightsInput = {
+    Id: string
     IsActive?: boolean
     DeactivatedAt?: Date | string | null
-    Id?: string
     VAId: string
     CompanyId: string
     VARoleId: string
@@ -48825,9 +50940,9 @@ export namespace Prisma {
   }
 
   export type MemberUpdateWithoutFlightsInput = {
+    Id?: StringFieldUpdateOperationsInput | string
     IsActive?: BoolFieldUpdateOperationsInput | boolean
     DeactivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    Id?: StringFieldUpdateOperationsInput | string
     TotalCargosTransportedLbs?: IntFieldUpdateOperationsInput | number
     TotalPAXsTransported?: IntFieldUpdateOperationsInput | number
     TotalEarnedCredits?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -48848,9 +50963,9 @@ export namespace Prisma {
   }
 
   export type MemberUncheckedUpdateWithoutFlightsInput = {
+    Id?: StringFieldUpdateOperationsInput | string
     IsActive?: BoolFieldUpdateOperationsInput | boolean
     DeactivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    Id?: StringFieldUpdateOperationsInput | string
     VAId?: StringFieldUpdateOperationsInput | string
     CompanyId?: StringFieldUpdateOperationsInput | string
     VARoleId?: StringFieldUpdateOperationsInput | string
@@ -49008,9 +51123,9 @@ export namespace Prisma {
   }
 
   export type MemberCreateWithoutFlightRoutesInput = {
+    Id: string
     IsActive?: boolean
     DeactivatedAt?: Date | string | null
-    Id?: string
     TotalCargosTransportedLbs: number
     TotalPAXsTransported: number
     TotalEarnedCredits: Decimal | DecimalJsLike | number | string
@@ -49031,9 +51146,9 @@ export namespace Prisma {
   }
 
   export type MemberUncheckedCreateWithoutFlightRoutesInput = {
+    Id: string
     IsActive?: boolean
     DeactivatedAt?: Date | string | null
-    Id?: string
     VAId: string
     CompanyId: string
     VARoleId: string
@@ -49213,9 +51328,9 @@ export namespace Prisma {
   }
 
   export type MemberUpdateWithoutFlightRoutesInput = {
+    Id?: StringFieldUpdateOperationsInput | string
     IsActive?: BoolFieldUpdateOperationsInput | boolean
     DeactivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    Id?: StringFieldUpdateOperationsInput | string
     TotalCargosTransportedLbs?: IntFieldUpdateOperationsInput | number
     TotalPAXsTransported?: IntFieldUpdateOperationsInput | number
     TotalEarnedCredits?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -49236,9 +51351,9 @@ export namespace Prisma {
   }
 
   export type MemberUncheckedUpdateWithoutFlightRoutesInput = {
+    Id?: StringFieldUpdateOperationsInput | string
     IsActive?: BoolFieldUpdateOperationsInput | boolean
     DeactivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    Id?: StringFieldUpdateOperationsInput | string
     VAId?: StringFieldUpdateOperationsInput | string
     CompanyId?: StringFieldUpdateOperationsInput | string
     VARoleId?: StringFieldUpdateOperationsInput | string
@@ -49264,8 +51379,10 @@ export namespace Prisma {
     Type: string
     SentAt: Date | string
     Status?: $Enums.ListenerEventStatus
+    SenderId: string
     Error?: string | null
     Data?: NullableJsonNullValueInput | InputJsonValue
+    DeliveredAt?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
   }
@@ -49277,8 +51394,10 @@ export namespace Prisma {
     Status?: EnumListenerEventStatusFieldUpdateOperationsInput | $Enums.ListenerEventStatus
     Error?: NullableStringFieldUpdateOperationsInput | string | null
     Data?: NullableJsonNullValueInput | InputJsonValue
+    DeliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Sender?: ListenerEventSenderUpdateOneRequiredWithoutListenerEventsNestedInput
   }
 
   export type ListenerEventUncheckedUpdateWithoutDiscordMessageInput = {
@@ -49287,8 +51406,10 @@ export namespace Prisma {
     Type?: StringFieldUpdateOperationsInput | string
     SentAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Status?: EnumListenerEventStatusFieldUpdateOperationsInput | $Enums.ListenerEventStatus
+    SenderId?: StringFieldUpdateOperationsInput | string
     Error?: NullableStringFieldUpdateOperationsInput | string | null
     Data?: NullableJsonNullValueInput | InputJsonValue
+    DeliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -49299,50 +51420,52 @@ export namespace Prisma {
     Type?: StringFieldUpdateOperationsInput | string
     SentAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Status?: EnumListenerEventStatusFieldUpdateOperationsInput | $Enums.ListenerEventStatus
+    SenderId?: StringFieldUpdateOperationsInput | string
     Error?: NullableStringFieldUpdateOperationsInput | string | null
     Data?: NullableJsonNullValueInput | InputJsonValue
+    DeliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type DiscordMessageCreateManyDiscordMessageTypeInput = {
+  export type DiscordMessageCreateManyDiscordMessageTemplateInput = {
     Id?: string
     ChannelId: string
-    MessageId: string
     Content: string
     DiscordChannelWebhookId?: string | null
+    DiscordMessageSentAt?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
   }
 
-  export type DiscordMessageUpdateWithoutDiscordMessageTypeInput = {
+  export type DiscordMessageUpdateWithoutDiscordMessageTemplateInput = {
     Id?: StringFieldUpdateOperationsInput | string
     ChannelId?: StringFieldUpdateOperationsInput | string
-    MessageId?: StringFieldUpdateOperationsInput | string
     Content?: StringFieldUpdateOperationsInput | string
+    DiscordMessageSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     DiscordChannelWebhook?: DiscordChannelWebhookUpdateOneWithoutDiscordMessagesNestedInput
     ListenerEvents?: ListenerEventUpdateManyWithoutDiscordMessageNestedInput
   }
 
-  export type DiscordMessageUncheckedUpdateWithoutDiscordMessageTypeInput = {
+  export type DiscordMessageUncheckedUpdateWithoutDiscordMessageTemplateInput = {
     Id?: StringFieldUpdateOperationsInput | string
     ChannelId?: StringFieldUpdateOperationsInput | string
-    MessageId?: StringFieldUpdateOperationsInput | string
     Content?: StringFieldUpdateOperationsInput | string
     DiscordChannelWebhookId?: NullableStringFieldUpdateOperationsInput | string | null
+    DiscordMessageSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ListenerEvents?: ListenerEventUncheckedUpdateManyWithoutDiscordMessageNestedInput
   }
 
-  export type DiscordMessageUncheckedUpdateManyWithoutDiscordMessageTypeInput = {
+  export type DiscordMessageUncheckedUpdateManyWithoutDiscordMessageTemplateInput = {
     Id?: StringFieldUpdateOperationsInput | string
     ChannelId?: StringFieldUpdateOperationsInput | string
-    MessageId?: StringFieldUpdateOperationsInput | string
     Content?: StringFieldUpdateOperationsInput | string
     DiscordChannelWebhookId?: NullableStringFieldUpdateOperationsInput | string | null
+    DiscordMessageSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -49350,9 +51473,19 @@ export namespace Prisma {
   export type DiscordMessageCreateManyDiscordChannelWebhookInput = {
     Id?: string
     ChannelId: string
-    MessageId: string
     Content: string
-    DiscordMessageTypeId: number
+    DiscordMessageTemplateId?: number | null
+    DiscordMessageSentAt?: Date | string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+  }
+
+  export type ListenerEventSenderCreateManyDiscordChannelWebhookInput = {
+    Id?: string
+    Name: string
+    Slug: string
+    Token: string
+    IsActive?: boolean
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
   }
@@ -49360,20 +51493,20 @@ export namespace Prisma {
   export type DiscordMessageUpdateWithoutDiscordChannelWebhookInput = {
     Id?: StringFieldUpdateOperationsInput | string
     ChannelId?: StringFieldUpdateOperationsInput | string
-    MessageId?: StringFieldUpdateOperationsInput | string
     Content?: StringFieldUpdateOperationsInput | string
+    DiscordMessageSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    DiscordMessageType?: DiscordMessageTypeUpdateOneRequiredWithoutDiscordMessagesNestedInput
+    DiscordMessageTemplate?: DiscordMessageTemplateUpdateOneWithoutDiscordMessagesNestedInput
     ListenerEvents?: ListenerEventUpdateManyWithoutDiscordMessageNestedInput
   }
 
   export type DiscordMessageUncheckedUpdateWithoutDiscordChannelWebhookInput = {
     Id?: StringFieldUpdateOperationsInput | string
     ChannelId?: StringFieldUpdateOperationsInput | string
-    MessageId?: StringFieldUpdateOperationsInput | string
     Content?: StringFieldUpdateOperationsInput | string
-    DiscordMessageTypeId?: IntFieldUpdateOperationsInput | number
+    DiscordMessageTemplateId?: NullableIntFieldUpdateOperationsInput | number | null
+    DiscordMessageSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ListenerEvents?: ListenerEventUncheckedUpdateManyWithoutDiscordMessageNestedInput
@@ -49382,17 +51515,104 @@ export namespace Prisma {
   export type DiscordMessageUncheckedUpdateManyWithoutDiscordChannelWebhookInput = {
     Id?: StringFieldUpdateOperationsInput | string
     ChannelId?: StringFieldUpdateOperationsInput | string
-    MessageId?: StringFieldUpdateOperationsInput | string
     Content?: StringFieldUpdateOperationsInput | string
-    DiscordMessageTypeId?: IntFieldUpdateOperationsInput | number
+    DiscordMessageTemplateId?: NullableIntFieldUpdateOperationsInput | number | null
+    DiscordMessageSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ListenerEventSenderUpdateWithoutDiscordChannelWebhookInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    Slug?: StringFieldUpdateOperationsInput | string
+    Token?: StringFieldUpdateOperationsInput | string
+    IsActive?: BoolFieldUpdateOperationsInput | boolean
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ListenerEvents?: ListenerEventUpdateManyWithoutSenderNestedInput
+  }
+
+  export type ListenerEventSenderUncheckedUpdateWithoutDiscordChannelWebhookInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    Slug?: StringFieldUpdateOperationsInput | string
+    Token?: StringFieldUpdateOperationsInput | string
+    IsActive?: BoolFieldUpdateOperationsInput | boolean
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ListenerEvents?: ListenerEventUncheckedUpdateManyWithoutSenderNestedInput
+  }
+
+  export type ListenerEventSenderUncheckedUpdateManyWithoutDiscordChannelWebhookInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    Slug?: StringFieldUpdateOperationsInput | string
+    Token?: StringFieldUpdateOperationsInput | string
+    IsActive?: BoolFieldUpdateOperationsInput | boolean
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ListenerEventCreateManySenderInput = {
+    Id?: number
+    Variant: string
+    Type: string
+    SentAt: Date | string
+    Status?: $Enums.ListenerEventStatus
+    Error?: string | null
+    Data?: NullableJsonNullValueInput | InputJsonValue
+    DiscordMessageId?: string | null
+    DeliveredAt?: Date | string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+  }
+
+  export type ListenerEventUpdateWithoutSenderInput = {
+    Variant?: StringFieldUpdateOperationsInput | string
+    Type?: StringFieldUpdateOperationsInput | string
+    SentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Status?: EnumListenerEventStatusFieldUpdateOperationsInput | $Enums.ListenerEventStatus
+    Error?: NullableStringFieldUpdateOperationsInput | string | null
+    Data?: NullableJsonNullValueInput | InputJsonValue
+    DeliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    DiscordMessage?: DiscordMessageUpdateOneWithoutListenerEventsNestedInput
+  }
+
+  export type ListenerEventUncheckedUpdateWithoutSenderInput = {
+    Id?: IntFieldUpdateOperationsInput | number
+    Variant?: StringFieldUpdateOperationsInput | string
+    Type?: StringFieldUpdateOperationsInput | string
+    SentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Status?: EnumListenerEventStatusFieldUpdateOperationsInput | $Enums.ListenerEventStatus
+    Error?: NullableStringFieldUpdateOperationsInput | string | null
+    Data?: NullableJsonNullValueInput | InputJsonValue
+    DiscordMessageId?: NullableStringFieldUpdateOperationsInput | string | null
+    DeliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ListenerEventUncheckedUpdateManyWithoutSenderInput = {
+    Id?: IntFieldUpdateOperationsInput | number
+    Variant?: StringFieldUpdateOperationsInput | string
+    Type?: StringFieldUpdateOperationsInput | string
+    SentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Status?: EnumListenerEventStatusFieldUpdateOperationsInput | $Enums.ListenerEventStatus
+    Error?: NullableStringFieldUpdateOperationsInput | string | null
+    Data?: NullableJsonNullValueInput | InputJsonValue
+    DiscordMessageId?: NullableStringFieldUpdateOperationsInput | string | null
+    DeliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type MemberCreateManyUserInput = {
+    Id: string
     IsActive?: boolean
     DeactivatedAt?: Date | string | null
-    Id?: string
     VAId: string
     CompanyId: string
     VARoleId: string
@@ -49442,9 +51662,9 @@ export namespace Prisma {
   }
 
   export type MemberUpdateWithoutUserInput = {
+    Id?: StringFieldUpdateOperationsInput | string
     IsActive?: BoolFieldUpdateOperationsInput | boolean
     DeactivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    Id?: StringFieldUpdateOperationsInput | string
     TotalCargosTransportedLbs?: IntFieldUpdateOperationsInput | number
     TotalPAXsTransported?: IntFieldUpdateOperationsInput | number
     TotalEarnedCredits?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -49465,9 +51685,9 @@ export namespace Prisma {
   }
 
   export type MemberUncheckedUpdateWithoutUserInput = {
+    Id?: StringFieldUpdateOperationsInput | string
     IsActive?: BoolFieldUpdateOperationsInput | boolean
     DeactivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    Id?: StringFieldUpdateOperationsInput | string
     VAId?: StringFieldUpdateOperationsInput | string
     CompanyId?: StringFieldUpdateOperationsInput | string
     VARoleId?: StringFieldUpdateOperationsInput | string
@@ -49488,9 +51708,9 @@ export namespace Prisma {
   }
 
   export type MemberUncheckedUpdateManyWithoutUserInput = {
+    Id?: StringFieldUpdateOperationsInput | string
     IsActive?: BoolFieldUpdateOperationsInput | boolean
     DeactivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    Id?: StringFieldUpdateOperationsInput | string
     VAId?: StringFieldUpdateOperationsInput | string
     CompanyId?: StringFieldUpdateOperationsInput | string
     VARoleId?: StringFieldUpdateOperationsInput | string
@@ -49639,7 +51859,7 @@ export namespace Prisma {
   }
 
   export type VirtualAirlineRoleCreateManyVirtualAirlineInput = {
-    Id?: string
+    Id: string
     Name: string
     Permission: number
     IsDefaultNewRole: boolean
@@ -49656,9 +51876,9 @@ export namespace Prisma {
   }
 
   export type MemberCreateManyVirtualAirlineInput = {
+    Id: string
     IsActive?: boolean
     DeactivatedAt?: Date | string | null
-    Id?: string
     CompanyId: string
     VARoleId: string
     TotalCargosTransportedLbs: number
@@ -49809,9 +52029,9 @@ export namespace Prisma {
   }
 
   export type MemberUpdateWithoutVirtualAirlineInput = {
+    Id?: StringFieldUpdateOperationsInput | string
     IsActive?: BoolFieldUpdateOperationsInput | boolean
     DeactivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    Id?: StringFieldUpdateOperationsInput | string
     TotalCargosTransportedLbs?: IntFieldUpdateOperationsInput | number
     TotalPAXsTransported?: IntFieldUpdateOperationsInput | number
     TotalEarnedCredits?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -49832,9 +52052,9 @@ export namespace Prisma {
   }
 
   export type MemberUncheckedUpdateWithoutVirtualAirlineInput = {
+    Id?: StringFieldUpdateOperationsInput | string
     IsActive?: BoolFieldUpdateOperationsInput | boolean
     DeactivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    Id?: StringFieldUpdateOperationsInput | string
     CompanyId?: StringFieldUpdateOperationsInput | string
     VARoleId?: StringFieldUpdateOperationsInput | string
     TotalCargosTransportedLbs?: IntFieldUpdateOperationsInput | number
@@ -49855,9 +52075,9 @@ export namespace Prisma {
   }
 
   export type MemberUncheckedUpdateManyWithoutVirtualAirlineInput = {
+    Id?: StringFieldUpdateOperationsInput | string
     IsActive?: BoolFieldUpdateOperationsInput | boolean
     DeactivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    Id?: StringFieldUpdateOperationsInput | string
     CompanyId?: StringFieldUpdateOperationsInput | string
     VARoleId?: StringFieldUpdateOperationsInput | string
     TotalCargosTransportedLbs?: IntFieldUpdateOperationsInput | number
@@ -50113,9 +52333,9 @@ export namespace Prisma {
   }
 
   export type MemberCreateManyVARoleInput = {
+    Id: string
     IsActive?: boolean
     DeactivatedAt?: Date | string | null
-    Id?: string
     VAId: string
     CompanyId: string
     TotalCargosTransportedLbs: number
@@ -50134,9 +52354,9 @@ export namespace Prisma {
   }
 
   export type MemberUpdateWithoutVARoleInput = {
+    Id?: StringFieldUpdateOperationsInput | string
     IsActive?: BoolFieldUpdateOperationsInput | boolean
     DeactivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    Id?: StringFieldUpdateOperationsInput | string
     TotalCargosTransportedLbs?: IntFieldUpdateOperationsInput | number
     TotalPAXsTransported?: IntFieldUpdateOperationsInput | number
     TotalEarnedCredits?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -50157,9 +52377,9 @@ export namespace Prisma {
   }
 
   export type MemberUncheckedUpdateWithoutVARoleInput = {
+    Id?: StringFieldUpdateOperationsInput | string
     IsActive?: BoolFieldUpdateOperationsInput | boolean
     DeactivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    Id?: StringFieldUpdateOperationsInput | string
     VAId?: StringFieldUpdateOperationsInput | string
     CompanyId?: StringFieldUpdateOperationsInput | string
     TotalCargosTransportedLbs?: IntFieldUpdateOperationsInput | number
@@ -50180,9 +52400,9 @@ export namespace Prisma {
   }
 
   export type MemberUncheckedUpdateManyWithoutVARoleInput = {
+    Id?: StringFieldUpdateOperationsInput | string
     IsActive?: BoolFieldUpdateOperationsInput | boolean
     DeactivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    Id?: StringFieldUpdateOperationsInput | string
     VAId?: StringFieldUpdateOperationsInput | string
     CompanyId?: StringFieldUpdateOperationsInput | string
     TotalCargosTransportedLbs?: IntFieldUpdateOperationsInput | number
@@ -50229,7 +52449,7 @@ export namespace Prisma {
   }
 
   export type CompanyCreateManyWorldInput = {
-    Id?: string
+    Id: string
     Name: string
     AirlineCode: string
     CreationDate: Date | string
@@ -50953,7 +53173,7 @@ export namespace Prisma {
   }
 
   export type AircraftMaintenanceCreateManyAircraftInput = {
-    Id?: string
+    Id: string
     AnnualCheckup: boolean
     Inspection100Hours: boolean
     FailuresRepair: boolean

@@ -1,2 +1,0 @@
--- AlterEnum
-ALTER TYPE "public"."JobType" ADD VALUE 'VIRTUAL_AIRLINE_FLEET_SYNC';

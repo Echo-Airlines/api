@@ -36,26 +36,27 @@ model InviteCode {
 }
 
 model DiscordMessage {
-  Id                      String   @id() @unique() @default(uuid()) @db.Uuid
-  ChannelId               String   @db.VarChar
-  MessageId               String   @db.VarChar
-  Content                 String   @db.VarChar
-  DiscordMessageTypeId    Int
-  DiscordChannelWebhookId String?  @db.Uuid
-  CreatedAt               DateTime @default(now()) @db.Timestamp(6)
-  UpdatedAt               DateTime @default(now()) @db.Timestamp(6)
+  Id                       String    @id() @unique() @default(uuid()) @db.Uuid
+  ChannelId                String    @db.VarChar
+  Content                  String    @db.VarChar
+  DiscordMessageTemplateId Int?
+  DiscordChannelWebhookId  String?   @db.Uuid
+  DiscordMessageSentAt     DateTime? @db.Timestamp(6)
+  CreatedAt                DateTime  @default(now()) @db.Timestamp(6)
+  UpdatedAt                DateTime  @default(now()) @db.Timestamp(6)
 
   // relations
-  DiscordMessageType    DiscordMessageType     @relation(fields: [DiscordMessageTypeId], references: [Id])
-  DiscordChannelWebhook DiscordChannelWebhook? @relation(fields: [DiscordChannelWebhookId], references: [Id])
-  ListenerEvents        ListenerEvent[]
+  DiscordMessageTemplate DiscordMessageTemplate? @relation(fields: [DiscordMessageTemplateId], references: [Id])
+  DiscordChannelWebhook  DiscordChannelWebhook?  @relation(fields: [DiscordChannelWebhookId], references: [Id])
+  ListenerEvents         ListenerEvent[]
 }
 
-model DiscordMessageType {
+model DiscordMessageTemplate {
   Id          Int      @id() @unique() @default(autoincrement())
+  Slug        String   @unique() @db.VarChar
   Name        String   @db.VarChar
   Description String?  @db.VarChar
-  Slug        String   @unique() @db.VarChar
+  Content     String   @db.VarChar
   CreatedAt   DateTime @default(now()) @db.Timestamp(6)
   UpdatedAt   DateTime @default(now()) @db.Timestamp(6)
 
@@ -64,15 +65,19 @@ model DiscordMessageType {
 }
 
 model DiscordChannelWebhook {
-  Id         String   @id() @unique() @default(uuid()) @db.Uuid
-  ChannelId  String   @db.VarChar
-  WebhookUrl String   @db.VarChar
-  IsActive   Boolean  @default(true)
-  CreatedAt  DateTime @default(now()) @db.Timestamp(6)
-  UpdatedAt  DateTime @default(now()) @db.Timestamp(6)
+  Id          String   @id() @unique() @default(uuid()) @db.Uuid
+  Name        String   @default("Unnamed Webhook") @db.VarChar
+  Description String?  @db.VarChar
+  WebhookUrl  String   @db.VarChar
+  ChannelId   String   @db.VarChar
+  Token       String   @unique() @db.VarChar
+  IsActive    Boolean  @default(true)
+  CreatedAt   DateTime @default(now()) @db.Timestamp(6)
+  UpdatedAt   DateTime @default(now()) @db.Timestamp(6)
 
   // relations
-  DiscordMessages DiscordMessage[]
+  DiscordMessages      DiscordMessage[]
+  ListenerEventSenders ListenerEventSender[]
 }
 
 model ListenerEvent {
@@ -81,14 +86,32 @@ model ListenerEvent {
   Type             String              @db.VarChar
   SentAt           DateTime            @db.Timestamp(6)
   Status           ListenerEventStatus @default(PENDING)
+  SenderId         String              @db.Uuid
   Error            String?             @db.VarChar
   Data             Json?
   DiscordMessageId String?             @db.Uuid
+  DeliveredAt      DateTime?           @db.Timestamp(6)
   CreatedAt        DateTime            @default(now()) @db.Timestamp(6)
   UpdatedAt        DateTime            @default(now()) @db.Timestamp(6)
 
   // relations
-  DiscordMessage DiscordMessage? @relation(fields: [DiscordMessageId], references: [Id])
+  DiscordMessage DiscordMessage?     @relation(fields: [DiscordMessageId], references: [Id])
+  Sender         ListenerEventSender @relation(fields: [SenderId], references: [Id])
+}
+
+model ListenerEventSender {
+  Id                      String   @id() @unique() @default(uuid()) @db.Uuid
+  Name                    String   @db.VarChar
+  Slug                    String   @unique() @db.VarChar
+  Token                   String   @unique() @db.VarChar
+  IsActive                Boolean  @default(true)
+  DiscordChannelWebhookId String?  @db.Uuid
+  CreatedAt               DateTime @default(now()) @db.Timestamp(6)
+  UpdatedAt               DateTime @default(now()) @db.Timestamp(6)
+
+  // relations
+  ListenerEvents        ListenerEvent[]
+  DiscordChannelWebhook DiscordChannelWebhook? @relation(fields: [DiscordChannelWebhookId], references: [Id])
 }
 
 enum ListenerEventStatus {
@@ -233,7 +256,7 @@ model VirtualAirline {
 }
 
 model VirtualAirlineRole {
-  Id                                     String    @id() @default(uuid()) @db.Uuid
+  Id                                     String    @id() @db.Uuid
   VAId                                   String    @db.Uuid
   Name                                   String    @db.VarChar
   Permission                             Int
@@ -269,9 +292,9 @@ model World {
 }
 
 model Member {
+  Id                        String    @id() @db.Uuid
   IsActive                  Boolean   @default(true)
   DeactivatedAt             DateTime? @db.Timestamp(6)
-  Id                        String    @id() @default(uuid()) @db.Uuid
   VAId                      String    @db.Uuid
   CompanyId                 String    @unique() @db.Uuid
   VARoleId                  String    @db.Uuid
@@ -301,7 +324,7 @@ model Member {
 }
 
 model Company {
-  Id              String    @id() @default(uuid()) @db.Uuid
+  Id              String    @id() @db.Uuid
   Name            String    @db.VarChar
   AirlineCode     String    @unique() @db.VarChar
   CreationDate    DateTime  @db.Timestamp(6)
@@ -327,7 +350,7 @@ model Company {
 }
 
 model Aircraft {
-  Id               String @id() @unique() @db.Uuid
+  Id               String @id() @db.Uuid
   Identifier       String @unique() @db.VarChar
   DisplayName      String @db.VarChar
   AircraftStatusId Int
@@ -349,7 +372,7 @@ model Aircraft {
 }
 
 model AircraftClass {
-  Id        String @id() @unique() @db.Uuid
+  Id        String @id() @db.Uuid
   ShortName String @unique() @db.VarChar
   Name      String @db.VarChar
 
@@ -358,7 +381,7 @@ model AircraftClass {
 }
 
 model AircraftMaintenance {
-  Id                            String   @id() @default(uuid()) @db.Uuid
+  Id                            String   @id() @db.Uuid
   AircraftId                    String   @db.Uuid
   AnnualCheckup                 Boolean
   Inspection100Hours            Boolean

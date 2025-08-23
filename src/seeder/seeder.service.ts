@@ -663,6 +663,15 @@ export class SeederService {
         data: dto,
       });
 
+      await this.prisma.appConfig.update({
+        where: {
+          Id: 1,
+        },
+        data: {
+          VirtualAirlineInitiated: true,
+        },
+      });
+      
       this.logger.debug(`Virtual airline ${dto.Id} has been created.`);
     } else {
       this.logger.debug(`Virtual airline ${dto.Id} already exists in the database, skipping.`);

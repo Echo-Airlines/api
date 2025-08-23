@@ -95,6 +95,7 @@ async function executeVirtualAirlineAircraftSync(dto: OnAirAircraft, virtualAirl
                     Id: dto.AircraftMaintenance.Id,
                 },
                 create: {
+                    Id: dto.AircraftMaintenance.Id,
                     AnnualCheckup: dto.AircraftMaintenance.AnnualCheckup,
                     Inspection100Hours: dto.AircraftMaintenance.Inspection100Hours,
                     FailuresRepair: dto.AircraftMaintenance.FailuresRepair,

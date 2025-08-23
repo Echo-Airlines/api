@@ -149,27 +149,31 @@ exports.Prisma.InviteCodeScalarFieldEnum = {
 exports.Prisma.DiscordMessageScalarFieldEnum = {
   Id: 'Id',
   ChannelId: 'ChannelId',
-  MessageId: 'MessageId',
   Content: 'Content',
-  DiscordMessageTypeId: 'DiscordMessageTypeId',
+  DiscordMessageTemplateId: 'DiscordMessageTemplateId',
   DiscordChannelWebhookId: 'DiscordChannelWebhookId',
+  DiscordMessageSentAt: 'DiscordMessageSentAt',
   CreatedAt: 'CreatedAt',
   UpdatedAt: 'UpdatedAt'
 };
 
-exports.Prisma.DiscordMessageTypeScalarFieldEnum = {
+exports.Prisma.DiscordMessageTemplateScalarFieldEnum = {
   Id: 'Id',
+  Slug: 'Slug',
   Name: 'Name',
   Description: 'Description',
-  Slug: 'Slug',
+  Content: 'Content',
   CreatedAt: 'CreatedAt',
   UpdatedAt: 'UpdatedAt'
 };
 
 exports.Prisma.DiscordChannelWebhookScalarFieldEnum = {
   Id: 'Id',
-  ChannelId: 'ChannelId',
+  Name: 'Name',
+  Description: 'Description',
   WebhookUrl: 'WebhookUrl',
+  ChannelId: 'ChannelId',
+  Token: 'Token',
   IsActive: 'IsActive',
   CreatedAt: 'CreatedAt',
   UpdatedAt: 'UpdatedAt'
@@ -181,9 +185,22 @@ exports.Prisma.ListenerEventScalarFieldEnum = {
   Type: 'Type',
   SentAt: 'SentAt',
   Status: 'Status',
+  SenderId: 'SenderId',
   Error: 'Error',
   Data: 'Data',
   DiscordMessageId: 'DiscordMessageId',
+  DeliveredAt: 'DeliveredAt',
+  CreatedAt: 'CreatedAt',
+  UpdatedAt: 'UpdatedAt'
+};
+
+exports.Prisma.ListenerEventSenderScalarFieldEnum = {
+  Id: 'Id',
+  Name: 'Name',
+  Slug: 'Slug',
+  Token: 'Token',
+  IsActive: 'IsActive',
+  DiscordChannelWebhookId: 'DiscordChannelWebhookId',
   CreatedAt: 'CreatedAt',
   UpdatedAt: 'UpdatedAt'
 };
@@ -311,9 +328,9 @@ exports.Prisma.WorldScalarFieldEnum = {
 };
 
 exports.Prisma.MemberScalarFieldEnum = {
+  Id: 'Id',
   IsActive: 'IsActive',
   DeactivatedAt: 'DeactivatedAt',
-  Id: 'Id',
   VAId: 'VAId',
   CompanyId: 'CompanyId',
   VARoleId: 'VARoleId',
@@ -578,9 +595,10 @@ exports.Prisma.ModelName = {
   AppConfig: 'AppConfig',
   InviteCode: 'InviteCode',
   DiscordMessage: 'DiscordMessage',
-  DiscordMessageType: 'DiscordMessageType',
+  DiscordMessageTemplate: 'DiscordMessageTemplate',
   DiscordChannelWebhook: 'DiscordChannelWebhook',
   ListenerEvent: 'ListenerEvent',
+  ListenerEventSender: 'ListenerEventSender',
   User: 'User',
   UserPrivacySettings: 'UserPrivacySettings',
   Role: 'Role',

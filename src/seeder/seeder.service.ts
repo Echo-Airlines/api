@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { eachOfSeries } from 'async';
 import { LoggerService } from '@/logger/logger.service';
-import SeedData from './SeederData';
+import SeedData from './data';
 import { PrismaService } from '@prisma/prisma.service';
 import { AircraftClass, AircraftStatus, AppConfig, Job, Livery, Permission, Prisma, Role, User, VirtualAirline, World } from 'prisma/generated/prisma';
 import { HashService } from '@/hash/hash.service';
@@ -19,94 +19,124 @@ export class SeederService {
     this.logger.setContext(SeederService.name);
   }
 
+  private checkModelEnabled(modelName: string): boolean {
+    const enabledModels = this.configService.get<string>('SEED_MODELS') || '';
+    const enabledModelsArray = enabledModels.split(',');
+    return enabledModelsArray.includes(modelName) || enabledModelsArray.length === 0;
+  }
+
+  private getEnabledModels(): string[] {
+    const enabledModels = this.configService.get<string>('SEED_MODELS') || '';
+    return enabledModels.split(',');
+  }
+
   public async run() {
     const seedDatabase: string =
       this.configService.get<string>('SEED_DATABASE') || 'false';
+    const enabledModels = this.getEnabledModels();
 
     if (seedDatabase !== 'true') {
       this.logger.debug(
         'Database seeding is disabled. Set the SEED_DATABASE environment variable to true to enable seeding.',
       );
       return;
+    } else if (enabledModels.length === 0) {
+      this.logger.debug('No models to seed. Set the SEED_MODELS environment variable to enable seeding.');
+      return;
     } else {
+      if (this.checkModelEnabled('Job')) {
+        // then seed jobs
+        await this._seedJobs(SeedData.Job)
+          .then(async (jobs: Job[]) => {
+            this.logger.debug(`${jobs.length} Jobs seeded.`);
+          })
+          .catch((err) => {
+            this.logger.error('Error seeding jobs:', err);
+          });
+      }
+
+      if (this.checkModelEnabled('AppConfig')) {
+        // then seed app config
+        await this._seedAppConfig(SeedData.AppConfig)
+          .then(async (appConfig: AppConfig) => {
+            this.logger.debug('App config seeded.', appConfig);
+          })
+          .catch((err) => {
+            this.logger.error('Error seeding app config:', err);
+          });
+      }
       // first seed permissions
-      await this._seedPermissions(SeedData.permissions)
-        .then(async (permissions: Permission[]) => {
-          this.logger.debug(`${permissions.length} Permissions seeded.`);
-        })
-        .catch((err) => {
-          this.logger.error('Error seeding permissions:', err);
-        });
-        
-      // // seed userRoles, pass in the user roles to seed, and return the user roles that were created.
-      await this._seedRoles(SeedData.roles)
-      .then(async (roles: Role[]) => {
-          this.logger.debug(`${roles.length} Roles seeded.`);
+      if (this.checkModelEnabled('Permission')) {
+        await this._seedPermissions(SeedData.Permission)
+          .then(async (permissions: Permission[]) => {
+            this.logger.debug(`${permissions.length} Permissions seeded.`);
+          })
+          .catch((err) => {
+            this.logger.error('Error seeding permissions:', err);
+          });
+      }
 
-          let users: User[] = await this._seedUsers(SeedData.users);
-          this.logger.debug(`${users.length} Users seeded.`);
-        })
-        .catch((err) => {
-          this.logger.error('Error seeding user roles:', err);
-        });
+      if (this.checkModelEnabled('Role')) {
+        // // seed userRoles, pass in the user roles to seed, and return the user roles that were created.
+        await this._seedRoles(SeedData.Role)
+          .then(async (roles: Role[]) => {
+            this.logger.debug(`${roles.length} Roles seeded.`);
 
-      // then seed worlds
-      await this._seedWorlds(SeedData.worlds)
-        .then(async (worlds: World[]) => {
-          this.logger.debug(`${worlds.length} Worlds seeded.`);
-        })
-        .catch((err) => {
-          this.logger.error('Error seeding worlds:', err);
-        });
+            let users: User[] = await this._seedUsers(SeedData.User);
+            this.logger.debug(`${users.length} Users seeded.`);
+          })
+          .catch((err) => {
+            this.logger.error('Error seeding user roles:', err);
+          });
+      }
 
-      // then seed aircraft statuses
-      await this._seedAircraftStatuses(SeedData.aircraftStatuses)
-        .then(async (aircraftStatuses: AircraftStatus[]) => {
-          this.logger.debug(`${aircraftStatuses.length} Aircraft statuses seeded.`);
-        })
-        .catch((err) => {
-          this.logger.error('Error seeding aircraft statuses:', err);
-        });
+      if (this.checkModelEnabled('World')) {
+        // then seed worlds
+        await this._seedWorlds(SeedData.World)
+          .then(async (worlds: World[]) => {
+            this.logger.debug(`${worlds.length} Worlds seeded.`);
+          })
+          .catch((err) => {
+            this.logger.error('Error seeding worlds:', err);
+          });
+      }
 
-      // then seed aircraft classes
-      await this._seedAircraftClasses(SeedData.aircraftClasses)
-        .then(async (aircraftClasses: AircraftClass[]) => {
-          this.logger.debug(`${aircraftClasses.length} Aircraft classes seeded.`);
-        })
-        .catch((err) => {
-          this.logger.error('Error seeding aircraft classes:', err);
-        });
+      if (this.checkModelEnabled('AircraftStatus')) {
+        // then seed aircraft statuses
+        await this._seedAircraftStatuses(SeedData.AircraftStatus)
+          .then(async (aircraftStatuses: AircraftStatus[]) => {
+            this.logger.debug(`${aircraftStatuses.length} Aircraft statuses seeded.`);
+          })
+          .catch((err) => {
+            this.logger.error('Error seeding aircraft statuses:', err);
+          });
+      }
 
-      // then seed jobs
-      await this._seedJobs(SeedData.jobs)
-        .then(async (jobs: Job[]) => {
-          this.logger.debug(`${jobs.length} Jobs seeded.`);
-        })
-        .catch((err) => {
-          this.logger.error('Error seeding jobs:', err);
-        });
+      if (this.checkModelEnabled('AircraftClass')) {
+        // then seed aircraft classes
+        await this._seedAircraftClasses(SeedData.AircraftClass)
+          .then(async (aircraftClasses: AircraftClass[]) => {
+            this.logger.debug(`${aircraftClasses.length} Aircraft classes seeded.`);
+          })
+          .catch((err) => {
+            this.logger.error('Error seeding aircraft classes:', err);
+          });
+      }
 
-      // then seed app config
-      await this._seedAppConfig(SeedData.appConfig)
-        .then(async (appConfig: AppConfig) => {
-          this.logger.debug('App config seeded.', appConfig);
-        })
-        .catch((err) => {
-          this.logger.error('Error seeding app config:', err);
-        });
+      if (this.checkModelEnabled('Livery')) {
+        await this._seedLiveries(SeedData.Livery)
+          .then(async (liveries: Livery[]) => {
+            this.logger.debug(`${liveries.length} Liveries seeded.`);
+          })
+          .catch((err) => {
+            this.logger.error('Error seeding liveries:', err);
+          });
+      }
 
-      await this._seedLiveries(SeedData.liveries)
-        .then(async (liveries: Livery[]) => {
-          this.logger.debug(`${liveries.length} Liveries seeded.`);
-        })
-        .catch((err) => {
-          this.logger.error('Error seeding liveries:', err);
-        });
-
-      if (SeedData.virtualAirline) {
-        await this._seedVirtualAirline(SeedData.virtualAirline)
+      if (this.checkModelEnabled('VirtualAirline') && SeedData.VirtualAirline) {
+        await this._seedVirtualAirline(SeedData.VirtualAirline)
           .then(async (virtualAirline: VirtualAirline) => {
-            
+
           })
           .catch((err) => {
             this.logger.error('Error seeding virtual airline:', err);
@@ -152,18 +182,18 @@ export class SeederService {
 
   private async _seedRoles(userRoles: Prisma.RoleCreateInput[]): Promise<Role[]> {
     return new Promise(async (resolve, reject) => {
-    if (!userRoles || userRoles.length === 0) {
-      this.logger.debug('No user roles to seed.');
-      return reject('no user roles to seed');
-    }
+      if (!userRoles || userRoles.length === 0) {
+        this.logger.debug('No user roles to seed.');
+        return reject('no user roles to seed');
+      }
 
-    this.logger.debug(`There are ${userRoles.length} user roles to seed.`);
-    const roles: Role[] = [];
+      this.logger.debug(`There are ${userRoles.length} user roles to seed.`);
+      const roles: Role[] = [];
       // iterate over the user roles and seed them one by one.
       eachOfSeries(
         userRoles,
         async (userRole: Prisma.RoleCreateInput) => {
-          const role: Role|null = await this._seedRole(userRole);
+          const role: Role | null = await this._seedRole(userRole);
           if (role) {
             roles.push(role);
           }
@@ -244,7 +274,7 @@ export class SeederService {
         return resolve(worlds);
       });
     });
-  } 
+  }
 
   private async _seedAircraftStatuses(seedAircraftStatuses: Prisma.AircraftStatusCreateInput[]): Promise<AircraftStatus[]> {
     return new Promise(async (resolve, reject) => {
@@ -371,7 +401,7 @@ export class SeederService {
       }
 
       this.logger.debug(`Seeding permission ${createPermission.Slug}.`);
-      let permission: Permission|null = await this.prisma.permission.findFirst({
+      let permission: Permission | null = await this.prisma.permission.findFirst({
         where: {
           Slug: createPermission.Slug,
         },
@@ -489,7 +519,7 @@ export class SeederService {
       }
 
       this.logger.debug(`Seeding aircraft status ${dto.Name}.`);
-      let aircraftStatusEntity: AircraftStatus|null = await this.prisma.aircraftStatus.findFirst({
+      let aircraftStatusEntity: AircraftStatus | null = await this.prisma.aircraftStatus.findFirst({
         where: {
           Name: dto.Name,
         },
@@ -519,7 +549,7 @@ export class SeederService {
 
       this.logger.debug(`Seeding aircraft class ${dto.Name}.`);
 
-      let aircraftClassEntity: AircraftClass|null = await this.prisma.aircraftClass.findFirst({
+      let aircraftClassEntity: AircraftClass | null = await this.prisma.aircraftClass.findFirst({
         where: {
           Name: dto.Name,
         },
@@ -547,7 +577,7 @@ export class SeederService {
       }
 
       this.logger.debug(`Seeding world ${dto.Name}.`);
-      let worldEntity: World|null = await this.prisma.world.findFirst({
+      let worldEntity: World | null = await this.prisma.world.findFirst({
         where: {
           Slug: dto.Slug,
         },
@@ -565,7 +595,7 @@ export class SeederService {
 
       return resolve(worldEntity);
     });
-  } 
+  }
 
   private async _seedLivery(dto: Prisma.LiveryCreateInput): Promise<Livery> {
     return new Promise(async (resolve, reject) => {
@@ -575,7 +605,7 @@ export class SeederService {
       }
 
       this.logger.debug(`Seeding livery ${dto.Name}.`);
-      let liveryEntity: Livery|null = await this.prisma.livery.findFirst({
+      let liveryEntity: Livery | null = await this.prisma.livery.findFirst({
         where: {
           Name: dto.Name,
         },
@@ -603,11 +633,11 @@ export class SeederService {
       }
 
       this.logger.debug(`Seeding job ${dto.Name}.`);
-      let jobEntity: Job|null = await this.prisma.job.findFirst({
+      let jobEntity: Job | null = await this.prisma.job.findFirst({
         where: {
           Name: dto.Name,
         },
-      }); 
+      });
 
       if (!jobEntity) {
         jobEntity = await this.prisma.job.create({
@@ -627,7 +657,7 @@ export class SeederService {
       }
 
       this.logger.debug(`Seeding app config.`);
-      let entity: AppConfig|null = await this.prisma.appConfig.findFirst({
+      let entity: AppConfig | null = await this.prisma.appConfig.findFirst({
         where: {
           Id: 1,
         },
@@ -650,34 +680,34 @@ export class SeederService {
         return reject('no virtual airline to seed');
       }
 
-    this.logger.debug(`Seeding virtual airline ${dto.Name}.`);
+      this.logger.debug(`Seeding virtual airline ${dto.Name}.`);
 
-    let entity: VirtualAirline|null = await this.prisma.virtualAirline.findFirst({
-      where: {
-        Id: dto.Id,
-      },
-    });
-
-    if (!entity) {
-      entity = await this.prisma.virtualAirline.create({
-        data: dto,
-      });
-
-      await this.prisma.appConfig.update({
+      let entity: VirtualAirline | null = await this.prisma.virtualAirline.findFirst({
         where: {
-          Id: 1,
-        },
-        data: {
-          VirtualAirlineInitiated: true,
+          Id: dto.Id,
         },
       });
-      
-      this.logger.debug(`Virtual airline ${dto.Id} has been created.`);
-    } else {
-      this.logger.debug(`Virtual airline ${dto.Id} already exists in the database, skipping.`);
-    }
 
-    return resolve(entity);
+      if (!entity) {
+        entity = await this.prisma.virtualAirline.create({
+          data: dto,
+        });
+
+        await this.prisma.appConfig.update({
+          where: {
+            Id: 1,
+          },
+          data: {
+            VirtualAirlineInitiated: true,
+          },
+        });
+
+        this.logger.debug(`Virtual airline ${dto.Id} has been created.`);
+      } else {
+        this.logger.debug(`Virtual airline ${dto.Id} already exists in the database, skipping.`);
+      }
+
+      return resolve(entity);
     });
   }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '@prisma/prisma.service';
-import { CreateMemberDto } from './dto/create-member.dto';
+import { Prisma } from 'prisma/generated/prisma';
 
 @Injectable()
 export class MemberService {
@@ -30,6 +30,17 @@ export class MemberService {
         });
     }
 
+    async findById(id: string, query?: Partial< Prisma.MemberFindUniqueArgs>) {
+        const entity = await this.prisma.member.findUnique({
+            where: {
+                Id: id,
+            },
+            ...query,
+        });
+
+        return entity;
+    }
+
     async findByUserId(userId: string) {
         return this.prisma.member.findFirst({
             where: {
@@ -53,6 +64,25 @@ export class MemberService {
                     },
                 },
             },
+        });
+
+        return result;
+    }
+
+    async create(dto: Prisma.MemberCreateInput) {
+        const result = await this.prisma.member.create({
+            data: dto,
+        });
+
+        return result;
+    }
+
+    async update(Id: string, dto: Prisma.MemberUpdateInput) {
+        const result = await this.prisma.member.update({
+            where: {
+                Id
+            },
+            data: dto,
         });
 
         return result;

@@ -39,7 +39,6 @@ export class VirtualAirlineController {
   @Get('leaderboard')
   async getLeaderboard() {
     const result: PublicMemberDto[] = await this.virtualAirlineService.getPrimaryLeaderboard()
-    .then((members) => members.filter((member) => member.VARoleId !== '1'))
     .then((members) => members.map((member) => new PublicMemberDto(member)));
     
     return result;
@@ -47,10 +46,10 @@ export class VirtualAirlineController {
 
   @Get('members')
   async getPrimaryVirtualAirlineMembers() {
-    const result: PublicMemberDto[] = await this.virtualAirlineService.getPrimaryVirtualAirlineMembers()
-      .then((members) => members.filter((member) => member.VARoleId !== '1'))
-      .then((members) => members.map((member) => new PublicMemberDto(member)));
+    const members: Member[] = await this.virtualAirlineService.getPrimaryVirtualAirlineMembers();
 
+    const result: PublicMemberDto[] = members.map((member) => new PublicMemberDto(member));
+    
     return result;
   }
 

@@ -1,7 +1,7 @@
 import { UseGuards, Controller, Get, Param, Post, Body, Put, Query } from '@nestjs/common';
 import { JwtAuthGuard } from '@auth/jwt-auth.guard';
 import { IsAdminGuard } from '@auth/is-admin.guard';
-import { Prisma } from 'prisma/generated/prisma';
+import { DiscordChannelWebhook, Prisma } from 'prisma/generated/prisma';
 import { AdminDiscordService } from './admin-discord.service';
 import { CreateDiscordChannelWebhookDto } from './dto/CreateDiscordChannelWebhookDto';
 import { SendDiscordMessageDto } from '@discord/dto/SendDiscordMessageDto';
@@ -24,10 +24,12 @@ export class AdminDiscordController {
             });
         }
 
-        return await this.adminDiscordService.ChannelWebhook_findMany({
+        const results: DiscordChannelWebhook[] = await this.adminDiscordService.ChannelWebhook_findMany({
             where: (active) ? { IsActive: true } : undefined,
             include: includeObject,
         });
+
+        return results;
     }
 
     @Get('webhook/:id')

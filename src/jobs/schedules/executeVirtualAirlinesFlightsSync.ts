@@ -185,7 +185,11 @@ async function executeVirtualAirlineFlightSync(dto: OnAirFlight, virtualAirline:
                             Id: dto.Company.WorldId,
                         },
                     },
-                    OwnerId: dto.Id,
+                    Owner: {
+                        connect: {
+                            Id: dto.Id,
+                        },
+                    },
                 },
             },
         },

@@ -44,27 +44,21 @@ export class VirtualAirlineService {
             throw new NotFoundException('Virtual airline not found');
         }
 
-        const entity = await this.prisma.member.findMany({
-            where: {
-                IsActive: true,
-                VirtualAirline: {
-                    Id: va.Id,
-                },
-            },
-            include: {
-                Company: true,
-                VARole: true
-            },
-            orderBy: {
-                UpdatedAt: 'desc'
-            }
-        });
+        let members = await this.getPrimaryVirtualAirlineMembers();
 
-        if (!entity) {
-            throw new NotFoundException('Virtual airline not found');
+        if (members.length === 0) {
+            return [];
+        } else {
+            // filter out members with a permission less than 400
+            members = members.filter((member) => {
+                const permission = member.VARole.Permission;
+                return permission < 400;
+            });
         }
 
-        const leaderboard = entity.sort((a, b) => {
+
+        // sort the members by the sort column
+        const leaderboard = members.sort((a, b) => {
             switch(sortColumn) {
                 case 'earnings':
                     return b.TotalEarnedCredits.toNumber() - a.TotalEarnedCredits.toNumber();
@@ -82,12 +76,18 @@ export class VirtualAirlineService {
             where: {
                 VirtualAirline: {
                     IsPrimary: true,
-                }
+                },
+                IsActive: true,
+            },
+            include: {
+                Company: true,
+                VARole: true
             }
         });
 
         return members;
     }
+    
     
     async getVirtualAirlineById(Id: string, query?: Prisma.VirtualAirlineFindUniqueArgs) {
         if (!Id) {
@@ -246,35 +246,6 @@ export class VirtualAirlineService {
         });
 
         return entity;
-    }
-
-    async Member_upsert(dto: Prisma.MemberCreateInput) {
-        try {
-            if (!dto.Id) {
-                throw new BadRequestException('Member ID is required');
-            }
-            
-            let entity: Member|null = await this.Member_findById(dto.Id);
-
-            if (!entity) {
-                entity = await this.prisma.member.create({
-                    data: dto
-                });
-            } else {
-                entity = await this.prisma.member.update({
-                    where: {
-                        Id: dto.Id
-                    },
-                    data: dto
-                });
-            }
-
-            return entity;
-            
-        } catch (error) {
-            console.error(error);
-            throw new BadRequestException('Failed to upsert member');
-        }
     }
 
     async Member_deactivate(Id: string) {

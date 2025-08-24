@@ -197,6 +197,7 @@ exports.Prisma.ListenerEventScalarFieldEnum = {
 exports.Prisma.ListenerEventSenderScalarFieldEnum = {
   Id: 'Id',
   Name: 'Name',
+  Description: 'Description',
   Slug: 'Slug',
   Token: 'Token',
   IsActive: 'IsActive',
@@ -262,6 +263,7 @@ exports.Prisma.LiveryScalarFieldEnum = {
   Id: 'Id',
   Name: 'Name',
   IsActive: 'IsActive',
+  AircraftId: 'AircraftId',
   DownloadCount: 'DownloadCount',
   Image: 'Image',
   Url: 'Url',
@@ -332,7 +334,6 @@ exports.Prisma.MemberScalarFieldEnum = {
   IsActive: 'IsActive',
   DeactivatedAt: 'DeactivatedAt',
   VAId: 'VAId',
-  CompanyId: 'CompanyId',
   VARoleId: 'VARoleId',
   TotalCargosTransportedLbs: 'TotalCargosTransportedLbs',
   TotalPAXsTransported: 'TotalPAXsTransported',
@@ -346,7 +347,8 @@ exports.Prisma.MemberScalarFieldEnum = {
   LastRefresh: 'LastRefresh',
   UserId: 'UserId',
   CreatedAt: 'CreatedAt',
-  UpdatedAt: 'UpdatedAt'
+  UpdatedAt: 'UpdatedAt',
+  CompanyId: 'CompanyId'
 };
 
 exports.Prisma.CompanyScalarFieldEnum = {
@@ -362,7 +364,6 @@ exports.Prisma.CompanyScalarFieldEnum = {
   LastReportDate: 'LastReportDate',
   DifficultyLevel: 'DifficultyLevel',
   WorldId: 'WorldId',
-  OwnerId: 'OwnerId',
   LastRefresh: 'LastRefresh',
   CreatedAt: 'CreatedAt',
   UpdatedAt: 'UpdatedAt'

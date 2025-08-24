@@ -22,6 +22,7 @@ import { DiscordModule } from './discord/discord.module';
 import { ListenerModule } from './listener/listener.module';
 import { FshubModule } from './fshub/fshub.module';
 import { NotifierModule } from './notifier/notifier.module';
+import { CompanyModule } from './company/company.module';
 
 @Module({
   imports: [
@@ -47,6 +48,7 @@ import { NotifierModule } from './notifier/notifier.module';
     ListenerModule,
     FshubModule,
     NotifierModule,
+    CompanyModule,
   ],
   controllers: [AppController],
   providers: [AppService],

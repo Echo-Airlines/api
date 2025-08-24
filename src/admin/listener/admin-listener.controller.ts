@@ -1,9 +1,9 @@
 // admin-listener.controller.ts
-import { Body, Controller, Delete, Get, NotFoundException, Param, Post, Put, Query, UseGuards } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, NotFoundException, Param, Post, Put, Query, UseGuards } from '@nestjs/common';
 import { AdminListenerService } from './admin-listener.service';
 import { IsAdminGuard } from '@auth/is-admin.guard';
 import { JwtAuthGuard } from '@auth/jwt-auth.guard';
-import { Prisma } from 'prisma/generated/prisma';
+import { ListenerEventSender, Prisma } from 'prisma/generated/prisma';
 import { CreateListenerSenderDto } from './dto/CreateListenerSender.dto';
 import * as crypto from 'crypto';
 
@@ -15,7 +15,7 @@ export class AdminListenerController {
     @Post('sender/create')
     @UseGuards(JwtAuthGuard, IsAdminGuard)
     async createSender(@Body() body: CreateListenerSenderDto) {
-        const sender = await this.listenerService.Sender_create({
+        const dto: Prisma.ListenerEventSenderCreateInput = {
             Name: body.Name,
             Slug: body.Slug,
             IsActive: body.IsActive,
@@ -25,7 +25,22 @@ export class AdminListenerController {
                     Id: body.DiscordChannelWebhookId,
                 },
             } : undefined,
-        });
+        };
+
+        const sender: ListenerEventSender|null = await this.listenerService.Sender_create(dto);
+
+        if (!sender) {
+            throw new BadRequestException({
+                message: 'Failed to create sender',
+                error: 'Failed to create sender',
+                statusCode: 400,
+                timestamp: new Date().toISOString(),
+                path: '/admin/listener/sender/create',
+                method: 'POST',
+                body: body,
+                dto: dto,
+            });
+        }
 
         return sender;
     }

@@ -1,4 +1,4 @@
-import { Member, Prisma, VirtualAirline } from "prisma/generated/prisma";
+import { Company, Member, Prisma, VirtualAirline } from "prisma/generated/prisma";
 import { JobSchedulerService } from "../job-scheduler.service";
 import { OnAirMember } from "@on-air/types";
 import { eachSeries } from "async";
@@ -52,60 +52,135 @@ async function executeVirtualAirlineMembersSync(virtualAirline: VirtualAirlineWi
 }
 
 async function executeVirtualAirlineMemberSync(dto: OnAirMember, virtualAirline: VirtualAirlineWithRelations, scheduler: JobSchedulerService) {
-    
-    const data: Prisma.MemberCreateInput = {
-        Id: dto.Id,
-        Company: {
-            connectOrCreate: {
-                where: {
-                    Id: dto.Company.Id,
-                },
-                create: {
-                    Id: dto.Company.Id,
-                    Name: dto.Company.Name,
-                    AirlineCode: dto.Company.AirlineCode,
-                    CreationDate: (dto.Company.CreationDate) ? new Date(dto.Company.CreationDate) : new Date(),
-                    Level: dto.Company.Level,
-                    LevelXP: dto.Company.LevelXP,
-                    Reputation: dto.Company.Reputation,
-                    Paused: dto.Company.Paused,
-                    LastConnection: (dto.Company.LastConnection) ? new Date(dto.Company.LastConnection) : null,
-                    LastReportDate: (dto.Company.LastReportDate) ? new Date(dto.Company.LastReportDate) : null,
-                    DifficultyLevel: dto.Company.DifficultyLevel,
-                    World: {
-                        connect: {
-                            Id: dto.Company.WorldId,
+    // try to find the member inf the database
+    let member = await scheduler.services.Member.findById(dto.Id, {
+        include: {
+            Company: true,
+        },
+    });
+
+    if (!member) {
+        const _dto: Prisma.MemberCreateInput = {
+            Id: dto.Id,
+            Company: {
+                connectOrCreate: {
+                    where: {
+                        Id: dto.Company.Id,
+                    },
+                    create: {
+                        Id: dto.Company.Id,
+                        Name: dto.Company.Name,
+                        AirlineCode: dto.Company.AirlineCode,
+                        CreationDate: (dto.Company.CreationDate) ? new Date(dto.Company.CreationDate) : new Date(),
+                        Level: dto.Company.Level,
+                        LevelXP: dto.Company.LevelXP,
+                        Reputation: dto.Company.Reputation,
+                        Paused: dto.Company.Paused,
+                        LastConnection: (dto.Company.LastConnection) ? new Date(dto.Company.LastConnection) : null,
+                        LastReportDate: (dto.Company.LastReportDate) ? new Date(dto.Company.LastReportDate) : null,
+                        DifficultyLevel: dto.Company.DifficultyLevel,
+                        World: {
+                            connect: {
+                                Id: dto.Company.WorldId,
+                            },
                         },
                     },
-                    OwnerId: dto.Id,
                 },
             },
-        },
-        TotalCargosTransportedLbs: dto.TotalCargosTransportedLbs,
-        TotalPAXsTransported: dto.TotalPAXsTransported,
-        TotalEarnedCredits: dto.TotalEarnedCredits,
-        TotalSpentCredits: dto.TotalSpentCredits,
-        NumberOfFlights: dto.NumberOfFlights,
-        FlightHours: dto.FlightHours,
-        Color: dto.Color,
-        ReputationImpact: dto.ReputationImpact,
-        LastVAFlightDate: dto.LastVAFlightDate ? new Date(dto.LastVAFlightDate) : null,
-        LastRefresh: new Date(),
-        VirtualAirline: {
-            connect: {
-                Id: virtualAirline.Id,
+            TotalCargosTransportedLbs: dto.TotalCargosTransportedLbs,
+            TotalPAXsTransported: dto.TotalPAXsTransported,
+            TotalEarnedCredits: dto.TotalEarnedCredits,
+            TotalSpentCredits: dto.TotalSpentCredits,
+            NumberOfFlights: dto.NumberOfFlights,
+            FlightHours: dto.FlightHours,
+            Color: dto.Color,
+            ReputationImpact: dto.ReputationImpact,
+            LastVAFlightDate: dto.LastVAFlightDate ? new Date(dto.LastVAFlightDate) : null,
+            LastRefresh: new Date(),
+            VirtualAirline: {
+                connect: {
+                    Id: virtualAirline.Id,
+                },
             },
-        },
-        VARole: {
-            connect: {
-                Id: dto.VARoleId,
+            VARole: {
+                connectOrCreate: {
+                    where: {
+                        Id: dto.VARoleId,
+                    },
+                    create: {
+                        Id: dto.VARoleId,
+                        Name: dto.VARole.Name,
+                        Permission: dto.VARole.Permission,
+                        IsDefaultNewRole: dto.VARole.IsDefaultNewRole,
+                        Color: dto.VARole.Color,
+                        PayPercent: dto.VARole.PayPercent,
+                        IsHidden: dto.VARole.IsHidden,
+                        RestrictLoadingVAJobsIntoNonVAAircraft: dto.VARole.RestrictLoadingVAJobsIntoNonVAAircraft,
+                        RestrictLoadingNonVAJobsIntoVAAircraft: dto.VARole.RestrictLoadingNonVAJobsIntoVAAircraft,
+                        PayWeekly: dto.VARole.PayWeekly,
+                        PayPerFlightHour: dto.VARole.PayPerFlightHour,
+                        LastRefresh: new Date(),
+                        VirtualAirline: {
+                            connect: {
+                                Id: virtualAirline.Id,
+                            },
+                        },
+                    },
+                },
+            }
+        };
+
+        member = await scheduler.services.Member.create(_dto);
+    } else {
+        const _dto: Prisma.MemberUpdateInput = {
+            Id: dto.Id,
+            TotalCargosTransportedLbs: dto.TotalCargosTransportedLbs,
+            TotalPAXsTransported: dto.TotalPAXsTransported,
+            TotalEarnedCredits: dto.TotalEarnedCredits,
+            TotalSpentCredits: dto.TotalSpentCredits,
+            NumberOfFlights: dto.NumberOfFlights,
+            FlightHours: dto.FlightHours,
+            Color: dto.Color,
+            ReputationImpact: dto.ReputationImpact,
+            LastVAFlightDate: dto.LastVAFlightDate ? new Date(dto.LastVAFlightDate) : null,
+            LastRefresh: new Date(),
+            VirtualAirline: {
+                connect: {
+                    Id: virtualAirline.Id,
+                },
             },
-        }
+            VARole: {
+                connectOrCreate: {
+                    where: {
+                        Id: dto.VARoleId,
+                    },
+                    create: {
+                        Id: dto.VARoleId,
+                        Name: dto.VARole.Name,
+                        Permission: dto.VARole.Permission,
+                        IsDefaultNewRole: dto.VARole.IsDefaultNewRole,
+                        Color: dto.VARole.Color,
+                        PayPercent: dto.VARole.PayPercent,
+                        IsHidden: dto.VARole.IsHidden,
+                        RestrictLoadingVAJobsIntoNonVAAircraft: dto.VARole.RestrictLoadingVAJobsIntoNonVAAircraft,
+                        RestrictLoadingNonVAJobsIntoVAAircraft: dto.VARole.RestrictLoadingNonVAJobsIntoVAAircraft,
+                        PayWeekly: dto.VARole.PayWeekly,
+                        PayPerFlightHour: dto.VARole.PayPerFlightHour,
+                        LastRefresh: new Date(),
+                        VirtualAirline: {
+                            connect: {
+                                Id: virtualAirline.Id,
+                            },
+                        },
+                    },
+                },
+            },
+        };
+
+        member = await scheduler.services.Member.update(dto.Id, _dto);
     }
-
-    const entity = await scheduler.services.VirtualAirline.Member_upsert(data);
-
-    return entity;
+    
+    return member;
 }
 
 async function deactivateVirtualAirlineMembers(virtualAirline: VirtualAirlineWithRelations, scheduler: JobSchedulerService) {

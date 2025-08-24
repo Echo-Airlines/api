@@ -10,6 +10,8 @@ import { JobsController } from './jobs.controller';
 import { AircraftModule } from '@aircraft/aircraft.module';
 import { AirportModule } from '@airport/airport.module';
 import { FlightModule } from '@flight/flight.module';
+import { CompanyModule } from '@company/company.module';
+import { MemberModule } from '@member/member.module';
 
 @Module({
     imports: [
@@ -21,6 +23,8 @@ import { FlightModule } from '@flight/flight.module';
         AircraftModule,
         AirportModule,
         FlightModule,
+        CompanyModule,
+        MemberModule,
     ],
     controllers: [JobsController],
     providers: [JobsService, JobSchedulerService],

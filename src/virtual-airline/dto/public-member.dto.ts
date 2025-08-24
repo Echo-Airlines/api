@@ -6,12 +6,28 @@ export type Member = PrismaMember & {
     VARole?: VirtualAirlineRole;
 }
 
+export class PublicVARole {
+    Name: string;
+    Permission: number;
+    IsDefaultNewRole: boolean;
+    Color: string;
+    LastRefresh: Date|null;
+
+    constructor(role: VirtualAirlineRole) {
+        this.Name = role.Name;
+        this.Permission = role.Permission;
+        this.IsDefaultNewRole = role.IsDefaultNewRole;
+        this.Color = role.Color;
+        this.LastRefresh = role.LastRefresh;
+    }
+}
+
 export class PublicMemberDto {
     Id: string;
     CompanyName: string;
     AirlineCode: string;
     Reputation: number;
-    VARole?: string;
+    VARole?: PublicVARole;
     Flights: number;
     Hours: number;
     Earnings: number;
@@ -26,7 +42,7 @@ export class PublicMemberDto {
         this.CompanyName = member.Company?.Name ?? '';
         this.AirlineCode = member.Company?.AirlineCode ?? '';
         this.Reputation = member.Company?.Reputation?.toNumber() ?? 0;
-        this.VARole = member.VARole?.Name;
+        this.VARole = (member.VARole) ? new PublicVARole(member.VARole) : undefined;
         this.Flights = member.NumberOfFlights;
         this.Hours = member.FlightHours.toNumber();
         this.Earnings = member.TotalEarnedCredits.toNumber();

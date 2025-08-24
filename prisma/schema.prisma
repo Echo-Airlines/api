@@ -36,44 +36,44 @@ model InviteCode {
 }
 
 model DiscordMessage {
-  Id                       String   @id() @unique() @default(uuid()) @db.Uuid
-  ChannelId                String   @db.VarChar
-  Content                  String   @db.VarChar
+  Id                       String    @id() @unique() @default(uuid()) @db.Uuid
+  ChannelId                String    @db.VarChar
+  Content                  String    @db.VarChar
   DiscordMessageTemplateId Int?
-  DiscordChannelWebhookId  String?  @db.Uuid
-  DiscordMessageSentAt     DateTime?       @db.Timestamp(6)
-  CreatedAt                DateTime @default(now()) @db.Timestamp(6)
-  UpdatedAt                DateTime @default(now()) @db.Timestamp(6)
+  DiscordChannelWebhookId  String?   @db.Uuid
+  DiscordMessageSentAt     DateTime? @db.Timestamp(6)
+  CreatedAt                DateTime  @default(now()) @db.Timestamp(6)
+  UpdatedAt                DateTime  @default(now()) @db.Timestamp(6)
 
   // relations
   DiscordMessageTemplate DiscordMessageTemplate? @relation(fields: [DiscordMessageTemplateId], references: [Id])
-  DiscordChannelWebhook  DiscordChannelWebhook? @relation(fields: [DiscordChannelWebhookId], references: [Id])
+  DiscordChannelWebhook  DiscordChannelWebhook?  @relation(fields: [DiscordChannelWebhookId], references: [Id])
   ListenerEvents         ListenerEvent[]
 }
 
 model DiscordMessageTemplate {
-  Id                   Int      @id() @unique() @default(autoincrement())
-  Slug                 String   @unique() @db.VarChar
-  Name                 String   @db.VarChar
-  Description          String?  @db.VarChar
-  Content              String   @db.VarChar
-  CreatedAt            DateTime @default(now()) @db.Timestamp(6)
-  UpdatedAt            DateTime @default(now()) @db.Timestamp(6)
+  Id          Int      @id() @unique() @default(autoincrement())
+  Slug        String   @unique() @db.VarChar
+  Name        String   @db.VarChar
+  Description String?  @db.VarChar
+  Content     String   @db.VarChar
+  CreatedAt   DateTime @default(now()) @db.Timestamp(6)
+  UpdatedAt   DateTime @default(now()) @db.Timestamp(6)
 
   // relations
-  DiscordMessages    DiscordMessage[]
+  DiscordMessages DiscordMessage[]
 }
 
 model DiscordChannelWebhook {
-  Id         String   @id() @unique() @default(uuid()) @db.Uuid
-  Name       String   @db.VarChar @default("Unnamed Webhook")
+  Id          String   @id() @unique() @default(uuid()) @db.Uuid
+  Name        String   @default("Unnamed Webhook") @db.VarChar
   Description String?  @db.VarChar
-  WebhookUrl String   @db.VarChar
-  ChannelId  String   @db.VarChar
-  Token      String   @unique() @db.VarChar
-  IsActive   Boolean  @default(true)
-  CreatedAt  DateTime @default(now()) @db.Timestamp(6)
-  UpdatedAt  DateTime @default(now()) @db.Timestamp(6)
+  WebhookUrl  String   @db.VarChar
+  ChannelId   String   @db.VarChar
+  Token       String   @unique() @db.VarChar
+  IsActive    Boolean  @default(true)
+  CreatedAt   DateTime @default(now()) @db.Timestamp(6)
+  UpdatedAt   DateTime @default(now()) @db.Timestamp(6)
 
   // relations
   DiscordMessages      DiscordMessage[]
@@ -209,6 +209,7 @@ model Livery {
   Id            String   @id() @default(uuid()) @db.Uuid
   Name          String   @db.VarChar
   IsActive      Boolean  @default(true)
+  AircraftId    String?   @db.Uuid
   DownloadCount Int      @default(0)
   Image         String   @db.VarChar
   Url           String?
@@ -216,6 +217,9 @@ model Livery {
   DownloadUrl   String?
   CreatedAt     DateTime @default(now()) @db.Timestamp(6)
   UpdatedAt     DateTime @default(now()) @db.Timestamp(6)
+
+  // relations
+  Aircraft Aircraft? @relation(fields: [AircraftId], references: [Id])
 }
 
 model VirtualAirline {
@@ -297,7 +301,6 @@ model Member {
   IsActive                  Boolean   @default(true)
   DeactivatedAt             DateTime? @db.Timestamp(6)
   VAId                      String    @db.Uuid
-  CompanyId                 String    @unique() @db.Uuid
   VARoleId                  String    @db.Uuid
   TotalCargosTransportedLbs Int
   TotalPAXsTransported      Int
@@ -312,6 +315,7 @@ model Member {
   UserId                    String?   @db.Uuid
   CreatedAt                 DateTime  @default(now()) @db.Timestamp(6)
   UpdatedAt                 DateTime  @default(now()) @db.Timestamp(6)
+  CompanyId                 String    @unique() @db.Uuid
 
   // relations
   Company        Company            @relation(fields: [CompanyId], references: [Id])
@@ -319,7 +323,7 @@ model Member {
   VARole         VirtualAirlineRole @relation(fields: [VARoleId], references: [Id])
   Flights        Flight[]
 
-  // user belongs to multiple VAs through Member
+  // Member can belong to one user
   User         User?         @relation(fields: [UserId], references: [Id])
   FlightRoutes FlightRoute[]
 }
@@ -337,17 +341,15 @@ model Company {
   LastReportDate  DateTime? @db.Timestamp(6)
   DifficultyLevel Int
   WorldId         String    @db.Uuid
-  OwnerId         String    @db.Uuid
 
   LastRefresh DateTime? @db.Timestamp(6)
   CreatedAt   DateTime  @default(now()) @db.Timestamp(6)
   UpdatedAt   DateTime  @default(now()) @db.Timestamp(6)
 
   // relations
-
   World   World    @relation(fields: [WorldId], references: [Id])
-  Owner   Member?
   Flights Flight[]
+  Owner  Member?
 }
 
 model Aircraft {
@@ -370,6 +372,7 @@ model Aircraft {
   CurrentAirport      Airport?              @relation("AircraftAtAirport", fields: [CurrentAirportId], references: [Id])
   AircraftMaintenance AircraftMaintenance[]
   Flights             Flight[]
+  Liveries            Livery[]
 }
 
 model AircraftClass {

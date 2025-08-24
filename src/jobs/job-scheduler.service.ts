@@ -15,6 +15,8 @@ import { executeVirtualAirlinesFleetSync } from './schedules/executeVirtualAirli
 import { AirportService } from '@airport/airport.service';
 import { FlightService } from '@flight/flight.service';
 import { executeVirtualAirlinesFlightsSync } from './schedules/executeVirtualAirlinesFlightsSync';
+import { CompanyService } from '@company/company.service';
+import { MemberService } from '@member/member.service';
 
 export interface IJobSchedulerServices {
     VirtualAirline: VirtualAirlineService;
@@ -22,6 +24,8 @@ export interface IJobSchedulerServices {
     Aircraft: AircraftService;
     Airport: AirportService;
     Flight: FlightService;
+    Company: CompanyService;
+    Member: MemberService;
 }
 
 @Injectable()
@@ -40,6 +44,8 @@ export class JobSchedulerService implements OnModuleInit {
         private readonly configService: ConfigService,
         private readonly airportService: AirportService,
         private readonly flightService: FlightService,
+        private readonly companyService: CompanyService,
+        private readonly memberService: MemberService,
     ) {
         this.services = {
             VirtualAirline: this.virtualAirlineService,
@@ -47,6 +53,8 @@ export class JobSchedulerService implements OnModuleInit {
             Aircraft: this.aircraftService,
             Airport: this.airportService,
             Flight: this.flightService,
+            Company: this.companyService,
+            Member: this.memberService,
         }
     }
 

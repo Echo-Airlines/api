@@ -102,6 +102,7 @@ model ListenerEvent {
 model ListenerEventSender {
   Id                      String   @id() @unique() @default(uuid()) @db.Uuid
   Name                    String   @db.VarChar
+  Description             String?  @db.VarChar
   Slug                    String   @unique() @db.VarChar
   Token                   String   @unique() @db.VarChar
   IsActive                Boolean  @default(true)
@@ -208,6 +209,7 @@ model Livery {
   Id            String   @id() @default(uuid()) @db.Uuid
   Name          String   @db.VarChar
   IsActive      Boolean  @default(true)
+  AircraftId    String?  @db.Uuid
   DownloadCount Int      @default(0)
   Image         String   @db.VarChar
   Url           String?
@@ -215,6 +217,9 @@ model Livery {
   DownloadUrl   String?
   CreatedAt     DateTime @default(now()) @db.Timestamp(6)
   UpdatedAt     DateTime @default(now()) @db.Timestamp(6)
+
+  // relations
+  Aircraft Aircraft? @relation(fields: [AircraftId], references: [Id])
 }
 
 model VirtualAirline {
@@ -296,7 +301,6 @@ model Member {
   IsActive                  Boolean   @default(true)
   DeactivatedAt             DateTime? @db.Timestamp(6)
   VAId                      String    @db.Uuid
-  CompanyId                 String    @unique() @db.Uuid
   VARoleId                  String    @db.Uuid
   TotalCargosTransportedLbs Int
   TotalPAXsTransported      Int
@@ -311,6 +315,7 @@ model Member {
   UserId                    String?   @db.Uuid
   CreatedAt                 DateTime  @default(now()) @db.Timestamp(6)
   UpdatedAt                 DateTime  @default(now()) @db.Timestamp(6)
+  CompanyId                 String    @unique() @db.Uuid
 
   // relations
   Company        Company            @relation(fields: [CompanyId], references: [Id])
@@ -318,7 +323,7 @@ model Member {
   VARole         VirtualAirlineRole @relation(fields: [VARoleId], references: [Id])
   Flights        Flight[]
 
-  // user belongs to multiple VAs through Member
+  // Member can belong to one user
   User         User?         @relation(fields: [UserId], references: [Id])
   FlightRoutes FlightRoute[]
 }
@@ -336,17 +341,15 @@ model Company {
   LastReportDate  DateTime? @db.Timestamp(6)
   DifficultyLevel Int
   WorldId         String    @db.Uuid
-  OwnerId         String    @db.Uuid
 
   LastRefresh DateTime? @db.Timestamp(6)
   CreatedAt   DateTime  @default(now()) @db.Timestamp(6)
   UpdatedAt   DateTime  @default(now()) @db.Timestamp(6)
 
   // relations
-
   World   World    @relation(fields: [WorldId], references: [Id])
-  Owner   Member?
   Flights Flight[]
+  Owner   Member?
 }
 
 model Aircraft {
@@ -369,6 +372,7 @@ model Aircraft {
   CurrentAirport      Airport?              @relation("AircraftAtAirport", fields: [CurrentAirportId], references: [Id])
   AircraftMaintenance AircraftMaintenance[]
   Flights             Flight[]
+  Liveries            Livery[]
 }
 
 model AircraftClass {

@@ -3570,11 +3570,13 @@ export namespace Prisma {
   export type AircraftCountOutputType = {
     AircraftMaintenance: number
     Flights: number
+    Liveries: number
   }
 
   export type AircraftCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     AircraftMaintenance?: boolean | AircraftCountOutputTypeCountAircraftMaintenanceArgs
     Flights?: boolean | AircraftCountOutputTypeCountFlightsArgs
+    Liveries?: boolean | AircraftCountOutputTypeCountLiveriesArgs
   }
 
   // Custom InputTypes
@@ -3600,6 +3602,13 @@ export namespace Prisma {
    */
   export type AircraftCountOutputTypeCountFlightsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: FlightWhereInput
+  }
+
+  /**
+   * AircraftCountOutputType without action
+   */
+  export type AircraftCountOutputTypeCountLiveriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LiveryWhereInput
   }
 
 
@@ -10695,6 +10704,7 @@ export namespace Prisma {
   export type ListenerEventSenderMinAggregateOutputType = {
     Id: string | null
     Name: string | null
+    Description: string | null
     Slug: string | null
     Token: string | null
     IsActive: boolean | null
@@ -10706,6 +10716,7 @@ export namespace Prisma {
   export type ListenerEventSenderMaxAggregateOutputType = {
     Id: string | null
     Name: string | null
+    Description: string | null
     Slug: string | null
     Token: string | null
     IsActive: boolean | null
@@ -10717,6 +10728,7 @@ export namespace Prisma {
   export type ListenerEventSenderCountAggregateOutputType = {
     Id: number
     Name: number
+    Description: number
     Slug: number
     Token: number
     IsActive: number
@@ -10730,6 +10742,7 @@ export namespace Prisma {
   export type ListenerEventSenderMinAggregateInputType = {
     Id?: true
     Name?: true
+    Description?: true
     Slug?: true
     Token?: true
     IsActive?: true
@@ -10741,6 +10754,7 @@ export namespace Prisma {
   export type ListenerEventSenderMaxAggregateInputType = {
     Id?: true
     Name?: true
+    Description?: true
     Slug?: true
     Token?: true
     IsActive?: true
@@ -10752,6 +10766,7 @@ export namespace Prisma {
   export type ListenerEventSenderCountAggregateInputType = {
     Id?: true
     Name?: true
+    Description?: true
     Slug?: true
     Token?: true
     IsActive?: true
@@ -10836,6 +10851,7 @@ export namespace Prisma {
   export type ListenerEventSenderGroupByOutputType = {
     Id: string
     Name: string
+    Description: string | null
     Slug: string
     Token: string
     IsActive: boolean
@@ -10864,6 +10880,7 @@ export namespace Prisma {
   export type ListenerEventSenderSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     Id?: boolean
     Name?: boolean
+    Description?: boolean
     Slug?: boolean
     Token?: boolean
     IsActive?: boolean
@@ -10878,6 +10895,7 @@ export namespace Prisma {
   export type ListenerEventSenderSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     Id?: boolean
     Name?: boolean
+    Description?: boolean
     Slug?: boolean
     Token?: boolean
     IsActive?: boolean
@@ -10890,6 +10908,7 @@ export namespace Prisma {
   export type ListenerEventSenderSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     Id?: boolean
     Name?: boolean
+    Description?: boolean
     Slug?: boolean
     Token?: boolean
     IsActive?: boolean
@@ -10902,6 +10921,7 @@ export namespace Prisma {
   export type ListenerEventSenderSelectScalar = {
     Id?: boolean
     Name?: boolean
+    Description?: boolean
     Slug?: boolean
     Token?: boolean
     IsActive?: boolean
@@ -10910,7 +10930,7 @@ export namespace Prisma {
     UpdatedAt?: boolean
   }
 
-  export type ListenerEventSenderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "Name" | "Slug" | "Token" | "IsActive" | "DiscordChannelWebhookId" | "CreatedAt" | "UpdatedAt", ExtArgs["result"]["listenerEventSender"]>
+  export type ListenerEventSenderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "Name" | "Description" | "Slug" | "Token" | "IsActive" | "DiscordChannelWebhookId" | "CreatedAt" | "UpdatedAt", ExtArgs["result"]["listenerEventSender"]>
   export type ListenerEventSenderInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     ListenerEvents?: boolean | ListenerEventSender$ListenerEventsArgs<ExtArgs>
     DiscordChannelWebhook?: boolean | ListenerEventSender$DiscordChannelWebhookArgs<ExtArgs>
@@ -10932,6 +10952,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       Id: string
       Name: string
+      Description: string | null
       Slug: string
       Token: string
       IsActive: boolean
@@ -11365,6 +11386,7 @@ export namespace Prisma {
   interface ListenerEventSenderFieldRefs {
     readonly Id: FieldRef<"ListenerEventSender", 'String'>
     readonly Name: FieldRef<"ListenerEventSender", 'String'>
+    readonly Description: FieldRef<"ListenerEventSender", 'String'>
     readonly Slug: FieldRef<"ListenerEventSender", 'String'>
     readonly Token: FieldRef<"ListenerEventSender", 'String'>
     readonly IsActive: FieldRef<"ListenerEventSender", 'Boolean'>
@@ -16614,6 +16636,7 @@ export namespace Prisma {
     Id: string | null
     Name: string | null
     IsActive: boolean | null
+    AircraftId: string | null
     DownloadCount: number | null
     Image: string | null
     Url: string | null
@@ -16627,6 +16650,7 @@ export namespace Prisma {
     Id: string | null
     Name: string | null
     IsActive: boolean | null
+    AircraftId: string | null
     DownloadCount: number | null
     Image: string | null
     Url: string | null
@@ -16640,6 +16664,7 @@ export namespace Prisma {
     Id: number
     Name: number
     IsActive: number
+    AircraftId: number
     DownloadCount: number
     Image: number
     Url: number
@@ -16663,6 +16688,7 @@ export namespace Prisma {
     Id?: true
     Name?: true
     IsActive?: true
+    AircraftId?: true
     DownloadCount?: true
     Image?: true
     Url?: true
@@ -16676,6 +16702,7 @@ export namespace Prisma {
     Id?: true
     Name?: true
     IsActive?: true
+    AircraftId?: true
     DownloadCount?: true
     Image?: true
     Url?: true
@@ -16689,6 +16716,7 @@ export namespace Prisma {
     Id?: true
     Name?: true
     IsActive?: true
+    AircraftId?: true
     DownloadCount?: true
     Image?: true
     Url?: true
@@ -16789,6 +16817,7 @@ export namespace Prisma {
     Id: string
     Name: string
     IsActive: boolean
+    AircraftId: string | null
     DownloadCount: number
     Image: string
     Url: string | null
@@ -16821,6 +16850,7 @@ export namespace Prisma {
     Id?: boolean
     Name?: boolean
     IsActive?: boolean
+    AircraftId?: boolean
     DownloadCount?: boolean
     Image?: boolean
     Url?: boolean
@@ -16828,12 +16858,14 @@ export namespace Prisma {
     DownloadUrl?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
+    Aircraft?: boolean | Livery$AircraftArgs<ExtArgs>
   }, ExtArgs["result"]["livery"]>
 
   export type LiverySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     Id?: boolean
     Name?: boolean
     IsActive?: boolean
+    AircraftId?: boolean
     DownloadCount?: boolean
     Image?: boolean
     Url?: boolean
@@ -16841,12 +16873,14 @@ export namespace Prisma {
     DownloadUrl?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
+    Aircraft?: boolean | Livery$AircraftArgs<ExtArgs>
   }, ExtArgs["result"]["livery"]>
 
   export type LiverySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     Id?: boolean
     Name?: boolean
     IsActive?: boolean
+    AircraftId?: boolean
     DownloadCount?: boolean
     Image?: boolean
     Url?: boolean
@@ -16854,12 +16888,14 @@ export namespace Prisma {
     DownloadUrl?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
+    Aircraft?: boolean | Livery$AircraftArgs<ExtArgs>
   }, ExtArgs["result"]["livery"]>
 
   export type LiverySelectScalar = {
     Id?: boolean
     Name?: boolean
     IsActive?: boolean
+    AircraftId?: boolean
     DownloadCount?: boolean
     Image?: boolean
     Url?: boolean
@@ -16869,15 +16905,27 @@ export namespace Prisma {
     UpdatedAt?: boolean
   }
 
-  export type LiveryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "Name" | "IsActive" | "DownloadCount" | "Image" | "Url" | "Description" | "DownloadUrl" | "CreatedAt" | "UpdatedAt", ExtArgs["result"]["livery"]>
+  export type LiveryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "Name" | "IsActive" | "AircraftId" | "DownloadCount" | "Image" | "Url" | "Description" | "DownloadUrl" | "CreatedAt" | "UpdatedAt", ExtArgs["result"]["livery"]>
+  export type LiveryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Aircraft?: boolean | Livery$AircraftArgs<ExtArgs>
+  }
+  export type LiveryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Aircraft?: boolean | Livery$AircraftArgs<ExtArgs>
+  }
+  export type LiveryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Aircraft?: boolean | Livery$AircraftArgs<ExtArgs>
+  }
 
   export type $LiveryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Livery"
-    objects: {}
+    objects: {
+      Aircraft: Prisma.$AircraftPayload<ExtArgs> | null
+    }
     scalars: $Extensions.GetPayloadResult<{
       Id: string
       Name: string
       IsActive: boolean
+      AircraftId: string | null
       DownloadCount: number
       Image: string
       Url: string | null
@@ -17279,6 +17327,7 @@ export namespace Prisma {
    */
   export interface Prisma__LiveryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    Aircraft<T extends Livery$AircraftArgs<ExtArgs> = {}>(args?: Subset<T, Livery$AircraftArgs<ExtArgs>>): Prisma__AircraftClient<$Result.GetResult<Prisma.$AircraftPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -17311,6 +17360,7 @@ export namespace Prisma {
     readonly Id: FieldRef<"Livery", 'String'>
     readonly Name: FieldRef<"Livery", 'String'>
     readonly IsActive: FieldRef<"Livery", 'Boolean'>
+    readonly AircraftId: FieldRef<"Livery", 'String'>
     readonly DownloadCount: FieldRef<"Livery", 'Int'>
     readonly Image: FieldRef<"Livery", 'String'>
     readonly Url: FieldRef<"Livery", 'String'>
@@ -17335,6 +17385,10 @@ export namespace Prisma {
      */
     omit?: LiveryOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveryInclude<ExtArgs> | null
+    /**
      * Filter, which Livery to fetch.
      */
     where: LiveryWhereUniqueInput
@@ -17353,6 +17407,10 @@ export namespace Prisma {
      */
     omit?: LiveryOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveryInclude<ExtArgs> | null
+    /**
      * Filter, which Livery to fetch.
      */
     where: LiveryWhereUniqueInput
@@ -17370,6 +17428,10 @@ export namespace Prisma {
      * Omit specific fields from the Livery
      */
     omit?: LiveryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveryInclude<ExtArgs> | null
     /**
      * Filter, which Livery to fetch.
      */
@@ -17419,6 +17481,10 @@ export namespace Prisma {
      */
     omit?: LiveryOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveryInclude<ExtArgs> | null
+    /**
      * Filter, which Livery to fetch.
      */
     where?: LiveryWhereInput
@@ -17467,6 +17533,10 @@ export namespace Prisma {
      */
     omit?: LiveryOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveryInclude<ExtArgs> | null
+    /**
      * Filter, which Liveries to fetch.
      */
     where?: LiveryWhereInput
@@ -17510,6 +17580,10 @@ export namespace Prisma {
      */
     omit?: LiveryOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveryInclude<ExtArgs> | null
+    /**
      * The data needed to create a Livery.
      */
     data: XOR<LiveryCreateInput, LiveryUncheckedCreateInput>
@@ -17543,6 +17617,10 @@ export namespace Prisma {
      */
     data: LiveryCreateManyInput | LiveryCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveryIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -17557,6 +17635,10 @@ export namespace Prisma {
      * Omit specific fields from the Livery
      */
     omit?: LiveryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveryInclude<ExtArgs> | null
     /**
      * The data needed to update a Livery.
      */
@@ -17609,6 +17691,10 @@ export namespace Prisma {
      * Limit how many Liveries to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveryIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -17623,6 +17709,10 @@ export namespace Prisma {
      * Omit specific fields from the Livery
      */
     omit?: LiveryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveryInclude<ExtArgs> | null
     /**
      * The filter to search for the Livery to update in case it exists.
      */
@@ -17650,6 +17740,10 @@ export namespace Prisma {
      */
     omit?: LiveryOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveryInclude<ExtArgs> | null
+    /**
      * Filter which Livery to delete.
      */
     where: LiveryWhereUniqueInput
@@ -17670,6 +17764,25 @@ export namespace Prisma {
   }
 
   /**
+   * Livery.Aircraft
+   */
+  export type Livery$AircraftArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Aircraft
+     */
+    select?: AircraftSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Aircraft
+     */
+    omit?: AircraftOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AircraftInclude<ExtArgs> | null
+    where?: AircraftWhereInput
+  }
+
+  /**
    * Livery without action
    */
   export type LiveryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -17681,6 +17794,10 @@ export namespace Prisma {
      * Omit specific fields from the Livery
      */
     omit?: LiveryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveryInclude<ExtArgs> | null
   }
 
 
@@ -21653,7 +21770,6 @@ export namespace Prisma {
     IsActive: boolean | null
     DeactivatedAt: Date | null
     VAId: string | null
-    CompanyId: string | null
     VARoleId: string | null
     TotalCargosTransportedLbs: number | null
     TotalPAXsTransported: number | null
@@ -21668,6 +21784,7 @@ export namespace Prisma {
     UserId: string | null
     CreatedAt: Date | null
     UpdatedAt: Date | null
+    CompanyId: string | null
   }
 
   export type MemberMaxAggregateOutputType = {
@@ -21675,7 +21792,6 @@ export namespace Prisma {
     IsActive: boolean | null
     DeactivatedAt: Date | null
     VAId: string | null
-    CompanyId: string | null
     VARoleId: string | null
     TotalCargosTransportedLbs: number | null
     TotalPAXsTransported: number | null
@@ -21690,6 +21806,7 @@ export namespace Prisma {
     UserId: string | null
     CreatedAt: Date | null
     UpdatedAt: Date | null
+    CompanyId: string | null
   }
 
   export type MemberCountAggregateOutputType = {
@@ -21697,7 +21814,6 @@ export namespace Prisma {
     IsActive: number
     DeactivatedAt: number
     VAId: number
-    CompanyId: number
     VARoleId: number
     TotalCargosTransportedLbs: number
     TotalPAXsTransported: number
@@ -21712,6 +21828,7 @@ export namespace Prisma {
     UserId: number
     CreatedAt: number
     UpdatedAt: number
+    CompanyId: number
     _all: number
   }
 
@@ -21741,7 +21858,6 @@ export namespace Prisma {
     IsActive?: true
     DeactivatedAt?: true
     VAId?: true
-    CompanyId?: true
     VARoleId?: true
     TotalCargosTransportedLbs?: true
     TotalPAXsTransported?: true
@@ -21756,6 +21872,7 @@ export namespace Prisma {
     UserId?: true
     CreatedAt?: true
     UpdatedAt?: true
+    CompanyId?: true
   }
 
   export type MemberMaxAggregateInputType = {
@@ -21763,7 +21880,6 @@ export namespace Prisma {
     IsActive?: true
     DeactivatedAt?: true
     VAId?: true
-    CompanyId?: true
     VARoleId?: true
     TotalCargosTransportedLbs?: true
     TotalPAXsTransported?: true
@@ -21778,6 +21894,7 @@ export namespace Prisma {
     UserId?: true
     CreatedAt?: true
     UpdatedAt?: true
+    CompanyId?: true
   }
 
   export type MemberCountAggregateInputType = {
@@ -21785,7 +21902,6 @@ export namespace Prisma {
     IsActive?: true
     DeactivatedAt?: true
     VAId?: true
-    CompanyId?: true
     VARoleId?: true
     TotalCargosTransportedLbs?: true
     TotalPAXsTransported?: true
@@ -21800,6 +21916,7 @@ export namespace Prisma {
     UserId?: true
     CreatedAt?: true
     UpdatedAt?: true
+    CompanyId?: true
     _all?: true
   }
 
@@ -21894,7 +22011,6 @@ export namespace Prisma {
     IsActive: boolean
     DeactivatedAt: Date | null
     VAId: string
-    CompanyId: string
     VARoleId: string
     TotalCargosTransportedLbs: number
     TotalPAXsTransported: number
@@ -21909,6 +22025,7 @@ export namespace Prisma {
     UserId: string | null
     CreatedAt: Date
     UpdatedAt: Date
+    CompanyId: string
     _count: MemberCountAggregateOutputType | null
     _avg: MemberAvgAggregateOutputType | null
     _sum: MemberSumAggregateOutputType | null
@@ -21935,7 +22052,6 @@ export namespace Prisma {
     IsActive?: boolean
     DeactivatedAt?: boolean
     VAId?: boolean
-    CompanyId?: boolean
     VARoleId?: boolean
     TotalCargosTransportedLbs?: boolean
     TotalPAXsTransported?: boolean
@@ -21950,6 +22066,7 @@ export namespace Prisma {
     UserId?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
+    CompanyId?: boolean
     Company?: boolean | CompanyDefaultArgs<ExtArgs>
     VirtualAirline?: boolean | VirtualAirlineDefaultArgs<ExtArgs>
     VARole?: boolean | VirtualAirlineRoleDefaultArgs<ExtArgs>
@@ -21964,7 +22081,6 @@ export namespace Prisma {
     IsActive?: boolean
     DeactivatedAt?: boolean
     VAId?: boolean
-    CompanyId?: boolean
     VARoleId?: boolean
     TotalCargosTransportedLbs?: boolean
     TotalPAXsTransported?: boolean
@@ -21979,6 +22095,7 @@ export namespace Prisma {
     UserId?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
+    CompanyId?: boolean
     Company?: boolean | CompanyDefaultArgs<ExtArgs>
     VirtualAirline?: boolean | VirtualAirlineDefaultArgs<ExtArgs>
     VARole?: boolean | VirtualAirlineRoleDefaultArgs<ExtArgs>
@@ -21990,7 +22107,6 @@ export namespace Prisma {
     IsActive?: boolean
     DeactivatedAt?: boolean
     VAId?: boolean
-    CompanyId?: boolean
     VARoleId?: boolean
     TotalCargosTransportedLbs?: boolean
     TotalPAXsTransported?: boolean
@@ -22005,6 +22121,7 @@ export namespace Prisma {
     UserId?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
+    CompanyId?: boolean
     Company?: boolean | CompanyDefaultArgs<ExtArgs>
     VirtualAirline?: boolean | VirtualAirlineDefaultArgs<ExtArgs>
     VARole?: boolean | VirtualAirlineRoleDefaultArgs<ExtArgs>
@@ -22016,7 +22133,6 @@ export namespace Prisma {
     IsActive?: boolean
     DeactivatedAt?: boolean
     VAId?: boolean
-    CompanyId?: boolean
     VARoleId?: boolean
     TotalCargosTransportedLbs?: boolean
     TotalPAXsTransported?: boolean
@@ -22031,9 +22147,10 @@ export namespace Prisma {
     UserId?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
+    CompanyId?: boolean
   }
 
-  export type MemberOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "IsActive" | "DeactivatedAt" | "VAId" | "CompanyId" | "VARoleId" | "TotalCargosTransportedLbs" | "TotalPAXsTransported" | "TotalEarnedCredits" | "TotalSpentCredits" | "NumberOfFlights" | "FlightHours" | "Color" | "ReputationImpact" | "LastVAFlightDate" | "LastRefresh" | "UserId" | "CreatedAt" | "UpdatedAt", ExtArgs["result"]["member"]>
+  export type MemberOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "IsActive" | "DeactivatedAt" | "VAId" | "VARoleId" | "TotalCargosTransportedLbs" | "TotalPAXsTransported" | "TotalEarnedCredits" | "TotalSpentCredits" | "NumberOfFlights" | "FlightHours" | "Color" | "ReputationImpact" | "LastVAFlightDate" | "LastRefresh" | "UserId" | "CreatedAt" | "UpdatedAt" | "CompanyId", ExtArgs["result"]["member"]>
   export type MemberInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Company?: boolean | CompanyDefaultArgs<ExtArgs>
     VirtualAirline?: boolean | VirtualAirlineDefaultArgs<ExtArgs>
@@ -22071,7 +22188,6 @@ export namespace Prisma {
       IsActive: boolean
       DeactivatedAt: Date | null
       VAId: string
-      CompanyId: string
       VARoleId: string
       TotalCargosTransportedLbs: number
       TotalPAXsTransported: number
@@ -22086,6 +22202,7 @@ export namespace Prisma {
       UserId: string | null
       CreatedAt: Date
       UpdatedAt: Date
+      CompanyId: string
     }, ExtArgs["result"]["member"]>
     composites: {}
   }
@@ -22519,7 +22636,6 @@ export namespace Prisma {
     readonly IsActive: FieldRef<"Member", 'Boolean'>
     readonly DeactivatedAt: FieldRef<"Member", 'DateTime'>
     readonly VAId: FieldRef<"Member", 'String'>
-    readonly CompanyId: FieldRef<"Member", 'String'>
     readonly VARoleId: FieldRef<"Member", 'String'>
     readonly TotalCargosTransportedLbs: FieldRef<"Member", 'Int'>
     readonly TotalPAXsTransported: FieldRef<"Member", 'Int'>
@@ -22534,6 +22650,7 @@ export namespace Prisma {
     readonly UserId: FieldRef<"Member", 'String'>
     readonly CreatedAt: FieldRef<"Member", 'DateTime'>
     readonly UpdatedAt: FieldRef<"Member", 'DateTime'>
+    readonly CompanyId: FieldRef<"Member", 'String'>
   }
     
 
@@ -23054,7 +23171,6 @@ export namespace Prisma {
     LastReportDate: Date | null
     DifficultyLevel: number | null
     WorldId: string | null
-    OwnerId: string | null
     LastRefresh: Date | null
     CreatedAt: Date | null
     UpdatedAt: Date | null
@@ -23073,7 +23189,6 @@ export namespace Prisma {
     LastReportDate: Date | null
     DifficultyLevel: number | null
     WorldId: string | null
-    OwnerId: string | null
     LastRefresh: Date | null
     CreatedAt: Date | null
     UpdatedAt: Date | null
@@ -23092,7 +23207,6 @@ export namespace Prisma {
     LastReportDate: number
     DifficultyLevel: number
     WorldId: number
-    OwnerId: number
     LastRefresh: number
     CreatedAt: number
     UpdatedAt: number
@@ -23127,7 +23241,6 @@ export namespace Prisma {
     LastReportDate?: true
     DifficultyLevel?: true
     WorldId?: true
-    OwnerId?: true
     LastRefresh?: true
     CreatedAt?: true
     UpdatedAt?: true
@@ -23146,7 +23259,6 @@ export namespace Prisma {
     LastReportDate?: true
     DifficultyLevel?: true
     WorldId?: true
-    OwnerId?: true
     LastRefresh?: true
     CreatedAt?: true
     UpdatedAt?: true
@@ -23165,7 +23277,6 @@ export namespace Prisma {
     LastReportDate?: true
     DifficultyLevel?: true
     WorldId?: true
-    OwnerId?: true
     LastRefresh?: true
     CreatedAt?: true
     UpdatedAt?: true
@@ -23271,7 +23382,6 @@ export namespace Prisma {
     LastReportDate: Date | null
     DifficultyLevel: number
     WorldId: string
-    OwnerId: string
     LastRefresh: Date | null
     CreatedAt: Date
     UpdatedAt: Date
@@ -23309,13 +23419,12 @@ export namespace Prisma {
     LastReportDate?: boolean
     DifficultyLevel?: boolean
     WorldId?: boolean
-    OwnerId?: boolean
     LastRefresh?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
     World?: boolean | WorldDefaultArgs<ExtArgs>
-    Owner?: boolean | Company$OwnerArgs<ExtArgs>
     Flights?: boolean | Company$FlightsArgs<ExtArgs>
+    Owner?: boolean | Company$OwnerArgs<ExtArgs>
     _count?: boolean | CompanyCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["company"]>
 
@@ -23332,7 +23441,6 @@ export namespace Prisma {
     LastReportDate?: boolean
     DifficultyLevel?: boolean
     WorldId?: boolean
-    OwnerId?: boolean
     LastRefresh?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
@@ -23352,7 +23460,6 @@ export namespace Prisma {
     LastReportDate?: boolean
     DifficultyLevel?: boolean
     WorldId?: boolean
-    OwnerId?: boolean
     LastRefresh?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
@@ -23372,17 +23479,16 @@ export namespace Prisma {
     LastReportDate?: boolean
     DifficultyLevel?: boolean
     WorldId?: boolean
-    OwnerId?: boolean
     LastRefresh?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
   }
 
-  export type CompanyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "Name" | "AirlineCode" | "CreationDate" | "Level" | "LevelXP" | "Reputation" | "Paused" | "LastConnection" | "LastReportDate" | "DifficultyLevel" | "WorldId" | "OwnerId" | "LastRefresh" | "CreatedAt" | "UpdatedAt", ExtArgs["result"]["company"]>
+  export type CompanyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "Name" | "AirlineCode" | "CreationDate" | "Level" | "LevelXP" | "Reputation" | "Paused" | "LastConnection" | "LastReportDate" | "DifficultyLevel" | "WorldId" | "LastRefresh" | "CreatedAt" | "UpdatedAt", ExtArgs["result"]["company"]>
   export type CompanyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     World?: boolean | WorldDefaultArgs<ExtArgs>
-    Owner?: boolean | Company$OwnerArgs<ExtArgs>
     Flights?: boolean | Company$FlightsArgs<ExtArgs>
+    Owner?: boolean | Company$OwnerArgs<ExtArgs>
     _count?: boolean | CompanyCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CompanyIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -23396,8 +23502,8 @@ export namespace Prisma {
     name: "Company"
     objects: {
       World: Prisma.$WorldPayload<ExtArgs>
-      Owner: Prisma.$MemberPayload<ExtArgs> | null
       Flights: Prisma.$FlightPayload<ExtArgs>[]
+      Owner: Prisma.$MemberPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       Id: string
@@ -23412,7 +23518,6 @@ export namespace Prisma {
       LastReportDate: Date | null
       DifficultyLevel: number
       WorldId: string
-      OwnerId: string
       LastRefresh: Date | null
       CreatedAt: Date
       UpdatedAt: Date
@@ -23811,8 +23916,8 @@ export namespace Prisma {
   export interface Prisma__CompanyClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     World<T extends WorldDefaultArgs<ExtArgs> = {}>(args?: Subset<T, WorldDefaultArgs<ExtArgs>>): Prisma__WorldClient<$Result.GetResult<Prisma.$WorldPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    Owner<T extends Company$OwnerArgs<ExtArgs> = {}>(args?: Subset<T, Company$OwnerArgs<ExtArgs>>): Prisma__MemberClient<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     Flights<T extends Company$FlightsArgs<ExtArgs> = {}>(args?: Subset<T, Company$FlightsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FlightPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Owner<T extends Company$OwnerArgs<ExtArgs> = {}>(args?: Subset<T, Company$OwnerArgs<ExtArgs>>): Prisma__MemberClient<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -23854,7 +23959,6 @@ export namespace Prisma {
     readonly LastReportDate: FieldRef<"Company", 'DateTime'>
     readonly DifficultyLevel: FieldRef<"Company", 'Int'>
     readonly WorldId: FieldRef<"Company", 'String'>
-    readonly OwnerId: FieldRef<"Company", 'String'>
     readonly LastRefresh: FieldRef<"Company", 'DateTime'>
     readonly CreatedAt: FieldRef<"Company", 'DateTime'>
     readonly UpdatedAt: FieldRef<"Company", 'DateTime'>
@@ -24254,25 +24358,6 @@ export namespace Prisma {
   }
 
   /**
-   * Company.Owner
-   */
-  export type Company$OwnerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Member
-     */
-    select?: MemberSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Member
-     */
-    omit?: MemberOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MemberInclude<ExtArgs> | null
-    where?: MemberWhereInput
-  }
-
-  /**
    * Company.Flights
    */
   export type Company$FlightsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -24294,6 +24379,25 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: FlightScalarFieldEnum | FlightScalarFieldEnum[]
+  }
+
+  /**
+   * Company.Owner
+   */
+  export type Company$OwnerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Member
+     */
+    select?: MemberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Member
+     */
+    omit?: MemberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MemberInclude<ExtArgs> | null
+    where?: MemberWhereInput
   }
 
   /**
@@ -24559,6 +24663,7 @@ export namespace Prisma {
     CurrentAirport?: boolean | Aircraft$CurrentAirportArgs<ExtArgs>
     AircraftMaintenance?: boolean | Aircraft$AircraftMaintenanceArgs<ExtArgs>
     Flights?: boolean | Aircraft$FlightsArgs<ExtArgs>
+    Liveries?: boolean | Aircraft$LiveriesArgs<ExtArgs>
     _count?: boolean | AircraftCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["aircraft"]>
 
@@ -24617,6 +24722,7 @@ export namespace Prisma {
     CurrentAirport?: boolean | Aircraft$CurrentAirportArgs<ExtArgs>
     AircraftMaintenance?: boolean | Aircraft$AircraftMaintenanceArgs<ExtArgs>
     Flights?: boolean | Aircraft$FlightsArgs<ExtArgs>
+    Liveries?: boolean | Aircraft$LiveriesArgs<ExtArgs>
     _count?: boolean | AircraftCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type AircraftIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -24641,6 +24747,7 @@ export namespace Prisma {
       CurrentAirport: Prisma.$AirportPayload<ExtArgs> | null
       AircraftMaintenance: Prisma.$AircraftMaintenancePayload<ExtArgs>[]
       Flights: Prisma.$FlightPayload<ExtArgs>[]
+      Liveries: Prisma.$LiveryPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       Id: string
@@ -25053,6 +25160,7 @@ export namespace Prisma {
     CurrentAirport<T extends Aircraft$CurrentAirportArgs<ExtArgs> = {}>(args?: Subset<T, Aircraft$CurrentAirportArgs<ExtArgs>>): Prisma__AirportClient<$Result.GetResult<Prisma.$AirportPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     AircraftMaintenance<T extends Aircraft$AircraftMaintenanceArgs<ExtArgs> = {}>(args?: Subset<T, Aircraft$AircraftMaintenanceArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AircraftMaintenancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Flights<T extends Aircraft$FlightsArgs<ExtArgs> = {}>(args?: Subset<T, Aircraft$FlightsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FlightPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Liveries<T extends Aircraft$LiveriesArgs<ExtArgs> = {}>(args?: Subset<T, Aircraft$LiveriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LiveryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -25552,6 +25660,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: FlightScalarFieldEnum | FlightScalarFieldEnum[]
+  }
+
+  /**
+   * Aircraft.Liveries
+   */
+  export type Aircraft$LiveriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Livery
+     */
+    select?: LiverySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Livery
+     */
+    omit?: LiveryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveryInclude<ExtArgs> | null
+    where?: LiveryWhereInput
+    orderBy?: LiveryOrderByWithRelationInput | LiveryOrderByWithRelationInput[]
+    cursor?: LiveryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LiveryScalarFieldEnum | LiveryScalarFieldEnum[]
   }
 
   /**
@@ -34834,6 +34966,7 @@ export namespace Prisma {
   export const ListenerEventSenderScalarFieldEnum: {
     Id: 'Id',
     Name: 'Name',
+    Description: 'Description',
     Slug: 'Slug',
     Token: 'Token',
     IsActive: 'IsActive',
@@ -34914,6 +35047,7 @@ export namespace Prisma {
     Id: 'Id',
     Name: 'Name',
     IsActive: 'IsActive',
+    AircraftId: 'AircraftId',
     DownloadCount: 'DownloadCount',
     Image: 'Image',
     Url: 'Url',
@@ -34996,7 +35130,6 @@ export namespace Prisma {
     IsActive: 'IsActive',
     DeactivatedAt: 'DeactivatedAt',
     VAId: 'VAId',
-    CompanyId: 'CompanyId',
     VARoleId: 'VARoleId',
     TotalCargosTransportedLbs: 'TotalCargosTransportedLbs',
     TotalPAXsTransported: 'TotalPAXsTransported',
@@ -35010,7 +35143,8 @@ export namespace Prisma {
     LastRefresh: 'LastRefresh',
     UserId: 'UserId',
     CreatedAt: 'CreatedAt',
-    UpdatedAt: 'UpdatedAt'
+    UpdatedAt: 'UpdatedAt',
+    CompanyId: 'CompanyId'
   };
 
   export type MemberScalarFieldEnum = (typeof MemberScalarFieldEnum)[keyof typeof MemberScalarFieldEnum]
@@ -35029,7 +35163,6 @@ export namespace Prisma {
     LastReportDate: 'LastReportDate',
     DifficultyLevel: 'DifficultyLevel',
     WorldId: 'WorldId',
-    OwnerId: 'OwnerId',
     LastRefresh: 'LastRefresh',
     CreatedAt: 'CreatedAt',
     UpdatedAt: 'UpdatedAt'
@@ -35909,6 +36042,7 @@ export namespace Prisma {
     NOT?: ListenerEventSenderWhereInput | ListenerEventSenderWhereInput[]
     Id?: UuidFilter<"ListenerEventSender"> | string
     Name?: StringFilter<"ListenerEventSender"> | string
+    Description?: StringNullableFilter<"ListenerEventSender"> | string | null
     Slug?: StringFilter<"ListenerEventSender"> | string
     Token?: StringFilter<"ListenerEventSender"> | string
     IsActive?: BoolFilter<"ListenerEventSender"> | boolean
@@ -35922,6 +36056,7 @@ export namespace Prisma {
   export type ListenerEventSenderOrderByWithRelationInput = {
     Id?: SortOrder
     Name?: SortOrder
+    Description?: SortOrderInput | SortOrder
     Slug?: SortOrder
     Token?: SortOrder
     IsActive?: SortOrder
@@ -35940,6 +36075,7 @@ export namespace Prisma {
     OR?: ListenerEventSenderWhereInput[]
     NOT?: ListenerEventSenderWhereInput | ListenerEventSenderWhereInput[]
     Name?: StringFilter<"ListenerEventSender"> | string
+    Description?: StringNullableFilter<"ListenerEventSender"> | string | null
     IsActive?: BoolFilter<"ListenerEventSender"> | boolean
     DiscordChannelWebhookId?: UuidNullableFilter<"ListenerEventSender"> | string | null
     CreatedAt?: DateTimeFilter<"ListenerEventSender"> | Date | string
@@ -35951,6 +36087,7 @@ export namespace Prisma {
   export type ListenerEventSenderOrderByWithAggregationInput = {
     Id?: SortOrder
     Name?: SortOrder
+    Description?: SortOrderInput | SortOrder
     Slug?: SortOrder
     Token?: SortOrder
     IsActive?: SortOrder
@@ -35968,6 +36105,7 @@ export namespace Prisma {
     NOT?: ListenerEventSenderScalarWhereWithAggregatesInput | ListenerEventSenderScalarWhereWithAggregatesInput[]
     Id?: UuidWithAggregatesFilter<"ListenerEventSender"> | string
     Name?: StringWithAggregatesFilter<"ListenerEventSender"> | string
+    Description?: StringNullableWithAggregatesFilter<"ListenerEventSender"> | string | null
     Slug?: StringWithAggregatesFilter<"ListenerEventSender"> | string
     Token?: StringWithAggregatesFilter<"ListenerEventSender"> | string
     IsActive?: BoolWithAggregatesFilter<"ListenerEventSender"> | boolean
@@ -36327,6 +36465,7 @@ export namespace Prisma {
     Id?: UuidFilter<"Livery"> | string
     Name?: StringFilter<"Livery"> | string
     IsActive?: BoolFilter<"Livery"> | boolean
+    AircraftId?: UuidNullableFilter<"Livery"> | string | null
     DownloadCount?: IntFilter<"Livery"> | number
     Image?: StringFilter<"Livery"> | string
     Url?: StringNullableFilter<"Livery"> | string | null
@@ -36334,12 +36473,14 @@ export namespace Prisma {
     DownloadUrl?: StringNullableFilter<"Livery"> | string | null
     CreatedAt?: DateTimeFilter<"Livery"> | Date | string
     UpdatedAt?: DateTimeFilter<"Livery"> | Date | string
+    Aircraft?: XOR<AircraftNullableScalarRelationFilter, AircraftWhereInput> | null
   }
 
   export type LiveryOrderByWithRelationInput = {
     Id?: SortOrder
     Name?: SortOrder
     IsActive?: SortOrder
+    AircraftId?: SortOrderInput | SortOrder
     DownloadCount?: SortOrder
     Image?: SortOrder
     Url?: SortOrderInput | SortOrder
@@ -36347,6 +36488,7 @@ export namespace Prisma {
     DownloadUrl?: SortOrderInput | SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
+    Aircraft?: AircraftOrderByWithRelationInput
   }
 
   export type LiveryWhereUniqueInput = Prisma.AtLeast<{
@@ -36356,6 +36498,7 @@ export namespace Prisma {
     NOT?: LiveryWhereInput | LiveryWhereInput[]
     Name?: StringFilter<"Livery"> | string
     IsActive?: BoolFilter<"Livery"> | boolean
+    AircraftId?: UuidNullableFilter<"Livery"> | string | null
     DownloadCount?: IntFilter<"Livery"> | number
     Image?: StringFilter<"Livery"> | string
     Url?: StringNullableFilter<"Livery"> | string | null
@@ -36363,12 +36506,14 @@ export namespace Prisma {
     DownloadUrl?: StringNullableFilter<"Livery"> | string | null
     CreatedAt?: DateTimeFilter<"Livery"> | Date | string
     UpdatedAt?: DateTimeFilter<"Livery"> | Date | string
+    Aircraft?: XOR<AircraftNullableScalarRelationFilter, AircraftWhereInput> | null
   }, "Id">
 
   export type LiveryOrderByWithAggregationInput = {
     Id?: SortOrder
     Name?: SortOrder
     IsActive?: SortOrder
+    AircraftId?: SortOrderInput | SortOrder
     DownloadCount?: SortOrder
     Image?: SortOrder
     Url?: SortOrderInput | SortOrder
@@ -36390,6 +36535,7 @@ export namespace Prisma {
     Id?: UuidWithAggregatesFilter<"Livery"> | string
     Name?: StringWithAggregatesFilter<"Livery"> | string
     IsActive?: BoolWithAggregatesFilter<"Livery"> | boolean
+    AircraftId?: UuidNullableWithAggregatesFilter<"Livery"> | string | null
     DownloadCount?: IntWithAggregatesFilter<"Livery"> | number
     Image?: StringWithAggregatesFilter<"Livery"> | string
     Url?: StringNullableWithAggregatesFilter<"Livery"> | string | null
@@ -36757,7 +36903,6 @@ export namespace Prisma {
     IsActive?: BoolFilter<"Member"> | boolean
     DeactivatedAt?: DateTimeNullableFilter<"Member"> | Date | string | null
     VAId?: UuidFilter<"Member"> | string
-    CompanyId?: UuidFilter<"Member"> | string
     VARoleId?: UuidFilter<"Member"> | string
     TotalCargosTransportedLbs?: IntFilter<"Member"> | number
     TotalPAXsTransported?: IntFilter<"Member"> | number
@@ -36772,6 +36917,7 @@ export namespace Prisma {
     UserId?: UuidNullableFilter<"Member"> | string | null
     CreatedAt?: DateTimeFilter<"Member"> | Date | string
     UpdatedAt?: DateTimeFilter<"Member"> | Date | string
+    CompanyId?: UuidFilter<"Member"> | string
     Company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
     VirtualAirline?: XOR<VirtualAirlineScalarRelationFilter, VirtualAirlineWhereInput>
     VARole?: XOR<VirtualAirlineRoleScalarRelationFilter, VirtualAirlineRoleWhereInput>
@@ -36785,7 +36931,6 @@ export namespace Prisma {
     IsActive?: SortOrder
     DeactivatedAt?: SortOrderInput | SortOrder
     VAId?: SortOrder
-    CompanyId?: SortOrder
     VARoleId?: SortOrder
     TotalCargosTransportedLbs?: SortOrder
     TotalPAXsTransported?: SortOrder
@@ -36800,6 +36945,7 @@ export namespace Prisma {
     UserId?: SortOrderInput | SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
+    CompanyId?: SortOrder
     Company?: CompanyOrderByWithRelationInput
     VirtualAirline?: VirtualAirlineOrderByWithRelationInput
     VARole?: VirtualAirlineRoleOrderByWithRelationInput
@@ -36844,7 +36990,6 @@ export namespace Prisma {
     IsActive?: SortOrder
     DeactivatedAt?: SortOrderInput | SortOrder
     VAId?: SortOrder
-    CompanyId?: SortOrder
     VARoleId?: SortOrder
     TotalCargosTransportedLbs?: SortOrder
     TotalPAXsTransported?: SortOrder
@@ -36859,6 +37004,7 @@ export namespace Prisma {
     UserId?: SortOrderInput | SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
+    CompanyId?: SortOrder
     _count?: MemberCountOrderByAggregateInput
     _avg?: MemberAvgOrderByAggregateInput
     _max?: MemberMaxOrderByAggregateInput
@@ -36874,7 +37020,6 @@ export namespace Prisma {
     IsActive?: BoolWithAggregatesFilter<"Member"> | boolean
     DeactivatedAt?: DateTimeNullableWithAggregatesFilter<"Member"> | Date | string | null
     VAId?: UuidWithAggregatesFilter<"Member"> | string
-    CompanyId?: UuidWithAggregatesFilter<"Member"> | string
     VARoleId?: UuidWithAggregatesFilter<"Member"> | string
     TotalCargosTransportedLbs?: IntWithAggregatesFilter<"Member"> | number
     TotalPAXsTransported?: IntWithAggregatesFilter<"Member"> | number
@@ -36889,6 +37034,7 @@ export namespace Prisma {
     UserId?: UuidNullableWithAggregatesFilter<"Member"> | string | null
     CreatedAt?: DateTimeWithAggregatesFilter<"Member"> | Date | string
     UpdatedAt?: DateTimeWithAggregatesFilter<"Member"> | Date | string
+    CompanyId?: UuidWithAggregatesFilter<"Member"> | string
   }
 
   export type CompanyWhereInput = {
@@ -36907,13 +37053,12 @@ export namespace Prisma {
     LastReportDate?: DateTimeNullableFilter<"Company"> | Date | string | null
     DifficultyLevel?: IntFilter<"Company"> | number
     WorldId?: UuidFilter<"Company"> | string
-    OwnerId?: UuidFilter<"Company"> | string
     LastRefresh?: DateTimeNullableFilter<"Company"> | Date | string | null
     CreatedAt?: DateTimeFilter<"Company"> | Date | string
     UpdatedAt?: DateTimeFilter<"Company"> | Date | string
     World?: XOR<WorldScalarRelationFilter, WorldWhereInput>
-    Owner?: XOR<MemberNullableScalarRelationFilter, MemberWhereInput> | null
     Flights?: FlightListRelationFilter
+    Owner?: XOR<MemberNullableScalarRelationFilter, MemberWhereInput> | null
   }
 
   export type CompanyOrderByWithRelationInput = {
@@ -36929,13 +37074,12 @@ export namespace Prisma {
     LastReportDate?: SortOrderInput | SortOrder
     DifficultyLevel?: SortOrder
     WorldId?: SortOrder
-    OwnerId?: SortOrder
     LastRefresh?: SortOrderInput | SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
     World?: WorldOrderByWithRelationInput
-    Owner?: MemberOrderByWithRelationInput
     Flights?: FlightOrderByRelationAggregateInput
+    Owner?: MemberOrderByWithRelationInput
   }
 
   export type CompanyWhereUniqueInput = Prisma.AtLeast<{
@@ -36954,13 +37098,12 @@ export namespace Prisma {
     LastReportDate?: DateTimeNullableFilter<"Company"> | Date | string | null
     DifficultyLevel?: IntFilter<"Company"> | number
     WorldId?: UuidFilter<"Company"> | string
-    OwnerId?: UuidFilter<"Company"> | string
     LastRefresh?: DateTimeNullableFilter<"Company"> | Date | string | null
     CreatedAt?: DateTimeFilter<"Company"> | Date | string
     UpdatedAt?: DateTimeFilter<"Company"> | Date | string
     World?: XOR<WorldScalarRelationFilter, WorldWhereInput>
-    Owner?: XOR<MemberNullableScalarRelationFilter, MemberWhereInput> | null
     Flights?: FlightListRelationFilter
+    Owner?: XOR<MemberNullableScalarRelationFilter, MemberWhereInput> | null
   }, "Id" | "AirlineCode">
 
   export type CompanyOrderByWithAggregationInput = {
@@ -36976,7 +37119,6 @@ export namespace Prisma {
     LastReportDate?: SortOrderInput | SortOrder
     DifficultyLevel?: SortOrder
     WorldId?: SortOrder
-    OwnerId?: SortOrder
     LastRefresh?: SortOrderInput | SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
@@ -37003,7 +37145,6 @@ export namespace Prisma {
     LastReportDate?: DateTimeNullableWithAggregatesFilter<"Company"> | Date | string | null
     DifficultyLevel?: IntWithAggregatesFilter<"Company"> | number
     WorldId?: UuidWithAggregatesFilter<"Company"> | string
-    OwnerId?: UuidWithAggregatesFilter<"Company"> | string
     LastRefresh?: DateTimeNullableWithAggregatesFilter<"Company"> | Date | string | null
     CreatedAt?: DateTimeWithAggregatesFilter<"Company"> | Date | string
     UpdatedAt?: DateTimeWithAggregatesFilter<"Company"> | Date | string
@@ -37029,6 +37170,7 @@ export namespace Prisma {
     CurrentAirport?: XOR<AirportNullableScalarRelationFilter, AirportWhereInput> | null
     AircraftMaintenance?: AircraftMaintenanceListRelationFilter
     Flights?: FlightListRelationFilter
+    Liveries?: LiveryListRelationFilter
   }
 
   export type AircraftOrderByWithRelationInput = {
@@ -37048,6 +37190,7 @@ export namespace Prisma {
     CurrentAirport?: AirportOrderByWithRelationInput
     AircraftMaintenance?: AircraftMaintenanceOrderByRelationAggregateInput
     Flights?: FlightOrderByRelationAggregateInput
+    Liveries?: LiveryOrderByRelationAggregateInput
   }
 
   export type AircraftWhereUniqueInput = Prisma.AtLeast<{
@@ -37070,6 +37213,7 @@ export namespace Prisma {
     CurrentAirport?: XOR<AirportNullableScalarRelationFilter, AirportWhereInput> | null
     AircraftMaintenance?: AircraftMaintenanceListRelationFilter
     Flights?: FlightListRelationFilter
+    Liveries?: LiveryListRelationFilter
   }, "Id" | "Identifier">
 
   export type AircraftOrderByWithAggregationInput = {
@@ -38490,6 +38634,7 @@ export namespace Prisma {
   export type ListenerEventSenderCreateInput = {
     Id?: string
     Name: string
+    Description?: string | null
     Slug: string
     Token: string
     IsActive?: boolean
@@ -38502,6 +38647,7 @@ export namespace Prisma {
   export type ListenerEventSenderUncheckedCreateInput = {
     Id?: string
     Name: string
+    Description?: string | null
     Slug: string
     Token: string
     IsActive?: boolean
@@ -38514,6 +38660,7 @@ export namespace Prisma {
   export type ListenerEventSenderUpdateInput = {
     Id?: StringFieldUpdateOperationsInput | string
     Name?: StringFieldUpdateOperationsInput | string
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
     Slug?: StringFieldUpdateOperationsInput | string
     Token?: StringFieldUpdateOperationsInput | string
     IsActive?: BoolFieldUpdateOperationsInput | boolean
@@ -38526,6 +38673,7 @@ export namespace Prisma {
   export type ListenerEventSenderUncheckedUpdateInput = {
     Id?: StringFieldUpdateOperationsInput | string
     Name?: StringFieldUpdateOperationsInput | string
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
     Slug?: StringFieldUpdateOperationsInput | string
     Token?: StringFieldUpdateOperationsInput | string
     IsActive?: BoolFieldUpdateOperationsInput | boolean
@@ -38538,6 +38686,7 @@ export namespace Prisma {
   export type ListenerEventSenderCreateManyInput = {
     Id?: string
     Name: string
+    Description?: string | null
     Slug: string
     Token: string
     IsActive?: boolean
@@ -38549,6 +38698,7 @@ export namespace Prisma {
   export type ListenerEventSenderUpdateManyMutationInput = {
     Id?: StringFieldUpdateOperationsInput | string
     Name?: StringFieldUpdateOperationsInput | string
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
     Slug?: StringFieldUpdateOperationsInput | string
     Token?: StringFieldUpdateOperationsInput | string
     IsActive?: BoolFieldUpdateOperationsInput | boolean
@@ -38559,6 +38709,7 @@ export namespace Prisma {
   export type ListenerEventSenderUncheckedUpdateManyInput = {
     Id?: StringFieldUpdateOperationsInput | string
     Name?: StringFieldUpdateOperationsInput | string
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
     Slug?: StringFieldUpdateOperationsInput | string
     Token?: StringFieldUpdateOperationsInput | string
     IsActive?: BoolFieldUpdateOperationsInput | boolean
@@ -38964,12 +39115,14 @@ export namespace Prisma {
     DownloadUrl?: string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    Aircraft?: AircraftCreateNestedOneWithoutLiveriesInput
   }
 
   export type LiveryUncheckedCreateInput = {
     Id?: string
     Name: string
     IsActive?: boolean
+    AircraftId?: string | null
     DownloadCount?: number
     Image: string
     Url?: string | null
@@ -38990,12 +39143,14 @@ export namespace Prisma {
     DownloadUrl?: NullableStringFieldUpdateOperationsInput | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Aircraft?: AircraftUpdateOneWithoutLiveriesNestedInput
   }
 
   export type LiveryUncheckedUpdateInput = {
     Id?: StringFieldUpdateOperationsInput | string
     Name?: StringFieldUpdateOperationsInput | string
     IsActive?: BoolFieldUpdateOperationsInput | boolean
+    AircraftId?: NullableStringFieldUpdateOperationsInput | string | null
     DownloadCount?: IntFieldUpdateOperationsInput | number
     Image?: StringFieldUpdateOperationsInput | string
     Url?: NullableStringFieldUpdateOperationsInput | string | null
@@ -39009,6 +39164,7 @@ export namespace Prisma {
     Id?: string
     Name: string
     IsActive?: boolean
+    AircraftId?: string | null
     DownloadCount?: number
     Image: string
     Url?: string | null
@@ -39035,6 +39191,7 @@ export namespace Prisma {
     Id?: StringFieldUpdateOperationsInput | string
     Name?: StringFieldUpdateOperationsInput | string
     IsActive?: BoolFieldUpdateOperationsInput | boolean
+    AircraftId?: NullableStringFieldUpdateOperationsInput | string | null
     DownloadCount?: IntFieldUpdateOperationsInput | number
     Image?: StringFieldUpdateOperationsInput | string
     Url?: NullableStringFieldUpdateOperationsInput | string | null
@@ -39495,7 +39652,6 @@ export namespace Prisma {
     IsActive?: boolean
     DeactivatedAt?: Date | string | null
     VAId: string
-    CompanyId: string
     VARoleId: string
     TotalCargosTransportedLbs: number
     TotalPAXsTransported: number
@@ -39510,6 +39666,7 @@ export namespace Prisma {
     UserId?: string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    CompanyId: string
     Flights?: FlightUncheckedCreateNestedManyWithoutMemberInput
     FlightRoutes?: FlightRouteUncheckedCreateNestedManyWithoutMemberInput
   }
@@ -39543,7 +39700,6 @@ export namespace Prisma {
     IsActive?: BoolFieldUpdateOperationsInput | boolean
     DeactivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     VAId?: StringFieldUpdateOperationsInput | string
-    CompanyId?: StringFieldUpdateOperationsInput | string
     VARoleId?: StringFieldUpdateOperationsInput | string
     TotalCargosTransportedLbs?: IntFieldUpdateOperationsInput | number
     TotalPAXsTransported?: IntFieldUpdateOperationsInput | number
@@ -39558,6 +39714,7 @@ export namespace Prisma {
     UserId?: NullableStringFieldUpdateOperationsInput | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    CompanyId?: StringFieldUpdateOperationsInput | string
     Flights?: FlightUncheckedUpdateManyWithoutMemberNestedInput
     FlightRoutes?: FlightRouteUncheckedUpdateManyWithoutMemberNestedInput
   }
@@ -39567,7 +39724,6 @@ export namespace Prisma {
     IsActive?: boolean
     DeactivatedAt?: Date | string | null
     VAId: string
-    CompanyId: string
     VARoleId: string
     TotalCargosTransportedLbs: number
     TotalPAXsTransported: number
@@ -39582,6 +39738,7 @@ export namespace Prisma {
     UserId?: string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    CompanyId: string
   }
 
   export type MemberUpdateManyMutationInput = {
@@ -39607,7 +39764,6 @@ export namespace Prisma {
     IsActive?: BoolFieldUpdateOperationsInput | boolean
     DeactivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     VAId?: StringFieldUpdateOperationsInput | string
-    CompanyId?: StringFieldUpdateOperationsInput | string
     VARoleId?: StringFieldUpdateOperationsInput | string
     TotalCargosTransportedLbs?: IntFieldUpdateOperationsInput | number
     TotalPAXsTransported?: IntFieldUpdateOperationsInput | number
@@ -39622,6 +39778,7 @@ export namespace Prisma {
     UserId?: NullableStringFieldUpdateOperationsInput | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    CompanyId?: StringFieldUpdateOperationsInput | string
   }
 
   export type CompanyCreateInput = {
@@ -39636,13 +39793,12 @@ export namespace Prisma {
     LastConnection?: Date | string | null
     LastReportDate?: Date | string | null
     DifficultyLevel: number
-    OwnerId: string
     LastRefresh?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
     World: WorldCreateNestedOneWithoutCompaniesInput
-    Owner?: MemberCreateNestedOneWithoutCompanyInput
     Flights?: FlightCreateNestedManyWithoutCompanyInput
+    Owner?: MemberCreateNestedOneWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateInput = {
@@ -39658,12 +39814,11 @@ export namespace Prisma {
     LastReportDate?: Date | string | null
     DifficultyLevel: number
     WorldId: string
-    OwnerId: string
     LastRefresh?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
-    Owner?: MemberUncheckedCreateNestedOneWithoutCompanyInput
     Flights?: FlightUncheckedCreateNestedManyWithoutCompanyInput
+    Owner?: MemberUncheckedCreateNestedOneWithoutCompanyInput
   }
 
   export type CompanyUpdateInput = {
@@ -39678,13 +39833,12 @@ export namespace Prisma {
     LastConnection?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     LastReportDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     DifficultyLevel?: IntFieldUpdateOperationsInput | number
-    OwnerId?: StringFieldUpdateOperationsInput | string
     LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     World?: WorldUpdateOneRequiredWithoutCompaniesNestedInput
-    Owner?: MemberUpdateOneWithoutCompanyNestedInput
     Flights?: FlightUpdateManyWithoutCompanyNestedInput
+    Owner?: MemberUpdateOneWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateInput = {
@@ -39700,12 +39854,11 @@ export namespace Prisma {
     LastReportDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     DifficultyLevel?: IntFieldUpdateOperationsInput | number
     WorldId?: StringFieldUpdateOperationsInput | string
-    OwnerId?: StringFieldUpdateOperationsInput | string
     LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Owner?: MemberUncheckedUpdateOneWithoutCompanyNestedInput
     Flights?: FlightUncheckedUpdateManyWithoutCompanyNestedInput
+    Owner?: MemberUncheckedUpdateOneWithoutCompanyNestedInput
   }
 
   export type CompanyCreateManyInput = {
@@ -39721,7 +39874,6 @@ export namespace Prisma {
     LastReportDate?: Date | string | null
     DifficultyLevel: number
     WorldId: string
-    OwnerId: string
     LastRefresh?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
@@ -39739,7 +39891,6 @@ export namespace Prisma {
     LastConnection?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     LastReportDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     DifficultyLevel?: IntFieldUpdateOperationsInput | number
-    OwnerId?: StringFieldUpdateOperationsInput | string
     LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -39758,7 +39909,6 @@ export namespace Prisma {
     LastReportDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     DifficultyLevel?: IntFieldUpdateOperationsInput | number
     WorldId?: StringFieldUpdateOperationsInput | string
-    OwnerId?: StringFieldUpdateOperationsInput | string
     LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -39777,6 +39927,7 @@ export namespace Prisma {
     CurrentAirport?: AirportCreateNestedOneWithoutAircraftAtAirportInput
     AircraftMaintenance?: AircraftMaintenanceCreateNestedManyWithoutAircraftInput
     Flights?: FlightCreateNestedManyWithoutAircraftInput
+    Liveries?: LiveryCreateNestedManyWithoutAircraftInput
   }
 
   export type AircraftUncheckedCreateInput = {
@@ -39792,6 +39943,7 @@ export namespace Prisma {
     UpdatedAt?: Date | string
     AircraftMaintenance?: AircraftMaintenanceUncheckedCreateNestedManyWithoutAircraftInput
     Flights?: FlightUncheckedCreateNestedManyWithoutAircraftInput
+    Liveries?: LiveryUncheckedCreateNestedManyWithoutAircraftInput
   }
 
   export type AircraftUpdateInput = {
@@ -39807,6 +39959,7 @@ export namespace Prisma {
     CurrentAirport?: AirportUpdateOneWithoutAircraftAtAirportNestedInput
     AircraftMaintenance?: AircraftMaintenanceUpdateManyWithoutAircraftNestedInput
     Flights?: FlightUpdateManyWithoutAircraftNestedInput
+    Liveries?: LiveryUpdateManyWithoutAircraftNestedInput
   }
 
   export type AircraftUncheckedUpdateInput = {
@@ -39822,6 +39975,7 @@ export namespace Prisma {
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     AircraftMaintenance?: AircraftMaintenanceUncheckedUpdateManyWithoutAircraftNestedInput
     Flights?: FlightUncheckedUpdateManyWithoutAircraftNestedInput
+    Liveries?: LiveryUncheckedUpdateManyWithoutAircraftNestedInput
   }
 
   export type AircraftCreateManyInput = {
@@ -41485,6 +41639,7 @@ export namespace Prisma {
   export type ListenerEventSenderCountOrderByAggregateInput = {
     Id?: SortOrder
     Name?: SortOrder
+    Description?: SortOrder
     Slug?: SortOrder
     Token?: SortOrder
     IsActive?: SortOrder
@@ -41496,6 +41651,7 @@ export namespace Prisma {
   export type ListenerEventSenderMaxOrderByAggregateInput = {
     Id?: SortOrder
     Name?: SortOrder
+    Description?: SortOrder
     Slug?: SortOrder
     Token?: SortOrder
     IsActive?: SortOrder
@@ -41507,6 +41663,7 @@ export namespace Prisma {
   export type ListenerEventSenderMinOrderByAggregateInput = {
     Id?: SortOrder
     Name?: SortOrder
+    Description?: SortOrder
     Slug?: SortOrder
     Token?: SortOrder
     IsActive?: SortOrder
@@ -41750,10 +41907,16 @@ export namespace Prisma {
     Id?: SortOrder
   }
 
+  export type AircraftNullableScalarRelationFilter = {
+    is?: AircraftWhereInput | null
+    isNot?: AircraftWhereInput | null
+  }
+
   export type LiveryCountOrderByAggregateInput = {
     Id?: SortOrder
     Name?: SortOrder
     IsActive?: SortOrder
+    AircraftId?: SortOrder
     DownloadCount?: SortOrder
     Image?: SortOrder
     Url?: SortOrder
@@ -41771,6 +41934,7 @@ export namespace Prisma {
     Id?: SortOrder
     Name?: SortOrder
     IsActive?: SortOrder
+    AircraftId?: SortOrder
     DownloadCount?: SortOrder
     Image?: SortOrder
     Url?: SortOrder
@@ -41784,6 +41948,7 @@ export namespace Prisma {
     Id?: SortOrder
     Name?: SortOrder
     IsActive?: SortOrder
+    AircraftId?: SortOrder
     DownloadCount?: SortOrder
     Image?: SortOrder
     Url?: SortOrder
@@ -42149,7 +42314,6 @@ export namespace Prisma {
     IsActive?: SortOrder
     DeactivatedAt?: SortOrder
     VAId?: SortOrder
-    CompanyId?: SortOrder
     VARoleId?: SortOrder
     TotalCargosTransportedLbs?: SortOrder
     TotalPAXsTransported?: SortOrder
@@ -42164,6 +42328,7 @@ export namespace Prisma {
     UserId?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
+    CompanyId?: SortOrder
   }
 
   export type MemberAvgOrderByAggregateInput = {
@@ -42181,7 +42346,6 @@ export namespace Prisma {
     IsActive?: SortOrder
     DeactivatedAt?: SortOrder
     VAId?: SortOrder
-    CompanyId?: SortOrder
     VARoleId?: SortOrder
     TotalCargosTransportedLbs?: SortOrder
     TotalPAXsTransported?: SortOrder
@@ -42196,6 +42360,7 @@ export namespace Prisma {
     UserId?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
+    CompanyId?: SortOrder
   }
 
   export type MemberMinOrderByAggregateInput = {
@@ -42203,7 +42368,6 @@ export namespace Prisma {
     IsActive?: SortOrder
     DeactivatedAt?: SortOrder
     VAId?: SortOrder
-    CompanyId?: SortOrder
     VARoleId?: SortOrder
     TotalCargosTransportedLbs?: SortOrder
     TotalPAXsTransported?: SortOrder
@@ -42218,6 +42382,7 @@ export namespace Prisma {
     UserId?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
+    CompanyId?: SortOrder
   }
 
   export type MemberSumOrderByAggregateInput = {
@@ -42253,7 +42418,6 @@ export namespace Prisma {
     LastReportDate?: SortOrder
     DifficultyLevel?: SortOrder
     WorldId?: SortOrder
-    OwnerId?: SortOrder
     LastRefresh?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
@@ -42279,7 +42443,6 @@ export namespace Prisma {
     LastReportDate?: SortOrder
     DifficultyLevel?: SortOrder
     WorldId?: SortOrder
-    OwnerId?: SortOrder
     LastRefresh?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
@@ -42298,7 +42461,6 @@ export namespace Prisma {
     LastReportDate?: SortOrder
     DifficultyLevel?: SortOrder
     WorldId?: SortOrder
-    OwnerId?: SortOrder
     LastRefresh?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
@@ -42332,7 +42494,17 @@ export namespace Prisma {
     none?: AircraftMaintenanceWhereInput
   }
 
+  export type LiveryListRelationFilter = {
+    every?: LiveryWhereInput
+    some?: LiveryWhereInput
+    none?: LiveryWhereInput
+  }
+
   export type AircraftMaintenanceOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type LiveryOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -42580,11 +42752,6 @@ export namespace Prisma {
   export type VirtualAirlineNullableScalarRelationFilter = {
     is?: VirtualAirlineWhereInput | null
     isNot?: VirtualAirlineWhereInput | null
-  }
-
-  export type AircraftNullableScalarRelationFilter = {
-    is?: AircraftWhereInput | null
-    isNot?: AircraftWhereInput | null
   }
 
   export type FlightCountOrderByAggregateInput = {
@@ -43641,6 +43808,22 @@ export namespace Prisma {
     deleteMany?: RoleScalarWhereInput | RoleScalarWhereInput[]
   }
 
+  export type AircraftCreateNestedOneWithoutLiveriesInput = {
+    create?: XOR<AircraftCreateWithoutLiveriesInput, AircraftUncheckedCreateWithoutLiveriesInput>
+    connectOrCreate?: AircraftCreateOrConnectWithoutLiveriesInput
+    connect?: AircraftWhereUniqueInput
+  }
+
+  export type AircraftUpdateOneWithoutLiveriesNestedInput = {
+    create?: XOR<AircraftCreateWithoutLiveriesInput, AircraftUncheckedCreateWithoutLiveriesInput>
+    connectOrCreate?: AircraftCreateOrConnectWithoutLiveriesInput
+    upsert?: AircraftUpsertWithoutLiveriesInput
+    disconnect?: AircraftWhereInput | boolean
+    delete?: AircraftWhereInput | boolean
+    connect?: AircraftWhereUniqueInput
+    update?: XOR<XOR<AircraftUpdateToOneWithWhereWithoutLiveriesInput, AircraftUpdateWithoutLiveriesInput>, AircraftUncheckedUpdateWithoutLiveriesInput>
+  }
+
   export type WorldCreateNestedOneWithoutVirtualAirlinesInput = {
     create?: XOR<WorldCreateWithoutVirtualAirlinesInput, WorldUncheckedCreateWithoutVirtualAirlinesInput>
     connectOrCreate?: WorldCreateOrConnectWithoutVirtualAirlinesInput
@@ -44161,12 +44344,6 @@ export namespace Prisma {
     connect?: WorldWhereUniqueInput
   }
 
-  export type MemberCreateNestedOneWithoutCompanyInput = {
-    create?: XOR<MemberCreateWithoutCompanyInput, MemberUncheckedCreateWithoutCompanyInput>
-    connectOrCreate?: MemberCreateOrConnectWithoutCompanyInput
-    connect?: MemberWhereUniqueInput
-  }
-
   export type FlightCreateNestedManyWithoutCompanyInput = {
     create?: XOR<FlightCreateWithoutCompanyInput, FlightUncheckedCreateWithoutCompanyInput> | FlightCreateWithoutCompanyInput[] | FlightUncheckedCreateWithoutCompanyInput[]
     connectOrCreate?: FlightCreateOrConnectWithoutCompanyInput | FlightCreateOrConnectWithoutCompanyInput[]
@@ -44174,7 +44351,7 @@ export namespace Prisma {
     connect?: FlightWhereUniqueInput | FlightWhereUniqueInput[]
   }
 
-  export type MemberUncheckedCreateNestedOneWithoutCompanyInput = {
+  export type MemberCreateNestedOneWithoutCompanyInput = {
     create?: XOR<MemberCreateWithoutCompanyInput, MemberUncheckedCreateWithoutCompanyInput>
     connectOrCreate?: MemberCreateOrConnectWithoutCompanyInput
     connect?: MemberWhereUniqueInput
@@ -44187,22 +44364,18 @@ export namespace Prisma {
     connect?: FlightWhereUniqueInput | FlightWhereUniqueInput[]
   }
 
+  export type MemberUncheckedCreateNestedOneWithoutCompanyInput = {
+    create?: XOR<MemberCreateWithoutCompanyInput, MemberUncheckedCreateWithoutCompanyInput>
+    connectOrCreate?: MemberCreateOrConnectWithoutCompanyInput
+    connect?: MemberWhereUniqueInput
+  }
+
   export type WorldUpdateOneRequiredWithoutCompaniesNestedInput = {
     create?: XOR<WorldCreateWithoutCompaniesInput, WorldUncheckedCreateWithoutCompaniesInput>
     connectOrCreate?: WorldCreateOrConnectWithoutCompaniesInput
     upsert?: WorldUpsertWithoutCompaniesInput
     connect?: WorldWhereUniqueInput
     update?: XOR<XOR<WorldUpdateToOneWithWhereWithoutCompaniesInput, WorldUpdateWithoutCompaniesInput>, WorldUncheckedUpdateWithoutCompaniesInput>
-  }
-
-  export type MemberUpdateOneWithoutCompanyNestedInput = {
-    create?: XOR<MemberCreateWithoutCompanyInput, MemberUncheckedCreateWithoutCompanyInput>
-    connectOrCreate?: MemberCreateOrConnectWithoutCompanyInput
-    upsert?: MemberUpsertWithoutCompanyInput
-    disconnect?: MemberWhereInput | boolean
-    delete?: MemberWhereInput | boolean
-    connect?: MemberWhereUniqueInput
-    update?: XOR<XOR<MemberUpdateToOneWithWhereWithoutCompanyInput, MemberUpdateWithoutCompanyInput>, MemberUncheckedUpdateWithoutCompanyInput>
   }
 
   export type FlightUpdateManyWithoutCompanyNestedInput = {
@@ -44219,7 +44392,7 @@ export namespace Prisma {
     deleteMany?: FlightScalarWhereInput | FlightScalarWhereInput[]
   }
 
-  export type MemberUncheckedUpdateOneWithoutCompanyNestedInput = {
+  export type MemberUpdateOneWithoutCompanyNestedInput = {
     create?: XOR<MemberCreateWithoutCompanyInput, MemberUncheckedCreateWithoutCompanyInput>
     connectOrCreate?: MemberCreateOrConnectWithoutCompanyInput
     upsert?: MemberUpsertWithoutCompanyInput
@@ -44241,6 +44414,16 @@ export namespace Prisma {
     update?: FlightUpdateWithWhereUniqueWithoutCompanyInput | FlightUpdateWithWhereUniqueWithoutCompanyInput[]
     updateMany?: FlightUpdateManyWithWhereWithoutCompanyInput | FlightUpdateManyWithWhereWithoutCompanyInput[]
     deleteMany?: FlightScalarWhereInput | FlightScalarWhereInput[]
+  }
+
+  export type MemberUncheckedUpdateOneWithoutCompanyNestedInput = {
+    create?: XOR<MemberCreateWithoutCompanyInput, MemberUncheckedCreateWithoutCompanyInput>
+    connectOrCreate?: MemberCreateOrConnectWithoutCompanyInput
+    upsert?: MemberUpsertWithoutCompanyInput
+    disconnect?: MemberWhereInput | boolean
+    delete?: MemberWhereInput | boolean
+    connect?: MemberWhereUniqueInput
+    update?: XOR<XOR<MemberUpdateToOneWithWhereWithoutCompanyInput, MemberUpdateWithoutCompanyInput>, MemberUncheckedUpdateWithoutCompanyInput>
   }
 
   export type AircraftClassCreateNestedOneWithoutAircraftsInput = {
@@ -44281,6 +44464,13 @@ export namespace Prisma {
     connect?: FlightWhereUniqueInput | FlightWhereUniqueInput[]
   }
 
+  export type LiveryCreateNestedManyWithoutAircraftInput = {
+    create?: XOR<LiveryCreateWithoutAircraftInput, LiveryUncheckedCreateWithoutAircraftInput> | LiveryCreateWithoutAircraftInput[] | LiveryUncheckedCreateWithoutAircraftInput[]
+    connectOrCreate?: LiveryCreateOrConnectWithoutAircraftInput | LiveryCreateOrConnectWithoutAircraftInput[]
+    createMany?: LiveryCreateManyAircraftInputEnvelope
+    connect?: LiveryWhereUniqueInput | LiveryWhereUniqueInput[]
+  }
+
   export type AircraftMaintenanceUncheckedCreateNestedManyWithoutAircraftInput = {
     create?: XOR<AircraftMaintenanceCreateWithoutAircraftInput, AircraftMaintenanceUncheckedCreateWithoutAircraftInput> | AircraftMaintenanceCreateWithoutAircraftInput[] | AircraftMaintenanceUncheckedCreateWithoutAircraftInput[]
     connectOrCreate?: AircraftMaintenanceCreateOrConnectWithoutAircraftInput | AircraftMaintenanceCreateOrConnectWithoutAircraftInput[]
@@ -44293,6 +44483,13 @@ export namespace Prisma {
     connectOrCreate?: FlightCreateOrConnectWithoutAircraftInput | FlightCreateOrConnectWithoutAircraftInput[]
     createMany?: FlightCreateManyAircraftInputEnvelope
     connect?: FlightWhereUniqueInput | FlightWhereUniqueInput[]
+  }
+
+  export type LiveryUncheckedCreateNestedManyWithoutAircraftInput = {
+    create?: XOR<LiveryCreateWithoutAircraftInput, LiveryUncheckedCreateWithoutAircraftInput> | LiveryCreateWithoutAircraftInput[] | LiveryUncheckedCreateWithoutAircraftInput[]
+    connectOrCreate?: LiveryCreateOrConnectWithoutAircraftInput | LiveryCreateOrConnectWithoutAircraftInput[]
+    createMany?: LiveryCreateManyAircraftInputEnvelope
+    connect?: LiveryWhereUniqueInput | LiveryWhereUniqueInput[]
   }
 
   export type AircraftClassUpdateOneRequiredWithoutAircraftsNestedInput = {
@@ -44357,6 +44554,20 @@ export namespace Prisma {
     deleteMany?: FlightScalarWhereInput | FlightScalarWhereInput[]
   }
 
+  export type LiveryUpdateManyWithoutAircraftNestedInput = {
+    create?: XOR<LiveryCreateWithoutAircraftInput, LiveryUncheckedCreateWithoutAircraftInput> | LiveryCreateWithoutAircraftInput[] | LiveryUncheckedCreateWithoutAircraftInput[]
+    connectOrCreate?: LiveryCreateOrConnectWithoutAircraftInput | LiveryCreateOrConnectWithoutAircraftInput[]
+    upsert?: LiveryUpsertWithWhereUniqueWithoutAircraftInput | LiveryUpsertWithWhereUniqueWithoutAircraftInput[]
+    createMany?: LiveryCreateManyAircraftInputEnvelope
+    set?: LiveryWhereUniqueInput | LiveryWhereUniqueInput[]
+    disconnect?: LiveryWhereUniqueInput | LiveryWhereUniqueInput[]
+    delete?: LiveryWhereUniqueInput | LiveryWhereUniqueInput[]
+    connect?: LiveryWhereUniqueInput | LiveryWhereUniqueInput[]
+    update?: LiveryUpdateWithWhereUniqueWithoutAircraftInput | LiveryUpdateWithWhereUniqueWithoutAircraftInput[]
+    updateMany?: LiveryUpdateManyWithWhereWithoutAircraftInput | LiveryUpdateManyWithWhereWithoutAircraftInput[]
+    deleteMany?: LiveryScalarWhereInput | LiveryScalarWhereInput[]
+  }
+
   export type AircraftMaintenanceUncheckedUpdateManyWithoutAircraftNestedInput = {
     create?: XOR<AircraftMaintenanceCreateWithoutAircraftInput, AircraftMaintenanceUncheckedCreateWithoutAircraftInput> | AircraftMaintenanceCreateWithoutAircraftInput[] | AircraftMaintenanceUncheckedCreateWithoutAircraftInput[]
     connectOrCreate?: AircraftMaintenanceCreateOrConnectWithoutAircraftInput | AircraftMaintenanceCreateOrConnectWithoutAircraftInput[]
@@ -44383,6 +44594,20 @@ export namespace Prisma {
     update?: FlightUpdateWithWhereUniqueWithoutAircraftInput | FlightUpdateWithWhereUniqueWithoutAircraftInput[]
     updateMany?: FlightUpdateManyWithWhereWithoutAircraftInput | FlightUpdateManyWithWhereWithoutAircraftInput[]
     deleteMany?: FlightScalarWhereInput | FlightScalarWhereInput[]
+  }
+
+  export type LiveryUncheckedUpdateManyWithoutAircraftNestedInput = {
+    create?: XOR<LiveryCreateWithoutAircraftInput, LiveryUncheckedCreateWithoutAircraftInput> | LiveryCreateWithoutAircraftInput[] | LiveryUncheckedCreateWithoutAircraftInput[]
+    connectOrCreate?: LiveryCreateOrConnectWithoutAircraftInput | LiveryCreateOrConnectWithoutAircraftInput[]
+    upsert?: LiveryUpsertWithWhereUniqueWithoutAircraftInput | LiveryUpsertWithWhereUniqueWithoutAircraftInput[]
+    createMany?: LiveryCreateManyAircraftInputEnvelope
+    set?: LiveryWhereUniqueInput | LiveryWhereUniqueInput[]
+    disconnect?: LiveryWhereUniqueInput | LiveryWhereUniqueInput[]
+    delete?: LiveryWhereUniqueInput | LiveryWhereUniqueInput[]
+    connect?: LiveryWhereUniqueInput | LiveryWhereUniqueInput[]
+    update?: LiveryUpdateWithWhereUniqueWithoutAircraftInput | LiveryUpdateWithWhereUniqueWithoutAircraftInput[]
+    updateMany?: LiveryUpdateManyWithWhereWithoutAircraftInput | LiveryUpdateManyWithWhereWithoutAircraftInput[]
+    deleteMany?: LiveryScalarWhereInput | LiveryScalarWhereInput[]
   }
 
   export type AircraftCreateNestedManyWithoutAircraftClassInput = {
@@ -45726,6 +45951,7 @@ export namespace Prisma {
   export type ListenerEventSenderCreateWithoutDiscordChannelWebhookInput = {
     Id?: string
     Name: string
+    Description?: string | null
     Slug: string
     Token: string
     IsActive?: boolean
@@ -45737,6 +45963,7 @@ export namespace Prisma {
   export type ListenerEventSenderUncheckedCreateWithoutDiscordChannelWebhookInput = {
     Id?: string
     Name: string
+    Description?: string | null
     Slug: string
     Token: string
     IsActive?: boolean
@@ -45793,6 +46020,7 @@ export namespace Prisma {
     NOT?: ListenerEventSenderScalarWhereInput | ListenerEventSenderScalarWhereInput[]
     Id?: UuidFilter<"ListenerEventSender"> | string
     Name?: StringFilter<"ListenerEventSender"> | string
+    Description?: StringNullableFilter<"ListenerEventSender"> | string | null
     Slug?: StringFilter<"ListenerEventSender"> | string
     Token?: StringFilter<"ListenerEventSender"> | string
     IsActive?: BoolFilter<"ListenerEventSender"> | boolean
@@ -45831,6 +46059,7 @@ export namespace Prisma {
   export type ListenerEventSenderCreateWithoutListenerEventsInput = {
     Id?: string
     Name: string
+    Description?: string | null
     Slug: string
     Token: string
     IsActive?: boolean
@@ -45842,6 +46071,7 @@ export namespace Prisma {
   export type ListenerEventSenderUncheckedCreateWithoutListenerEventsInput = {
     Id?: string
     Name: string
+    Description?: string | null
     Slug: string
     Token: string
     IsActive?: boolean
@@ -45902,6 +46132,7 @@ export namespace Prisma {
   export type ListenerEventSenderUpdateWithoutListenerEventsInput = {
     Id?: StringFieldUpdateOperationsInput | string
     Name?: StringFieldUpdateOperationsInput | string
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
     Slug?: StringFieldUpdateOperationsInput | string
     Token?: StringFieldUpdateOperationsInput | string
     IsActive?: BoolFieldUpdateOperationsInput | boolean
@@ -45913,6 +46144,7 @@ export namespace Prisma {
   export type ListenerEventSenderUncheckedUpdateWithoutListenerEventsInput = {
     Id?: StringFieldUpdateOperationsInput | string
     Name?: StringFieldUpdateOperationsInput | string
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
     Slug?: StringFieldUpdateOperationsInput | string
     Token?: StringFieldUpdateOperationsInput | string
     IsActive?: BoolFieldUpdateOperationsInput | boolean
@@ -46121,7 +46353,6 @@ export namespace Prisma {
     IsActive?: boolean
     DeactivatedAt?: Date | string | null
     VAId: string
-    CompanyId: string
     VARoleId: string
     TotalCargosTransportedLbs: number
     TotalPAXsTransported: number
@@ -46135,6 +46366,7 @@ export namespace Prisma {
     LastRefresh?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    CompanyId: string
     Flights?: FlightUncheckedCreateNestedManyWithoutMemberInput
     FlightRoutes?: FlightRouteUncheckedCreateNestedManyWithoutMemberInput
   }
@@ -46256,7 +46488,6 @@ export namespace Prisma {
     IsActive?: BoolFilter<"Member"> | boolean
     DeactivatedAt?: DateTimeNullableFilter<"Member"> | Date | string | null
     VAId?: UuidFilter<"Member"> | string
-    CompanyId?: UuidFilter<"Member"> | string
     VARoleId?: UuidFilter<"Member"> | string
     TotalCargosTransportedLbs?: IntFilter<"Member"> | number
     TotalPAXsTransported?: IntFilter<"Member"> | number
@@ -46271,6 +46502,7 @@ export namespace Prisma {
     UserId?: UuidNullableFilter<"Member"> | string | null
     CreatedAt?: DateTimeFilter<"Member"> | Date | string
     UpdatedAt?: DateTimeFilter<"Member"> | Date | string
+    CompanyId?: UuidFilter<"Member"> | string
   }
 
   export type InviteCodeUpsertWithoutUserInput = {
@@ -46699,6 +46931,82 @@ export namespace Prisma {
     data: XOR<RoleUpdateManyMutationInput, RoleUncheckedUpdateManyWithoutPermissionsInput>
   }
 
+  export type AircraftCreateWithoutLiveriesInput = {
+    Id: string
+    Identifier: string
+    DisplayName: string
+    LastRefresh?: Date | string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    AircraftClass: AircraftClassCreateNestedOneWithoutAircraftsInput
+    VirtualAirline: VirtualAirlineCreateNestedOneWithoutFleetInput
+    AircraftStatus: AircraftStatusCreateNestedOneWithoutAircraftsInput
+    CurrentAirport?: AirportCreateNestedOneWithoutAircraftAtAirportInput
+    AircraftMaintenance?: AircraftMaintenanceCreateNestedManyWithoutAircraftInput
+    Flights?: FlightCreateNestedManyWithoutAircraftInput
+  }
+
+  export type AircraftUncheckedCreateWithoutLiveriesInput = {
+    Id: string
+    Identifier: string
+    DisplayName: string
+    AircraftStatusId: number
+    AircraftClassId: string
+    VirtualAirlineId: string
+    CurrentAirportId?: string | null
+    LastRefresh?: Date | string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    AircraftMaintenance?: AircraftMaintenanceUncheckedCreateNestedManyWithoutAircraftInput
+    Flights?: FlightUncheckedCreateNestedManyWithoutAircraftInput
+  }
+
+  export type AircraftCreateOrConnectWithoutLiveriesInput = {
+    where: AircraftWhereUniqueInput
+    create: XOR<AircraftCreateWithoutLiveriesInput, AircraftUncheckedCreateWithoutLiveriesInput>
+  }
+
+  export type AircraftUpsertWithoutLiveriesInput = {
+    update: XOR<AircraftUpdateWithoutLiveriesInput, AircraftUncheckedUpdateWithoutLiveriesInput>
+    create: XOR<AircraftCreateWithoutLiveriesInput, AircraftUncheckedCreateWithoutLiveriesInput>
+    where?: AircraftWhereInput
+  }
+
+  export type AircraftUpdateToOneWithWhereWithoutLiveriesInput = {
+    where?: AircraftWhereInput
+    data: XOR<AircraftUpdateWithoutLiveriesInput, AircraftUncheckedUpdateWithoutLiveriesInput>
+  }
+
+  export type AircraftUpdateWithoutLiveriesInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Identifier?: StringFieldUpdateOperationsInput | string
+    DisplayName?: StringFieldUpdateOperationsInput | string
+    LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    AircraftClass?: AircraftClassUpdateOneRequiredWithoutAircraftsNestedInput
+    VirtualAirline?: VirtualAirlineUpdateOneRequiredWithoutFleetNestedInput
+    AircraftStatus?: AircraftStatusUpdateOneRequiredWithoutAircraftsNestedInput
+    CurrentAirport?: AirportUpdateOneWithoutAircraftAtAirportNestedInput
+    AircraftMaintenance?: AircraftMaintenanceUpdateManyWithoutAircraftNestedInput
+    Flights?: FlightUpdateManyWithoutAircraftNestedInput
+  }
+
+  export type AircraftUncheckedUpdateWithoutLiveriesInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Identifier?: StringFieldUpdateOperationsInput | string
+    DisplayName?: StringFieldUpdateOperationsInput | string
+    AircraftStatusId?: IntFieldUpdateOperationsInput | number
+    AircraftClassId?: StringFieldUpdateOperationsInput | string
+    VirtualAirlineId?: StringFieldUpdateOperationsInput | string
+    CurrentAirportId?: NullableStringFieldUpdateOperationsInput | string | null
+    LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    AircraftMaintenance?: AircraftMaintenanceUncheckedUpdateManyWithoutAircraftNestedInput
+    Flights?: FlightUncheckedUpdateManyWithoutAircraftNestedInput
+  }
+
   export type WorldCreateWithoutVirtualAirlinesInput = {
     Id: string
     Name: string
@@ -46799,7 +47107,6 @@ export namespace Prisma {
     Id: string
     IsActive?: boolean
     DeactivatedAt?: Date | string | null
-    CompanyId: string
     VARoleId: string
     TotalCargosTransportedLbs: number
     TotalPAXsTransported: number
@@ -46814,6 +47121,7 @@ export namespace Prisma {
     UserId?: string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    CompanyId: string
     Flights?: FlightUncheckedCreateNestedManyWithoutMemberInput
     FlightRoutes?: FlightRouteUncheckedCreateNestedManyWithoutMemberInput
   }
@@ -46840,6 +47148,7 @@ export namespace Prisma {
     CurrentAirport?: AirportCreateNestedOneWithoutAircraftAtAirportInput
     AircraftMaintenance?: AircraftMaintenanceCreateNestedManyWithoutAircraftInput
     Flights?: FlightCreateNestedManyWithoutAircraftInput
+    Liveries?: LiveryCreateNestedManyWithoutAircraftInput
   }
 
   export type AircraftUncheckedCreateWithoutVirtualAirlineInput = {
@@ -46854,6 +47163,7 @@ export namespace Prisma {
     UpdatedAt?: Date | string
     AircraftMaintenance?: AircraftMaintenanceUncheckedCreateNestedManyWithoutAircraftInput
     Flights?: FlightUncheckedCreateNestedManyWithoutAircraftInput
+    Liveries?: LiveryUncheckedCreateNestedManyWithoutAircraftInput
   }
 
   export type AircraftCreateOrConnectWithoutVirtualAirlineInput = {
@@ -47332,7 +47642,6 @@ export namespace Prisma {
     IsActive?: boolean
     DeactivatedAt?: Date | string | null
     VAId: string
-    CompanyId: string
     TotalCargosTransportedLbs: number
     TotalPAXsTransported: number
     TotalEarnedCredits: Decimal | DecimalJsLike | number | string
@@ -47346,6 +47655,7 @@ export namespace Prisma {
     UserId?: string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    CompanyId: string
     Flights?: FlightUncheckedCreateNestedManyWithoutMemberInput
     FlightRoutes?: FlightRouteUncheckedCreateNestedManyWithoutMemberInput
   }
@@ -47569,12 +47879,11 @@ export namespace Prisma {
     LastConnection?: Date | string | null
     LastReportDate?: Date | string | null
     DifficultyLevel: number
-    OwnerId: string
     LastRefresh?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
-    Owner?: MemberCreateNestedOneWithoutCompanyInput
     Flights?: FlightCreateNestedManyWithoutCompanyInput
+    Owner?: MemberCreateNestedOneWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutWorldInput = {
@@ -47589,12 +47898,11 @@ export namespace Prisma {
     LastConnection?: Date | string | null
     LastReportDate?: Date | string | null
     DifficultyLevel: number
-    OwnerId: string
     LastRefresh?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
-    Owner?: MemberUncheckedCreateNestedOneWithoutCompanyInput
     Flights?: FlightUncheckedCreateNestedManyWithoutCompanyInput
+    Owner?: MemberUncheckedCreateNestedOneWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutWorldInput = {
@@ -47687,7 +47995,6 @@ export namespace Prisma {
     LastReportDate?: DateTimeNullableFilter<"Company"> | Date | string | null
     DifficultyLevel?: IntFilter<"Company"> | number
     WorldId?: UuidFilter<"Company"> | string
-    OwnerId?: UuidFilter<"Company"> | string
     LastRefresh?: DateTimeNullableFilter<"Company"> | Date | string | null
     CreatedAt?: DateTimeFilter<"Company"> | Date | string
     UpdatedAt?: DateTimeFilter<"Company"> | Date | string
@@ -47705,7 +48012,6 @@ export namespace Prisma {
     LastConnection?: Date | string | null
     LastReportDate?: Date | string | null
     DifficultyLevel: number
-    OwnerId: string
     LastRefresh?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
@@ -47726,7 +48032,6 @@ export namespace Prisma {
     LastReportDate?: Date | string | null
     DifficultyLevel: number
     WorldId: string
-    OwnerId: string
     LastRefresh?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
@@ -48096,7 +48401,6 @@ export namespace Prisma {
     LastConnection?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     LastReportDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     DifficultyLevel?: IntFieldUpdateOperationsInput | number
-    OwnerId?: StringFieldUpdateOperationsInput | string
     LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -48117,7 +48421,6 @@ export namespace Prisma {
     LastReportDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     DifficultyLevel?: IntFieldUpdateOperationsInput | number
     WorldId?: StringFieldUpdateOperationsInput | string
-    OwnerId?: StringFieldUpdateOperationsInput | string
     LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -48378,57 +48681,6 @@ export namespace Prisma {
     create: XOR<WorldCreateWithoutCompaniesInput, WorldUncheckedCreateWithoutCompaniesInput>
   }
 
-  export type MemberCreateWithoutCompanyInput = {
-    Id: string
-    IsActive?: boolean
-    DeactivatedAt?: Date | string | null
-    TotalCargosTransportedLbs: number
-    TotalPAXsTransported: number
-    TotalEarnedCredits: Decimal | DecimalJsLike | number | string
-    TotalSpentCredits: Decimal | DecimalJsLike | number | string
-    NumberOfFlights: number
-    FlightHours: Decimal | DecimalJsLike | number | string
-    Color: string
-    ReputationImpact: Decimal | DecimalJsLike | number | string
-    LastVAFlightDate?: Date | string | null
-    LastRefresh?: Date | string | null
-    CreatedAt?: Date | string
-    UpdatedAt?: Date | string
-    VirtualAirline: VirtualAirlineCreateNestedOneWithoutMembersInput
-    VARole: VirtualAirlineRoleCreateNestedOneWithoutMembersInput
-    Flights?: FlightCreateNestedManyWithoutMemberInput
-    User?: UserCreateNestedOneWithoutMembersInput
-    FlightRoutes?: FlightRouteCreateNestedManyWithoutMemberInput
-  }
-
-  export type MemberUncheckedCreateWithoutCompanyInput = {
-    Id: string
-    IsActive?: boolean
-    DeactivatedAt?: Date | string | null
-    VAId: string
-    VARoleId: string
-    TotalCargosTransportedLbs: number
-    TotalPAXsTransported: number
-    TotalEarnedCredits: Decimal | DecimalJsLike | number | string
-    TotalSpentCredits: Decimal | DecimalJsLike | number | string
-    NumberOfFlights: number
-    FlightHours: Decimal | DecimalJsLike | number | string
-    Color: string
-    ReputationImpact: Decimal | DecimalJsLike | number | string
-    LastVAFlightDate?: Date | string | null
-    LastRefresh?: Date | string | null
-    UserId?: string | null
-    CreatedAt?: Date | string
-    UpdatedAt?: Date | string
-    Flights?: FlightUncheckedCreateNestedManyWithoutMemberInput
-    FlightRoutes?: FlightRouteUncheckedCreateNestedManyWithoutMemberInput
-  }
-
-  export type MemberCreateOrConnectWithoutCompanyInput = {
-    where: MemberWhereUniqueInput
-    create: XOR<MemberCreateWithoutCompanyInput, MemberUncheckedCreateWithoutCompanyInput>
-  }
-
   export type FlightCreateWithoutCompanyInput = {
     Id: string
     Registered: boolean
@@ -48571,6 +48823,57 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type MemberCreateWithoutCompanyInput = {
+    Id: string
+    IsActive?: boolean
+    DeactivatedAt?: Date | string | null
+    TotalCargosTransportedLbs: number
+    TotalPAXsTransported: number
+    TotalEarnedCredits: Decimal | DecimalJsLike | number | string
+    TotalSpentCredits: Decimal | DecimalJsLike | number | string
+    NumberOfFlights: number
+    FlightHours: Decimal | DecimalJsLike | number | string
+    Color: string
+    ReputationImpact: Decimal | DecimalJsLike | number | string
+    LastVAFlightDate?: Date | string | null
+    LastRefresh?: Date | string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    VirtualAirline: VirtualAirlineCreateNestedOneWithoutMembersInput
+    VARole: VirtualAirlineRoleCreateNestedOneWithoutMembersInput
+    Flights?: FlightCreateNestedManyWithoutMemberInput
+    User?: UserCreateNestedOneWithoutMembersInput
+    FlightRoutes?: FlightRouteCreateNestedManyWithoutMemberInput
+  }
+
+  export type MemberUncheckedCreateWithoutCompanyInput = {
+    Id: string
+    IsActive?: boolean
+    DeactivatedAt?: Date | string | null
+    VAId: string
+    VARoleId: string
+    TotalCargosTransportedLbs: number
+    TotalPAXsTransported: number
+    TotalEarnedCredits: Decimal | DecimalJsLike | number | string
+    TotalSpentCredits: Decimal | DecimalJsLike | number | string
+    NumberOfFlights: number
+    FlightHours: Decimal | DecimalJsLike | number | string
+    Color: string
+    ReputationImpact: Decimal | DecimalJsLike | number | string
+    LastVAFlightDate?: Date | string | null
+    LastRefresh?: Date | string | null
+    UserId?: string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    Flights?: FlightUncheckedCreateNestedManyWithoutMemberInput
+    FlightRoutes?: FlightRouteUncheckedCreateNestedManyWithoutMemberInput
+  }
+
+  export type MemberCreateOrConnectWithoutCompanyInput = {
+    where: MemberWhereUniqueInput
+    create: XOR<MemberCreateWithoutCompanyInput, MemberUncheckedCreateWithoutCompanyInput>
+  }
+
   export type WorldUpsertWithoutCompaniesInput = {
     update: XOR<WorldUpdateWithoutCompaniesInput, WorldUncheckedUpdateWithoutCompaniesInput>
     create: XOR<WorldCreateWithoutCompaniesInput, WorldUncheckedCreateWithoutCompaniesInput>
@@ -48600,6 +48903,22 @@ export namespace Prisma {
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     VirtualAirlines?: VirtualAirlineUncheckedUpdateManyWithoutWorldNestedInput
+  }
+
+  export type FlightUpsertWithWhereUniqueWithoutCompanyInput = {
+    where: FlightWhereUniqueInput
+    update: XOR<FlightUpdateWithoutCompanyInput, FlightUncheckedUpdateWithoutCompanyInput>
+    create: XOR<FlightCreateWithoutCompanyInput, FlightUncheckedCreateWithoutCompanyInput>
+  }
+
+  export type FlightUpdateWithWhereUniqueWithoutCompanyInput = {
+    where: FlightWhereUniqueInput
+    data: XOR<FlightUpdateWithoutCompanyInput, FlightUncheckedUpdateWithoutCompanyInput>
+  }
+
+  export type FlightUpdateManyWithWhereWithoutCompanyInput = {
+    where: FlightScalarWhereInput
+    data: XOR<FlightUpdateManyMutationInput, FlightUncheckedUpdateManyWithoutCompanyInput>
   }
 
   export type MemberUpsertWithoutCompanyInput = {
@@ -48657,22 +48976,6 @@ export namespace Prisma {
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Flights?: FlightUncheckedUpdateManyWithoutMemberNestedInput
     FlightRoutes?: FlightRouteUncheckedUpdateManyWithoutMemberNestedInput
-  }
-
-  export type FlightUpsertWithWhereUniqueWithoutCompanyInput = {
-    where: FlightWhereUniqueInput
-    update: XOR<FlightUpdateWithoutCompanyInput, FlightUncheckedUpdateWithoutCompanyInput>
-    create: XOR<FlightCreateWithoutCompanyInput, FlightUncheckedCreateWithoutCompanyInput>
-  }
-
-  export type FlightUpdateWithWhereUniqueWithoutCompanyInput = {
-    where: FlightWhereUniqueInput
-    data: XOR<FlightUpdateWithoutCompanyInput, FlightUncheckedUpdateWithoutCompanyInput>
-  }
-
-  export type FlightUpdateManyWithWhereWithoutCompanyInput = {
-    where: FlightScalarWhereInput
-    data: XOR<FlightUpdateManyMutationInput, FlightUncheckedUpdateManyWithoutCompanyInput>
   }
 
   export type AircraftClassCreateWithoutAircraftsInput = {
@@ -49013,6 +49316,42 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type LiveryCreateWithoutAircraftInput = {
+    Id?: string
+    Name: string
+    IsActive?: boolean
+    DownloadCount?: number
+    Image: string
+    Url?: string | null
+    Description?: string | null
+    DownloadUrl?: string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+  }
+
+  export type LiveryUncheckedCreateWithoutAircraftInput = {
+    Id?: string
+    Name: string
+    IsActive?: boolean
+    DownloadCount?: number
+    Image: string
+    Url?: string | null
+    Description?: string | null
+    DownloadUrl?: string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+  }
+
+  export type LiveryCreateOrConnectWithoutAircraftInput = {
+    where: LiveryWhereUniqueInput
+    create: XOR<LiveryCreateWithoutAircraftInput, LiveryUncheckedCreateWithoutAircraftInput>
+  }
+
+  export type LiveryCreateManyAircraftInputEnvelope = {
+    data: LiveryCreateManyAircraftInput | LiveryCreateManyAircraftInput[]
+    skipDuplicates?: boolean
+  }
+
   export type AircraftClassUpsertWithoutAircraftsInput = {
     update: XOR<AircraftClassUpdateWithoutAircraftsInput, AircraftClassUncheckedUpdateWithoutAircraftsInput>
     create: XOR<AircraftClassCreateWithoutAircraftsInput, AircraftClassUncheckedCreateWithoutAircraftsInput>
@@ -49241,6 +49580,39 @@ export namespace Prisma {
     data: XOR<FlightUpdateManyMutationInput, FlightUncheckedUpdateManyWithoutAircraftInput>
   }
 
+  export type LiveryUpsertWithWhereUniqueWithoutAircraftInput = {
+    where: LiveryWhereUniqueInput
+    update: XOR<LiveryUpdateWithoutAircraftInput, LiveryUncheckedUpdateWithoutAircraftInput>
+    create: XOR<LiveryCreateWithoutAircraftInput, LiveryUncheckedCreateWithoutAircraftInput>
+  }
+
+  export type LiveryUpdateWithWhereUniqueWithoutAircraftInput = {
+    where: LiveryWhereUniqueInput
+    data: XOR<LiveryUpdateWithoutAircraftInput, LiveryUncheckedUpdateWithoutAircraftInput>
+  }
+
+  export type LiveryUpdateManyWithWhereWithoutAircraftInput = {
+    where: LiveryScalarWhereInput
+    data: XOR<LiveryUpdateManyMutationInput, LiveryUncheckedUpdateManyWithoutAircraftInput>
+  }
+
+  export type LiveryScalarWhereInput = {
+    AND?: LiveryScalarWhereInput | LiveryScalarWhereInput[]
+    OR?: LiveryScalarWhereInput[]
+    NOT?: LiveryScalarWhereInput | LiveryScalarWhereInput[]
+    Id?: UuidFilter<"Livery"> | string
+    Name?: StringFilter<"Livery"> | string
+    IsActive?: BoolFilter<"Livery"> | boolean
+    AircraftId?: UuidNullableFilter<"Livery"> | string | null
+    DownloadCount?: IntFilter<"Livery"> | number
+    Image?: StringFilter<"Livery"> | string
+    Url?: StringNullableFilter<"Livery"> | string | null
+    Description?: StringNullableFilter<"Livery"> | string | null
+    DownloadUrl?: StringNullableFilter<"Livery"> | string | null
+    CreatedAt?: DateTimeFilter<"Livery"> | Date | string
+    UpdatedAt?: DateTimeFilter<"Livery"> | Date | string
+  }
+
   export type AircraftCreateWithoutAircraftClassInput = {
     Id: string
     Identifier: string
@@ -49253,6 +49625,7 @@ export namespace Prisma {
     CurrentAirport?: AirportCreateNestedOneWithoutAircraftAtAirportInput
     AircraftMaintenance?: AircraftMaintenanceCreateNestedManyWithoutAircraftInput
     Flights?: FlightCreateNestedManyWithoutAircraftInput
+    Liveries?: LiveryCreateNestedManyWithoutAircraftInput
   }
 
   export type AircraftUncheckedCreateWithoutAircraftClassInput = {
@@ -49267,6 +49640,7 @@ export namespace Prisma {
     UpdatedAt?: Date | string
     AircraftMaintenance?: AircraftMaintenanceUncheckedCreateNestedManyWithoutAircraftInput
     Flights?: FlightUncheckedCreateNestedManyWithoutAircraftInput
+    Liveries?: LiveryUncheckedCreateNestedManyWithoutAircraftInput
   }
 
   export type AircraftCreateOrConnectWithoutAircraftClassInput = {
@@ -49307,6 +49681,7 @@ export namespace Prisma {
     AircraftStatus: AircraftStatusCreateNestedOneWithoutAircraftsInput
     CurrentAirport?: AirportCreateNestedOneWithoutAircraftAtAirportInput
     Flights?: FlightCreateNestedManyWithoutAircraftInput
+    Liveries?: LiveryCreateNestedManyWithoutAircraftInput
   }
 
   export type AircraftUncheckedCreateWithoutAircraftMaintenanceInput = {
@@ -49321,6 +49696,7 @@ export namespace Prisma {
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
     Flights?: FlightUncheckedCreateNestedManyWithoutAircraftInput
+    Liveries?: LiveryUncheckedCreateNestedManyWithoutAircraftInput
   }
 
   export type AircraftCreateOrConnectWithoutAircraftMaintenanceInput = {
@@ -49351,6 +49727,7 @@ export namespace Prisma {
     AircraftStatus?: AircraftStatusUpdateOneRequiredWithoutAircraftsNestedInput
     CurrentAirport?: AirportUpdateOneWithoutAircraftAtAirportNestedInput
     Flights?: FlightUpdateManyWithoutAircraftNestedInput
+    Liveries?: LiveryUpdateManyWithoutAircraftNestedInput
   }
 
   export type AircraftUncheckedUpdateWithoutAircraftMaintenanceInput = {
@@ -49365,6 +49742,7 @@ export namespace Prisma {
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Flights?: FlightUncheckedUpdateManyWithoutAircraftNestedInput
+    Liveries?: LiveryUncheckedUpdateManyWithoutAircraftNestedInput
   }
 
   export type AircraftCreateWithoutAircraftStatusInput = {
@@ -49379,6 +49757,7 @@ export namespace Prisma {
     CurrentAirport?: AirportCreateNestedOneWithoutAircraftAtAirportInput
     AircraftMaintenance?: AircraftMaintenanceCreateNestedManyWithoutAircraftInput
     Flights?: FlightCreateNestedManyWithoutAircraftInput
+    Liveries?: LiveryCreateNestedManyWithoutAircraftInput
   }
 
   export type AircraftUncheckedCreateWithoutAircraftStatusInput = {
@@ -49393,6 +49772,7 @@ export namespace Prisma {
     UpdatedAt?: Date | string
     AircraftMaintenance?: AircraftMaintenanceUncheckedCreateNestedManyWithoutAircraftInput
     Flights?: FlightUncheckedCreateNestedManyWithoutAircraftInput
+    Liveries?: LiveryUncheckedCreateNestedManyWithoutAircraftInput
   }
 
   export type AircraftCreateOrConnectWithoutAircraftStatusInput = {
@@ -49433,6 +49813,7 @@ export namespace Prisma {
     AircraftStatus: AircraftStatusCreateNestedOneWithoutAircraftsInput
     AircraftMaintenance?: AircraftMaintenanceCreateNestedManyWithoutAircraftInput
     Flights?: FlightCreateNestedManyWithoutAircraftInput
+    Liveries?: LiveryCreateNestedManyWithoutAircraftInput
   }
 
   export type AircraftUncheckedCreateWithoutCurrentAirportInput = {
@@ -49447,6 +49828,7 @@ export namespace Prisma {
     UpdatedAt?: Date | string
     AircraftMaintenance?: AircraftMaintenanceUncheckedCreateNestedManyWithoutAircraftInput
     Flights?: FlightUncheckedCreateNestedManyWithoutAircraftInput
+    Liveries?: LiveryUncheckedCreateNestedManyWithoutAircraftInput
   }
 
   export type AircraftCreateOrConnectWithoutCurrentAirportInput = {
@@ -50119,7 +50501,6 @@ export namespace Prisma {
     LastConnection?: Date | string | null
     LastReportDate?: Date | string | null
     DifficultyLevel: number
-    OwnerId: string
     LastRefresh?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
@@ -50140,7 +50521,6 @@ export namespace Prisma {
     LastReportDate?: Date | string | null
     DifficultyLevel: number
     WorldId: string
-    OwnerId: string
     LastRefresh?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
@@ -50233,6 +50613,7 @@ export namespace Prisma {
     AircraftStatus: AircraftStatusCreateNestedOneWithoutAircraftsInput
     CurrentAirport?: AirportCreateNestedOneWithoutAircraftAtAirportInput
     AircraftMaintenance?: AircraftMaintenanceCreateNestedManyWithoutAircraftInput
+    Liveries?: LiveryCreateNestedManyWithoutAircraftInput
   }
 
   export type AircraftUncheckedCreateWithoutFlightsInput = {
@@ -50247,6 +50628,7 @@ export namespace Prisma {
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
     AircraftMaintenance?: AircraftMaintenanceUncheckedCreateNestedManyWithoutAircraftInput
+    Liveries?: LiveryUncheckedCreateNestedManyWithoutAircraftInput
   }
 
   export type AircraftCreateOrConnectWithoutFlightsInput = {
@@ -50504,7 +50886,6 @@ export namespace Prisma {
     IsActive?: boolean
     DeactivatedAt?: Date | string | null
     VAId: string
-    CompanyId: string
     VARoleId: string
     TotalCargosTransportedLbs: number
     TotalPAXsTransported: number
@@ -50519,6 +50900,7 @@ export namespace Prisma {
     UserId?: string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    CompanyId: string
     FlightRoutes?: FlightRouteUncheckedCreateNestedManyWithoutMemberInput
   }
 
@@ -50550,7 +50932,6 @@ export namespace Prisma {
     LastConnection?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     LastReportDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     DifficultyLevel?: IntFieldUpdateOperationsInput | number
-    OwnerId?: StringFieldUpdateOperationsInput | string
     LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -50571,7 +50952,6 @@ export namespace Prisma {
     LastReportDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     DifficultyLevel?: IntFieldUpdateOperationsInput | number
     WorldId?: StringFieldUpdateOperationsInput | string
-    OwnerId?: StringFieldUpdateOperationsInput | string
     LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -50676,6 +51056,7 @@ export namespace Prisma {
     AircraftStatus?: AircraftStatusUpdateOneRequiredWithoutAircraftsNestedInput
     CurrentAirport?: AirportUpdateOneWithoutAircraftAtAirportNestedInput
     AircraftMaintenance?: AircraftMaintenanceUpdateManyWithoutAircraftNestedInput
+    Liveries?: LiveryUpdateManyWithoutAircraftNestedInput
   }
 
   export type AircraftUncheckedUpdateWithoutFlightsInput = {
@@ -50690,6 +51071,7 @@ export namespace Prisma {
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     AircraftMaintenance?: AircraftMaintenanceUncheckedUpdateManyWithoutAircraftNestedInput
+    Liveries?: LiveryUncheckedUpdateManyWithoutAircraftNestedInput
   }
 
   export type FlightRouteUpsertWithWhereUniqueWithoutFlightInput = {
@@ -50967,7 +51349,6 @@ export namespace Prisma {
     IsActive?: BoolFieldUpdateOperationsInput | boolean
     DeactivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     VAId?: StringFieldUpdateOperationsInput | string
-    CompanyId?: StringFieldUpdateOperationsInput | string
     VARoleId?: StringFieldUpdateOperationsInput | string
     TotalCargosTransportedLbs?: IntFieldUpdateOperationsInput | number
     TotalPAXsTransported?: IntFieldUpdateOperationsInput | number
@@ -50982,6 +51363,7 @@ export namespace Prisma {
     UserId?: NullableStringFieldUpdateOperationsInput | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    CompanyId?: StringFieldUpdateOperationsInput | string
     FlightRoutes?: FlightRouteUncheckedUpdateManyWithoutMemberNestedInput
   }
 
@@ -51150,7 +51532,6 @@ export namespace Prisma {
     IsActive?: boolean
     DeactivatedAt?: Date | string | null
     VAId: string
-    CompanyId: string
     VARoleId: string
     TotalCargosTransportedLbs: number
     TotalPAXsTransported: number
@@ -51165,6 +51546,7 @@ export namespace Prisma {
     UserId?: string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    CompanyId: string
     Flights?: FlightUncheckedCreateNestedManyWithoutMemberInput
   }
 
@@ -51355,7 +51737,6 @@ export namespace Prisma {
     IsActive?: BoolFieldUpdateOperationsInput | boolean
     DeactivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     VAId?: StringFieldUpdateOperationsInput | string
-    CompanyId?: StringFieldUpdateOperationsInput | string
     VARoleId?: StringFieldUpdateOperationsInput | string
     TotalCargosTransportedLbs?: IntFieldUpdateOperationsInput | number
     TotalPAXsTransported?: IntFieldUpdateOperationsInput | number
@@ -51370,6 +51751,7 @@ export namespace Prisma {
     UserId?: NullableStringFieldUpdateOperationsInput | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    CompanyId?: StringFieldUpdateOperationsInput | string
     Flights?: FlightUncheckedUpdateManyWithoutMemberNestedInput
   }
 
@@ -51483,6 +51865,7 @@ export namespace Prisma {
   export type ListenerEventSenderCreateManyDiscordChannelWebhookInput = {
     Id?: string
     Name: string
+    Description?: string | null
     Slug: string
     Token: string
     IsActive?: boolean
@@ -51525,6 +51908,7 @@ export namespace Prisma {
   export type ListenerEventSenderUpdateWithoutDiscordChannelWebhookInput = {
     Id?: StringFieldUpdateOperationsInput | string
     Name?: StringFieldUpdateOperationsInput | string
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
     Slug?: StringFieldUpdateOperationsInput | string
     Token?: StringFieldUpdateOperationsInput | string
     IsActive?: BoolFieldUpdateOperationsInput | boolean
@@ -51536,6 +51920,7 @@ export namespace Prisma {
   export type ListenerEventSenderUncheckedUpdateWithoutDiscordChannelWebhookInput = {
     Id?: StringFieldUpdateOperationsInput | string
     Name?: StringFieldUpdateOperationsInput | string
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
     Slug?: StringFieldUpdateOperationsInput | string
     Token?: StringFieldUpdateOperationsInput | string
     IsActive?: BoolFieldUpdateOperationsInput | boolean
@@ -51547,6 +51932,7 @@ export namespace Prisma {
   export type ListenerEventSenderUncheckedUpdateManyWithoutDiscordChannelWebhookInput = {
     Id?: StringFieldUpdateOperationsInput | string
     Name?: StringFieldUpdateOperationsInput | string
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
     Slug?: StringFieldUpdateOperationsInput | string
     Token?: StringFieldUpdateOperationsInput | string
     IsActive?: BoolFieldUpdateOperationsInput | boolean
@@ -51614,7 +52000,6 @@ export namespace Prisma {
     IsActive?: boolean
     DeactivatedAt?: Date | string | null
     VAId: string
-    CompanyId: string
     VARoleId: string
     TotalCargosTransportedLbs: number
     TotalPAXsTransported: number
@@ -51628,6 +52013,7 @@ export namespace Prisma {
     LastRefresh?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    CompanyId: string
   }
 
   export type RoleUpdateWithoutUsersInput = {
@@ -51689,7 +52075,6 @@ export namespace Prisma {
     IsActive?: BoolFieldUpdateOperationsInput | boolean
     DeactivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     VAId?: StringFieldUpdateOperationsInput | string
-    CompanyId?: StringFieldUpdateOperationsInput | string
     VARoleId?: StringFieldUpdateOperationsInput | string
     TotalCargosTransportedLbs?: IntFieldUpdateOperationsInput | number
     TotalPAXsTransported?: IntFieldUpdateOperationsInput | number
@@ -51703,6 +52088,7 @@ export namespace Prisma {
     LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    CompanyId?: StringFieldUpdateOperationsInput | string
     Flights?: FlightUncheckedUpdateManyWithoutMemberNestedInput
     FlightRoutes?: FlightRouteUncheckedUpdateManyWithoutMemberNestedInput
   }
@@ -51712,7 +52098,6 @@ export namespace Prisma {
     IsActive?: BoolFieldUpdateOperationsInput | boolean
     DeactivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     VAId?: StringFieldUpdateOperationsInput | string
-    CompanyId?: StringFieldUpdateOperationsInput | string
     VARoleId?: StringFieldUpdateOperationsInput | string
     TotalCargosTransportedLbs?: IntFieldUpdateOperationsInput | number
     TotalPAXsTransported?: IntFieldUpdateOperationsInput | number
@@ -51726,6 +52111,7 @@ export namespace Prisma {
     LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    CompanyId?: StringFieldUpdateOperationsInput | string
   }
 
   export type PermissionUpdateWithoutRolesInput = {
@@ -51879,7 +52265,6 @@ export namespace Prisma {
     Id: string
     IsActive?: boolean
     DeactivatedAt?: Date | string | null
-    CompanyId: string
     VARoleId: string
     TotalCargosTransportedLbs: number
     TotalPAXsTransported: number
@@ -51894,6 +52279,7 @@ export namespace Prisma {
     UserId?: string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    CompanyId: string
   }
 
   export type AircraftCreateManyVirtualAirlineInput = {
@@ -52055,7 +52441,6 @@ export namespace Prisma {
     Id?: StringFieldUpdateOperationsInput | string
     IsActive?: BoolFieldUpdateOperationsInput | boolean
     DeactivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    CompanyId?: StringFieldUpdateOperationsInput | string
     VARoleId?: StringFieldUpdateOperationsInput | string
     TotalCargosTransportedLbs?: IntFieldUpdateOperationsInput | number
     TotalPAXsTransported?: IntFieldUpdateOperationsInput | number
@@ -52070,6 +52455,7 @@ export namespace Prisma {
     UserId?: NullableStringFieldUpdateOperationsInput | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    CompanyId?: StringFieldUpdateOperationsInput | string
     Flights?: FlightUncheckedUpdateManyWithoutMemberNestedInput
     FlightRoutes?: FlightRouteUncheckedUpdateManyWithoutMemberNestedInput
   }
@@ -52078,7 +52464,6 @@ export namespace Prisma {
     Id?: StringFieldUpdateOperationsInput | string
     IsActive?: BoolFieldUpdateOperationsInput | boolean
     DeactivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    CompanyId?: StringFieldUpdateOperationsInput | string
     VARoleId?: StringFieldUpdateOperationsInput | string
     TotalCargosTransportedLbs?: IntFieldUpdateOperationsInput | number
     TotalPAXsTransported?: IntFieldUpdateOperationsInput | number
@@ -52093,6 +52478,7 @@ export namespace Prisma {
     UserId?: NullableStringFieldUpdateOperationsInput | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    CompanyId?: StringFieldUpdateOperationsInput | string
   }
 
   export type AircraftUpdateWithoutVirtualAirlineInput = {
@@ -52107,6 +52493,7 @@ export namespace Prisma {
     CurrentAirport?: AirportUpdateOneWithoutAircraftAtAirportNestedInput
     AircraftMaintenance?: AircraftMaintenanceUpdateManyWithoutAircraftNestedInput
     Flights?: FlightUpdateManyWithoutAircraftNestedInput
+    Liveries?: LiveryUpdateManyWithoutAircraftNestedInput
   }
 
   export type AircraftUncheckedUpdateWithoutVirtualAirlineInput = {
@@ -52121,6 +52508,7 @@ export namespace Prisma {
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     AircraftMaintenance?: AircraftMaintenanceUncheckedUpdateManyWithoutAircraftNestedInput
     Flights?: FlightUncheckedUpdateManyWithoutAircraftNestedInput
+    Liveries?: LiveryUncheckedUpdateManyWithoutAircraftNestedInput
   }
 
   export type AircraftUncheckedUpdateManyWithoutVirtualAirlineInput = {
@@ -52337,7 +52725,6 @@ export namespace Prisma {
     IsActive?: boolean
     DeactivatedAt?: Date | string | null
     VAId: string
-    CompanyId: string
     TotalCargosTransportedLbs: number
     TotalPAXsTransported: number
     TotalEarnedCredits: Decimal | DecimalJsLike | number | string
@@ -52351,6 +52738,7 @@ export namespace Prisma {
     UserId?: string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    CompanyId: string
   }
 
   export type MemberUpdateWithoutVARoleInput = {
@@ -52381,7 +52769,6 @@ export namespace Prisma {
     IsActive?: BoolFieldUpdateOperationsInput | boolean
     DeactivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     VAId?: StringFieldUpdateOperationsInput | string
-    CompanyId?: StringFieldUpdateOperationsInput | string
     TotalCargosTransportedLbs?: IntFieldUpdateOperationsInput | number
     TotalPAXsTransported?: IntFieldUpdateOperationsInput | number
     TotalEarnedCredits?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -52395,6 +52782,7 @@ export namespace Prisma {
     UserId?: NullableStringFieldUpdateOperationsInput | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    CompanyId?: StringFieldUpdateOperationsInput | string
     Flights?: FlightUncheckedUpdateManyWithoutMemberNestedInput
     FlightRoutes?: FlightRouteUncheckedUpdateManyWithoutMemberNestedInput
   }
@@ -52404,7 +52792,6 @@ export namespace Prisma {
     IsActive?: BoolFieldUpdateOperationsInput | boolean
     DeactivatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     VAId?: StringFieldUpdateOperationsInput | string
-    CompanyId?: StringFieldUpdateOperationsInput | string
     TotalCargosTransportedLbs?: IntFieldUpdateOperationsInput | number
     TotalPAXsTransported?: IntFieldUpdateOperationsInput | number
     TotalEarnedCredits?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -52418,6 +52805,7 @@ export namespace Prisma {
     UserId?: NullableStringFieldUpdateOperationsInput | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    CompanyId?: StringFieldUpdateOperationsInput | string
   }
 
   export type VirtualAirlineCreateManyWorldInput = {
@@ -52460,7 +52848,6 @@ export namespace Prisma {
     LastConnection?: Date | string | null
     LastReportDate?: Date | string | null
     DifficultyLevel: number
-    OwnerId: string
     LastRefresh?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
@@ -52570,12 +52957,11 @@ export namespace Prisma {
     LastConnection?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     LastReportDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     DifficultyLevel?: IntFieldUpdateOperationsInput | number
-    OwnerId?: StringFieldUpdateOperationsInput | string
     LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Owner?: MemberUpdateOneWithoutCompanyNestedInput
     Flights?: FlightUpdateManyWithoutCompanyNestedInput
+    Owner?: MemberUpdateOneWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutWorldInput = {
@@ -52590,12 +52976,11 @@ export namespace Prisma {
     LastConnection?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     LastReportDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     DifficultyLevel?: IntFieldUpdateOperationsInput | number
-    OwnerId?: StringFieldUpdateOperationsInput | string
     LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Owner?: MemberUncheckedUpdateOneWithoutCompanyNestedInput
     Flights?: FlightUncheckedUpdateManyWithoutCompanyNestedInput
+    Owner?: MemberUncheckedUpdateOneWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateManyWithoutWorldInput = {
@@ -52610,7 +52995,6 @@ export namespace Prisma {
     LastConnection?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     LastReportDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     DifficultyLevel?: IntFieldUpdateOperationsInput | number
-    OwnerId?: StringFieldUpdateOperationsInput | string
     LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -53255,6 +53639,19 @@ export namespace Prisma {
     FlightStatus?: $Enums.FlightStatus
   }
 
+  export type LiveryCreateManyAircraftInput = {
+    Id?: string
+    Name: string
+    IsActive?: boolean
+    DownloadCount?: number
+    Image: string
+    Url?: string | null
+    Description?: string | null
+    DownloadUrl?: string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+  }
+
   export type AircraftMaintenanceUpdateWithoutAircraftInput = {
     Id?: StringFieldUpdateOperationsInput | string
     AnnualCheckup?: BoolFieldUpdateOperationsInput | boolean
@@ -53506,6 +53903,45 @@ export namespace Prisma {
     FlightStatus?: EnumFlightStatusFieldUpdateOperationsInput | $Enums.FlightStatus
   }
 
+  export type LiveryUpdateWithoutAircraftInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    IsActive?: BoolFieldUpdateOperationsInput | boolean
+    DownloadCount?: IntFieldUpdateOperationsInput | number
+    Image?: StringFieldUpdateOperationsInput | string
+    Url?: NullableStringFieldUpdateOperationsInput | string | null
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
+    DownloadUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LiveryUncheckedUpdateWithoutAircraftInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    IsActive?: BoolFieldUpdateOperationsInput | boolean
+    DownloadCount?: IntFieldUpdateOperationsInput | number
+    Image?: StringFieldUpdateOperationsInput | string
+    Url?: NullableStringFieldUpdateOperationsInput | string | null
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
+    DownloadUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LiveryUncheckedUpdateManyWithoutAircraftInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    IsActive?: BoolFieldUpdateOperationsInput | boolean
+    DownloadCount?: IntFieldUpdateOperationsInput | number
+    Image?: StringFieldUpdateOperationsInput | string
+    Url?: NullableStringFieldUpdateOperationsInput | string | null
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
+    DownloadUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type AircraftCreateManyAircraftClassInput = {
     Id: string
     Identifier: string
@@ -53530,6 +53966,7 @@ export namespace Prisma {
     CurrentAirport?: AirportUpdateOneWithoutAircraftAtAirportNestedInput
     AircraftMaintenance?: AircraftMaintenanceUpdateManyWithoutAircraftNestedInput
     Flights?: FlightUpdateManyWithoutAircraftNestedInput
+    Liveries?: LiveryUpdateManyWithoutAircraftNestedInput
   }
 
   export type AircraftUncheckedUpdateWithoutAircraftClassInput = {
@@ -53544,6 +53981,7 @@ export namespace Prisma {
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     AircraftMaintenance?: AircraftMaintenanceUncheckedUpdateManyWithoutAircraftNestedInput
     Flights?: FlightUncheckedUpdateManyWithoutAircraftNestedInput
+    Liveries?: LiveryUncheckedUpdateManyWithoutAircraftNestedInput
   }
 
   export type AircraftUncheckedUpdateManyWithoutAircraftClassInput = {
@@ -53582,6 +54020,7 @@ export namespace Prisma {
     CurrentAirport?: AirportUpdateOneWithoutAircraftAtAirportNestedInput
     AircraftMaintenance?: AircraftMaintenanceUpdateManyWithoutAircraftNestedInput
     Flights?: FlightUpdateManyWithoutAircraftNestedInput
+    Liveries?: LiveryUpdateManyWithoutAircraftNestedInput
   }
 
   export type AircraftUncheckedUpdateWithoutAircraftStatusInput = {
@@ -53596,6 +54035,7 @@ export namespace Prisma {
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     AircraftMaintenance?: AircraftMaintenanceUncheckedUpdateManyWithoutAircraftNestedInput
     Flights?: FlightUncheckedUpdateManyWithoutAircraftNestedInput
+    Liveries?: LiveryUncheckedUpdateManyWithoutAircraftNestedInput
   }
 
   export type AircraftUncheckedUpdateManyWithoutAircraftStatusInput = {
@@ -53894,6 +54334,7 @@ export namespace Prisma {
     AircraftStatus?: AircraftStatusUpdateOneRequiredWithoutAircraftsNestedInput
     AircraftMaintenance?: AircraftMaintenanceUpdateManyWithoutAircraftNestedInput
     Flights?: FlightUpdateManyWithoutAircraftNestedInput
+    Liveries?: LiveryUpdateManyWithoutAircraftNestedInput
   }
 
   export type AircraftUncheckedUpdateWithoutCurrentAirportInput = {
@@ -53908,6 +54349,7 @@ export namespace Prisma {
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     AircraftMaintenance?: AircraftMaintenanceUncheckedUpdateManyWithoutAircraftNestedInput
     Flights?: FlightUncheckedUpdateManyWithoutAircraftNestedInput
+    Liveries?: LiveryUncheckedUpdateManyWithoutAircraftNestedInput
   }
 
   export type AircraftUncheckedUpdateManyWithoutCurrentAirportInput = {

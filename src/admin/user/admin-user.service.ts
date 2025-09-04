@@ -18,14 +18,18 @@ export class AdminUserService {
         return entity;
     }
 
-    async create(data: Prisma.UserCreateInput) {
-        const entity = await this.prisma.user.create({ data });
+    async create(data: Prisma.UserCreateInput, query?: Partial<Prisma.UserCreateArgs>) {
+        const _query: Prisma.UserCreateArgs = { data, ...query };
+
+        const entity = await this.prisma.user.create(_query);
 
         return entity;
     }
 
-    async update(Id: string, data: Prisma.UserUpdateInput) {
-        const entity = await this.prisma.user.update({ where: { Id }, data });
+    async update(Id: string, data: Prisma.UserUpdateInput, query?: Partial<Prisma.UserUpdateArgs>) {
+        const _query: Prisma.UserUpdateArgs = { where: { Id }, data, ...query };
+
+        const entity = await this.prisma.user.update(_query);
 
         return entity;
     }

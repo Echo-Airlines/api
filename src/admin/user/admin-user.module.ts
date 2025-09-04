@@ -4,9 +4,10 @@ import { AdminUserService } from "./admin-user.service";
 import { AdminUserController } from "./admin-user.controller";
 import { AdminRoleController } from "./admin-role.controller";
 import { AdminInviteCodeController } from "./admin-invite-code.controller";
+import { HashModule } from "@hash/hash.module";
 
 @Module({
-    imports: [PrismaModule],
+    imports: [PrismaModule, HashModule],
     providers: [AdminUserService],
     exports: [AdminUserService],
     controllers: [AdminUserController, AdminRoleController, AdminInviteCodeController],

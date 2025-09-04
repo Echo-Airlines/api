@@ -131,16 +131,6 @@ export class AppConfigService {
         return result;
     }
 
-    async Livery_upsert(dto: Livery) {
-        const result = await this.prisma.livery.upsert({
-            where: { Id: dto.Id },
-            update: dto,
-            create: dto
-        });
-
-        return result;
-    }
-
     async Livery_incrementDownloadCount(id: string) {
         const result = await this.prisma.livery.update({
             where: { Id: id },

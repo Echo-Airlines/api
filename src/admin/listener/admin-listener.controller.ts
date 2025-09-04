@@ -6,6 +6,7 @@ import { JwtAuthGuard } from '@auth/jwt-auth.guard';
 import { ListenerEventSender, Prisma } from 'prisma/generated/prisma';
 import { CreateListenerSenderDto } from './dto/CreateListenerSender.dto';
 import * as crypto from 'crypto';
+import { ListenerEventSenderWithRelationsDto } from './dto/ListenerEventSenderWithRelationsDto.dto';
 
 @Controller('admin/listener')
 export class AdminListenerController {
@@ -63,11 +64,17 @@ export class AdminListenerController {
         const sender = await this.listenerService.Sender_getOneById(Id, {
             include: {
                 ListenerEvents: true,
+                DiscordChannelWebhook: true,
             }
-        });
+        }) as ListenerEventSenderWithRelationsDto;
 
         if (!sender) {
             throw new NotFoundException('Sender not found');
+        }
+
+        // sort the ListenerEvents by CreatedAt descending
+        if (sender.ListenerEvents) {
+            sender.ListenerEvents = sender.ListenerEvents.sort((a, b) => b.CreatedAt.getTime() - a.CreatedAt.getTime());
         }
 
         return sender;
@@ -89,12 +96,36 @@ export class AdminListenerController {
         return sender;
     }
 
+    @Post('sender/:id/regenerate-token')
+    @UseGuards(JwtAuthGuard, IsAdminGuard)
+    async regenerateToken(@Param('id') Id: string) {
+        const sender = await this.listenerService.Sender_regenerateToken(Id);
+
+        return sender;
+    }
+
     @Delete('sender/:id')
     @UseGuards(JwtAuthGuard, IsAdminGuard)
     async deleteSender(@Param('id') Id: string) {
         const sender = await this.listenerService.Sender_delete(Id);
 
         return sender;
+    }
+
+    @Post('sender/event/:id/resend')
+    @UseGuards(JwtAuthGuard, IsAdminGuard)
+    async resendEvent(@Param('id') Id: number) {
+        if (!Id) {
+            throw new BadRequestException('Event ID is required');
+        }
+
+        if (!Number.isInteger(Id)) {
+            Id = Number(Id);
+        }
+
+        const event = await this.listenerService.Event_resend(Id);
+
+        return event;
     }
 
     @Get(':senderSlug/events')

@@ -74,6 +74,16 @@ export type Permission = $Result.DefaultSelection<Prisma.$PermissionPayload>
  */
 export type Livery = $Result.DefaultSelection<Prisma.$LiveryPayload>
 /**
+ * Model LiveryImage
+ * 
+ */
+export type LiveryImage = $Result.DefaultSelection<Prisma.$LiveryImagePayload>
+/**
+ * Model LiveryFile
+ * 
+ */
+export type LiveryFile = $Result.DefaultSelection<Prisma.$LiveryFilePayload>
+/**
  * Model VirtualAirline
  * 
  */
@@ -462,6 +472,26 @@ export class PrismaClient<
   get livery(): Prisma.LiveryDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.liveryImage`: Exposes CRUD operations for the **LiveryImage** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more LiveryImages
+    * const liveryImages = await prisma.liveryImage.findMany()
+    * ```
+    */
+  get liveryImage(): Prisma.LiveryImageDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.liveryFile`: Exposes CRUD operations for the **LiveryFile** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more LiveryFiles
+    * const liveryFiles = await prisma.liveryFile.findMany()
+    * ```
+    */
+  get liveryFile(): Prisma.LiveryFileDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.virtualAirline`: Exposes CRUD operations for the **VirtualAirline** model.
     * Example usage:
     * ```ts
@@ -648,8 +678,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.14.0
-   * Query Engine version: 717184b7b35ea05dfa71a3236b7af656013e1e49
+   * Prisma Client JS version: 6.15.0
+   * Query Engine version: 85179d7826409ee107a6ba334b5e305ae3fba9fb
    */
   export type PrismaVersion = {
     client: string
@@ -1042,6 +1072,8 @@ export namespace Prisma {
     Role: 'Role',
     Permission: 'Permission',
     Livery: 'Livery',
+    LiveryImage: 'LiveryImage',
+    LiveryFile: 'LiveryFile',
     VirtualAirline: 'VirtualAirline',
     VirtualAirlineRole: 'VirtualAirlineRole',
     World: 'World',
@@ -1073,7 +1105,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "appConfig" | "inviteCode" | "discordMessage" | "discordMessageTemplate" | "discordChannelWebhook" | "listenerEvent" | "listenerEventSender" | "user" | "userPrivacySettings" | "role" | "permission" | "livery" | "virtualAirline" | "virtualAirlineRole" | "world" | "member" | "company" | "aircraft" | "aircraftClass" | "aircraftMaintenance" | "aircraftStatus" | "airport" | "flight" | "flightRoute" | "job"
+      modelProps: "appConfig" | "inviteCode" | "discordMessage" | "discordMessageTemplate" | "discordChannelWebhook" | "listenerEvent" | "listenerEventSender" | "user" | "userPrivacySettings" | "role" | "permission" | "livery" | "liveryImage" | "liveryFile" | "virtualAirline" | "virtualAirlineRole" | "world" | "member" | "company" | "aircraft" | "aircraftClass" | "aircraftMaintenance" | "aircraftStatus" | "airport" | "flight" | "flightRoute" | "job"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1962,6 +1994,154 @@ export namespace Prisma {
           count: {
             args: Prisma.LiveryCountArgs<ExtArgs>
             result: $Utils.Optional<LiveryCountAggregateOutputType> | number
+          }
+        }
+      }
+      LiveryImage: {
+        payload: Prisma.$LiveryImagePayload<ExtArgs>
+        fields: Prisma.LiveryImageFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.LiveryImageFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LiveryImagePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.LiveryImageFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LiveryImagePayload>
+          }
+          findFirst: {
+            args: Prisma.LiveryImageFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LiveryImagePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.LiveryImageFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LiveryImagePayload>
+          }
+          findMany: {
+            args: Prisma.LiveryImageFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LiveryImagePayload>[]
+          }
+          create: {
+            args: Prisma.LiveryImageCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LiveryImagePayload>
+          }
+          createMany: {
+            args: Prisma.LiveryImageCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.LiveryImageCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LiveryImagePayload>[]
+          }
+          delete: {
+            args: Prisma.LiveryImageDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LiveryImagePayload>
+          }
+          update: {
+            args: Prisma.LiveryImageUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LiveryImagePayload>
+          }
+          deleteMany: {
+            args: Prisma.LiveryImageDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.LiveryImageUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.LiveryImageUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LiveryImagePayload>[]
+          }
+          upsert: {
+            args: Prisma.LiveryImageUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LiveryImagePayload>
+          }
+          aggregate: {
+            args: Prisma.LiveryImageAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateLiveryImage>
+          }
+          groupBy: {
+            args: Prisma.LiveryImageGroupByArgs<ExtArgs>
+            result: $Utils.Optional<LiveryImageGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.LiveryImageCountArgs<ExtArgs>
+            result: $Utils.Optional<LiveryImageCountAggregateOutputType> | number
+          }
+        }
+      }
+      LiveryFile: {
+        payload: Prisma.$LiveryFilePayload<ExtArgs>
+        fields: Prisma.LiveryFileFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.LiveryFileFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LiveryFilePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.LiveryFileFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LiveryFilePayload>
+          }
+          findFirst: {
+            args: Prisma.LiveryFileFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LiveryFilePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.LiveryFileFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LiveryFilePayload>
+          }
+          findMany: {
+            args: Prisma.LiveryFileFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LiveryFilePayload>[]
+          }
+          create: {
+            args: Prisma.LiveryFileCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LiveryFilePayload>
+          }
+          createMany: {
+            args: Prisma.LiveryFileCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.LiveryFileCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LiveryFilePayload>[]
+          }
+          delete: {
+            args: Prisma.LiveryFileDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LiveryFilePayload>
+          }
+          update: {
+            args: Prisma.LiveryFileUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LiveryFilePayload>
+          }
+          deleteMany: {
+            args: Prisma.LiveryFileDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.LiveryFileUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.LiveryFileUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LiveryFilePayload>[]
+          }
+          upsert: {
+            args: Prisma.LiveryFileUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LiveryFilePayload>
+          }
+          aggregate: {
+            args: Prisma.LiveryFileAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateLiveryFile>
+          }
+          groupBy: {
+            args: Prisma.LiveryFileGroupByArgs<ExtArgs>
+            result: $Utils.Optional<LiveryFileGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.LiveryFileCountArgs<ExtArgs>
+            result: $Utils.Optional<LiveryFileCountAggregateOutputType> | number
           }
         }
       }
@@ -3031,6 +3211,8 @@ export namespace Prisma {
     role?: RoleOmit
     permission?: PermissionOmit
     livery?: LiveryOmit
+    liveryImage?: LiveryImageOmit
+    liveryFile?: LiveryFileOmit
     virtualAirline?: VirtualAirlineOmit
     virtualAirlineRole?: VirtualAirlineRoleOmit
     world?: WorldOmit
@@ -3258,11 +3440,13 @@ export namespace Prisma {
 
   export type UserCountOutputType = {
     Roles: number
+    PrivacySettings: number
     Members: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Roles?: boolean | UserCountOutputTypeCountRolesArgs
+    PrivacySettings?: boolean | UserCountOutputTypeCountPrivacySettingsArgs
     Members?: boolean | UserCountOutputTypeCountMembersArgs
   }
 
@@ -3282,6 +3466,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountRolesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: RoleWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountPrivacySettingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserPrivacySettingsWhereInput
   }
 
   /**
@@ -3360,6 +3551,46 @@ export namespace Prisma {
    */
   export type PermissionCountOutputTypeCountRolesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: RoleWhereInput
+  }
+
+
+  /**
+   * Count Type LiveryCountOutputType
+   */
+
+  export type LiveryCountOutputType = {
+    Images: number
+    Files: number
+  }
+
+  export type LiveryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Images?: boolean | LiveryCountOutputTypeCountImagesArgs
+    Files?: boolean | LiveryCountOutputTypeCountFilesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * LiveryCountOutputType without action
+   */
+  export type LiveryCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiveryCountOutputType
+     */
+    select?: LiveryCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * LiveryCountOutputType without action
+   */
+  export type LiveryCountOutputTypeCountImagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LiveryImageWhereInput
+  }
+
+  /**
+   * LiveryCountOutputType without action
+   */
+  export type LiveryCountOutputTypeCountFilesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LiveryFileWhereInput
   }
 
 
@@ -12231,7 +12462,7 @@ export namespace Prisma {
     name: "User"
     objects: {
       Roles: Prisma.$RolePayload<ExtArgs>[]
-      PrivacySettings: Prisma.$UserPrivacySettingsPayload<ExtArgs> | null
+      PrivacySettings: Prisma.$UserPrivacySettingsPayload<ExtArgs>[]
       Members: Prisma.$MemberPayload<ExtArgs>[]
       InviteCode: Prisma.$InviteCodePayload<ExtArgs> | null
     }
@@ -12651,7 +12882,7 @@ export namespace Prisma {
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     Roles<T extends User$RolesArgs<ExtArgs> = {}>(args?: Subset<T, User$RolesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    PrivacySettings<T extends User$PrivacySettingsArgs<ExtArgs> = {}>(args?: Subset<T, User$PrivacySettingsArgs<ExtArgs>>): Prisma__UserPrivacySettingsClient<$Result.GetResult<Prisma.$UserPrivacySettingsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    PrivacySettings<T extends User$PrivacySettingsArgs<ExtArgs> = {}>(args?: Subset<T, User$PrivacySettingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPrivacySettingsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Members<T extends User$MembersArgs<ExtArgs> = {}>(args?: Subset<T, User$MembersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     InviteCode<T extends User$InviteCodeArgs<ExtArgs> = {}>(args?: Subset<T, User$InviteCodeArgs<ExtArgs>>): Prisma__InviteCodeClient<$Result.GetResult<Prisma.$InviteCodePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
@@ -13139,6 +13370,11 @@ export namespace Prisma {
      */
     include?: UserPrivacySettingsInclude<ExtArgs> | null
     where?: UserPrivacySettingsWhereInput
+    orderBy?: UserPrivacySettingsOrderByWithRelationInput | UserPrivacySettingsOrderByWithRelationInput[]
+    cursor?: UserPrivacySettingsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserPrivacySettingsScalarFieldEnum | UserPrivacySettingsScalarFieldEnum[]
   }
 
   /**
@@ -16639,6 +16875,8 @@ export namespace Prisma {
     AircraftId: string | null
     DownloadCount: number | null
     Image: string | null
+    ImageFileName: string | null
+    CoverPhoto: string | null
     Url: string | null
     Description: string | null
     DownloadUrl: string | null
@@ -16653,6 +16891,8 @@ export namespace Prisma {
     AircraftId: string | null
     DownloadCount: number | null
     Image: string | null
+    ImageFileName: string | null
+    CoverPhoto: string | null
     Url: string | null
     Description: string | null
     DownloadUrl: string | null
@@ -16667,6 +16907,9 @@ export namespace Prisma {
     AircraftId: number
     DownloadCount: number
     Image: number
+    ImageFileName: number
+    CoverPhoto: number
+    Metadata: number
     Url: number
     Description: number
     DownloadUrl: number
@@ -16691,6 +16934,8 @@ export namespace Prisma {
     AircraftId?: true
     DownloadCount?: true
     Image?: true
+    ImageFileName?: true
+    CoverPhoto?: true
     Url?: true
     Description?: true
     DownloadUrl?: true
@@ -16705,6 +16950,8 @@ export namespace Prisma {
     AircraftId?: true
     DownloadCount?: true
     Image?: true
+    ImageFileName?: true
+    CoverPhoto?: true
     Url?: true
     Description?: true
     DownloadUrl?: true
@@ -16719,6 +16966,9 @@ export namespace Prisma {
     AircraftId?: true
     DownloadCount?: true
     Image?: true
+    ImageFileName?: true
+    CoverPhoto?: true
+    Metadata?: true
     Url?: true
     Description?: true
     DownloadUrl?: true
@@ -16820,6 +17070,9 @@ export namespace Prisma {
     AircraftId: string | null
     DownloadCount: number
     Image: string
+    ImageFileName: string | null
+    CoverPhoto: string | null
+    Metadata: JsonValue | null
     Url: string | null
     Description: string | null
     DownloadUrl: string | null
@@ -16853,12 +17106,18 @@ export namespace Prisma {
     AircraftId?: boolean
     DownloadCount?: boolean
     Image?: boolean
+    ImageFileName?: boolean
+    CoverPhoto?: boolean
+    Metadata?: boolean
     Url?: boolean
     Description?: boolean
     DownloadUrl?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
     Aircraft?: boolean | Livery$AircraftArgs<ExtArgs>
+    Images?: boolean | Livery$ImagesArgs<ExtArgs>
+    Files?: boolean | Livery$FilesArgs<ExtArgs>
+    _count?: boolean | LiveryCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["livery"]>
 
   export type LiverySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -16868,6 +17127,9 @@ export namespace Prisma {
     AircraftId?: boolean
     DownloadCount?: boolean
     Image?: boolean
+    ImageFileName?: boolean
+    CoverPhoto?: boolean
+    Metadata?: boolean
     Url?: boolean
     Description?: boolean
     DownloadUrl?: boolean
@@ -16883,6 +17145,9 @@ export namespace Prisma {
     AircraftId?: boolean
     DownloadCount?: boolean
     Image?: boolean
+    ImageFileName?: boolean
+    CoverPhoto?: boolean
+    Metadata?: boolean
     Url?: boolean
     Description?: boolean
     DownloadUrl?: boolean
@@ -16898,6 +17163,9 @@ export namespace Prisma {
     AircraftId?: boolean
     DownloadCount?: boolean
     Image?: boolean
+    ImageFileName?: boolean
+    CoverPhoto?: boolean
+    Metadata?: boolean
     Url?: boolean
     Description?: boolean
     DownloadUrl?: boolean
@@ -16905,9 +17173,12 @@ export namespace Prisma {
     UpdatedAt?: boolean
   }
 
-  export type LiveryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "Name" | "IsActive" | "AircraftId" | "DownloadCount" | "Image" | "Url" | "Description" | "DownloadUrl" | "CreatedAt" | "UpdatedAt", ExtArgs["result"]["livery"]>
+  export type LiveryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "Name" | "IsActive" | "AircraftId" | "DownloadCount" | "Image" | "ImageFileName" | "CoverPhoto" | "Metadata" | "Url" | "Description" | "DownloadUrl" | "CreatedAt" | "UpdatedAt", ExtArgs["result"]["livery"]>
   export type LiveryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Aircraft?: boolean | Livery$AircraftArgs<ExtArgs>
+    Images?: boolean | Livery$ImagesArgs<ExtArgs>
+    Files?: boolean | Livery$FilesArgs<ExtArgs>
+    _count?: boolean | LiveryCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type LiveryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Aircraft?: boolean | Livery$AircraftArgs<ExtArgs>
@@ -16920,6 +17191,8 @@ export namespace Prisma {
     name: "Livery"
     objects: {
       Aircraft: Prisma.$AircraftPayload<ExtArgs> | null
+      Images: Prisma.$LiveryImagePayload<ExtArgs>[]
+      Files: Prisma.$LiveryFilePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       Id: string
@@ -16928,6 +17201,9 @@ export namespace Prisma {
       AircraftId: string | null
       DownloadCount: number
       Image: string
+      ImageFileName: string | null
+      CoverPhoto: string | null
+      Metadata: Prisma.JsonValue | null
       Url: string | null
       Description: string | null
       DownloadUrl: string | null
@@ -17328,6 +17604,8 @@ export namespace Prisma {
   export interface Prisma__LiveryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     Aircraft<T extends Livery$AircraftArgs<ExtArgs> = {}>(args?: Subset<T, Livery$AircraftArgs<ExtArgs>>): Prisma__AircraftClient<$Result.GetResult<Prisma.$AircraftPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    Images<T extends Livery$ImagesArgs<ExtArgs> = {}>(args?: Subset<T, Livery$ImagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LiveryImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Files<T extends Livery$FilesArgs<ExtArgs> = {}>(args?: Subset<T, Livery$FilesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LiveryFilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -17363,6 +17641,9 @@ export namespace Prisma {
     readonly AircraftId: FieldRef<"Livery", 'String'>
     readonly DownloadCount: FieldRef<"Livery", 'Int'>
     readonly Image: FieldRef<"Livery", 'String'>
+    readonly ImageFileName: FieldRef<"Livery", 'String'>
+    readonly CoverPhoto: FieldRef<"Livery", 'String'>
+    readonly Metadata: FieldRef<"Livery", 'Json'>
     readonly Url: FieldRef<"Livery", 'String'>
     readonly Description: FieldRef<"Livery", 'String'>
     readonly DownloadUrl: FieldRef<"Livery", 'String'>
@@ -17783,6 +18064,54 @@ export namespace Prisma {
   }
 
   /**
+   * Livery.Images
+   */
+  export type Livery$ImagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiveryImage
+     */
+    select?: LiveryImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LiveryImage
+     */
+    omit?: LiveryImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveryImageInclude<ExtArgs> | null
+    where?: LiveryImageWhereInput
+    orderBy?: LiveryImageOrderByWithRelationInput | LiveryImageOrderByWithRelationInput[]
+    cursor?: LiveryImageWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LiveryImageScalarFieldEnum | LiveryImageScalarFieldEnum[]
+  }
+
+  /**
+   * Livery.Files
+   */
+  export type Livery$FilesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiveryFile
+     */
+    select?: LiveryFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LiveryFile
+     */
+    omit?: LiveryFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveryFileInclude<ExtArgs> | null
+    where?: LiveryFileWhereInput
+    orderBy?: LiveryFileOrderByWithRelationInput | LiveryFileOrderByWithRelationInput[]
+    cursor?: LiveryFileWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LiveryFileScalarFieldEnum | LiveryFileScalarFieldEnum[]
+  }
+
+  /**
    * Livery without action
    */
   export type LiveryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -17798,6 +18127,2320 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: LiveryInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model LiveryImage
+   */
+
+  export type AggregateLiveryImage = {
+    _count: LiveryImageCountAggregateOutputType | null
+    _avg: LiveryImageAvgAggregateOutputType | null
+    _sum: LiveryImageSumAggregateOutputType | null
+    _min: LiveryImageMinAggregateOutputType | null
+    _max: LiveryImageMaxAggregateOutputType | null
+  }
+
+  export type LiveryImageAvgAggregateOutputType = {
+    Size: number | null
+  }
+
+  export type LiveryImageSumAggregateOutputType = {
+    Size: number | null
+  }
+
+  export type LiveryImageMinAggregateOutputType = {
+    Id: string | null
+    LiveryId: string | null
+    Name: string | null
+    Type: string | null
+    Path: string | null
+    Size: number | null
+    MimeType: string | null
+    FileName: string | null
+    CreatedAt: Date | null
+    UpdatedAt: Date | null
+  }
+
+  export type LiveryImageMaxAggregateOutputType = {
+    Id: string | null
+    LiveryId: string | null
+    Name: string | null
+    Type: string | null
+    Path: string | null
+    Size: number | null
+    MimeType: string | null
+    FileName: string | null
+    CreatedAt: Date | null
+    UpdatedAt: Date | null
+  }
+
+  export type LiveryImageCountAggregateOutputType = {
+    Id: number
+    LiveryId: number
+    Name: number
+    Type: number
+    Path: number
+    Size: number
+    MimeType: number
+    FileName: number
+    CreatedAt: number
+    UpdatedAt: number
+    _all: number
+  }
+
+
+  export type LiveryImageAvgAggregateInputType = {
+    Size?: true
+  }
+
+  export type LiveryImageSumAggregateInputType = {
+    Size?: true
+  }
+
+  export type LiveryImageMinAggregateInputType = {
+    Id?: true
+    LiveryId?: true
+    Name?: true
+    Type?: true
+    Path?: true
+    Size?: true
+    MimeType?: true
+    FileName?: true
+    CreatedAt?: true
+    UpdatedAt?: true
+  }
+
+  export type LiveryImageMaxAggregateInputType = {
+    Id?: true
+    LiveryId?: true
+    Name?: true
+    Type?: true
+    Path?: true
+    Size?: true
+    MimeType?: true
+    FileName?: true
+    CreatedAt?: true
+    UpdatedAt?: true
+  }
+
+  export type LiveryImageCountAggregateInputType = {
+    Id?: true
+    LiveryId?: true
+    Name?: true
+    Type?: true
+    Path?: true
+    Size?: true
+    MimeType?: true
+    FileName?: true
+    CreatedAt?: true
+    UpdatedAt?: true
+    _all?: true
+  }
+
+  export type LiveryImageAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LiveryImage to aggregate.
+     */
+    where?: LiveryImageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LiveryImages to fetch.
+     */
+    orderBy?: LiveryImageOrderByWithRelationInput | LiveryImageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: LiveryImageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LiveryImages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LiveryImages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned LiveryImages
+    **/
+    _count?: true | LiveryImageCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: LiveryImageAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: LiveryImageSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: LiveryImageMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: LiveryImageMaxAggregateInputType
+  }
+
+  export type GetLiveryImageAggregateType<T extends LiveryImageAggregateArgs> = {
+        [P in keyof T & keyof AggregateLiveryImage]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateLiveryImage[P]>
+      : GetScalarType<T[P], AggregateLiveryImage[P]>
+  }
+
+
+
+
+  export type LiveryImageGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LiveryImageWhereInput
+    orderBy?: LiveryImageOrderByWithAggregationInput | LiveryImageOrderByWithAggregationInput[]
+    by: LiveryImageScalarFieldEnum[] | LiveryImageScalarFieldEnum
+    having?: LiveryImageScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: LiveryImageCountAggregateInputType | true
+    _avg?: LiveryImageAvgAggregateInputType
+    _sum?: LiveryImageSumAggregateInputType
+    _min?: LiveryImageMinAggregateInputType
+    _max?: LiveryImageMaxAggregateInputType
+  }
+
+  export type LiveryImageGroupByOutputType = {
+    Id: string
+    LiveryId: string
+    Name: string
+    Type: string
+    Path: string
+    Size: number
+    MimeType: string
+    FileName: string
+    CreatedAt: Date
+    UpdatedAt: Date
+    _count: LiveryImageCountAggregateOutputType | null
+    _avg: LiveryImageAvgAggregateOutputType | null
+    _sum: LiveryImageSumAggregateOutputType | null
+    _min: LiveryImageMinAggregateOutputType | null
+    _max: LiveryImageMaxAggregateOutputType | null
+  }
+
+  type GetLiveryImageGroupByPayload<T extends LiveryImageGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<LiveryImageGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof LiveryImageGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], LiveryImageGroupByOutputType[P]>
+            : GetScalarType<T[P], LiveryImageGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type LiveryImageSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    Id?: boolean
+    LiveryId?: boolean
+    Name?: boolean
+    Type?: boolean
+    Path?: boolean
+    Size?: boolean
+    MimeType?: boolean
+    FileName?: boolean
+    CreatedAt?: boolean
+    UpdatedAt?: boolean
+    Livery?: boolean | LiveryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["liveryImage"]>
+
+  export type LiveryImageSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    Id?: boolean
+    LiveryId?: boolean
+    Name?: boolean
+    Type?: boolean
+    Path?: boolean
+    Size?: boolean
+    MimeType?: boolean
+    FileName?: boolean
+    CreatedAt?: boolean
+    UpdatedAt?: boolean
+    Livery?: boolean | LiveryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["liveryImage"]>
+
+  export type LiveryImageSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    Id?: boolean
+    LiveryId?: boolean
+    Name?: boolean
+    Type?: boolean
+    Path?: boolean
+    Size?: boolean
+    MimeType?: boolean
+    FileName?: boolean
+    CreatedAt?: boolean
+    UpdatedAt?: boolean
+    Livery?: boolean | LiveryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["liveryImage"]>
+
+  export type LiveryImageSelectScalar = {
+    Id?: boolean
+    LiveryId?: boolean
+    Name?: boolean
+    Type?: boolean
+    Path?: boolean
+    Size?: boolean
+    MimeType?: boolean
+    FileName?: boolean
+    CreatedAt?: boolean
+    UpdatedAt?: boolean
+  }
+
+  export type LiveryImageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "LiveryId" | "Name" | "Type" | "Path" | "Size" | "MimeType" | "FileName" | "CreatedAt" | "UpdatedAt", ExtArgs["result"]["liveryImage"]>
+  export type LiveryImageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Livery?: boolean | LiveryDefaultArgs<ExtArgs>
+  }
+  export type LiveryImageIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Livery?: boolean | LiveryDefaultArgs<ExtArgs>
+  }
+  export type LiveryImageIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Livery?: boolean | LiveryDefaultArgs<ExtArgs>
+  }
+
+  export type $LiveryImagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "LiveryImage"
+    objects: {
+      Livery: Prisma.$LiveryPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      Id: string
+      LiveryId: string
+      Name: string
+      Type: string
+      Path: string
+      Size: number
+      MimeType: string
+      FileName: string
+      CreatedAt: Date
+      UpdatedAt: Date
+    }, ExtArgs["result"]["liveryImage"]>
+    composites: {}
+  }
+
+  type LiveryImageGetPayload<S extends boolean | null | undefined | LiveryImageDefaultArgs> = $Result.GetResult<Prisma.$LiveryImagePayload, S>
+
+  type LiveryImageCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<LiveryImageFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: LiveryImageCountAggregateInputType | true
+    }
+
+  export interface LiveryImageDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['LiveryImage'], meta: { name: 'LiveryImage' } }
+    /**
+     * Find zero or one LiveryImage that matches the filter.
+     * @param {LiveryImageFindUniqueArgs} args - Arguments to find a LiveryImage
+     * @example
+     * // Get one LiveryImage
+     * const liveryImage = await prisma.liveryImage.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends LiveryImageFindUniqueArgs>(args: SelectSubset<T, LiveryImageFindUniqueArgs<ExtArgs>>): Prisma__LiveryImageClient<$Result.GetResult<Prisma.$LiveryImagePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one LiveryImage that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {LiveryImageFindUniqueOrThrowArgs} args - Arguments to find a LiveryImage
+     * @example
+     * // Get one LiveryImage
+     * const liveryImage = await prisma.liveryImage.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends LiveryImageFindUniqueOrThrowArgs>(args: SelectSubset<T, LiveryImageFindUniqueOrThrowArgs<ExtArgs>>): Prisma__LiveryImageClient<$Result.GetResult<Prisma.$LiveryImagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first LiveryImage that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LiveryImageFindFirstArgs} args - Arguments to find a LiveryImage
+     * @example
+     * // Get one LiveryImage
+     * const liveryImage = await prisma.liveryImage.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends LiveryImageFindFirstArgs>(args?: SelectSubset<T, LiveryImageFindFirstArgs<ExtArgs>>): Prisma__LiveryImageClient<$Result.GetResult<Prisma.$LiveryImagePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first LiveryImage that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LiveryImageFindFirstOrThrowArgs} args - Arguments to find a LiveryImage
+     * @example
+     * // Get one LiveryImage
+     * const liveryImage = await prisma.liveryImage.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends LiveryImageFindFirstOrThrowArgs>(args?: SelectSubset<T, LiveryImageFindFirstOrThrowArgs<ExtArgs>>): Prisma__LiveryImageClient<$Result.GetResult<Prisma.$LiveryImagePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more LiveryImages that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LiveryImageFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all LiveryImages
+     * const liveryImages = await prisma.liveryImage.findMany()
+     * 
+     * // Get first 10 LiveryImages
+     * const liveryImages = await prisma.liveryImage.findMany({ take: 10 })
+     * 
+     * // Only select the `Id`
+     * const liveryImageWithIdOnly = await prisma.liveryImage.findMany({ select: { Id: true } })
+     * 
+     */
+    findMany<T extends LiveryImageFindManyArgs>(args?: SelectSubset<T, LiveryImageFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LiveryImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a LiveryImage.
+     * @param {LiveryImageCreateArgs} args - Arguments to create a LiveryImage.
+     * @example
+     * // Create one LiveryImage
+     * const LiveryImage = await prisma.liveryImage.create({
+     *   data: {
+     *     // ... data to create a LiveryImage
+     *   }
+     * })
+     * 
+     */
+    create<T extends LiveryImageCreateArgs>(args: SelectSubset<T, LiveryImageCreateArgs<ExtArgs>>): Prisma__LiveryImageClient<$Result.GetResult<Prisma.$LiveryImagePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many LiveryImages.
+     * @param {LiveryImageCreateManyArgs} args - Arguments to create many LiveryImages.
+     * @example
+     * // Create many LiveryImages
+     * const liveryImage = await prisma.liveryImage.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends LiveryImageCreateManyArgs>(args?: SelectSubset<T, LiveryImageCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many LiveryImages and returns the data saved in the database.
+     * @param {LiveryImageCreateManyAndReturnArgs} args - Arguments to create many LiveryImages.
+     * @example
+     * // Create many LiveryImages
+     * const liveryImage = await prisma.liveryImage.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many LiveryImages and only return the `Id`
+     * const liveryImageWithIdOnly = await prisma.liveryImage.createManyAndReturn({
+     *   select: { Id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends LiveryImageCreateManyAndReturnArgs>(args?: SelectSubset<T, LiveryImageCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LiveryImagePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a LiveryImage.
+     * @param {LiveryImageDeleteArgs} args - Arguments to delete one LiveryImage.
+     * @example
+     * // Delete one LiveryImage
+     * const LiveryImage = await prisma.liveryImage.delete({
+     *   where: {
+     *     // ... filter to delete one LiveryImage
+     *   }
+     * })
+     * 
+     */
+    delete<T extends LiveryImageDeleteArgs>(args: SelectSubset<T, LiveryImageDeleteArgs<ExtArgs>>): Prisma__LiveryImageClient<$Result.GetResult<Prisma.$LiveryImagePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one LiveryImage.
+     * @param {LiveryImageUpdateArgs} args - Arguments to update one LiveryImage.
+     * @example
+     * // Update one LiveryImage
+     * const liveryImage = await prisma.liveryImage.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends LiveryImageUpdateArgs>(args: SelectSubset<T, LiveryImageUpdateArgs<ExtArgs>>): Prisma__LiveryImageClient<$Result.GetResult<Prisma.$LiveryImagePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more LiveryImages.
+     * @param {LiveryImageDeleteManyArgs} args - Arguments to filter LiveryImages to delete.
+     * @example
+     * // Delete a few LiveryImages
+     * const { count } = await prisma.liveryImage.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends LiveryImageDeleteManyArgs>(args?: SelectSubset<T, LiveryImageDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more LiveryImages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LiveryImageUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many LiveryImages
+     * const liveryImage = await prisma.liveryImage.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends LiveryImageUpdateManyArgs>(args: SelectSubset<T, LiveryImageUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more LiveryImages and returns the data updated in the database.
+     * @param {LiveryImageUpdateManyAndReturnArgs} args - Arguments to update many LiveryImages.
+     * @example
+     * // Update many LiveryImages
+     * const liveryImage = await prisma.liveryImage.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more LiveryImages and only return the `Id`
+     * const liveryImageWithIdOnly = await prisma.liveryImage.updateManyAndReturn({
+     *   select: { Id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends LiveryImageUpdateManyAndReturnArgs>(args: SelectSubset<T, LiveryImageUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LiveryImagePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one LiveryImage.
+     * @param {LiveryImageUpsertArgs} args - Arguments to update or create a LiveryImage.
+     * @example
+     * // Update or create a LiveryImage
+     * const liveryImage = await prisma.liveryImage.upsert({
+     *   create: {
+     *     // ... data to create a LiveryImage
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the LiveryImage we want to update
+     *   }
+     * })
+     */
+    upsert<T extends LiveryImageUpsertArgs>(args: SelectSubset<T, LiveryImageUpsertArgs<ExtArgs>>): Prisma__LiveryImageClient<$Result.GetResult<Prisma.$LiveryImagePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of LiveryImages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LiveryImageCountArgs} args - Arguments to filter LiveryImages to count.
+     * @example
+     * // Count the number of LiveryImages
+     * const count = await prisma.liveryImage.count({
+     *   where: {
+     *     // ... the filter for the LiveryImages we want to count
+     *   }
+     * })
+    **/
+    count<T extends LiveryImageCountArgs>(
+      args?: Subset<T, LiveryImageCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], LiveryImageCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a LiveryImage.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LiveryImageAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends LiveryImageAggregateArgs>(args: Subset<T, LiveryImageAggregateArgs>): Prisma.PrismaPromise<GetLiveryImageAggregateType<T>>
+
+    /**
+     * Group by LiveryImage.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LiveryImageGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends LiveryImageGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: LiveryImageGroupByArgs['orderBy'] }
+        : { orderBy?: LiveryImageGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, LiveryImageGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetLiveryImageGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the LiveryImage model
+   */
+  readonly fields: LiveryImageFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for LiveryImage.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__LiveryImageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    Livery<T extends LiveryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, LiveryDefaultArgs<ExtArgs>>): Prisma__LiveryClient<$Result.GetResult<Prisma.$LiveryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the LiveryImage model
+   */
+  interface LiveryImageFieldRefs {
+    readonly Id: FieldRef<"LiveryImage", 'String'>
+    readonly LiveryId: FieldRef<"LiveryImage", 'String'>
+    readonly Name: FieldRef<"LiveryImage", 'String'>
+    readonly Type: FieldRef<"LiveryImage", 'String'>
+    readonly Path: FieldRef<"LiveryImage", 'String'>
+    readonly Size: FieldRef<"LiveryImage", 'Int'>
+    readonly MimeType: FieldRef<"LiveryImage", 'String'>
+    readonly FileName: FieldRef<"LiveryImage", 'String'>
+    readonly CreatedAt: FieldRef<"LiveryImage", 'DateTime'>
+    readonly UpdatedAt: FieldRef<"LiveryImage", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * LiveryImage findUnique
+   */
+  export type LiveryImageFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiveryImage
+     */
+    select?: LiveryImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LiveryImage
+     */
+    omit?: LiveryImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveryImageInclude<ExtArgs> | null
+    /**
+     * Filter, which LiveryImage to fetch.
+     */
+    where: LiveryImageWhereUniqueInput
+  }
+
+  /**
+   * LiveryImage findUniqueOrThrow
+   */
+  export type LiveryImageFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiveryImage
+     */
+    select?: LiveryImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LiveryImage
+     */
+    omit?: LiveryImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveryImageInclude<ExtArgs> | null
+    /**
+     * Filter, which LiveryImage to fetch.
+     */
+    where: LiveryImageWhereUniqueInput
+  }
+
+  /**
+   * LiveryImage findFirst
+   */
+  export type LiveryImageFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiveryImage
+     */
+    select?: LiveryImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LiveryImage
+     */
+    omit?: LiveryImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveryImageInclude<ExtArgs> | null
+    /**
+     * Filter, which LiveryImage to fetch.
+     */
+    where?: LiveryImageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LiveryImages to fetch.
+     */
+    orderBy?: LiveryImageOrderByWithRelationInput | LiveryImageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LiveryImages.
+     */
+    cursor?: LiveryImageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LiveryImages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LiveryImages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LiveryImages.
+     */
+    distinct?: LiveryImageScalarFieldEnum | LiveryImageScalarFieldEnum[]
+  }
+
+  /**
+   * LiveryImage findFirstOrThrow
+   */
+  export type LiveryImageFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiveryImage
+     */
+    select?: LiveryImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LiveryImage
+     */
+    omit?: LiveryImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveryImageInclude<ExtArgs> | null
+    /**
+     * Filter, which LiveryImage to fetch.
+     */
+    where?: LiveryImageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LiveryImages to fetch.
+     */
+    orderBy?: LiveryImageOrderByWithRelationInput | LiveryImageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LiveryImages.
+     */
+    cursor?: LiveryImageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LiveryImages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LiveryImages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LiveryImages.
+     */
+    distinct?: LiveryImageScalarFieldEnum | LiveryImageScalarFieldEnum[]
+  }
+
+  /**
+   * LiveryImage findMany
+   */
+  export type LiveryImageFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiveryImage
+     */
+    select?: LiveryImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LiveryImage
+     */
+    omit?: LiveryImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveryImageInclude<ExtArgs> | null
+    /**
+     * Filter, which LiveryImages to fetch.
+     */
+    where?: LiveryImageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LiveryImages to fetch.
+     */
+    orderBy?: LiveryImageOrderByWithRelationInput | LiveryImageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing LiveryImages.
+     */
+    cursor?: LiveryImageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LiveryImages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LiveryImages.
+     */
+    skip?: number
+    distinct?: LiveryImageScalarFieldEnum | LiveryImageScalarFieldEnum[]
+  }
+
+  /**
+   * LiveryImage create
+   */
+  export type LiveryImageCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiveryImage
+     */
+    select?: LiveryImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LiveryImage
+     */
+    omit?: LiveryImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveryImageInclude<ExtArgs> | null
+    /**
+     * The data needed to create a LiveryImage.
+     */
+    data: XOR<LiveryImageCreateInput, LiveryImageUncheckedCreateInput>
+  }
+
+  /**
+   * LiveryImage createMany
+   */
+  export type LiveryImageCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many LiveryImages.
+     */
+    data: LiveryImageCreateManyInput | LiveryImageCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * LiveryImage createManyAndReturn
+   */
+  export type LiveryImageCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiveryImage
+     */
+    select?: LiveryImageSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the LiveryImage
+     */
+    omit?: LiveryImageOmit<ExtArgs> | null
+    /**
+     * The data used to create many LiveryImages.
+     */
+    data: LiveryImageCreateManyInput | LiveryImageCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveryImageIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * LiveryImage update
+   */
+  export type LiveryImageUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiveryImage
+     */
+    select?: LiveryImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LiveryImage
+     */
+    omit?: LiveryImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveryImageInclude<ExtArgs> | null
+    /**
+     * The data needed to update a LiveryImage.
+     */
+    data: XOR<LiveryImageUpdateInput, LiveryImageUncheckedUpdateInput>
+    /**
+     * Choose, which LiveryImage to update.
+     */
+    where: LiveryImageWhereUniqueInput
+  }
+
+  /**
+   * LiveryImage updateMany
+   */
+  export type LiveryImageUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update LiveryImages.
+     */
+    data: XOR<LiveryImageUpdateManyMutationInput, LiveryImageUncheckedUpdateManyInput>
+    /**
+     * Filter which LiveryImages to update
+     */
+    where?: LiveryImageWhereInput
+    /**
+     * Limit how many LiveryImages to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * LiveryImage updateManyAndReturn
+   */
+  export type LiveryImageUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiveryImage
+     */
+    select?: LiveryImageSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the LiveryImage
+     */
+    omit?: LiveryImageOmit<ExtArgs> | null
+    /**
+     * The data used to update LiveryImages.
+     */
+    data: XOR<LiveryImageUpdateManyMutationInput, LiveryImageUncheckedUpdateManyInput>
+    /**
+     * Filter which LiveryImages to update
+     */
+    where?: LiveryImageWhereInput
+    /**
+     * Limit how many LiveryImages to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveryImageIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * LiveryImage upsert
+   */
+  export type LiveryImageUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiveryImage
+     */
+    select?: LiveryImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LiveryImage
+     */
+    omit?: LiveryImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveryImageInclude<ExtArgs> | null
+    /**
+     * The filter to search for the LiveryImage to update in case it exists.
+     */
+    where: LiveryImageWhereUniqueInput
+    /**
+     * In case the LiveryImage found by the `where` argument doesn't exist, create a new LiveryImage with this data.
+     */
+    create: XOR<LiveryImageCreateInput, LiveryImageUncheckedCreateInput>
+    /**
+     * In case the LiveryImage was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<LiveryImageUpdateInput, LiveryImageUncheckedUpdateInput>
+  }
+
+  /**
+   * LiveryImage delete
+   */
+  export type LiveryImageDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiveryImage
+     */
+    select?: LiveryImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LiveryImage
+     */
+    omit?: LiveryImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveryImageInclude<ExtArgs> | null
+    /**
+     * Filter which LiveryImage to delete.
+     */
+    where: LiveryImageWhereUniqueInput
+  }
+
+  /**
+   * LiveryImage deleteMany
+   */
+  export type LiveryImageDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LiveryImages to delete
+     */
+    where?: LiveryImageWhereInput
+    /**
+     * Limit how many LiveryImages to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * LiveryImage without action
+   */
+  export type LiveryImageDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiveryImage
+     */
+    select?: LiveryImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LiveryImage
+     */
+    omit?: LiveryImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveryImageInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model LiveryFile
+   */
+
+  export type AggregateLiveryFile = {
+    _count: LiveryFileCountAggregateOutputType | null
+    _avg: LiveryFileAvgAggregateOutputType | null
+    _sum: LiveryFileSumAggregateOutputType | null
+    _min: LiveryFileMinAggregateOutputType | null
+    _max: LiveryFileMaxAggregateOutputType | null
+  }
+
+  export type LiveryFileAvgAggregateOutputType = {
+    Size: number | null
+  }
+
+  export type LiveryFileSumAggregateOutputType = {
+    Size: number | null
+  }
+
+  export type LiveryFileMinAggregateOutputType = {
+    Id: string | null
+    LiveryId: string | null
+    Name: string | null
+    Type: string | null
+    Path: string | null
+    Size: number | null
+    MimeType: string | null
+    FileName: string | null
+    CreatedAt: Date | null
+    UpdatedAt: Date | null
+  }
+
+  export type LiveryFileMaxAggregateOutputType = {
+    Id: string | null
+    LiveryId: string | null
+    Name: string | null
+    Type: string | null
+    Path: string | null
+    Size: number | null
+    MimeType: string | null
+    FileName: string | null
+    CreatedAt: Date | null
+    UpdatedAt: Date | null
+  }
+
+  export type LiveryFileCountAggregateOutputType = {
+    Id: number
+    LiveryId: number
+    Name: number
+    Type: number
+    Path: number
+    Size: number
+    MimeType: number
+    FileName: number
+    CreatedAt: number
+    UpdatedAt: number
+    _all: number
+  }
+
+
+  export type LiveryFileAvgAggregateInputType = {
+    Size?: true
+  }
+
+  export type LiveryFileSumAggregateInputType = {
+    Size?: true
+  }
+
+  export type LiveryFileMinAggregateInputType = {
+    Id?: true
+    LiveryId?: true
+    Name?: true
+    Type?: true
+    Path?: true
+    Size?: true
+    MimeType?: true
+    FileName?: true
+    CreatedAt?: true
+    UpdatedAt?: true
+  }
+
+  export type LiveryFileMaxAggregateInputType = {
+    Id?: true
+    LiveryId?: true
+    Name?: true
+    Type?: true
+    Path?: true
+    Size?: true
+    MimeType?: true
+    FileName?: true
+    CreatedAt?: true
+    UpdatedAt?: true
+  }
+
+  export type LiveryFileCountAggregateInputType = {
+    Id?: true
+    LiveryId?: true
+    Name?: true
+    Type?: true
+    Path?: true
+    Size?: true
+    MimeType?: true
+    FileName?: true
+    CreatedAt?: true
+    UpdatedAt?: true
+    _all?: true
+  }
+
+  export type LiveryFileAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LiveryFile to aggregate.
+     */
+    where?: LiveryFileWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LiveryFiles to fetch.
+     */
+    orderBy?: LiveryFileOrderByWithRelationInput | LiveryFileOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: LiveryFileWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LiveryFiles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LiveryFiles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned LiveryFiles
+    **/
+    _count?: true | LiveryFileCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: LiveryFileAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: LiveryFileSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: LiveryFileMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: LiveryFileMaxAggregateInputType
+  }
+
+  export type GetLiveryFileAggregateType<T extends LiveryFileAggregateArgs> = {
+        [P in keyof T & keyof AggregateLiveryFile]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateLiveryFile[P]>
+      : GetScalarType<T[P], AggregateLiveryFile[P]>
+  }
+
+
+
+
+  export type LiveryFileGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LiveryFileWhereInput
+    orderBy?: LiveryFileOrderByWithAggregationInput | LiveryFileOrderByWithAggregationInput[]
+    by: LiveryFileScalarFieldEnum[] | LiveryFileScalarFieldEnum
+    having?: LiveryFileScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: LiveryFileCountAggregateInputType | true
+    _avg?: LiveryFileAvgAggregateInputType
+    _sum?: LiveryFileSumAggregateInputType
+    _min?: LiveryFileMinAggregateInputType
+    _max?: LiveryFileMaxAggregateInputType
+  }
+
+  export type LiveryFileGroupByOutputType = {
+    Id: string
+    LiveryId: string
+    Name: string
+    Type: string
+    Path: string
+    Size: number
+    MimeType: string
+    FileName: string
+    CreatedAt: Date
+    UpdatedAt: Date
+    _count: LiveryFileCountAggregateOutputType | null
+    _avg: LiveryFileAvgAggregateOutputType | null
+    _sum: LiveryFileSumAggregateOutputType | null
+    _min: LiveryFileMinAggregateOutputType | null
+    _max: LiveryFileMaxAggregateOutputType | null
+  }
+
+  type GetLiveryFileGroupByPayload<T extends LiveryFileGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<LiveryFileGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof LiveryFileGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], LiveryFileGroupByOutputType[P]>
+            : GetScalarType<T[P], LiveryFileGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type LiveryFileSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    Id?: boolean
+    LiveryId?: boolean
+    Name?: boolean
+    Type?: boolean
+    Path?: boolean
+    Size?: boolean
+    MimeType?: boolean
+    FileName?: boolean
+    CreatedAt?: boolean
+    UpdatedAt?: boolean
+    Livery?: boolean | LiveryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["liveryFile"]>
+
+  export type LiveryFileSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    Id?: boolean
+    LiveryId?: boolean
+    Name?: boolean
+    Type?: boolean
+    Path?: boolean
+    Size?: boolean
+    MimeType?: boolean
+    FileName?: boolean
+    CreatedAt?: boolean
+    UpdatedAt?: boolean
+    Livery?: boolean | LiveryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["liveryFile"]>
+
+  export type LiveryFileSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    Id?: boolean
+    LiveryId?: boolean
+    Name?: boolean
+    Type?: boolean
+    Path?: boolean
+    Size?: boolean
+    MimeType?: boolean
+    FileName?: boolean
+    CreatedAt?: boolean
+    UpdatedAt?: boolean
+    Livery?: boolean | LiveryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["liveryFile"]>
+
+  export type LiveryFileSelectScalar = {
+    Id?: boolean
+    LiveryId?: boolean
+    Name?: boolean
+    Type?: boolean
+    Path?: boolean
+    Size?: boolean
+    MimeType?: boolean
+    FileName?: boolean
+    CreatedAt?: boolean
+    UpdatedAt?: boolean
+  }
+
+  export type LiveryFileOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "LiveryId" | "Name" | "Type" | "Path" | "Size" | "MimeType" | "FileName" | "CreatedAt" | "UpdatedAt", ExtArgs["result"]["liveryFile"]>
+  export type LiveryFileInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Livery?: boolean | LiveryDefaultArgs<ExtArgs>
+  }
+  export type LiveryFileIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Livery?: boolean | LiveryDefaultArgs<ExtArgs>
+  }
+  export type LiveryFileIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Livery?: boolean | LiveryDefaultArgs<ExtArgs>
+  }
+
+  export type $LiveryFilePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "LiveryFile"
+    objects: {
+      Livery: Prisma.$LiveryPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      Id: string
+      LiveryId: string
+      Name: string
+      Type: string
+      Path: string
+      Size: number
+      MimeType: string
+      FileName: string
+      CreatedAt: Date
+      UpdatedAt: Date
+    }, ExtArgs["result"]["liveryFile"]>
+    composites: {}
+  }
+
+  type LiveryFileGetPayload<S extends boolean | null | undefined | LiveryFileDefaultArgs> = $Result.GetResult<Prisma.$LiveryFilePayload, S>
+
+  type LiveryFileCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<LiveryFileFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: LiveryFileCountAggregateInputType | true
+    }
+
+  export interface LiveryFileDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['LiveryFile'], meta: { name: 'LiveryFile' } }
+    /**
+     * Find zero or one LiveryFile that matches the filter.
+     * @param {LiveryFileFindUniqueArgs} args - Arguments to find a LiveryFile
+     * @example
+     * // Get one LiveryFile
+     * const liveryFile = await prisma.liveryFile.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends LiveryFileFindUniqueArgs>(args: SelectSubset<T, LiveryFileFindUniqueArgs<ExtArgs>>): Prisma__LiveryFileClient<$Result.GetResult<Prisma.$LiveryFilePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one LiveryFile that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {LiveryFileFindUniqueOrThrowArgs} args - Arguments to find a LiveryFile
+     * @example
+     * // Get one LiveryFile
+     * const liveryFile = await prisma.liveryFile.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends LiveryFileFindUniqueOrThrowArgs>(args: SelectSubset<T, LiveryFileFindUniqueOrThrowArgs<ExtArgs>>): Prisma__LiveryFileClient<$Result.GetResult<Prisma.$LiveryFilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first LiveryFile that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LiveryFileFindFirstArgs} args - Arguments to find a LiveryFile
+     * @example
+     * // Get one LiveryFile
+     * const liveryFile = await prisma.liveryFile.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends LiveryFileFindFirstArgs>(args?: SelectSubset<T, LiveryFileFindFirstArgs<ExtArgs>>): Prisma__LiveryFileClient<$Result.GetResult<Prisma.$LiveryFilePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first LiveryFile that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LiveryFileFindFirstOrThrowArgs} args - Arguments to find a LiveryFile
+     * @example
+     * // Get one LiveryFile
+     * const liveryFile = await prisma.liveryFile.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends LiveryFileFindFirstOrThrowArgs>(args?: SelectSubset<T, LiveryFileFindFirstOrThrowArgs<ExtArgs>>): Prisma__LiveryFileClient<$Result.GetResult<Prisma.$LiveryFilePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more LiveryFiles that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LiveryFileFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all LiveryFiles
+     * const liveryFiles = await prisma.liveryFile.findMany()
+     * 
+     * // Get first 10 LiveryFiles
+     * const liveryFiles = await prisma.liveryFile.findMany({ take: 10 })
+     * 
+     * // Only select the `Id`
+     * const liveryFileWithIdOnly = await prisma.liveryFile.findMany({ select: { Id: true } })
+     * 
+     */
+    findMany<T extends LiveryFileFindManyArgs>(args?: SelectSubset<T, LiveryFileFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LiveryFilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a LiveryFile.
+     * @param {LiveryFileCreateArgs} args - Arguments to create a LiveryFile.
+     * @example
+     * // Create one LiveryFile
+     * const LiveryFile = await prisma.liveryFile.create({
+     *   data: {
+     *     // ... data to create a LiveryFile
+     *   }
+     * })
+     * 
+     */
+    create<T extends LiveryFileCreateArgs>(args: SelectSubset<T, LiveryFileCreateArgs<ExtArgs>>): Prisma__LiveryFileClient<$Result.GetResult<Prisma.$LiveryFilePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many LiveryFiles.
+     * @param {LiveryFileCreateManyArgs} args - Arguments to create many LiveryFiles.
+     * @example
+     * // Create many LiveryFiles
+     * const liveryFile = await prisma.liveryFile.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends LiveryFileCreateManyArgs>(args?: SelectSubset<T, LiveryFileCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many LiveryFiles and returns the data saved in the database.
+     * @param {LiveryFileCreateManyAndReturnArgs} args - Arguments to create many LiveryFiles.
+     * @example
+     * // Create many LiveryFiles
+     * const liveryFile = await prisma.liveryFile.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many LiveryFiles and only return the `Id`
+     * const liveryFileWithIdOnly = await prisma.liveryFile.createManyAndReturn({
+     *   select: { Id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends LiveryFileCreateManyAndReturnArgs>(args?: SelectSubset<T, LiveryFileCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LiveryFilePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a LiveryFile.
+     * @param {LiveryFileDeleteArgs} args - Arguments to delete one LiveryFile.
+     * @example
+     * // Delete one LiveryFile
+     * const LiveryFile = await prisma.liveryFile.delete({
+     *   where: {
+     *     // ... filter to delete one LiveryFile
+     *   }
+     * })
+     * 
+     */
+    delete<T extends LiveryFileDeleteArgs>(args: SelectSubset<T, LiveryFileDeleteArgs<ExtArgs>>): Prisma__LiveryFileClient<$Result.GetResult<Prisma.$LiveryFilePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one LiveryFile.
+     * @param {LiveryFileUpdateArgs} args - Arguments to update one LiveryFile.
+     * @example
+     * // Update one LiveryFile
+     * const liveryFile = await prisma.liveryFile.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends LiveryFileUpdateArgs>(args: SelectSubset<T, LiveryFileUpdateArgs<ExtArgs>>): Prisma__LiveryFileClient<$Result.GetResult<Prisma.$LiveryFilePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more LiveryFiles.
+     * @param {LiveryFileDeleteManyArgs} args - Arguments to filter LiveryFiles to delete.
+     * @example
+     * // Delete a few LiveryFiles
+     * const { count } = await prisma.liveryFile.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends LiveryFileDeleteManyArgs>(args?: SelectSubset<T, LiveryFileDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more LiveryFiles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LiveryFileUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many LiveryFiles
+     * const liveryFile = await prisma.liveryFile.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends LiveryFileUpdateManyArgs>(args: SelectSubset<T, LiveryFileUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more LiveryFiles and returns the data updated in the database.
+     * @param {LiveryFileUpdateManyAndReturnArgs} args - Arguments to update many LiveryFiles.
+     * @example
+     * // Update many LiveryFiles
+     * const liveryFile = await prisma.liveryFile.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more LiveryFiles and only return the `Id`
+     * const liveryFileWithIdOnly = await prisma.liveryFile.updateManyAndReturn({
+     *   select: { Id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends LiveryFileUpdateManyAndReturnArgs>(args: SelectSubset<T, LiveryFileUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LiveryFilePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one LiveryFile.
+     * @param {LiveryFileUpsertArgs} args - Arguments to update or create a LiveryFile.
+     * @example
+     * // Update or create a LiveryFile
+     * const liveryFile = await prisma.liveryFile.upsert({
+     *   create: {
+     *     // ... data to create a LiveryFile
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the LiveryFile we want to update
+     *   }
+     * })
+     */
+    upsert<T extends LiveryFileUpsertArgs>(args: SelectSubset<T, LiveryFileUpsertArgs<ExtArgs>>): Prisma__LiveryFileClient<$Result.GetResult<Prisma.$LiveryFilePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of LiveryFiles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LiveryFileCountArgs} args - Arguments to filter LiveryFiles to count.
+     * @example
+     * // Count the number of LiveryFiles
+     * const count = await prisma.liveryFile.count({
+     *   where: {
+     *     // ... the filter for the LiveryFiles we want to count
+     *   }
+     * })
+    **/
+    count<T extends LiveryFileCountArgs>(
+      args?: Subset<T, LiveryFileCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], LiveryFileCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a LiveryFile.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LiveryFileAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends LiveryFileAggregateArgs>(args: Subset<T, LiveryFileAggregateArgs>): Prisma.PrismaPromise<GetLiveryFileAggregateType<T>>
+
+    /**
+     * Group by LiveryFile.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LiveryFileGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends LiveryFileGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: LiveryFileGroupByArgs['orderBy'] }
+        : { orderBy?: LiveryFileGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, LiveryFileGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetLiveryFileGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the LiveryFile model
+   */
+  readonly fields: LiveryFileFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for LiveryFile.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__LiveryFileClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    Livery<T extends LiveryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, LiveryDefaultArgs<ExtArgs>>): Prisma__LiveryClient<$Result.GetResult<Prisma.$LiveryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the LiveryFile model
+   */
+  interface LiveryFileFieldRefs {
+    readonly Id: FieldRef<"LiveryFile", 'String'>
+    readonly LiveryId: FieldRef<"LiveryFile", 'String'>
+    readonly Name: FieldRef<"LiveryFile", 'String'>
+    readonly Type: FieldRef<"LiveryFile", 'String'>
+    readonly Path: FieldRef<"LiveryFile", 'String'>
+    readonly Size: FieldRef<"LiveryFile", 'Int'>
+    readonly MimeType: FieldRef<"LiveryFile", 'String'>
+    readonly FileName: FieldRef<"LiveryFile", 'String'>
+    readonly CreatedAt: FieldRef<"LiveryFile", 'DateTime'>
+    readonly UpdatedAt: FieldRef<"LiveryFile", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * LiveryFile findUnique
+   */
+  export type LiveryFileFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiveryFile
+     */
+    select?: LiveryFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LiveryFile
+     */
+    omit?: LiveryFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveryFileInclude<ExtArgs> | null
+    /**
+     * Filter, which LiveryFile to fetch.
+     */
+    where: LiveryFileWhereUniqueInput
+  }
+
+  /**
+   * LiveryFile findUniqueOrThrow
+   */
+  export type LiveryFileFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiveryFile
+     */
+    select?: LiveryFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LiveryFile
+     */
+    omit?: LiveryFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveryFileInclude<ExtArgs> | null
+    /**
+     * Filter, which LiveryFile to fetch.
+     */
+    where: LiveryFileWhereUniqueInput
+  }
+
+  /**
+   * LiveryFile findFirst
+   */
+  export type LiveryFileFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiveryFile
+     */
+    select?: LiveryFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LiveryFile
+     */
+    omit?: LiveryFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveryFileInclude<ExtArgs> | null
+    /**
+     * Filter, which LiveryFile to fetch.
+     */
+    where?: LiveryFileWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LiveryFiles to fetch.
+     */
+    orderBy?: LiveryFileOrderByWithRelationInput | LiveryFileOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LiveryFiles.
+     */
+    cursor?: LiveryFileWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LiveryFiles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LiveryFiles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LiveryFiles.
+     */
+    distinct?: LiveryFileScalarFieldEnum | LiveryFileScalarFieldEnum[]
+  }
+
+  /**
+   * LiveryFile findFirstOrThrow
+   */
+  export type LiveryFileFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiveryFile
+     */
+    select?: LiveryFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LiveryFile
+     */
+    omit?: LiveryFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveryFileInclude<ExtArgs> | null
+    /**
+     * Filter, which LiveryFile to fetch.
+     */
+    where?: LiveryFileWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LiveryFiles to fetch.
+     */
+    orderBy?: LiveryFileOrderByWithRelationInput | LiveryFileOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LiveryFiles.
+     */
+    cursor?: LiveryFileWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LiveryFiles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LiveryFiles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LiveryFiles.
+     */
+    distinct?: LiveryFileScalarFieldEnum | LiveryFileScalarFieldEnum[]
+  }
+
+  /**
+   * LiveryFile findMany
+   */
+  export type LiveryFileFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiveryFile
+     */
+    select?: LiveryFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LiveryFile
+     */
+    omit?: LiveryFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveryFileInclude<ExtArgs> | null
+    /**
+     * Filter, which LiveryFiles to fetch.
+     */
+    where?: LiveryFileWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LiveryFiles to fetch.
+     */
+    orderBy?: LiveryFileOrderByWithRelationInput | LiveryFileOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing LiveryFiles.
+     */
+    cursor?: LiveryFileWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LiveryFiles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LiveryFiles.
+     */
+    skip?: number
+    distinct?: LiveryFileScalarFieldEnum | LiveryFileScalarFieldEnum[]
+  }
+
+  /**
+   * LiveryFile create
+   */
+  export type LiveryFileCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiveryFile
+     */
+    select?: LiveryFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LiveryFile
+     */
+    omit?: LiveryFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveryFileInclude<ExtArgs> | null
+    /**
+     * The data needed to create a LiveryFile.
+     */
+    data: XOR<LiveryFileCreateInput, LiveryFileUncheckedCreateInput>
+  }
+
+  /**
+   * LiveryFile createMany
+   */
+  export type LiveryFileCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many LiveryFiles.
+     */
+    data: LiveryFileCreateManyInput | LiveryFileCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * LiveryFile createManyAndReturn
+   */
+  export type LiveryFileCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiveryFile
+     */
+    select?: LiveryFileSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the LiveryFile
+     */
+    omit?: LiveryFileOmit<ExtArgs> | null
+    /**
+     * The data used to create many LiveryFiles.
+     */
+    data: LiveryFileCreateManyInput | LiveryFileCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveryFileIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * LiveryFile update
+   */
+  export type LiveryFileUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiveryFile
+     */
+    select?: LiveryFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LiveryFile
+     */
+    omit?: LiveryFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveryFileInclude<ExtArgs> | null
+    /**
+     * The data needed to update a LiveryFile.
+     */
+    data: XOR<LiveryFileUpdateInput, LiveryFileUncheckedUpdateInput>
+    /**
+     * Choose, which LiveryFile to update.
+     */
+    where: LiveryFileWhereUniqueInput
+  }
+
+  /**
+   * LiveryFile updateMany
+   */
+  export type LiveryFileUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update LiveryFiles.
+     */
+    data: XOR<LiveryFileUpdateManyMutationInput, LiveryFileUncheckedUpdateManyInput>
+    /**
+     * Filter which LiveryFiles to update
+     */
+    where?: LiveryFileWhereInput
+    /**
+     * Limit how many LiveryFiles to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * LiveryFile updateManyAndReturn
+   */
+  export type LiveryFileUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiveryFile
+     */
+    select?: LiveryFileSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the LiveryFile
+     */
+    omit?: LiveryFileOmit<ExtArgs> | null
+    /**
+     * The data used to update LiveryFiles.
+     */
+    data: XOR<LiveryFileUpdateManyMutationInput, LiveryFileUncheckedUpdateManyInput>
+    /**
+     * Filter which LiveryFiles to update
+     */
+    where?: LiveryFileWhereInput
+    /**
+     * Limit how many LiveryFiles to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveryFileIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * LiveryFile upsert
+   */
+  export type LiveryFileUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiveryFile
+     */
+    select?: LiveryFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LiveryFile
+     */
+    omit?: LiveryFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveryFileInclude<ExtArgs> | null
+    /**
+     * The filter to search for the LiveryFile to update in case it exists.
+     */
+    where: LiveryFileWhereUniqueInput
+    /**
+     * In case the LiveryFile found by the `where` argument doesn't exist, create a new LiveryFile with this data.
+     */
+    create: XOR<LiveryFileCreateInput, LiveryFileUncheckedCreateInput>
+    /**
+     * In case the LiveryFile was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<LiveryFileUpdateInput, LiveryFileUncheckedUpdateInput>
+  }
+
+  /**
+   * LiveryFile delete
+   */
+  export type LiveryFileDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiveryFile
+     */
+    select?: LiveryFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LiveryFile
+     */
+    omit?: LiveryFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveryFileInclude<ExtArgs> | null
+    /**
+     * Filter which LiveryFile to delete.
+     */
+    where: LiveryFileWhereUniqueInput
+  }
+
+  /**
+   * LiveryFile deleteMany
+   */
+  export type LiveryFileDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LiveryFiles to delete
+     */
+    where?: LiveryFileWhereInput
+    /**
+     * Limit how many LiveryFiles to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * LiveryFile without action
+   */
+  export type LiveryFileDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiveryFile
+     */
+    select?: LiveryFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LiveryFile
+     */
+    omit?: LiveryFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LiveryFileInclude<ExtArgs> | null
   }
 
 
@@ -29097,12 +31740,14 @@ export namespace Prisma {
     Id: string | null
     ICAO: string | null
     IATA: string | null
+    Description: string | null
     Name: string | null
     Size: number | null
     City: string | null
     State: string | null
     CountryCode: string | null
     CountryName: string | null
+    CountryEmoji: string | null
     Latitude: Decimal | null
     Longitude: Decimal | null
     HomeWebSiteUrl: string | null
@@ -29115,12 +31760,14 @@ export namespace Prisma {
     Id: string | null
     ICAO: string | null
     IATA: string | null
+    Description: string | null
     Name: string | null
     Size: number | null
     City: string | null
     State: string | null
     CountryCode: string | null
     CountryName: string | null
+    CountryEmoji: string | null
     Latitude: Decimal | null
     Longitude: Decimal | null
     HomeWebSiteUrl: string | null
@@ -29133,12 +31780,14 @@ export namespace Prisma {
     Id: number
     ICAO: number
     IATA: number
+    Description: number
     Name: number
     Size: number
     City: number
     State: number
     CountryCode: number
     CountryName: number
+    CountryEmoji: number
     Latitude: number
     Longitude: number
     HomeWebSiteUrl: number
@@ -29165,12 +31814,14 @@ export namespace Prisma {
     Id?: true
     ICAO?: true
     IATA?: true
+    Description?: true
     Name?: true
     Size?: true
     City?: true
     State?: true
     CountryCode?: true
     CountryName?: true
+    CountryEmoji?: true
     Latitude?: true
     Longitude?: true
     HomeWebSiteUrl?: true
@@ -29183,12 +31834,14 @@ export namespace Prisma {
     Id?: true
     ICAO?: true
     IATA?: true
+    Description?: true
     Name?: true
     Size?: true
     City?: true
     State?: true
     CountryCode?: true
     CountryName?: true
+    CountryEmoji?: true
     Latitude?: true
     Longitude?: true
     HomeWebSiteUrl?: true
@@ -29201,12 +31854,14 @@ export namespace Prisma {
     Id?: true
     ICAO?: true
     IATA?: true
+    Description?: true
     Name?: true
     Size?: true
     City?: true
     State?: true
     CountryCode?: true
     CountryName?: true
+    CountryEmoji?: true
     Latitude?: true
     Longitude?: true
     HomeWebSiteUrl?: true
@@ -29306,12 +31961,14 @@ export namespace Prisma {
     Id: string
     ICAO: string
     IATA: string | null
+    Description: string | null
     Name: string
     Size: number
     City: string | null
     State: string | null
     CountryCode: string | null
     CountryName: string | null
+    CountryEmoji: string | null
     Latitude: Decimal
     Longitude: Decimal
     HomeWebSiteUrl: string | null
@@ -29343,12 +32000,14 @@ export namespace Prisma {
     Id?: boolean
     ICAO?: boolean
     IATA?: boolean
+    Description?: boolean
     Name?: boolean
     Size?: boolean
     City?: boolean
     State?: boolean
     CountryCode?: boolean
     CountryName?: boolean
+    CountryEmoji?: boolean
     Latitude?: boolean
     Longitude?: boolean
     HomeWebSiteUrl?: boolean
@@ -29367,12 +32026,14 @@ export namespace Prisma {
     Id?: boolean
     ICAO?: boolean
     IATA?: boolean
+    Description?: boolean
     Name?: boolean
     Size?: boolean
     City?: boolean
     State?: boolean
     CountryCode?: boolean
     CountryName?: boolean
+    CountryEmoji?: boolean
     Latitude?: boolean
     Longitude?: boolean
     HomeWebSiteUrl?: boolean
@@ -29385,12 +32046,14 @@ export namespace Prisma {
     Id?: boolean
     ICAO?: boolean
     IATA?: boolean
+    Description?: boolean
     Name?: boolean
     Size?: boolean
     City?: boolean
     State?: boolean
     CountryCode?: boolean
     CountryName?: boolean
+    CountryEmoji?: boolean
     Latitude?: boolean
     Longitude?: boolean
     HomeWebSiteUrl?: boolean
@@ -29403,12 +32066,14 @@ export namespace Prisma {
     Id?: boolean
     ICAO?: boolean
     IATA?: boolean
+    Description?: boolean
     Name?: boolean
     Size?: boolean
     City?: boolean
     State?: boolean
     CountryCode?: boolean
     CountryName?: boolean
+    CountryEmoji?: boolean
     Latitude?: boolean
     Longitude?: boolean
     HomeWebSiteUrl?: boolean
@@ -29417,7 +32082,7 @@ export namespace Prisma {
     UpdatedAt?: boolean
   }
 
-  export type AirportOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "ICAO" | "IATA" | "Name" | "Size" | "City" | "State" | "CountryCode" | "CountryName" | "Latitude" | "Longitude" | "HomeWebSiteUrl" | "WikiUrl" | "CreatedAt" | "UpdatedAt", ExtArgs["result"]["airport"]>
+  export type AirportOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "ICAO" | "IATA" | "Description" | "Name" | "Size" | "City" | "State" | "CountryCode" | "CountryName" | "CountryEmoji" | "Latitude" | "Longitude" | "HomeWebSiteUrl" | "WikiUrl" | "CreatedAt" | "UpdatedAt", ExtArgs["result"]["airport"]>
   export type AirportInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     AircraftAtAirport?: boolean | Airport$AircraftAtAirportArgs<ExtArgs>
     DepartingFlights?: boolean | Airport$DepartingFlightsArgs<ExtArgs>
@@ -29442,12 +32107,14 @@ export namespace Prisma {
       Id: string
       ICAO: string
       IATA: string | null
+      Description: string | null
       Name: string
       Size: number
       City: string | null
       State: string | null
       CountryCode: string | null
       CountryName: string | null
+      CountryEmoji: string | null
       Latitude: Prisma.Decimal
       Longitude: Prisma.Decimal
       HomeWebSiteUrl: string | null
@@ -29885,12 +32552,14 @@ export namespace Prisma {
     readonly Id: FieldRef<"Airport", 'String'>
     readonly ICAO: FieldRef<"Airport", 'String'>
     readonly IATA: FieldRef<"Airport", 'String'>
+    readonly Description: FieldRef<"Airport", 'String'>
     readonly Name: FieldRef<"Airport", 'String'>
     readonly Size: FieldRef<"Airport", 'Int'>
     readonly City: FieldRef<"Airport", 'String'>
     readonly State: FieldRef<"Airport", 'String'>
     readonly CountryCode: FieldRef<"Airport", 'String'>
     readonly CountryName: FieldRef<"Airport", 'String'>
+    readonly CountryEmoji: FieldRef<"Airport", 'String'>
     readonly Latitude: FieldRef<"Airport", 'Decimal'>
     readonly Longitude: FieldRef<"Airport", 'Decimal'>
     readonly HomeWebSiteUrl: FieldRef<"Airport", 'String'>
@@ -35050,6 +37719,9 @@ export namespace Prisma {
     AircraftId: 'AircraftId',
     DownloadCount: 'DownloadCount',
     Image: 'Image',
+    ImageFileName: 'ImageFileName',
+    CoverPhoto: 'CoverPhoto',
+    Metadata: 'Metadata',
     Url: 'Url',
     Description: 'Description',
     DownloadUrl: 'DownloadUrl',
@@ -35058,6 +37730,38 @@ export namespace Prisma {
   };
 
   export type LiveryScalarFieldEnum = (typeof LiveryScalarFieldEnum)[keyof typeof LiveryScalarFieldEnum]
+
+
+  export const LiveryImageScalarFieldEnum: {
+    Id: 'Id',
+    LiveryId: 'LiveryId',
+    Name: 'Name',
+    Type: 'Type',
+    Path: 'Path',
+    Size: 'Size',
+    MimeType: 'MimeType',
+    FileName: 'FileName',
+    CreatedAt: 'CreatedAt',
+    UpdatedAt: 'UpdatedAt'
+  };
+
+  export type LiveryImageScalarFieldEnum = (typeof LiveryImageScalarFieldEnum)[keyof typeof LiveryImageScalarFieldEnum]
+
+
+  export const LiveryFileScalarFieldEnum: {
+    Id: 'Id',
+    LiveryId: 'LiveryId',
+    Name: 'Name',
+    Type: 'Type',
+    Path: 'Path',
+    Size: 'Size',
+    MimeType: 'MimeType',
+    FileName: 'FileName',
+    CreatedAt: 'CreatedAt',
+    UpdatedAt: 'UpdatedAt'
+  };
+
+  export type LiveryFileScalarFieldEnum = (typeof LiveryFileScalarFieldEnum)[keyof typeof LiveryFileScalarFieldEnum]
 
 
   export const VirtualAirlineScalarFieldEnum: {
@@ -35230,12 +37934,14 @@ export namespace Prisma {
     Id: 'Id',
     ICAO: 'ICAO',
     IATA: 'IATA',
+    Description: 'Description',
     Name: 'Name',
     Size: 'Size',
     City: 'City',
     State: 'State',
     CountryCode: 'CountryCode',
     CountryName: 'CountryName',
+    CountryEmoji: 'CountryEmoji',
     Latitude: 'Latitude',
     Longitude: 'Longitude',
     HomeWebSiteUrl: 'HomeWebSiteUrl',
@@ -36139,7 +38845,7 @@ export namespace Prisma {
     DiscordAvatar?: StringNullableFilter<"User"> | string | null
     DiscordEmail?: StringNullableFilter<"User"> | string | null
     Roles?: RoleListRelationFilter
-    PrivacySettings?: XOR<UserPrivacySettingsNullableScalarRelationFilter, UserPrivacySettingsWhereInput> | null
+    PrivacySettings?: UserPrivacySettingsListRelationFilter
     Members?: MemberListRelationFilter
     InviteCode?: XOR<InviteCodeNullableScalarRelationFilter, InviteCodeWhereInput> | null
   }
@@ -36166,7 +38872,7 @@ export namespace Prisma {
     DiscordAvatar?: SortOrderInput | SortOrder
     DiscordEmail?: SortOrderInput | SortOrder
     Roles?: RoleOrderByRelationAggregateInput
-    PrivacySettings?: UserPrivacySettingsOrderByWithRelationInput
+    PrivacySettings?: UserPrivacySettingsOrderByRelationAggregateInput
     Members?: MemberOrderByRelationAggregateInput
     InviteCode?: InviteCodeOrderByWithRelationInput
   }
@@ -36196,7 +38902,7 @@ export namespace Prisma {
     DiscordAvatar?: StringNullableFilter<"User"> | string | null
     DiscordEmail?: StringNullableFilter<"User"> | string | null
     Roles?: RoleListRelationFilter
-    PrivacySettings?: XOR<UserPrivacySettingsNullableScalarRelationFilter, UserPrivacySettingsWhereInput> | null
+    PrivacySettings?: UserPrivacySettingsListRelationFilter
     Members?: MemberListRelationFilter
     InviteCode?: XOR<InviteCodeNullableScalarRelationFilter, InviteCodeWhereInput> | null
   }, "Id" | "Id" | "Username" | "Email" | "InviteCodeId" | "DiscordId">
@@ -36468,12 +39174,17 @@ export namespace Prisma {
     AircraftId?: UuidNullableFilter<"Livery"> | string | null
     DownloadCount?: IntFilter<"Livery"> | number
     Image?: StringFilter<"Livery"> | string
+    ImageFileName?: StringNullableFilter<"Livery"> | string | null
+    CoverPhoto?: StringNullableFilter<"Livery"> | string | null
+    Metadata?: JsonNullableFilter<"Livery">
     Url?: StringNullableFilter<"Livery"> | string | null
     Description?: StringNullableFilter<"Livery"> | string | null
     DownloadUrl?: StringNullableFilter<"Livery"> | string | null
     CreatedAt?: DateTimeFilter<"Livery"> | Date | string
     UpdatedAt?: DateTimeFilter<"Livery"> | Date | string
     Aircraft?: XOR<AircraftNullableScalarRelationFilter, AircraftWhereInput> | null
+    Images?: LiveryImageListRelationFilter
+    Files?: LiveryFileListRelationFilter
   }
 
   export type LiveryOrderByWithRelationInput = {
@@ -36483,12 +39194,17 @@ export namespace Prisma {
     AircraftId?: SortOrderInput | SortOrder
     DownloadCount?: SortOrder
     Image?: SortOrder
+    ImageFileName?: SortOrderInput | SortOrder
+    CoverPhoto?: SortOrderInput | SortOrder
+    Metadata?: SortOrderInput | SortOrder
     Url?: SortOrderInput | SortOrder
     Description?: SortOrderInput | SortOrder
     DownloadUrl?: SortOrderInput | SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
     Aircraft?: AircraftOrderByWithRelationInput
+    Images?: LiveryImageOrderByRelationAggregateInput
+    Files?: LiveryFileOrderByRelationAggregateInput
   }
 
   export type LiveryWhereUniqueInput = Prisma.AtLeast<{
@@ -36501,12 +39217,17 @@ export namespace Prisma {
     AircraftId?: UuidNullableFilter<"Livery"> | string | null
     DownloadCount?: IntFilter<"Livery"> | number
     Image?: StringFilter<"Livery"> | string
+    ImageFileName?: StringNullableFilter<"Livery"> | string | null
+    CoverPhoto?: StringNullableFilter<"Livery"> | string | null
+    Metadata?: JsonNullableFilter<"Livery">
     Url?: StringNullableFilter<"Livery"> | string | null
     Description?: StringNullableFilter<"Livery"> | string | null
     DownloadUrl?: StringNullableFilter<"Livery"> | string | null
     CreatedAt?: DateTimeFilter<"Livery"> | Date | string
     UpdatedAt?: DateTimeFilter<"Livery"> | Date | string
     Aircraft?: XOR<AircraftNullableScalarRelationFilter, AircraftWhereInput> | null
+    Images?: LiveryImageListRelationFilter
+    Files?: LiveryFileListRelationFilter
   }, "Id">
 
   export type LiveryOrderByWithAggregationInput = {
@@ -36516,6 +39237,9 @@ export namespace Prisma {
     AircraftId?: SortOrderInput | SortOrder
     DownloadCount?: SortOrder
     Image?: SortOrder
+    ImageFileName?: SortOrderInput | SortOrder
+    CoverPhoto?: SortOrderInput | SortOrder
+    Metadata?: SortOrderInput | SortOrder
     Url?: SortOrderInput | SortOrder
     Description?: SortOrderInput | SortOrder
     DownloadUrl?: SortOrderInput | SortOrder
@@ -36538,11 +39262,178 @@ export namespace Prisma {
     AircraftId?: UuidNullableWithAggregatesFilter<"Livery"> | string | null
     DownloadCount?: IntWithAggregatesFilter<"Livery"> | number
     Image?: StringWithAggregatesFilter<"Livery"> | string
+    ImageFileName?: StringNullableWithAggregatesFilter<"Livery"> | string | null
+    CoverPhoto?: StringNullableWithAggregatesFilter<"Livery"> | string | null
+    Metadata?: JsonNullableWithAggregatesFilter<"Livery">
     Url?: StringNullableWithAggregatesFilter<"Livery"> | string | null
     Description?: StringNullableWithAggregatesFilter<"Livery"> | string | null
     DownloadUrl?: StringNullableWithAggregatesFilter<"Livery"> | string | null
     CreatedAt?: DateTimeWithAggregatesFilter<"Livery"> | Date | string
     UpdatedAt?: DateTimeWithAggregatesFilter<"Livery"> | Date | string
+  }
+
+  export type LiveryImageWhereInput = {
+    AND?: LiveryImageWhereInput | LiveryImageWhereInput[]
+    OR?: LiveryImageWhereInput[]
+    NOT?: LiveryImageWhereInput | LiveryImageWhereInput[]
+    Id?: UuidFilter<"LiveryImage"> | string
+    LiveryId?: UuidFilter<"LiveryImage"> | string
+    Name?: StringFilter<"LiveryImage"> | string
+    Type?: StringFilter<"LiveryImage"> | string
+    Path?: StringFilter<"LiveryImage"> | string
+    Size?: IntFilter<"LiveryImage"> | number
+    MimeType?: StringFilter<"LiveryImage"> | string
+    FileName?: StringFilter<"LiveryImage"> | string
+    CreatedAt?: DateTimeFilter<"LiveryImage"> | Date | string
+    UpdatedAt?: DateTimeFilter<"LiveryImage"> | Date | string
+    Livery?: XOR<LiveryScalarRelationFilter, LiveryWhereInput>
+  }
+
+  export type LiveryImageOrderByWithRelationInput = {
+    Id?: SortOrder
+    LiveryId?: SortOrder
+    Name?: SortOrder
+    Type?: SortOrder
+    Path?: SortOrder
+    Size?: SortOrder
+    MimeType?: SortOrder
+    FileName?: SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+    Livery?: LiveryOrderByWithRelationInput
+  }
+
+  export type LiveryImageWhereUniqueInput = Prisma.AtLeast<{
+    Id?: string
+    AND?: LiveryImageWhereInput | LiveryImageWhereInput[]
+    OR?: LiveryImageWhereInput[]
+    NOT?: LiveryImageWhereInput | LiveryImageWhereInput[]
+    LiveryId?: UuidFilter<"LiveryImage"> | string
+    Name?: StringFilter<"LiveryImage"> | string
+    Type?: StringFilter<"LiveryImage"> | string
+    Path?: StringFilter<"LiveryImage"> | string
+    Size?: IntFilter<"LiveryImage"> | number
+    MimeType?: StringFilter<"LiveryImage"> | string
+    FileName?: StringFilter<"LiveryImage"> | string
+    CreatedAt?: DateTimeFilter<"LiveryImage"> | Date | string
+    UpdatedAt?: DateTimeFilter<"LiveryImage"> | Date | string
+    Livery?: XOR<LiveryScalarRelationFilter, LiveryWhereInput>
+  }, "Id">
+
+  export type LiveryImageOrderByWithAggregationInput = {
+    Id?: SortOrder
+    LiveryId?: SortOrder
+    Name?: SortOrder
+    Type?: SortOrder
+    Path?: SortOrder
+    Size?: SortOrder
+    MimeType?: SortOrder
+    FileName?: SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+    _count?: LiveryImageCountOrderByAggregateInput
+    _avg?: LiveryImageAvgOrderByAggregateInput
+    _max?: LiveryImageMaxOrderByAggregateInput
+    _min?: LiveryImageMinOrderByAggregateInput
+    _sum?: LiveryImageSumOrderByAggregateInput
+  }
+
+  export type LiveryImageScalarWhereWithAggregatesInput = {
+    AND?: LiveryImageScalarWhereWithAggregatesInput | LiveryImageScalarWhereWithAggregatesInput[]
+    OR?: LiveryImageScalarWhereWithAggregatesInput[]
+    NOT?: LiveryImageScalarWhereWithAggregatesInput | LiveryImageScalarWhereWithAggregatesInput[]
+    Id?: UuidWithAggregatesFilter<"LiveryImage"> | string
+    LiveryId?: UuidWithAggregatesFilter<"LiveryImage"> | string
+    Name?: StringWithAggregatesFilter<"LiveryImage"> | string
+    Type?: StringWithAggregatesFilter<"LiveryImage"> | string
+    Path?: StringWithAggregatesFilter<"LiveryImage"> | string
+    Size?: IntWithAggregatesFilter<"LiveryImage"> | number
+    MimeType?: StringWithAggregatesFilter<"LiveryImage"> | string
+    FileName?: StringWithAggregatesFilter<"LiveryImage"> | string
+    CreatedAt?: DateTimeWithAggregatesFilter<"LiveryImage"> | Date | string
+    UpdatedAt?: DateTimeWithAggregatesFilter<"LiveryImage"> | Date | string
+  }
+
+  export type LiveryFileWhereInput = {
+    AND?: LiveryFileWhereInput | LiveryFileWhereInput[]
+    OR?: LiveryFileWhereInput[]
+    NOT?: LiveryFileWhereInput | LiveryFileWhereInput[]
+    Id?: UuidFilter<"LiveryFile"> | string
+    LiveryId?: UuidFilter<"LiveryFile"> | string
+    Name?: StringFilter<"LiveryFile"> | string
+    Type?: StringFilter<"LiveryFile"> | string
+    Path?: StringFilter<"LiveryFile"> | string
+    Size?: IntFilter<"LiveryFile"> | number
+    MimeType?: StringFilter<"LiveryFile"> | string
+    FileName?: StringFilter<"LiveryFile"> | string
+    CreatedAt?: DateTimeFilter<"LiveryFile"> | Date | string
+    UpdatedAt?: DateTimeFilter<"LiveryFile"> | Date | string
+    Livery?: XOR<LiveryScalarRelationFilter, LiveryWhereInput>
+  }
+
+  export type LiveryFileOrderByWithRelationInput = {
+    Id?: SortOrder
+    LiveryId?: SortOrder
+    Name?: SortOrder
+    Type?: SortOrder
+    Path?: SortOrder
+    Size?: SortOrder
+    MimeType?: SortOrder
+    FileName?: SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+    Livery?: LiveryOrderByWithRelationInput
+  }
+
+  export type LiveryFileWhereUniqueInput = Prisma.AtLeast<{
+    Id?: string
+    AND?: LiveryFileWhereInput | LiveryFileWhereInput[]
+    OR?: LiveryFileWhereInput[]
+    NOT?: LiveryFileWhereInput | LiveryFileWhereInput[]
+    LiveryId?: UuidFilter<"LiveryFile"> | string
+    Name?: StringFilter<"LiveryFile"> | string
+    Type?: StringFilter<"LiveryFile"> | string
+    Path?: StringFilter<"LiveryFile"> | string
+    Size?: IntFilter<"LiveryFile"> | number
+    MimeType?: StringFilter<"LiveryFile"> | string
+    FileName?: StringFilter<"LiveryFile"> | string
+    CreatedAt?: DateTimeFilter<"LiveryFile"> | Date | string
+    UpdatedAt?: DateTimeFilter<"LiveryFile"> | Date | string
+    Livery?: XOR<LiveryScalarRelationFilter, LiveryWhereInput>
+  }, "Id">
+
+  export type LiveryFileOrderByWithAggregationInput = {
+    Id?: SortOrder
+    LiveryId?: SortOrder
+    Name?: SortOrder
+    Type?: SortOrder
+    Path?: SortOrder
+    Size?: SortOrder
+    MimeType?: SortOrder
+    FileName?: SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+    _count?: LiveryFileCountOrderByAggregateInput
+    _avg?: LiveryFileAvgOrderByAggregateInput
+    _max?: LiveryFileMaxOrderByAggregateInput
+    _min?: LiveryFileMinOrderByAggregateInput
+    _sum?: LiveryFileSumOrderByAggregateInput
+  }
+
+  export type LiveryFileScalarWhereWithAggregatesInput = {
+    AND?: LiveryFileScalarWhereWithAggregatesInput | LiveryFileScalarWhereWithAggregatesInput[]
+    OR?: LiveryFileScalarWhereWithAggregatesInput[]
+    NOT?: LiveryFileScalarWhereWithAggregatesInput | LiveryFileScalarWhereWithAggregatesInput[]
+    Id?: UuidWithAggregatesFilter<"LiveryFile"> | string
+    LiveryId?: UuidWithAggregatesFilter<"LiveryFile"> | string
+    Name?: StringWithAggregatesFilter<"LiveryFile"> | string
+    Type?: StringWithAggregatesFilter<"LiveryFile"> | string
+    Path?: StringWithAggregatesFilter<"LiveryFile"> | string
+    Size?: IntWithAggregatesFilter<"LiveryFile"> | number
+    MimeType?: StringWithAggregatesFilter<"LiveryFile"> | string
+    FileName?: StringWithAggregatesFilter<"LiveryFile"> | string
+    CreatedAt?: DateTimeWithAggregatesFilter<"LiveryFile"> | Date | string
+    UpdatedAt?: DateTimeWithAggregatesFilter<"LiveryFile"> | Date | string
   }
 
   export type VirtualAirlineWhereInput = {
@@ -37456,12 +40347,14 @@ export namespace Prisma {
     Id?: UuidFilter<"Airport"> | string
     ICAO?: StringFilter<"Airport"> | string
     IATA?: StringNullableFilter<"Airport"> | string | null
+    Description?: StringNullableFilter<"Airport"> | string | null
     Name?: StringFilter<"Airport"> | string
     Size?: IntFilter<"Airport"> | number
     City?: StringNullableFilter<"Airport"> | string | null
     State?: StringNullableFilter<"Airport"> | string | null
     CountryCode?: StringNullableFilter<"Airport"> | string | null
     CountryName?: StringNullableFilter<"Airport"> | string | null
+    CountryEmoji?: StringNullableFilter<"Airport"> | string | null
     Latitude?: DecimalFilter<"Airport"> | Decimal | DecimalJsLike | number | string
     Longitude?: DecimalFilter<"Airport"> | Decimal | DecimalJsLike | number | string
     HomeWebSiteUrl?: StringNullableFilter<"Airport"> | string | null
@@ -37479,12 +40372,14 @@ export namespace Prisma {
     Id?: SortOrder
     ICAO?: SortOrder
     IATA?: SortOrderInput | SortOrder
+    Description?: SortOrderInput | SortOrder
     Name?: SortOrder
     Size?: SortOrder
     City?: SortOrderInput | SortOrder
     State?: SortOrderInput | SortOrder
     CountryCode?: SortOrderInput | SortOrder
     CountryName?: SortOrderInput | SortOrder
+    CountryEmoji?: SortOrderInput | SortOrder
     Latitude?: SortOrder
     Longitude?: SortOrder
     HomeWebSiteUrl?: SortOrderInput | SortOrder
@@ -37505,12 +40400,14 @@ export namespace Prisma {
     AND?: AirportWhereInput | AirportWhereInput[]
     OR?: AirportWhereInput[]
     NOT?: AirportWhereInput | AirportWhereInput[]
+    Description?: StringNullableFilter<"Airport"> | string | null
     Name?: StringFilter<"Airport"> | string
     Size?: IntFilter<"Airport"> | number
     City?: StringNullableFilter<"Airport"> | string | null
     State?: StringNullableFilter<"Airport"> | string | null
     CountryCode?: StringNullableFilter<"Airport"> | string | null
     CountryName?: StringNullableFilter<"Airport"> | string | null
+    CountryEmoji?: StringNullableFilter<"Airport"> | string | null
     Latitude?: DecimalFilter<"Airport"> | Decimal | DecimalJsLike | number | string
     Longitude?: DecimalFilter<"Airport"> | Decimal | DecimalJsLike | number | string
     HomeWebSiteUrl?: StringNullableFilter<"Airport"> | string | null
@@ -37528,12 +40425,14 @@ export namespace Prisma {
     Id?: SortOrder
     ICAO?: SortOrder
     IATA?: SortOrderInput | SortOrder
+    Description?: SortOrderInput | SortOrder
     Name?: SortOrder
     Size?: SortOrder
     City?: SortOrderInput | SortOrder
     State?: SortOrderInput | SortOrder
     CountryCode?: SortOrderInput | SortOrder
     CountryName?: SortOrderInput | SortOrder
+    CountryEmoji?: SortOrderInput | SortOrder
     Latitude?: SortOrder
     Longitude?: SortOrder
     HomeWebSiteUrl?: SortOrderInput | SortOrder
@@ -37554,12 +40453,14 @@ export namespace Prisma {
     Id?: UuidWithAggregatesFilter<"Airport"> | string
     ICAO?: StringWithAggregatesFilter<"Airport"> | string
     IATA?: StringNullableWithAggregatesFilter<"Airport"> | string | null
+    Description?: StringNullableWithAggregatesFilter<"Airport"> | string | null
     Name?: StringWithAggregatesFilter<"Airport"> | string
     Size?: IntWithAggregatesFilter<"Airport"> | number
     City?: StringNullableWithAggregatesFilter<"Airport"> | string | null
     State?: StringNullableWithAggregatesFilter<"Airport"> | string | null
     CountryCode?: StringNullableWithAggregatesFilter<"Airport"> | string | null
     CountryName?: StringNullableWithAggregatesFilter<"Airport"> | string | null
+    CountryEmoji?: StringNullableWithAggregatesFilter<"Airport"> | string | null
     Latitude?: DecimalWithAggregatesFilter<"Airport"> | Decimal | DecimalJsLike | number | string
     Longitude?: DecimalWithAggregatesFilter<"Airport"> | Decimal | DecimalJsLike | number | string
     HomeWebSiteUrl?: StringNullableWithAggregatesFilter<"Airport"> | string | null
@@ -38739,7 +41640,7 @@ export namespace Prisma {
     DiscordAvatar?: string | null
     DiscordEmail?: string | null
     Roles?: RoleCreateNestedManyWithoutUsersInput
-    PrivacySettings?: UserPrivacySettingsCreateNestedOneWithoutUserInput
+    PrivacySettings?: UserPrivacySettingsCreateNestedManyWithoutUserInput
     Members?: MemberCreateNestedManyWithoutUserInput
     InviteCode?: InviteCodeCreateNestedOneWithoutUserInput
   }
@@ -38766,7 +41667,7 @@ export namespace Prisma {
     DiscordAvatar?: string | null
     DiscordEmail?: string | null
     Roles?: RoleUncheckedCreateNestedManyWithoutUsersInput
-    PrivacySettings?: UserPrivacySettingsUncheckedCreateNestedOneWithoutUserInput
+    PrivacySettings?: UserPrivacySettingsUncheckedCreateNestedManyWithoutUserInput
     Members?: MemberUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -38791,7 +41692,7 @@ export namespace Prisma {
     DiscordAvatar?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordEmail?: NullableStringFieldUpdateOperationsInput | string | null
     Roles?: RoleUpdateManyWithoutUsersNestedInput
-    PrivacySettings?: UserPrivacySettingsUpdateOneWithoutUserNestedInput
+    PrivacySettings?: UserPrivacySettingsUpdateManyWithoutUserNestedInput
     Members?: MemberUpdateManyWithoutUserNestedInput
     InviteCode?: InviteCodeUpdateOneWithoutUserNestedInput
   }
@@ -38818,7 +41719,7 @@ export namespace Prisma {
     DiscordAvatar?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordEmail?: NullableStringFieldUpdateOperationsInput | string | null
     Roles?: RoleUncheckedUpdateManyWithoutUsersNestedInput
-    PrivacySettings?: UserPrivacySettingsUncheckedUpdateOneWithoutUserNestedInput
+    PrivacySettings?: UserPrivacySettingsUncheckedUpdateManyWithoutUserNestedInput
     Members?: MemberUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -39110,12 +42011,17 @@ export namespace Prisma {
     IsActive?: boolean
     DownloadCount?: number
     Image: string
+    ImageFileName?: string | null
+    CoverPhoto?: string | null
+    Metadata?: NullableJsonNullValueInput | InputJsonValue
     Url?: string | null
     Description?: string | null
     DownloadUrl?: string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
     Aircraft?: AircraftCreateNestedOneWithoutLiveriesInput
+    Images?: LiveryImageCreateNestedManyWithoutLiveryInput
+    Files?: LiveryFileCreateNestedManyWithoutLiveryInput
   }
 
   export type LiveryUncheckedCreateInput = {
@@ -39125,11 +42031,16 @@ export namespace Prisma {
     AircraftId?: string | null
     DownloadCount?: number
     Image: string
+    ImageFileName?: string | null
+    CoverPhoto?: string | null
+    Metadata?: NullableJsonNullValueInput | InputJsonValue
     Url?: string | null
     Description?: string | null
     DownloadUrl?: string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    Images?: LiveryImageUncheckedCreateNestedManyWithoutLiveryInput
+    Files?: LiveryFileUncheckedCreateNestedManyWithoutLiveryInput
   }
 
   export type LiveryUpdateInput = {
@@ -39138,12 +42049,17 @@ export namespace Prisma {
     IsActive?: BoolFieldUpdateOperationsInput | boolean
     DownloadCount?: IntFieldUpdateOperationsInput | number
     Image?: StringFieldUpdateOperationsInput | string
+    ImageFileName?: NullableStringFieldUpdateOperationsInput | string | null
+    CoverPhoto?: NullableStringFieldUpdateOperationsInput | string | null
+    Metadata?: NullableJsonNullValueInput | InputJsonValue
     Url?: NullableStringFieldUpdateOperationsInput | string | null
     Description?: NullableStringFieldUpdateOperationsInput | string | null
     DownloadUrl?: NullableStringFieldUpdateOperationsInput | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Aircraft?: AircraftUpdateOneWithoutLiveriesNestedInput
+    Images?: LiveryImageUpdateManyWithoutLiveryNestedInput
+    Files?: LiveryFileUpdateManyWithoutLiveryNestedInput
   }
 
   export type LiveryUncheckedUpdateInput = {
@@ -39153,11 +42069,16 @@ export namespace Prisma {
     AircraftId?: NullableStringFieldUpdateOperationsInput | string | null
     DownloadCount?: IntFieldUpdateOperationsInput | number
     Image?: StringFieldUpdateOperationsInput | string
+    ImageFileName?: NullableStringFieldUpdateOperationsInput | string | null
+    CoverPhoto?: NullableStringFieldUpdateOperationsInput | string | null
+    Metadata?: NullableJsonNullValueInput | InputJsonValue
     Url?: NullableStringFieldUpdateOperationsInput | string | null
     Description?: NullableStringFieldUpdateOperationsInput | string | null
     DownloadUrl?: NullableStringFieldUpdateOperationsInput | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Images?: LiveryImageUncheckedUpdateManyWithoutLiveryNestedInput
+    Files?: LiveryFileUncheckedUpdateManyWithoutLiveryNestedInput
   }
 
   export type LiveryCreateManyInput = {
@@ -39167,6 +42088,9 @@ export namespace Prisma {
     AircraftId?: string | null
     DownloadCount?: number
     Image: string
+    ImageFileName?: string | null
+    CoverPhoto?: string | null
+    Metadata?: NullableJsonNullValueInput | InputJsonValue
     Url?: string | null
     Description?: string | null
     DownloadUrl?: string | null
@@ -39180,6 +42104,9 @@ export namespace Prisma {
     IsActive?: BoolFieldUpdateOperationsInput | boolean
     DownloadCount?: IntFieldUpdateOperationsInput | number
     Image?: StringFieldUpdateOperationsInput | string
+    ImageFileName?: NullableStringFieldUpdateOperationsInput | string | null
+    CoverPhoto?: NullableStringFieldUpdateOperationsInput | string | null
+    Metadata?: NullableJsonNullValueInput | InputJsonValue
     Url?: NullableStringFieldUpdateOperationsInput | string | null
     Description?: NullableStringFieldUpdateOperationsInput | string | null
     DownloadUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -39194,9 +42121,192 @@ export namespace Prisma {
     AircraftId?: NullableStringFieldUpdateOperationsInput | string | null
     DownloadCount?: IntFieldUpdateOperationsInput | number
     Image?: StringFieldUpdateOperationsInput | string
+    ImageFileName?: NullableStringFieldUpdateOperationsInput | string | null
+    CoverPhoto?: NullableStringFieldUpdateOperationsInput | string | null
+    Metadata?: NullableJsonNullValueInput | InputJsonValue
     Url?: NullableStringFieldUpdateOperationsInput | string | null
     Description?: NullableStringFieldUpdateOperationsInput | string | null
     DownloadUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LiveryImageCreateInput = {
+    Id?: string
+    Name: string
+    Type: string
+    Path: string
+    Size: number
+    MimeType: string
+    FileName: string
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    Livery: LiveryCreateNestedOneWithoutImagesInput
+  }
+
+  export type LiveryImageUncheckedCreateInput = {
+    Id?: string
+    LiveryId: string
+    Name: string
+    Type: string
+    Path: string
+    Size: number
+    MimeType: string
+    FileName: string
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+  }
+
+  export type LiveryImageUpdateInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    Type?: StringFieldUpdateOperationsInput | string
+    Path?: StringFieldUpdateOperationsInput | string
+    Size?: IntFieldUpdateOperationsInput | number
+    MimeType?: StringFieldUpdateOperationsInput | string
+    FileName?: StringFieldUpdateOperationsInput | string
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Livery?: LiveryUpdateOneRequiredWithoutImagesNestedInput
+  }
+
+  export type LiveryImageUncheckedUpdateInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    LiveryId?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    Type?: StringFieldUpdateOperationsInput | string
+    Path?: StringFieldUpdateOperationsInput | string
+    Size?: IntFieldUpdateOperationsInput | number
+    MimeType?: StringFieldUpdateOperationsInput | string
+    FileName?: StringFieldUpdateOperationsInput | string
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LiveryImageCreateManyInput = {
+    Id?: string
+    LiveryId: string
+    Name: string
+    Type: string
+    Path: string
+    Size: number
+    MimeType: string
+    FileName: string
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+  }
+
+  export type LiveryImageUpdateManyMutationInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    Type?: StringFieldUpdateOperationsInput | string
+    Path?: StringFieldUpdateOperationsInput | string
+    Size?: IntFieldUpdateOperationsInput | number
+    MimeType?: StringFieldUpdateOperationsInput | string
+    FileName?: StringFieldUpdateOperationsInput | string
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LiveryImageUncheckedUpdateManyInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    LiveryId?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    Type?: StringFieldUpdateOperationsInput | string
+    Path?: StringFieldUpdateOperationsInput | string
+    Size?: IntFieldUpdateOperationsInput | number
+    MimeType?: StringFieldUpdateOperationsInput | string
+    FileName?: StringFieldUpdateOperationsInput | string
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LiveryFileCreateInput = {
+    Id?: string
+    Name: string
+    Type: string
+    Path: string
+    Size: number
+    MimeType: string
+    FileName: string
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    Livery: LiveryCreateNestedOneWithoutFilesInput
+  }
+
+  export type LiveryFileUncheckedCreateInput = {
+    Id?: string
+    LiveryId: string
+    Name: string
+    Type: string
+    Path: string
+    Size: number
+    MimeType: string
+    FileName: string
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+  }
+
+  export type LiveryFileUpdateInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    Type?: StringFieldUpdateOperationsInput | string
+    Path?: StringFieldUpdateOperationsInput | string
+    Size?: IntFieldUpdateOperationsInput | number
+    MimeType?: StringFieldUpdateOperationsInput | string
+    FileName?: StringFieldUpdateOperationsInput | string
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Livery?: LiveryUpdateOneRequiredWithoutFilesNestedInput
+  }
+
+  export type LiveryFileUncheckedUpdateInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    LiveryId?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    Type?: StringFieldUpdateOperationsInput | string
+    Path?: StringFieldUpdateOperationsInput | string
+    Size?: IntFieldUpdateOperationsInput | number
+    MimeType?: StringFieldUpdateOperationsInput | string
+    FileName?: StringFieldUpdateOperationsInput | string
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LiveryFileCreateManyInput = {
+    Id?: string
+    LiveryId: string
+    Name: string
+    Type: string
+    Path: string
+    Size: number
+    MimeType: string
+    FileName: string
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+  }
+
+  export type LiveryFileUpdateManyMutationInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    Type?: StringFieldUpdateOperationsInput | string
+    Path?: StringFieldUpdateOperationsInput | string
+    Size?: IntFieldUpdateOperationsInput | number
+    MimeType?: StringFieldUpdateOperationsInput | string
+    FileName?: StringFieldUpdateOperationsInput | string
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LiveryFileUncheckedUpdateManyInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    LiveryId?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    Type?: StringFieldUpdateOperationsInput | string
+    Path?: StringFieldUpdateOperationsInput | string
+    Size?: IntFieldUpdateOperationsInput | number
+    MimeType?: StringFieldUpdateOperationsInput | string
+    FileName?: StringFieldUpdateOperationsInput | string
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -40234,12 +43344,14 @@ export namespace Prisma {
     Id: string
     ICAO: string
     IATA?: string | null
+    Description?: string | null
     Name: string
     Size?: number
     City?: string | null
     State?: string | null
     CountryCode?: string | null
     CountryName?: string | null
+    CountryEmoji?: string | null
     Latitude: Decimal | DecimalJsLike | number | string
     Longitude: Decimal | DecimalJsLike | number | string
     HomeWebSiteUrl?: string | null
@@ -40257,12 +43369,14 @@ export namespace Prisma {
     Id: string
     ICAO: string
     IATA?: string | null
+    Description?: string | null
     Name: string
     Size?: number
     City?: string | null
     State?: string | null
     CountryCode?: string | null
     CountryName?: string | null
+    CountryEmoji?: string | null
     Latitude: Decimal | DecimalJsLike | number | string
     Longitude: Decimal | DecimalJsLike | number | string
     HomeWebSiteUrl?: string | null
@@ -40280,12 +43394,14 @@ export namespace Prisma {
     Id?: StringFieldUpdateOperationsInput | string
     ICAO?: StringFieldUpdateOperationsInput | string
     IATA?: NullableStringFieldUpdateOperationsInput | string | null
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
     Name?: StringFieldUpdateOperationsInput | string
     Size?: IntFieldUpdateOperationsInput | number
     City?: NullableStringFieldUpdateOperationsInput | string | null
     State?: NullableStringFieldUpdateOperationsInput | string | null
     CountryCode?: NullableStringFieldUpdateOperationsInput | string | null
     CountryName?: NullableStringFieldUpdateOperationsInput | string | null
+    CountryEmoji?: NullableStringFieldUpdateOperationsInput | string | null
     Latitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     Longitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     HomeWebSiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -40303,12 +43419,14 @@ export namespace Prisma {
     Id?: StringFieldUpdateOperationsInput | string
     ICAO?: StringFieldUpdateOperationsInput | string
     IATA?: NullableStringFieldUpdateOperationsInput | string | null
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
     Name?: StringFieldUpdateOperationsInput | string
     Size?: IntFieldUpdateOperationsInput | number
     City?: NullableStringFieldUpdateOperationsInput | string | null
     State?: NullableStringFieldUpdateOperationsInput | string | null
     CountryCode?: NullableStringFieldUpdateOperationsInput | string | null
     CountryName?: NullableStringFieldUpdateOperationsInput | string | null
+    CountryEmoji?: NullableStringFieldUpdateOperationsInput | string | null
     Latitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     Longitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     HomeWebSiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -40326,12 +43444,14 @@ export namespace Prisma {
     Id: string
     ICAO: string
     IATA?: string | null
+    Description?: string | null
     Name: string
     Size?: number
     City?: string | null
     State?: string | null
     CountryCode?: string | null
     CountryName?: string | null
+    CountryEmoji?: string | null
     Latitude: Decimal | DecimalJsLike | number | string
     Longitude: Decimal | DecimalJsLike | number | string
     HomeWebSiteUrl?: string | null
@@ -40344,12 +43464,14 @@ export namespace Prisma {
     Id?: StringFieldUpdateOperationsInput | string
     ICAO?: StringFieldUpdateOperationsInput | string
     IATA?: NullableStringFieldUpdateOperationsInput | string | null
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
     Name?: StringFieldUpdateOperationsInput | string
     Size?: IntFieldUpdateOperationsInput | number
     City?: NullableStringFieldUpdateOperationsInput | string | null
     State?: NullableStringFieldUpdateOperationsInput | string | null
     CountryCode?: NullableStringFieldUpdateOperationsInput | string | null
     CountryName?: NullableStringFieldUpdateOperationsInput | string | null
+    CountryEmoji?: NullableStringFieldUpdateOperationsInput | string | null
     Latitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     Longitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     HomeWebSiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -40362,12 +43484,14 @@ export namespace Prisma {
     Id?: StringFieldUpdateOperationsInput | string
     ICAO?: StringFieldUpdateOperationsInput | string
     IATA?: NullableStringFieldUpdateOperationsInput | string | null
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
     Name?: StringFieldUpdateOperationsInput | string
     Size?: IntFieldUpdateOperationsInput | number
     City?: NullableStringFieldUpdateOperationsInput | string | null
     State?: NullableStringFieldUpdateOperationsInput | string | null
     CountryCode?: NullableStringFieldUpdateOperationsInput | string | null
     CountryName?: NullableStringFieldUpdateOperationsInput | string | null
+    CountryEmoji?: NullableStringFieldUpdateOperationsInput | string | null
     Latitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     Longitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     HomeWebSiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -41678,9 +44802,10 @@ export namespace Prisma {
     none?: RoleWhereInput
   }
 
-  export type UserPrivacySettingsNullableScalarRelationFilter = {
-    is?: UserPrivacySettingsWhereInput | null
-    isNot?: UserPrivacySettingsWhereInput | null
+  export type UserPrivacySettingsListRelationFilter = {
+    every?: UserPrivacySettingsWhereInput
+    some?: UserPrivacySettingsWhereInput
+    none?: UserPrivacySettingsWhereInput
   }
 
   export type MemberListRelationFilter = {
@@ -41695,6 +44820,10 @@ export namespace Prisma {
   }
 
   export type RoleOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type UserPrivacySettingsOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -41912,6 +45041,26 @@ export namespace Prisma {
     isNot?: AircraftWhereInput | null
   }
 
+  export type LiveryImageListRelationFilter = {
+    every?: LiveryImageWhereInput
+    some?: LiveryImageWhereInput
+    none?: LiveryImageWhereInput
+  }
+
+  export type LiveryFileListRelationFilter = {
+    every?: LiveryFileWhereInput
+    some?: LiveryFileWhereInput
+    none?: LiveryFileWhereInput
+  }
+
+  export type LiveryImageOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type LiveryFileOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type LiveryCountOrderByAggregateInput = {
     Id?: SortOrder
     Name?: SortOrder
@@ -41919,6 +45068,9 @@ export namespace Prisma {
     AircraftId?: SortOrder
     DownloadCount?: SortOrder
     Image?: SortOrder
+    ImageFileName?: SortOrder
+    CoverPhoto?: SortOrder
+    Metadata?: SortOrder
     Url?: SortOrder
     Description?: SortOrder
     DownloadUrl?: SortOrder
@@ -41937,6 +45089,8 @@ export namespace Prisma {
     AircraftId?: SortOrder
     DownloadCount?: SortOrder
     Image?: SortOrder
+    ImageFileName?: SortOrder
+    CoverPhoto?: SortOrder
     Url?: SortOrder
     Description?: SortOrder
     DownloadUrl?: SortOrder
@@ -41951,6 +45105,8 @@ export namespace Prisma {
     AircraftId?: SortOrder
     DownloadCount?: SortOrder
     Image?: SortOrder
+    ImageFileName?: SortOrder
+    CoverPhoto?: SortOrder
     Url?: SortOrder
     Description?: SortOrder
     DownloadUrl?: SortOrder
@@ -41960,6 +45116,105 @@ export namespace Prisma {
 
   export type LiverySumOrderByAggregateInput = {
     DownloadCount?: SortOrder
+  }
+
+  export type LiveryScalarRelationFilter = {
+    is?: LiveryWhereInput
+    isNot?: LiveryWhereInput
+  }
+
+  export type LiveryImageCountOrderByAggregateInput = {
+    Id?: SortOrder
+    LiveryId?: SortOrder
+    Name?: SortOrder
+    Type?: SortOrder
+    Path?: SortOrder
+    Size?: SortOrder
+    MimeType?: SortOrder
+    FileName?: SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+  }
+
+  export type LiveryImageAvgOrderByAggregateInput = {
+    Size?: SortOrder
+  }
+
+  export type LiveryImageMaxOrderByAggregateInput = {
+    Id?: SortOrder
+    LiveryId?: SortOrder
+    Name?: SortOrder
+    Type?: SortOrder
+    Path?: SortOrder
+    Size?: SortOrder
+    MimeType?: SortOrder
+    FileName?: SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+  }
+
+  export type LiveryImageMinOrderByAggregateInput = {
+    Id?: SortOrder
+    LiveryId?: SortOrder
+    Name?: SortOrder
+    Type?: SortOrder
+    Path?: SortOrder
+    Size?: SortOrder
+    MimeType?: SortOrder
+    FileName?: SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+  }
+
+  export type LiveryImageSumOrderByAggregateInput = {
+    Size?: SortOrder
+  }
+
+  export type LiveryFileCountOrderByAggregateInput = {
+    Id?: SortOrder
+    LiveryId?: SortOrder
+    Name?: SortOrder
+    Type?: SortOrder
+    Path?: SortOrder
+    Size?: SortOrder
+    MimeType?: SortOrder
+    FileName?: SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+  }
+
+  export type LiveryFileAvgOrderByAggregateInput = {
+    Size?: SortOrder
+  }
+
+  export type LiveryFileMaxOrderByAggregateInput = {
+    Id?: SortOrder
+    LiveryId?: SortOrder
+    Name?: SortOrder
+    Type?: SortOrder
+    Path?: SortOrder
+    Size?: SortOrder
+    MimeType?: SortOrder
+    FileName?: SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+  }
+
+  export type LiveryFileMinOrderByAggregateInput = {
+    Id?: SortOrder
+    LiveryId?: SortOrder
+    Name?: SortOrder
+    Type?: SortOrder
+    Path?: SortOrder
+    Size?: SortOrder
+    MimeType?: SortOrder
+    FileName?: SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+  }
+
+  export type LiveryFileSumOrderByAggregateInput = {
+    Size?: SortOrder
   }
 
   export type DecimalNullableFilter<$PrismaModel = never> = {
@@ -42680,12 +45935,14 @@ export namespace Prisma {
     Id?: SortOrder
     ICAO?: SortOrder
     IATA?: SortOrder
+    Description?: SortOrder
     Name?: SortOrder
     Size?: SortOrder
     City?: SortOrder
     State?: SortOrder
     CountryCode?: SortOrder
     CountryName?: SortOrder
+    CountryEmoji?: SortOrder
     Latitude?: SortOrder
     Longitude?: SortOrder
     HomeWebSiteUrl?: SortOrder
@@ -42704,12 +45961,14 @@ export namespace Prisma {
     Id?: SortOrder
     ICAO?: SortOrder
     IATA?: SortOrder
+    Description?: SortOrder
     Name?: SortOrder
     Size?: SortOrder
     City?: SortOrder
     State?: SortOrder
     CountryCode?: SortOrder
     CountryName?: SortOrder
+    CountryEmoji?: SortOrder
     Latitude?: SortOrder
     Longitude?: SortOrder
     HomeWebSiteUrl?: SortOrder
@@ -42722,12 +45981,14 @@ export namespace Prisma {
     Id?: SortOrder
     ICAO?: SortOrder
     IATA?: SortOrder
+    Description?: SortOrder
     Name?: SortOrder
     Size?: SortOrder
     City?: SortOrder
     State?: SortOrder
     CountryCode?: SortOrder
     CountryName?: SortOrder
+    CountryEmoji?: SortOrder
     Latitude?: SortOrder
     Longitude?: SortOrder
     HomeWebSiteUrl?: SortOrder
@@ -43542,10 +46803,11 @@ export namespace Prisma {
     connect?: RoleWhereUniqueInput | RoleWhereUniqueInput[]
   }
 
-  export type UserPrivacySettingsCreateNestedOneWithoutUserInput = {
-    create?: XOR<UserPrivacySettingsCreateWithoutUserInput, UserPrivacySettingsUncheckedCreateWithoutUserInput>
-    connectOrCreate?: UserPrivacySettingsCreateOrConnectWithoutUserInput
-    connect?: UserPrivacySettingsWhereUniqueInput
+  export type UserPrivacySettingsCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserPrivacySettingsCreateWithoutUserInput, UserPrivacySettingsUncheckedCreateWithoutUserInput> | UserPrivacySettingsCreateWithoutUserInput[] | UserPrivacySettingsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserPrivacySettingsCreateOrConnectWithoutUserInput | UserPrivacySettingsCreateOrConnectWithoutUserInput[]
+    createMany?: UserPrivacySettingsCreateManyUserInputEnvelope
+    connect?: UserPrivacySettingsWhereUniqueInput | UserPrivacySettingsWhereUniqueInput[]
   }
 
   export type MemberCreateNestedManyWithoutUserInput = {
@@ -43567,10 +46829,11 @@ export namespace Prisma {
     connect?: RoleWhereUniqueInput | RoleWhereUniqueInput[]
   }
 
-  export type UserPrivacySettingsUncheckedCreateNestedOneWithoutUserInput = {
-    create?: XOR<UserPrivacySettingsCreateWithoutUserInput, UserPrivacySettingsUncheckedCreateWithoutUserInput>
-    connectOrCreate?: UserPrivacySettingsCreateOrConnectWithoutUserInput
-    connect?: UserPrivacySettingsWhereUniqueInput
+  export type UserPrivacySettingsUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserPrivacySettingsCreateWithoutUserInput, UserPrivacySettingsUncheckedCreateWithoutUserInput> | UserPrivacySettingsCreateWithoutUserInput[] | UserPrivacySettingsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserPrivacySettingsCreateOrConnectWithoutUserInput | UserPrivacySettingsCreateOrConnectWithoutUserInput[]
+    createMany?: UserPrivacySettingsCreateManyUserInputEnvelope
+    connect?: UserPrivacySettingsWhereUniqueInput | UserPrivacySettingsWhereUniqueInput[]
   }
 
   export type MemberUncheckedCreateNestedManyWithoutUserInput = {
@@ -43593,14 +46856,18 @@ export namespace Prisma {
     deleteMany?: RoleScalarWhereInput | RoleScalarWhereInput[]
   }
 
-  export type UserPrivacySettingsUpdateOneWithoutUserNestedInput = {
-    create?: XOR<UserPrivacySettingsCreateWithoutUserInput, UserPrivacySettingsUncheckedCreateWithoutUserInput>
-    connectOrCreate?: UserPrivacySettingsCreateOrConnectWithoutUserInput
-    upsert?: UserPrivacySettingsUpsertWithoutUserInput
-    disconnect?: UserPrivacySettingsWhereInput | boolean
-    delete?: UserPrivacySettingsWhereInput | boolean
-    connect?: UserPrivacySettingsWhereUniqueInput
-    update?: XOR<XOR<UserPrivacySettingsUpdateToOneWithWhereWithoutUserInput, UserPrivacySettingsUpdateWithoutUserInput>, UserPrivacySettingsUncheckedUpdateWithoutUserInput>
+  export type UserPrivacySettingsUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserPrivacySettingsCreateWithoutUserInput, UserPrivacySettingsUncheckedCreateWithoutUserInput> | UserPrivacySettingsCreateWithoutUserInput[] | UserPrivacySettingsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserPrivacySettingsCreateOrConnectWithoutUserInput | UserPrivacySettingsCreateOrConnectWithoutUserInput[]
+    upsert?: UserPrivacySettingsUpsertWithWhereUniqueWithoutUserInput | UserPrivacySettingsUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserPrivacySettingsCreateManyUserInputEnvelope
+    set?: UserPrivacySettingsWhereUniqueInput | UserPrivacySettingsWhereUniqueInput[]
+    disconnect?: UserPrivacySettingsWhereUniqueInput | UserPrivacySettingsWhereUniqueInput[]
+    delete?: UserPrivacySettingsWhereUniqueInput | UserPrivacySettingsWhereUniqueInput[]
+    connect?: UserPrivacySettingsWhereUniqueInput | UserPrivacySettingsWhereUniqueInput[]
+    update?: UserPrivacySettingsUpdateWithWhereUniqueWithoutUserInput | UserPrivacySettingsUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserPrivacySettingsUpdateManyWithWhereWithoutUserInput | UserPrivacySettingsUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserPrivacySettingsScalarWhereInput | UserPrivacySettingsScalarWhereInput[]
   }
 
   export type MemberUpdateManyWithoutUserNestedInput = {
@@ -43640,14 +46907,18 @@ export namespace Prisma {
     deleteMany?: RoleScalarWhereInput | RoleScalarWhereInput[]
   }
 
-  export type UserPrivacySettingsUncheckedUpdateOneWithoutUserNestedInput = {
-    create?: XOR<UserPrivacySettingsCreateWithoutUserInput, UserPrivacySettingsUncheckedCreateWithoutUserInput>
-    connectOrCreate?: UserPrivacySettingsCreateOrConnectWithoutUserInput
-    upsert?: UserPrivacySettingsUpsertWithoutUserInput
-    disconnect?: UserPrivacySettingsWhereInput | boolean
-    delete?: UserPrivacySettingsWhereInput | boolean
-    connect?: UserPrivacySettingsWhereUniqueInput
-    update?: XOR<XOR<UserPrivacySettingsUpdateToOneWithWhereWithoutUserInput, UserPrivacySettingsUpdateWithoutUserInput>, UserPrivacySettingsUncheckedUpdateWithoutUserInput>
+  export type UserPrivacySettingsUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserPrivacySettingsCreateWithoutUserInput, UserPrivacySettingsUncheckedCreateWithoutUserInput> | UserPrivacySettingsCreateWithoutUserInput[] | UserPrivacySettingsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserPrivacySettingsCreateOrConnectWithoutUserInput | UserPrivacySettingsCreateOrConnectWithoutUserInput[]
+    upsert?: UserPrivacySettingsUpsertWithWhereUniqueWithoutUserInput | UserPrivacySettingsUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserPrivacySettingsCreateManyUserInputEnvelope
+    set?: UserPrivacySettingsWhereUniqueInput | UserPrivacySettingsWhereUniqueInput[]
+    disconnect?: UserPrivacySettingsWhereUniqueInput | UserPrivacySettingsWhereUniqueInput[]
+    delete?: UserPrivacySettingsWhereUniqueInput | UserPrivacySettingsWhereUniqueInput[]
+    connect?: UserPrivacySettingsWhereUniqueInput | UserPrivacySettingsWhereUniqueInput[]
+    update?: UserPrivacySettingsUpdateWithWhereUniqueWithoutUserInput | UserPrivacySettingsUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserPrivacySettingsUpdateManyWithWhereWithoutUserInput | UserPrivacySettingsUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserPrivacySettingsScalarWhereInput | UserPrivacySettingsScalarWhereInput[]
   }
 
   export type MemberUncheckedUpdateManyWithoutUserNestedInput = {
@@ -43814,6 +47085,34 @@ export namespace Prisma {
     connect?: AircraftWhereUniqueInput
   }
 
+  export type LiveryImageCreateNestedManyWithoutLiveryInput = {
+    create?: XOR<LiveryImageCreateWithoutLiveryInput, LiveryImageUncheckedCreateWithoutLiveryInput> | LiveryImageCreateWithoutLiveryInput[] | LiveryImageUncheckedCreateWithoutLiveryInput[]
+    connectOrCreate?: LiveryImageCreateOrConnectWithoutLiveryInput | LiveryImageCreateOrConnectWithoutLiveryInput[]
+    createMany?: LiveryImageCreateManyLiveryInputEnvelope
+    connect?: LiveryImageWhereUniqueInput | LiveryImageWhereUniqueInput[]
+  }
+
+  export type LiveryFileCreateNestedManyWithoutLiveryInput = {
+    create?: XOR<LiveryFileCreateWithoutLiveryInput, LiveryFileUncheckedCreateWithoutLiveryInput> | LiveryFileCreateWithoutLiveryInput[] | LiveryFileUncheckedCreateWithoutLiveryInput[]
+    connectOrCreate?: LiveryFileCreateOrConnectWithoutLiveryInput | LiveryFileCreateOrConnectWithoutLiveryInput[]
+    createMany?: LiveryFileCreateManyLiveryInputEnvelope
+    connect?: LiveryFileWhereUniqueInput | LiveryFileWhereUniqueInput[]
+  }
+
+  export type LiveryImageUncheckedCreateNestedManyWithoutLiveryInput = {
+    create?: XOR<LiveryImageCreateWithoutLiveryInput, LiveryImageUncheckedCreateWithoutLiveryInput> | LiveryImageCreateWithoutLiveryInput[] | LiveryImageUncheckedCreateWithoutLiveryInput[]
+    connectOrCreate?: LiveryImageCreateOrConnectWithoutLiveryInput | LiveryImageCreateOrConnectWithoutLiveryInput[]
+    createMany?: LiveryImageCreateManyLiveryInputEnvelope
+    connect?: LiveryImageWhereUniqueInput | LiveryImageWhereUniqueInput[]
+  }
+
+  export type LiveryFileUncheckedCreateNestedManyWithoutLiveryInput = {
+    create?: XOR<LiveryFileCreateWithoutLiveryInput, LiveryFileUncheckedCreateWithoutLiveryInput> | LiveryFileCreateWithoutLiveryInput[] | LiveryFileUncheckedCreateWithoutLiveryInput[]
+    connectOrCreate?: LiveryFileCreateOrConnectWithoutLiveryInput | LiveryFileCreateOrConnectWithoutLiveryInput[]
+    createMany?: LiveryFileCreateManyLiveryInputEnvelope
+    connect?: LiveryFileWhereUniqueInput | LiveryFileWhereUniqueInput[]
+  }
+
   export type AircraftUpdateOneWithoutLiveriesNestedInput = {
     create?: XOR<AircraftCreateWithoutLiveriesInput, AircraftUncheckedCreateWithoutLiveriesInput>
     connectOrCreate?: AircraftCreateOrConnectWithoutLiveriesInput
@@ -43822,6 +47121,90 @@ export namespace Prisma {
     delete?: AircraftWhereInput | boolean
     connect?: AircraftWhereUniqueInput
     update?: XOR<XOR<AircraftUpdateToOneWithWhereWithoutLiveriesInput, AircraftUpdateWithoutLiveriesInput>, AircraftUncheckedUpdateWithoutLiveriesInput>
+  }
+
+  export type LiveryImageUpdateManyWithoutLiveryNestedInput = {
+    create?: XOR<LiveryImageCreateWithoutLiveryInput, LiveryImageUncheckedCreateWithoutLiveryInput> | LiveryImageCreateWithoutLiveryInput[] | LiveryImageUncheckedCreateWithoutLiveryInput[]
+    connectOrCreate?: LiveryImageCreateOrConnectWithoutLiveryInput | LiveryImageCreateOrConnectWithoutLiveryInput[]
+    upsert?: LiveryImageUpsertWithWhereUniqueWithoutLiveryInput | LiveryImageUpsertWithWhereUniqueWithoutLiveryInput[]
+    createMany?: LiveryImageCreateManyLiveryInputEnvelope
+    set?: LiveryImageWhereUniqueInput | LiveryImageWhereUniqueInput[]
+    disconnect?: LiveryImageWhereUniqueInput | LiveryImageWhereUniqueInput[]
+    delete?: LiveryImageWhereUniqueInput | LiveryImageWhereUniqueInput[]
+    connect?: LiveryImageWhereUniqueInput | LiveryImageWhereUniqueInput[]
+    update?: LiveryImageUpdateWithWhereUniqueWithoutLiveryInput | LiveryImageUpdateWithWhereUniqueWithoutLiveryInput[]
+    updateMany?: LiveryImageUpdateManyWithWhereWithoutLiveryInput | LiveryImageUpdateManyWithWhereWithoutLiveryInput[]
+    deleteMany?: LiveryImageScalarWhereInput | LiveryImageScalarWhereInput[]
+  }
+
+  export type LiveryFileUpdateManyWithoutLiveryNestedInput = {
+    create?: XOR<LiveryFileCreateWithoutLiveryInput, LiveryFileUncheckedCreateWithoutLiveryInput> | LiveryFileCreateWithoutLiveryInput[] | LiveryFileUncheckedCreateWithoutLiveryInput[]
+    connectOrCreate?: LiveryFileCreateOrConnectWithoutLiveryInput | LiveryFileCreateOrConnectWithoutLiveryInput[]
+    upsert?: LiveryFileUpsertWithWhereUniqueWithoutLiveryInput | LiveryFileUpsertWithWhereUniqueWithoutLiveryInput[]
+    createMany?: LiveryFileCreateManyLiveryInputEnvelope
+    set?: LiveryFileWhereUniqueInput | LiveryFileWhereUniqueInput[]
+    disconnect?: LiveryFileWhereUniqueInput | LiveryFileWhereUniqueInput[]
+    delete?: LiveryFileWhereUniqueInput | LiveryFileWhereUniqueInput[]
+    connect?: LiveryFileWhereUniqueInput | LiveryFileWhereUniqueInput[]
+    update?: LiveryFileUpdateWithWhereUniqueWithoutLiveryInput | LiveryFileUpdateWithWhereUniqueWithoutLiveryInput[]
+    updateMany?: LiveryFileUpdateManyWithWhereWithoutLiveryInput | LiveryFileUpdateManyWithWhereWithoutLiveryInput[]
+    deleteMany?: LiveryFileScalarWhereInput | LiveryFileScalarWhereInput[]
+  }
+
+  export type LiveryImageUncheckedUpdateManyWithoutLiveryNestedInput = {
+    create?: XOR<LiveryImageCreateWithoutLiveryInput, LiveryImageUncheckedCreateWithoutLiveryInput> | LiveryImageCreateWithoutLiveryInput[] | LiveryImageUncheckedCreateWithoutLiveryInput[]
+    connectOrCreate?: LiveryImageCreateOrConnectWithoutLiveryInput | LiveryImageCreateOrConnectWithoutLiveryInput[]
+    upsert?: LiveryImageUpsertWithWhereUniqueWithoutLiveryInput | LiveryImageUpsertWithWhereUniqueWithoutLiveryInput[]
+    createMany?: LiveryImageCreateManyLiveryInputEnvelope
+    set?: LiveryImageWhereUniqueInput | LiveryImageWhereUniqueInput[]
+    disconnect?: LiveryImageWhereUniqueInput | LiveryImageWhereUniqueInput[]
+    delete?: LiveryImageWhereUniqueInput | LiveryImageWhereUniqueInput[]
+    connect?: LiveryImageWhereUniqueInput | LiveryImageWhereUniqueInput[]
+    update?: LiveryImageUpdateWithWhereUniqueWithoutLiveryInput | LiveryImageUpdateWithWhereUniqueWithoutLiveryInput[]
+    updateMany?: LiveryImageUpdateManyWithWhereWithoutLiveryInput | LiveryImageUpdateManyWithWhereWithoutLiveryInput[]
+    deleteMany?: LiveryImageScalarWhereInput | LiveryImageScalarWhereInput[]
+  }
+
+  export type LiveryFileUncheckedUpdateManyWithoutLiveryNestedInput = {
+    create?: XOR<LiveryFileCreateWithoutLiveryInput, LiveryFileUncheckedCreateWithoutLiveryInput> | LiveryFileCreateWithoutLiveryInput[] | LiveryFileUncheckedCreateWithoutLiveryInput[]
+    connectOrCreate?: LiveryFileCreateOrConnectWithoutLiveryInput | LiveryFileCreateOrConnectWithoutLiveryInput[]
+    upsert?: LiveryFileUpsertWithWhereUniqueWithoutLiveryInput | LiveryFileUpsertWithWhereUniqueWithoutLiveryInput[]
+    createMany?: LiveryFileCreateManyLiveryInputEnvelope
+    set?: LiveryFileWhereUniqueInput | LiveryFileWhereUniqueInput[]
+    disconnect?: LiveryFileWhereUniqueInput | LiveryFileWhereUniqueInput[]
+    delete?: LiveryFileWhereUniqueInput | LiveryFileWhereUniqueInput[]
+    connect?: LiveryFileWhereUniqueInput | LiveryFileWhereUniqueInput[]
+    update?: LiveryFileUpdateWithWhereUniqueWithoutLiveryInput | LiveryFileUpdateWithWhereUniqueWithoutLiveryInput[]
+    updateMany?: LiveryFileUpdateManyWithWhereWithoutLiveryInput | LiveryFileUpdateManyWithWhereWithoutLiveryInput[]
+    deleteMany?: LiveryFileScalarWhereInput | LiveryFileScalarWhereInput[]
+  }
+
+  export type LiveryCreateNestedOneWithoutImagesInput = {
+    create?: XOR<LiveryCreateWithoutImagesInput, LiveryUncheckedCreateWithoutImagesInput>
+    connectOrCreate?: LiveryCreateOrConnectWithoutImagesInput
+    connect?: LiveryWhereUniqueInput
+  }
+
+  export type LiveryUpdateOneRequiredWithoutImagesNestedInput = {
+    create?: XOR<LiveryCreateWithoutImagesInput, LiveryUncheckedCreateWithoutImagesInput>
+    connectOrCreate?: LiveryCreateOrConnectWithoutImagesInput
+    upsert?: LiveryUpsertWithoutImagesInput
+    connect?: LiveryWhereUniqueInput
+    update?: XOR<XOR<LiveryUpdateToOneWithWhereWithoutImagesInput, LiveryUpdateWithoutImagesInput>, LiveryUncheckedUpdateWithoutImagesInput>
+  }
+
+  export type LiveryCreateNestedOneWithoutFilesInput = {
+    create?: XOR<LiveryCreateWithoutFilesInput, LiveryUncheckedCreateWithoutFilesInput>
+    connectOrCreate?: LiveryCreateOrConnectWithoutFilesInput
+    connect?: LiveryWhereUniqueInput
+  }
+
+  export type LiveryUpdateOneRequiredWithoutFilesNestedInput = {
+    create?: XOR<LiveryCreateWithoutFilesInput, LiveryUncheckedCreateWithoutFilesInput>
+    connectOrCreate?: LiveryCreateOrConnectWithoutFilesInput
+    upsert?: LiveryUpsertWithoutFilesInput
+    connect?: LiveryWhereUniqueInput
+    update?: XOR<XOR<LiveryUpdateToOneWithWhereWithoutFilesInput, LiveryUpdateWithoutFilesInput>, LiveryUncheckedUpdateWithoutFilesInput>
   }
 
   export type WorldCreateNestedOneWithoutVirtualAirlinesInput = {
@@ -45566,7 +48949,7 @@ export namespace Prisma {
     DiscordAvatar?: string | null
     DiscordEmail?: string | null
     Roles?: RoleCreateNestedManyWithoutUsersInput
-    PrivacySettings?: UserPrivacySettingsCreateNestedOneWithoutUserInput
+    PrivacySettings?: UserPrivacySettingsCreateNestedManyWithoutUserInput
     Members?: MemberCreateNestedManyWithoutUserInput
   }
 
@@ -45591,7 +48974,7 @@ export namespace Prisma {
     DiscordAvatar?: string | null
     DiscordEmail?: string | null
     Roles?: RoleUncheckedCreateNestedManyWithoutUsersInput
-    PrivacySettings?: UserPrivacySettingsUncheckedCreateNestedOneWithoutUserInput
+    PrivacySettings?: UserPrivacySettingsUncheckedCreateNestedManyWithoutUserInput
     Members?: MemberUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -45632,7 +49015,7 @@ export namespace Prisma {
     DiscordAvatar?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordEmail?: NullableStringFieldUpdateOperationsInput | string | null
     Roles?: RoleUpdateManyWithoutUsersNestedInput
-    PrivacySettings?: UserPrivacySettingsUpdateOneWithoutUserNestedInput
+    PrivacySettings?: UserPrivacySettingsUpdateManyWithoutUserNestedInput
     Members?: MemberUpdateManyWithoutUserNestedInput
   }
 
@@ -45657,7 +49040,7 @@ export namespace Prisma {
     DiscordAvatar?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordEmail?: NullableStringFieldUpdateOperationsInput | string | null
     Roles?: RoleUncheckedUpdateManyWithoutUsersNestedInput
-    PrivacySettings?: UserPrivacySettingsUncheckedUpdateOneWithoutUserNestedInput
+    PrivacySettings?: UserPrivacySettingsUncheckedUpdateManyWithoutUserNestedInput
     Members?: MemberUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -46325,6 +49708,11 @@ export namespace Prisma {
     create: XOR<UserPrivacySettingsCreateWithoutUserInput, UserPrivacySettingsUncheckedCreateWithoutUserInput>
   }
 
+  export type UserPrivacySettingsCreateManyUserInputEnvelope = {
+    data: UserPrivacySettingsCreateManyUserInput | UserPrivacySettingsCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type MemberCreateWithoutUserInput = {
     Id: string
     IsActive?: boolean
@@ -46433,35 +49821,34 @@ export namespace Prisma {
     VirtualAirlineRoleId?: UuidNullableFilter<"Role"> | string | null
   }
 
-  export type UserPrivacySettingsUpsertWithoutUserInput = {
+  export type UserPrivacySettingsUpsertWithWhereUniqueWithoutUserInput = {
+    where: UserPrivacySettingsWhereUniqueInput
     update: XOR<UserPrivacySettingsUpdateWithoutUserInput, UserPrivacySettingsUncheckedUpdateWithoutUserInput>
     create: XOR<UserPrivacySettingsCreateWithoutUserInput, UserPrivacySettingsUncheckedCreateWithoutUserInput>
-    where?: UserPrivacySettingsWhereInput
   }
 
-  export type UserPrivacySettingsUpdateToOneWithWhereWithoutUserInput = {
-    where?: UserPrivacySettingsWhereInput
+  export type UserPrivacySettingsUpdateWithWhereUniqueWithoutUserInput = {
+    where: UserPrivacySettingsWhereUniqueInput
     data: XOR<UserPrivacySettingsUpdateWithoutUserInput, UserPrivacySettingsUncheckedUpdateWithoutUserInput>
   }
 
-  export type UserPrivacySettingsUpdateWithoutUserInput = {
-    Id?: StringFieldUpdateOperationsInput | string
-    ShowOnlineStatus?: BoolFieldUpdateOperationsInput | boolean
-    ShowFirstName?: BoolFieldUpdateOperationsInput | boolean
-    ShowLastName?: BoolFieldUpdateOperationsInput | boolean
-    ShowLastNameInitial?: BoolFieldUpdateOperationsInput | boolean
-    ShowLastLogin?: BoolFieldUpdateOperationsInput | boolean
-    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type UserPrivacySettingsUpdateManyWithWhereWithoutUserInput = {
+    where: UserPrivacySettingsScalarWhereInput
+    data: XOR<UserPrivacySettingsUpdateManyMutationInput, UserPrivacySettingsUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type UserPrivacySettingsUncheckedUpdateWithoutUserInput = {
-    Id?: StringFieldUpdateOperationsInput | string
-    ShowOnlineStatus?: BoolFieldUpdateOperationsInput | boolean
-    ShowFirstName?: BoolFieldUpdateOperationsInput | boolean
-    ShowLastName?: BoolFieldUpdateOperationsInput | boolean
-    ShowLastNameInitial?: BoolFieldUpdateOperationsInput | boolean
-    ShowLastLogin?: BoolFieldUpdateOperationsInput | boolean
-    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type UserPrivacySettingsScalarWhereInput = {
+    AND?: UserPrivacySettingsScalarWhereInput | UserPrivacySettingsScalarWhereInput[]
+    OR?: UserPrivacySettingsScalarWhereInput[]
+    NOT?: UserPrivacySettingsScalarWhereInput | UserPrivacySettingsScalarWhereInput[]
+    Id?: UuidFilter<"UserPrivacySettings"> | string
+    UserId?: UuidFilter<"UserPrivacySettings"> | string
+    ShowOnlineStatus?: BoolFilter<"UserPrivacySettings"> | boolean
+    ShowFirstName?: BoolFilter<"UserPrivacySettings"> | boolean
+    ShowLastName?: BoolFilter<"UserPrivacySettings"> | boolean
+    ShowLastNameInitial?: BoolFilter<"UserPrivacySettings"> | boolean
+    ShowLastLogin?: BoolFilter<"UserPrivacySettings"> | boolean
+    CreatedAt?: DateTimeFilter<"UserPrivacySettings"> | Date | string
   }
 
   export type MemberUpsertWithWhereUniqueWithoutUserInput = {
@@ -46692,7 +50079,7 @@ export namespace Prisma {
     DiscordUsername?: string | null
     DiscordAvatar?: string | null
     DiscordEmail?: string | null
-    PrivacySettings?: UserPrivacySettingsCreateNestedOneWithoutUserInput
+    PrivacySettings?: UserPrivacySettingsCreateNestedManyWithoutUserInput
     Members?: MemberCreateNestedManyWithoutUserInput
     InviteCode?: InviteCodeCreateNestedOneWithoutUserInput
   }
@@ -46718,7 +50105,7 @@ export namespace Prisma {
     DiscordUsername?: string | null
     DiscordAvatar?: string | null
     DiscordEmail?: string | null
-    PrivacySettings?: UserPrivacySettingsUncheckedCreateNestedOneWithoutUserInput
+    PrivacySettings?: UserPrivacySettingsUncheckedCreateNestedManyWithoutUserInput
     Members?: MemberUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -46966,6 +50353,74 @@ export namespace Prisma {
     create: XOR<AircraftCreateWithoutLiveriesInput, AircraftUncheckedCreateWithoutLiveriesInput>
   }
 
+  export type LiveryImageCreateWithoutLiveryInput = {
+    Id?: string
+    Name: string
+    Type: string
+    Path: string
+    Size: number
+    MimeType: string
+    FileName: string
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+  }
+
+  export type LiveryImageUncheckedCreateWithoutLiveryInput = {
+    Id?: string
+    Name: string
+    Type: string
+    Path: string
+    Size: number
+    MimeType: string
+    FileName: string
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+  }
+
+  export type LiveryImageCreateOrConnectWithoutLiveryInput = {
+    where: LiveryImageWhereUniqueInput
+    create: XOR<LiveryImageCreateWithoutLiveryInput, LiveryImageUncheckedCreateWithoutLiveryInput>
+  }
+
+  export type LiveryImageCreateManyLiveryInputEnvelope = {
+    data: LiveryImageCreateManyLiveryInput | LiveryImageCreateManyLiveryInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type LiveryFileCreateWithoutLiveryInput = {
+    Id?: string
+    Name: string
+    Type: string
+    Path: string
+    Size: number
+    MimeType: string
+    FileName: string
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+  }
+
+  export type LiveryFileUncheckedCreateWithoutLiveryInput = {
+    Id?: string
+    Name: string
+    Type: string
+    Path: string
+    Size: number
+    MimeType: string
+    FileName: string
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+  }
+
+  export type LiveryFileCreateOrConnectWithoutLiveryInput = {
+    where: LiveryFileWhereUniqueInput
+    create: XOR<LiveryFileCreateWithoutLiveryInput, LiveryFileUncheckedCreateWithoutLiveryInput>
+  }
+
+  export type LiveryFileCreateManyLiveryInputEnvelope = {
+    data: LiveryFileCreateManyLiveryInput | LiveryFileCreateManyLiveryInput[]
+    skipDuplicates?: boolean
+  }
+
   export type AircraftUpsertWithoutLiveriesInput = {
     update: XOR<AircraftUpdateWithoutLiveriesInput, AircraftUncheckedUpdateWithoutLiveriesInput>
     create: XOR<AircraftCreateWithoutLiveriesInput, AircraftUncheckedCreateWithoutLiveriesInput>
@@ -47005,6 +50460,246 @@ export namespace Prisma {
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     AircraftMaintenance?: AircraftMaintenanceUncheckedUpdateManyWithoutAircraftNestedInput
     Flights?: FlightUncheckedUpdateManyWithoutAircraftNestedInput
+  }
+
+  export type LiveryImageUpsertWithWhereUniqueWithoutLiveryInput = {
+    where: LiveryImageWhereUniqueInput
+    update: XOR<LiveryImageUpdateWithoutLiveryInput, LiveryImageUncheckedUpdateWithoutLiveryInput>
+    create: XOR<LiveryImageCreateWithoutLiveryInput, LiveryImageUncheckedCreateWithoutLiveryInput>
+  }
+
+  export type LiveryImageUpdateWithWhereUniqueWithoutLiveryInput = {
+    where: LiveryImageWhereUniqueInput
+    data: XOR<LiveryImageUpdateWithoutLiveryInput, LiveryImageUncheckedUpdateWithoutLiveryInput>
+  }
+
+  export type LiveryImageUpdateManyWithWhereWithoutLiveryInput = {
+    where: LiveryImageScalarWhereInput
+    data: XOR<LiveryImageUpdateManyMutationInput, LiveryImageUncheckedUpdateManyWithoutLiveryInput>
+  }
+
+  export type LiveryImageScalarWhereInput = {
+    AND?: LiveryImageScalarWhereInput | LiveryImageScalarWhereInput[]
+    OR?: LiveryImageScalarWhereInput[]
+    NOT?: LiveryImageScalarWhereInput | LiveryImageScalarWhereInput[]
+    Id?: UuidFilter<"LiveryImage"> | string
+    LiveryId?: UuidFilter<"LiveryImage"> | string
+    Name?: StringFilter<"LiveryImage"> | string
+    Type?: StringFilter<"LiveryImage"> | string
+    Path?: StringFilter<"LiveryImage"> | string
+    Size?: IntFilter<"LiveryImage"> | number
+    MimeType?: StringFilter<"LiveryImage"> | string
+    FileName?: StringFilter<"LiveryImage"> | string
+    CreatedAt?: DateTimeFilter<"LiveryImage"> | Date | string
+    UpdatedAt?: DateTimeFilter<"LiveryImage"> | Date | string
+  }
+
+  export type LiveryFileUpsertWithWhereUniqueWithoutLiveryInput = {
+    where: LiveryFileWhereUniqueInput
+    update: XOR<LiveryFileUpdateWithoutLiveryInput, LiveryFileUncheckedUpdateWithoutLiveryInput>
+    create: XOR<LiveryFileCreateWithoutLiveryInput, LiveryFileUncheckedCreateWithoutLiveryInput>
+  }
+
+  export type LiveryFileUpdateWithWhereUniqueWithoutLiveryInput = {
+    where: LiveryFileWhereUniqueInput
+    data: XOR<LiveryFileUpdateWithoutLiveryInput, LiveryFileUncheckedUpdateWithoutLiveryInput>
+  }
+
+  export type LiveryFileUpdateManyWithWhereWithoutLiveryInput = {
+    where: LiveryFileScalarWhereInput
+    data: XOR<LiveryFileUpdateManyMutationInput, LiveryFileUncheckedUpdateManyWithoutLiveryInput>
+  }
+
+  export type LiveryFileScalarWhereInput = {
+    AND?: LiveryFileScalarWhereInput | LiveryFileScalarWhereInput[]
+    OR?: LiveryFileScalarWhereInput[]
+    NOT?: LiveryFileScalarWhereInput | LiveryFileScalarWhereInput[]
+    Id?: UuidFilter<"LiveryFile"> | string
+    LiveryId?: UuidFilter<"LiveryFile"> | string
+    Name?: StringFilter<"LiveryFile"> | string
+    Type?: StringFilter<"LiveryFile"> | string
+    Path?: StringFilter<"LiveryFile"> | string
+    Size?: IntFilter<"LiveryFile"> | number
+    MimeType?: StringFilter<"LiveryFile"> | string
+    FileName?: StringFilter<"LiveryFile"> | string
+    CreatedAt?: DateTimeFilter<"LiveryFile"> | Date | string
+    UpdatedAt?: DateTimeFilter<"LiveryFile"> | Date | string
+  }
+
+  export type LiveryCreateWithoutImagesInput = {
+    Id?: string
+    Name: string
+    IsActive?: boolean
+    DownloadCount?: number
+    Image: string
+    ImageFileName?: string | null
+    CoverPhoto?: string | null
+    Metadata?: NullableJsonNullValueInput | InputJsonValue
+    Url?: string | null
+    Description?: string | null
+    DownloadUrl?: string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    Aircraft?: AircraftCreateNestedOneWithoutLiveriesInput
+    Files?: LiveryFileCreateNestedManyWithoutLiveryInput
+  }
+
+  export type LiveryUncheckedCreateWithoutImagesInput = {
+    Id?: string
+    Name: string
+    IsActive?: boolean
+    AircraftId?: string | null
+    DownloadCount?: number
+    Image: string
+    ImageFileName?: string | null
+    CoverPhoto?: string | null
+    Metadata?: NullableJsonNullValueInput | InputJsonValue
+    Url?: string | null
+    Description?: string | null
+    DownloadUrl?: string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    Files?: LiveryFileUncheckedCreateNestedManyWithoutLiveryInput
+  }
+
+  export type LiveryCreateOrConnectWithoutImagesInput = {
+    where: LiveryWhereUniqueInput
+    create: XOR<LiveryCreateWithoutImagesInput, LiveryUncheckedCreateWithoutImagesInput>
+  }
+
+  export type LiveryUpsertWithoutImagesInput = {
+    update: XOR<LiveryUpdateWithoutImagesInput, LiveryUncheckedUpdateWithoutImagesInput>
+    create: XOR<LiveryCreateWithoutImagesInput, LiveryUncheckedCreateWithoutImagesInput>
+    where?: LiveryWhereInput
+  }
+
+  export type LiveryUpdateToOneWithWhereWithoutImagesInput = {
+    where?: LiveryWhereInput
+    data: XOR<LiveryUpdateWithoutImagesInput, LiveryUncheckedUpdateWithoutImagesInput>
+  }
+
+  export type LiveryUpdateWithoutImagesInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    IsActive?: BoolFieldUpdateOperationsInput | boolean
+    DownloadCount?: IntFieldUpdateOperationsInput | number
+    Image?: StringFieldUpdateOperationsInput | string
+    ImageFileName?: NullableStringFieldUpdateOperationsInput | string | null
+    CoverPhoto?: NullableStringFieldUpdateOperationsInput | string | null
+    Metadata?: NullableJsonNullValueInput | InputJsonValue
+    Url?: NullableStringFieldUpdateOperationsInput | string | null
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
+    DownloadUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Aircraft?: AircraftUpdateOneWithoutLiveriesNestedInput
+    Files?: LiveryFileUpdateManyWithoutLiveryNestedInput
+  }
+
+  export type LiveryUncheckedUpdateWithoutImagesInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    IsActive?: BoolFieldUpdateOperationsInput | boolean
+    AircraftId?: NullableStringFieldUpdateOperationsInput | string | null
+    DownloadCount?: IntFieldUpdateOperationsInput | number
+    Image?: StringFieldUpdateOperationsInput | string
+    ImageFileName?: NullableStringFieldUpdateOperationsInput | string | null
+    CoverPhoto?: NullableStringFieldUpdateOperationsInput | string | null
+    Metadata?: NullableJsonNullValueInput | InputJsonValue
+    Url?: NullableStringFieldUpdateOperationsInput | string | null
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
+    DownloadUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Files?: LiveryFileUncheckedUpdateManyWithoutLiveryNestedInput
+  }
+
+  export type LiveryCreateWithoutFilesInput = {
+    Id?: string
+    Name: string
+    IsActive?: boolean
+    DownloadCount?: number
+    Image: string
+    ImageFileName?: string | null
+    CoverPhoto?: string | null
+    Metadata?: NullableJsonNullValueInput | InputJsonValue
+    Url?: string | null
+    Description?: string | null
+    DownloadUrl?: string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    Aircraft?: AircraftCreateNestedOneWithoutLiveriesInput
+    Images?: LiveryImageCreateNestedManyWithoutLiveryInput
+  }
+
+  export type LiveryUncheckedCreateWithoutFilesInput = {
+    Id?: string
+    Name: string
+    IsActive?: boolean
+    AircraftId?: string | null
+    DownloadCount?: number
+    Image: string
+    ImageFileName?: string | null
+    CoverPhoto?: string | null
+    Metadata?: NullableJsonNullValueInput | InputJsonValue
+    Url?: string | null
+    Description?: string | null
+    DownloadUrl?: string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    Images?: LiveryImageUncheckedCreateNestedManyWithoutLiveryInput
+  }
+
+  export type LiveryCreateOrConnectWithoutFilesInput = {
+    where: LiveryWhereUniqueInput
+    create: XOR<LiveryCreateWithoutFilesInput, LiveryUncheckedCreateWithoutFilesInput>
+  }
+
+  export type LiveryUpsertWithoutFilesInput = {
+    update: XOR<LiveryUpdateWithoutFilesInput, LiveryUncheckedUpdateWithoutFilesInput>
+    create: XOR<LiveryCreateWithoutFilesInput, LiveryUncheckedCreateWithoutFilesInput>
+    where?: LiveryWhereInput
+  }
+
+  export type LiveryUpdateToOneWithWhereWithoutFilesInput = {
+    where?: LiveryWhereInput
+    data: XOR<LiveryUpdateWithoutFilesInput, LiveryUncheckedUpdateWithoutFilesInput>
+  }
+
+  export type LiveryUpdateWithoutFilesInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    IsActive?: BoolFieldUpdateOperationsInput | boolean
+    DownloadCount?: IntFieldUpdateOperationsInput | number
+    Image?: StringFieldUpdateOperationsInput | string
+    ImageFileName?: NullableStringFieldUpdateOperationsInput | string | null
+    CoverPhoto?: NullableStringFieldUpdateOperationsInput | string | null
+    Metadata?: NullableJsonNullValueInput | InputJsonValue
+    Url?: NullableStringFieldUpdateOperationsInput | string | null
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
+    DownloadUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Aircraft?: AircraftUpdateOneWithoutLiveriesNestedInput
+    Images?: LiveryImageUpdateManyWithoutLiveryNestedInput
+  }
+
+  export type LiveryUncheckedUpdateWithoutFilesInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    IsActive?: BoolFieldUpdateOperationsInput | boolean
+    AircraftId?: NullableStringFieldUpdateOperationsInput | string | null
+    DownloadCount?: IntFieldUpdateOperationsInput | number
+    Image?: StringFieldUpdateOperationsInput | string
+    ImageFileName?: NullableStringFieldUpdateOperationsInput | string | null
+    CoverPhoto?: NullableStringFieldUpdateOperationsInput | string | null
+    Metadata?: NullableJsonNullValueInput | InputJsonValue
+    Url?: NullableStringFieldUpdateOperationsInput | string | null
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
+    DownloadUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Images?: LiveryImageUncheckedUpdateManyWithoutLiveryNestedInput
   }
 
   export type WorldCreateWithoutVirtualAirlinesInput = {
@@ -48318,7 +52013,7 @@ export namespace Prisma {
     DiscordAvatar?: string | null
     DiscordEmail?: string | null
     Roles?: RoleCreateNestedManyWithoutUsersInput
-    PrivacySettings?: UserPrivacySettingsCreateNestedOneWithoutUserInput
+    PrivacySettings?: UserPrivacySettingsCreateNestedManyWithoutUserInput
     InviteCode?: InviteCodeCreateNestedOneWithoutUserInput
   }
 
@@ -48344,7 +52039,7 @@ export namespace Prisma {
     DiscordAvatar?: string | null
     DiscordEmail?: string | null
     Roles?: RoleUncheckedCreateNestedManyWithoutUsersInput
-    PrivacySettings?: UserPrivacySettingsUncheckedCreateNestedOneWithoutUserInput
+    PrivacySettings?: UserPrivacySettingsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutMembersInput = {
@@ -48599,7 +52294,7 @@ export namespace Prisma {
     DiscordAvatar?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordEmail?: NullableStringFieldUpdateOperationsInput | string | null
     Roles?: RoleUpdateManyWithoutUsersNestedInput
-    PrivacySettings?: UserPrivacySettingsUpdateOneWithoutUserNestedInput
+    PrivacySettings?: UserPrivacySettingsUpdateManyWithoutUserNestedInput
     InviteCode?: InviteCodeUpdateOneWithoutUserNestedInput
   }
 
@@ -48625,7 +52320,7 @@ export namespace Prisma {
     DiscordAvatar?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordEmail?: NullableStringFieldUpdateOperationsInput | string | null
     Roles?: RoleUncheckedUpdateManyWithoutUsersNestedInput
-    PrivacySettings?: UserPrivacySettingsUncheckedUpdateOneWithoutUserNestedInput
+    PrivacySettings?: UserPrivacySettingsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type FlightRouteUpsertWithWhereUniqueWithoutMemberInput = {
@@ -49083,12 +52778,14 @@ export namespace Prisma {
     Id: string
     ICAO: string
     IATA?: string | null
+    Description?: string | null
     Name: string
     Size?: number
     City?: string | null
     State?: string | null
     CountryCode?: string | null
     CountryName?: string | null
+    CountryEmoji?: string | null
     Latitude: Decimal | DecimalJsLike | number | string
     Longitude: Decimal | DecimalJsLike | number | string
     HomeWebSiteUrl?: string | null
@@ -49105,12 +52802,14 @@ export namespace Prisma {
     Id: string
     ICAO: string
     IATA?: string | null
+    Description?: string | null
     Name: string
     Size?: number
     City?: string | null
     State?: string | null
     CountryCode?: string | null
     CountryName?: string | null
+    CountryEmoji?: string | null
     Latitude: Decimal | DecimalJsLike | number | string
     Longitude: Decimal | DecimalJsLike | number | string
     HomeWebSiteUrl?: string | null
@@ -49322,11 +53021,16 @@ export namespace Prisma {
     IsActive?: boolean
     DownloadCount?: number
     Image: string
+    ImageFileName?: string | null
+    CoverPhoto?: string | null
+    Metadata?: NullableJsonNullValueInput | InputJsonValue
     Url?: string | null
     Description?: string | null
     DownloadUrl?: string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    Images?: LiveryImageCreateNestedManyWithoutLiveryInput
+    Files?: LiveryFileCreateNestedManyWithoutLiveryInput
   }
 
   export type LiveryUncheckedCreateWithoutAircraftInput = {
@@ -49335,11 +53039,16 @@ export namespace Prisma {
     IsActive?: boolean
     DownloadCount?: number
     Image: string
+    ImageFileName?: string | null
+    CoverPhoto?: string | null
+    Metadata?: NullableJsonNullValueInput | InputJsonValue
     Url?: string | null
     Description?: string | null
     DownloadUrl?: string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    Images?: LiveryImageUncheckedCreateNestedManyWithoutLiveryInput
+    Files?: LiveryFileUncheckedCreateNestedManyWithoutLiveryInput
   }
 
   export type LiveryCreateOrConnectWithoutAircraftInput = {
@@ -49486,12 +53195,14 @@ export namespace Prisma {
     Id?: StringFieldUpdateOperationsInput | string
     ICAO?: StringFieldUpdateOperationsInput | string
     IATA?: NullableStringFieldUpdateOperationsInput | string | null
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
     Name?: StringFieldUpdateOperationsInput | string
     Size?: IntFieldUpdateOperationsInput | number
     City?: NullableStringFieldUpdateOperationsInput | string | null
     State?: NullableStringFieldUpdateOperationsInput | string | null
     CountryCode?: NullableStringFieldUpdateOperationsInput | string | null
     CountryName?: NullableStringFieldUpdateOperationsInput | string | null
+    CountryEmoji?: NullableStringFieldUpdateOperationsInput | string | null
     Latitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     Longitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     HomeWebSiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -49508,12 +53219,14 @@ export namespace Prisma {
     Id?: StringFieldUpdateOperationsInput | string
     ICAO?: StringFieldUpdateOperationsInput | string
     IATA?: NullableStringFieldUpdateOperationsInput | string | null
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
     Name?: StringFieldUpdateOperationsInput | string
     Size?: IntFieldUpdateOperationsInput | number
     City?: NullableStringFieldUpdateOperationsInput | string | null
     State?: NullableStringFieldUpdateOperationsInput | string | null
     CountryCode?: NullableStringFieldUpdateOperationsInput | string | null
     CountryName?: NullableStringFieldUpdateOperationsInput | string | null
+    CountryEmoji?: NullableStringFieldUpdateOperationsInput | string | null
     Latitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     Longitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     HomeWebSiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -49606,6 +53319,9 @@ export namespace Prisma {
     AircraftId?: UuidNullableFilter<"Livery"> | string | null
     DownloadCount?: IntFilter<"Livery"> | number
     Image?: StringFilter<"Livery"> | string
+    ImageFileName?: StringNullableFilter<"Livery"> | string | null
+    CoverPhoto?: StringNullableFilter<"Livery"> | string | null
+    Metadata?: JsonNullableFilter<"Livery">
     Url?: StringNullableFilter<"Livery"> | string | null
     Description?: StringNullableFilter<"Livery"> | string | null
     DownloadUrl?: StringNullableFilter<"Livery"> | string | null
@@ -50666,12 +54382,14 @@ export namespace Prisma {
     Id: string
     ICAO: string
     IATA?: string | null
+    Description?: string | null
     Name: string
     Size?: number
     City?: string | null
     State?: string | null
     CountryCode?: string | null
     CountryName?: string | null
+    CountryEmoji?: string | null
     Latitude: Decimal | DecimalJsLike | number | string
     Longitude: Decimal | DecimalJsLike | number | string
     HomeWebSiteUrl?: string | null
@@ -50688,12 +54406,14 @@ export namespace Prisma {
     Id: string
     ICAO: string
     IATA?: string | null
+    Description?: string | null
     Name: string
     Size?: number
     City?: string | null
     State?: string | null
     CountryCode?: string | null
     CountryName?: string | null
+    CountryEmoji?: string | null
     Latitude: Decimal | DecimalJsLike | number | string
     Longitude: Decimal | DecimalJsLike | number | string
     HomeWebSiteUrl?: string | null
@@ -50715,12 +54435,14 @@ export namespace Prisma {
     Id: string
     ICAO: string
     IATA?: string | null
+    Description?: string | null
     Name: string
     Size?: number
     City?: string | null
     State?: string | null
     CountryCode?: string | null
     CountryName?: string | null
+    CountryEmoji?: string | null
     Latitude: Decimal | DecimalJsLike | number | string
     Longitude: Decimal | DecimalJsLike | number | string
     HomeWebSiteUrl?: string | null
@@ -50737,12 +54459,14 @@ export namespace Prisma {
     Id: string
     ICAO: string
     IATA?: string | null
+    Description?: string | null
     Name: string
     Size?: number
     City?: string | null
     State?: string | null
     CountryCode?: string | null
     CountryName?: string | null
+    CountryEmoji?: string | null
     Latitude: Decimal | DecimalJsLike | number | string
     Longitude: Decimal | DecimalJsLike | number | string
     HomeWebSiteUrl?: string | null
@@ -50764,12 +54488,14 @@ export namespace Prisma {
     Id: string
     ICAO: string
     IATA?: string | null
+    Description?: string | null
     Name: string
     Size?: number
     City?: string | null
     State?: string | null
     CountryCode?: string | null
     CountryName?: string | null
+    CountryEmoji?: string | null
     Latitude: Decimal | DecimalJsLike | number | string
     Longitude: Decimal | DecimalJsLike | number | string
     HomeWebSiteUrl?: string | null
@@ -50786,12 +54512,14 @@ export namespace Prisma {
     Id: string
     ICAO: string
     IATA?: string | null
+    Description?: string | null
     Name: string
     Size?: number
     City?: string | null
     State?: string | null
     CountryCode?: string | null
     CountryName?: string | null
+    CountryEmoji?: string | null
     Latitude: Decimal | DecimalJsLike | number | string
     Longitude: Decimal | DecimalJsLike | number | string
     HomeWebSiteUrl?: string | null
@@ -50813,12 +54541,14 @@ export namespace Prisma {
     Id: string
     ICAO: string
     IATA?: string | null
+    Description?: string | null
     Name: string
     Size?: number
     City?: string | null
     State?: string | null
     CountryCode?: string | null
     CountryName?: string | null
+    CountryEmoji?: string | null
     Latitude: Decimal | DecimalJsLike | number | string
     Longitude: Decimal | DecimalJsLike | number | string
     HomeWebSiteUrl?: string | null
@@ -50835,12 +54565,14 @@ export namespace Prisma {
     Id: string
     ICAO: string
     IATA?: string | null
+    Description?: string | null
     Name: string
     Size?: number
     City?: string | null
     State?: string | null
     CountryCode?: string | null
     CountryName?: string | null
+    CountryEmoji?: string | null
     Latitude: Decimal | DecimalJsLike | number | string
     Longitude: Decimal | DecimalJsLike | number | string
     HomeWebSiteUrl?: string | null
@@ -51105,12 +54837,14 @@ export namespace Prisma {
     Id?: StringFieldUpdateOperationsInput | string
     ICAO?: StringFieldUpdateOperationsInput | string
     IATA?: NullableStringFieldUpdateOperationsInput | string | null
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
     Name?: StringFieldUpdateOperationsInput | string
     Size?: IntFieldUpdateOperationsInput | number
     City?: NullableStringFieldUpdateOperationsInput | string | null
     State?: NullableStringFieldUpdateOperationsInput | string | null
     CountryCode?: NullableStringFieldUpdateOperationsInput | string | null
     CountryName?: NullableStringFieldUpdateOperationsInput | string | null
+    CountryEmoji?: NullableStringFieldUpdateOperationsInput | string | null
     Latitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     Longitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     HomeWebSiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -51127,12 +54861,14 @@ export namespace Prisma {
     Id?: StringFieldUpdateOperationsInput | string
     ICAO?: StringFieldUpdateOperationsInput | string
     IATA?: NullableStringFieldUpdateOperationsInput | string | null
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
     Name?: StringFieldUpdateOperationsInput | string
     Size?: IntFieldUpdateOperationsInput | number
     City?: NullableStringFieldUpdateOperationsInput | string | null
     State?: NullableStringFieldUpdateOperationsInput | string | null
     CountryCode?: NullableStringFieldUpdateOperationsInput | string | null
     CountryName?: NullableStringFieldUpdateOperationsInput | string | null
+    CountryEmoji?: NullableStringFieldUpdateOperationsInput | string | null
     Latitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     Longitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     HomeWebSiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -51160,12 +54896,14 @@ export namespace Prisma {
     Id?: StringFieldUpdateOperationsInput | string
     ICAO?: StringFieldUpdateOperationsInput | string
     IATA?: NullableStringFieldUpdateOperationsInput | string | null
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
     Name?: StringFieldUpdateOperationsInput | string
     Size?: IntFieldUpdateOperationsInput | number
     City?: NullableStringFieldUpdateOperationsInput | string | null
     State?: NullableStringFieldUpdateOperationsInput | string | null
     CountryCode?: NullableStringFieldUpdateOperationsInput | string | null
     CountryName?: NullableStringFieldUpdateOperationsInput | string | null
+    CountryEmoji?: NullableStringFieldUpdateOperationsInput | string | null
     Latitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     Longitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     HomeWebSiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -51182,12 +54920,14 @@ export namespace Prisma {
     Id?: StringFieldUpdateOperationsInput | string
     ICAO?: StringFieldUpdateOperationsInput | string
     IATA?: NullableStringFieldUpdateOperationsInput | string | null
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
     Name?: StringFieldUpdateOperationsInput | string
     Size?: IntFieldUpdateOperationsInput | number
     City?: NullableStringFieldUpdateOperationsInput | string | null
     State?: NullableStringFieldUpdateOperationsInput | string | null
     CountryCode?: NullableStringFieldUpdateOperationsInput | string | null
     CountryName?: NullableStringFieldUpdateOperationsInput | string | null
+    CountryEmoji?: NullableStringFieldUpdateOperationsInput | string | null
     Latitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     Longitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     HomeWebSiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -51215,12 +54955,14 @@ export namespace Prisma {
     Id?: StringFieldUpdateOperationsInput | string
     ICAO?: StringFieldUpdateOperationsInput | string
     IATA?: NullableStringFieldUpdateOperationsInput | string | null
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
     Name?: StringFieldUpdateOperationsInput | string
     Size?: IntFieldUpdateOperationsInput | number
     City?: NullableStringFieldUpdateOperationsInput | string | null
     State?: NullableStringFieldUpdateOperationsInput | string | null
     CountryCode?: NullableStringFieldUpdateOperationsInput | string | null
     CountryName?: NullableStringFieldUpdateOperationsInput | string | null
+    CountryEmoji?: NullableStringFieldUpdateOperationsInput | string | null
     Latitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     Longitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     HomeWebSiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -51237,12 +54979,14 @@ export namespace Prisma {
     Id?: StringFieldUpdateOperationsInput | string
     ICAO?: StringFieldUpdateOperationsInput | string
     IATA?: NullableStringFieldUpdateOperationsInput | string | null
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
     Name?: StringFieldUpdateOperationsInput | string
     Size?: IntFieldUpdateOperationsInput | number
     City?: NullableStringFieldUpdateOperationsInput | string | null
     State?: NullableStringFieldUpdateOperationsInput | string | null
     CountryCode?: NullableStringFieldUpdateOperationsInput | string | null
     CountryName?: NullableStringFieldUpdateOperationsInput | string | null
+    CountryEmoji?: NullableStringFieldUpdateOperationsInput | string | null
     Latitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     Longitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     HomeWebSiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -51270,12 +55014,14 @@ export namespace Prisma {
     Id?: StringFieldUpdateOperationsInput | string
     ICAO?: StringFieldUpdateOperationsInput | string
     IATA?: NullableStringFieldUpdateOperationsInput | string | null
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
     Name?: StringFieldUpdateOperationsInput | string
     Size?: IntFieldUpdateOperationsInput | number
     City?: NullableStringFieldUpdateOperationsInput | string | null
     State?: NullableStringFieldUpdateOperationsInput | string | null
     CountryCode?: NullableStringFieldUpdateOperationsInput | string | null
     CountryName?: NullableStringFieldUpdateOperationsInput | string | null
+    CountryEmoji?: NullableStringFieldUpdateOperationsInput | string | null
     Latitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     Longitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     HomeWebSiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -51292,12 +55038,14 @@ export namespace Prisma {
     Id?: StringFieldUpdateOperationsInput | string
     ICAO?: StringFieldUpdateOperationsInput | string
     IATA?: NullableStringFieldUpdateOperationsInput | string | null
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
     Name?: StringFieldUpdateOperationsInput | string
     Size?: IntFieldUpdateOperationsInput | number
     City?: NullableStringFieldUpdateOperationsInput | string | null
     State?: NullableStringFieldUpdateOperationsInput | string | null
     CountryCode?: NullableStringFieldUpdateOperationsInput | string | null
     CountryName?: NullableStringFieldUpdateOperationsInput | string | null
+    CountryEmoji?: NullableStringFieldUpdateOperationsInput | string | null
     Latitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     Longitude?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     HomeWebSiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -51995,6 +55743,16 @@ export namespace Prisma {
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type UserPrivacySettingsCreateManyUserInput = {
+    Id?: string
+    ShowOnlineStatus?: boolean
+    ShowFirstName?: boolean
+    ShowLastName?: boolean
+    ShowLastNameInitial?: boolean
+    ShowLastLogin?: boolean
+    CreatedAt?: Date | string
+  }
+
   export type MemberCreateManyUserInput = {
     Id: string
     IsActive?: boolean
@@ -52045,6 +55803,36 @@ export namespace Prisma {
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     VirtualAirlineRoleId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type UserPrivacySettingsUpdateWithoutUserInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    ShowOnlineStatus?: BoolFieldUpdateOperationsInput | boolean
+    ShowFirstName?: BoolFieldUpdateOperationsInput | boolean
+    ShowLastName?: BoolFieldUpdateOperationsInput | boolean
+    ShowLastNameInitial?: BoolFieldUpdateOperationsInput | boolean
+    ShowLastLogin?: BoolFieldUpdateOperationsInput | boolean
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserPrivacySettingsUncheckedUpdateWithoutUserInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    ShowOnlineStatus?: BoolFieldUpdateOperationsInput | boolean
+    ShowFirstName?: BoolFieldUpdateOperationsInput | boolean
+    ShowLastName?: BoolFieldUpdateOperationsInput | boolean
+    ShowLastNameInitial?: BoolFieldUpdateOperationsInput | boolean
+    ShowLastLogin?: BoolFieldUpdateOperationsInput | boolean
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserPrivacySettingsUncheckedUpdateManyWithoutUserInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    ShowOnlineStatus?: BoolFieldUpdateOperationsInput | boolean
+    ShowFirstName?: BoolFieldUpdateOperationsInput | boolean
+    ShowLastName?: BoolFieldUpdateOperationsInput | boolean
+    ShowLastNameInitial?: BoolFieldUpdateOperationsInput | boolean
+    ShowLastLogin?: BoolFieldUpdateOperationsInput | boolean
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type MemberUpdateWithoutUserInput = {
@@ -52160,7 +55948,7 @@ export namespace Prisma {
     DiscordUsername?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordAvatar?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordEmail?: NullableStringFieldUpdateOperationsInput | string | null
-    PrivacySettings?: UserPrivacySettingsUpdateOneWithoutUserNestedInput
+    PrivacySettings?: UserPrivacySettingsUpdateManyWithoutUserNestedInput
     Members?: MemberUpdateManyWithoutUserNestedInput
     InviteCode?: InviteCodeUpdateOneWithoutUserNestedInput
   }
@@ -52186,7 +55974,7 @@ export namespace Prisma {
     DiscordUsername?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordAvatar?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordEmail?: NullableStringFieldUpdateOperationsInput | string | null
-    PrivacySettings?: UserPrivacySettingsUncheckedUpdateOneWithoutUserNestedInput
+    PrivacySettings?: UserPrivacySettingsUncheckedUpdateManyWithoutUserNestedInput
     Members?: MemberUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -52242,6 +56030,102 @@ export namespace Prisma {
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     VirtualAirlineRoleId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type LiveryImageCreateManyLiveryInput = {
+    Id?: string
+    Name: string
+    Type: string
+    Path: string
+    Size: number
+    MimeType: string
+    FileName: string
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+  }
+
+  export type LiveryFileCreateManyLiveryInput = {
+    Id?: string
+    Name: string
+    Type: string
+    Path: string
+    Size: number
+    MimeType: string
+    FileName: string
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+  }
+
+  export type LiveryImageUpdateWithoutLiveryInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    Type?: StringFieldUpdateOperationsInput | string
+    Path?: StringFieldUpdateOperationsInput | string
+    Size?: IntFieldUpdateOperationsInput | number
+    MimeType?: StringFieldUpdateOperationsInput | string
+    FileName?: StringFieldUpdateOperationsInput | string
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LiveryImageUncheckedUpdateWithoutLiveryInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    Type?: StringFieldUpdateOperationsInput | string
+    Path?: StringFieldUpdateOperationsInput | string
+    Size?: IntFieldUpdateOperationsInput | number
+    MimeType?: StringFieldUpdateOperationsInput | string
+    FileName?: StringFieldUpdateOperationsInput | string
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LiveryImageUncheckedUpdateManyWithoutLiveryInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    Type?: StringFieldUpdateOperationsInput | string
+    Path?: StringFieldUpdateOperationsInput | string
+    Size?: IntFieldUpdateOperationsInput | number
+    MimeType?: StringFieldUpdateOperationsInput | string
+    FileName?: StringFieldUpdateOperationsInput | string
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LiveryFileUpdateWithoutLiveryInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    Type?: StringFieldUpdateOperationsInput | string
+    Path?: StringFieldUpdateOperationsInput | string
+    Size?: IntFieldUpdateOperationsInput | number
+    MimeType?: StringFieldUpdateOperationsInput | string
+    FileName?: StringFieldUpdateOperationsInput | string
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LiveryFileUncheckedUpdateWithoutLiveryInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    Type?: StringFieldUpdateOperationsInput | string
+    Path?: StringFieldUpdateOperationsInput | string
+    Size?: IntFieldUpdateOperationsInput | number
+    MimeType?: StringFieldUpdateOperationsInput | string
+    FileName?: StringFieldUpdateOperationsInput | string
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LiveryFileUncheckedUpdateManyWithoutLiveryInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    Type?: StringFieldUpdateOperationsInput | string
+    Path?: StringFieldUpdateOperationsInput | string
+    Size?: IntFieldUpdateOperationsInput | number
+    MimeType?: StringFieldUpdateOperationsInput | string
+    FileName?: StringFieldUpdateOperationsInput | string
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type VirtualAirlineRoleCreateManyVirtualAirlineInput = {
@@ -53645,6 +57529,9 @@ export namespace Prisma {
     IsActive?: boolean
     DownloadCount?: number
     Image: string
+    ImageFileName?: string | null
+    CoverPhoto?: string | null
+    Metadata?: NullableJsonNullValueInput | InputJsonValue
     Url?: string | null
     Description?: string | null
     DownloadUrl?: string | null
@@ -53909,11 +57796,16 @@ export namespace Prisma {
     IsActive?: BoolFieldUpdateOperationsInput | boolean
     DownloadCount?: IntFieldUpdateOperationsInput | number
     Image?: StringFieldUpdateOperationsInput | string
+    ImageFileName?: NullableStringFieldUpdateOperationsInput | string | null
+    CoverPhoto?: NullableStringFieldUpdateOperationsInput | string | null
+    Metadata?: NullableJsonNullValueInput | InputJsonValue
     Url?: NullableStringFieldUpdateOperationsInput | string | null
     Description?: NullableStringFieldUpdateOperationsInput | string | null
     DownloadUrl?: NullableStringFieldUpdateOperationsInput | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Images?: LiveryImageUpdateManyWithoutLiveryNestedInput
+    Files?: LiveryFileUpdateManyWithoutLiveryNestedInput
   }
 
   export type LiveryUncheckedUpdateWithoutAircraftInput = {
@@ -53922,11 +57814,16 @@ export namespace Prisma {
     IsActive?: BoolFieldUpdateOperationsInput | boolean
     DownloadCount?: IntFieldUpdateOperationsInput | number
     Image?: StringFieldUpdateOperationsInput | string
+    ImageFileName?: NullableStringFieldUpdateOperationsInput | string | null
+    CoverPhoto?: NullableStringFieldUpdateOperationsInput | string | null
+    Metadata?: NullableJsonNullValueInput | InputJsonValue
     Url?: NullableStringFieldUpdateOperationsInput | string | null
     Description?: NullableStringFieldUpdateOperationsInput | string | null
     DownloadUrl?: NullableStringFieldUpdateOperationsInput | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Images?: LiveryImageUncheckedUpdateManyWithoutLiveryNestedInput
+    Files?: LiveryFileUncheckedUpdateManyWithoutLiveryNestedInput
   }
 
   export type LiveryUncheckedUpdateManyWithoutAircraftInput = {
@@ -53935,6 +57832,9 @@ export namespace Prisma {
     IsActive?: BoolFieldUpdateOperationsInput | boolean
     DownloadCount?: IntFieldUpdateOperationsInput | number
     Image?: StringFieldUpdateOperationsInput | string
+    ImageFileName?: NullableStringFieldUpdateOperationsInput | string | null
+    CoverPhoto?: NullableStringFieldUpdateOperationsInput | string | null
+    Metadata?: NullableJsonNullValueInput | InputJsonValue
     Url?: NullableStringFieldUpdateOperationsInput | string | null
     Description?: NullableStringFieldUpdateOperationsInput | string | null
     DownloadUrl?: NullableStringFieldUpdateOperationsInput | string | null

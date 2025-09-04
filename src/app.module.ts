@@ -23,12 +23,29 @@ import { ListenerModule } from './listener/listener.module';
 import { FshubModule } from './fshub/fshub.module';
 import { NotifierModule } from './notifier/notifier.module';
 import { CompanyModule } from './company/company.module';
+import { LiveryModule } from './livery/livery.module';
+import { WebsocketModule } from './websocket/websocket.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
+import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: ['.env', '.env.local'],
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..'),
+      serveStaticOptions: {
+        fallthrough: false,
+      },
+    }),
+    MulterModule.registerAsync({
+      useFactory: () => ({
+        dest: join(__dirname, '..', 'files'),
+      }),
+      inject: [ConfigService],
     }),
     PrismaModule,
     OnAirModule,
@@ -49,6 +66,8 @@ import { CompanyModule } from './company/company.module';
     FshubModule,
     NotifierModule,
     CompanyModule,
+    LiveryModule,
+    WebsocketModule,
   ],
   controllers: [AppController],
   providers: [AppService],

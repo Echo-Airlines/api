@@ -1,4 +1,4 @@
-import { UseGuards, Controller, Get, Param, Post, Body, Put, Query } from '@nestjs/common';
+import { UseGuards, Controller, Get, Param, Post, Delete, Body, Put, Query, BadRequestException } from '@nestjs/common';
 import { JwtAuthGuard } from '@auth/jwt-auth.guard';
 import { IsAdminGuard } from '@auth/is-admin.guard';
 import { DiscordChannelWebhook, Prisma } from 'prisma/generated/prisma';
@@ -6,7 +6,7 @@ import { AdminDiscordService } from './admin-discord.service';
 import { CreateDiscordChannelWebhookDto } from './dto/CreateDiscordChannelWebhookDto';
 import { SendDiscordMessageDto } from '@discord/dto/SendDiscordMessageDto';
 import { DiscordService } from '@discord/discord.service';
-import { CreateDiscordMessageTemplateDto } from './dto/CreateDiscordMessageTemplateDto';
+import { CreateDiscordMessageTemplateDto, UpdateDiscordMessageTemplateDto } from './dto/CreateDiscordMessageTemplateDto';
 
 @Controller('admin/discord')
 export class AdminDiscordController {
@@ -51,10 +51,9 @@ export class AdminDiscordController {
 
     @Post('webhook/:id/message')
     @UseGuards(JwtAuthGuard, IsAdminGuard)
-    async sendMessage(@Param('id') id: string, @Body() body: { content: string, username?: string }) {
+    async sendMessage(@Param('id') id: string, @Body() body: { content: string, username: string }) {
         const discordMessage: SendDiscordMessageDto = {
-            content: body.content,
-            username: body.username
+            content: `${body.content}\nSent by: ${body.username}`,
         };
 
         return await this.discordService.ChannelWebhook_sendMessage(id, discordMessage);
@@ -84,5 +83,26 @@ export class AdminDiscordController {
         };
 
         return await this.adminDiscordService.DiscordMessageTemplate_create(_body);
+    }
+
+    @Put(['message-templates/:id', 'message-template/:id'])
+    @UseGuards(JwtAuthGuard, IsAdminGuard)
+    async updateMessageTemplate(@Param('id') id: number, @Body() body: UpdateDiscordMessageTemplateDto) {
+        try {
+            if (typeof id === 'string') {
+                id = parseInt(id);
+            }
+
+            const result = await this.adminDiscordService.DiscordMessageTemplate_update(id, body);
+            return result;
+        } catch (error) {
+            throw new BadRequestException(error.message);
+        }
+    }
+
+    @Delete('webhook/:id')
+    @UseGuards(JwtAuthGuard, IsAdminGuard)
+    async deleteWebhook(@Param('id') id: string) {
+        return await this.adminDiscordService.ChannelWebhook_delete(id);
     }
 }

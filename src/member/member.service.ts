@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '@prisma/prisma.service';
-import { Prisma } from 'prisma/generated/prisma';
+import { Member, Prisma } from 'prisma/generated/prisma';
 
 @Injectable()
 export class MemberService {
@@ -19,13 +19,32 @@ export class MemberService {
     //     });
     // }
 
+    async findAllActive() {
+        const result: Member[] = await this.prisma.member.findMany({
+            where: {
+                IsActive: true,
+            },
+        });
+
+        return result;
+    }
+
     async findByCompanyId(companyId: string) {
         return this.prisma.member.findFirst({
             where: {
                 CompanyId: companyId,
             },
             include: {
-                User: true,
+                User: {
+                    select: {
+                        Id: true,
+                        FirstName: true,
+                        LastName: true,
+                        Username: true,
+                        PrivacySettings: true,
+                    },
+                },
+                Company: true,
             },
         });
     }
@@ -48,6 +67,7 @@ export class MemberService {
             },
             include: {
                 User: true,
+                Company: true,
             },
         });
     }

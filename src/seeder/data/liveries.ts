@@ -44,6 +44,7 @@ export default [
     {
         Name: 'FlyByWire A320neo',
         Image: 'https://www.echoairlines.com/files/liveries/FlyByWire-A320neo-ECHO-Airlines.jpg',
+        ImageFileName: 'FlyByWire-A320neo-ECHO-Airlines.jpg',
         // Url: 'https://flightsim.to/file/94360/echo-airlines-n7310x-flybywire-a320neo-8k',
         Description: 'A beautiful livery for the FlyByWire A320neo, with our signature whale design.',
         DownloadUrl: '/files/liveries/FlyByWire-A320neo-ECHO-Airlines.zip'

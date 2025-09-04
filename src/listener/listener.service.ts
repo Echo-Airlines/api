@@ -7,6 +7,7 @@ import { DiscordService } from '@discord/discord.service';
 import { SendDiscordMessageDto } from '@discord/dto/SendDiscordMessageDto';
 import { FSHubEventDto } from './dto/FSHubEvent.dto';
 import { LoggerService } from '@logger/logger.service';
+import { WebsocketGateway } from '@websocket/websocket.gateway';
 const notifier = require('node-notifier');
 import Handlebars from "handlebars";
 
@@ -28,6 +29,8 @@ export type FlightEvent = {
     landing_rate?: number
     pitch?: number
     bank?: number
+    country?: string
+    country_emoji?: string
 }
 
 export type FlightEventUser = {
@@ -149,7 +152,11 @@ export type FlightEventWeight = {
 export class ListenerService {
     private readonly logger = new LoggerService(ListenerService.name);
 
-    constructor(private prisma: PrismaService, private readonly discordService: DiscordService) {}
+    constructor(
+        private prisma: PrismaService, 
+        private readonly discordService: DiscordService,
+        private readonly websocketGateway: WebsocketGateway
+    ) {}
 
     async createListenerEvent(event: Prisma.ListenerEventCreateInput) {
         const listenerEvent = await this.prisma.listenerEvent.create({
@@ -207,6 +214,18 @@ export class ListenerService {
                 throw new Error('Invalid sender');
         }
 
+        // Emit WebSocket event to all connected clients
+        if (listenerEvent) {
+            this.websocketGateway.emitEvent(listenerEvent.Type, {
+                eventId: listenerEvent.Id,
+                variant: listenerEvent.Variant,
+                sender: sender.Slug,
+                data: listenerEvent.Data,
+                sentAt: listenerEvent.SentAt,
+                status: listenerEvent.Status
+            });
+        }
+
         return listenerEvent;
     }
 
@@ -254,47 +273,61 @@ export class ListenerService {
             if (SentAt > new Date()) {
                 SentAt = new Date();
             }
-            
-            let listenerEvent = await this.createListenerEvent({
-                Variant: body._variant,
-                Type: body._type,
-                SentAt: SentAt,
-                Data: body._data,
-                Sender: {
-                    connect: {
-                        Id: sender.Id
-                    }
-                },
-                Status: 'PENDING'
-            });
+
+            let listenerEvent: ListenerEvent;
+
+            if (body.resend && body.event) {
+                listenerEvent = body.event;
+            } else {
+                listenerEvent = await this.createListenerEvent({
+                    Variant: body._variant,
+                    Type: body._type,
+                    SentAt: SentAt,
+                    Data: body._data,
+                    Sender: {
+                        connect: {
+                            Id: sender.Id
+                        }
+                    },
+                    Status: 'PENDING'
+                });
+            }
 
             if (!sender.DiscordChannelWebhookId) {
                 return listenerEvent;
             }
+
             listenerEvent = await this.updateListenerEventStatus(listenerEvent.Id, ListenerEventStatus.PROCESSING);
-            const messageTemplates: DiscordMessageTemplate[] = await this.discordService.MessageTemplate_findMany();
+
+            // check if the message template exists
+            const messageTemplate: DiscordMessageTemplate|null = await this.discordService.MessageTemplate_findOneBySlug(listenerEvent.Type);
 
             let content = '';
             switch (listenerEvent.Type) {
                 case 'profile.updated':
                     const pilot = listenerEvent.Data as Pilot
-                    content = `${pilot.name} has updated their profile.`;
-                    console.log('profile.updated:', content);
-                    break;
-                case 'flight.departed':
-                    this.logger.debug('flight.departed');
-                    const flightDeparted = listenerEvent.Data as FlightEvent
-                    content = await this.compileMessageTemplate('flight.departed', flightDeparted);
-                    if (content === '') {
-                        content = `${flightDeparted.airline.profile.abbreviation} ${flightDeparted.aircraft.name} #${flightDeparted.plan.flight_no} ${flightDeparted.plan.departure} to ${flightDeparted.plan.arrival} has departed.\n\`\`\``;
+                    if (!messageTemplate) {
+                        content = `${pilot.name} has updated their profile.`;
+                    } else {
+                        content = await this.compileMessageTemplate(messageTemplate.Slug, pilot);
                     }
 
+                    this.logger.debug(`profile.updated: ${content}`);
+                    break;
+                case 'flight.departed':
+                    const flightDeparted = listenerEvent.Data as FlightEvent
+                    if (!messageTemplate) {
+                        content = `${flightDeparted.airline.profile.abbreviation} ${flightDeparted.aircraft.name} #${flightDeparted.plan.flight_no} ${flightDeparted.plan.departure} to ${flightDeparted.plan.arrival} has departed.\n\`\`\``;
+                    } else {
+                        content = await this.compileMessageTemplate(messageTemplate.Slug, flightDeparted);
+                    }
+
+                    this.logger.debug(`flight.departed: ${content}`);
                     break;
                 case 'flight.arrived':
                     this.logger.debug('flight.arrived');
                     const flightArrived = listenerEvent.Data as FlightEvent
-                    content = await this.compileMessageTemplate('flight.arrived', flightArrived);
-                    if (content === '') {
+                    if (!messageTemplate) {
                         let msg: string[] = [];
                         if (flightArrived.landing_rate) {
                             msg.push(`Landing Rate: ${flightArrived.landing_rate} ft/min ${flightArrived.landing_rate > -200 ? '🧈': ''}`);
@@ -313,30 +346,36 @@ export class ListenerService {
                         }
 
                         content = `${flightArrived.airline.profile.abbreviation} ${flightArrived.aircraft.name} ${(flightArrived.plan.flight_no) ? flightArrived.plan.flight_no : ''} ${flightArrived.plan.departure} to ${flightArrived.plan.arrival} flown by ${flightArrived.user.name}  has arrived.\n\`\`\`${msg.join('\n')}\`\`\``;
-                    }
-                    break;
-                case 'flight.completed':
-                    this.logger.debug('flight.completed');
-                    const flightCompleted = listenerEvent.Data as FlightEvent
-                    content = await this.compileMessageTemplate('flight.completed', flightCompleted);
-                    if (content === '') {
-                        content = `${flightCompleted.airline.profile.abbreviation} ${flightCompleted.aircraft.name} ${flightCompleted.plan.callsign} ${flightCompleted.plan.icao_dep} to ${flightCompleted.plan.icao_arr} flown by ${flightCompleted.user.name} has completed.`;
-                    }
-                    
-                    break;
-                case 'flight.updated':
-                    this.logger.debug('flight.updated');
-                    const flightUpdated = listenerEvent.Data as FlightEvent
-                    content = await this.compileMessageTemplate('flight.updated', flightUpdated);
-                    if (content === '') {
-                        content = `${flightUpdated.airline.profile.abbreviation} ${flightUpdated.aircraft.name} ${(flightUpdated.plan.flight_no) ? flightUpdated.plan.flight_no : ''} ${flightUpdated.plan.departure} to ${flightUpdated.plan.arrival} flown by ${flightUpdated.user.name} has updated.`;
+
+                    } else {
+                        content = await this.compileMessageTemplate(messageTemplate.Slug, flightArrived);
                     }
 
+                    this.logger.debug(`flight.arrived: ${content}`);
+                    break;
+                case 'flight.completed':
+                    const flightCompleted = listenerEvent.Data as FlightEvent
+                    if (!messageTemplate) {
+                        content = `${flightCompleted.airline.profile.abbreviation} ${flightCompleted.aircraft.name} ${flightCompleted.plan.callsign} ${flightCompleted.plan.icao_dep} to ${flightCompleted.plan.icao_arr} flown by ${flightCompleted.user.name} has completed.`;
+                    } else {
+                        content = await this.compileMessageTemplate(messageTemplate.Slug, flightCompleted);
+                    }
+
+                    this.logger.debug(`flight.completed: ${content}`);
+                    break;
+                case 'flight.updated':
+                    const flightUpdated = listenerEvent.Data as FlightEvent
+                    if (!messageTemplate) {
+                        content = `${flightUpdated.airline.profile.abbreviation} ${flightUpdated.aircraft.name} ${(flightUpdated.plan.flight_no) ? flightUpdated.plan.flight_no : ''} ${flightUpdated.plan.departure} to ${flightUpdated.plan.arrival} flown by ${flightUpdated.user.name} has updated.`;
+                    } else {
+                        content = await this.compileMessageTemplate(messageTemplate.Slug, flightUpdated);
+                    }
+
+                    this.logger.debug(`flight.updated: ${content}`);
                     break;
                 case 'website.test':
-                    this.logger.debug('website.test');
                     content = JSON.stringify(listenerEvent.Data, null, 2) as string;
-                    this.logger.debug('website.test');
+                    this.logger.debug(`website.test: ${content}`);
                     break;
             }
 
@@ -344,8 +383,19 @@ export class ListenerService {
                 content: content,
             };
 
+            if (content === '') {
+                this.logger.error(`${listenerEvent.Type} event has no content`);
+                return listenerEvent;
+            }
+
             const message: DiscordMessage = await this.discordService.ChannelWebhook_sendMessage(sender.DiscordChannelWebhookId, discordMessage);
 
+            if (!message) {
+                this.logger.error(`${listenerEvent.Type} event failed to send to Discord`);
+                return listenerEvent;
+            }
+
+            // update the listener event
             listenerEvent = await this.updateListenerEvent(listenerEvent.Id, {
                 DeliveredAt: message.DiscordMessageSentAt,
                 Status: 'COMPLETED',
@@ -356,6 +406,7 @@ export class ListenerService {
                 }
             });
 
+            // notify the server that the event was sent
             notifier.notify(`'${listenerEvent.Type}' event sent to Discord`);
 
             return listenerEvent;

@@ -99,4 +99,15 @@ export class AdminDiscordService {
 
         return entity;
     }
+
+    async DiscordMessageTemplate_update(Id: number, data: Prisma.DiscordMessageTemplateUpdateInput) {
+        const entity = await this.prisma.discordMessageTemplate.update({
+            where: {
+                Id
+            },
+            data
+        });
+
+        return entity;
+    }
 }

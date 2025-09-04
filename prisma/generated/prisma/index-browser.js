@@ -20,12 +20,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.14.0
- * Query Engine version: 717184b7b35ea05dfa71a3236b7af656013e1e49
+ * Prisma Client JS version: 6.15.0
+ * Query Engine version: 85179d7826409ee107a6ba334b5e305ae3fba9fb
  */
 Prisma.prismaVersion = {
-  client: "6.14.0",
-  engine: "717184b7b35ea05dfa71a3236b7af656013e1e49"
+  client: "6.15.0",
+  engine: "85179d7826409ee107a6ba334b5e305ae3fba9fb"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -266,9 +266,38 @@ exports.Prisma.LiveryScalarFieldEnum = {
   AircraftId: 'AircraftId',
   DownloadCount: 'DownloadCount',
   Image: 'Image',
+  ImageFileName: 'ImageFileName',
+  CoverPhoto: 'CoverPhoto',
+  Metadata: 'Metadata',
   Url: 'Url',
   Description: 'Description',
   DownloadUrl: 'DownloadUrl',
+  CreatedAt: 'CreatedAt',
+  UpdatedAt: 'UpdatedAt'
+};
+
+exports.Prisma.LiveryImageScalarFieldEnum = {
+  Id: 'Id',
+  LiveryId: 'LiveryId',
+  Name: 'Name',
+  Type: 'Type',
+  Path: 'Path',
+  Size: 'Size',
+  MimeType: 'MimeType',
+  FileName: 'FileName',
+  CreatedAt: 'CreatedAt',
+  UpdatedAt: 'UpdatedAt'
+};
+
+exports.Prisma.LiveryFileScalarFieldEnum = {
+  Id: 'Id',
+  LiveryId: 'LiveryId',
+  Name: 'Name',
+  Type: 'Type',
+  Path: 'Path',
+  Size: 'Size',
+  MimeType: 'MimeType',
+  FileName: 'FileName',
   CreatedAt: 'CreatedAt',
   UpdatedAt: 'UpdatedAt'
 };
@@ -416,12 +445,14 @@ exports.Prisma.AirportScalarFieldEnum = {
   Id: 'Id',
   ICAO: 'ICAO',
   IATA: 'IATA',
+  Description: 'Description',
   Name: 'Name',
   Size: 'Size',
   City: 'City',
   State: 'State',
   CountryCode: 'CountryCode',
   CountryName: 'CountryName',
+  CountryEmoji: 'CountryEmoji',
   Latitude: 'Latitude',
   Longitude: 'Longitude',
   HomeWebSiteUrl: 'HomeWebSiteUrl',
@@ -605,6 +636,8 @@ exports.Prisma.ModelName = {
   Role: 'Role',
   Permission: 'Permission',
   Livery: 'Livery',
+  LiveryImage: 'LiveryImage',
+  LiveryFile: 'LiveryFile',
   VirtualAirline: 'VirtualAirline',
   VirtualAirlineRole: 'VirtualAirlineRole',
   World: 'World',

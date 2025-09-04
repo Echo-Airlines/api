@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '@prisma/prisma.service';
 import { Prisma, User as PrismaUser } from 'prisma/generated/prisma';
-import { PublicUserDto, User } from './dto/PublicUser.dto';
+import { PublicUserDto, RawUser, User } from './dto/PublicUser.dto';
 
 @Injectable()
 export class UserService {
@@ -27,7 +27,7 @@ export class UserService {
             }
         })
 
-        const results = entities.map((e) => new PublicUserDto(e as User));
+        const results = entities.map((e) => new PublicUserDto(e as RawUser));
 
         return results;
     }
@@ -53,7 +53,7 @@ export class UserService {
             }
         });
 
-        const result = entity ? new PublicUserDto(entity as User) : null;
+        const result = entity ? new PublicUserDto(entity as RawUser) : null;
 
         return result;
     }
@@ -78,7 +78,7 @@ export class UserService {
                 UpdatedAt: true,
             }
         })
-        .then((e) => new PublicUserDto(e as User|null));
+        .then((e) => new PublicUserDto(e as RawUser));
 
         return entity;
     }

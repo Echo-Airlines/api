@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Test</title>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .connected {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .disconnected {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .event {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+        .event-type {
+            font-weight: bold;
+            color: #007bff;
+        }
+        .event-data {
+            margin-top: 5px;
+            font-family: monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+        }
+        #events {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <h1>WebSocket Listener Event Test</h1>
+    
+    <div id="status" class="status disconnected">
+        Disconnected
+    </div>
+    
+    <div>
+        <button onclick="connect()">Connect</button>
+        <button onclick="disconnect()">Disconnect</button>
+        <button onclick="clearEvents()">Clear Events</button>
+    </div>
+    
+    <h3>Received Events:</h3>
+    <div id="events"></div>
+
+    <script>
+        let socket;
+        let isConnected = false;
+
+        function updateStatus(connected) {
+            const statusDiv = document.getElementById('status');
+            isConnected = connected;
+            
+            if (connected) {
+                statusDiv.textContent = 'Connected';
+                statusDiv.className = 'status connected';
+            } else {
+                statusDiv.textContent = 'Disconnected';
+                statusDiv.className = 'status disconnected';
+            }
+        }
+
+        function addEvent(eventData) {
+            const eventsDiv = document.getElementById('events');
+            const eventDiv = document.createElement('div');
+            eventDiv.className = 'event';
+            
+            const timestamp = new Date(eventData.timestamp).toLocaleTimeString();
+            eventDiv.innerHTML = `
+                <div class="event-type">${eventData.type}</div>
+                <div>Time: ${timestamp}</div>
+                <div class="event-data">${JSON.stringify(eventData.data, null, 2)}</div>
+            `;
+            
+            eventsDiv.insertBefore(eventDiv, eventsDiv.firstChild);
+        }
+
+        function connect() {
+            if (isConnected) {
+                alert('Already connected!');
+                return;
+            }
+
+            // Connect to the WebSocket server
+            socket = io('http://localhost:3000', {
+                transports: ['websocket', 'polling']
+            });
+
+            socket.on('connect', () => {
+                console.log('Connected to WebSocket server');
+                updateStatus(true);
+            });
+
+            socket.on('disconnect', () => {
+                console.log('Disconnected from WebSocket server');
+                updateStatus(false);
+            });
+
+            socket.on('listener-event', (data) => {
+                console.log('Received listener event:', data);
+                addEvent(data);
+            });
+
+            socket.on('connect_error', (error) => {
+                console.error('Connection error:', error);
+                alert('Failed to connect to WebSocket server');
+            });
+        }
+
+        function disconnect() {
+            if (socket) {
+                socket.disconnect();
+                socket = null;
+            }
+        }
+
+        function clearEvents() {
+            document.getElementById('events').innerHTML = '';
+        }
+
+        // Auto-connect when page loads
+        window.onload = function() {
+            connect();
+        };
+    </script>
+</body>
+</html>

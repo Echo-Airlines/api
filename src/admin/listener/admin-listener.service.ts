@@ -1,11 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '@prisma/prisma.service';
-import { Prisma } from 'prisma/generated/prisma';
+import { ListenerEventStatus, Prisma } from 'prisma/generated/prisma';
 import * as crypto from 'crypto';
+import { ListenerService } from 'src/listener/listener.service';
 
 @Injectable()
 export class AdminListenerService {
-    constructor(private prisma: PrismaService) {}
+    constructor(private prisma: PrismaService, private readonly listenerService: ListenerService) {}
 
     async createListenerEvent(event: Prisma.ListenerEventCreateInput) {
         const listenerEvent = await this.prisma.listenerEvent.create({
@@ -94,6 +95,20 @@ export class AdminListenerService {
 
         return sender;
     }
+    
+    async Sender_regenerateToken(Id: string) {
+        const sender = await this.prisma.listenerEventSender.update({
+            where: {
+                Id,
+            },
+            data: {
+                Token: crypto.randomBytes(32).toString('hex'),
+            },
+        });
+
+        return sender;
+    }
+
 
     async Sender_toggle(Id: string) {
         const entity = await this.prisma.listenerEventSender.findUnique({
@@ -124,5 +139,24 @@ export class AdminListenerService {
         });
 
         return sender;
+    }
+
+    
+    async Event_resend(Id: number) {
+        const event = await this.prisma.listenerEvent.update({
+            where: {
+                Id,
+            },
+            data: {
+                Status: ListenerEventStatus.PENDING,
+            },
+            include: {
+                Sender: true,
+            },
+        });
+
+        const sentEvent = await this.listenerService.processListenerEvent(event.Sender, { event, resend: true, data: event.Data});
+
+        return sentEvent;
     }
 }

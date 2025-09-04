@@ -150,7 +150,7 @@ model User {
   Roles Role[] @relation("UserRoles")
 
   // user has one privacy settings
-  PrivacySettings UserPrivacySettings?
+  PrivacySettings UserPrivacySettings[]
 
   // user belongs to multiple VAs through Member
   Members Member[]
@@ -212,6 +212,9 @@ model Livery {
   AircraftId    String?   @db.Uuid
   DownloadCount Int      @default(0)
   Image         String   @db.VarChar
+  ImageFileName String?   @db.VarChar 
+  CoverPhoto    String?   @db.VarChar
+  Metadata      Json?
   Url           String?
   Description   String?
   DownloadUrl   String?
@@ -220,6 +223,40 @@ model Livery {
 
   // relations
   Aircraft Aircraft? @relation(fields: [AircraftId], references: [Id])
+  Images LiveryImage[]
+  Files LiveryFile[]
+}
+
+model LiveryImage {
+  Id        String   @id() @default(uuid()) @db.Uuid
+  LiveryId  String   @db.Uuid
+  Name      String   @db.VarChar
+  Type      String   @db.VarChar
+  Path      String   @db.VarChar
+  Size      Int
+  MimeType  String   @db.VarChar
+  FileName  String   @db.VarChar
+  CreatedAt DateTime @default(now()) @db.Timestamp(6)
+  UpdatedAt DateTime @default(now()) @db.Timestamp(6)
+
+  // relations
+  Livery Livery @relation(fields: [LiveryId], references: [Id])
+}
+
+model LiveryFile {
+  Id        String   @id() @default(uuid()) @db.Uuid
+  LiveryId  String   @db.Uuid
+  Name      String   @db.VarChar
+  Type      String   @db.VarChar
+  Path      String   @db.VarChar
+  Size      Int
+  MimeType  String   @db.VarChar
+  FileName  String   @db.VarChar
+  CreatedAt DateTime @default(now()) @db.Timestamp(6)
+  UpdatedAt DateTime @default(now()) @db.Timestamp(6)
+
+  // relations
+  Livery Livery @relation(fields: [LiveryId], references: [Id])
 }
 
 model VirtualAirline {
@@ -424,12 +461,14 @@ model Airport {
   Id             String   @id() @unique() @db.Uuid
   ICAO           String   @unique() @db.VarChar
   IATA           String?  @unique() @db.VarChar
+  Description    String?  @db.VarChar
   Name           String   @db.VarChar
   Size           Int      @default(9)
   City           String?  @db.VarChar
   State          String?  @db.VarChar
   CountryCode    String?  @db.VarChar
   CountryName    String?  @db.VarChar
+  CountryEmoji   String?  @db.VarChar
   Latitude       Decimal  @db.Decimal(10, 6)
   Longitude      Decimal  @db.Decimal(10, 6)
   HomeWebSiteUrl String?  @db.VarChar

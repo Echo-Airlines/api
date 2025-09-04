@@ -77,6 +77,14 @@ export class AdminUserController {
         return data;
     }
 
+    @Post(':id/unassign-role')
+    @UseGuards(JwtAuthGuard, IsAdminGuard)
+    async unassignRoleToUser(@Param('id') id: string, @Body() body: { roleSlug: string }) {
+        const data: User|null = await this.userService.unassignRoleFromUser(id, body.roleSlug);
+
+        return data;
+    }
+
     @Post(':id/assign-role')
     @UseGuards(JwtAuthGuard, IsAdminGuard)
     async assignRoleToUser(@Param('id') id: string, @Body() body: { roleSlug: string }) {

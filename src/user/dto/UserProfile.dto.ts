@@ -1,5 +1,5 @@
-import { Member } from "prisma/generated/prisma";
 import { AuthUser, User } from "./PublicUser.dto";
+import { MemberWithRelations } from "@member/dto/member-witth-relations";
 
 export class UserProfileDto {
     Id: string;
@@ -12,7 +12,7 @@ export class UserProfileDto {
     LastLogin: Date|null;
     FirstLoginCompleted: boolean;
     Roles: string[];
-    Members: Member[];
+    Members: MemberWithRelations[];
 
     constructor(user: User|AuthUser) {
         this.Id = user.Id;

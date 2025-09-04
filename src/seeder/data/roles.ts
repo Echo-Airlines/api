@@ -18,10 +18,6 @@ export default [
         Name: 'Member',
     },
     {
-        Slug: 'premium',
-        Name: 'Premium Member',
-    },
-    {
         Slug: 'owner',
         Name: 'Owner',
     },

@@ -12,6 +12,7 @@ export type OnAirAircraftClass = AircraftClass;
 export type OnAirAircraftType = AircraftType;
 
 export type OnAirAirport = Airport & {
+    Description?: string;
     HomeWebSiteUrl?: string;
     WikiUrl?: string;
 };

@@ -8,6 +8,7 @@ import SeedData_AppConfig from "./appConfig";
 import SeedData_AircraftStatuses from "./aircraftStatuses";
 import SeedData_AircraftClasses from "./aircraftClasses";
 import SeedData_VirtualAirline from "./virtualAirline";
+import SeedData_DiscordMessageTemplates from "./discordMessageTemplates";
 import { Prisma } from "prisma/generated/prisma";
 
 export default {
@@ -21,6 +22,7 @@ export default {
     AircraftStatus: SeedData_AircraftStatuses,
     AircraftClass: SeedData_AircraftClasses,
     VirtualAirline: SeedData_VirtualAirline,
+    DiscordMessageTemplate: SeedData_DiscordMessageTemplates,
 };
 
 export type SeedData = {
@@ -34,4 +36,5 @@ export type SeedData = {
     AircraftStatus: Prisma.AircraftStatusCreateInput[];
     AircraftClass: Prisma.AircraftClassCreateInput[];
     VirtualAirline: Prisma.VirtualAirlineCreateInput|undefined;
+    DiscordMessageTemplate: Prisma.DiscordMessageTemplateCreateInput[];
 };

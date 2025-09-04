@@ -4,7 +4,7 @@ import { eachOfSeries } from 'async';
 import { LoggerService } from '@/logger/logger.service';
 import SeedData from './data';
 import { PrismaService } from '@prisma/prisma.service';
-import { AircraftClass, AircraftStatus, AppConfig, Job, Livery, Permission, Prisma, Role, User, VirtualAirline, World } from 'prisma/generated/prisma';
+import { AircraftClass, AircraftStatus, AppConfig, DiscordMessageTemplate, Job, Livery, Permission, Prisma, Role, User, VirtualAirline, World } from 'prisma/generated/prisma';
 import { HashService } from '@/hash/hash.service';
 
 @Injectable()
@@ -143,10 +143,48 @@ export class SeederService {
           });
       }
 
+      if (this.checkModelEnabled('DiscordMessageTemplate')) {
+        await this._seedDiscordMessageTemplates(SeedData.DiscordMessageTemplate)
+          .then(async (discordMessageTemplates: DiscordMessageTemplate[]) => {
+            this.logger.debug(`${discordMessageTemplates.length} Discord message templates seeded.`);
+          })
+          .catch((err) => {
+            this.logger.error('Error seeding discord message templates:', err);
+          });
+      }
+      
       // then print a message that seeding is complete with the number of users and roles created.
       this.logger.debug('Seeding complete.');
-
     }
+  }
+
+  private async _seedDiscordMessageTemplates(seedDiscordMessageTemplates: Prisma.DiscordMessageTemplateCreateInput[]): Promise<DiscordMessageTemplate[]> {
+
+    return new Promise(async (resolve, reject) => {
+      if (!seedDiscordMessageTemplates || seedDiscordMessageTemplates.length === 0) {
+        this.logger.debug('No discord message templates to seed.');
+        return reject('no discord message templates to seed');
+      }
+
+      this.logger.debug(`There are ${seedDiscordMessageTemplates.length} discord message templates to seed.`);
+      const discordMessageTemplates: DiscordMessageTemplate[] = [];
+
+      // iterate over the discord message templates and seed them one by one.
+      eachOfSeries(seedDiscordMessageTemplates, async (discordMessageTemplate: Prisma.DiscordMessageTemplateCreateInput) => {
+        this.logger.debug(`Seeding discord message template ${discordMessageTemplate.Slug}.`);
+        const discordMessageTemplateEntity: DiscordMessageTemplate = await this._seedDiscordMessageTemplate(discordMessageTemplate);
+        discordMessageTemplates.push(discordMessageTemplateEntity);
+        return discordMessageTemplateEntity;
+      }, (err) => {
+        if (err) {
+          this.logger.error('Error seeding discord message templates:', err);
+          return reject(err);
+        }
+
+        this.logger.debug('Discord message template seeding complete.');
+        return resolve(discordMessageTemplates);
+      });
+    });
   }
 
   private async _seedPermissions(seedPermissions: Prisma.PermissionCreateInput[]) {
@@ -390,6 +428,35 @@ export class SeederService {
         this.logger.debug('Livery seeding complete.');
         return resolve(liveries);
       });
+    });
+  }
+
+  private async _seedDiscordMessageTemplate(seedDiscordMessageTemplate: Prisma.DiscordMessageTemplateCreateInput): Promise<DiscordMessageTemplate> {
+
+    return new Promise(async (resolve, reject) => {
+      if (!seedDiscordMessageTemplate) {
+        this.logger.debug('No discord message template to seed.');
+        return reject('no discord message template to seed');
+      }
+
+      this.logger.debug(`Seeding discord message template ${seedDiscordMessageTemplate.Slug}.`);
+      let discordMessageTemplateEntity: DiscordMessageTemplate | null = await this.prisma.discordMessageTemplate.findFirst({
+        where: {
+          Slug: seedDiscordMessageTemplate.Slug,
+        },
+      });
+      
+      if (!discordMessageTemplateEntity) {
+        discordMessageTemplateEntity = await this.prisma.discordMessageTemplate.create({
+          data: seedDiscordMessageTemplate,
+        });
+      
+        this.logger.debug(`Discord message template ${seedDiscordMessageTemplate.Slug} has been created.`);
+      } else {
+        this.logger.debug(`Discord message template ${seedDiscordMessageTemplate.Slug} already exists in the database, skipping.`);
+      }
+
+      return resolve(discordMessageTemplateEntity);
     });
   }
 

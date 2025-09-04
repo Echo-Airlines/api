@@ -14,7 +14,11 @@ export class VirtualAirlineController {
     let query: Prisma.VirtualAirlineFindManyArgs |undefined = {
       include: {
         World: true,
-        Members: true,
+        Members: {
+          include: {
+            Company: true,
+          }
+        },
       },
       orderBy: {
         UpdatedAt: 'desc'

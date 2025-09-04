@@ -118,7 +118,11 @@ export class AuthService {
                 BanReason: true,
                 BanExpiresAt: true,
                 LastLogin: true,
-                Members: true,
+                Members: {
+                    include: {
+                        Company: true,
+                    }
+                },
             }
         });
 

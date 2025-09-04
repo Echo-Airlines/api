@@ -41,10 +41,12 @@ export class AirportController {
                 State: onAirAirport.State,
                 CountryCode: onAirAirport.CountryCode,
                 CountryName: onAirAirport.CountryName,
+                CountryEmoji: this.airportService.determineCountryEmoji(onAirAirport.CountryCode),
                 Latitude: new Prisma.Decimal(onAirAirport.Latitude),
                 Longitude: new Prisma.Decimal(onAirAirport.Longitude),
                 HomeWebSiteUrl: onAirAirport.HomeWebSiteUrl || null,
                 WikiUrl: onAirAirport.WikiUrl || null,
+                Description: onAirAirport.Description || null,
                 CreatedAt: new Date(),
                 UpdatedAt: new Date()
             }

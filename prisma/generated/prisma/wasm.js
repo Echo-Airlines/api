@@ -223,6 +223,8 @@ exports.Prisma.UserScalarFieldEnum = {
   InviteCodeId: 'InviteCodeId',
   CreatedAt: 'CreatedAt',
   UpdatedAt: 'UpdatedAt',
+  WelcomeEmailSentAt: 'WelcomeEmailSentAt',
+  ConfirmEmailToken: 'ConfirmEmailToken',
   DiscordId: 'DiscordId',
   DiscordUsername: 'DiscordUsername',
   DiscordAvatar: 'DiscordAvatar',

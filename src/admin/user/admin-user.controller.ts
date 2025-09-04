@@ -1,14 +1,18 @@
-import { Body, Controller, Delete, Get, NotFoundException, Param, Post, UseGuards } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, NotFoundException, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { AdminUserService } from './admin-user.service';
 import { InviteCode, Prisma, User } from 'prisma/generated/prisma';
 import { JwtAuthGuard } from '@auth/jwt-auth.guard';
 import { IsAdminGuard } from '@auth/is-admin.guard';
 import { AdminAddUserDto } from './dto/AdminAddUserDto';
 import { HashService } from '@hash/hash.service';
+import { CreateEmailDto } from '@email/create-email.dto';
+import { ConfigService } from '@nestjs/config';
+import { EmailService } from '@email/email.service';
+import * as crypto from 'crypto';
 
 @Controller(['admin/user', 'admin/users', 'admin/u'])
 export class AdminUserController {
-    constructor(private readonly userService: AdminUserService, private readonly hashService: HashService) {}
+    constructor(private readonly userService: AdminUserService, private readonly hashService: HashService, private readonly configService: ConfigService, private readonly emailService: EmailService) {}
 
     @Get()
     @UseGuards(JwtAuthGuard, IsAdminGuard)
@@ -83,7 +87,7 @@ export class AdminUserController {
     @UseGuards(JwtAuthGuard, IsAdminGuard)
     async createUser(@Body() body: AdminAddUserDto) {
         let user: User|null = null;
-        const createData: Prisma.UserCreateInput = {
+        let createData: Prisma.UserCreateInput = {
             Username: body.Username,
             Email: body.Email,
             FirstName: body.FirstName,
@@ -103,8 +107,13 @@ export class AdminUserController {
             Password: this.hashService.hashSync(body.Password),
         };
 
+        if (body.SendEmail) {
+            createData.ConfirmEmailToken = crypto.randomUUID();
+        }
+
         user = await this.userService.create(createData, {
             select: {
+                Id: true,
                 Username: true,
                 Email: true,
                 FirstName: true,
@@ -124,9 +133,139 @@ export class AdminUserController {
                 PrivacySettings: true,
                 Members: true,
                 InviteCode: true,
+                ConfirmEmailToken: true,
             },
         });
-        // @TODO: if body.SendEmail is true, send an email to the user
+
+        if (user.Email && body.SendEmail) {
+            // if body.SendEmail is true, send an email to the user
+            const urlBase = this.configService.get<string>('FRONTEND_URL') || 'http://localhost:3001';
+            const welcomeEmail: CreateEmailDto = {
+                to: user.Email,
+                template: 'welcome',
+                subject: 'Welcome to our Virtual Airline!',
+                context: {
+                    firstName: user.FirstName,
+                    username: user.Username,
+                    password: body.Password,
+                    email: user.Email,
+                    confirmLink: `${urlBase}/api/user/confirm-email?token=${user.ConfirmEmailToken}`,
+                },
+            }
+
+            await this.emailService.sendWelcomeEmail(welcomeEmail);
+
+            user.WelcomeEmailSentAt = new Date();
+
+            user = await this.userService.update(user.Id, { WelcomeEmailSentAt: user.WelcomeEmailSentAt });
+        }
+
+        return user;
+    }
+
+    @Put(':username/send-welcome-email')
+    @UseGuards(JwtAuthGuard, IsAdminGuard)
+    async sendWelcomeEmail(@Param('username') username: string) {
+        let user: User|null = await this.userService.findOne({ where: { Username: username }, select: {
+            Id: true,
+            Username: true,
+            Email: true,
+            FirstName: true,
+            LastName: true,
+            FirstLoginCompleted: true,
+            IsOnline: true,
+            IsBanned: true,
+            BanReason: true,
+            BanExpiresAt: true,
+            IsVerified: true,
+            LastLogin: true,
+            DiscordId: true,
+            DiscordUsername: true,
+            DiscordAvatar: true,
+            DiscordEmail: true,
+            Roles: true,
+            PrivacySettings: true,
+            Members: true,
+            InviteCode: true,
+            ConfirmEmailToken: true,
+        }, });
+        
+        const urlBase = this.configService.get<string>('FRONTEND_URL') || 'http://localhost:3001';
+
+        if (!user) {
+            throw new NotFoundException('User not found');
+        }
+
+        if (!user.Email || user.Email === null) {
+            throw new BadRequestException('User email not found');
+        }
+
+        if (!user.ConfirmEmailToken) {
+            user = await this.userService.update(user.Id, { ConfirmEmailToken: crypto.randomUUID() },
+            {
+                select: {
+                    Id: true,
+                    Username: true,
+                    Email: true,
+                    FirstName: true,
+                    LastName: true,
+                    FirstLoginCompleted: true,
+                    IsOnline: true,
+                    IsBanned: true,
+                    BanReason: true,
+                    BanExpiresAt: true,
+                    IsVerified: true,
+                    LastLogin: true,
+                    DiscordId: true,
+                    DiscordUsername: true,
+                    DiscordAvatar: true,
+                    DiscordEmail: true,
+                    Roles: true,
+                    PrivacySettings: true,
+                    Members: true,
+                    InviteCode: true,
+                    ConfirmEmailToken: true,
+                },
+            });
+        }
+
+        await this.emailService.sendWelcomeEmail({
+            to: user.Email!,
+            template: 'welcome',
+            subject: 'Welcome to our Virtual Airline!',
+            context: {
+                firstName: user.FirstName,
+                username: user.Username,
+                email: user.Email,
+                confirmLink: `${urlBase}/api/user/confirm-email?token=${user.ConfirmEmailToken}`,
+            },
+        });
+
+        user = await this.userService.update(user.Id, { WelcomeEmailSentAt: new Date() }, {
+            select: {
+                Id: true,
+                Username: true,
+                Email: true,
+                FirstName: true,
+                LastName: true,
+                FirstLoginCompleted: true,
+                IsOnline: true,
+                IsBanned: true,
+                BanReason: true,
+                BanExpiresAt: true,
+                IsVerified: true,
+                LastLogin: true,
+                DiscordId: true,
+                DiscordUsername: true,
+                DiscordAvatar: true,
+                DiscordEmail: true,
+                Roles: true,
+                PrivacySettings: true,
+                Members: true,
+                InviteCode: true,
+                ConfirmEmailToken: true,
+            }
+        });
 
         return user;
     }

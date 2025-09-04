@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '@prisma/prisma.service';
 import { Prisma, User as PrismaUser } from 'prisma/generated/prisma';
 import { PublicUserDto, RawUser, User } from './dto/PublicUser.dto';
@@ -101,5 +101,74 @@ export class UserService {
         });
 
         return result;
+    }
+
+    async confirmEmail(token: string) {
+        let user = await this.prisma.user.findUnique({
+            where: { ConfirmEmailToken: token },
+            select: {
+                Id: true,
+                Username: true,
+                Email: true,
+                FirstName: true,
+                LastName: true,
+                FirstLoginCompleted: true,
+                IsOnline: true,
+                IsBanned: true,
+                BanReason: true,
+                BanExpiresAt: true,
+                IsVerified: true,
+                LastLogin: true,
+                DiscordId: true,
+                DiscordUsername: true,
+                DiscordAvatar: true,
+                DiscordEmail: true,
+                Roles: true,
+                PrivacySettings: true,
+                Members: true,
+                InviteCode: true,
+                ConfirmEmailToken: true,
+            },
+        });
+
+        if (!user) {
+            throw new NotFoundException('User not found');
+        }
+        if (!user.IsVerified) {
+            user.IsVerified = true;
+        }
+
+        user = await this.prisma.user.update({
+            where: { Id: user.Id },
+            data: {
+                IsVerified: true,
+                ConfirmEmailToken: null,
+            },
+            select: {
+                Id: true,
+                Username: true,
+                Email: true,
+                FirstName: true,
+                LastName: true,
+                FirstLoginCompleted: true,
+                IsOnline: true,
+                IsBanned: true,
+                BanReason: true,
+                BanExpiresAt: true,
+                IsVerified: true,
+                LastLogin: true,
+                DiscordId: true,
+                DiscordUsername: true,
+                DiscordAvatar: true,
+                DiscordEmail: true,
+                Roles: true,
+                PrivacySettings: true,
+                Members: true,
+                InviteCode: true,
+                ConfirmEmailToken: true,
+            },
+        });
+
+        return user;
     }
 }

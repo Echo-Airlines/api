@@ -28,6 +28,12 @@ import { WebsocketModule } from './websocket/websocket.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { MulterModule } from '@nestjs/platform-express';
+import { EmailModule } from './email/email.module';
+import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
+import { MailerModule } from '@nestjs-modules/mailer';
+
+const emailTemplatesDirectory = join(__dirname, 'email/templates');
+console.log('emailTemplatesDirectory:', emailTemplatesDirectory);
 
 @Module({
   imports: [
@@ -46,6 +52,26 @@ import { MulterModule } from '@nestjs/platform-express';
         dest: join(__dirname, '..', 'files'),
       }),
       inject: [ConfigService],
+    }),
+    MailerModule.forRoot({
+      transport: {
+        host: process.env.MAIL_HOST,
+        port: process.env.MAIL_PORT ? parseInt(process.env.MAIL_PORT) : 587,
+        auth: {
+          user: process.env.MAIL_USERNAME,
+          pass: process.env.MAIL_PASSWORD,
+        },
+      },
+      defaults: {
+        from: process.env.MAIL_FROM || '"noreply" <noreply@azsupras.club>',
+      },
+      template: {
+        dir: emailTemplatesDirectory,
+        adapter: new HandlebarsAdapter(),
+        options: {
+          strict: false,
+        },
+      },
     }),
     PrismaModule,
     OnAirModule,
@@ -68,6 +94,7 @@ import { MulterModule } from '@nestjs/platform-express';
     CompanyModule,
     LiveryModule,
     WebsocketModule,
+    EmailModule,
   ],
   controllers: [AppController],
   providers: [AppService],

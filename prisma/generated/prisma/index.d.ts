@@ -12108,6 +12108,8 @@ export namespace Prisma {
     InviteCodeId: string | null
     CreatedAt: Date | null
     UpdatedAt: Date | null
+    WelcomeEmailSentAt: Date | null
+    ConfirmEmailToken: string | null
     DiscordId: string | null
     DiscordUsername: string | null
     DiscordAvatar: string | null
@@ -12131,6 +12133,8 @@ export namespace Prisma {
     InviteCodeId: string | null
     CreatedAt: Date | null
     UpdatedAt: Date | null
+    WelcomeEmailSentAt: Date | null
+    ConfirmEmailToken: string | null
     DiscordId: string | null
     DiscordUsername: string | null
     DiscordAvatar: string | null
@@ -12154,6 +12158,8 @@ export namespace Prisma {
     InviteCodeId: number
     CreatedAt: number
     UpdatedAt: number
+    WelcomeEmailSentAt: number
+    ConfirmEmailToken: number
     DiscordId: number
     DiscordUsername: number
     DiscordAvatar: number
@@ -12179,6 +12185,8 @@ export namespace Prisma {
     InviteCodeId?: true
     CreatedAt?: true
     UpdatedAt?: true
+    WelcomeEmailSentAt?: true
+    ConfirmEmailToken?: true
     DiscordId?: true
     DiscordUsername?: true
     DiscordAvatar?: true
@@ -12202,6 +12210,8 @@ export namespace Prisma {
     InviteCodeId?: true
     CreatedAt?: true
     UpdatedAt?: true
+    WelcomeEmailSentAt?: true
+    ConfirmEmailToken?: true
     DiscordId?: true
     DiscordUsername?: true
     DiscordAvatar?: true
@@ -12225,6 +12235,8 @@ export namespace Prisma {
     InviteCodeId?: true
     CreatedAt?: true
     UpdatedAt?: true
+    WelcomeEmailSentAt?: true
+    ConfirmEmailToken?: true
     DiscordId?: true
     DiscordUsername?: true
     DiscordAvatar?: true
@@ -12321,6 +12333,8 @@ export namespace Prisma {
     InviteCodeId: string | null
     CreatedAt: Date
     UpdatedAt: Date
+    WelcomeEmailSentAt: Date | null
+    ConfirmEmailToken: string | null
     DiscordId: string | null
     DiscordUsername: string | null
     DiscordAvatar: string | null
@@ -12361,6 +12375,8 @@ export namespace Prisma {
     InviteCodeId?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
+    WelcomeEmailSentAt?: boolean
+    ConfirmEmailToken?: boolean
     DiscordId?: boolean
     DiscordUsername?: boolean
     DiscordAvatar?: boolean
@@ -12389,6 +12405,8 @@ export namespace Prisma {
     InviteCodeId?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
+    WelcomeEmailSentAt?: boolean
+    ConfirmEmailToken?: boolean
     DiscordId?: boolean
     DiscordUsername?: boolean
     DiscordAvatar?: boolean
@@ -12413,6 +12431,8 @@ export namespace Prisma {
     InviteCodeId?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
+    WelcomeEmailSentAt?: boolean
+    ConfirmEmailToken?: boolean
     DiscordId?: boolean
     DiscordUsername?: boolean
     DiscordAvatar?: boolean
@@ -12437,13 +12457,15 @@ export namespace Prisma {
     InviteCodeId?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
+    WelcomeEmailSentAt?: boolean
+    ConfirmEmailToken?: boolean
     DiscordId?: boolean
     DiscordUsername?: boolean
     DiscordAvatar?: boolean
     DiscordEmail?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "Username" | "Password" | "Email" | "FirstName" | "LastName" | "FirstLoginCompleted" | "IsOnline" | "IsBanned" | "BanReason" | "BanExpiresAt" | "IsVerified" | "LastLogin" | "InviteCodeId" | "CreatedAt" | "UpdatedAt" | "DiscordId" | "DiscordUsername" | "DiscordAvatar" | "DiscordEmail", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "Username" | "Password" | "Email" | "FirstName" | "LastName" | "FirstLoginCompleted" | "IsOnline" | "IsBanned" | "BanReason" | "BanExpiresAt" | "IsVerified" | "LastLogin" | "InviteCodeId" | "CreatedAt" | "UpdatedAt" | "WelcomeEmailSentAt" | "ConfirmEmailToken" | "DiscordId" | "DiscordUsername" | "DiscordAvatar" | "DiscordEmail", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Roles?: boolean | User$RolesArgs<ExtArgs>
     PrivacySettings?: boolean | User$PrivacySettingsArgs<ExtArgs>
@@ -12483,6 +12505,8 @@ export namespace Prisma {
       InviteCodeId: string | null
       CreatedAt: Date
       UpdatedAt: Date
+      WelcomeEmailSentAt: Date | null
+      ConfirmEmailToken: string | null
       DiscordId: string | null
       DiscordUsername: string | null
       DiscordAvatar: string | null
@@ -12930,6 +12954,8 @@ export namespace Prisma {
     readonly InviteCodeId: FieldRef<"User", 'String'>
     readonly CreatedAt: FieldRef<"User", 'DateTime'>
     readonly UpdatedAt: FieldRef<"User", 'DateTime'>
+    readonly WelcomeEmailSentAt: FieldRef<"User", 'DateTime'>
+    readonly ConfirmEmailToken: FieldRef<"User", 'String'>
     readonly DiscordId: FieldRef<"User", 'String'>
     readonly DiscordUsername: FieldRef<"User", 'String'>
     readonly DiscordAvatar: FieldRef<"User", 'String'>
@@ -37664,6 +37690,8 @@ export namespace Prisma {
     InviteCodeId: 'InviteCodeId',
     CreatedAt: 'CreatedAt',
     UpdatedAt: 'UpdatedAt',
+    WelcomeEmailSentAt: 'WelcomeEmailSentAt',
+    ConfirmEmailToken: 'ConfirmEmailToken',
     DiscordId: 'DiscordId',
     DiscordUsername: 'DiscordUsername',
     DiscordAvatar: 'DiscordAvatar',
@@ -38840,6 +38868,8 @@ export namespace Prisma {
     InviteCodeId?: UuidNullableFilter<"User"> | string | null
     CreatedAt?: DateTimeFilter<"User"> | Date | string
     UpdatedAt?: DateTimeFilter<"User"> | Date | string
+    WelcomeEmailSentAt?: DateTimeNullableFilter<"User"> | Date | string | null
+    ConfirmEmailToken?: StringNullableFilter<"User"> | string | null
     DiscordId?: StringNullableFilter<"User"> | string | null
     DiscordUsername?: StringNullableFilter<"User"> | string | null
     DiscordAvatar?: StringNullableFilter<"User"> | string | null
@@ -38867,6 +38897,8 @@ export namespace Prisma {
     InviteCodeId?: SortOrderInput | SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
+    WelcomeEmailSentAt?: SortOrderInput | SortOrder
+    ConfirmEmailToken?: SortOrderInput | SortOrder
     DiscordId?: SortOrderInput | SortOrder
     DiscordUsername?: SortOrderInput | SortOrder
     DiscordAvatar?: SortOrderInput | SortOrder
@@ -38882,6 +38914,7 @@ export namespace Prisma {
     Username?: string
     Email?: string
     InviteCodeId?: string
+    ConfirmEmailToken?: string
     DiscordId?: string
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
@@ -38898,6 +38931,7 @@ export namespace Prisma {
     LastLogin?: DateTimeNullableFilter<"User"> | Date | string | null
     CreatedAt?: DateTimeFilter<"User"> | Date | string
     UpdatedAt?: DateTimeFilter<"User"> | Date | string
+    WelcomeEmailSentAt?: DateTimeNullableFilter<"User"> | Date | string | null
     DiscordUsername?: StringNullableFilter<"User"> | string | null
     DiscordAvatar?: StringNullableFilter<"User"> | string | null
     DiscordEmail?: StringNullableFilter<"User"> | string | null
@@ -38905,7 +38939,7 @@ export namespace Prisma {
     PrivacySettings?: UserPrivacySettingsListRelationFilter
     Members?: MemberListRelationFilter
     InviteCode?: XOR<InviteCodeNullableScalarRelationFilter, InviteCodeWhereInput> | null
-  }, "Id" | "Id" | "Username" | "Email" | "InviteCodeId" | "DiscordId">
+  }, "Id" | "Id" | "Username" | "Email" | "InviteCodeId" | "ConfirmEmailToken" | "DiscordId">
 
   export type UserOrderByWithAggregationInput = {
     Id?: SortOrder
@@ -38924,6 +38958,8 @@ export namespace Prisma {
     InviteCodeId?: SortOrderInput | SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
+    WelcomeEmailSentAt?: SortOrderInput | SortOrder
+    ConfirmEmailToken?: SortOrderInput | SortOrder
     DiscordId?: SortOrderInput | SortOrder
     DiscordUsername?: SortOrderInput | SortOrder
     DiscordAvatar?: SortOrderInput | SortOrder
@@ -38953,6 +38989,8 @@ export namespace Prisma {
     InviteCodeId?: UuidNullableWithAggregatesFilter<"User"> | string | null
     CreatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     UpdatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+    WelcomeEmailSentAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+    ConfirmEmailToken?: StringNullableWithAggregatesFilter<"User"> | string | null
     DiscordId?: StringNullableWithAggregatesFilter<"User"> | string | null
     DiscordUsername?: StringNullableWithAggregatesFilter<"User"> | string | null
     DiscordAvatar?: StringNullableWithAggregatesFilter<"User"> | string | null
@@ -41635,6 +41673,8 @@ export namespace Prisma {
     LastLogin?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    WelcomeEmailSentAt?: Date | string | null
+    ConfirmEmailToken?: string | null
     DiscordId?: string | null
     DiscordUsername?: string | null
     DiscordAvatar?: string | null
@@ -41662,6 +41702,8 @@ export namespace Prisma {
     InviteCodeId?: string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    WelcomeEmailSentAt?: Date | string | null
+    ConfirmEmailToken?: string | null
     DiscordId?: string | null
     DiscordUsername?: string | null
     DiscordAvatar?: string | null
@@ -41687,6 +41729,8 @@ export namespace Prisma {
     LastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    WelcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ConfirmEmailToken?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordId?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordUsername?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordAvatar?: NullableStringFieldUpdateOperationsInput | string | null
@@ -41714,6 +41758,8 @@ export namespace Prisma {
     InviteCodeId?: NullableStringFieldUpdateOperationsInput | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    WelcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ConfirmEmailToken?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordId?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordUsername?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordAvatar?: NullableStringFieldUpdateOperationsInput | string | null
@@ -41740,6 +41786,8 @@ export namespace Prisma {
     InviteCodeId?: string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    WelcomeEmailSentAt?: Date | string | null
+    ConfirmEmailToken?: string | null
     DiscordId?: string | null
     DiscordUsername?: string | null
     DiscordAvatar?: string | null
@@ -41762,6 +41810,8 @@ export namespace Prisma {
     LastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    WelcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ConfirmEmailToken?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordId?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordUsername?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordAvatar?: NullableStringFieldUpdateOperationsInput | string | null
@@ -41785,6 +41835,8 @@ export namespace Prisma {
     InviteCodeId?: NullableStringFieldUpdateOperationsInput | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    WelcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ConfirmEmailToken?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordId?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordUsername?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordAvatar?: NullableStringFieldUpdateOperationsInput | string | null
@@ -44848,6 +44900,8 @@ export namespace Prisma {
     InviteCodeId?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
+    WelcomeEmailSentAt?: SortOrder
+    ConfirmEmailToken?: SortOrder
     DiscordId?: SortOrder
     DiscordUsername?: SortOrder
     DiscordAvatar?: SortOrder
@@ -44871,6 +44925,8 @@ export namespace Prisma {
     InviteCodeId?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
+    WelcomeEmailSentAt?: SortOrder
+    ConfirmEmailToken?: SortOrder
     DiscordId?: SortOrder
     DiscordUsername?: SortOrder
     DiscordAvatar?: SortOrder
@@ -44894,6 +44950,8 @@ export namespace Prisma {
     InviteCodeId?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
+    WelcomeEmailSentAt?: SortOrder
+    ConfirmEmailToken?: SortOrder
     DiscordId?: SortOrder
     DiscordUsername?: SortOrder
     DiscordAvatar?: SortOrder
@@ -48944,6 +49002,8 @@ export namespace Prisma {
     LastLogin?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    WelcomeEmailSentAt?: Date | string | null
+    ConfirmEmailToken?: string | null
     DiscordId?: string | null
     DiscordUsername?: string | null
     DiscordAvatar?: string | null
@@ -48969,6 +49029,8 @@ export namespace Prisma {
     LastLogin?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    WelcomeEmailSentAt?: Date | string | null
+    ConfirmEmailToken?: string | null
     DiscordId?: string | null
     DiscordUsername?: string | null
     DiscordAvatar?: string | null
@@ -49010,6 +49072,8 @@ export namespace Prisma {
     LastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    WelcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ConfirmEmailToken?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordId?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordUsername?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordAvatar?: NullableStringFieldUpdateOperationsInput | string | null
@@ -49035,6 +49099,8 @@ export namespace Prisma {
     LastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    WelcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ConfirmEmailToken?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordId?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordUsername?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordAvatar?: NullableStringFieldUpdateOperationsInput | string | null
@@ -49937,6 +50003,8 @@ export namespace Prisma {
     LastLogin?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    WelcomeEmailSentAt?: Date | string | null
+    ConfirmEmailToken?: string | null
     DiscordId?: string | null
     DiscordUsername?: string | null
     DiscordAvatar?: string | null
@@ -49963,6 +50031,8 @@ export namespace Prisma {
     InviteCodeId?: string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    WelcomeEmailSentAt?: Date | string | null
+    ConfirmEmailToken?: string | null
     DiscordId?: string | null
     DiscordUsername?: string | null
     DiscordAvatar?: string | null
@@ -50003,6 +50073,8 @@ export namespace Prisma {
     LastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    WelcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ConfirmEmailToken?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordId?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordUsername?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordAvatar?: NullableStringFieldUpdateOperationsInput | string | null
@@ -50029,6 +50101,8 @@ export namespace Prisma {
     InviteCodeId?: NullableStringFieldUpdateOperationsInput | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    WelcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ConfirmEmailToken?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordId?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordUsername?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordAvatar?: NullableStringFieldUpdateOperationsInput | string | null
@@ -50075,6 +50149,8 @@ export namespace Prisma {
     LastLogin?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    WelcomeEmailSentAt?: Date | string | null
+    ConfirmEmailToken?: string | null
     DiscordId?: string | null
     DiscordUsername?: string | null
     DiscordAvatar?: string | null
@@ -50101,6 +50177,8 @@ export namespace Prisma {
     InviteCodeId?: string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    WelcomeEmailSentAt?: Date | string | null
+    ConfirmEmailToken?: string | null
     DiscordId?: string | null
     DiscordUsername?: string | null
     DiscordAvatar?: string | null
@@ -50221,6 +50299,8 @@ export namespace Prisma {
     InviteCodeId?: UuidNullableFilter<"User"> | string | null
     CreatedAt?: DateTimeFilter<"User"> | Date | string
     UpdatedAt?: DateTimeFilter<"User"> | Date | string
+    WelcomeEmailSentAt?: DateTimeNullableFilter<"User"> | Date | string | null
+    ConfirmEmailToken?: StringNullableFilter<"User"> | string | null
     DiscordId?: StringNullableFilter<"User"> | string | null
     DiscordUsername?: StringNullableFilter<"User"> | string | null
     DiscordAvatar?: StringNullableFilter<"User"> | string | null
@@ -52008,6 +52088,8 @@ export namespace Prisma {
     LastLogin?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    WelcomeEmailSentAt?: Date | string | null
+    ConfirmEmailToken?: string | null
     DiscordId?: string | null
     DiscordUsername?: string | null
     DiscordAvatar?: string | null
@@ -52034,6 +52116,8 @@ export namespace Prisma {
     InviteCodeId?: string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    WelcomeEmailSentAt?: Date | string | null
+    ConfirmEmailToken?: string | null
     DiscordId?: string | null
     DiscordUsername?: string | null
     DiscordAvatar?: string | null
@@ -52289,6 +52373,8 @@ export namespace Prisma {
     LastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    WelcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ConfirmEmailToken?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordId?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordUsername?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordAvatar?: NullableStringFieldUpdateOperationsInput | string | null
@@ -52315,6 +52401,8 @@ export namespace Prisma {
     InviteCodeId?: NullableStringFieldUpdateOperationsInput | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    WelcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ConfirmEmailToken?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordId?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordUsername?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordAvatar?: NullableStringFieldUpdateOperationsInput | string | null
@@ -55944,6 +56032,8 @@ export namespace Prisma {
     LastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    WelcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ConfirmEmailToken?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordId?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordUsername?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordAvatar?: NullableStringFieldUpdateOperationsInput | string | null
@@ -55970,6 +56060,8 @@ export namespace Prisma {
     InviteCodeId?: NullableStringFieldUpdateOperationsInput | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    WelcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ConfirmEmailToken?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordId?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordUsername?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordAvatar?: NullableStringFieldUpdateOperationsInput | string | null
@@ -55995,6 +56087,8 @@ export namespace Prisma {
     InviteCodeId?: NullableStringFieldUpdateOperationsInput | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    WelcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ConfirmEmailToken?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordId?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordUsername?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordAvatar?: NullableStringFieldUpdateOperationsInput | string | null

@@ -274,34 +274,22 @@ export const SeedData_VirtualAirline: Prisma.VirtualAirlineCreateInput|undefined
 
 export const SeedData_DiscordMessageTemplates: Prisma.DiscordMessageTemplateCreateInput[] = [
     {
-        Name: 'Flight Departed',
         Slug: 'flight.departed',
-        Description: 'A message sent when a flight departs',
+        Name: 'Flight Departed',
+        Description: 'Flight Departed',
         Content: '[{{airline.profile.abbreviation}}] {{airline.name}} 🧑‍✈️**{{user.name}}**{{#if plan}} flight {{plan.flight_no}} has departed **{{plan.departure}}** for **{{plan.arrival}}**{{else}} has departed{{#if airport}} {{airport.icao}}{{/if}}{{/if}} via {{#if aircraft.user_conf.tail}}{{aircraft.user_conf.tail}}{{else}}{{aircraft.icao}} {{aircraft.icao_name}}{{/if}}.',
     },
     {
-        Name: 'Flight Arrived',
         Slug: 'flight.arrived',
-        Description: 'A message sent when a flight arrives',
-        Content: '{{airline}} {{aircraft}} #{{flight_no}} {{departure}} to {{arrival}} has arrived.\n\`\`\`{{pitch}} deg {{bank}} deg {{speed_tas}} kts {{wind}} {{heading}}°\`\`\`',
+        Name: 'Flight Arrived',
+        Description: 'Flight Arrived',
+        Content: '[{{airline.profile.abbreviation}}] {{airline.name}}{{#if plan}} flight {{plan.flight_no}} has arrived{{#if airport}} at **{{airport.icao}}**{{/if}}{{#if plan.departure}} from **{{plan.departure}}**{{/if}}{{else}} has arrived{{#if airport}} {{airport.icao}}{{/if}}{{/if}} via {{#if aircraft.user_conf.tail}}{{aircraft.user_conf.tail}}{{else}}{{aircraft.icao}} {{aircraft.icao_name}}{{/if}}.\n{{#if user.name}}\n**Pilot:** {{user.name}}{{/if}}{{#if landing_rate}}\n**Landing Rate:** {{landing_rate}}{{/if}}{{#if speed_tas}}\n**Speed:** {{speed_tas}} kts{{/if}}{{#if wind}}\n**Wind:** {{wind.speed}}@{{wind.direction}}°{{/if}}'
     },
     {
-        Name: 'Flight Updated',
         Slug: 'flight.updated',
-        Description: 'A message sent when a flight is updated',
-        Content: '{{airline}} {{aircraft}} #{{flight_no}} {{departure}} to {{arrival}} has been updated.\n\`\`\`{{pitch}} deg {{bank}} deg {{speed_tas}} kts {{wind}} {{heading}}°\`\`\`',
-    },
-    {
-        Name: 'Flight Completed',
-        Slug: 'flight.completed',
-        Description: 'A message sent when a flight is completed',
-        Content: '{{airline}} {{aircraft}} #{{flight_no}} {{departure}} to {{arrival}} has completed.\n\`\`\`{{pitch}} deg {{bank}} deg {{speed_tas}} kts {{wind}} {{heading}}°\`\`\`',
-    },
-    {
-        Name: 'Pilot Profile Updated',
-        Slug: 'profile.updated',
-        Description: 'A message sent when a pilot profile is updated',
-        Content: '{{pilot}} has updated their profile.',
+        Name: 'Flight Updated',
+        Description: 'Flight Updated',
+        Content: '{{airline}} {{aircraft}} #{{flight_no}} {{departure}} to {{arrival}} has been updated.\n```{{pitch}} deg {{bank}} deg {{speed_tas}} kts {{wind}} {{heading}}°```'
     }
 ];
 

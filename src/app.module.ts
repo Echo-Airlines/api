@@ -8,8 +8,6 @@ import { AppConfigModule } from './app-config/app-config.module';
 import { JobsModule } from './jobs/jobs.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { LoggerService } from '@logger/logger.service';
-import { SeederService } from './seeder/seeder.service';
-import { SeederModule } from './seeder/seeder.module';
 import { LoggerModule } from '@logger/logger.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
@@ -78,7 +76,6 @@ console.log('emailTemplatesDirectory:', emailTemplatesDirectory);
     VirtualAirlineModule,
     AppConfigModule,
     JobsModule,
-    SeederModule,
     LoggerModule,
     UserModule,
     AuthModule,
@@ -100,14 +97,8 @@ console.log('emailTemplatesDirectory:', emailTemplatesDirectory);
   providers: [AppService],
 })
 
-export class AppModule implements OnModuleInit {
+export class AppModule {
   private readonly logger = new LoggerService(AppModule.name);
   constructor(
-    private readonly configService: ConfigService,
-    private readonly seederService: SeederService,
   ) {}
-
-  async onModuleInit() {   
-     
-  }
 }

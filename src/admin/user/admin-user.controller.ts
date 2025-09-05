@@ -139,6 +139,10 @@ export class AdminUserController {
             },
         });
 
+        if (!user || user === null) {
+            throw new NotFoundException('User not found');
+        }
+
         if (user.Email && body.SendEmail) {
             // if body.SendEmail is true, send an email to the user
             const urlBase = this.configService.get<string>('FRONTEND_URL') || 'http://localhost:3001';
@@ -217,7 +221,15 @@ export class AdminUserController {
                 EmailVerifiedAt: true,
                 WelcomeEmailSentAt: true,
             }
-        });
+        });   
+        
+        if (!user || user === null) {
+            throw new NotFoundException('User not found');
+        }
+
+        if (!user) {
+            throw new NotFoundException('User not found');
+        }
 
         // send the reset password email
         await this.emailService.sendResetPasswordEmail({
@@ -227,7 +239,11 @@ export class AdminUserController {
             context: {
                 resetPasswordLink: `${urlBase}/auth/reset-password?token=${user.ResetPasswordToken}`,
             },
-        });
+        });   
+
+        if (!user || user === null) {
+            throw new NotFoundException('User not found');
+        }
 
         user = await this.userService.update(user.Id, { ResetPasswordEmailSentAt: new Date() }, {
             select : {
@@ -291,11 +307,11 @@ export class AdminUserController {
         
         const urlBase = this.configService.get<string>('FRONTEND_URL') || 'http://localhost:3001';
 
-        if (!user) {
+        if (!user || user === null) {
             throw new NotFoundException('User not found');
         }
 
-        if (!user.Email || user.Email === null) {
+        if (!user.Email) {
             throw new BadRequestException('User email not found');
         }
 
@@ -327,6 +343,10 @@ export class AdminUserController {
                     WelcomeEmailSentAt: true,
                 },
             });
+        }
+        
+        if (!user || user === null) {
+            throw new NotFoundException('User not found');
         }
 
         await this.emailService.sendWelcomeEmail({

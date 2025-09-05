@@ -27,6 +27,7 @@ export type User = {
     FirstLoginCompleted: boolean
     IsOnline: boolean
     IsBanned: boolean
+    Email: string | null
     BanReason: string | null
     BanExpiresAt: Date | null
     IsVerified: boolean

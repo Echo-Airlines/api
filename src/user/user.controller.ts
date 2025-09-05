@@ -1,8 +1,10 @@
-import { BadRequestException, Controller, Get, NotFoundException, Query, Res } from '@nestjs/common';
+import { BadRequestException, Controller, Get, NotFoundException, Query, Req, Res, UnauthorizedException, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import { PublicUserDto, User } from './dto/PublicUser.dto';
 import { ConfigService } from '@nestjs/config';
 import { Response } from 'express';
+import { UserProfileDto } from './dto/UserProfile.dto';
+import { JwtAuthGuard } from '@auth/jwt-auth.guard';
 
 @Controller(['user', 'users', 'u'])
 export class UserController {
@@ -30,5 +32,17 @@ export class UserController {
         const baseUrl = this.configService.get<string>('FRONTEND_URL') || 'http://localhost:3001';
 
         return res.redirect(`${baseUrl}/email-confirmed`);
+    }
+
+    @Get('me')
+    @UseGuards(JwtAuthGuard)
+    async me(@Req() req) {
+        const user: UserProfileDto|null = await this.userService.me(req.user.userId);
+
+        if (!user) {
+            throw new UnauthorizedException('Invalid session');
+        }
+
+        return user;
     }
 }

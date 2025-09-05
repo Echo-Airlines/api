@@ -141,7 +141,10 @@ model User {
   UpdatedAt           DateTime  @default(now()) @db.Timestamp(6)
   WelcomeEmailSentAt  DateTime? @db.Timestamp(6)
   ConfirmEmailToken   String?   @unique() @db.VarChar
-
+  EmailVerifiedAt     DateTime? @db.Timestamp(6)
+  ResetPasswordToken  String?   @unique() @db.VarChar
+  ResetPasswordEmailSentAt DateTime? @db.Timestamp(6)
+  
   // Discord OAuth2 fields
   DiscordId       String? @unique() @db.VarChar
   DiscordUsername String? @db.VarChar

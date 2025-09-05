@@ -2,10 +2,48 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '@prisma/prisma.service';
 import { Prisma, User as PrismaUser } from 'prisma/generated/prisma';
 import { PublicUserDto, RawUser, User } from './dto/PublicUser.dto';
+import { UserProfileDto } from './dto/UserProfile.dto';
 
 @Injectable()
 export class UserService {
     constructor(private prisma: PrismaService) {}
+    
+    async me(userId: string) {
+        const user = await this.prisma.user.findUnique({
+            where: { Id: userId },
+            select: {
+                Id: true,
+                Username: true,
+                FirstName: true,
+                LastName: true,
+                FirstLoginCompleted: true,
+                IsOnline: true,
+                IsVerified: true,
+                CreatedAt: true,
+                UpdatedAt: true,
+                Roles: true,
+                PrivacySettings: true,
+                Email: true,
+                IsBanned: true,
+                BanReason: true,
+                BanExpiresAt: true,
+                LastLogin: true,
+                Members: {
+                    include: {
+                        Company: true,
+                    }
+                },
+            }
+        });
+
+        if (!user) {
+            return null;
+        }
+        
+        const result: UserProfileDto = new UserProfileDto(user as unknown as User);
+
+        return result;
+    }
 
     async findAllActive() {
         const entities = await this.prisma.user.findMany({
@@ -128,6 +166,7 @@ export class UserService {
                 Members: true,
                 InviteCode: true,
                 ConfirmEmailToken: true,
+                EmailVerifiedAt: true,
             },
         });
 
@@ -143,6 +182,7 @@ export class UserService {
             data: {
                 IsVerified: true,
                 ConfirmEmailToken: null,
+                EmailVerifiedAt: new Date(),
             },
             select: {
                 Id: true,
@@ -166,6 +206,7 @@ export class UserService {
                 Members: true,
                 InviteCode: true,
                 ConfirmEmailToken: true,
+                EmailVerifiedAt: true,
             },
         });
 

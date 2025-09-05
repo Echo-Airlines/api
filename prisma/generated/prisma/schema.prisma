@@ -123,24 +123,27 @@ enum ListenerEventStatus {
 }
 
 model User {
-  Id                  String    @id() @unique() @default(uuid()) @db.Uuid
-  Username            String    @unique() @db.VarChar
-  Password            String?   @db.VarChar
-  Email               String?   @unique() @db.VarChar
-  FirstName           String?   @db.VarChar
-  LastName            String?   @db.VarChar
-  FirstLoginCompleted Boolean   @default(false)
-  IsOnline            Boolean   @default(false)
-  IsBanned            Boolean   @default(false)
-  BanReason           String?   @db.VarChar
-  BanExpiresAt        DateTime? @db.Timestamp(6)
-  IsVerified          Boolean   @default(false)
-  LastLogin           DateTime? @db.Timestamp(6)
-  InviteCodeId        String?   @unique() @db.Uuid
-  CreatedAt           DateTime  @default(now()) @db.Timestamp(6)
-  UpdatedAt           DateTime  @default(now()) @db.Timestamp(6)
-  WelcomeEmailSentAt  DateTime? @db.Timestamp(6)
-  ConfirmEmailToken   String?   @unique() @db.VarChar
+  Id                       String    @id() @unique() @default(uuid()) @db.Uuid
+  Username                 String    @unique() @db.VarChar
+  Password                 String?   @db.VarChar
+  Email                    String?   @unique() @db.VarChar
+  FirstName                String?   @db.VarChar
+  LastName                 String?   @db.VarChar
+  FirstLoginCompleted      Boolean   @default(false)
+  IsOnline                 Boolean   @default(false)
+  IsBanned                 Boolean   @default(false)
+  BanReason                String?   @db.VarChar
+  BanExpiresAt             DateTime? @db.Timestamp(6)
+  IsVerified               Boolean   @default(false)
+  LastLogin                DateTime? @db.Timestamp(6)
+  InviteCodeId             String?   @unique() @db.Uuid
+  CreatedAt                DateTime  @default(now()) @db.Timestamp(6)
+  UpdatedAt                DateTime  @default(now()) @db.Timestamp(6)
+  WelcomeEmailSentAt       DateTime? @db.Timestamp(6)
+  ConfirmEmailToken        String?   @unique() @db.VarChar
+  EmailVerifiedAt          DateTime? @db.Timestamp(6)
+  ResetPasswordToken       String?   @unique() @db.VarChar
+  ResetPasswordEmailSentAt DateTime? @db.Timestamp(6)
 
   // Discord OAuth2 fields
   DiscordId       String? @unique() @db.VarChar

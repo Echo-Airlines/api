@@ -12110,6 +12110,9 @@ export namespace Prisma {
     UpdatedAt: Date | null
     WelcomeEmailSentAt: Date | null
     ConfirmEmailToken: string | null
+    EmailVerifiedAt: Date | null
+    ResetPasswordToken: string | null
+    ResetPasswordEmailSentAt: Date | null
     DiscordId: string | null
     DiscordUsername: string | null
     DiscordAvatar: string | null
@@ -12135,6 +12138,9 @@ export namespace Prisma {
     UpdatedAt: Date | null
     WelcomeEmailSentAt: Date | null
     ConfirmEmailToken: string | null
+    EmailVerifiedAt: Date | null
+    ResetPasswordToken: string | null
+    ResetPasswordEmailSentAt: Date | null
     DiscordId: string | null
     DiscordUsername: string | null
     DiscordAvatar: string | null
@@ -12160,6 +12166,9 @@ export namespace Prisma {
     UpdatedAt: number
     WelcomeEmailSentAt: number
     ConfirmEmailToken: number
+    EmailVerifiedAt: number
+    ResetPasswordToken: number
+    ResetPasswordEmailSentAt: number
     DiscordId: number
     DiscordUsername: number
     DiscordAvatar: number
@@ -12187,6 +12196,9 @@ export namespace Prisma {
     UpdatedAt?: true
     WelcomeEmailSentAt?: true
     ConfirmEmailToken?: true
+    EmailVerifiedAt?: true
+    ResetPasswordToken?: true
+    ResetPasswordEmailSentAt?: true
     DiscordId?: true
     DiscordUsername?: true
     DiscordAvatar?: true
@@ -12212,6 +12224,9 @@ export namespace Prisma {
     UpdatedAt?: true
     WelcomeEmailSentAt?: true
     ConfirmEmailToken?: true
+    EmailVerifiedAt?: true
+    ResetPasswordToken?: true
+    ResetPasswordEmailSentAt?: true
     DiscordId?: true
     DiscordUsername?: true
     DiscordAvatar?: true
@@ -12237,6 +12252,9 @@ export namespace Prisma {
     UpdatedAt?: true
     WelcomeEmailSentAt?: true
     ConfirmEmailToken?: true
+    EmailVerifiedAt?: true
+    ResetPasswordToken?: true
+    ResetPasswordEmailSentAt?: true
     DiscordId?: true
     DiscordUsername?: true
     DiscordAvatar?: true
@@ -12335,6 +12353,9 @@ export namespace Prisma {
     UpdatedAt: Date
     WelcomeEmailSentAt: Date | null
     ConfirmEmailToken: string | null
+    EmailVerifiedAt: Date | null
+    ResetPasswordToken: string | null
+    ResetPasswordEmailSentAt: Date | null
     DiscordId: string | null
     DiscordUsername: string | null
     DiscordAvatar: string | null
@@ -12377,6 +12398,9 @@ export namespace Prisma {
     UpdatedAt?: boolean
     WelcomeEmailSentAt?: boolean
     ConfirmEmailToken?: boolean
+    EmailVerifiedAt?: boolean
+    ResetPasswordToken?: boolean
+    ResetPasswordEmailSentAt?: boolean
     DiscordId?: boolean
     DiscordUsername?: boolean
     DiscordAvatar?: boolean
@@ -12407,6 +12431,9 @@ export namespace Prisma {
     UpdatedAt?: boolean
     WelcomeEmailSentAt?: boolean
     ConfirmEmailToken?: boolean
+    EmailVerifiedAt?: boolean
+    ResetPasswordToken?: boolean
+    ResetPasswordEmailSentAt?: boolean
     DiscordId?: boolean
     DiscordUsername?: boolean
     DiscordAvatar?: boolean
@@ -12433,6 +12460,9 @@ export namespace Prisma {
     UpdatedAt?: boolean
     WelcomeEmailSentAt?: boolean
     ConfirmEmailToken?: boolean
+    EmailVerifiedAt?: boolean
+    ResetPasswordToken?: boolean
+    ResetPasswordEmailSentAt?: boolean
     DiscordId?: boolean
     DiscordUsername?: boolean
     DiscordAvatar?: boolean
@@ -12459,13 +12489,16 @@ export namespace Prisma {
     UpdatedAt?: boolean
     WelcomeEmailSentAt?: boolean
     ConfirmEmailToken?: boolean
+    EmailVerifiedAt?: boolean
+    ResetPasswordToken?: boolean
+    ResetPasswordEmailSentAt?: boolean
     DiscordId?: boolean
     DiscordUsername?: boolean
     DiscordAvatar?: boolean
     DiscordEmail?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "Username" | "Password" | "Email" | "FirstName" | "LastName" | "FirstLoginCompleted" | "IsOnline" | "IsBanned" | "BanReason" | "BanExpiresAt" | "IsVerified" | "LastLogin" | "InviteCodeId" | "CreatedAt" | "UpdatedAt" | "WelcomeEmailSentAt" | "ConfirmEmailToken" | "DiscordId" | "DiscordUsername" | "DiscordAvatar" | "DiscordEmail", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "Username" | "Password" | "Email" | "FirstName" | "LastName" | "FirstLoginCompleted" | "IsOnline" | "IsBanned" | "BanReason" | "BanExpiresAt" | "IsVerified" | "LastLogin" | "InviteCodeId" | "CreatedAt" | "UpdatedAt" | "WelcomeEmailSentAt" | "ConfirmEmailToken" | "EmailVerifiedAt" | "ResetPasswordToken" | "ResetPasswordEmailSentAt" | "DiscordId" | "DiscordUsername" | "DiscordAvatar" | "DiscordEmail", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Roles?: boolean | User$RolesArgs<ExtArgs>
     PrivacySettings?: boolean | User$PrivacySettingsArgs<ExtArgs>
@@ -12507,6 +12540,9 @@ export namespace Prisma {
       UpdatedAt: Date
       WelcomeEmailSentAt: Date | null
       ConfirmEmailToken: string | null
+      EmailVerifiedAt: Date | null
+      ResetPasswordToken: string | null
+      ResetPasswordEmailSentAt: Date | null
       DiscordId: string | null
       DiscordUsername: string | null
       DiscordAvatar: string | null
@@ -12956,6 +12992,9 @@ export namespace Prisma {
     readonly UpdatedAt: FieldRef<"User", 'DateTime'>
     readonly WelcomeEmailSentAt: FieldRef<"User", 'DateTime'>
     readonly ConfirmEmailToken: FieldRef<"User", 'String'>
+    readonly EmailVerifiedAt: FieldRef<"User", 'DateTime'>
+    readonly ResetPasswordToken: FieldRef<"User", 'String'>
+    readonly ResetPasswordEmailSentAt: FieldRef<"User", 'DateTime'>
     readonly DiscordId: FieldRef<"User", 'String'>
     readonly DiscordUsername: FieldRef<"User", 'String'>
     readonly DiscordAvatar: FieldRef<"User", 'String'>
@@ -37692,6 +37731,9 @@ export namespace Prisma {
     UpdatedAt: 'UpdatedAt',
     WelcomeEmailSentAt: 'WelcomeEmailSentAt',
     ConfirmEmailToken: 'ConfirmEmailToken',
+    EmailVerifiedAt: 'EmailVerifiedAt',
+    ResetPasswordToken: 'ResetPasswordToken',
+    ResetPasswordEmailSentAt: 'ResetPasswordEmailSentAt',
     DiscordId: 'DiscordId',
     DiscordUsername: 'DiscordUsername',
     DiscordAvatar: 'DiscordAvatar',
@@ -38870,6 +38912,9 @@ export namespace Prisma {
     UpdatedAt?: DateTimeFilter<"User"> | Date | string
     WelcomeEmailSentAt?: DateTimeNullableFilter<"User"> | Date | string | null
     ConfirmEmailToken?: StringNullableFilter<"User"> | string | null
+    EmailVerifiedAt?: DateTimeNullableFilter<"User"> | Date | string | null
+    ResetPasswordToken?: StringNullableFilter<"User"> | string | null
+    ResetPasswordEmailSentAt?: DateTimeNullableFilter<"User"> | Date | string | null
     DiscordId?: StringNullableFilter<"User"> | string | null
     DiscordUsername?: StringNullableFilter<"User"> | string | null
     DiscordAvatar?: StringNullableFilter<"User"> | string | null
@@ -38899,6 +38944,9 @@ export namespace Prisma {
     UpdatedAt?: SortOrder
     WelcomeEmailSentAt?: SortOrderInput | SortOrder
     ConfirmEmailToken?: SortOrderInput | SortOrder
+    EmailVerifiedAt?: SortOrderInput | SortOrder
+    ResetPasswordToken?: SortOrderInput | SortOrder
+    ResetPasswordEmailSentAt?: SortOrderInput | SortOrder
     DiscordId?: SortOrderInput | SortOrder
     DiscordUsername?: SortOrderInput | SortOrder
     DiscordAvatar?: SortOrderInput | SortOrder
@@ -38915,6 +38963,7 @@ export namespace Prisma {
     Email?: string
     InviteCodeId?: string
     ConfirmEmailToken?: string
+    ResetPasswordToken?: string
     DiscordId?: string
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
@@ -38932,6 +38981,8 @@ export namespace Prisma {
     CreatedAt?: DateTimeFilter<"User"> | Date | string
     UpdatedAt?: DateTimeFilter<"User"> | Date | string
     WelcomeEmailSentAt?: DateTimeNullableFilter<"User"> | Date | string | null
+    EmailVerifiedAt?: DateTimeNullableFilter<"User"> | Date | string | null
+    ResetPasswordEmailSentAt?: DateTimeNullableFilter<"User"> | Date | string | null
     DiscordUsername?: StringNullableFilter<"User"> | string | null
     DiscordAvatar?: StringNullableFilter<"User"> | string | null
     DiscordEmail?: StringNullableFilter<"User"> | string | null
@@ -38939,7 +38990,7 @@ export namespace Prisma {
     PrivacySettings?: UserPrivacySettingsListRelationFilter
     Members?: MemberListRelationFilter
     InviteCode?: XOR<InviteCodeNullableScalarRelationFilter, InviteCodeWhereInput> | null
-  }, "Id" | "Id" | "Username" | "Email" | "InviteCodeId" | "ConfirmEmailToken" | "DiscordId">
+  }, "Id" | "Id" | "Username" | "Email" | "InviteCodeId" | "ConfirmEmailToken" | "ResetPasswordToken" | "DiscordId">
 
   export type UserOrderByWithAggregationInput = {
     Id?: SortOrder
@@ -38960,6 +39011,9 @@ export namespace Prisma {
     UpdatedAt?: SortOrder
     WelcomeEmailSentAt?: SortOrderInput | SortOrder
     ConfirmEmailToken?: SortOrderInput | SortOrder
+    EmailVerifiedAt?: SortOrderInput | SortOrder
+    ResetPasswordToken?: SortOrderInput | SortOrder
+    ResetPasswordEmailSentAt?: SortOrderInput | SortOrder
     DiscordId?: SortOrderInput | SortOrder
     DiscordUsername?: SortOrderInput | SortOrder
     DiscordAvatar?: SortOrderInput | SortOrder
@@ -38991,6 +39045,9 @@ export namespace Prisma {
     UpdatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     WelcomeEmailSentAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     ConfirmEmailToken?: StringNullableWithAggregatesFilter<"User"> | string | null
+    EmailVerifiedAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+    ResetPasswordToken?: StringNullableWithAggregatesFilter<"User"> | string | null
+    ResetPasswordEmailSentAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     DiscordId?: StringNullableWithAggregatesFilter<"User"> | string | null
     DiscordUsername?: StringNullableWithAggregatesFilter<"User"> | string | null
     DiscordAvatar?: StringNullableWithAggregatesFilter<"User"> | string | null
@@ -41675,6 +41732,9 @@ export namespace Prisma {
     UpdatedAt?: Date | string
     WelcomeEmailSentAt?: Date | string | null
     ConfirmEmailToken?: string | null
+    EmailVerifiedAt?: Date | string | null
+    ResetPasswordToken?: string | null
+    ResetPasswordEmailSentAt?: Date | string | null
     DiscordId?: string | null
     DiscordUsername?: string | null
     DiscordAvatar?: string | null
@@ -41704,6 +41764,9 @@ export namespace Prisma {
     UpdatedAt?: Date | string
     WelcomeEmailSentAt?: Date | string | null
     ConfirmEmailToken?: string | null
+    EmailVerifiedAt?: Date | string | null
+    ResetPasswordToken?: string | null
+    ResetPasswordEmailSentAt?: Date | string | null
     DiscordId?: string | null
     DiscordUsername?: string | null
     DiscordAvatar?: string | null
@@ -41731,6 +41794,9 @@ export namespace Prisma {
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     WelcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ConfirmEmailToken?: NullableStringFieldUpdateOperationsInput | string | null
+    EmailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ResetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    ResetPasswordEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     DiscordId?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordUsername?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordAvatar?: NullableStringFieldUpdateOperationsInput | string | null
@@ -41760,6 +41826,9 @@ export namespace Prisma {
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     WelcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ConfirmEmailToken?: NullableStringFieldUpdateOperationsInput | string | null
+    EmailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ResetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    ResetPasswordEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     DiscordId?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordUsername?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordAvatar?: NullableStringFieldUpdateOperationsInput | string | null
@@ -41788,6 +41857,9 @@ export namespace Prisma {
     UpdatedAt?: Date | string
     WelcomeEmailSentAt?: Date | string | null
     ConfirmEmailToken?: string | null
+    EmailVerifiedAt?: Date | string | null
+    ResetPasswordToken?: string | null
+    ResetPasswordEmailSentAt?: Date | string | null
     DiscordId?: string | null
     DiscordUsername?: string | null
     DiscordAvatar?: string | null
@@ -41812,6 +41884,9 @@ export namespace Prisma {
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     WelcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ConfirmEmailToken?: NullableStringFieldUpdateOperationsInput | string | null
+    EmailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ResetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    ResetPasswordEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     DiscordId?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordUsername?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordAvatar?: NullableStringFieldUpdateOperationsInput | string | null
@@ -41837,6 +41912,9 @@ export namespace Prisma {
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     WelcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ConfirmEmailToken?: NullableStringFieldUpdateOperationsInput | string | null
+    EmailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ResetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    ResetPasswordEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     DiscordId?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordUsername?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordAvatar?: NullableStringFieldUpdateOperationsInput | string | null
@@ -44902,6 +44980,9 @@ export namespace Prisma {
     UpdatedAt?: SortOrder
     WelcomeEmailSentAt?: SortOrder
     ConfirmEmailToken?: SortOrder
+    EmailVerifiedAt?: SortOrder
+    ResetPasswordToken?: SortOrder
+    ResetPasswordEmailSentAt?: SortOrder
     DiscordId?: SortOrder
     DiscordUsername?: SortOrder
     DiscordAvatar?: SortOrder
@@ -44927,6 +45008,9 @@ export namespace Prisma {
     UpdatedAt?: SortOrder
     WelcomeEmailSentAt?: SortOrder
     ConfirmEmailToken?: SortOrder
+    EmailVerifiedAt?: SortOrder
+    ResetPasswordToken?: SortOrder
+    ResetPasswordEmailSentAt?: SortOrder
     DiscordId?: SortOrder
     DiscordUsername?: SortOrder
     DiscordAvatar?: SortOrder
@@ -44952,6 +45036,9 @@ export namespace Prisma {
     UpdatedAt?: SortOrder
     WelcomeEmailSentAt?: SortOrder
     ConfirmEmailToken?: SortOrder
+    EmailVerifiedAt?: SortOrder
+    ResetPasswordToken?: SortOrder
+    ResetPasswordEmailSentAt?: SortOrder
     DiscordId?: SortOrder
     DiscordUsername?: SortOrder
     DiscordAvatar?: SortOrder
@@ -49004,6 +49091,9 @@ export namespace Prisma {
     UpdatedAt?: Date | string
     WelcomeEmailSentAt?: Date | string | null
     ConfirmEmailToken?: string | null
+    EmailVerifiedAt?: Date | string | null
+    ResetPasswordToken?: string | null
+    ResetPasswordEmailSentAt?: Date | string | null
     DiscordId?: string | null
     DiscordUsername?: string | null
     DiscordAvatar?: string | null
@@ -49031,6 +49121,9 @@ export namespace Prisma {
     UpdatedAt?: Date | string
     WelcomeEmailSentAt?: Date | string | null
     ConfirmEmailToken?: string | null
+    EmailVerifiedAt?: Date | string | null
+    ResetPasswordToken?: string | null
+    ResetPasswordEmailSentAt?: Date | string | null
     DiscordId?: string | null
     DiscordUsername?: string | null
     DiscordAvatar?: string | null
@@ -49074,6 +49167,9 @@ export namespace Prisma {
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     WelcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ConfirmEmailToken?: NullableStringFieldUpdateOperationsInput | string | null
+    EmailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ResetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    ResetPasswordEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     DiscordId?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordUsername?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordAvatar?: NullableStringFieldUpdateOperationsInput | string | null
@@ -49101,6 +49197,9 @@ export namespace Prisma {
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     WelcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ConfirmEmailToken?: NullableStringFieldUpdateOperationsInput | string | null
+    EmailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ResetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    ResetPasswordEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     DiscordId?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordUsername?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordAvatar?: NullableStringFieldUpdateOperationsInput | string | null
@@ -50005,6 +50104,9 @@ export namespace Prisma {
     UpdatedAt?: Date | string
     WelcomeEmailSentAt?: Date | string | null
     ConfirmEmailToken?: string | null
+    EmailVerifiedAt?: Date | string | null
+    ResetPasswordToken?: string | null
+    ResetPasswordEmailSentAt?: Date | string | null
     DiscordId?: string | null
     DiscordUsername?: string | null
     DiscordAvatar?: string | null
@@ -50033,6 +50135,9 @@ export namespace Prisma {
     UpdatedAt?: Date | string
     WelcomeEmailSentAt?: Date | string | null
     ConfirmEmailToken?: string | null
+    EmailVerifiedAt?: Date | string | null
+    ResetPasswordToken?: string | null
+    ResetPasswordEmailSentAt?: Date | string | null
     DiscordId?: string | null
     DiscordUsername?: string | null
     DiscordAvatar?: string | null
@@ -50075,6 +50180,9 @@ export namespace Prisma {
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     WelcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ConfirmEmailToken?: NullableStringFieldUpdateOperationsInput | string | null
+    EmailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ResetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    ResetPasswordEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     DiscordId?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordUsername?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordAvatar?: NullableStringFieldUpdateOperationsInput | string | null
@@ -50103,6 +50211,9 @@ export namespace Prisma {
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     WelcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ConfirmEmailToken?: NullableStringFieldUpdateOperationsInput | string | null
+    EmailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ResetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    ResetPasswordEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     DiscordId?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordUsername?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordAvatar?: NullableStringFieldUpdateOperationsInput | string | null
@@ -50151,6 +50262,9 @@ export namespace Prisma {
     UpdatedAt?: Date | string
     WelcomeEmailSentAt?: Date | string | null
     ConfirmEmailToken?: string | null
+    EmailVerifiedAt?: Date | string | null
+    ResetPasswordToken?: string | null
+    ResetPasswordEmailSentAt?: Date | string | null
     DiscordId?: string | null
     DiscordUsername?: string | null
     DiscordAvatar?: string | null
@@ -50179,6 +50293,9 @@ export namespace Prisma {
     UpdatedAt?: Date | string
     WelcomeEmailSentAt?: Date | string | null
     ConfirmEmailToken?: string | null
+    EmailVerifiedAt?: Date | string | null
+    ResetPasswordToken?: string | null
+    ResetPasswordEmailSentAt?: Date | string | null
     DiscordId?: string | null
     DiscordUsername?: string | null
     DiscordAvatar?: string | null
@@ -50301,6 +50418,9 @@ export namespace Prisma {
     UpdatedAt?: DateTimeFilter<"User"> | Date | string
     WelcomeEmailSentAt?: DateTimeNullableFilter<"User"> | Date | string | null
     ConfirmEmailToken?: StringNullableFilter<"User"> | string | null
+    EmailVerifiedAt?: DateTimeNullableFilter<"User"> | Date | string | null
+    ResetPasswordToken?: StringNullableFilter<"User"> | string | null
+    ResetPasswordEmailSentAt?: DateTimeNullableFilter<"User"> | Date | string | null
     DiscordId?: StringNullableFilter<"User"> | string | null
     DiscordUsername?: StringNullableFilter<"User"> | string | null
     DiscordAvatar?: StringNullableFilter<"User"> | string | null
@@ -52090,6 +52210,9 @@ export namespace Prisma {
     UpdatedAt?: Date | string
     WelcomeEmailSentAt?: Date | string | null
     ConfirmEmailToken?: string | null
+    EmailVerifiedAt?: Date | string | null
+    ResetPasswordToken?: string | null
+    ResetPasswordEmailSentAt?: Date | string | null
     DiscordId?: string | null
     DiscordUsername?: string | null
     DiscordAvatar?: string | null
@@ -52118,6 +52241,9 @@ export namespace Prisma {
     UpdatedAt?: Date | string
     WelcomeEmailSentAt?: Date | string | null
     ConfirmEmailToken?: string | null
+    EmailVerifiedAt?: Date | string | null
+    ResetPasswordToken?: string | null
+    ResetPasswordEmailSentAt?: Date | string | null
     DiscordId?: string | null
     DiscordUsername?: string | null
     DiscordAvatar?: string | null
@@ -52375,6 +52501,9 @@ export namespace Prisma {
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     WelcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ConfirmEmailToken?: NullableStringFieldUpdateOperationsInput | string | null
+    EmailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ResetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    ResetPasswordEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     DiscordId?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordUsername?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordAvatar?: NullableStringFieldUpdateOperationsInput | string | null
@@ -52403,6 +52532,9 @@ export namespace Prisma {
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     WelcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ConfirmEmailToken?: NullableStringFieldUpdateOperationsInput | string | null
+    EmailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ResetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    ResetPasswordEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     DiscordId?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordUsername?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordAvatar?: NullableStringFieldUpdateOperationsInput | string | null
@@ -56034,6 +56166,9 @@ export namespace Prisma {
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     WelcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ConfirmEmailToken?: NullableStringFieldUpdateOperationsInput | string | null
+    EmailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ResetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    ResetPasswordEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     DiscordId?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordUsername?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordAvatar?: NullableStringFieldUpdateOperationsInput | string | null
@@ -56062,6 +56197,9 @@ export namespace Prisma {
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     WelcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ConfirmEmailToken?: NullableStringFieldUpdateOperationsInput | string | null
+    EmailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ResetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    ResetPasswordEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     DiscordId?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordUsername?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordAvatar?: NullableStringFieldUpdateOperationsInput | string | null
@@ -56089,6 +56227,9 @@ export namespace Prisma {
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     WelcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ConfirmEmailToken?: NullableStringFieldUpdateOperationsInput | string | null
+    EmailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ResetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    ResetPasswordEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     DiscordId?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordUsername?: NullableStringFieldUpdateOperationsInput | string | null
     DiscordAvatar?: NullableStringFieldUpdateOperationsInput | string | null

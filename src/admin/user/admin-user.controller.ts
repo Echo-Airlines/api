@@ -61,10 +61,12 @@ export class AdminUserController {
                 BanReason: true,
                 BanExpiresAt: true,
                 IsVerified: true,
+                EmailVerifiedAt: true,
                 LastLogin: true,
                 CreatedAt: true,
                 UpdatedAt: true,
                 Roles: true,
+                WelcomeEmailSentAt: true,
             }
         });
 
@@ -163,6 +165,101 @@ export class AdminUserController {
         return user;
     }
 
+    @Put(':username/send-reset-password-email')
+    @UseGuards(JwtAuthGuard, IsAdminGuard)
+    async sendResetPasswordEmail(@Param('username') username: string) {
+        if (!username) {
+            throw new BadRequestException('Username is required');
+        }
+
+        // find the user by username
+        let user: User|null = await this.userService.findOne({ where: { Username: username }, select: {
+            Id: true,
+            Password: true,
+            ResetPasswordEmailSentAt: true,
+            ResetPasswordToken: true,
+        }});
+        
+        if (!user) {
+            throw new NotFoundException('User not found');
+        }
+
+        const urlBase = this.configService.get<string>('FRONTEND_URL') || 'http://localhost:3001';
+
+        if (!user.Email || user.Email === null) {
+            throw new BadRequestException('User email not found');
+        }
+
+        // update the user with a new reset password token and reset password email sent at
+        user = await this.userService.update(user.Id, { ResetPasswordToken: crypto.randomUUID(), ResetPasswordEmailSentAt: new Date() }, {
+            select: {
+                Id: true,
+                Username: true,
+                Email: true,
+                FirstName: true,
+                LastName: true,
+                FirstLoginCompleted: true,
+                IsOnline: true,
+                IsBanned: true,
+                BanReason: true,
+                BanExpiresAt: true,
+                IsVerified: true,
+                LastLogin: true,
+                DiscordId: true,
+                DiscordUsername: true,
+                DiscordAvatar: true,
+                DiscordEmail: true,
+                Roles: true,
+                PrivacySettings: true,
+                Members: true,
+                InviteCode: true,
+                ConfirmEmailToken: true,
+                EmailVerifiedAt: true,
+                WelcomeEmailSentAt: true,
+            }
+        });
+
+        // send the reset password email
+        await this.emailService.sendResetPasswordEmail({
+            to: user.Email!,
+            template: 'reset-password',
+            subject: 'Reset your password',
+            context: {
+                resetPasswordLink: `${urlBase}/auth/reset-password?token=${user.ResetPasswordToken}`,
+            },
+        });
+
+        user = await this.userService.update(user.Id, { ResetPasswordEmailSentAt: new Date() }, {
+            select : {
+                Id: true,
+                Username: true,
+                Email: true,
+                FirstName: true,
+                LastName: true,
+                FirstLoginCompleted: true,
+                IsOnline: true,
+                IsBanned: true,
+                BanReason: true,
+                BanExpiresAt: true,
+                IsVerified: true,
+                LastLogin: true,
+                DiscordId: true,
+                DiscordUsername: true,
+                DiscordAvatar: true,
+                DiscordEmail: true,
+                Roles: true,
+                PrivacySettings: true,
+                Members: true,
+                InviteCode: true,
+                ConfirmEmailToken: true,
+                EmailVerifiedAt: true,
+                WelcomeEmailSentAt: true,
+            }
+        });
+
+        return user;
+    }
+
     @Put(':username/send-welcome-email')
     @UseGuards(JwtAuthGuard, IsAdminGuard)
     async sendWelcomeEmail(@Param('username') username: string) {
@@ -188,6 +285,8 @@ export class AdminUserController {
             Members: true,
             InviteCode: true,
             ConfirmEmailToken: true,
+            EmailVerifiedAt: true,
+            WelcomeEmailSentAt: true,
         }, });
         
         const urlBase = this.configService.get<string>('FRONTEND_URL') || 'http://localhost:3001';
@@ -225,6 +324,7 @@ export class AdminUserController {
                     Members: true,
                     InviteCode: true,
                     ConfirmEmailToken: true,
+                    WelcomeEmailSentAt: true,
                 },
             });
         }
@@ -264,6 +364,8 @@ export class AdminUserController {
                 Members: true,
                 InviteCode: true,
                 ConfirmEmailToken: true,
+                EmailVerifiedAt: true,
+                WelcomeEmailSentAt: true,
             }
         });
 

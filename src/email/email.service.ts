@@ -55,12 +55,29 @@ export class EmailService {
     public async sendWelcomeEmail(
         mail: CreateEmailDto,
     ): Promise<ISentMessageInfo> {
-        this.log.debug(`Sending welcome email to ${mail.to}`);
+        this.log.debug(`Sending ${mail.template} email to ${mail.to}`);
 
         const opts: ISendMailOptions = {
             to: mail.to,
             subject: mail.subject || 'Welcome to our club!',
-            template: 'welcome',
+            template: mail.template || 'welcome',
+            context: mail.context,
+        };
+
+        const results: ISentMessageInfo = await this._send(opts);
+
+        return results;
+    }
+
+    public async sendResetPasswordEmail(
+        mail: CreateEmailDto,
+    ): Promise<ISentMessageInfo> {
+        this.log.debug(`Sending reset password email to ${mail.to}`);
+
+        const opts: ISendMailOptions = {
+            to: mail.to,
+            subject: mail.subject || 'Reset your password',
+            template: mail.template || 'reset-password',
             context: mail.context,
         };
 

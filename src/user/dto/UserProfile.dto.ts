@@ -17,6 +17,7 @@ export class UserProfileDto {
     constructor(user: User|AuthUser) {
         this.Id = user.Id;
         this.Username = user.Username;
+        this.Email = user.Email;
         this.FirstName = user.FirstName;
         this.LastName = user.LastName || null;
         this.IsOnline = user.IsOnline;

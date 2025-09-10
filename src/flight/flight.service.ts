@@ -74,7 +74,13 @@ export class FlightService {
         let flightStatus: FlightStatus[] = [FlightStatus.PENDING, FlightStatus.FLIGHT];
 
         if (completed) {
-            flightStatus = [FlightStatus.COMPLETED, FlightStatus.CANCELLED];
+            flightStatus = [
+                FlightStatus.PENDING,
+                FlightStatus.FLIGHT,
+                FlightStatus.COMPLETED,
+                FlightStatus.CANCELLED,
+                FlightStatus.WARP,
+            ];
         }
 
         const entities: Flight[] = await this.prisma.flight.findMany({

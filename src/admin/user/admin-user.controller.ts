@@ -67,6 +67,50 @@ export class AdminUserController {
                 UpdatedAt: true,
                 Roles: true,
                 WelcomeEmailSentAt: true,
+                Members: {
+                    select: {
+                        Id: true,
+                        VARole: true,
+                        TotalCargosTransportedLbs: true,
+                        TotalPAXsTransported: true,
+                        TotalEarnedCredits: true,
+                        TotalSpentCredits: true,
+                        NumberOfFlights: true,
+                        FlightHours: true,
+                        Color: true,
+                        ReputationImpact: true,
+                        LastVAFlightDate: true,
+                        LastRefresh: true,
+                        VirtualAirline: {
+                            select: {
+                                Id: true,
+                                IsPrimary: true,
+                                Identifier: true,
+                                Name: true,
+                                Description: true,
+                                LastDividendsDistribution: true,
+                                LastComputationDate: true,
+                                ComputedMemberCount: true,
+                                ComputedAircraftsCount: true,
+                                ComputedNumberOfFlights30Days: true,
+                                ComputedNumberOfFlightHours30Days: true,
+                                ComputedMostUsedAirports: true,
+                                LastConnection: true,
+                                LastReportDate: true,
+                                Reputation: true,
+                                CreationDate: true,
+                                DifficultyLevel: true,
+                                Level: true,
+                                LevelXP: true,
+                                TotalContractsCompleted: true,
+                                TotalContractsEarnedCredits: true,
+                                LastRefresh: true,
+                                World: true,
+                            }
+                        },
+                        Company: true,
+                    },
+                },
             }
         });
 
@@ -180,6 +224,7 @@ export class AdminUserController {
         let user: User|null = await this.userService.findOne({ where: { Username: username }, select: {
             Id: true,
             Password: true,
+            Email: true,
             ResetPasswordEmailSentAt: true,
             ResetPasswordToken: true,
         }});

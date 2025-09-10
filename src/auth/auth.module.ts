@@ -10,13 +10,16 @@ import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './jwt.strategy';
 import { DiscordStrategy } from './discord.strategy';
 import { AppConfigModule } from '../app-config/app-config.module';
+import { EmailModule } from '@email/email.module';
 
 @Module({
   imports: [HashModule, PrismaModule, PassportModule, AppConfigModule,
     JwtModule.register({
       secret: jwtConstants.secret,
       signOptions: { expiresIn: '30d' },
-    }),],
+    }),
+    EmailModule,
+  ],
   controllers: [AuthController],
   providers: [AuthService, LocalStrategy, JwtStrategy, DiscordStrategy],
   exports: [AuthService, PassportModule],

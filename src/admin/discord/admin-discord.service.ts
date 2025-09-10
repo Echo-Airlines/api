@@ -92,6 +92,17 @@ export class AdminDiscordService {
         return entities;
     }
 
+    async DiscordMessageTemplate_findById(Id: number, query?: Partial<Prisma.DiscordMessageTemplateFindUniqueArgs>) {
+        const entity = await this.prisma.discordMessageTemplate.findUnique({
+            where: {
+                Id
+            },
+            ...query
+        });
+
+        return entity;
+    }
+
     async DiscordMessageTemplate_create(data: Prisma.DiscordMessageTemplateCreateInput) {
         const entity = await this.prisma.discordMessageTemplate.create({
             data
@@ -106,6 +117,16 @@ export class AdminDiscordService {
                 Id
             },
             data
+        });
+
+        return entity;
+    }
+
+    async DiscordMessageTemplate_delete(Id: number) {
+        const entity = await this.prisma.discordMessageTemplate.delete({
+            where: {
+                Id
+            }
         });
 
         return entity;

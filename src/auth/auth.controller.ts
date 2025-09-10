@@ -9,6 +9,8 @@ import { Response } from 'express';
 import { AppConfig, InviteCode, User } from 'prisma/generated/prisma';
 import { RegisterUserDto } from './dto/RegisterUserDto';
 import { AppConfigService } from '@app-config/app-config.service';
+import { ForgotPasswordDto } from './dto/ForgotPasswordDto';
+import { ResetPasswordDto } from './dto/ResetPasswordDto';
 
 @Controller('auth')
 export class AuthController {
@@ -17,7 +19,9 @@ export class AuthController {
     @UseGuards(LocalAuthGuard)
     @Post('login')
     async login(@Req() req) {
-        return this.authService.login(req.user);
+        const result = await this.authService.login(req.user);
+        
+        return result;
     }
 
     @UseGuards(LocalAuthGuard)
@@ -46,6 +50,20 @@ export class AuthController {
         }
 
         return user;
+    }
+
+    @Post('forgot-password')
+    async forgotPassword(@Body() body: ForgotPasswordDto) {
+        const result = await this.authService.forgotPassword(body);
+
+        return result;
+    }
+
+    @Post('reset-password')
+    async resetPassword(@Body() body: ResetPasswordDto) {
+        const data = await this.authService.resetPassword(body);
+
+        return data;
     }
 
     // Discord OAuth2 endpoints

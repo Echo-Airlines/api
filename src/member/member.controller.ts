@@ -36,7 +36,7 @@ export class MemberController {
         }
 
         // if the member does not have a UserId, associate the current user to the member
-        member = await this.memberService.associateMemberToUser(member.Id, req.user.userId);
+        member = await this.memberService.associateMemberToUser(member.Id, body.userId);
         
         // update the user's first name, last name, and set first login completed to true
         await this.userService.updateById(req.user.userId, {
@@ -52,19 +52,9 @@ export class MemberController {
                     ShowLastLogin: body.privacySettings.showLastLogin,
                 }
             },
-            Roles: {
-                connect: [
-                    {
-                        Slug: 'user'
-                    },
-                    {
-                        Slug: 'member'
-                    }
-                ]
-            }
         });
 
-        member = await this.memberService.findByUserId(req.user.userId);
+        member = await this.memberService.findByUserId(body.userId);
 
         return member;
     }
@@ -73,7 +63,7 @@ export class MemberController {
     @UseGuards(JwtAuthGuard)
     async update(@Param('id') Id: string, @Req() req, @Body() body: CreateMemberDto) {
         // first check if the user exists
-        let user: PublicUserDto|null = await this.userService.findUserById(req.user.userId);
+        let user: PublicUserDto|null = await this.userService.findUserById(Id);
 
         if (!user) {
             // throw an error
@@ -94,7 +84,7 @@ export class MemberController {
                 FirstLoginCompleted: true,
             });
 
-            member = await this.memberService.findByUserId(req.user.userId);
+            member = await this.memberService.findByUserId(user.Id);
 
             return member;
         } else if (member.UserId) {
@@ -104,35 +94,16 @@ export class MemberController {
             
 
         // if the member does not have a UserId, associate the current user to the member
-        member = await this.memberService.associateMemberToUser(member.Id, req.user.userId);
+        member = await this.memberService.associateMemberToUser(member.Id, user.Id);
         
         // update the user's first name, last name, and set first login completed to true
-        await this.userService.updateById(req.user.userId, {
+        await this.userService.updateById(user.Id, {
             FirstName: body.firstName || null,
             LastName: body.lastName || null,
             FirstLoginCompleted: true,
-            PrivacySettings: {
-                create: {
-                    ShowOnlineStatus: body.privacySettings.showOnlineStatus,
-                    ShowFirstName: body.privacySettings.showFirstName,
-                    ShowLastName: body.privacySettings.showLastName,
-                    ShowLastNameInitial: body.privacySettings.showLastNameInitial,
-                    ShowLastLogin: body.privacySettings.showLastLogin,
-                }
-            },
-            Roles: {
-                connect: [
-                    {
-                        Slug: 'user'
-                    },
-                    {
-                        Slug: 'member'
-                    }
-                ]
-            }
         });
 
-        member = await this.memberService.findByUserId(req.user.userId);
+        member = await this.memberService.findByUserId(user.Id);
 
         return member;
     }

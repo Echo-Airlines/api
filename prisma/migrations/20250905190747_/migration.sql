@@ -1,0 +1,21 @@
+-- CreateEnum
+CREATE TYPE "public"."NOTAMStatus" AS ENUM ('ACTIVE', 'INACTIVE', 'PENDING');
+
+-- CreateTable
+CREATE TABLE "public"."NOTAM" (
+    "Id" UUID NOT NULL,
+    "Title" VARCHAR NOT NULL,
+    "Content" VARCHAR NOT NULL,
+    "ExpirationDate" TIMESTAMP(6),
+    "Link" VARCHAR,
+    "EffectiveDate" TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "Status" "public"."NOTAMStatus" NOT NULL DEFAULT 'ACTIVE',
+    "CreatedById" UUID NOT NULL,
+    "CreatedAt" TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "UpdatedAt" TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "NOTAM_pkey" PRIMARY KEY ("Id")
+);
+
+-- AddForeignKey
+ALTER TABLE "public"."NOTAM" ADD CONSTRAINT "NOTAM_CreatedById_fkey" FOREIGN KEY ("CreatedById") REFERENCES "public"."User"("Id") ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { PrismaService } from '@prisma/prisma.service';
 import { AuthUser, User } from '@user/dto/PublicUser.dto';
 import { UserProfileDto } from '@user/dto/UserProfile.dto';
@@ -7,6 +7,9 @@ import { HashService } from 'src/hash/hash.service';
 import { JwtService } from '@nestjs/jwt';
 import { ChangePasswordDto, } from './dto/ChangePasswordDto';
 import { RegisterUserDto } from './dto/RegisterUserDto';
+import { ForgotPasswordDto } from './dto/ForgotPasswordDto';
+import { EmailService } from '@email/email.service';
+import { ResetPasswordDto } from './dto/ResetPasswordDto';
 
 interface DiscordUserData {
   discordId: string;
@@ -29,7 +32,8 @@ export class AuthService {
     constructor(
         private prisma: PrismaService,
         private hashService: HashService,
-        private jwtService: JwtService
+        private jwtService: JwtService,
+        private emailService: EmailService
     ) {}
 
     private async _findUserByIdentity(identity: string, password: string) {
@@ -38,10 +42,10 @@ export class AuthService {
         }
         
         if (identity.includes('@')) {
-            where.Email = identity;
+            where.Email = identity.toLowerCase();
             // where.Password = hashedPassword;
         } else {
-            where.Username = identity;
+            where.Username = identity.toLowerCase();
             // where.Password = hashedPassword;
         }
 
@@ -179,6 +183,97 @@ export class AuthService {
 
         const result = new UserProfileDto(updatedUser as unknown as AuthUser);
         return result;
+    }
+
+    public async forgotPassword(body: ForgotPasswordDto) {
+        let user = await this.prisma.user.findUnique({
+            where: { Email: body.Email },
+            select: {
+                Id: true,
+                Username: true,
+                FirstName: true,
+                LastName: true,
+                FirstLoginCompleted: true,
+                IsOnline: true,
+                IsVerified: true,
+                CreatedAt: true,
+                UpdatedAt: true,
+                Roles: true,
+                PrivacySettings: true,
+                Email: true,
+                IsBanned: true,
+                BanReason: true,
+                BanExpiresAt: true,
+                LastLogin: true,
+                Members: {
+                    include: {
+                        Company: true,
+                    }
+                },
+            }
+        });
+
+        if (!user) {
+            throw new NotFoundException('User not found');
+        }
+
+        if (!user.Email) {
+            throw new BadRequestException('User email not found');
+        }
+
+        // generate verify token and save it to the user record in the database
+        const ResetPasswordToken = this.jwtService.sign({ userId: user.Id }, { expiresIn: '2h' });
+        user = await this.prisma.user.update({
+            where: { Id: user.Id },
+            data: { ResetPasswordToken: ResetPasswordToken },
+            select: {
+                Id: true,
+                Username: true,
+                FirstName: true,
+                LastName: true,
+                FirstLoginCompleted: true,
+                IsOnline: true,
+                IsVerified: true,
+                CreatedAt: true,
+                UpdatedAt: true,
+                Roles: true,
+                PrivacySettings: true,
+                Email: true,
+                IsBanned: true,
+                BanReason: true,
+                BanExpiresAt: true,
+                LastLogin: true,
+                Members: {
+                    include: {
+                        Company: true,
+                    }
+                },
+            }
+        });
+
+        if (!user) {
+            throw new NotFoundException('User not found');
+        }
+
+        if (!user.Email) {
+            throw new BadRequestException('User email not found');
+        }
+
+        const verifyLink: string = `${process.env.FRONTEND_URL}/auth/reset-password?token=${ResetPasswordToken}`;
+        console.log(verifyLink);
+        // send email to user
+        await this.emailService.sendForgotPasswordEmail({
+            to: user.Email,
+            subject: 'Forgot Password',
+            template: 'forgot-password',
+            context: {
+                username: user.Username,
+                firstName: user.FirstName,
+                verifyLink,
+            },
+        });
+
+        return user;
     }
 
     async createUser(body: RegisterUserDto) {
@@ -372,6 +467,28 @@ export class AuthService {
 
         const user = await this.prisma.user.findUnique({
             where: { Email: email },
+        });
+
+        return user;
+    }
+
+    public async resetPassword(body: ResetPasswordDto) {
+        const user = await this.prisma.user.findUnique({
+            where: { ResetPasswordToken: body.token },
+        });
+
+        if (!user) {
+            throw new NotFoundException('User not found');
+        }
+
+        if (body.password !== body.confirmPassword) {
+            throw new BadRequestException('Passwords do not match');
+        }
+
+        const hashedPassword = await this.hashService.hash(body.password);
+        await this.prisma.user.update({
+            where: { Id: user.Id },
+            data: { Password: hashedPassword },
         });
 
         return user;

@@ -69,7 +69,16 @@ export class AdminDiscordController {
     @UseGuards(JwtAuthGuard, IsAdminGuard)
     async getMessageTemplates() {
         return await this.adminDiscordService.DiscordMessageTemplate_findMany();
-        
+    }
+
+    @Get(['message-templates/:id', 'message-template/:id'])
+    @UseGuards(JwtAuthGuard, IsAdminGuard)
+    async getMessageTemplate(@Param('id') id: string) {
+        return await this.adminDiscordService.DiscordMessageTemplate_findById(parseInt(id), {
+            include: {
+                DiscordMessages: true,
+            }
+        });
     }
 
     @Post(['message-templates', 'message-template'])
@@ -98,6 +107,12 @@ export class AdminDiscordController {
         } catch (error) {
             throw new BadRequestException(error.message);
         }
+    }
+
+    @Delete(['message-templates/:id', 'message-template/:id'])
+    @UseGuards(JwtAuthGuard, IsAdminGuard)
+    async deleteMessageTemplate(@Param('id') id: string) {
+        return await this.adminDiscordService.DiscordMessageTemplate_delete(parseInt(id));
     }
 
     @Delete('webhook/:id')

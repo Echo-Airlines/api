@@ -163,6 +163,9 @@ model User {
 
   // user can be invited by an invite code
   InviteCode InviteCode? @relation(fields: [InviteCodeId], references: [Id])
+
+  // user can create NOTAMs
+  NOTAMs Notam[]
 }
 
 model UserPrivacySettings {
@@ -337,6 +340,29 @@ model World {
   // relations
   VirtualAirlines VirtualAirline[]
   Companies       Company[]
+}
+
+model Notam {
+  Id             String      @id() @default(uuid()) @db.Uuid
+  Title          String      @db.VarChar
+  Content        String      @db.VarChar
+  ExpirationDate DateTime?   @db.Timestamp(6)
+  Link           String?     @db.VarChar
+  EffectiveDate  DateTime    @default(now()) @db.Timestamp(6)
+  Status         NOTAMStatus @default(ACTIVE)
+  CreatedById    String      @db.Uuid
+
+  CreatedAt DateTime @default(now()) @db.Timestamp(6)
+  UpdatedAt DateTime @default(now()) @db.Timestamp(6)
+
+  // relations
+  CreatedBy User @relation(fields: [CreatedById], references: [Id])
+}
+
+enum NOTAMStatus {
+  ACTIVE
+  INACTIVE
+  PENDING
 }
 
 model Member {

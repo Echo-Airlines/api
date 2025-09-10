@@ -99,6 +99,11 @@ export type VirtualAirlineRole = $Result.DefaultSelection<Prisma.$VirtualAirline
  */
 export type World = $Result.DefaultSelection<Prisma.$WorldPayload>
 /**
+ * Model Notam
+ * 
+ */
+export type Notam = $Result.DefaultSelection<Prisma.$NotamPayload>
+/**
  * Model Member
  * 
  */
@@ -163,6 +168,15 @@ export namespace $Enums {
 export type ListenerEventStatus = (typeof ListenerEventStatus)[keyof typeof ListenerEventStatus]
 
 
+export const NOTAMStatus: {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE',
+  PENDING: 'PENDING'
+};
+
+export type NOTAMStatus = (typeof NOTAMStatus)[keyof typeof NOTAMStatus]
+
+
 export const FlightStatus: {
   PENDING: 'PENDING',
   FLIGHT: 'FLIGHT',
@@ -216,6 +230,10 @@ export type CronExpression = (typeof CronExpression)[keyof typeof CronExpression
 export type ListenerEventStatus = $Enums.ListenerEventStatus
 
 export const ListenerEventStatus: typeof $Enums.ListenerEventStatus
+
+export type NOTAMStatus = $Enums.NOTAMStatus
+
+export const NOTAMStatus: typeof $Enums.NOTAMStatus
 
 export type FlightStatus = $Enums.FlightStatus
 
@@ -531,6 +549,16 @@ export class PrismaClient<
     * ```
     */
   get world(): Prisma.WorldDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.notam`: Exposes CRUD operations for the **Notam** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Notams
+    * const notams = await prisma.notam.findMany()
+    * ```
+    */
+  get notam(): Prisma.NotamDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.member`: Exposes CRUD operations for the **Member** model.
@@ -1088,6 +1116,7 @@ export namespace Prisma {
     VirtualAirline: 'VirtualAirline',
     VirtualAirlineRole: 'VirtualAirlineRole',
     World: 'World',
+    Notam: 'Notam',
     Member: 'Member',
     Company: 'Company',
     Aircraft: 'Aircraft',
@@ -1116,7 +1145,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "appConfig" | "inviteCode" | "discordMessage" | "discordMessageTemplate" | "discordChannelWebhook" | "listenerEvent" | "listenerEventSender" | "user" | "userPrivacySettings" | "role" | "permission" | "livery" | "liveryImage" | "liveryFile" | "virtualAirline" | "virtualAirlineRole" | "world" | "member" | "company" | "aircraft" | "aircraftClass" | "aircraftMaintenance" | "aircraftStatus" | "airport" | "flight" | "flightRoute" | "job"
+      modelProps: "appConfig" | "inviteCode" | "discordMessage" | "discordMessageTemplate" | "discordChannelWebhook" | "listenerEvent" | "listenerEventSender" | "user" | "userPrivacySettings" | "role" | "permission" | "livery" | "liveryImage" | "liveryFile" | "virtualAirline" | "virtualAirlineRole" | "world" | "notam" | "member" | "company" | "aircraft" | "aircraftClass" | "aircraftMaintenance" | "aircraftStatus" | "airport" | "flight" | "flightRoute" | "job"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2378,6 +2407,80 @@ export namespace Prisma {
           }
         }
       }
+      Notam: {
+        payload: Prisma.$NotamPayload<ExtArgs>
+        fields: Prisma.NotamFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.NotamFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotamPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.NotamFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotamPayload>
+          }
+          findFirst: {
+            args: Prisma.NotamFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotamPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.NotamFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotamPayload>
+          }
+          findMany: {
+            args: Prisma.NotamFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotamPayload>[]
+          }
+          create: {
+            args: Prisma.NotamCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotamPayload>
+          }
+          createMany: {
+            args: Prisma.NotamCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.NotamCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotamPayload>[]
+          }
+          delete: {
+            args: Prisma.NotamDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotamPayload>
+          }
+          update: {
+            args: Prisma.NotamUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotamPayload>
+          }
+          deleteMany: {
+            args: Prisma.NotamDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.NotamUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.NotamUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotamPayload>[]
+          }
+          upsert: {
+            args: Prisma.NotamUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotamPayload>
+          }
+          aggregate: {
+            args: Prisma.NotamAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateNotam>
+          }
+          groupBy: {
+            args: Prisma.NotamGroupByArgs<ExtArgs>
+            result: $Utils.Optional<NotamGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.NotamCountArgs<ExtArgs>
+            result: $Utils.Optional<NotamCountAggregateOutputType> | number
+          }
+        }
+      }
       Member: {
         payload: Prisma.$MemberPayload<ExtArgs>
         fields: Prisma.MemberFieldRefs
@@ -3227,6 +3330,7 @@ export namespace Prisma {
     virtualAirline?: VirtualAirlineOmit
     virtualAirlineRole?: VirtualAirlineRoleOmit
     world?: WorldOmit
+    notam?: NotamOmit
     member?: MemberOmit
     company?: CompanyOmit
     aircraft?: AircraftOmit
@@ -3453,12 +3557,14 @@ export namespace Prisma {
     Roles: number
     PrivacySettings: number
     Members: number
+    NOTAMs: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Roles?: boolean | UserCountOutputTypeCountRolesArgs
     PrivacySettings?: boolean | UserCountOutputTypeCountPrivacySettingsArgs
     Members?: boolean | UserCountOutputTypeCountMembersArgs
+    NOTAMs?: boolean | UserCountOutputTypeCountNOTAMsArgs
   }
 
   // Custom InputTypes
@@ -3491,6 +3597,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountMembersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MemberWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountNOTAMsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NotamWhereInput
   }
 
 
@@ -12420,6 +12533,7 @@ export namespace Prisma {
     PrivacySettings?: boolean | User$PrivacySettingsArgs<ExtArgs>
     Members?: boolean | User$MembersArgs<ExtArgs>
     InviteCode?: boolean | User$InviteCodeArgs<ExtArgs>
+    NOTAMs?: boolean | User$NOTAMsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -12515,6 +12629,7 @@ export namespace Prisma {
     PrivacySettings?: boolean | User$PrivacySettingsArgs<ExtArgs>
     Members?: boolean | User$MembersArgs<ExtArgs>
     InviteCode?: boolean | User$InviteCodeArgs<ExtArgs>
+    NOTAMs?: boolean | User$NOTAMsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -12531,6 +12646,7 @@ export namespace Prisma {
       PrivacySettings: Prisma.$UserPrivacySettingsPayload<ExtArgs>[]
       Members: Prisma.$MemberPayload<ExtArgs>[]
       InviteCode: Prisma.$InviteCodePayload<ExtArgs> | null
+      NOTAMs: Prisma.$NotamPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       Id: string
@@ -12956,6 +13072,7 @@ export namespace Prisma {
     PrivacySettings<T extends User$PrivacySettingsArgs<ExtArgs> = {}>(args?: Subset<T, User$PrivacySettingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPrivacySettingsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Members<T extends User$MembersArgs<ExtArgs> = {}>(args?: Subset<T, User$MembersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     InviteCode<T extends User$InviteCodeArgs<ExtArgs> = {}>(args?: Subset<T, User$InviteCodeArgs<ExtArgs>>): Prisma__InviteCodeClient<$Result.GetResult<Prisma.$InviteCodePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    NOTAMs<T extends User$NOTAMsArgs<ExtArgs> = {}>(args?: Subset<T, User$NOTAMsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotamPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -13494,6 +13611,30 @@ export namespace Prisma {
      */
     include?: InviteCodeInclude<ExtArgs> | null
     where?: InviteCodeWhereInput
+  }
+
+  /**
+   * User.NOTAMs
+   */
+  export type User$NOTAMsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notam
+     */
+    select?: NotamSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notam
+     */
+    omit?: NotamOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotamInclude<ExtArgs> | null
+    where?: NotamWhereInput
+    orderBy?: NotamOrderByWithRelationInput | NotamOrderByWithRelationInput[]
+    cursor?: NotamWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: NotamScalarFieldEnum | NotamScalarFieldEnum[]
   }
 
   /**
@@ -24449,6 +24590,1129 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: WorldInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Notam
+   */
+
+  export type AggregateNotam = {
+    _count: NotamCountAggregateOutputType | null
+    _min: NotamMinAggregateOutputType | null
+    _max: NotamMaxAggregateOutputType | null
+  }
+
+  export type NotamMinAggregateOutputType = {
+    Id: string | null
+    Title: string | null
+    Content: string | null
+    ExpirationDate: Date | null
+    Link: string | null
+    EffectiveDate: Date | null
+    Status: $Enums.NOTAMStatus | null
+    CreatedById: string | null
+    CreatedAt: Date | null
+    UpdatedAt: Date | null
+  }
+
+  export type NotamMaxAggregateOutputType = {
+    Id: string | null
+    Title: string | null
+    Content: string | null
+    ExpirationDate: Date | null
+    Link: string | null
+    EffectiveDate: Date | null
+    Status: $Enums.NOTAMStatus | null
+    CreatedById: string | null
+    CreatedAt: Date | null
+    UpdatedAt: Date | null
+  }
+
+  export type NotamCountAggregateOutputType = {
+    Id: number
+    Title: number
+    Content: number
+    ExpirationDate: number
+    Link: number
+    EffectiveDate: number
+    Status: number
+    CreatedById: number
+    CreatedAt: number
+    UpdatedAt: number
+    _all: number
+  }
+
+
+  export type NotamMinAggregateInputType = {
+    Id?: true
+    Title?: true
+    Content?: true
+    ExpirationDate?: true
+    Link?: true
+    EffectiveDate?: true
+    Status?: true
+    CreatedById?: true
+    CreatedAt?: true
+    UpdatedAt?: true
+  }
+
+  export type NotamMaxAggregateInputType = {
+    Id?: true
+    Title?: true
+    Content?: true
+    ExpirationDate?: true
+    Link?: true
+    EffectiveDate?: true
+    Status?: true
+    CreatedById?: true
+    CreatedAt?: true
+    UpdatedAt?: true
+  }
+
+  export type NotamCountAggregateInputType = {
+    Id?: true
+    Title?: true
+    Content?: true
+    ExpirationDate?: true
+    Link?: true
+    EffectiveDate?: true
+    Status?: true
+    CreatedById?: true
+    CreatedAt?: true
+    UpdatedAt?: true
+    _all?: true
+  }
+
+  export type NotamAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Notam to aggregate.
+     */
+    where?: NotamWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Notams to fetch.
+     */
+    orderBy?: NotamOrderByWithRelationInput | NotamOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: NotamWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Notams from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Notams.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Notams
+    **/
+    _count?: true | NotamCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: NotamMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: NotamMaxAggregateInputType
+  }
+
+  export type GetNotamAggregateType<T extends NotamAggregateArgs> = {
+        [P in keyof T & keyof AggregateNotam]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateNotam[P]>
+      : GetScalarType<T[P], AggregateNotam[P]>
+  }
+
+
+
+
+  export type NotamGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NotamWhereInput
+    orderBy?: NotamOrderByWithAggregationInput | NotamOrderByWithAggregationInput[]
+    by: NotamScalarFieldEnum[] | NotamScalarFieldEnum
+    having?: NotamScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: NotamCountAggregateInputType | true
+    _min?: NotamMinAggregateInputType
+    _max?: NotamMaxAggregateInputType
+  }
+
+  export type NotamGroupByOutputType = {
+    Id: string
+    Title: string
+    Content: string
+    ExpirationDate: Date | null
+    Link: string | null
+    EffectiveDate: Date
+    Status: $Enums.NOTAMStatus
+    CreatedById: string
+    CreatedAt: Date
+    UpdatedAt: Date
+    _count: NotamCountAggregateOutputType | null
+    _min: NotamMinAggregateOutputType | null
+    _max: NotamMaxAggregateOutputType | null
+  }
+
+  type GetNotamGroupByPayload<T extends NotamGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<NotamGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof NotamGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], NotamGroupByOutputType[P]>
+            : GetScalarType<T[P], NotamGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type NotamSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    Id?: boolean
+    Title?: boolean
+    Content?: boolean
+    ExpirationDate?: boolean
+    Link?: boolean
+    EffectiveDate?: boolean
+    Status?: boolean
+    CreatedById?: boolean
+    CreatedAt?: boolean
+    UpdatedAt?: boolean
+    CreatedBy?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["notam"]>
+
+  export type NotamSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    Id?: boolean
+    Title?: boolean
+    Content?: boolean
+    ExpirationDate?: boolean
+    Link?: boolean
+    EffectiveDate?: boolean
+    Status?: boolean
+    CreatedById?: boolean
+    CreatedAt?: boolean
+    UpdatedAt?: boolean
+    CreatedBy?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["notam"]>
+
+  export type NotamSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    Id?: boolean
+    Title?: boolean
+    Content?: boolean
+    ExpirationDate?: boolean
+    Link?: boolean
+    EffectiveDate?: boolean
+    Status?: boolean
+    CreatedById?: boolean
+    CreatedAt?: boolean
+    UpdatedAt?: boolean
+    CreatedBy?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["notam"]>
+
+  export type NotamSelectScalar = {
+    Id?: boolean
+    Title?: boolean
+    Content?: boolean
+    ExpirationDate?: boolean
+    Link?: boolean
+    EffectiveDate?: boolean
+    Status?: boolean
+    CreatedById?: boolean
+    CreatedAt?: boolean
+    UpdatedAt?: boolean
+  }
+
+  export type NotamOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "Title" | "Content" | "ExpirationDate" | "Link" | "EffectiveDate" | "Status" | "CreatedById" | "CreatedAt" | "UpdatedAt", ExtArgs["result"]["notam"]>
+  export type NotamInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    CreatedBy?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type NotamIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    CreatedBy?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type NotamIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    CreatedBy?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $NotamPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Notam"
+    objects: {
+      CreatedBy: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      Id: string
+      Title: string
+      Content: string
+      ExpirationDate: Date | null
+      Link: string | null
+      EffectiveDate: Date
+      Status: $Enums.NOTAMStatus
+      CreatedById: string
+      CreatedAt: Date
+      UpdatedAt: Date
+    }, ExtArgs["result"]["notam"]>
+    composites: {}
+  }
+
+  type NotamGetPayload<S extends boolean | null | undefined | NotamDefaultArgs> = $Result.GetResult<Prisma.$NotamPayload, S>
+
+  type NotamCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<NotamFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: NotamCountAggregateInputType | true
+    }
+
+  export interface NotamDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Notam'], meta: { name: 'Notam' } }
+    /**
+     * Find zero or one Notam that matches the filter.
+     * @param {NotamFindUniqueArgs} args - Arguments to find a Notam
+     * @example
+     * // Get one Notam
+     * const notam = await prisma.notam.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends NotamFindUniqueArgs>(args: SelectSubset<T, NotamFindUniqueArgs<ExtArgs>>): Prisma__NotamClient<$Result.GetResult<Prisma.$NotamPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Notam that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {NotamFindUniqueOrThrowArgs} args - Arguments to find a Notam
+     * @example
+     * // Get one Notam
+     * const notam = await prisma.notam.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends NotamFindUniqueOrThrowArgs>(args: SelectSubset<T, NotamFindUniqueOrThrowArgs<ExtArgs>>): Prisma__NotamClient<$Result.GetResult<Prisma.$NotamPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Notam that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotamFindFirstArgs} args - Arguments to find a Notam
+     * @example
+     * // Get one Notam
+     * const notam = await prisma.notam.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends NotamFindFirstArgs>(args?: SelectSubset<T, NotamFindFirstArgs<ExtArgs>>): Prisma__NotamClient<$Result.GetResult<Prisma.$NotamPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Notam that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotamFindFirstOrThrowArgs} args - Arguments to find a Notam
+     * @example
+     * // Get one Notam
+     * const notam = await prisma.notam.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends NotamFindFirstOrThrowArgs>(args?: SelectSubset<T, NotamFindFirstOrThrowArgs<ExtArgs>>): Prisma__NotamClient<$Result.GetResult<Prisma.$NotamPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Notams that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotamFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Notams
+     * const notams = await prisma.notam.findMany()
+     * 
+     * // Get first 10 Notams
+     * const notams = await prisma.notam.findMany({ take: 10 })
+     * 
+     * // Only select the `Id`
+     * const notamWithIdOnly = await prisma.notam.findMany({ select: { Id: true } })
+     * 
+     */
+    findMany<T extends NotamFindManyArgs>(args?: SelectSubset<T, NotamFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotamPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Notam.
+     * @param {NotamCreateArgs} args - Arguments to create a Notam.
+     * @example
+     * // Create one Notam
+     * const Notam = await prisma.notam.create({
+     *   data: {
+     *     // ... data to create a Notam
+     *   }
+     * })
+     * 
+     */
+    create<T extends NotamCreateArgs>(args: SelectSubset<T, NotamCreateArgs<ExtArgs>>): Prisma__NotamClient<$Result.GetResult<Prisma.$NotamPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Notams.
+     * @param {NotamCreateManyArgs} args - Arguments to create many Notams.
+     * @example
+     * // Create many Notams
+     * const notam = await prisma.notam.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends NotamCreateManyArgs>(args?: SelectSubset<T, NotamCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Notams and returns the data saved in the database.
+     * @param {NotamCreateManyAndReturnArgs} args - Arguments to create many Notams.
+     * @example
+     * // Create many Notams
+     * const notam = await prisma.notam.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Notams and only return the `Id`
+     * const notamWithIdOnly = await prisma.notam.createManyAndReturn({
+     *   select: { Id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends NotamCreateManyAndReturnArgs>(args?: SelectSubset<T, NotamCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotamPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Notam.
+     * @param {NotamDeleteArgs} args - Arguments to delete one Notam.
+     * @example
+     * // Delete one Notam
+     * const Notam = await prisma.notam.delete({
+     *   where: {
+     *     // ... filter to delete one Notam
+     *   }
+     * })
+     * 
+     */
+    delete<T extends NotamDeleteArgs>(args: SelectSubset<T, NotamDeleteArgs<ExtArgs>>): Prisma__NotamClient<$Result.GetResult<Prisma.$NotamPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Notam.
+     * @param {NotamUpdateArgs} args - Arguments to update one Notam.
+     * @example
+     * // Update one Notam
+     * const notam = await prisma.notam.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends NotamUpdateArgs>(args: SelectSubset<T, NotamUpdateArgs<ExtArgs>>): Prisma__NotamClient<$Result.GetResult<Prisma.$NotamPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Notams.
+     * @param {NotamDeleteManyArgs} args - Arguments to filter Notams to delete.
+     * @example
+     * // Delete a few Notams
+     * const { count } = await prisma.notam.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends NotamDeleteManyArgs>(args?: SelectSubset<T, NotamDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Notams.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotamUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Notams
+     * const notam = await prisma.notam.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends NotamUpdateManyArgs>(args: SelectSubset<T, NotamUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Notams and returns the data updated in the database.
+     * @param {NotamUpdateManyAndReturnArgs} args - Arguments to update many Notams.
+     * @example
+     * // Update many Notams
+     * const notam = await prisma.notam.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Notams and only return the `Id`
+     * const notamWithIdOnly = await prisma.notam.updateManyAndReturn({
+     *   select: { Id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends NotamUpdateManyAndReturnArgs>(args: SelectSubset<T, NotamUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotamPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Notam.
+     * @param {NotamUpsertArgs} args - Arguments to update or create a Notam.
+     * @example
+     * // Update or create a Notam
+     * const notam = await prisma.notam.upsert({
+     *   create: {
+     *     // ... data to create a Notam
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Notam we want to update
+     *   }
+     * })
+     */
+    upsert<T extends NotamUpsertArgs>(args: SelectSubset<T, NotamUpsertArgs<ExtArgs>>): Prisma__NotamClient<$Result.GetResult<Prisma.$NotamPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Notams.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotamCountArgs} args - Arguments to filter Notams to count.
+     * @example
+     * // Count the number of Notams
+     * const count = await prisma.notam.count({
+     *   where: {
+     *     // ... the filter for the Notams we want to count
+     *   }
+     * })
+    **/
+    count<T extends NotamCountArgs>(
+      args?: Subset<T, NotamCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], NotamCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Notam.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotamAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends NotamAggregateArgs>(args: Subset<T, NotamAggregateArgs>): Prisma.PrismaPromise<GetNotamAggregateType<T>>
+
+    /**
+     * Group by Notam.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotamGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends NotamGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: NotamGroupByArgs['orderBy'] }
+        : { orderBy?: NotamGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, NotamGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNotamGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Notam model
+   */
+  readonly fields: NotamFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Notam.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__NotamClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    CreatedBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Notam model
+   */
+  interface NotamFieldRefs {
+    readonly Id: FieldRef<"Notam", 'String'>
+    readonly Title: FieldRef<"Notam", 'String'>
+    readonly Content: FieldRef<"Notam", 'String'>
+    readonly ExpirationDate: FieldRef<"Notam", 'DateTime'>
+    readonly Link: FieldRef<"Notam", 'String'>
+    readonly EffectiveDate: FieldRef<"Notam", 'DateTime'>
+    readonly Status: FieldRef<"Notam", 'NOTAMStatus'>
+    readonly CreatedById: FieldRef<"Notam", 'String'>
+    readonly CreatedAt: FieldRef<"Notam", 'DateTime'>
+    readonly UpdatedAt: FieldRef<"Notam", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Notam findUnique
+   */
+  export type NotamFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notam
+     */
+    select?: NotamSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notam
+     */
+    omit?: NotamOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotamInclude<ExtArgs> | null
+    /**
+     * Filter, which Notam to fetch.
+     */
+    where: NotamWhereUniqueInput
+  }
+
+  /**
+   * Notam findUniqueOrThrow
+   */
+  export type NotamFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notam
+     */
+    select?: NotamSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notam
+     */
+    omit?: NotamOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotamInclude<ExtArgs> | null
+    /**
+     * Filter, which Notam to fetch.
+     */
+    where: NotamWhereUniqueInput
+  }
+
+  /**
+   * Notam findFirst
+   */
+  export type NotamFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notam
+     */
+    select?: NotamSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notam
+     */
+    omit?: NotamOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotamInclude<ExtArgs> | null
+    /**
+     * Filter, which Notam to fetch.
+     */
+    where?: NotamWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Notams to fetch.
+     */
+    orderBy?: NotamOrderByWithRelationInput | NotamOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Notams.
+     */
+    cursor?: NotamWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Notams from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Notams.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Notams.
+     */
+    distinct?: NotamScalarFieldEnum | NotamScalarFieldEnum[]
+  }
+
+  /**
+   * Notam findFirstOrThrow
+   */
+  export type NotamFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notam
+     */
+    select?: NotamSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notam
+     */
+    omit?: NotamOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotamInclude<ExtArgs> | null
+    /**
+     * Filter, which Notam to fetch.
+     */
+    where?: NotamWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Notams to fetch.
+     */
+    orderBy?: NotamOrderByWithRelationInput | NotamOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Notams.
+     */
+    cursor?: NotamWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Notams from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Notams.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Notams.
+     */
+    distinct?: NotamScalarFieldEnum | NotamScalarFieldEnum[]
+  }
+
+  /**
+   * Notam findMany
+   */
+  export type NotamFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notam
+     */
+    select?: NotamSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notam
+     */
+    omit?: NotamOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotamInclude<ExtArgs> | null
+    /**
+     * Filter, which Notams to fetch.
+     */
+    where?: NotamWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Notams to fetch.
+     */
+    orderBy?: NotamOrderByWithRelationInput | NotamOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Notams.
+     */
+    cursor?: NotamWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Notams from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Notams.
+     */
+    skip?: number
+    distinct?: NotamScalarFieldEnum | NotamScalarFieldEnum[]
+  }
+
+  /**
+   * Notam create
+   */
+  export type NotamCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notam
+     */
+    select?: NotamSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notam
+     */
+    omit?: NotamOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotamInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Notam.
+     */
+    data: XOR<NotamCreateInput, NotamUncheckedCreateInput>
+  }
+
+  /**
+   * Notam createMany
+   */
+  export type NotamCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Notams.
+     */
+    data: NotamCreateManyInput | NotamCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Notam createManyAndReturn
+   */
+  export type NotamCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notam
+     */
+    select?: NotamSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notam
+     */
+    omit?: NotamOmit<ExtArgs> | null
+    /**
+     * The data used to create many Notams.
+     */
+    data: NotamCreateManyInput | NotamCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotamIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Notam update
+   */
+  export type NotamUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notam
+     */
+    select?: NotamSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notam
+     */
+    omit?: NotamOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotamInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Notam.
+     */
+    data: XOR<NotamUpdateInput, NotamUncheckedUpdateInput>
+    /**
+     * Choose, which Notam to update.
+     */
+    where: NotamWhereUniqueInput
+  }
+
+  /**
+   * Notam updateMany
+   */
+  export type NotamUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Notams.
+     */
+    data: XOR<NotamUpdateManyMutationInput, NotamUncheckedUpdateManyInput>
+    /**
+     * Filter which Notams to update
+     */
+    where?: NotamWhereInput
+    /**
+     * Limit how many Notams to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Notam updateManyAndReturn
+   */
+  export type NotamUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notam
+     */
+    select?: NotamSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notam
+     */
+    omit?: NotamOmit<ExtArgs> | null
+    /**
+     * The data used to update Notams.
+     */
+    data: XOR<NotamUpdateManyMutationInput, NotamUncheckedUpdateManyInput>
+    /**
+     * Filter which Notams to update
+     */
+    where?: NotamWhereInput
+    /**
+     * Limit how many Notams to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotamIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Notam upsert
+   */
+  export type NotamUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notam
+     */
+    select?: NotamSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notam
+     */
+    omit?: NotamOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotamInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Notam to update in case it exists.
+     */
+    where: NotamWhereUniqueInput
+    /**
+     * In case the Notam found by the `where` argument doesn't exist, create a new Notam with this data.
+     */
+    create: XOR<NotamCreateInput, NotamUncheckedCreateInput>
+    /**
+     * In case the Notam was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<NotamUpdateInput, NotamUncheckedUpdateInput>
+  }
+
+  /**
+   * Notam delete
+   */
+  export type NotamDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notam
+     */
+    select?: NotamSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notam
+     */
+    omit?: NotamOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotamInclude<ExtArgs> | null
+    /**
+     * Filter which Notam to delete.
+     */
+    where: NotamWhereUniqueInput
+  }
+
+  /**
+   * Notam deleteMany
+   */
+  export type NotamDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Notams to delete
+     */
+    where?: NotamWhereInput
+    /**
+     * Limit how many Notams to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Notam without action
+   */
+  export type NotamDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notam
+     */
+    select?: NotamSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notam
+     */
+    omit?: NotamOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotamInclude<ExtArgs> | null
   }
 
 
@@ -37910,6 +39174,22 @@ export namespace Prisma {
   export type WorldScalarFieldEnum = (typeof WorldScalarFieldEnum)[keyof typeof WorldScalarFieldEnum]
 
 
+  export const NotamScalarFieldEnum: {
+    Id: 'Id',
+    Title: 'Title',
+    Content: 'Content',
+    ExpirationDate: 'ExpirationDate',
+    Link: 'Link',
+    EffectiveDate: 'EffectiveDate',
+    Status: 'Status',
+    CreatedById: 'CreatedById',
+    CreatedAt: 'CreatedAt',
+    UpdatedAt: 'UpdatedAt'
+  };
+
+  export type NotamScalarFieldEnum = (typeof NotamScalarFieldEnum)[keyof typeof NotamScalarFieldEnum]
+
+
   export const MemberScalarFieldEnum: {
     Id: 'Id',
     IsActive: 'IsActive',
@@ -38270,6 +39550,20 @@ export namespace Prisma {
    * Reference to a field of type 'Decimal[]'
    */
   export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'NOTAMStatus'
+   */
+  export type EnumNOTAMStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NOTAMStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'NOTAMStatus[]'
+   */
+  export type ListEnumNOTAMStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NOTAMStatus[]'>
     
 
 
@@ -38934,6 +40228,7 @@ export namespace Prisma {
     PrivacySettings?: UserPrivacySettingsListRelationFilter
     Members?: MemberListRelationFilter
     InviteCode?: XOR<InviteCodeNullableScalarRelationFilter, InviteCodeWhereInput> | null
+    NOTAMs?: NotamListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -38966,6 +40261,7 @@ export namespace Prisma {
     PrivacySettings?: UserPrivacySettingsOrderByRelationAggregateInput
     Members?: MemberOrderByRelationAggregateInput
     InviteCode?: InviteCodeOrderByWithRelationInput
+    NOTAMs?: NotamOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -39001,6 +40297,7 @@ export namespace Prisma {
     PrivacySettings?: UserPrivacySettingsListRelationFilter
     Members?: MemberListRelationFilter
     InviteCode?: XOR<InviteCodeNullableScalarRelationFilter, InviteCodeWhereInput> | null
+    NOTAMs?: NotamListRelationFilter
   }, "Id" | "Id" | "Username" | "Email" | "InviteCodeId" | "ConfirmEmailToken" | "ResetPasswordToken" | "DiscordId">
 
   export type UserOrderByWithAggregationInput = {
@@ -39890,6 +41187,86 @@ export namespace Prisma {
     Description?: StringNullableWithAggregatesFilter<"World"> | string | null
     CreatedAt?: DateTimeWithAggregatesFilter<"World"> | Date | string
     UpdatedAt?: DateTimeWithAggregatesFilter<"World"> | Date | string
+  }
+
+  export type NotamWhereInput = {
+    AND?: NotamWhereInput | NotamWhereInput[]
+    OR?: NotamWhereInput[]
+    NOT?: NotamWhereInput | NotamWhereInput[]
+    Id?: UuidFilter<"Notam"> | string
+    Title?: StringFilter<"Notam"> | string
+    Content?: StringFilter<"Notam"> | string
+    ExpirationDate?: DateTimeNullableFilter<"Notam"> | Date | string | null
+    Link?: StringNullableFilter<"Notam"> | string | null
+    EffectiveDate?: DateTimeFilter<"Notam"> | Date | string
+    Status?: EnumNOTAMStatusFilter<"Notam"> | $Enums.NOTAMStatus
+    CreatedById?: UuidFilter<"Notam"> | string
+    CreatedAt?: DateTimeFilter<"Notam"> | Date | string
+    UpdatedAt?: DateTimeFilter<"Notam"> | Date | string
+    CreatedBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type NotamOrderByWithRelationInput = {
+    Id?: SortOrder
+    Title?: SortOrder
+    Content?: SortOrder
+    ExpirationDate?: SortOrderInput | SortOrder
+    Link?: SortOrderInput | SortOrder
+    EffectiveDate?: SortOrder
+    Status?: SortOrder
+    CreatedById?: SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+    CreatedBy?: UserOrderByWithRelationInput
+  }
+
+  export type NotamWhereUniqueInput = Prisma.AtLeast<{
+    Id?: string
+    AND?: NotamWhereInput | NotamWhereInput[]
+    OR?: NotamWhereInput[]
+    NOT?: NotamWhereInput | NotamWhereInput[]
+    Title?: StringFilter<"Notam"> | string
+    Content?: StringFilter<"Notam"> | string
+    ExpirationDate?: DateTimeNullableFilter<"Notam"> | Date | string | null
+    Link?: StringNullableFilter<"Notam"> | string | null
+    EffectiveDate?: DateTimeFilter<"Notam"> | Date | string
+    Status?: EnumNOTAMStatusFilter<"Notam"> | $Enums.NOTAMStatus
+    CreatedById?: UuidFilter<"Notam"> | string
+    CreatedAt?: DateTimeFilter<"Notam"> | Date | string
+    UpdatedAt?: DateTimeFilter<"Notam"> | Date | string
+    CreatedBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "Id">
+
+  export type NotamOrderByWithAggregationInput = {
+    Id?: SortOrder
+    Title?: SortOrder
+    Content?: SortOrder
+    ExpirationDate?: SortOrderInput | SortOrder
+    Link?: SortOrderInput | SortOrder
+    EffectiveDate?: SortOrder
+    Status?: SortOrder
+    CreatedById?: SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+    _count?: NotamCountOrderByAggregateInput
+    _max?: NotamMaxOrderByAggregateInput
+    _min?: NotamMinOrderByAggregateInput
+  }
+
+  export type NotamScalarWhereWithAggregatesInput = {
+    AND?: NotamScalarWhereWithAggregatesInput | NotamScalarWhereWithAggregatesInput[]
+    OR?: NotamScalarWhereWithAggregatesInput[]
+    NOT?: NotamScalarWhereWithAggregatesInput | NotamScalarWhereWithAggregatesInput[]
+    Id?: UuidWithAggregatesFilter<"Notam"> | string
+    Title?: StringWithAggregatesFilter<"Notam"> | string
+    Content?: StringWithAggregatesFilter<"Notam"> | string
+    ExpirationDate?: DateTimeNullableWithAggregatesFilter<"Notam"> | Date | string | null
+    Link?: StringNullableWithAggregatesFilter<"Notam"> | string | null
+    EffectiveDate?: DateTimeWithAggregatesFilter<"Notam"> | Date | string
+    Status?: EnumNOTAMStatusWithAggregatesFilter<"Notam"> | $Enums.NOTAMStatus
+    CreatedById?: UuidWithAggregatesFilter<"Notam"> | string
+    CreatedAt?: DateTimeWithAggregatesFilter<"Notam"> | Date | string
+    UpdatedAt?: DateTimeWithAggregatesFilter<"Notam"> | Date | string
   }
 
   export type MemberWhereInput = {
@@ -41754,6 +43131,7 @@ export namespace Prisma {
     PrivacySettings?: UserPrivacySettingsCreateNestedManyWithoutUserInput
     Members?: MemberCreateNestedManyWithoutUserInput
     InviteCode?: InviteCodeCreateNestedOneWithoutUserInput
+    NOTAMs?: NotamCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -41785,6 +43163,7 @@ export namespace Prisma {
     Roles?: RoleUncheckedCreateNestedManyWithoutUsersInput
     PrivacySettings?: UserPrivacySettingsUncheckedCreateNestedManyWithoutUserInput
     Members?: MemberUncheckedCreateNestedManyWithoutUserInput
+    NOTAMs?: NotamUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUpdateInput = {
@@ -41816,6 +43195,7 @@ export namespace Prisma {
     PrivacySettings?: UserPrivacySettingsUpdateManyWithoutUserNestedInput
     Members?: MemberUpdateManyWithoutUserNestedInput
     InviteCode?: InviteCodeUpdateOneWithoutUserNestedInput
+    NOTAMs?: NotamUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -41847,6 +43227,7 @@ export namespace Prisma {
     Roles?: RoleUncheckedUpdateManyWithoutUsersNestedInput
     PrivacySettings?: UserPrivacySettingsUncheckedUpdateManyWithoutUserNestedInput
     Members?: MemberUncheckedUpdateManyWithoutUserNestedInput
+    NOTAMs?: NotamUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -42870,6 +44251,96 @@ export namespace Prisma {
     Name?: StringFieldUpdateOperationsInput | string
     Slug?: StringFieldUpdateOperationsInput | string
     Description?: NullableStringFieldUpdateOperationsInput | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotamCreateInput = {
+    Id?: string
+    Title: string
+    Content: string
+    ExpirationDate?: Date | string | null
+    Link?: string | null
+    EffectiveDate?: Date | string
+    Status?: $Enums.NOTAMStatus
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    CreatedBy: UserCreateNestedOneWithoutNOTAMsInput
+  }
+
+  export type NotamUncheckedCreateInput = {
+    Id?: string
+    Title: string
+    Content: string
+    ExpirationDate?: Date | string | null
+    Link?: string | null
+    EffectiveDate?: Date | string
+    Status?: $Enums.NOTAMStatus
+    CreatedById: string
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+  }
+
+  export type NotamUpdateInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Title?: StringFieldUpdateOperationsInput | string
+    Content?: StringFieldUpdateOperationsInput | string
+    ExpirationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Link?: NullableStringFieldUpdateOperationsInput | string | null
+    EffectiveDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    Status?: EnumNOTAMStatusFieldUpdateOperationsInput | $Enums.NOTAMStatus
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    CreatedBy?: UserUpdateOneRequiredWithoutNOTAMsNestedInput
+  }
+
+  export type NotamUncheckedUpdateInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Title?: StringFieldUpdateOperationsInput | string
+    Content?: StringFieldUpdateOperationsInput | string
+    ExpirationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Link?: NullableStringFieldUpdateOperationsInput | string | null
+    EffectiveDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    Status?: EnumNOTAMStatusFieldUpdateOperationsInput | $Enums.NOTAMStatus
+    CreatedById?: StringFieldUpdateOperationsInput | string
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotamCreateManyInput = {
+    Id?: string
+    Title: string
+    Content: string
+    ExpirationDate?: Date | string | null
+    Link?: string | null
+    EffectiveDate?: Date | string
+    Status?: $Enums.NOTAMStatus
+    CreatedById: string
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+  }
+
+  export type NotamUpdateManyMutationInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Title?: StringFieldUpdateOperationsInput | string
+    Content?: StringFieldUpdateOperationsInput | string
+    ExpirationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Link?: NullableStringFieldUpdateOperationsInput | string | null
+    EffectiveDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    Status?: EnumNOTAMStatusFieldUpdateOperationsInput | $Enums.NOTAMStatus
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotamUncheckedUpdateManyInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Title?: StringFieldUpdateOperationsInput | string
+    Content?: StringFieldUpdateOperationsInput | string
+    ExpirationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Link?: NullableStringFieldUpdateOperationsInput | string | null
+    EffectiveDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    Status?: EnumNOTAMStatusFieldUpdateOperationsInput | $Enums.NOTAMStatus
+    CreatedById?: StringFieldUpdateOperationsInput | string
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -44960,6 +46431,12 @@ export namespace Prisma {
     isNot?: InviteCodeWhereInput | null
   }
 
+  export type NotamListRelationFilter = {
+    every?: NotamWhereInput
+    some?: NotamWhereInput
+    none?: NotamWhereInput
+  }
+
   export type RoleOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -44969,6 +46446,10 @@ export namespace Prisma {
   }
 
   export type MemberOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type NotamOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -45698,6 +47179,62 @@ export namespace Prisma {
     Description?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
+  }
+
+  export type EnumNOTAMStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.NOTAMStatus | EnumNOTAMStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.NOTAMStatus[] | ListEnumNOTAMStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.NOTAMStatus[] | ListEnumNOTAMStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumNOTAMStatusFilter<$PrismaModel> | $Enums.NOTAMStatus
+  }
+
+  export type NotamCountOrderByAggregateInput = {
+    Id?: SortOrder
+    Title?: SortOrder
+    Content?: SortOrder
+    ExpirationDate?: SortOrder
+    Link?: SortOrder
+    EffectiveDate?: SortOrder
+    Status?: SortOrder
+    CreatedById?: SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+  }
+
+  export type NotamMaxOrderByAggregateInput = {
+    Id?: SortOrder
+    Title?: SortOrder
+    Content?: SortOrder
+    ExpirationDate?: SortOrder
+    Link?: SortOrder
+    EffectiveDate?: SortOrder
+    Status?: SortOrder
+    CreatedById?: SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+  }
+
+  export type NotamMinOrderByAggregateInput = {
+    Id?: SortOrder
+    Title?: SortOrder
+    Content?: SortOrder
+    ExpirationDate?: SortOrder
+    Link?: SortOrder
+    EffectiveDate?: SortOrder
+    Status?: SortOrder
+    CreatedById?: SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+  }
+
+  export type EnumNOTAMStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.NOTAMStatus | EnumNOTAMStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.NOTAMStatus[] | ListEnumNOTAMStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.NOTAMStatus[] | ListEnumNOTAMStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumNOTAMStatusWithAggregatesFilter<$PrismaModel> | $Enums.NOTAMStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumNOTAMStatusFilter<$PrismaModel>
+    _max?: NestedEnumNOTAMStatusFilter<$PrismaModel>
   }
 
   export type CompanyScalarRelationFilter = {
@@ -46979,6 +48516,13 @@ export namespace Prisma {
     connect?: InviteCodeWhereUniqueInput
   }
 
+  export type NotamCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<NotamCreateWithoutCreatedByInput, NotamUncheckedCreateWithoutCreatedByInput> | NotamCreateWithoutCreatedByInput[] | NotamUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: NotamCreateOrConnectWithoutCreatedByInput | NotamCreateOrConnectWithoutCreatedByInput[]
+    createMany?: NotamCreateManyCreatedByInputEnvelope
+    connect?: NotamWhereUniqueInput | NotamWhereUniqueInput[]
+  }
+
   export type RoleUncheckedCreateNestedManyWithoutUsersInput = {
     create?: XOR<RoleCreateWithoutUsersInput, RoleUncheckedCreateWithoutUsersInput> | RoleCreateWithoutUsersInput[] | RoleUncheckedCreateWithoutUsersInput[]
     connectOrCreate?: RoleCreateOrConnectWithoutUsersInput | RoleCreateOrConnectWithoutUsersInput[]
@@ -46997,6 +48541,13 @@ export namespace Prisma {
     connectOrCreate?: MemberCreateOrConnectWithoutUserInput | MemberCreateOrConnectWithoutUserInput[]
     createMany?: MemberCreateManyUserInputEnvelope
     connect?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+  }
+
+  export type NotamUncheckedCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<NotamCreateWithoutCreatedByInput, NotamUncheckedCreateWithoutCreatedByInput> | NotamCreateWithoutCreatedByInput[] | NotamUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: NotamCreateOrConnectWithoutCreatedByInput | NotamCreateOrConnectWithoutCreatedByInput[]
+    createMany?: NotamCreateManyCreatedByInputEnvelope
+    connect?: NotamWhereUniqueInput | NotamWhereUniqueInput[]
   }
 
   export type RoleUpdateManyWithoutUsersNestedInput = {
@@ -47050,6 +48601,20 @@ export namespace Prisma {
     update?: XOR<XOR<InviteCodeUpdateToOneWithWhereWithoutUserInput, InviteCodeUpdateWithoutUserInput>, InviteCodeUncheckedUpdateWithoutUserInput>
   }
 
+  export type NotamUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<NotamCreateWithoutCreatedByInput, NotamUncheckedCreateWithoutCreatedByInput> | NotamCreateWithoutCreatedByInput[] | NotamUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: NotamCreateOrConnectWithoutCreatedByInput | NotamCreateOrConnectWithoutCreatedByInput[]
+    upsert?: NotamUpsertWithWhereUniqueWithoutCreatedByInput | NotamUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: NotamCreateManyCreatedByInputEnvelope
+    set?: NotamWhereUniqueInput | NotamWhereUniqueInput[]
+    disconnect?: NotamWhereUniqueInput | NotamWhereUniqueInput[]
+    delete?: NotamWhereUniqueInput | NotamWhereUniqueInput[]
+    connect?: NotamWhereUniqueInput | NotamWhereUniqueInput[]
+    update?: NotamUpdateWithWhereUniqueWithoutCreatedByInput | NotamUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: NotamUpdateManyWithWhereWithoutCreatedByInput | NotamUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: NotamScalarWhereInput | NotamScalarWhereInput[]
+  }
+
   export type RoleUncheckedUpdateManyWithoutUsersNestedInput = {
     create?: XOR<RoleCreateWithoutUsersInput, RoleUncheckedCreateWithoutUsersInput> | RoleCreateWithoutUsersInput[] | RoleUncheckedCreateWithoutUsersInput[]
     connectOrCreate?: RoleCreateOrConnectWithoutUsersInput | RoleCreateOrConnectWithoutUsersInput[]
@@ -47089,6 +48654,20 @@ export namespace Prisma {
     update?: MemberUpdateWithWhereUniqueWithoutUserInput | MemberUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: MemberUpdateManyWithWhereWithoutUserInput | MemberUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: MemberScalarWhereInput | MemberScalarWhereInput[]
+  }
+
+  export type NotamUncheckedUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<NotamCreateWithoutCreatedByInput, NotamUncheckedCreateWithoutCreatedByInput> | NotamCreateWithoutCreatedByInput[] | NotamUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: NotamCreateOrConnectWithoutCreatedByInput | NotamCreateOrConnectWithoutCreatedByInput[]
+    upsert?: NotamUpsertWithWhereUniqueWithoutCreatedByInput | NotamUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: NotamCreateManyCreatedByInputEnvelope
+    set?: NotamWhereUniqueInput | NotamWhereUniqueInput[]
+    disconnect?: NotamWhereUniqueInput | NotamWhereUniqueInput[]
+    delete?: NotamWhereUniqueInput | NotamWhereUniqueInput[]
+    connect?: NotamWhereUniqueInput | NotamWhereUniqueInput[]
+    update?: NotamUpdateWithWhereUniqueWithoutCreatedByInput | NotamUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: NotamUpdateManyWithWhereWithoutCreatedByInput | NotamUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: NotamScalarWhereInput | NotamScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutPrivacySettingsInput = {
@@ -47733,6 +49312,24 @@ export namespace Prisma {
     update?: CompanyUpdateWithWhereUniqueWithoutWorldInput | CompanyUpdateWithWhereUniqueWithoutWorldInput[]
     updateMany?: CompanyUpdateManyWithWhereWithoutWorldInput | CompanyUpdateManyWithWhereWithoutWorldInput[]
     deleteMany?: CompanyScalarWhereInput | CompanyScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutNOTAMsInput = {
+    create?: XOR<UserCreateWithoutNOTAMsInput, UserUncheckedCreateWithoutNOTAMsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutNOTAMsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EnumNOTAMStatusFieldUpdateOperationsInput = {
+    set?: $Enums.NOTAMStatus
+  }
+
+  export type UserUpdateOneRequiredWithoutNOTAMsNestedInput = {
+    create?: XOR<UserCreateWithoutNOTAMsInput, UserUncheckedCreateWithoutNOTAMsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutNOTAMsInput
+    upsert?: UserUpsertWithoutNOTAMsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutNOTAMsInput, UserUpdateWithoutNOTAMsInput>, UserUncheckedUpdateWithoutNOTAMsInput>
   }
 
   export type CompanyCreateNestedOneWithoutOwnerInput = {
@@ -49016,6 +50613,23 @@ export namespace Prisma {
     _max?: NestedDecimalFilter<$PrismaModel>
   }
 
+  export type NestedEnumNOTAMStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.NOTAMStatus | EnumNOTAMStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.NOTAMStatus[] | ListEnumNOTAMStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.NOTAMStatus[] | ListEnumNOTAMStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumNOTAMStatusFilter<$PrismaModel> | $Enums.NOTAMStatus
+  }
+
+  export type NestedEnumNOTAMStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.NOTAMStatus | EnumNOTAMStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.NOTAMStatus[] | ListEnumNOTAMStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.NOTAMStatus[] | ListEnumNOTAMStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumNOTAMStatusWithAggregatesFilter<$PrismaModel> | $Enums.NOTAMStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumNOTAMStatusFilter<$PrismaModel>
+    _max?: NestedEnumNOTAMStatusFilter<$PrismaModel>
+  }
+
   export type NestedEnumFlightStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.FlightStatus | EnumFlightStatusFieldRefInput<$PrismaModel>
     in?: $Enums.FlightStatus[] | ListEnumFlightStatusFieldRefInput<$PrismaModel>
@@ -49112,6 +50726,7 @@ export namespace Prisma {
     Roles?: RoleCreateNestedManyWithoutUsersInput
     PrivacySettings?: UserPrivacySettingsCreateNestedManyWithoutUserInput
     Members?: MemberCreateNestedManyWithoutUserInput
+    NOTAMs?: NotamCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutInviteCodeInput = {
@@ -49142,6 +50757,7 @@ export namespace Prisma {
     Roles?: RoleUncheckedCreateNestedManyWithoutUsersInput
     PrivacySettings?: UserPrivacySettingsUncheckedCreateNestedManyWithoutUserInput
     Members?: MemberUncheckedCreateNestedManyWithoutUserInput
+    NOTAMs?: NotamUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutInviteCodeInput = {
@@ -49188,6 +50804,7 @@ export namespace Prisma {
     Roles?: RoleUpdateManyWithoutUsersNestedInput
     PrivacySettings?: UserPrivacySettingsUpdateManyWithoutUserNestedInput
     Members?: MemberUpdateManyWithoutUserNestedInput
+    NOTAMs?: NotamUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutInviteCodeInput = {
@@ -49218,6 +50835,7 @@ export namespace Prisma {
     Roles?: RoleUncheckedUpdateManyWithoutUsersNestedInput
     PrivacySettings?: UserPrivacySettingsUncheckedUpdateManyWithoutUserNestedInput
     Members?: MemberUncheckedUpdateManyWithoutUserNestedInput
+    NOTAMs?: NotamUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type DiscordMessageTemplateCreateWithoutDiscordMessagesInput = {
@@ -49968,6 +51586,40 @@ export namespace Prisma {
     create: XOR<InviteCodeCreateWithoutUserInput, InviteCodeUncheckedCreateWithoutUserInput>
   }
 
+  export type NotamCreateWithoutCreatedByInput = {
+    Id?: string
+    Title: string
+    Content: string
+    ExpirationDate?: Date | string | null
+    Link?: string | null
+    EffectiveDate?: Date | string
+    Status?: $Enums.NOTAMStatus
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+  }
+
+  export type NotamUncheckedCreateWithoutCreatedByInput = {
+    Id?: string
+    Title: string
+    Content: string
+    ExpirationDate?: Date | string | null
+    Link?: string | null
+    EffectiveDate?: Date | string
+    Status?: $Enums.NOTAMStatus
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+  }
+
+  export type NotamCreateOrConnectWithoutCreatedByInput = {
+    where: NotamWhereUniqueInput
+    create: XOR<NotamCreateWithoutCreatedByInput, NotamUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type NotamCreateManyCreatedByInputEnvelope = {
+    data: NotamCreateManyCreatedByInput | NotamCreateManyCreatedByInput[]
+    skipDuplicates?: boolean
+  }
+
   export type RoleUpsertWithWhereUniqueWithoutUsersInput = {
     where: RoleWhereUniqueInput
     update: XOR<RoleUpdateWithoutUsersInput, RoleUncheckedUpdateWithoutUsersInput>
@@ -50097,6 +51749,38 @@ export namespace Prisma {
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type NotamUpsertWithWhereUniqueWithoutCreatedByInput = {
+    where: NotamWhereUniqueInput
+    update: XOR<NotamUpdateWithoutCreatedByInput, NotamUncheckedUpdateWithoutCreatedByInput>
+    create: XOR<NotamCreateWithoutCreatedByInput, NotamUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type NotamUpdateWithWhereUniqueWithoutCreatedByInput = {
+    where: NotamWhereUniqueInput
+    data: XOR<NotamUpdateWithoutCreatedByInput, NotamUncheckedUpdateWithoutCreatedByInput>
+  }
+
+  export type NotamUpdateManyWithWhereWithoutCreatedByInput = {
+    where: NotamScalarWhereInput
+    data: XOR<NotamUpdateManyMutationInput, NotamUncheckedUpdateManyWithoutCreatedByInput>
+  }
+
+  export type NotamScalarWhereInput = {
+    AND?: NotamScalarWhereInput | NotamScalarWhereInput[]
+    OR?: NotamScalarWhereInput[]
+    NOT?: NotamScalarWhereInput | NotamScalarWhereInput[]
+    Id?: UuidFilter<"Notam"> | string
+    Title?: StringFilter<"Notam"> | string
+    Content?: StringFilter<"Notam"> | string
+    ExpirationDate?: DateTimeNullableFilter<"Notam"> | Date | string | null
+    Link?: StringNullableFilter<"Notam"> | string | null
+    EffectiveDate?: DateTimeFilter<"Notam"> | Date | string
+    Status?: EnumNOTAMStatusFilter<"Notam"> | $Enums.NOTAMStatus
+    CreatedById?: UuidFilter<"Notam"> | string
+    CreatedAt?: DateTimeFilter<"Notam"> | Date | string
+    UpdatedAt?: DateTimeFilter<"Notam"> | Date | string
+  }
+
   export type UserCreateWithoutPrivacySettingsInput = {
     Id?: string
     Username: string
@@ -50125,6 +51809,7 @@ export namespace Prisma {
     Roles?: RoleCreateNestedManyWithoutUsersInput
     Members?: MemberCreateNestedManyWithoutUserInput
     InviteCode?: InviteCodeCreateNestedOneWithoutUserInput
+    NOTAMs?: NotamCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutPrivacySettingsInput = {
@@ -50155,6 +51840,7 @@ export namespace Prisma {
     DiscordEmail?: string | null
     Roles?: RoleUncheckedCreateNestedManyWithoutUsersInput
     Members?: MemberUncheckedCreateNestedManyWithoutUserInput
+    NOTAMs?: NotamUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutPrivacySettingsInput = {
@@ -50201,6 +51887,7 @@ export namespace Prisma {
     Roles?: RoleUpdateManyWithoutUsersNestedInput
     Members?: MemberUpdateManyWithoutUserNestedInput
     InviteCode?: InviteCodeUpdateOneWithoutUserNestedInput
+    NOTAMs?: NotamUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPrivacySettingsInput = {
@@ -50231,6 +51918,7 @@ export namespace Prisma {
     DiscordEmail?: NullableStringFieldUpdateOperationsInput | string | null
     Roles?: RoleUncheckedUpdateManyWithoutUsersNestedInput
     Members?: MemberUncheckedUpdateManyWithoutUserNestedInput
+    NOTAMs?: NotamUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type PermissionCreateWithoutRolesInput = {
@@ -50283,6 +51971,7 @@ export namespace Prisma {
     PrivacySettings?: UserPrivacySettingsCreateNestedManyWithoutUserInput
     Members?: MemberCreateNestedManyWithoutUserInput
     InviteCode?: InviteCodeCreateNestedOneWithoutUserInput
+    NOTAMs?: NotamCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutRolesInput = {
@@ -50313,6 +52002,7 @@ export namespace Prisma {
     DiscordEmail?: string | null
     PrivacySettings?: UserPrivacySettingsUncheckedCreateNestedManyWithoutUserInput
     Members?: MemberUncheckedCreateNestedManyWithoutUserInput
+    NOTAMs?: NotamUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutRolesInput = {
@@ -51906,6 +53596,146 @@ export namespace Prisma {
     UpdatedAt?: DateTimeFilter<"Company"> | Date | string
   }
 
+  export type UserCreateWithoutNOTAMsInput = {
+    Id?: string
+    Username: string
+    Password?: string | null
+    Email?: string | null
+    FirstName?: string | null
+    LastName?: string | null
+    FirstLoginCompleted?: boolean
+    IsOnline?: boolean
+    IsBanned?: boolean
+    BanReason?: string | null
+    BanExpiresAt?: Date | string | null
+    IsVerified?: boolean
+    LastLogin?: Date | string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    WelcomeEmailSentAt?: Date | string | null
+    ConfirmEmailToken?: string | null
+    EmailVerifiedAt?: Date | string | null
+    ResetPasswordToken?: string | null
+    ResetPasswordEmailSentAt?: Date | string | null
+    DiscordId?: string | null
+    DiscordUsername?: string | null
+    DiscordAvatar?: string | null
+    DiscordEmail?: string | null
+    Roles?: RoleCreateNestedManyWithoutUsersInput
+    PrivacySettings?: UserPrivacySettingsCreateNestedManyWithoutUserInput
+    Members?: MemberCreateNestedManyWithoutUserInput
+    InviteCode?: InviteCodeCreateNestedOneWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutNOTAMsInput = {
+    Id?: string
+    Username: string
+    Password?: string | null
+    Email?: string | null
+    FirstName?: string | null
+    LastName?: string | null
+    FirstLoginCompleted?: boolean
+    IsOnline?: boolean
+    IsBanned?: boolean
+    BanReason?: string | null
+    BanExpiresAt?: Date | string | null
+    IsVerified?: boolean
+    LastLogin?: Date | string | null
+    InviteCodeId?: string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    WelcomeEmailSentAt?: Date | string | null
+    ConfirmEmailToken?: string | null
+    EmailVerifiedAt?: Date | string | null
+    ResetPasswordToken?: string | null
+    ResetPasswordEmailSentAt?: Date | string | null
+    DiscordId?: string | null
+    DiscordUsername?: string | null
+    DiscordAvatar?: string | null
+    DiscordEmail?: string | null
+    Roles?: RoleUncheckedCreateNestedManyWithoutUsersInput
+    PrivacySettings?: UserPrivacySettingsUncheckedCreateNestedManyWithoutUserInput
+    Members?: MemberUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutNOTAMsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutNOTAMsInput, UserUncheckedCreateWithoutNOTAMsInput>
+  }
+
+  export type UserUpsertWithoutNOTAMsInput = {
+    update: XOR<UserUpdateWithoutNOTAMsInput, UserUncheckedUpdateWithoutNOTAMsInput>
+    create: XOR<UserCreateWithoutNOTAMsInput, UserUncheckedCreateWithoutNOTAMsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutNOTAMsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutNOTAMsInput, UserUncheckedUpdateWithoutNOTAMsInput>
+  }
+
+  export type UserUpdateWithoutNOTAMsInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Username?: StringFieldUpdateOperationsInput | string
+    Password?: NullableStringFieldUpdateOperationsInput | string | null
+    Email?: NullableStringFieldUpdateOperationsInput | string | null
+    FirstName?: NullableStringFieldUpdateOperationsInput | string | null
+    LastName?: NullableStringFieldUpdateOperationsInput | string | null
+    FirstLoginCompleted?: BoolFieldUpdateOperationsInput | boolean
+    IsOnline?: BoolFieldUpdateOperationsInput | boolean
+    IsBanned?: BoolFieldUpdateOperationsInput | boolean
+    BanReason?: NullableStringFieldUpdateOperationsInput | string | null
+    BanExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    IsVerified?: BoolFieldUpdateOperationsInput | boolean
+    LastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    WelcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ConfirmEmailToken?: NullableStringFieldUpdateOperationsInput | string | null
+    EmailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ResetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    ResetPasswordEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    DiscordId?: NullableStringFieldUpdateOperationsInput | string | null
+    DiscordUsername?: NullableStringFieldUpdateOperationsInput | string | null
+    DiscordAvatar?: NullableStringFieldUpdateOperationsInput | string | null
+    DiscordEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    Roles?: RoleUpdateManyWithoutUsersNestedInput
+    PrivacySettings?: UserPrivacySettingsUpdateManyWithoutUserNestedInput
+    Members?: MemberUpdateManyWithoutUserNestedInput
+    InviteCode?: InviteCodeUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutNOTAMsInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Username?: StringFieldUpdateOperationsInput | string
+    Password?: NullableStringFieldUpdateOperationsInput | string | null
+    Email?: NullableStringFieldUpdateOperationsInput | string | null
+    FirstName?: NullableStringFieldUpdateOperationsInput | string | null
+    LastName?: NullableStringFieldUpdateOperationsInput | string | null
+    FirstLoginCompleted?: BoolFieldUpdateOperationsInput | boolean
+    IsOnline?: BoolFieldUpdateOperationsInput | boolean
+    IsBanned?: BoolFieldUpdateOperationsInput | boolean
+    BanReason?: NullableStringFieldUpdateOperationsInput | string | null
+    BanExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    IsVerified?: BoolFieldUpdateOperationsInput | boolean
+    LastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    InviteCodeId?: NullableStringFieldUpdateOperationsInput | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    WelcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ConfirmEmailToken?: NullableStringFieldUpdateOperationsInput | string | null
+    EmailVerifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ResetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    ResetPasswordEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    DiscordId?: NullableStringFieldUpdateOperationsInput | string | null
+    DiscordUsername?: NullableStringFieldUpdateOperationsInput | string | null
+    DiscordAvatar?: NullableStringFieldUpdateOperationsInput | string | null
+    DiscordEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    Roles?: RoleUncheckedUpdateManyWithoutUsersNestedInput
+    PrivacySettings?: UserPrivacySettingsUncheckedUpdateManyWithoutUserNestedInput
+    Members?: MemberUncheckedUpdateManyWithoutUserNestedInput
+  }
+
   export type CompanyCreateWithoutOwnerInput = {
     Id: string
     Name: string
@@ -52231,6 +54061,7 @@ export namespace Prisma {
     Roles?: RoleCreateNestedManyWithoutUsersInput
     PrivacySettings?: UserPrivacySettingsCreateNestedManyWithoutUserInput
     InviteCode?: InviteCodeCreateNestedOneWithoutUserInput
+    NOTAMs?: NotamCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutMembersInput = {
@@ -52261,6 +54092,7 @@ export namespace Prisma {
     DiscordEmail?: string | null
     Roles?: RoleUncheckedCreateNestedManyWithoutUsersInput
     PrivacySettings?: UserPrivacySettingsUncheckedCreateNestedManyWithoutUserInput
+    NOTAMs?: NotamUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutMembersInput = {
@@ -52522,6 +54354,7 @@ export namespace Prisma {
     Roles?: RoleUpdateManyWithoutUsersNestedInput
     PrivacySettings?: UserPrivacySettingsUpdateManyWithoutUserNestedInput
     InviteCode?: InviteCodeUpdateOneWithoutUserNestedInput
+    NOTAMs?: NotamUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMembersInput = {
@@ -52552,6 +54385,7 @@ export namespace Prisma {
     DiscordEmail?: NullableStringFieldUpdateOperationsInput | string | null
     Roles?: RoleUncheckedUpdateManyWithoutUsersNestedInput
     PrivacySettings?: UserPrivacySettingsUncheckedUpdateManyWithoutUserNestedInput
+    NOTAMs?: NotamUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type FlightRouteUpsertWithWhereUniqueWithoutMemberInput = {
@@ -56005,6 +57839,18 @@ export namespace Prisma {
     CompanyId: string
   }
 
+  export type NotamCreateManyCreatedByInput = {
+    Id?: string
+    Title: string
+    Content: string
+    ExpirationDate?: Date | string | null
+    Link?: string | null
+    EffectiveDate?: Date | string
+    Status?: $Enums.NOTAMStatus
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+  }
+
   export type RoleUpdateWithoutUsersInput = {
     Name?: StringFieldUpdateOperationsInput | string
     Description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -56133,6 +57979,42 @@ export namespace Prisma {
     CompanyId?: StringFieldUpdateOperationsInput | string
   }
 
+  export type NotamUpdateWithoutCreatedByInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Title?: StringFieldUpdateOperationsInput | string
+    Content?: StringFieldUpdateOperationsInput | string
+    ExpirationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Link?: NullableStringFieldUpdateOperationsInput | string | null
+    EffectiveDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    Status?: EnumNOTAMStatusFieldUpdateOperationsInput | $Enums.NOTAMStatus
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotamUncheckedUpdateWithoutCreatedByInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Title?: StringFieldUpdateOperationsInput | string
+    Content?: StringFieldUpdateOperationsInput | string
+    ExpirationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Link?: NullableStringFieldUpdateOperationsInput | string | null
+    EffectiveDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    Status?: EnumNOTAMStatusFieldUpdateOperationsInput | $Enums.NOTAMStatus
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotamUncheckedUpdateManyWithoutCreatedByInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Title?: StringFieldUpdateOperationsInput | string
+    Content?: StringFieldUpdateOperationsInput | string
+    ExpirationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Link?: NullableStringFieldUpdateOperationsInput | string | null
+    EffectiveDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    Status?: EnumNOTAMStatusFieldUpdateOperationsInput | $Enums.NOTAMStatus
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type PermissionUpdateWithoutRolesInput = {
     Name?: StringFieldUpdateOperationsInput | string
     Description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -56187,6 +58069,7 @@ export namespace Prisma {
     PrivacySettings?: UserPrivacySettingsUpdateManyWithoutUserNestedInput
     Members?: MemberUpdateManyWithoutUserNestedInput
     InviteCode?: InviteCodeUpdateOneWithoutUserNestedInput
+    NOTAMs?: NotamUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRolesInput = {
@@ -56217,6 +58100,7 @@ export namespace Prisma {
     DiscordEmail?: NullableStringFieldUpdateOperationsInput | string | null
     PrivacySettings?: UserPrivacySettingsUncheckedUpdateManyWithoutUserNestedInput
     Members?: MemberUncheckedUpdateManyWithoutUserNestedInput
+    NOTAMs?: NotamUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutRolesInput = {

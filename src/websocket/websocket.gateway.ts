@@ -9,7 +9,11 @@ import {
 import { Server, Socket } from 'socket.io';
 import { LoggerService } from '@logger/logger.service';
 
-@WebSocketGateway()
+@WebSocketGateway({
+  transports: ['websocket', 'polling'],
+  addTrailingSlash: false,
+  namespace: '/ws',
+})
 export class WebsocketGateway
   implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect
 {

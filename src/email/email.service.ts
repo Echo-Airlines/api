@@ -51,6 +51,23 @@ export class EmailService {
         }
     }
 
+    public async sendForgotPasswordEmail(
+        mail: CreateEmailDto,
+    ): Promise<ISentMessageInfo> {
+        this.log.debug(`Sending forgot password email to ${mail.to}`);
+
+        const opts: ISendMailOptions = {
+            to: mail.to,
+            subject: mail.subject || 'Forgot Password',
+            template: mail.template || 'forgot-password',
+            context: mail.context,
+        };
+
+        const results: ISentMessageInfo = await this._send(opts);
+
+        return results;
+    }
+
     // send welcome email
     public async sendWelcomeEmail(
         mail: CreateEmailDto,

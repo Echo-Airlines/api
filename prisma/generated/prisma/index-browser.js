@@ -363,6 +363,19 @@ exports.Prisma.WorldScalarFieldEnum = {
   UpdatedAt: 'UpdatedAt'
 };
 
+exports.Prisma.NotamScalarFieldEnum = {
+  Id: 'Id',
+  Title: 'Title',
+  Content: 'Content',
+  ExpirationDate: 'ExpirationDate',
+  Link: 'Link',
+  EffectiveDate: 'EffectiveDate',
+  Status: 'Status',
+  CreatedById: 'CreatedById',
+  CreatedAt: 'CreatedAt',
+  UpdatedAt: 'UpdatedAt'
+};
+
 exports.Prisma.MemberScalarFieldEnum = {
   Id: 'Id',
   IsActive: 'IsActive',
@@ -591,6 +604,12 @@ exports.ListenerEventStatus = exports.$Enums.ListenerEventStatus = {
   FAILED: 'FAILED'
 };
 
+exports.NOTAMStatus = exports.$Enums.NOTAMStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE',
+  PENDING: 'PENDING'
+};
+
 exports.FlightStatus = exports.$Enums.FlightStatus = {
   PENDING: 'PENDING',
   FLIGHT: 'FLIGHT',
@@ -646,6 +665,7 @@ exports.Prisma.ModelName = {
   VirtualAirline: 'VirtualAirline',
   VirtualAirlineRole: 'VirtualAirlineRole',
   World: 'World',
+  Notam: 'Notam',
   Member: 'Member',
   Company: 'Company',
   Aircraft: 'Aircraft',

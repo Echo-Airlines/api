@@ -29,9 +29,14 @@ export class UserService {
                 BanExpiresAt: true,
                 LastLogin: true,
                 Members: {
-                    include: {
+                    select: {
+                        Id: true,
+                        VARole: true,
+                        TotalCargosTransportedLbs: true,
+                        TotalPAXsTransported: true,
+                        VirtualAirline: true,
                         Company: true,
-                    }
+                    },
                 },
             }
         });

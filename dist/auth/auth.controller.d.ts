@@ -1,0 +1,127 @@
+import { AuthService } from './auth.service';
+import { UserProfileDto } from '@user/dto/UserProfile.dto';
+import { ChangePasswordDto } from './dto/ChangePasswordDto';
+import { Response } from 'express';
+import { RegisterUserDto } from './dto/RegisterUserDto';
+import { AppConfigService } from '@app-config/app-config.service';
+import { ForgotPasswordDto } from './dto/ForgotPasswordDto';
+import { ResetPasswordDto } from './dto/ResetPasswordDto';
+export declare class AuthController {
+    private authService;
+    private appConfigService;
+    constructor(authService: AuthService, appConfigService: AppConfigService);
+    login(req: any): Promise<{
+        access_token: string;
+        user: UserProfileDto;
+    }>;
+    logout(req: any): Promise<any>;
+    changePassword(req: any, body: ChangePasswordDto): Promise<UserProfileDto>;
+    session(req: any): Promise<UserProfileDto>;
+    forgotPassword(body: ForgotPasswordDto): Promise<{
+        Id: string;
+        Username: string;
+        Email: string | null;
+        FirstName: string | null;
+        LastName: string | null;
+        FirstLoginCompleted: boolean;
+        IsOnline: boolean;
+        IsBanned: boolean;
+        BanReason: string | null;
+        BanExpiresAt: Date | null;
+        IsVerified: boolean;
+        LastLogin: Date | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
+        Members: ({
+            Company: {
+                Id: string;
+                CreatedAt: Date;
+                UpdatedAt: Date;
+                Name: string;
+                WorldId: string;
+                LastConnection: Date | null;
+                LastReportDate: Date | null;
+                Reputation: import("prisma/generated/prisma/runtime/library").Decimal;
+                CreationDate: Date;
+                DifficultyLevel: number;
+                Level: number;
+                LevelXP: number;
+                LastRefresh: Date | null;
+                AirlineCode: string;
+                Paused: boolean;
+            };
+        } & {
+            Id: string;
+            CreatedAt: Date;
+            UpdatedAt: Date;
+            LastRefresh: Date | null;
+            IsActive: boolean;
+            DeactivatedAt: Date | null;
+            VAId: string;
+            VARoleId: string;
+            TotalCargosTransportedLbs: number;
+            TotalPAXsTransported: number;
+            TotalEarnedCredits: import("prisma/generated/prisma/runtime/library").Decimal;
+            TotalSpentCredits: import("prisma/generated/prisma/runtime/library").Decimal;
+            NumberOfFlights: number;
+            FlightHours: import("prisma/generated/prisma/runtime/library").Decimal;
+            Color: string;
+            ReputationImpact: import("prisma/generated/prisma/runtime/library").Decimal;
+            LastVAFlightDate: Date | null;
+            UserId: string | null;
+            CompanyId: string;
+        })[];
+        Roles: {
+            Id: number;
+            CreatedAt: Date;
+            UpdatedAt: Date;
+            Name: string;
+            Description: string | null;
+            Slug: string;
+            VirtualAirlineRoleId: string | null;
+        }[];
+        PrivacySettings: {
+            Id: string;
+            CreatedAt: Date;
+            UserId: string;
+            ShowOnlineStatus: boolean;
+            ShowFirstName: boolean;
+            ShowLastName: boolean;
+            ShowLastNameInitial: boolean;
+            ShowLastLogin: boolean;
+        }[];
+    }>;
+    resetPassword(body: ResetPasswordDto): Promise<{
+        Id: string;
+        Username: string;
+        Password: string | null;
+        Email: string | null;
+        FirstName: string | null;
+        LastName: string | null;
+        FirstLoginCompleted: boolean;
+        IsOnline: boolean;
+        IsBanned: boolean;
+        BanReason: string | null;
+        BanExpiresAt: Date | null;
+        IsVerified: boolean;
+        LastLogin: Date | null;
+        InviteCodeId: string | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
+        WelcomeEmailSentAt: Date | null;
+        ConfirmEmailToken: string | null;
+        EmailVerifiedAt: Date | null;
+        ResetPasswordToken: string | null;
+        ResetPasswordEmailSentAt: Date | null;
+        DiscordId: string | null;
+        DiscordUsername: string | null;
+        DiscordAvatar: string | null;
+        DiscordEmail: string | null;
+    }>;
+    discordAuth(req: any, res: Response): Promise<void>;
+    register(body: RegisterUserDto): Promise<{
+        user: UserProfileDto;
+        token: string;
+    }>;
+    discordAuthCallback(req: any, res: Response): Promise<void>;
+}

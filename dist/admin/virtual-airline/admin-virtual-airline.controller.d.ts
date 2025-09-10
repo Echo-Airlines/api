@@ -1,0 +1,67 @@
+import { AdminVirtualAirlineService } from './admin-virtual-airline.service';
+export declare class AdminVirtualAirlineController {
+    private readonly virtualAirlineService;
+    constructor(virtualAirlineService: AdminVirtualAirlineService);
+    getAll(): Promise<{
+        Id: string;
+        CreatedAt: Date;
+        UpdatedAt: Date;
+        ApiKey: string;
+        IsPrimary: boolean;
+        Identifier: string | null;
+        Name: string | null;
+        Description: string | null;
+        WorldId: string | null;
+        LastDividendsDistribution: Date | null;
+        LastComputationDate: Date | null;
+        ComputedMemberCount: number | null;
+        ComputedAircraftsCount: number | null;
+        ComputedNumberOfFlights30Days: number | null;
+        ComputedNumberOfFlightHours30Days: number | null;
+        ComputedMostUsedAirports: string | null;
+        LastConnection: Date | null;
+        LastReportDate: Date | null;
+        Reputation: import("prisma/generated/prisma/runtime/library").Decimal | null;
+        CreationDate: Date | null;
+        DifficultyLevel: number | null;
+        Level: number | null;
+        LevelXP: number | null;
+        TotalContractsCompleted: number | null;
+        TotalContractsEarnedCredits: number | null;
+        LastRefresh: Date | null;
+    }[]>;
+    getVARoles(): Promise<{
+        Id: string;
+        CreatedAt: Date;
+        UpdatedAt: Date;
+        Name: string;
+        LastRefresh: Date | null;
+        VAId: string;
+        Color: string;
+        Permission: number;
+        IsDefaultNewRole: boolean;
+        PayPercent: import("prisma/generated/prisma/runtime/library").Decimal;
+        IsHidden: boolean;
+        RestrictLoadingVAJobsIntoNonVAAircraft: boolean;
+        RestrictLoadingNonVAJobsIntoVAAircraft: boolean;
+        PayWeekly: import("prisma/generated/prisma/runtime/library").Decimal;
+        PayPerFlightHour: import("prisma/generated/prisma/runtime/library").Decimal;
+    }[]>;
+    getUnlinkedVARoles(): Promise<{
+        Id: string;
+        CreatedAt: Date;
+        UpdatedAt: Date;
+        Name: string;
+        LastRefresh: Date | null;
+        VAId: string;
+        Color: string;
+        Permission: number;
+        IsDefaultNewRole: boolean;
+        PayPercent: import("prisma/generated/prisma/runtime/library").Decimal;
+        IsHidden: boolean;
+        RestrictLoadingVAJobsIntoNonVAAircraft: boolean;
+        RestrictLoadingNonVAJobsIntoVAAircraft: boolean;
+        PayWeekly: import("prisma/generated/prisma/runtime/library").Decimal;
+        PayPerFlightHour: import("prisma/generated/prisma/runtime/library").Decimal;
+    }[]>;
+}

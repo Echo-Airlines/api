@@ -168,10 +168,10 @@ export class AdminListenerController {
         return events;
     }
 
-    @Delete(':senderSlug/events/:id')
+    @Delete(['sender/events/:id', 'sender/event/:id'])
     @UseGuards(JwtAuthGuard, IsAdminGuard)
-    async deleteEvent(@Param('id') Id: number) {
-        const event = await this.listenerService.deleteOneById(Id);
+    async deleteEvent(@Param('id') Id: string) {
+        const event = await this.listenerService.deleteOneById(parseInt(Id));
 
         if (!event) {
             throw new NotFoundException('FSHub event not found');

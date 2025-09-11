@@ -77,7 +77,7 @@ export class ListenerService {
     }
 
     public async processListenerEvent(sender: ListenerEventSender, body: any) {
-        let listenerEvent: ListenerEvent|null = null;
+        let listenerEvent: ListenerEvent|undefined = undefined;
 
         switch (sender.Slug) {
             case 'fshub':
@@ -121,7 +121,7 @@ export class ListenerService {
     }
 
     private async _processFSHubListenerEvent(sender: ListenerEventSender, body: FSHubEventDto) {
-        let listenerEvent: ListenerEvent;
+        let listenerEvent: ListenerEvent|undefined = undefined;
 
         try {
             let SentAt: Date;
@@ -257,15 +257,19 @@ export class ListenerService {
             notifier.notify(`'${listenerEvent.Type}' event sent to Discord`);
 
             return listenerEvent;
-        } catch (error) {
-            this.logger.error('Error sending discord message:', error);
+        } catch (error: any) {
+            this.logger.error(`Error sending discord message:\n${error.message}`);
+            let _listenerEvent: ListenerEvent|undefined = listenerEvent as ListenerEvent | undefined;
 
-            listenerEvent = await this.updateListenerEvent(listenerEvent!.Id, {
-                Status: 'FAILED',
-                Error: error.message,
-            });
+            if (_listenerEvent) {
+                listenerEvent = await this.updateListenerEvent(_listenerEvent.Id, {
+                    Status: 'FAILED',
+                    Error: error.message,
+                });
 
-            notifier.notify(`'${listenerEvent.Type}' event failed to send to Discord: ${error.message}`);
+                notifier.notify(`'${listenerEvent.Type}' event failed to send to Discord: ${error.message}`);
+            } 
+
 
             return listenerEvent;
         }

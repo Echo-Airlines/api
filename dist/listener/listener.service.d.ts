@@ -86,7 +86,7 @@ export declare class ListenerService {
         Data: Prisma.JsonValue | null;
         DiscordMessageId: string | null;
         DeliveredAt: Date | null;
-    }>;
+    } | undefined>;
     private _compileMessageTemplate;
     private _processFSHubListenerEvent;
     private _processFSHubFlightDeparted;

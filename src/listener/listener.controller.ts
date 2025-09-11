@@ -23,7 +23,7 @@ export class ListenerController {
             throw new BadRequestException('Sender is not active');
         }
 
-        let listenerEvent: ListenerEvent|null = null;
+        let listenerEvent: ListenerEvent|undefined = undefined;
         switch (sender.Slug) {
             case 'fshub':
                 listenerEvent = await this.listenerService.processListenerEvent(sender, body as FSHubEventDto);
@@ -35,7 +35,7 @@ export class ListenerController {
         return {
             success: true,
             message: 'Listener event created',
-            listenerEvent
+            listenerEvent: listenerEvent || null
         };
     }
 }

@@ -85,7 +85,7 @@ export declare class AdminListenerController {
         Data: Prisma.JsonValue | null;
         DiscordMessageId: string | null;
         DeliveredAt: Date | null;
-    }>;
+    } | undefined>;
     getEvents(senderSlug: string, variant?: string, type?: string): Promise<{
         Id: string;
         CreatedAt: Date;

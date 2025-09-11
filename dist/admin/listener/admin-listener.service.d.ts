@@ -175,5 +175,5 @@ export declare class AdminListenerService {
         Data: Prisma.JsonValue | null;
         DiscordMessageId: string | null;
         DeliveredAt: Date | null;
-    }>;
+    } | undefined>;
 }

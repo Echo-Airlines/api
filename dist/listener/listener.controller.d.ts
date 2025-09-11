@@ -18,6 +18,6 @@ export declare class ListenerController {
             Data: import("prisma/generated/prisma/runtime/library").JsonValue | null;
             DiscordMessageId: string | null;
             DeliveredAt: Date | null;
-        };
+        } | null;
     }>;
 }

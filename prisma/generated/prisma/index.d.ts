@@ -9846,22 +9846,12 @@ export namespace Prisma {
 
   export type AggregateListenerEvent = {
     _count: ListenerEventCountAggregateOutputType | null
-    _avg: ListenerEventAvgAggregateOutputType | null
-    _sum: ListenerEventSumAggregateOutputType | null
     _min: ListenerEventMinAggregateOutputType | null
     _max: ListenerEventMaxAggregateOutputType | null
   }
 
-  export type ListenerEventAvgAggregateOutputType = {
-    Id: number | null
-  }
-
-  export type ListenerEventSumAggregateOutputType = {
-    Id: number | null
-  }
-
   export type ListenerEventMinAggregateOutputType = {
-    Id: number | null
+    Id: string | null
     Variant: string | null
     Type: string | null
     SentAt: Date | null
@@ -9875,7 +9865,7 @@ export namespace Prisma {
   }
 
   export type ListenerEventMaxAggregateOutputType = {
-    Id: number | null
+    Id: string | null
     Variant: string | null
     Type: string | null
     SentAt: Date | null
@@ -9904,14 +9894,6 @@ export namespace Prisma {
     _all: number
   }
 
-
-  export type ListenerEventAvgAggregateInputType = {
-    Id?: true
-  }
-
-  export type ListenerEventSumAggregateInputType = {
-    Id?: true
-  }
 
   export type ListenerEventMinAggregateInputType = {
     Id?: true
@@ -9995,18 +9977,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: ListenerEventAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: ListenerEventSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: ListenerEventMinAggregateInputType
@@ -10037,14 +10007,12 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: ListenerEventCountAggregateInputType | true
-    _avg?: ListenerEventAvgAggregateInputType
-    _sum?: ListenerEventSumAggregateInputType
     _min?: ListenerEventMinAggregateInputType
     _max?: ListenerEventMaxAggregateInputType
   }
 
   export type ListenerEventGroupByOutputType = {
-    Id: number
+    Id: string
     Variant: string
     Type: string
     SentAt: Date
@@ -10057,8 +10025,6 @@ export namespace Prisma {
     CreatedAt: Date
     UpdatedAt: Date
     _count: ListenerEventCountAggregateOutputType | null
-    _avg: ListenerEventAvgAggregateOutputType | null
-    _sum: ListenerEventSumAggregateOutputType | null
     _min: ListenerEventMinAggregateOutputType | null
     _max: ListenerEventMaxAggregateOutputType | null
   }
@@ -10164,7 +10130,7 @@ export namespace Prisma {
       Sender: Prisma.$ListenerEventSenderPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      Id: number
+      Id: string
       Variant: string
       Type: string
       SentAt: Date
@@ -10601,7 +10567,7 @@ export namespace Prisma {
    * Fields of the ListenerEvent model
    */
   interface ListenerEventFieldRefs {
-    readonly Id: FieldRef<"ListenerEvent", 'Int'>
+    readonly Id: FieldRef<"ListenerEvent", 'String'>
     readonly Variant: FieldRef<"ListenerEvent", 'String'>
     readonly Type: FieldRef<"ListenerEvent", 'String'>
     readonly SentAt: FieldRef<"ListenerEvent", 'DateTime'>
@@ -40026,7 +39992,7 @@ export namespace Prisma {
     AND?: ListenerEventWhereInput | ListenerEventWhereInput[]
     OR?: ListenerEventWhereInput[]
     NOT?: ListenerEventWhereInput | ListenerEventWhereInput[]
-    Id?: IntFilter<"ListenerEvent"> | number
+    Id?: UuidFilter<"ListenerEvent"> | string
     Variant?: StringFilter<"ListenerEvent"> | string
     Type?: StringFilter<"ListenerEvent"> | string
     SentAt?: DateTimeFilter<"ListenerEvent"> | Date | string
@@ -40060,7 +40026,7 @@ export namespace Prisma {
   }
 
   export type ListenerEventWhereUniqueInput = Prisma.AtLeast<{
-    Id?: number
+    Id?: string
     AND?: ListenerEventWhereInput | ListenerEventWhereInput[]
     OR?: ListenerEventWhereInput[]
     NOT?: ListenerEventWhereInput | ListenerEventWhereInput[]
@@ -40093,17 +40059,15 @@ export namespace Prisma {
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
     _count?: ListenerEventCountOrderByAggregateInput
-    _avg?: ListenerEventAvgOrderByAggregateInput
     _max?: ListenerEventMaxOrderByAggregateInput
     _min?: ListenerEventMinOrderByAggregateInput
-    _sum?: ListenerEventSumOrderByAggregateInput
   }
 
   export type ListenerEventScalarWhereWithAggregatesInput = {
     AND?: ListenerEventScalarWhereWithAggregatesInput | ListenerEventScalarWhereWithAggregatesInput[]
     OR?: ListenerEventScalarWhereWithAggregatesInput[]
     NOT?: ListenerEventScalarWhereWithAggregatesInput | ListenerEventScalarWhereWithAggregatesInput[]
-    Id?: IntWithAggregatesFilter<"ListenerEvent"> | number
+    Id?: UuidWithAggregatesFilter<"ListenerEvent"> | string
     Variant?: StringWithAggregatesFilter<"ListenerEvent"> | string
     Type?: StringWithAggregatesFilter<"ListenerEvent"> | string
     SentAt?: DateTimeWithAggregatesFilter<"ListenerEvent"> | Date | string
@@ -42916,6 +42880,7 @@ export namespace Prisma {
   }
 
   export type ListenerEventCreateInput = {
+    Id?: string
     Variant: string
     Type: string
     SentAt: Date | string
@@ -42930,7 +42895,7 @@ export namespace Prisma {
   }
 
   export type ListenerEventUncheckedCreateInput = {
-    Id?: number
+    Id?: string
     Variant: string
     Type: string
     SentAt: Date | string
@@ -42945,6 +42910,7 @@ export namespace Prisma {
   }
 
   export type ListenerEventUpdateInput = {
+    Id?: StringFieldUpdateOperationsInput | string
     Variant?: StringFieldUpdateOperationsInput | string
     Type?: StringFieldUpdateOperationsInput | string
     SentAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -42959,7 +42925,7 @@ export namespace Prisma {
   }
 
   export type ListenerEventUncheckedUpdateInput = {
-    Id?: IntFieldUpdateOperationsInput | number
+    Id?: StringFieldUpdateOperationsInput | string
     Variant?: StringFieldUpdateOperationsInput | string
     Type?: StringFieldUpdateOperationsInput | string
     SentAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -42974,7 +42940,7 @@ export namespace Prisma {
   }
 
   export type ListenerEventCreateManyInput = {
-    Id?: number
+    Id?: string
     Variant: string
     Type: string
     SentAt: Date | string
@@ -42989,6 +42955,7 @@ export namespace Prisma {
   }
 
   export type ListenerEventUpdateManyMutationInput = {
+    Id?: StringFieldUpdateOperationsInput | string
     Variant?: StringFieldUpdateOperationsInput | string
     Type?: StringFieldUpdateOperationsInput | string
     SentAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -43001,7 +42968,7 @@ export namespace Prisma {
   }
 
   export type ListenerEventUncheckedUpdateManyInput = {
-    Id?: IntFieldUpdateOperationsInput | number
+    Id?: StringFieldUpdateOperationsInput | string
     Variant?: StringFieldUpdateOperationsInput | string
     Type?: StringFieldUpdateOperationsInput | string
     SentAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -46300,10 +46267,6 @@ export namespace Prisma {
     UpdatedAt?: SortOrder
   }
 
-  export type ListenerEventAvgOrderByAggregateInput = {
-    Id?: SortOrder
-  }
-
   export type ListenerEventMaxOrderByAggregateInput = {
     Id?: SortOrder
     Variant?: SortOrder
@@ -46330,10 +46293,6 @@ export namespace Prisma {
     DeliveredAt?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
-  }
-
-  export type ListenerEventSumOrderByAggregateInput = {
-    Id?: SortOrder
   }
 
   export type EnumListenerEventStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -50894,6 +50853,7 @@ export namespace Prisma {
   }
 
   export type ListenerEventCreateWithoutDiscordMessageInput = {
+    Id?: string
     Variant: string
     Type: string
     SentAt: Date | string
@@ -50907,7 +50867,7 @@ export namespace Prisma {
   }
 
   export type ListenerEventUncheckedCreateWithoutDiscordMessageInput = {
-    Id?: number
+    Id?: string
     Variant: string
     Type: string
     SentAt: Date | string
@@ -51017,7 +50977,7 @@ export namespace Prisma {
     AND?: ListenerEventScalarWhereInput | ListenerEventScalarWhereInput[]
     OR?: ListenerEventScalarWhereInput[]
     NOT?: ListenerEventScalarWhereInput | ListenerEventScalarWhereInput[]
-    Id?: IntFilter<"ListenerEvent"> | number
+    Id?: UuidFilter<"ListenerEvent"> | string
     Variant?: StringFilter<"ListenerEvent"> | string
     Type?: StringFilter<"ListenerEvent"> | string
     SentAt?: DateTimeFilter<"ListenerEvent"> | Date | string
@@ -51331,6 +51291,7 @@ export namespace Prisma {
   }
 
   export type ListenerEventCreateWithoutSenderInput = {
+    Id?: string
     Variant: string
     Type: string
     SentAt: Date | string
@@ -51344,7 +51305,7 @@ export namespace Prisma {
   }
 
   export type ListenerEventUncheckedCreateWithoutSenderInput = {
-    Id?: number
+    Id?: string
     Variant: string
     Type: string
     SentAt: Date | string
@@ -57569,7 +57530,7 @@ export namespace Prisma {
   }
 
   export type ListenerEventCreateManyDiscordMessageInput = {
-    Id?: number
+    Id?: string
     Variant: string
     Type: string
     SentAt: Date | string
@@ -57583,6 +57544,7 @@ export namespace Prisma {
   }
 
   export type ListenerEventUpdateWithoutDiscordMessageInput = {
+    Id?: StringFieldUpdateOperationsInput | string
     Variant?: StringFieldUpdateOperationsInput | string
     Type?: StringFieldUpdateOperationsInput | string
     SentAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -57596,7 +57558,7 @@ export namespace Prisma {
   }
 
   export type ListenerEventUncheckedUpdateWithoutDiscordMessageInput = {
-    Id?: IntFieldUpdateOperationsInput | number
+    Id?: StringFieldUpdateOperationsInput | string
     Variant?: StringFieldUpdateOperationsInput | string
     Type?: StringFieldUpdateOperationsInput | string
     SentAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -57610,7 +57572,7 @@ export namespace Prisma {
   }
 
   export type ListenerEventUncheckedUpdateManyWithoutDiscordMessageInput = {
-    Id?: IntFieldUpdateOperationsInput | number
+    Id?: StringFieldUpdateOperationsInput | string
     Variant?: StringFieldUpdateOperationsInput | string
     Type?: StringFieldUpdateOperationsInput | string
     SentAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -57754,7 +57716,7 @@ export namespace Prisma {
   }
 
   export type ListenerEventCreateManySenderInput = {
-    Id?: number
+    Id?: string
     Variant: string
     Type: string
     SentAt: Date | string
@@ -57768,6 +57730,7 @@ export namespace Prisma {
   }
 
   export type ListenerEventUpdateWithoutSenderInput = {
+    Id?: StringFieldUpdateOperationsInput | string
     Variant?: StringFieldUpdateOperationsInput | string
     Type?: StringFieldUpdateOperationsInput | string
     SentAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -57781,7 +57744,7 @@ export namespace Prisma {
   }
 
   export type ListenerEventUncheckedUpdateWithoutSenderInput = {
-    Id?: IntFieldUpdateOperationsInput | number
+    Id?: StringFieldUpdateOperationsInput | string
     Variant?: StringFieldUpdateOperationsInput | string
     Type?: StringFieldUpdateOperationsInput | string
     SentAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -57795,7 +57758,7 @@ export namespace Prisma {
   }
 
   export type ListenerEventUncheckedUpdateManyWithoutSenderInput = {
-    Id?: IntFieldUpdateOperationsInput | number
+    Id?: StringFieldUpdateOperationsInput | string
     Variant?: StringFieldUpdateOperationsInput | string
     Type?: StringFieldUpdateOperationsInput | string
     SentAt?: DateTimeFieldUpdateOperationsInput | Date | string

@@ -6,7 +6,7 @@ export declare class AdminListenerService {
     private readonly listenerService;
     constructor(prisma: PrismaService, listenerService: ListenerService);
     createListenerEvent(event: Prisma.ListenerEventCreateInput): Promise<{
-        Id: number;
+        Id: string;
         CreatedAt: Date;
         UpdatedAt: Date;
         Type: string;
@@ -20,7 +20,7 @@ export declare class AdminListenerService {
         DeliveredAt: Date | null;
     }>;
     getMany(query?: Prisma.ListenerEventFindManyArgs): Promise<{
-        Id: number;
+        Id: string;
         CreatedAt: Date;
         UpdatedAt: Date;
         Type: string;
@@ -33,8 +33,8 @@ export declare class AdminListenerService {
         DiscordMessageId: string | null;
         DeliveredAt: Date | null;
     }[]>;
-    deleteOneById(Id: number): Promise<{
-        Id: number;
+    deleteOneById(Id: string): Promise<{
+        Id: string;
         CreatedAt: Date;
         UpdatedAt: Date;
         Type: string;
@@ -162,8 +162,8 @@ export declare class AdminListenerService {
         Token: string;
         DiscordChannelWebhookId: string | null;
     }>;
-    Event_resend(Id: number): Promise<{
-        Id: number;
+    Event_resend(Id: string): Promise<{
+        Id: string;
         CreatedAt: Date;
         UpdatedAt: Date;
         Type: string;

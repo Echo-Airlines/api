@@ -114,14 +114,11 @@ export class AdminListenerController {
 
     @Post('sender/event/:id/resend')
     @UseGuards(JwtAuthGuard, IsAdminGuard)
-    async resendEvent(@Param('id') Id: number) {
+    async resendEvent(@Param('id') Id: string) {
         if (!Id) {
             throw new BadRequestException('Event ID is required');
         }
 
-        if (!Number.isInteger(Id)) {
-            Id = Number(Id);
-        }
 
         const event = await this.listenerService.Event_resend(Id);
 
@@ -171,7 +168,7 @@ export class AdminListenerController {
     @Delete(['sender/events/:id', 'sender/event/:id'])
     @UseGuards(JwtAuthGuard, IsAdminGuard)
     async deleteEvent(@Param('id') Id: string) {
-        const event = await this.listenerService.deleteOneById(parseInt(Id));
+        const event = await this.listenerService.deleteOneById(Id);
 
         if (!event) {
             throw new NotFoundException('FSHub event not found');

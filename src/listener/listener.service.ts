@@ -4,149 +4,15 @@ import { DiscordMessage, DiscordMessageTemplate, ListenerEvent, ListenerEventSen
 import * as crypto from 'crypto';
 import { Airport, Flight, Owner, Pilot } from 'fshub-api/dist/types';
 import { DiscordService } from '@discord/discord.service';
-import { SendDiscordMessageDto } from '@discord/dto/SendDiscordMessageDto';
+import { DiscordMessageEmbedDto, SendDiscordMessageDto } from '@discord/dto/SendDiscordMessageDto';
 import { FSHubEventDto } from './dto/FSHubEvent.dto';
 import { LoggerService } from '@logger/logger.service';
 import { WebsocketGateway } from '@websocket/websocket.gateway';
 const notifier = require('node-notifier');
 import Handlebars from "handlebars";
+import { FSHubFlightDepartedEvent } from './type/FSHubFlightDepartedEvent';
+import { FSHubFlightCompletedEvent } from './type/FSHubFlightCompletedEvent';
 
-export type FlightEvent = {
-    id: number
-    user: FlightEventUser
-    aircraft: FlightEventAircraft
-    airline: FlightEventAirline
-    plan: FlightEventPlan
-    schedule: FlightEventSchedule
-    airport: FlightEventAirport
-    speed_tas: number
-    heading: FlightEventHeading
-    wind: FlightEventWind
-    weight: FlightEventWeight
-    gps: FlightEventGps
-    datetime: string
-    departure_at: string
-    landing_rate?: number
-    pitch?: number
-    bank?: number
-    country?: string
-    country_emoji?: string
-}
-
-export type FlightEventUser = {
-    id: number
-    name: string
-    email: string
-    profile: FlightEventProfile
-    locations: FlightEventLocations
-    handles: FlightEventHandles
-    timezone: string
-    country: string
-}
-  
-export type FlightEventProfile = {
-    avatar_url: string
-    bio: string
-}
-  
-export type FlightEventLocations = {
-    base: string
-    locale: string
-}
-  
-export type FlightEventHandles = {
-    website: any
-    twitter: string
-    facebook: any
-    vatsim: string
-    ivao: string
-}
-  
-export type FlightEventAircraft = {
-    icao: string
-    icao_name: string
-    name: string
-    type: string
-    user_conf: FlightEventUserConf
-}
-  
-export type FlightEventUserConf = {
-    tail: string
-    icao: string
-}
-  
-export type FlightEventAirline = {
-    id: number
-    owner: FlightEventOwner
-    name: string
-    profile: FlightEventAirlineProfile
-    handles: FlightEventHandles
-}
-
-export type FlightEventAirlineProfile = {
-    abbreviation: string
-    bio?: string
-  }
-  
-export type FlightEventOwner = {
-    id: number
-    name: string
-    email: string
-    profile: FlightEventProfile
-    locations: FlightEventLocations
-    handles: FlightEventHandles
-    timezone: string
-    country: string
-}
-  
-export type FlightEventPlan = {
-    callsign: any;
-    icao_arr: any;
-    icao_dep: any;
-    flight_no: string
-    cruise_lvl: number
-    departure: string
-    arrival: string
-}
-  
-export type FlightEventSchedule = {
-    status: string
-    time: string
-}
-  
-export type FlightEventAirport = {
-    icao: string
-    iata: string
-    name: string
-    locale: FlightEventLocale
-}
-  
-export type FlightEventLocale = {
-    city: string
-    state: any
-    country: string
-    gps: FlightEventGps
-}
-  
-export type FlightEventGps = {
-    lat: number
-    lng: number
-}
-  
-export type FlightEventHeading = {
-    true: number
-    magnetic: number
-}
-  
-export type FlightEventWind = {
-    speed: number
-    direction: number
-}
-  
-export type FlightEventWeight = {
-    fuel: number
-    zfw: number
-}
 
 @Injectable()
 export class ListenerService {
@@ -159,33 +25,40 @@ export class ListenerService {
     ) {}
 
     async createListenerEvent(event: Prisma.ListenerEventCreateInput) {
-        const listenerEvent = await this.prisma.listenerEvent.create({
+
+        const query: Prisma.ListenerEventCreateArgs = {
             data: event,
-        });
+        };
+
+        const listenerEvent = await this.prisma.listenerEvent.create(query);
 
         return listenerEvent;
     }
 
-    async updateListenerEvent(Id: number, event: Prisma.ListenerEventUpdateInput) {
-        const listenerEvent = await this.prisma.listenerEvent.update({
+    async updateListenerEvent(Id: string, event: Prisma.ListenerEventUpdateInput) {
+        const query: Prisma.ListenerEventUpdateArgs = {
             where: {
                 Id,
             },
             data: event,
-        });
+        };
+
+        const listenerEvent = await this.prisma.listenerEvent.update(query);
 
         return listenerEvent;
     }
 
-    async updateListenerEventStatus(Id: number, Status: ListenerEventStatus) {
-        const listenerEvent = await this.prisma.listenerEvent.update({
+    async updateListenerEventStatus(Id: string, Status: ListenerEventStatus) {
+        const query: Prisma.ListenerEventUpdateArgs = {
             where: {
                 Id,
             },
             data: {
                 Status,
             }
-        });
+        };
+
+        const listenerEvent = await this.prisma.listenerEvent.update(query);
 
         return listenerEvent;
     }
@@ -208,7 +81,7 @@ export class ListenerService {
 
         switch (sender.Slug) {
             case 'fshub':
-                listenerEvent = await this.processFSHubListenerEvent(sender, body as FSHubEventDto);
+                listenerEvent = await this._processFSHubListenerEvent(sender, body as FSHubEventDto);
                 break;
             default:
                 throw new Error('Invalid sender');
@@ -229,7 +102,7 @@ export class ListenerService {
         return listenerEvent;
     }
 
-    private async compileMessageTemplate(slug: string, data: any) {
+    private async _compileMessageTemplate(slug: string, data: any) {
         const messageTemplate = await this.discordService.MessageTemplate_findOneBySlug(slug);
         let content = '';
 
@@ -247,7 +120,7 @@ export class ListenerService {
         return content;
     }
 
-    private async processFSHubListenerEvent(sender: ListenerEventSender, body: FSHubEventDto) {
+    private async _processFSHubListenerEvent(sender: ListenerEventSender, body: FSHubEventDto) {
         let listenerEvent: ListenerEvent;
 
         try {
@@ -302,93 +175,67 @@ export class ListenerService {
             // check if the message template exists
             const messageTemplate: DiscordMessageTemplate|null = await this.discordService.MessageTemplate_findOneBySlug(listenerEvent.Type);
 
-            let content = '';
+            let message: SendDiscordMessageDto = {
+                content: ' ',
+                embeds: [],
+                footer: {
+                    text: `Powered By 🐬ECHO Localizer | #${listenerEvent.Id}`
+                }
+            };
+
             switch (listenerEvent.Type) {
-                case 'profile.updated':
-                    const pilot = listenerEvent.Data as Pilot
-                    if (!messageTemplate) {
-                        content = `${pilot.name} has updated their profile.`;
-                    } else {
-                        content = await this.compileMessageTemplate(messageTemplate.Slug, pilot);
-                    }
+                // case 'profile.updated':
+                //     message.content = '**Pilot Profile Updated**';
+                //     const pilot = listenerEvent.Data as Pilot
+                //     if (!messageTemplate) {
+                //         message.content = `${pilot.name} has updated their profile.`;
+                //     } else {
+                //         message.content = await this._compileMessageTemplate(messageTemplate.Slug, pilot);
+                //     }
 
-                    this.logger.debug(`profile.updated: ${content}`);
-                    break;
+                //     this.logger.debug(`profile.updated: ${message.content}`);
+                //     break;
                 case 'flight.departed':
-                    const flightDeparted = listenerEvent.Data as FlightEvent
-                    if (!messageTemplate) {
-                        content = `${flightDeparted.airline.profile.abbreviation} ${flightDeparted.aircraft.name} #${flightDeparted.plan.flight_no} ${flightDeparted.plan.departure} to ${flightDeparted.plan.arrival} has departed.\n\`\`\``;
-                    } else {
-                        content = await this.compileMessageTemplate(messageTemplate.Slug, flightDeparted);
-                    }
-
-                    this.logger.debug(`flight.departed: ${content}`);
+                    const flightDeparted = listenerEvent.Data as FSHubFlightDepartedEvent
+                    this.logger.debug(`flight.departed | #${flightDeparted.id} - https://fshub.io/flight/${flightDeparted.id}/report`);
+                    message.embeds = this._processFSHubFlightDeparted(flightDeparted, listenerEvent.Id);
+                    
                     break;
-                case 'flight.arrived':
-                    this.logger.debug('flight.arrived');
-                    const flightArrived = listenerEvent.Data as FlightEvent
-                    if (!messageTemplate) {
-                        let msg: string[] = [];
-                        if (flightArrived.landing_rate) {
-                            msg.push(`Landing Rate: ${flightArrived.landing_rate} ft/min ${flightArrived.landing_rate > -200 ? '🧈': ''}`);
-                        }
-                        if (flightArrived.pitch) {
-                            msg.push(`Pitch: ${flightArrived.pitch} deg`);
-                        }
-                        if (flightArrived.bank) {
-                            msg.push(`Bank: ${flightArrived.bank} deg`);
-                        }
-                        if (flightArrived.speed_tas) {
-                            msg.push(`Speed: ${flightArrived.speed_tas} kts`);
-                        }
-                        if (flightArrived.wind) {
-                            msg.push(`Wind: ${flightArrived.wind.speed} kts ${flightArrived.wind.direction}°`);
-                        }
+                // case 'flight.arrived':
+                //     const flightArrived = listenerEvent.Data as FlightEvent
+                //     this.logger.debug(`flight.arrived | #${flightArrived.id} - https://fshub.io/flight/${flightArrived.id}/report`);
+                //     message.embeds = this._processFSHubFlightArrived(flightArrived);
 
-                        content = `${flightArrived.airline.profile.abbreviation} ${flightArrived.aircraft.name} ${(flightArrived.plan.flight_no) ? flightArrived.plan.flight_no : ''} ${flightArrived.plan.departure} to ${flightArrived.plan.arrival} flown by ${flightArrived.user.name}  has arrived.\n\`\`\`${msg.join('\n')}\`\`\``;
-
-                    } else {
-                        content = await this.compileMessageTemplate(messageTemplate.Slug, flightArrived);
-                    }
-
-                    this.logger.debug(`flight.arrived: ${content}`);
-                    break;
+                //     break;
                 case 'flight.completed':
-                    const flightCompleted = listenerEvent.Data as FlightEvent
-                    if (!messageTemplate) {
-                        content = `${flightCompleted.airline.profile.abbreviation} ${flightCompleted.aircraft.name} ${flightCompleted.plan.callsign} ${flightCompleted.plan.icao_dep} to ${flightCompleted.plan.icao_arr} flown by ${flightCompleted.user.name} has completed.`;
-                    } else {
-                        content = await this.compileMessageTemplate(messageTemplate.Slug, flightCompleted);
-                    }
+                    const flightCompleted = listenerEvent.Data as FSHubFlightCompletedEvent
+                    this.logger.debug(`flight.completed | #${flightCompleted.id} - https://fshub.io/flight/${flightCompleted.id}/report`);
+                    message.embeds = this._processFSHubFlightCompleted(flightCompleted, listenerEvent.Id);
 
-                    this.logger.debug(`flight.completed: ${content}`);
                     break;
-                case 'flight.updated':
-                    const flightUpdated = listenerEvent.Data as FlightEvent
-                    if (!messageTemplate) {
-                        content = `${flightUpdated.airline.profile.abbreviation} ${flightUpdated.aircraft.name} ${(flightUpdated.plan.flight_no) ? flightUpdated.plan.flight_no : ''} ${flightUpdated.plan.departure} to ${flightUpdated.plan.arrival} flown by ${flightUpdated.user.name} has updated.`;
-                    } else {
-                        content = await this.compileMessageTemplate(messageTemplate.Slug, flightUpdated);
-                    }
+                // case 'flight.updated':
+                //     const flightUpdated = listenerEvent.Data as FlightEvent
+                //     if (!messageTemplate) {
+                //         message.content = `${flightUpdated.airline.profile.abbreviation} ${flightUpdated.aircraft.name} ${(flightUpdated.plan.flight_no) ? flightUpdated.plan.flight_no : ''} ${flightUpdated.plan.departure} to ${flightUpdated.plan.arrival} flown by ${flightUpdated.user.name} has updated.`;
+                //     } else {
+                //         message.content = await this.compileMessageTemplate(messageTemplate.Slug, flightUpdated);
+                //     }
 
-                    this.logger.debug(`flight.updated: ${content}`);
-                    break;
+                //     this.logger.debug(`flight.updated: ${message.content}`);
+                //     break;
                 case 'website.test':
-                    content = JSON.stringify(listenerEvent.Data, null, 2) as string;
-                    this.logger.debug(`website.test: ${content}`);
+                    message.content = JSON.stringify(listenerEvent.Data, null, 2) as string;
+                    this.logger.debug(`website.test | ${message.content}`);
                     break;
             }
 
-            const discordMessage: SendDiscordMessageDto = {
-                content: content,
-            };
 
-            if (content === '') {
+            if (message.content === '') {
                 this.logger.error(`${listenerEvent.Type} event has no content`);
                 return listenerEvent;
             }
 
-            const message: DiscordMessage = await this.discordService.ChannelWebhook_sendMessage(sender.DiscordChannelWebhookId, discordMessage);
+            const discordMessage: DiscordMessage = await this.discordService.ChannelWebhook_sendMessage(sender.DiscordChannelWebhookId, message);
 
             if (!message) {
                 this.logger.error(`${listenerEvent.Type} event failed to send to Discord`);
@@ -397,11 +244,11 @@ export class ListenerService {
 
             // update the listener event
             listenerEvent = await this.updateListenerEvent(listenerEvent.Id, {
-                DeliveredAt: message.DiscordMessageSentAt,
+                DeliveredAt: discordMessage.DiscordMessageSentAt,
                 Status: 'COMPLETED',
                 DiscordMessage: {
                     connect: {
-                        Id: message.Id
+                        Id: discordMessage.Id
                     }
                 }
             });
@@ -424,4 +271,221 @@ export class ListenerService {
         }
     }
 
+    private _processFSHubFlightDeparted(flightDeparted: FSHubFlightDepartedEvent, listenerEventId: string) {
+        const embeds: DiscordMessageEmbedDto[] = [];
+
+        const departureAtDate = new Date(flightDeparted.departure_at);
+        // Format: Tuesday, August 30, 2022 9:59 PM
+        const formattedDepartureAt = departureAtDate.toLocaleString('en-US', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: '2-digit',
+            hour12: true,
+        });
+
+        const baseEmbed: DiscordMessageEmbedDto = {
+            title: '**Flight Departed**',
+            description: `A flight (#${flightDeparted.id}) has departed from [${flightDeparted.airport.name} (${flightDeparted.airport.icao})](https://skyvector.com/airport/${flightDeparted.airport.icao}) at ${formattedDepartureAt}!`,
+            fields: [
+                {
+                    name: 'Pilot',
+                    value: `${flightDeparted.user.name}`,
+                },
+            ],
+            footer: {
+                text: `Powered By 🐬ECHO Localizer | #${flightDeparted.id} | ${listenerEventId}`
+            }
+        }
+
+        if (flightDeparted.airline) {
+            let airlineName = '🏢 ';
+            if (flightDeparted.airline.handles.website) {
+                airlineName += `[${flightDeparted.airline.name} (${flightDeparted.airline.profile.abbreviation})](${flightDeparted.airline.handles.website})`;
+            } else {
+                airlineName += `${flightDeparted.airline.name} (${flightDeparted.airline.profile.abbreviation})`;
+            }
+
+            baseEmbed.fields?.push({
+                name: 'Airline',
+                value: airlineName,
+            })
+        }
+
+        if (flightDeparted.plan) {
+            let flightPlanValues: string[] = [];
+            if (flightDeparted.plan.flight_no) {
+                flightPlanValues.push(`🆔 Flight No: ${flightDeparted.plan.flight_no}`);
+            }
+            if (flightDeparted.plan.departure) {
+                flightPlanValues.push(`🛫 Departure: [${flightDeparted.plan.departure}](https://skyvector.com/airport/${flightDeparted.plan.departure}) | 🛬 Arrival: [${flightDeparted.plan.arrival}](https://skyvector.com/airport/${flightDeparted.plan.arrival})`);
+            }
+            
+            if (flightDeparted.plan.route) {
+                flightPlanValues.push(`Route: ${flightDeparted.plan.route}`);
+            }
+            if (flightDeparted.plan.cruise_lvl) {
+                flightPlanValues.push(`Cruise Level: FL${flightDeparted.plan.cruise_lvl}`);
+            }
+                
+            if (flightPlanValues.length > 0) {
+                baseEmbed.fields?.push({
+                    name: 'Flight Plan',
+                    value: flightPlanValues.join('\n'),
+                })
+            }
+        }
+
+        if (flightDeparted.aircraft) {
+            let aircraftValues: string[] = [];
+            if (flightDeparted.aircraft.name) {
+                aircraftValues.push(`✈️ Name: ${flightDeparted.aircraft.name} (${flightDeparted.aircraft.icao})`);
+            }
+
+            if (flightDeparted.aircraft.user_conf.tail) {
+                aircraftValues.push(`🆔 Tail: ${flightDeparted.aircraft.user_conf.tail}`);
+            }
+
+            if (aircraftValues.length > 0) {
+                baseEmbed.fields?.push({
+                    name: 'Aircraft',
+                    value: aircraftValues.join('\n'),
+                })
+            }
+        }
+
+        embeds.push(baseEmbed);
+
+        return embeds;
+    }
+
+    // private _processFSHubFlightArrived(flightArrived: FlightEvent) {
+    //     const embeds: DiscordMessageEmbedDto[] = [];
+
+    //     return embeds;
+    // }
+
+    private _processFSHubFlightCompleted(flightCompleted: FSHubFlightCompletedEvent, listenerEventId: string) {
+        const embeds: DiscordMessageEmbedDto[] = [];
+
+        const baseEmbed: DiscordMessageEmbedDto = {
+            title: '**Pilot Flight Completed**',
+            description: `A flight ([#${flightCompleted.id}](${`https://fshub.io/flight/${flightCompleted.id}/report`})) from [${flightCompleted.departure.airport.name} (${flightCompleted.departure.airport.icao})](https://skyvector.com/airport/${flightCompleted.departure.airport.icao}) to [${flightCompleted.arrival.airport.name} (${flightCompleted.arrival.airport.icao})](https://skyvector.com/airport/${flightCompleted.arrival.airport.icao}) has been completed by 🧑‍✈️ ${flightCompleted.user.name}!`,
+            fields: [],
+            footer: {
+                text: `Powered By 🐬ECHO Localizer | #${flightCompleted.id} | ${listenerEventId}`
+            }
+        }
+
+        if (flightCompleted.airline) {
+            let airlineName = '🏢 ';
+            if (flightCompleted.airline.handles.website) {
+                airlineName += `[${flightCompleted.airline.name} (${flightCompleted.airline.profile.abbreviation})](${flightCompleted.airline.handles.website})`;
+            } else {
+                airlineName += `${flightCompleted.airline.name} (${flightCompleted.airline.profile.abbreviation})`;
+            }
+
+            baseEmbed.fields?.push({
+                name: 'Airline',
+                value: airlineName,
+            })
+        }
+
+        if (flightCompleted.plan) {
+            let flightPlanValues: string[] = [];
+            if (flightCompleted.plan.callsign) {
+                flightPlanValues.push(`🆔 Flight No: ${flightCompleted.plan.callsign}`);
+            }
+            if (flightCompleted.plan.icao_dep) {
+                flightPlanValues.push(`🛫 Departure: [${flightCompleted.plan.icao_dep}](https://skyvector.com/airport/${flightCompleted.plan.icao_dep}) | 🛬 Arrival: [${flightCompleted.plan.icao_arr}](https://skyvector.com/airport/${flightCompleted.plan.icao_arr})`);
+            }
+            
+            if (flightCompleted.plan.route) {
+                flightPlanValues.push(`Route: ${flightCompleted.plan.route}`);
+            }
+            if (flightCompleted.plan.cruise_lvl) {
+                flightPlanValues.push(`Cruise Level: FL${flightCompleted.plan.cruise_lvl}`);
+            }
+                
+            if (flightPlanValues.length > 0) {
+                baseEmbed.fields?.push({
+                    name: 'Flight Plan',
+                    value: flightPlanValues.join('\n'),
+                })
+            }
+        }
+
+        if (flightCompleted.aircraft) {
+            let aircraftValues: string[] = [];
+            if (flightCompleted.aircraft.name) {
+                aircraftValues.push(`✈️ Name: ${flightCompleted.aircraft.name} (${flightCompleted.aircraft.icao})`);
+            }
+
+            if (flightCompleted.aircraft.user_conf.tail) {
+                aircraftValues.push(`🆔 Tail: ${flightCompleted.aircraft.user_conf.tail}`);
+            }
+
+            let fuelValue: string[] = [];
+            if (flightCompleted.departure.weight.fuel) {
+                fuelValue.push(`🔋 Fuel on Departure: **${flightCompleted.departure.weight.fuel} lbs**`);
+            }
+
+            if (flightCompleted.arrival.weight.fuel) {
+                fuelValue.push(` Fuel on Arrival: **${flightCompleted.arrival.weight.fuel} lbs**`);
+            }
+
+            if (flightCompleted.fuel_burnt) {
+                fuelValue.push(`🔥 Burned: **${flightCompleted.fuel_burnt} lbs**`);
+            }
+            
+            if (fuelValue.length > 0) {
+                aircraftValues.push(fuelValue.join(' | '));
+            }
+
+            if (aircraftValues.length > 0) {
+                baseEmbed.fields?.push({
+                    name: 'Aircraft',
+                    value: aircraftValues.join('\n'),
+                })
+            }
+        }
+
+        if (flightCompleted.arrival) {
+            let landingInformation: string[] = [];
+            if (flightCompleted.arrival.landing_rate) {
+                if (flightCompleted.arrival.landing_rate > -150) {
+                    landingInformation.push(`Landing Rate: **${flightCompleted.arrival.landing_rate} FPM** 🧈`);
+                } else {
+                    landingInformation.push(`Landing Rate: **${flightCompleted.arrival.landing_rate} FPM** (Too Fast)`);
+                }
+            }
+
+            if (flightCompleted.arrival.pitch && flightCompleted.arrival.bank) {
+                landingInformation.push(`Pitch: **${flightCompleted.arrival.pitch}°** / Bank: **${flightCompleted.arrival.bank}°**`);
+            }
+
+            if (flightCompleted.arrival.speed_tas) {
+                landingInformation.push(`Speed: **${flightCompleted.arrival.speed_tas} KTS TAS**`);
+            }
+
+            if (flightCompleted.arrival.wind) {
+                landingInformation.push(`Wind: **${flightCompleted.arrival.wind.direction}° @ ${flightCompleted.arrival.wind.speed} KTS**`);
+            } else {
+                landingInformation.push(`Wind: **Unknown**`);
+            }
+
+            if (landingInformation.length > 0) {
+                baseEmbed.fields?.push({
+                    name: 'Landing Information',
+                    value: landingInformation.join('\n'),
+                })
+            }
+        }
+
+        embeds.push(baseEmbed);
+
+        return embeds;
+    }
 }

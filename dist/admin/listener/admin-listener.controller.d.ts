@@ -72,8 +72,8 @@ export declare class AdminListenerController {
         Token: string;
         DiscordChannelWebhookId: string | null;
     }>;
-    resendEvent(Id: number): Promise<{
-        Id: number;
+    resendEvent(Id: string): Promise<{
+        Id: string;
         CreatedAt: Date;
         UpdatedAt: Date;
         Type: string;
@@ -87,7 +87,7 @@ export declare class AdminListenerController {
         DeliveredAt: Date | null;
     }>;
     getEvents(senderSlug: string, variant?: string, type?: string): Promise<{
-        Id: number;
+        Id: string;
         CreatedAt: Date;
         UpdatedAt: Date;
         Type: string;
@@ -101,7 +101,7 @@ export declare class AdminListenerController {
         DeliveredAt: Date | null;
     }[]>;
     deleteEvent(Id: string): Promise<{
-        Id: number;
+        Id: string;
         CreatedAt: Date;
         UpdatedAt: Date;
         Type: string;

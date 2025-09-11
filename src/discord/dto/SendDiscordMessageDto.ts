@@ -19,6 +19,20 @@ export class SendDiscordMessageDto {
 
     @IsOptional()
     embeds?: DiscordMessageEmbedDto[];
+
+    @IsOptional()
+    @IsString()
+    footer?: DiscordMessageFooterDto;
+}
+
+export class DiscordMessageFooterDto {
+    @IsOptional()
+    @IsString()
+    text?: string;
+
+    @IsOptional()
+    @IsString()
+    icon_url?: string;
 }
 
 export class DiscordMessageEmbedDto {
@@ -48,7 +62,7 @@ export class DiscordMessageEmbedDto {
 
     @IsOptional()
     @IsString()
-    footer?: string;
+    footer?: DiscordMessageFooterDto;
 
     @IsOptional()
     @IsString()
@@ -59,10 +73,33 @@ export class DiscordMessageEmbedDto {
     thumbnail?: string;
 
     @IsOptional()
-    @IsString()
-    author?: string;
+    author?: DiscordMessageEmbedAuthorDto;
 
     @IsOptional()
     @IsString()
-    fields?: string[];
+    fields?: DiscordMessageEmbedFieldDto[];
+}
+
+export class DiscordMessageEmbedAuthorDto {
+    @IsOptional()
+    @IsString()
+    name?: string;
+    
+    @IsOptional()
+    @IsString()
+    icon_url?: string;
+}
+
+export class DiscordMessageEmbedFieldDto {
+    @IsOptional()
+    @IsString()
+    name?: string;
+
+    @IsOptional()
+    @IsString()
+    value?: string;
+
+    @IsOptional()
+    @IsBoolean()
+    inline?: boolean;
 }

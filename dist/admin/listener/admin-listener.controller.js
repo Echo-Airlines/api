@@ -94,9 +94,6 @@ let AdminListenerController = class AdminListenerController {
         if (!Id) {
             throw new common_1.BadRequestException('Event ID is required');
         }
-        if (!Number.isInteger(Id)) {
-            Id = Number(Id);
-        }
         const event = await this.listenerService.Event_resend(Id);
         return event;
     }
@@ -137,7 +134,7 @@ let AdminListenerController = class AdminListenerController {
         return events;
     }
     async deleteEvent(Id) {
-        const event = await this.listenerService.deleteOneById(parseInt(Id));
+        const event = await this.listenerService.deleteOneById(Id);
         if (!event) {
             throw new common_1.NotFoundException('FSHub event not found');
         }
@@ -206,7 +203,7 @@ __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, is_admin_guard_1.IsAdminGuard),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
+    __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], AdminListenerController.prototype, "resendEvent", null);
 __decorate([

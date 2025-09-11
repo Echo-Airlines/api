@@ -8,6 +8,7 @@ class FSHubEventDto {
     _data;
     resend;
     event;
+    data;
 }
 exports.FSHubEventDto = FSHubEventDto;
 //# sourceMappingURL=FSHubEvent.dto.js.map

@@ -3,6 +3,7 @@ import { PrismaService } from '@prisma/prisma.service';
 import { ListenerEventStatus, Prisma } from 'prisma/generated/prisma';
 import * as crypto from 'crypto';
 import { ListenerService } from 'src/listener/listener.service';
+import { FSHubEventDto } from '@listener/dto/FSHubEvent.dto';
 
 @Injectable()
 export class AdminListenerService {
@@ -22,7 +23,7 @@ export class AdminListenerService {
         return events;
     }
 
-    async deleteOneById(Id: number) {
+    async deleteOneById(Id: string) {
         const event = await this.prisma.listenerEvent.delete({
             where: {
                 Id,
@@ -142,7 +143,7 @@ export class AdminListenerService {
     }
 
     
-    async Event_resend(Id: number) {
+    async Event_resend(Id: string) {
         const event = await this.prisma.listenerEvent.update({
             where: {
                 Id,
@@ -155,7 +156,7 @@ export class AdminListenerService {
             },
         });
 
-        const sentEvent = await this.listenerService.processListenerEvent(event.Sender, { event, resend: true, data: event.Data});
+        const sentEvent = await this.listenerService.processListenerEvent(event.Sender, { event, resend: true, data: event.Data });
 
         return sentEvent;
     }

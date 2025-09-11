@@ -6,4 +6,5 @@ export declare class FSHubEventDto {
     _data: any;
     resend?: boolean;
     event?: ListenerEvent;
+    data?: any;
 }

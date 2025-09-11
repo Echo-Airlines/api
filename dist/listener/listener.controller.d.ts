@@ -6,7 +6,7 @@ export declare class ListenerController {
         success: boolean;
         message: string;
         listenerEvent: {
-            Id: number;
+            Id: string;
             CreatedAt: Date;
             UpdatedAt: Date;
             Type: string;

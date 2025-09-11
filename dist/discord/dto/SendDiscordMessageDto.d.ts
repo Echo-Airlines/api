@@ -4,6 +4,11 @@ export declare class SendDiscordMessageDto {
     avatar_url?: string;
     tts?: boolean;
     embeds?: DiscordMessageEmbedDto[];
+    footer?: DiscordMessageFooterDto;
+}
+export declare class DiscordMessageFooterDto {
+    text?: string;
+    icon_url?: string;
 }
 export declare class DiscordMessageEmbedDto {
     title?: string;
@@ -12,9 +17,18 @@ export declare class DiscordMessageEmbedDto {
     url?: string;
     timestamp?: string;
     color?: string;
-    footer?: string;
+    footer?: DiscordMessageFooterDto;
     image?: string;
     thumbnail?: string;
-    author?: string;
-    fields?: string[];
+    author?: DiscordMessageEmbedAuthorDto;
+    fields?: DiscordMessageEmbedFieldDto[];
+}
+export declare class DiscordMessageEmbedAuthorDto {
+    name?: string;
+    icon_url?: string;
+}
+export declare class DiscordMessageEmbedFieldDto {
+    name?: string;
+    value?: string;
+    inline?: boolean;
 }

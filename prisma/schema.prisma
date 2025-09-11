@@ -82,7 +82,7 @@ model DiscordChannelWebhook {
 }
 
 model ListenerEvent {
-  Id               Int                 @id() @unique() @default(autoincrement())
+  Id               String                 @id() @unique() @default(uuid()) @db.Uuid
   Variant          String              @db.VarChar
   Type             String              @db.VarChar
   SentAt           DateTime            @db.Timestamp(6)

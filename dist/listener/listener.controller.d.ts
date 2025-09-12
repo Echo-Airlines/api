@@ -7,17 +7,17 @@ export declare class ListenerController {
         message: string;
         listenerEvent: {
             Id: string;
-            Variant: string;
+            CreatedAt: Date;
+            UpdatedAt: Date;
             Type: string;
-            SentAt: Date;
             Status: import("prisma/generated/prisma").$Enums.ListenerEventStatus;
+            Variant: string;
+            SentAt: Date;
             SenderId: string;
             Error: string | null;
             Data: import("prisma/generated/prisma/runtime/library").JsonValue | null;
             DiscordMessageId: string | null;
             DeliveredAt: Date | null;
-            CreatedAt: Date;
-            UpdatedAt: Date;
         } | null;
     }>;
 }

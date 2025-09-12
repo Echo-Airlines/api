@@ -12,10 +12,10 @@ export declare class AdminDiscordController {
         UpdatedAt: Date;
         Name: string;
         Description: string | null;
-        Token: string;
         IsActive: boolean;
         WebhookUrl: string;
         ChannelId: string;
+        Token: string;
     }[]>;
     getWebhook(id: string): Promise<{
         Id: string;
@@ -23,10 +23,10 @@ export declare class AdminDiscordController {
         UpdatedAt: Date;
         Name: string;
         Description: string | null;
-        Token: string;
         IsActive: boolean;
         WebhookUrl: string;
         ChannelId: string;
+        Token: string;
     } | null>;
     createWebhook(body: CreateDiscordChannelWebhookDto): Promise<{
         Id: string;
@@ -34,10 +34,10 @@ export declare class AdminDiscordController {
         UpdatedAt: Date;
         Name: string;
         Description: string | null;
-        Token: string;
         IsActive: boolean;
         WebhookUrl: string;
         ChannelId: string;
+        Token: string;
     }>;
     updateWebhook(id: string, body: CreateDiscordChannelWebhookDto): Promise<{
         Id: string;
@@ -45,10 +45,10 @@ export declare class AdminDiscordController {
         UpdatedAt: Date;
         Name: string;
         Description: string | null;
-        Token: string;
         IsActive: boolean;
         WebhookUrl: string;
         ChannelId: string;
+        Token: string;
     }>;
     sendMessage(id: string, body: {
         content: string;
@@ -57,11 +57,11 @@ export declare class AdminDiscordController {
         Id: string;
         CreatedAt: Date;
         UpdatedAt: Date;
-        DiscordChannelWebhookId: string | null;
-        ChannelId: string;
         Content: string;
+        ChannelId: string;
         DiscordMessageSentAt: Date | null;
         DiscordMessageTemplateId: number | null;
+        DiscordChannelWebhookId: string | null;
     }>;
     toggleWebhook(id: string): Promise<{
         Id: string;
@@ -69,10 +69,10 @@ export declare class AdminDiscordController {
         UpdatedAt: Date;
         Name: string;
         Description: string | null;
-        Token: string;
         IsActive: boolean;
         WebhookUrl: string;
         ChannelId: string;
+        Token: string;
     }>;
     getMessageTemplates(): Promise<{
         Id: number;
@@ -125,9 +125,9 @@ export declare class AdminDiscordController {
         UpdatedAt: Date;
         Name: string;
         Description: string | null;
-        Token: string;
         IsActive: boolean;
         WebhookUrl: string;
         ChannelId: string;
+        Token: string;
     }>;
 }

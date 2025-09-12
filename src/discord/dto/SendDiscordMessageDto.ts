@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsBoolean, IsOptional, IsString } from "class-validator";
+import { IsNotEmpty, IsBoolean, IsOptional, IsString, IsNumber } from "class-validator";
 
 export class SendDiscordMessageDto {
     @IsNotEmpty()
@@ -57,8 +57,8 @@ export class DiscordMessageEmbedDto {
     timestamp?: string;
 
     @IsOptional()
-    @IsString()
-    color?: string;
+    @IsNumber()
+    color?: number;
 
     @IsOptional()
     @IsString()

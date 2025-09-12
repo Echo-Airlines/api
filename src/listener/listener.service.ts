@@ -12,6 +12,7 @@ const notifier = require('node-notifier');
 import Handlebars from "handlebars";
 import { FSHubFlightDepartedEvent } from './type/FSHubFlightDepartedEvent';
 import { FSHubFlightCompletedEvent } from './type/FSHubFlightCompletedEvent';
+import { Colors } from 'discord.js';
 
 
 @Injectable()
@@ -276,50 +277,77 @@ export class ListenerService {
     }
 
     private _processFSHubFlightDeparted(flightDeparted: FSHubFlightDepartedEvent, listenerEventId: string) {
+        // Build the description for the embed
+        let airlineName = '';
+        const description: string[] = [];
+        const flightPlanValues: string[] = [];
+        const aircraftValues: string[] = [];
         const embeds: DiscordMessageEmbedDto[] = [];
 
-        const departureAtDate = new Date(flightDeparted.departure_at);
-        // Format: Tuesday, August 30, 2022 9:59 PM
-        const formattedDepartureAt = departureAtDate.toLocaleString('en-US', {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-            hour: 'numeric',
-            minute: '2-digit',
-            hour12: true,
-        });
+        try {
+            const departureAtDate = new Date(flightDeparted.departure_at || '');
+            
+            const formattedDepartureAt = departureAtDate.toLocaleString('en-US', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: '2-digit',
+                hour12: true,
+            });
+
+            description.push(`Flight (#${flightDeparted.id}) has departed`);
+
+            if (flightDeparted.airport) {
+                description.push(`from [${flightDeparted.airport.name} (${flightDeparted.airport.icao})](https://skyvector.com/airport/${flightDeparted.airport.icao})`);
+            } else if (flightDeparted.plan) {
+                description.push(`from [${flightDeparted.plan.departure}](https://skyvector.com/airport/${flightDeparted.plan.departure})`);
+            }
+
+            description.push(` at ${formattedDepartureAt}!`);
+        } catch (error) {
+            this.logger.error(`Error formatting description for flight.departed event ${listenerEventId}: ${error.message}`);
+        }
 
         const baseEmbed: DiscordMessageEmbedDto = {
             title: '**Flight Departed**',
-            description: `A flight (#${flightDeparted.id}) has departed from [${flightDeparted.airport.name} (${flightDeparted.airport.icao})](https://skyvector.com/airport/${flightDeparted.airport.icao}) at ${formattedDepartureAt}!`,
-            fields: [
-                {
-                    name: 'Pilot',
-                    value: `${flightDeparted.user.name}`,
-                },
-            ],
+            description: description.join(' '),
+            color: this._scheduleColorCode(flightDeparted.schedule.status),
+            fields: [],
             footer: {
                 text: `Powered By 🐬ECHO Localizer | #${flightDeparted.id} | ${listenerEventId}`
             }
         }
 
+        if (flightDeparted.user) {
+            this.logger.debug(`Adding pilot to embed for flight.departed event ${listenerEventId}: ${flightDeparted.user.name}`);
+            baseEmbed.fields?.push({
+                name: 'Pilot',
+                value: `[${flightDeparted.user.name}](https://fshub.io/pilot/${flightDeparted.user.id}/profile)`,
+            });
+            this.logger.debug(`Added pilot to embed for flight.departed event ${listenerEventId}: ${flightDeparted.user.name}`);
+        }
+
+        // Add the airline to the embed
         if (flightDeparted.airline) {
-            let airlineName = '🏢 ';
+            this.logger.debug(`Adding airline to embed for flight.departed event ${listenerEventId}: ${flightDeparted.airline.name}`);
             if (flightDeparted.airline.handles.website) {
-                airlineName += `[${flightDeparted.airline.name} (${flightDeparted.airline.profile.abbreviation})](${flightDeparted.airline.handles.website})`;
+                airlineName += `🏢 [${flightDeparted.airline.name} (${flightDeparted.airline.profile.abbreviation})](${flightDeparted.airline.handles.website})`;
             } else {
-                airlineName += `${flightDeparted.airline.name} (${flightDeparted.airline.profile.abbreviation})`;
+                airlineName += `🏢 ${flightDeparted.airline.name} (${flightDeparted.airline.profile.abbreviation})`;
             }
 
             baseEmbed.fields?.push({
                 name: 'Airline',
                 value: airlineName,
             })
+
+            this.logger.debug(`Added airline to embed for flight.departed event ${listenerEventId}: ${flightDeparted.airline.name}`);
         }
 
+        // Add the flight plan to the embed
         if (flightDeparted.plan) {
-            let flightPlanValues: string[] = [];
             if (flightDeparted.plan.flight_no) {
                 flightPlanValues.push(`🆔 Flight No: ${flightDeparted.plan.flight_no}`);
             }
@@ -339,37 +367,75 @@ export class ListenerService {
                     name: 'Flight Plan',
                     value: flightPlanValues.join('\n'),
                 })
+
+                this.logger.debug(`Added flight plan to embed for flight.departed event ${listenerEventId}: ${flightDeparted.plan.flight_no}`);
             }
         }
 
+        // Add the aircraft to the embed
         if (flightDeparted.aircraft) {
-            let aircraftValues: string[] = [];
             if (flightDeparted.aircraft.name) {
-                aircraftValues.push(`✈️ Name: ${flightDeparted.aircraft.name} (${flightDeparted.aircraft.icao})`);
+                aircraftValues.push(`✈️ Name: ${flightDeparted.aircraft.icao_name}${flightDeparted.aircraft.icao && flightDeparted.aircraft.icao != '' ? ` (${flightDeparted.aircraft.icao})` : ''}`);
             }
 
-            if (flightDeparted.aircraft.user_conf.tail) {
-                aircraftValues.push(`🆔 Tail: ${flightDeparted.aircraft.user_conf.tail}`);
+            if (flightDeparted.aircraft.name && flightDeparted.aircraft.name.length > 0) {
+                aircraftValues.push(`🎨 Livery: ${flightDeparted.aircraft.name}`);
             }
+
+            aircraftValues.push(`🆔 Tail: ${flightDeparted.aircraft.user_conf.tail !== '' ? flightDeparted.aircraft.user_conf.tail : 'N/A'}`);
 
             if (aircraftValues.length > 0) {
                 baseEmbed.fields?.push({
                     name: 'Aircraft',
                     value: aircraftValues.join('\n'),
                 })
+
+                this.logger.debug(`Added aircraft to embed for flight.departed event ${listenerEventId}: ${flightDeparted.aircraft.name}`);
             }
         }
 
+        let takeoffInformation: string[] = [];
+
+        if (flightDeparted.pitch) {
+            takeoffInformation.push(`Pitch: **${flightDeparted.pitch}°** / Bank: **${flightDeparted.bank}°**`);
+        }
+
+        if (flightDeparted.speed_tas && flightDeparted.speed_tas > 10) {
+            takeoffInformation.push(`Speed: **${flightDeparted.speed_tas} KTS TAS**`);
+        }
+
+        if (flightDeparted.wind) {
+            takeoffInformation.push(`Wind: **${flightDeparted.wind.direction}° @ ${flightDeparted.wind.speed} KTS**`);
+        }
+
+        if (takeoffInformation.length > 0) {
+            baseEmbed.fields?.push({
+                name: 'Takeoff Information',
+                value: takeoffInformation.join('\n'),
+            })
+        }
+
+        // Add the embed to the array
         embeds.push(baseEmbed);
+        this.logger.debug(`Added embed to array for flight.departed event ${listenerEventId}`);
 
         return embeds;
     }
 
-    // private _processFSHubFlightArrived(flightArrived: FlightEvent) {
-    //     const embeds: DiscordMessageEmbedDto[] = [];
-
-    //     return embeds;
-    // }
+    private _scheduleColorCode(status: string|null): number {
+        switch (status) {
+            case 'CANCELLED':
+                return Colors.Red;
+            case 'ON_TIME':
+                return Colors.Green;
+            case 'LATE':
+                return Colors.Orange;
+            case 'ARRIVED':
+                return Colors.Blue;
+            default:
+                return Colors.Default;
+        }
+    }
 
     private _processFSHubFlightCompleted(flightCompleted: FSHubFlightCompletedEvent, listenerEventId: string) {
         const embeds: DiscordMessageEmbedDto[] = [];
@@ -378,6 +444,7 @@ export class ListenerService {
             title: '**Pilot Flight Completed**',
             description: `A flight ([#${flightCompleted.id}](${`https://fshub.io/flight/${flightCompleted.id}/report`})) from [${flightCompleted.departure.airport.name} (${flightCompleted.departure.airport.icao})](https://skyvector.com/airport/${flightCompleted.departure.airport.icao}) to [${flightCompleted.arrival.airport.name} (${flightCompleted.arrival.airport.icao})](https://skyvector.com/airport/${flightCompleted.arrival.airport.icao}) has been completed by 🧑‍✈️ ${flightCompleted.user.name}!`,
             fields: [],
+            color: this._scheduleColorCode(flightCompleted.schedule_status),
             footer: {
                 text: `Powered By 🐬ECHO Localizer | #${flightCompleted.id} | ${listenerEventId}`
             }

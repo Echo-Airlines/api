@@ -16,7 +16,7 @@ export declare class DiscordMessageEmbedDto {
     description?: string;
     url?: string;
     timestamp?: string;
-    color?: string;
+    color?: number;
     footer?: DiscordMessageFooterDto;
     image?: string;
     thumbnail?: string;

@@ -7,45 +7,45 @@ export declare class AdminListenerService {
     constructor(prisma: PrismaService, listenerService: ListenerService);
     createListenerEvent(event: Prisma.ListenerEventCreateInput): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
-        Type: string;
-        Status: import("prisma/generated/prisma").$Enums.ListenerEventStatus;
         Variant: string;
+        Type: string;
         SentAt: Date;
+        Status: import("prisma/generated/prisma").$Enums.ListenerEventStatus;
         SenderId: string;
         Error: string | null;
         Data: Prisma.JsonValue | null;
         DiscordMessageId: string | null;
         DeliveredAt: Date | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
     }>;
     getMany(query?: Prisma.ListenerEventFindManyArgs): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
-        Type: string;
-        Status: import("prisma/generated/prisma").$Enums.ListenerEventStatus;
         Variant: string;
+        Type: string;
         SentAt: Date;
+        Status: import("prisma/generated/prisma").$Enums.ListenerEventStatus;
         SenderId: string;
         Error: string | null;
         Data: Prisma.JsonValue | null;
         DiscordMessageId: string | null;
         DeliveredAt: Date | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
     }[]>;
     deleteOneById(Id: string): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
-        Type: string;
-        Status: import("prisma/generated/prisma").$Enums.ListenerEventStatus;
         Variant: string;
+        Type: string;
         SentAt: Date;
+        Status: import("prisma/generated/prisma").$Enums.ListenerEventStatus;
         SenderId: string;
         Error: string | null;
         Data: Prisma.JsonValue | null;
         DiscordMessageId: string | null;
         DeliveredAt: Date | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
     }>;
     getSenderBySlug(Slug: string): Promise<({
         DiscordChannelWebhook: {
@@ -54,10 +54,10 @@ export declare class AdminListenerService {
             UpdatedAt: Date;
             Name: string;
             Description: string | null;
+            Token: string;
             IsActive: boolean;
             WebhookUrl: string;
             ChannelId: string;
-            Token: string;
         } | null;
     } & {
         Id: string;
@@ -66,8 +66,8 @@ export declare class AdminListenerService {
         Name: string;
         Description: string | null;
         Slug: string;
-        IsActive: boolean;
         Token: string;
+        IsActive: boolean;
         DiscordChannelWebhookId: string | null;
     }) | null>;
     Sender_getMany(query?: Prisma.ListenerEventSenderFindManyArgs): Promise<{
@@ -77,8 +77,8 @@ export declare class AdminListenerService {
         Name: string;
         Description: string | null;
         Slug: string;
-        IsActive: boolean;
         Token: string;
+        IsActive: boolean;
         DiscordChannelWebhookId: string | null;
     }[]>;
     Sender_getOneById(Id: string, queryOpts?: {
@@ -92,8 +92,8 @@ export declare class AdminListenerService {
         Name: string;
         Description: string | null;
         Slug: string;
-        IsActive: boolean;
         Token: string;
+        IsActive: boolean;
         DiscordChannelWebhookId: string | null;
     } | null>;
     Sender_getOneBySlug(Slug: string, query?: Prisma.ListenerEventSenderFindUniqueArgs): Promise<{
@@ -103,8 +103,8 @@ export declare class AdminListenerService {
         Name: string;
         Description: string | null;
         Slug: string;
-        IsActive: boolean;
         Token: string;
+        IsActive: boolean;
         DiscordChannelWebhookId: string | null;
     } | null>;
     Sender_create(data: Prisma.ListenerEventSenderCreateInput): Promise<{
@@ -114,8 +114,8 @@ export declare class AdminListenerService {
         Name: string;
         Description: string | null;
         Slug: string;
-        IsActive: boolean;
         Token: string;
+        IsActive: boolean;
         DiscordChannelWebhookId: string | null;
     }>;
     Sender_update(Id: string, data: Prisma.ListenerEventSenderUpdateInput): Promise<{
@@ -125,8 +125,8 @@ export declare class AdminListenerService {
         Name: string;
         Description: string | null;
         Slug: string;
-        IsActive: boolean;
         Token: string;
+        IsActive: boolean;
         DiscordChannelWebhookId: string | null;
     }>;
     Sender_regenerateToken(Id: string): Promise<{
@@ -136,8 +136,8 @@ export declare class AdminListenerService {
         Name: string;
         Description: string | null;
         Slug: string;
-        IsActive: boolean;
         Token: string;
+        IsActive: boolean;
         DiscordChannelWebhookId: string | null;
     }>;
     Sender_toggle(Id: string): Promise<{
@@ -147,8 +147,8 @@ export declare class AdminListenerService {
         Name: string;
         Description: string | null;
         Slug: string;
-        IsActive: boolean;
         Token: string;
+        IsActive: boolean;
         DiscordChannelWebhookId: string | null;
     }>;
     Sender_delete(Id: string): Promise<{
@@ -158,22 +158,22 @@ export declare class AdminListenerService {
         Name: string;
         Description: string | null;
         Slug: string;
-        IsActive: boolean;
         Token: string;
+        IsActive: boolean;
         DiscordChannelWebhookId: string | null;
     }>;
     Event_resend(Id: string): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
-        Type: string;
-        Status: import("prisma/generated/prisma").$Enums.ListenerEventStatus;
         Variant: string;
+        Type: string;
         SentAt: Date;
+        Status: import("prisma/generated/prisma").$Enums.ListenerEventStatus;
         SenderId: string;
         Error: string | null;
         Data: Prisma.JsonValue | null;
         DiscordMessageId: string | null;
         DeliveredAt: Date | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
     } | undefined>;
 }

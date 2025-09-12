@@ -9,10 +9,10 @@ export declare class AdminDiscordService {
         UpdatedAt: Date;
         Name: string;
         Description: string | null;
+        Token: string;
         IsActive: boolean;
         WebhookUrl: string;
         ChannelId: string;
-        Token: string;
     }[]>;
     ChannelWebhook_findById(Id: string): Promise<{
         Id: string;
@@ -20,10 +20,10 @@ export declare class AdminDiscordService {
         UpdatedAt: Date;
         Name: string;
         Description: string | null;
+        Token: string;
         IsActive: boolean;
         WebhookUrl: string;
         ChannelId: string;
-        Token: string;
     } | null>;
     ChannelWebhook_create(data: Prisma.DiscordChannelWebhookCreateInput): Promise<{
         Id: string;
@@ -31,10 +31,10 @@ export declare class AdminDiscordService {
         UpdatedAt: Date;
         Name: string;
         Description: string | null;
+        Token: string;
         IsActive: boolean;
         WebhookUrl: string;
         ChannelId: string;
-        Token: string;
     }>;
     ChannelWebhook_update(Id: string, data: Prisma.DiscordChannelWebhookUpdateInput): Promise<{
         Id: string;
@@ -42,10 +42,10 @@ export declare class AdminDiscordService {
         UpdatedAt: Date;
         Name: string;
         Description: string | null;
+        Token: string;
         IsActive: boolean;
         WebhookUrl: string;
         ChannelId: string;
-        Token: string;
     }>;
     ChannelWebhook_delete(Id: string): Promise<{
         Id: string;
@@ -53,10 +53,10 @@ export declare class AdminDiscordService {
         UpdatedAt: Date;
         Name: string;
         Description: string | null;
+        Token: string;
         IsActive: boolean;
         WebhookUrl: string;
         ChannelId: string;
-        Token: string;
     }>;
     ChannelWebhook_toggle(Id: string): Promise<{
         Id: string;
@@ -64,10 +64,10 @@ export declare class AdminDiscordService {
         UpdatedAt: Date;
         Name: string;
         Description: string | null;
+        Token: string;
         IsActive: boolean;
         WebhookUrl: string;
         ChannelId: string;
-        Token: string;
     }>;
     DiscordMessageTemplate_findMany(query?: Prisma.DiscordMessageTemplateFindManyArgs): Promise<{
         Id: number;

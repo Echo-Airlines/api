@@ -20,5 +20,6 @@ export declare class AppConfigController {
         DiscordAuthCreateUser: boolean;
         LocalAuthEnabled: boolean;
         VirtualAirlineInitiated: boolean;
+        FSHubApiKey: string;
     }>;
 }

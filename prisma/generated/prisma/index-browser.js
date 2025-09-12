@@ -133,6 +133,7 @@ exports.Prisma.AppConfigScalarFieldEnum = {
   DiscordAuthCreateUser: 'DiscordAuthCreateUser',
   LocalAuthEnabled: 'LocalAuthEnabled',
   VirtualAirlineInitiated: 'VirtualAirlineInitiated',
+  FSHubApiKey: 'FSHubApiKey',
   CreatedAt: 'CreatedAt',
   UpdatedAt: 'UpdatedAt'
 };

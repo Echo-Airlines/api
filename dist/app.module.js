@@ -104,7 +104,7 @@ exports.AppModule = AppModule = AppModule_1 = __decorate([
             flight_module_1.FlightModule,
             discord_module_1.DiscordModule,
             listener_module_1.ListenerModule,
-            fshub_module_1.FshubModule,
+            fshub_module_1.FSHubModule,
             notifier_module_1.NotifierModule,
             company_module_1.CompanyModule,
             livery_module_1.LiveryModule,

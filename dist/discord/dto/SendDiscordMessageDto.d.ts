@@ -1,5 +1,5 @@
 export declare class SendDiscordMessageDto {
-    content: string;
+    content: string | null;
     username?: string;
     avatar_url?: string;
     tts?: boolean;
@@ -18,10 +18,13 @@ export declare class DiscordMessageEmbedDto {
     timestamp?: string;
     color?: number;
     footer?: DiscordMessageFooterDto;
-    image?: string;
+    image?: DiscordMessageEmbedImageDto;
     thumbnail?: string;
     author?: DiscordMessageEmbedAuthorDto;
     fields?: DiscordMessageEmbedFieldDto[];
+}
+export declare class DiscordMessageEmbedImageDto {
+    url?: string;
 }
 export declare class DiscordMessageEmbedAuthorDto {
     name?: string;

@@ -13,12 +13,13 @@ const listener_controller_1 = require("./listener.controller");
 const prisma_module_1 = require("../prisma/prisma.module");
 const discord_module_1 = require("../discord/discord.module");
 const websocket_module_1 = require("../websocket/websocket.module");
+const fshub_module_1 = require("../fshub/fshub.module");
 let ListenerModule = class ListenerModule {
 };
 exports.ListenerModule = ListenerModule;
 exports.ListenerModule = ListenerModule = __decorate([
     (0, common_1.Module)({
-        imports: [prisma_module_1.PrismaModule, discord_module_1.DiscordModule, websocket_module_1.WebsocketModule],
+        imports: [prisma_module_1.PrismaModule, discord_module_1.DiscordModule, websocket_module_1.WebsocketModule, fshub_module_1.FSHubModule],
         providers: [listener_service_1.ListenerService],
         controllers: [listener_controller_1.ListenerController],
         exports: [listener_service_1.ListenerService],

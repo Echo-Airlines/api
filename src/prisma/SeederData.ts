@@ -264,6 +264,7 @@ export const SeedData_AppConfig: Prisma.AppConfigCreateInput = {
     DiscordAuthEnabled: process.env.DISCORDAUTHENABLED === 'true',
     LocalAuthEnabled: process.env.LOCALAUTHENABLED === 'true',
     DiscordAuthCreateUser: process.env.DISCORDAUTHCREATEUSER === 'true',
+    FSHubApiKey: process.env.FSHUBAPIKEY,
 };
 
 export const SeedData_VirtualAirline: Prisma.VirtualAirlineCreateInput|undefined = ((process.env.ONAIRVIRTUALAIRLINEID && process.env.ONAIRAPIKEY) ? {

@@ -22,6 +22,7 @@ model AppConfig {
   DiscordAuthCreateUser          Boolean  @default(false)
   LocalAuthEnabled               Boolean  @default(true)
   VirtualAirlineInitiated        Boolean  @default(false)
+  FSHubApiKey                    String   @default("") @db.VarChar
   CreatedAt                      DateTime @default(now()) @db.Timestamp(6)
   UpdatedAt                      DateTime @default(now()) @db.Timestamp(6)
 }

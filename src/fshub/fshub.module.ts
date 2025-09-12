@@ -1,4 +1,10 @@
 import { Module } from '@nestjs/common';
+import { FSHubService } from './fshub.service';
+import { AppConfigModule } from '@app-config/app-config.module';
 
-@Module({})
-export class FshubModule {}
+@Module({
+  imports: [AppConfigModule],
+  providers: [FSHubService],
+  exports: [FSHubService]
+})
+export class FSHubModule {}

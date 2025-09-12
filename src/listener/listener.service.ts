@@ -13,6 +13,7 @@ import Handlebars from "handlebars";
 import { FSHubFlightDepartedEvent } from './type/FSHubFlightDepartedEvent';
 import { FSHubFlightCompletedEvent } from './type/FSHubFlightCompletedEvent';
 import { Colors } from 'discord.js';
+import { FSHubScreenshot, FSHubService } from '@fshub/fshub.service';
 
 
 @Injectable()
@@ -22,7 +23,8 @@ export class ListenerService {
     constructor(
         private prisma: PrismaService, 
         private readonly discordService: DiscordService,
-        private readonly websocketGateway: WebsocketGateway
+        private readonly websocketGateway: WebsocketGateway,
+        private readonly fshubService: FSHubService
     ) {}
 
     async createListenerEvent(event: Prisma.ListenerEventCreateInput) {
@@ -177,11 +179,10 @@ export class ListenerService {
             const messageTemplate: DiscordMessageTemplate|null = await this.discordService.MessageTemplate_findOneBySlug(listenerEvent.Type);
 
             let message: SendDiscordMessageDto = {
-                content: ' ',
+                content: null,
+                avatar_url: 'https://www.echoairlines.com/assets/whale-logo.png',
                 embeds: [],
-                footer: {
-                    text: `Powered By 🐬ECHO Localizer | #${listenerEvent.Id}`
-                }
+                username: "ECHO Localizer 🐋",
             };
 
             switch (listenerEvent.Type) {
@@ -199,7 +200,7 @@ export class ListenerService {
                 case 'flight.departed':
                     const flightDeparted = listenerEvent.Data as FSHubFlightDepartedEvent
                     this.logger.debug(`flight.departed | #${flightDeparted.id} - https://fshub.io/flight/${flightDeparted.id}/report`);
-                    message.embeds = this._processFSHubFlightDeparted(flightDeparted, listenerEvent.Id);
+                    message.embeds = await this._processFSHubFlightDeparted(flightDeparted, listenerEvent.Id);
                     
                     break;
                 // case 'flight.arrived':
@@ -211,7 +212,7 @@ export class ListenerService {
                 case 'flight.completed':
                     const flightCompleted = listenerEvent.Data as FSHubFlightCompletedEvent
                     this.logger.debug(`flight.completed | #${flightCompleted.id} - https://fshub.io/flight/${flightCompleted.id}/report`);
-                    message.embeds = this._processFSHubFlightCompleted(flightCompleted, listenerEvent.Id);
+                    message.embeds = await this._processFSHubFlightCompleted(flightCompleted, listenerEvent.Id);
 
                     break;
                 // case 'flight.updated':
@@ -276,7 +277,7 @@ export class ListenerService {
         }
     }
 
-    private _processFSHubFlightDeparted(flightDeparted: FSHubFlightDepartedEvent, listenerEventId: string) {
+    private async _processFSHubFlightDeparted(flightDeparted: FSHubFlightDepartedEvent, listenerEventId: string) {
         // Build the description for the embed
         let airlineName = '';
         const description: string[] = [];
@@ -315,8 +316,12 @@ export class ListenerService {
             description: description.join(' '),
             color: this._scheduleColorCode(flightDeparted.schedule.status),
             fields: [],
+            author: {
+                name: 'Echo 🐋',
+                icon_url: 'https://www.echoairlines.com/assets/whale-logo.png',
+            },
             footer: {
-                text: `Powered By 🐬ECHO Localizer | #${flightDeparted.id} | ${listenerEventId}`
+                text: `Powered By 🐋 ECHO Localizer | #${flightDeparted.id} | ${listenerEventId}`
             }
         }
 
@@ -437,16 +442,18 @@ export class ListenerService {
         }
     }
 
-    private _processFSHubFlightCompleted(flightCompleted: FSHubFlightCompletedEvent, listenerEventId: string) {
+    private async _processFSHubFlightCompleted(flightCompleted: FSHubFlightCompletedEvent, listenerEventId: string) {
         const embeds: DiscordMessageEmbedDto[] = [];
 
-        const baseEmbed: DiscordMessageEmbedDto = {
+        let baseEmbed: DiscordMessageEmbedDto = {
             title: '**Pilot Flight Completed**',
             description: `A flight ([#${flightCompleted.id}](${`https://fshub.io/flight/${flightCompleted.id}/report`})) from [${flightCompleted.departure.airport.name} (${flightCompleted.departure.airport.icao})](https://skyvector.com/airport/${flightCompleted.departure.airport.icao}) to [${flightCompleted.arrival.airport.name} (${flightCompleted.arrival.airport.icao})](https://skyvector.com/airport/${flightCompleted.arrival.airport.icao}) has been completed by 🧑‍✈️ ${flightCompleted.user.name}!`,
+            url: `https://fshub.io/flight/${flightCompleted.id}/report`,
             fields: [],
             color: this._scheduleColorCode(flightCompleted.schedule_status),
+            timestamp: new Date().toISOString(),
             footer: {
-                text: `Powered By 🐬ECHO Localizer | #${flightCompleted.id} | ${listenerEventId}`
+                text: `Powered By 🐋 ECHO Localizer | #${flightCompleted.id} | ${listenerEventId}`
             }
         }
 
@@ -555,7 +562,60 @@ export class ListenerService {
             }
         }
 
-        embeds.push(baseEmbed);
+        try {
+            // build the screenshots by fetching the screenshots from the fshub service
+            let screenshots: FSHubScreenshot[] = await this.fshubService.getFlightScreenshotsById(flightCompleted.id);
+            
+            // if there are screenshots, add the first one to the baseEmbed
+            if (screenshots.length <= 0) {
+                embeds.push(baseEmbed);
+                return embeds;
+            }
+
+            if (screenshots.length > 4) {
+                screenshots = screenshots.slice(0, 4);
+            }
+
+            baseEmbed.fields?.push({
+                name: 'Flight Screenshots',
+                value: `Here are the last 4 screenshots of the flight. Click [here](https://fshub.io/flight/${flightCompleted.id}/media) to view all screenshots.`,
+            })
+
+            baseEmbed.image = {
+                url: screenshots[0].urls.fullsize,
+            }
+
+            // baseEmbed.fields?.push({
+            //     name: 'Flight Screenshots',
+            //     value: 'Here are the last 4 screenshots of the flight',
+            // })
+
+            embeds.push(baseEmbed);
+            // then loop through the screenshots and add them to the embeds array, skipping the first one
+            // let count = 0;
+            // let max = 4; // max 4 screenshots per embed
+            // let screenshotEmbed: DiscordMessageEmbedDto = {
+            //     url: `https://fshub.io/flight/${flightCompleted.id}/report`,
+            //     image: {
+            //         url: screenshots[0].urls.fullsize,
+            //     }
+            // }
+
+            // embeds.push(screenshotEmbed);
+
+            for (const screenshot of screenshots.slice(1)) {
+                const imgEmbed: DiscordMessageEmbedDto = {
+                    url: `https://fshub.io/flight/${flightCompleted.id}/report`,
+                    image: {
+                        url: screenshot.urls.fullsize,
+                    }
+                }
+
+                embeds.push(imgEmbed)
+            }
+        } catch (error) {
+            this.logger.error(`Error fetching screenshots for flight.completed event ${listenerEventId}: ${error.message}`);
+        }
 
         return embeds;
     }

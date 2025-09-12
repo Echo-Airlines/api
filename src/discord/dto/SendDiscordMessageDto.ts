@@ -3,7 +3,7 @@ import { IsNotEmpty, IsBoolean, IsOptional, IsString, IsNumber } from "class-val
 export class SendDiscordMessageDto {
     @IsNotEmpty()
     @IsString()
-    content: string;
+    content: string|null;
 
     @IsOptional()
     @IsString()
@@ -66,7 +66,7 @@ export class DiscordMessageEmbedDto {
 
     @IsOptional()
     @IsString()
-    image?: string;
+    image?: DiscordMessageEmbedImageDto;
 
     @IsOptional()
     @IsString()
@@ -78,6 +78,12 @@ export class DiscordMessageEmbedDto {
     @IsOptional()
     @IsString()
     fields?: DiscordMessageEmbedFieldDto[];
+}
+
+export class DiscordMessageEmbedImageDto {
+    @IsOptional()
+    @IsString()
+    url?: string;
 }
 
 export class DiscordMessageEmbedAuthorDto {

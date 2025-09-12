@@ -18,7 +18,7 @@ import { AirportModule } from './airport/airport.module';
 import { FlightModule } from './flight/flight.module';
 import { DiscordModule } from './discord/discord.module';
 import { ListenerModule } from './listener/listener.module';
-import { FshubModule } from './fshub/fshub.module';
+import { FSHubModule } from './fshub/fshub.module';
 import { NotifierModule } from './notifier/notifier.module';
 import { CompanyModule } from './company/company.module';
 import { LiveryModule } from './livery/livery.module';
@@ -87,7 +87,7 @@ console.log('emailTemplatesDirectory:', emailTemplatesDirectory);
     FlightModule,
     DiscordModule,
     ListenerModule,
-    FshubModule,
+    FSHubModule,
     NotifierModule,
     CompanyModule,
     LiveryModule,

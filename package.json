@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "@nestjs-modules/mailer": "^2.0.2",
+    "@nestjs/axios": "^4.0.1",
     "@nestjs/bullmq": "^11.0.3",
     "@nestjs/common": "^11.0.1",
     "@nestjs/config": "^4.0.2",
@@ -49,7 +50,7 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.2",
     "discord.js": "^14.22.1",
-    "fshub-api": "^1.0.1",
+    "fshub-api": "file:../../node-fshub-api",
     "handlebars": "^4.7.8",
     "node-notifier": "^10.0.1",
     "onair-api": "^2.8.7",

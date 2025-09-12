@@ -18,6 +18,7 @@ export declare class AppConfigService {
         DiscordAuthCreateUser: boolean;
         LocalAuthEnabled: boolean;
         VirtualAirlineInitiated: boolean;
+        FSHubApiKey: string;
     }>;
     findOne(query: Prisma.AppConfigWhereInput): Promise<{
         Id: number;
@@ -34,6 +35,7 @@ export declare class AppConfigService {
         DiscordAuthCreateUser: boolean;
         LocalAuthEnabled: boolean;
         VirtualAirlineInitiated: boolean;
+        FSHubApiKey: string;
     }>;
     findMany(query: Prisma.AppConfigFindManyArgs): Promise<{
         Id: number;
@@ -50,6 +52,7 @@ export declare class AppConfigService {
         DiscordAuthCreateUser: boolean;
         LocalAuthEnabled: boolean;
         VirtualAirlineInitiated: boolean;
+        FSHubApiKey: string;
     }[]>;
     getLatest(): Promise<{
         Id: number;
@@ -66,6 +69,7 @@ export declare class AppConfigService {
         DiscordAuthCreateUser: boolean;
         LocalAuthEnabled: boolean;
         VirtualAirlineInitiated: boolean;
+        FSHubApiKey: string;
     } | null>;
     update(query: Prisma.AppConfigWhereInput, dto: AppConfig): Promise<{
         Id: number;
@@ -82,6 +86,7 @@ export declare class AppConfigService {
         DiscordAuthCreateUser: boolean;
         LocalAuthEnabled: boolean;
         VirtualAirlineInitiated: boolean;
+        FSHubApiKey: string;
     }>;
     upsert(dto: AppConfig): Promise<{
         Id: number;
@@ -98,6 +103,7 @@ export declare class AppConfigService {
         DiscordAuthCreateUser: boolean;
         LocalAuthEnabled: boolean;
         VirtualAirlineInitiated: boolean;
+        FSHubApiKey: string;
     }>;
     delete(query: Prisma.AppConfigWhereInput): Promise<{
         Id: number;
@@ -114,6 +120,7 @@ export declare class AppConfigService {
         DiscordAuthCreateUser: boolean;
         LocalAuthEnabled: boolean;
         VirtualAirlineInitiated: boolean;
+        FSHubApiKey: string;
     }>;
     setVirtualAirlineInitiated(VirtualAirlineInitiated: boolean): Promise<{
         Id: number;
@@ -130,6 +137,7 @@ export declare class AppConfigService {
         DiscordAuthCreateUser: boolean;
         LocalAuthEnabled: boolean;
         VirtualAirlineInitiated: boolean;
+        FSHubApiKey: string;
     }>;
     Livery_findAll(): Promise<{
         Id: string;
@@ -247,6 +255,7 @@ export declare class AppConfigService {
         DiscordAuthCreateUser: boolean;
         LocalAuthEnabled: boolean;
         VirtualAirlineInitiated: boolean;
+        FSHubApiKey: string;
     }>;
     getDiscordConfig(): Promise<{
         DiscordAuthEnabled: boolean;

@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DiscordMessageEmbedFieldDto = exports.DiscordMessageEmbedAuthorDto = exports.DiscordMessageEmbedDto = exports.DiscordMessageFooterDto = exports.SendDiscordMessageDto = void 0;
+exports.DiscordMessageEmbedFieldDto = exports.DiscordMessageEmbedAuthorDto = exports.DiscordMessageEmbedImageDto = exports.DiscordMessageEmbedDto = exports.DiscordMessageFooterDto = exports.SendDiscordMessageDto = void 0;
 const class_validator_1 = require("class-validator");
 class SendDiscordMessageDto {
     content;
@@ -23,7 +23,7 @@ exports.SendDiscordMessageDto = SendDiscordMessageDto;
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
+    __metadata("design:type", Object)
 ], SendDiscordMessageDto.prototype, "content", void 0);
 __decorate([
     (0, class_validator_1.IsOptional)(),
@@ -116,7 +116,7 @@ __decorate([
 __decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
+    __metadata("design:type", DiscordMessageEmbedImageDto)
 ], DiscordMessageEmbedDto.prototype, "image", void 0);
 __decorate([
     (0, class_validator_1.IsOptional)(),
@@ -132,6 +132,15 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", Array)
 ], DiscordMessageEmbedDto.prototype, "fields", void 0);
+class DiscordMessageEmbedImageDto {
+    url;
+}
+exports.DiscordMessageEmbedImageDto = DiscordMessageEmbedImageDto;
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], DiscordMessageEmbedImageDto.prototype, "url", void 0);
 class DiscordMessageEmbedAuthorDto {
     name;
     icon_url;

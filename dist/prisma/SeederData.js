@@ -241,6 +241,7 @@ exports.SeedData_AppConfig = {
     DiscordAuthEnabled: process.env.DISCORDAUTHENABLED === 'true',
     LocalAuthEnabled: process.env.LOCALAUTHENABLED === 'true',
     DiscordAuthCreateUser: process.env.DISCORDAUTHCREATEUSER === 'true',
+    FSHubApiKey: process.env.FSHUBAPIKEY,
 };
 exports.SeedData_VirtualAirline = ((process.env.ONAIRVIRTUALAIRLINEID && process.env.ONAIRAPIKEY) ? {
     Id: process.env.ONAIRVIRTUALAIRLINEID,

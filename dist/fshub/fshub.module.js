@@ -6,12 +6,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FshubModule = void 0;
+exports.FSHubModule = void 0;
 const common_1 = require("@nestjs/common");
-let FshubModule = class FshubModule {
+const fshub_service_1 = require("./fshub.service");
+const app_config_module_1 = require("../app-config/app-config.module");
+let FSHubModule = class FSHubModule {
 };
-exports.FshubModule = FshubModule;
-exports.FshubModule = FshubModule = __decorate([
-    (0, common_1.Module)({})
-], FshubModule);
+exports.FSHubModule = FSHubModule;
+exports.FSHubModule = FSHubModule = __decorate([
+    (0, common_1.Module)({
+        imports: [app_config_module_1.AppConfigModule],
+        providers: [fshub_service_1.FSHubService],
+        exports: [fshub_service_1.FSHubService]
+    })
+], FSHubModule);
 //# sourceMappingURL=fshub.module.js.map

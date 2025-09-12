@@ -4164,6 +4164,7 @@ export namespace Prisma {
     DiscordAuthCreateUser: boolean | null
     LocalAuthEnabled: boolean | null
     VirtualAirlineInitiated: boolean | null
+    FSHubApiKey: string | null
     CreatedAt: Date | null
     UpdatedAt: Date | null
   }
@@ -4181,6 +4182,7 @@ export namespace Prisma {
     DiscordAuthCreateUser: boolean | null
     LocalAuthEnabled: boolean | null
     VirtualAirlineInitiated: boolean | null
+    FSHubApiKey: string | null
     CreatedAt: Date | null
     UpdatedAt: Date | null
   }
@@ -4198,6 +4200,7 @@ export namespace Prisma {
     DiscordAuthCreateUser: number
     LocalAuthEnabled: number
     VirtualAirlineInitiated: number
+    FSHubApiKey: number
     CreatedAt: number
     UpdatedAt: number
     _all: number
@@ -4225,6 +4228,7 @@ export namespace Prisma {
     DiscordAuthCreateUser?: true
     LocalAuthEnabled?: true
     VirtualAirlineInitiated?: true
+    FSHubApiKey?: true
     CreatedAt?: true
     UpdatedAt?: true
   }
@@ -4242,6 +4246,7 @@ export namespace Prisma {
     DiscordAuthCreateUser?: true
     LocalAuthEnabled?: true
     VirtualAirlineInitiated?: true
+    FSHubApiKey?: true
     CreatedAt?: true
     UpdatedAt?: true
   }
@@ -4259,6 +4264,7 @@ export namespace Prisma {
     DiscordAuthCreateUser?: true
     LocalAuthEnabled?: true
     VirtualAirlineInitiated?: true
+    FSHubApiKey?: true
     CreatedAt?: true
     UpdatedAt?: true
     _all?: true
@@ -4363,6 +4369,7 @@ export namespace Prisma {
     DiscordAuthCreateUser: boolean
     LocalAuthEnabled: boolean
     VirtualAirlineInitiated: boolean
+    FSHubApiKey: string
     CreatedAt: Date
     UpdatedAt: Date
     _count: AppConfigCountAggregateOutputType | null
@@ -4399,6 +4406,7 @@ export namespace Prisma {
     DiscordAuthCreateUser?: boolean
     LocalAuthEnabled?: boolean
     VirtualAirlineInitiated?: boolean
+    FSHubApiKey?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
   }, ExtArgs["result"]["appConfig"]>
@@ -4416,6 +4424,7 @@ export namespace Prisma {
     DiscordAuthCreateUser?: boolean
     LocalAuthEnabled?: boolean
     VirtualAirlineInitiated?: boolean
+    FSHubApiKey?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
   }, ExtArgs["result"]["appConfig"]>
@@ -4433,6 +4442,7 @@ export namespace Prisma {
     DiscordAuthCreateUser?: boolean
     LocalAuthEnabled?: boolean
     VirtualAirlineInitiated?: boolean
+    FSHubApiKey?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
   }, ExtArgs["result"]["appConfig"]>
@@ -4450,11 +4460,12 @@ export namespace Prisma {
     DiscordAuthCreateUser?: boolean
     LocalAuthEnabled?: boolean
     VirtualAirlineInitiated?: boolean
+    FSHubApiKey?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
   }
 
-  export type AppConfigOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "OnAirSyncEnabled" | "OnAirVASyncEnabled" | "OnAirVAMembersSyncEnabled" | "OnAirCompanySyncEnabled" | "DiscordServerInviteLink" | "DiscordServerInviteLinkEnabled" | "AcceptingNewMembers" | "DiscordAuthEnabled" | "DiscordAuthCreateUser" | "LocalAuthEnabled" | "VirtualAirlineInitiated" | "CreatedAt" | "UpdatedAt", ExtArgs["result"]["appConfig"]>
+  export type AppConfigOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "OnAirSyncEnabled" | "OnAirVASyncEnabled" | "OnAirVAMembersSyncEnabled" | "OnAirCompanySyncEnabled" | "DiscordServerInviteLink" | "DiscordServerInviteLinkEnabled" | "AcceptingNewMembers" | "DiscordAuthEnabled" | "DiscordAuthCreateUser" | "LocalAuthEnabled" | "VirtualAirlineInitiated" | "FSHubApiKey" | "CreatedAt" | "UpdatedAt", ExtArgs["result"]["appConfig"]>
 
   export type $AppConfigPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "AppConfig"
@@ -4472,6 +4483,7 @@ export namespace Prisma {
       DiscordAuthCreateUser: boolean
       LocalAuthEnabled: boolean
       VirtualAirlineInitiated: boolean
+      FSHubApiKey: string
       CreatedAt: Date
       UpdatedAt: Date
     }, ExtArgs["result"]["appConfig"]>
@@ -4909,6 +4921,7 @@ export namespace Prisma {
     readonly DiscordAuthCreateUser: FieldRef<"AppConfig", 'Boolean'>
     readonly LocalAuthEnabled: FieldRef<"AppConfig", 'Boolean'>
     readonly VirtualAirlineInitiated: FieldRef<"AppConfig", 'Boolean'>
+    readonly FSHubApiKey: FieldRef<"AppConfig", 'String'>
     readonly CreatedAt: FieldRef<"AppConfig", 'DateTime'>
     readonly UpdatedAt: FieldRef<"AppConfig", 'DateTime'>
   }
@@ -38859,6 +38872,7 @@ export namespace Prisma {
     DiscordAuthCreateUser: 'DiscordAuthCreateUser',
     LocalAuthEnabled: 'LocalAuthEnabled',
     VirtualAirlineInitiated: 'VirtualAirlineInitiated',
+    FSHubApiKey: 'FSHubApiKey',
     CreatedAt: 'CreatedAt',
     UpdatedAt: 'UpdatedAt'
   };
@@ -39622,6 +39636,7 @@ export namespace Prisma {
     DiscordAuthCreateUser?: BoolFilter<"AppConfig"> | boolean
     LocalAuthEnabled?: BoolFilter<"AppConfig"> | boolean
     VirtualAirlineInitiated?: BoolFilter<"AppConfig"> | boolean
+    FSHubApiKey?: StringFilter<"AppConfig"> | string
     CreatedAt?: DateTimeFilter<"AppConfig"> | Date | string
     UpdatedAt?: DateTimeFilter<"AppConfig"> | Date | string
   }
@@ -39639,6 +39654,7 @@ export namespace Prisma {
     DiscordAuthCreateUser?: SortOrder
     LocalAuthEnabled?: SortOrder
     VirtualAirlineInitiated?: SortOrder
+    FSHubApiKey?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
   }
@@ -39659,6 +39675,7 @@ export namespace Prisma {
     DiscordAuthCreateUser?: BoolFilter<"AppConfig"> | boolean
     LocalAuthEnabled?: BoolFilter<"AppConfig"> | boolean
     VirtualAirlineInitiated?: BoolFilter<"AppConfig"> | boolean
+    FSHubApiKey?: StringFilter<"AppConfig"> | string
     CreatedAt?: DateTimeFilter<"AppConfig"> | Date | string
     UpdatedAt?: DateTimeFilter<"AppConfig"> | Date | string
   }, "Id">
@@ -39676,6 +39693,7 @@ export namespace Prisma {
     DiscordAuthCreateUser?: SortOrder
     LocalAuthEnabled?: SortOrder
     VirtualAirlineInitiated?: SortOrder
+    FSHubApiKey?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
     _count?: AppConfigCountOrderByAggregateInput
@@ -39701,6 +39719,7 @@ export namespace Prisma {
     DiscordAuthCreateUser?: BoolWithAggregatesFilter<"AppConfig"> | boolean
     LocalAuthEnabled?: BoolWithAggregatesFilter<"AppConfig"> | boolean
     VirtualAirlineInitiated?: BoolWithAggregatesFilter<"AppConfig"> | boolean
+    FSHubApiKey?: StringWithAggregatesFilter<"AppConfig"> | string
     CreatedAt?: DateTimeWithAggregatesFilter<"AppConfig"> | Date | string
     UpdatedAt?: DateTimeWithAggregatesFilter<"AppConfig"> | Date | string
   }
@@ -42466,6 +42485,7 @@ export namespace Prisma {
     DiscordAuthCreateUser?: boolean
     LocalAuthEnabled?: boolean
     VirtualAirlineInitiated?: boolean
+    FSHubApiKey?: string
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
   }
@@ -42483,6 +42503,7 @@ export namespace Prisma {
     DiscordAuthCreateUser?: boolean
     LocalAuthEnabled?: boolean
     VirtualAirlineInitiated?: boolean
+    FSHubApiKey?: string
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
   }
@@ -42499,6 +42520,7 @@ export namespace Prisma {
     DiscordAuthCreateUser?: BoolFieldUpdateOperationsInput | boolean
     LocalAuthEnabled?: BoolFieldUpdateOperationsInput | boolean
     VirtualAirlineInitiated?: BoolFieldUpdateOperationsInput | boolean
+    FSHubApiKey?: StringFieldUpdateOperationsInput | string
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -42516,6 +42538,7 @@ export namespace Prisma {
     DiscordAuthCreateUser?: BoolFieldUpdateOperationsInput | boolean
     LocalAuthEnabled?: BoolFieldUpdateOperationsInput | boolean
     VirtualAirlineInitiated?: BoolFieldUpdateOperationsInput | boolean
+    FSHubApiKey?: StringFieldUpdateOperationsInput | string
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -42533,6 +42556,7 @@ export namespace Prisma {
     DiscordAuthCreateUser?: boolean
     LocalAuthEnabled?: boolean
     VirtualAirlineInitiated?: boolean
+    FSHubApiKey?: string
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
   }
@@ -42549,6 +42573,7 @@ export namespace Prisma {
     DiscordAuthCreateUser?: BoolFieldUpdateOperationsInput | boolean
     LocalAuthEnabled?: BoolFieldUpdateOperationsInput | boolean
     VirtualAirlineInitiated?: BoolFieldUpdateOperationsInput | boolean
+    FSHubApiKey?: StringFieldUpdateOperationsInput | string
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -42566,6 +42591,7 @@ export namespace Prisma {
     DiscordAuthCreateUser?: BoolFieldUpdateOperationsInput | boolean
     LocalAuthEnabled?: BoolFieldUpdateOperationsInput | boolean
     VirtualAirlineInitiated?: BoolFieldUpdateOperationsInput | boolean
+    FSHubApiKey?: StringFieldUpdateOperationsInput | string
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -45755,6 +45781,21 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type StringFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringFilter<$PrismaModel> | string
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -45784,6 +45825,7 @@ export namespace Prisma {
     DiscordAuthCreateUser?: SortOrder
     LocalAuthEnabled?: SortOrder
     VirtualAirlineInitiated?: SortOrder
+    FSHubApiKey?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
   }
@@ -45805,6 +45847,7 @@ export namespace Prisma {
     DiscordAuthCreateUser?: SortOrder
     LocalAuthEnabled?: SortOrder
     VirtualAirlineInitiated?: SortOrder
+    FSHubApiKey?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
   }
@@ -45822,6 +45865,7 @@ export namespace Prisma {
     DiscordAuthCreateUser?: SortOrder
     LocalAuthEnabled?: SortOrder
     VirtualAirlineInitiated?: SortOrder
+    FSHubApiKey?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
   }
@@ -45872,6 +45916,24 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
+  export type StringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -45896,21 +45958,6 @@ export namespace Prisma {
     gte?: string | StringFieldRefInput<$PrismaModel>
     mode?: QueryMode
     not?: NestedUuidFilter<$PrismaModel> | string
-  }
-
-  export type StringFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringFilter<$PrismaModel> | string
   }
 
   export type DateTimeNullableFilter<$PrismaModel = never> = {
@@ -45966,24 +46013,6 @@ export namespace Prisma {
     gte?: string | StringFieldRefInput<$PrismaModel>
     mode?: QueryMode
     not?: NestedUuidWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
-  }
-
-  export type StringWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
@@ -48097,6 +48126,10 @@ export namespace Prisma {
     set?: string | null
   }
 
+  export type StringFieldUpdateOperationsInput = {
+    set?: string
+  }
+
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
   }
@@ -48119,10 +48152,6 @@ export namespace Prisma {
     create?: XOR<UserCreateWithoutInviteCodeInput, UserUncheckedCreateWithoutInviteCodeInput>
     connectOrCreate?: UserCreateOrConnectWithoutInviteCodeInput
     connect?: UserWhereUniqueInput
-  }
-
-  export type StringFieldUpdateOperationsInput = {
-    set?: string
   }
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
@@ -50257,6 +50286,20 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type NestedStringFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringFilter<$PrismaModel> | string
+  }
+
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -50331,6 +50374,23 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -50356,20 +50416,6 @@ export namespace Prisma {
     not?: NestedUuidFilter<$PrismaModel> | string
   }
 
-  export type NestedStringFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringFilter<$PrismaModel> | string
-  }
-
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -50390,23 +50436,6 @@ export namespace Prisma {
     gt?: string | StringFieldRefInput<$PrismaModel>
     gte?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedUuidWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
-  }
-
-  export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>

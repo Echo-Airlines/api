@@ -19,11 +19,4 @@ export class AppConfigController {
 
         return new PublicAppConfigDto(config);
     }
-
-    @Put('upsert')
-    async upsert(@Request() req, @Body() dto: AppConfig) {
-        const config: AppConfig|null = await this.appConfigService.upsert(dto);
-
-        return config;
-    }
 }

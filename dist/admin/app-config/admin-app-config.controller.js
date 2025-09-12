@@ -12,11 +12,12 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AppConfigController = void 0;
+exports.AdminAppConfigController = void 0;
+const is_admin_guard_1 = require("../../auth/is-admin.guard");
+const jwt_auth_guard_1 = require("../../auth/jwt-auth.guard");
 const common_1 = require("@nestjs/common");
-const app_config_service_1 = require("./app-config.service");
-const public_app_config_dto_1 = require("./dto/public-app-config.dto");
-let AppConfigController = class AppConfigController {
+const admin_app_config_service_1 = require("./admin-app-config.service");
+let AdminAppConfigController = class AdminAppConfigController {
     appConfigService;
     constructor(appConfigService) {
         this.appConfigService = appConfigService;
@@ -26,19 +27,33 @@ let AppConfigController = class AppConfigController {
         if (!config) {
             throw new common_1.NotFoundException('Config not found');
         }
-        return new public_app_config_dto_1.PublicAppConfigDto(config);
+        return config;
+    }
+    async upsert(req, dto) {
+        const config = await this.appConfigService.upsert(dto);
+        return config;
     }
 };
-exports.AppConfigController = AppConfigController;
+exports.AdminAppConfigController = AdminAppConfigController;
 __decorate([
     (0, common_1.Get)(),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, is_admin_guard_1.IsAdminGuard),
     __param(0, (0, common_1.Request)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
-], AppConfigController.prototype, "findLatest", null);
-exports.AppConfigController = AppConfigController = __decorate([
-    (0, common_1.Controller)('config'),
-    __metadata("design:paramtypes", [app_config_service_1.AppConfigService])
-], AppConfigController);
-//# sourceMappingURL=app-config.controller.js.map
+], AdminAppConfigController.prototype, "findLatest", null);
+__decorate([
+    (0, common_1.Put)('upsert'),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, is_admin_guard_1.IsAdminGuard),
+    __param(0, (0, common_1.Request)()),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], AdminAppConfigController.prototype, "upsert", null);
+exports.AdminAppConfigController = AdminAppConfigController = __decorate([
+    (0, common_1.Controller)('admin/config'),
+    __metadata("design:paramtypes", [admin_app_config_service_1.AdminAppConfigService])
+], AdminAppConfigController);
+//# sourceMappingURL=admin-app-config.controller.js.map

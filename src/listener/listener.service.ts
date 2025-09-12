@@ -1,8 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '@prisma/prisma.service';
 import { DiscordMessage, DiscordMessageTemplate, ListenerEvent, ListenerEventSender, ListenerEventStatus, Prisma } from 'prisma/generated/prisma';
-import * as crypto from 'crypto';
-import { Airport, Flight, Owner, Pilot } from 'fshub-api/dist/types';
 import { DiscordService } from '@discord/discord.service';
 import { DiscordMessageEmbedDto, SendDiscordMessageDto } from '@discord/dto/SendDiscordMessageDto';
 import { FSHubEventDto } from './dto/FSHubEvent.dto';

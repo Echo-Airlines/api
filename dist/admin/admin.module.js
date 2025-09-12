@@ -12,12 +12,13 @@ const admin_user_module_1 = require("./user/admin-user.module");
 const admin_virtual_airline_module_1 = require("./virtual-airline/admin-virtual-airline.module");
 const admin_discord_module_1 = require("./discord/admin-discord.module");
 const admin_listener_module_1 = require("./listener/admin-listener.module");
+const admin_app_config_module_1 = require("./app-config/admin-app-config.module");
 let AdminModule = class AdminModule {
 };
 exports.AdminModule = AdminModule;
 exports.AdminModule = AdminModule = __decorate([
     (0, common_1.Module)({
-        imports: [admin_user_module_1.AdminUserModule, admin_virtual_airline_module_1.AdminVirtualAirlineModule, admin_discord_module_1.AdminDiscordModule, admin_listener_module_1.AdminListenerModule],
+        imports: [admin_user_module_1.AdminUserModule, admin_virtual_airline_module_1.AdminVirtualAirlineModule, admin_discord_module_1.AdminDiscordModule, admin_listener_module_1.AdminListenerModule, admin_app_config_module_1.AdminAppConfigModule],
         providers: [],
         exports: [],
         controllers: [],

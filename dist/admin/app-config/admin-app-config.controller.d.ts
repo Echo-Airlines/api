@@ -5,6 +5,8 @@ export declare class AdminAppConfigController {
     constructor(appConfigService: AdminAppConfigService);
     findLatest(req: Request): Promise<{
         Id: number;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         OnAirSyncEnabled: boolean;
         OnAirVASyncEnabled: boolean;
         OnAirVAMembersSyncEnabled: boolean;
@@ -17,11 +19,11 @@ export declare class AdminAppConfigController {
         LocalAuthEnabled: boolean;
         VirtualAirlineInitiated: boolean;
         FSHubApiKey: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
     }>;
     upsert(req: any, dto: AppConfig): Promise<{
         Id: number;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         OnAirSyncEnabled: boolean;
         OnAirVASyncEnabled: boolean;
         OnAirVAMembersSyncEnabled: boolean;
@@ -34,7 +36,5 @@ export declare class AdminAppConfigController {
         LocalAuthEnabled: boolean;
         VirtualAirlineInitiated: boolean;
         FSHubApiKey: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
     }>;
 }

@@ -21,11 +21,12 @@ let AdminDiscordService = class AdminDiscordService {
         const entities = await this.prisma.discordChannelWebhook.findMany(query ?? {});
         return entities;
     }
-    async ChannelWebhook_findById(Id) {
+    async ChannelWebhook_findById(Id, query) {
         const entity = await this.prisma.discordChannelWebhook.findUnique({
             where: {
                 Id
-            }
+            },
+            ...query
         });
         return entity;
     }

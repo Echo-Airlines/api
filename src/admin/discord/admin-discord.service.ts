@@ -14,11 +14,12 @@ export class AdminDiscordService {
         return entities;
     }
 
-    async ChannelWebhook_findById(Id: string) {
+    async ChannelWebhook_findById(Id: string, query?: Partial<Prisma.DiscordChannelWebhookFindUniqueArgs>) {
         const entity = await this.prisma.discordChannelWebhook.findUnique({
             where: {
                 Id
-            }
+            },
+            ...query
         });
 
         return entity;

@@ -42,7 +42,11 @@ let AdminDiscordController = class AdminDiscordController {
         return results;
     }
     async getWebhook(id) {
-        return await this.adminDiscordService.ChannelWebhook_findById(id);
+        return await this.adminDiscordService.ChannelWebhook_findById(id, {
+            include: {
+                DiscordMessages: true,
+            }
+        });
     }
     async createWebhook(body) {
         return await this.adminDiscordService.ChannelWebhook_create(body);

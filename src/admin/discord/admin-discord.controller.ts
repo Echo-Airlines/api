@@ -34,7 +34,11 @@ export class AdminDiscordController {
 
     @Get('webhook/:id')
     async getWebhook(@Param('id') id: string) {
-        return await this.adminDiscordService.ChannelWebhook_findById(id);
+        return await this.adminDiscordService.ChannelWebhook_findById(id, {
+            include: {
+                DiscordMessages: true,
+            }
+        });
     }
 
     @Post('webhook')

@@ -14,7 +14,7 @@ export declare class AdminDiscordService {
         ChannelId: string;
         Token: string;
     }[]>;
-    ChannelWebhook_findById(Id: string): Promise<{
+    ChannelWebhook_findById(Id: string, query?: Partial<Prisma.DiscordChannelWebhookFindUniqueArgs>): Promise<{
         Id: string;
         CreatedAt: Date;
         UpdatedAt: Date;

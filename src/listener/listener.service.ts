@@ -445,7 +445,7 @@ export class ListenerService {
 
         let baseEmbed: DiscordMessageEmbedDto = {
             title: '**Pilot Flight Completed**',
-            description: `A flight ([#${flightCompleted.id}](${`https://fshub.io/flight/${flightCompleted.id}/report`})) from [${flightCompleted.departure.airport.name} (${flightCompleted.departure.airport.icao})](https://skyvector.com/airport/${flightCompleted.departure.airport.icao}) to [${flightCompleted.arrival.airport.name} (${flightCompleted.arrival.airport.icao})](https://skyvector.com/airport/${flightCompleted.arrival.airport.icao}) has been completed by 🧑‍✈️ ${flightCompleted.user.name}!`,
+            description: `A flight ([#${flightCompleted.id}](${`https://fshub.io/flight/${flightCompleted.id}/report`})) from [${flightCompleted.departure.airport.name} (${flightCompleted.departure.airport.icao})](https://skyvector.com/airport/${flightCompleted.departure.airport.icao}) to [${flightCompleted.arrival.airport.name} (${flightCompleted.arrival.airport.icao})](https://skyvector.com/airport/${flightCompleted.arrival.airport.icao}) has been completed by 🧑‍✈️ [${flightCompleted.user.name}](https://fshub.io/pilot/${flightCompleted.user.id}/profile)!`,
             url: `https://fshub.io/flight/${flightCompleted.id}/report`,
             fields: [],
             color: this._scheduleColorCode(flightCompleted.schedule_status),
@@ -574,9 +574,17 @@ export class ListenerService {
                 screenshots = screenshots.slice(0, 4);
             }
 
+            let screenshotTitleField = '';
+
+            if (screenshots.length > 4) {
+                screenshotTitleField += `Here are the last ${screenshots.length} screenshots of the flight.\n`;
+            }
+
+            screenshotTitleField += `[You can click here to view all screenshots.](https://fshub.io/flight/${flightCompleted.id}/media)`;
+            
             baseEmbed.fields?.push({
                 name: 'Flight Screenshots',
-                value: `Here are the last 4 screenshots of the flight. Click [here](https://fshub.io/flight/${flightCompleted.id}/media) to view all screenshots.`,
+                value: screenshotTitleField,
             })
 
             baseEmbed.image = {
@@ -612,7 +620,14 @@ export class ListenerService {
                 embeds.push(imgEmbed)
             }
         } catch (error) {
+            if (error.message === 'No screenshots found') {
+                embeds.push(baseEmbed);
+                return embeds;
+            }
+
             this.logger.error(`Error fetching screenshots for flight.completed event ${listenerEventId}: ${error.message}`);
+            embeds.push(baseEmbed);
+            return embeds;
         }
 
         return embeds;

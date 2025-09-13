@@ -178,7 +178,7 @@ export class ListenerService {
 
             let message: SendDiscordMessageDto = {
                 content: null,
-                avatar_url: 'https://www.echoairlines.com/assets/whale-logo.png',
+                avatar_url: 'https://www.echoairlines.com/echo-localizer-logo.png',
                 embeds: [],
                 username: "ECHO Localizer 🐋",
             };
@@ -316,7 +316,7 @@ export class ListenerService {
             fields: [],
             author: {
                 name: 'Echo 🐋',
-                icon_url: 'https://www.echoairlines.com/assets/whale-logo.png',
+                icon_url: 'https://www.echoairlines.com/echo-localizer-logo.png',
             },
             footer: {
                 text: `Powered By 🐋 ECHO Localizer | #${flightDeparted.id} | ${listenerEventId}`

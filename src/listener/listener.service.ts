@@ -82,7 +82,10 @@ export class ListenerService {
 
         switch (sender.Slug) {
             case 'fshub':
-                listenerEvent = await this._processFSHubListenerEvent(sender, body as FSHubEventDto);
+                const fshubBody: FSHubEventDto = body as FSHubEventDto;
+                if (fshubBody._data.speed_tas && fshubBody._data.speed_tas > 20) {
+                    listenerEvent = await this._processFSHubListenerEvent(sender, fshubBody);
+                }
                 break;
             default:
                 throw new Error('Invalid sender');

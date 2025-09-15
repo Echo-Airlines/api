@@ -77,7 +77,10 @@ let ListenerService = ListenerService_1 = class ListenerService {
         let listenerEvent = undefined;
         switch (sender.Slug) {
             case 'fshub':
-                listenerEvent = await this._processFSHubListenerEvent(sender, body);
+                const fshubBody = body;
+                if (fshubBody._data.speed_tas && fshubBody._data.speed_tas > 20) {
+                    listenerEvent = await this._processFSHubListenerEvent(sender, fshubBody);
+                }
                 break;
             default:
                 throw new Error('Invalid sender');
@@ -155,7 +158,7 @@ let ListenerService = ListenerService_1 = class ListenerService {
             const messageTemplate = await this.discordService.MessageTemplate_findOneBySlug(listenerEvent.Type);
             let message = {
                 content: null,
-                avatar_url: 'https://www.echoairlines.com/assets/whale-logo.png',
+                avatar_url: 'https://www.echoairlines.com/echo-localizer-logo.png',
                 embeds: [],
                 username: "ECHO Localizer 🐋",
             };
@@ -245,7 +248,7 @@ let ListenerService = ListenerService_1 = class ListenerService {
             fields: [],
             author: {
                 name: 'Echo 🐋',
-                icon_url: 'https://www.echoairlines.com/assets/whale-logo.png',
+                icon_url: 'https://www.echoairlines.com/echo-localizer-logo.png',
             },
             footer: {
                 text: `Powered By 🐋 ECHO Localizer | #${flightDeparted.id} | ${listenerEventId}`

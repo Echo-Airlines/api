@@ -35,6 +35,11 @@ let AdminUserService = class AdminUserService {
         const entity = await this.prisma.user.update(_query);
         return entity;
     }
+    async updateByUsername(Username, data, query) {
+        const _query = { where: { Username }, data, ...query };
+        const entity = await this.prisma.user.update(_query);
+        return entity;
+    }
     async deleteOneById(Id) {
         const entity = await this.prisma.$transaction(async (tx) => {
             await tx.userPrivacySettings.deleteMany({

@@ -140,6 +140,17 @@ let AdminListenerService = class AdminListenerService {
         const sentEvent = await this.listenerService.processListenerEvent(event.Sender, { event, resend: true, data: event.Data });
         return sentEvent;
     }
+    async Event_markAsCompleted(Id) {
+        const event = await this.prisma.listenerEvent.update({
+            where: {
+                Id,
+            },
+            data: {
+                Status: prisma_1.ListenerEventStatus.COMPLETED,
+            },
+        });
+        return event;
+    }
 };
 exports.AdminListenerService = AdminListenerService;
 exports.AdminListenerService = AdminListenerService = __decorate([

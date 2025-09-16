@@ -100,6 +100,20 @@ export declare class AdminListenerController {
         CreatedAt: Date;
         UpdatedAt: Date;
     }[]>;
+    markEventAsCompleted(Id: string): Promise<{
+        Id: string;
+        Variant: string;
+        Type: string;
+        SentAt: Date;
+        Status: import("prisma/generated/prisma").$Enums.ListenerEventStatus;
+        SenderId: string;
+        Error: string | null;
+        Data: Prisma.JsonValue | null;
+        DiscordMessageId: string | null;
+        DeliveredAt: Date | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
+    }>;
     deleteEvent(Id: string): Promise<{
         Id: string;
         Variant: string;

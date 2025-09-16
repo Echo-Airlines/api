@@ -9,6 +9,7 @@ import { CreateEmailDto } from '@email/create-email.dto';
 import { ConfigService } from '@nestjs/config';
 import { EmailService } from '@email/email.service';
 import * as crypto from 'crypto';
+import { AdminUpdateUserDto } from './dto/AdminUpdateUserDto';
 
 @Controller(['admin/user', 'admin/users', 'admin/u'])
 export class AdminUserController {
@@ -134,7 +135,7 @@ export class AdminUserController {
     async createUser(@Body() body: AdminAddUserDto) {
         let user: User|null = null;
         let createData: Prisma.UserCreateInput = {
-            Username: body.Username,
+            Username: body.Username.toLowerCase(),
             Email: body.Email,
             FirstName: body.FirstName,
             LastName: body.LastName,
@@ -209,6 +210,28 @@ export class AdminUserController {
 
             user = await this.userService.update(user.Id, { WelcomeEmailSentAt: user.WelcomeEmailSentAt });
         }
+
+        return user;
+    }
+
+    @Put(':username')
+    @UseGuards(JwtAuthGuard, IsAdminGuard)
+    async updateUser(@Param('username') username: string, @Body() body: AdminUpdateUserDto) {
+        let data: Prisma.UserUpdateInput = {
+            Username: body.Username?.toLowerCase(),
+            Email: body.Email,
+            FirstName: body.FirstName,
+            LastName: body.LastName,
+            Roles: {
+                connect: body.Roles?.map((role) => ({ Slug: role })),
+            },
+        };
+
+        if (body.Password && body.ConfirmPassword === body.Password) {
+            data.Password = this.hashService.hashSync(body.Password);
+        }
+
+        const user: User|null = await this.userService.updateByUsername(username, data, { select: { Username: true, Email: true, FirstName: true, LastName: true, Roles: true }});
 
         return user;
     }

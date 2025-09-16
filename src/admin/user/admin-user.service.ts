@@ -33,6 +33,14 @@ export class AdminUserService {
 
         return entity;
     }
+
+    async updateByUsername(Username: string, data: Prisma.UserUpdateInput, query?: Partial<Prisma.UserUpdateArgs>) {
+        const _query: Prisma.UserUpdateArgs = { where: { Username }, data, ...query };
+
+        const entity = await this.prisma.user.update(_query);
+
+        return entity;
+    }
     
     async deleteOneById(Id: string) {
         // Use a transaction to ensure all related records are deleted atomically

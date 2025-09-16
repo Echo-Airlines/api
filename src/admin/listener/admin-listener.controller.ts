@@ -3,7 +3,7 @@ import { BadRequestException, Body, Controller, Delete, Get, NotFoundException, 
 import { AdminListenerService } from './admin-listener.service';
 import { IsAdminGuard } from '@auth/is-admin.guard';
 import { JwtAuthGuard } from '@auth/jwt-auth.guard';
-import { ListenerEventSender, Prisma } from 'prisma/generated/prisma';
+import { ListenerEvent, ListenerEventSender, Prisma } from 'prisma/generated/prisma';
 import { CreateListenerSenderDto } from './dto/CreateListenerSender.dto';
 import * as crypto from 'crypto';
 import { ListenerEventSenderWithRelationsDto } from './dto/ListenerEventSenderWithRelationsDto.dto';
@@ -163,6 +163,18 @@ export class AdminListenerController {
         const events = await this.listenerService.getMany(query);
 
         return events;
+    }
+
+    @Put('sender/event/:id/mark-as-completed')
+    @UseGuards(JwtAuthGuard, IsAdminGuard)
+    async markEventAsCompleted(@Param('id') Id: string) {
+        const event: ListenerEvent|null = await this.listenerService.Event_markAsCompleted(Id);
+
+        if (!event) {
+            throw new NotFoundException('FSHub event not found');
+        }
+
+        return event;
     }
 
     @Delete(['sender/events/:id', 'sender/event/:id'])

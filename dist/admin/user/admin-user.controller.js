@@ -22,6 +22,7 @@ const hash_service_1 = require("../../hash/hash.service");
 const config_1 = require("@nestjs/config");
 const email_service_1 = require("../../email/email.service");
 const crypto = require("crypto");
+const AdminUpdateUserDto_1 = require("./dto/AdminUpdateUserDto");
 let AdminUserController = class AdminUserController {
     userService;
     hashService;
@@ -138,7 +139,7 @@ let AdminUserController = class AdminUserController {
     async createUser(body) {
         let user = null;
         let createData = {
-            Username: body.Username,
+            Username: body.Username.toLowerCase(),
             Email: body.Email,
             FirstName: body.FirstName,
             LastName: body.LastName,
@@ -205,6 +206,22 @@ let AdminUserController = class AdminUserController {
             user.WelcomeEmailSentAt = new Date();
             user = await this.userService.update(user.Id, { WelcomeEmailSentAt: user.WelcomeEmailSentAt });
         }
+        return user;
+    }
+    async updateUser(username, body) {
+        let data = {
+            Username: body.Username?.toLowerCase(),
+            Email: body.Email,
+            FirstName: body.FirstName,
+            LastName: body.LastName,
+            Roles: {
+                connect: body.Roles?.map((role) => ({ Slug: role })),
+            },
+        };
+        if (body.Password && body.ConfirmPassword === body.Password) {
+            data.Password = this.hashService.hashSync(body.Password);
+        }
+        const user = await this.userService.updateByUsername(username, data, { select: { Username: true, Email: true, FirstName: true, LastName: true, Roles: true } });
         return user;
     }
     async sendResetPasswordEmail(username) {
@@ -451,6 +468,15 @@ __decorate([
     __metadata("design:paramtypes", [AdminAddUserDto_1.AdminAddUserDto]),
     __metadata("design:returntype", Promise)
 ], AdminUserController.prototype, "createUser", null);
+__decorate([
+    (0, common_1.Put)(':username'),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, is_admin_guard_1.IsAdminGuard),
+    __param(0, (0, common_1.Param)('username')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, AdminUpdateUserDto_1.AdminUpdateUserDto]),
+    __metadata("design:returntype", Promise)
+], AdminUserController.prototype, "updateUser", null);
 __decorate([
     (0, common_1.Put)(':username/send-reset-password-email'),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, is_admin_guard_1.IsAdminGuard),

@@ -111,6 +111,33 @@ export declare class AdminUserService {
         DiscordAvatar: string | null;
         DiscordEmail: string | null;
     }>;
+    updateByUsername(Username: string, data: Prisma.UserUpdateInput, query?: Partial<Prisma.UserUpdateArgs>): Promise<{
+        Id: string;
+        Username: string;
+        Password: string | null;
+        Email: string | null;
+        FirstName: string | null;
+        LastName: string | null;
+        FirstLoginCompleted: boolean;
+        IsOnline: boolean;
+        IsBanned: boolean;
+        BanReason: string | null;
+        BanExpiresAt: Date | null;
+        IsVerified: boolean;
+        LastLogin: Date | null;
+        InviteCodeId: string | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
+        WelcomeEmailSentAt: Date | null;
+        ConfirmEmailToken: string | null;
+        EmailVerifiedAt: Date | null;
+        ResetPasswordToken: string | null;
+        ResetPasswordEmailSentAt: Date | null;
+        DiscordId: string | null;
+        DiscordUsername: string | null;
+        DiscordAvatar: string | null;
+        DiscordEmail: string | null;
+    }>;
     deleteOneById(Id: string): Promise<{
         Id: string;
         Username: string;
@@ -198,26 +225,26 @@ export declare class AdminUserService {
             CreatedAt: Date;
             UpdatedAt: Date;
             Name: string;
-            LastRefresh: Date | null;
             VAId: string;
-            Color: string;
             Permission: number;
             IsDefaultNewRole: boolean;
+            Color: string;
             PayPercent: Prisma.Decimal;
             IsHidden: boolean;
             RestrictLoadingVAJobsIntoNonVAAircraft: boolean;
             RestrictLoadingNonVAJobsIntoVAAircraft: boolean;
             PayWeekly: Prisma.Decimal;
             PayPerFlightHour: Prisma.Decimal;
+            LastRefresh: Date | null;
         } | null;
     } & {
         Id: number;
         CreatedAt: Date;
         UpdatedAt: Date;
-        Name: string;
-        Description: string | null;
         Slug: string;
         VirtualAirlineRoleId: string | null;
+        Name: string;
+        Description: string | null;
     })[]>;
     getRoleBySlug(slug: string): Promise<({
         VirtualAirlineRole: {
@@ -225,26 +252,26 @@ export declare class AdminUserService {
             CreatedAt: Date;
             UpdatedAt: Date;
             Name: string;
-            LastRefresh: Date | null;
             VAId: string;
-            Color: string;
             Permission: number;
             IsDefaultNewRole: boolean;
+            Color: string;
             PayPercent: Prisma.Decimal;
             IsHidden: boolean;
             RestrictLoadingVAJobsIntoNonVAAircraft: boolean;
             RestrictLoadingNonVAJobsIntoVAAircraft: boolean;
             PayWeekly: Prisma.Decimal;
             PayPerFlightHour: Prisma.Decimal;
+            LastRefresh: Date | null;
         } | null;
     } & {
         Id: number;
         CreatedAt: Date;
         UpdatedAt: Date;
-        Name: string;
-        Description: string | null;
         Slug: string;
         VirtualAirlineRoleId: string | null;
+        Name: string;
+        Description: string | null;
     }) | null>;
     findManyInviteCodes(query?: Prisma.InviteCodeFindManyArgs): Promise<{
         Id: string;
@@ -298,9 +325,9 @@ export declare class AdminUserService {
         Id: number;
         CreatedAt: Date;
         UpdatedAt: Date;
-        Name: string;
-        Description: string | null;
         Slug: string;
         VirtualAirlineRoleId: string | null;
+        Name: string;
+        Description: string | null;
     }>;
 }

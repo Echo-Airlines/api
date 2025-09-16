@@ -133,6 +133,13 @@ let AdminListenerController = class AdminListenerController {
         const events = await this.listenerService.getMany(query);
         return events;
     }
+    async markEventAsCompleted(Id) {
+        const event = await this.listenerService.Event_markAsCompleted(Id);
+        if (!event) {
+            throw new common_1.NotFoundException('FSHub event not found');
+        }
+        return event;
+    }
     async deleteEvent(Id) {
         const event = await this.listenerService.deleteOneById(Id);
         if (!event) {
@@ -216,6 +223,14 @@ __decorate([
     __metadata("design:paramtypes", [String, String, String]),
     __metadata("design:returntype", Promise)
 ], AdminListenerController.prototype, "getEvents", null);
+__decorate([
+    (0, common_1.Put)('sender/event/:id/mark-as-completed'),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, is_admin_guard_1.IsAdminGuard),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], AdminListenerController.prototype, "markEventAsCompleted", null);
 __decorate([
     (0, common_1.Delete)(['sender/events/:id', 'sender/event/:id']),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, is_admin_guard_1.IsAdminGuard),

@@ -160,4 +160,17 @@ export class AdminListenerService {
 
         return sentEvent;
     }
+
+    async Event_markAsCompleted(Id: string) {
+        const event = await this.prisma.listenerEvent.update({
+            where: {
+                Id,
+            },
+            data: {
+                Status: ListenerEventStatus.COMPLETED,
+            },
+        });
+
+        return event;
+    }
 }

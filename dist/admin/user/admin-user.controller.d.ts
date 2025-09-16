@@ -3,6 +3,7 @@ import { AdminAddUserDto } from './dto/AdminAddUserDto';
 import { HashService } from '@hash/hash.service';
 import { ConfigService } from '@nestjs/config';
 import { EmailService } from '@email/email.service';
+import { AdminUpdateUserDto } from './dto/AdminUpdateUserDto';
 export declare class AdminUserController {
     private readonly userService;
     private readonly hashService;
@@ -91,6 +92,33 @@ export declare class AdminUserController {
         DiscordEmail: string | null;
     }>;
     createUser(body: AdminAddUserDto): Promise<{
+        Id: string;
+        Username: string;
+        Password: string | null;
+        Email: string | null;
+        FirstName: string | null;
+        LastName: string | null;
+        FirstLoginCompleted: boolean;
+        IsOnline: boolean;
+        IsBanned: boolean;
+        BanReason: string | null;
+        BanExpiresAt: Date | null;
+        IsVerified: boolean;
+        LastLogin: Date | null;
+        InviteCodeId: string | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
+        WelcomeEmailSentAt: Date | null;
+        ConfirmEmailToken: string | null;
+        EmailVerifiedAt: Date | null;
+        ResetPasswordToken: string | null;
+        ResetPasswordEmailSentAt: Date | null;
+        DiscordId: string | null;
+        DiscordUsername: string | null;
+        DiscordAvatar: string | null;
+        DiscordEmail: string | null;
+    }>;
+    updateUser(username: string, body: AdminUpdateUserDto): Promise<{
         Id: string;
         Username: string;
         Password: string | null;

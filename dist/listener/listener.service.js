@@ -81,6 +81,9 @@ let ListenerService = ListenerService_1 = class ListenerService {
                 if (fshubBody._data.speed_tas && fshubBody._data.speed_tas > 20) {
                     listenerEvent = await this._processFSHubListenerEvent(sender, fshubBody);
                 }
+                else {
+                    this.logger.warn(`Speed is too low to process '${fshubBody._type}' event for flight #${fshubBody._data.id}`);
+                }
                 break;
             default:
                 throw new Error('Invalid sender');
@@ -116,6 +119,9 @@ let ListenerService = ListenerService_1 = class ListenerService {
         let listenerEvent = undefined;
         try {
             let SentAt;
+            if (body._data.speed_tas && body._data.speed_tas <= 20 || !body._data.speed_tas) {
+                throw new Error('Speed is too low to process flight.departed event');
+            }
             if (typeof body._sent === 'number' &&
                 Number.isFinite(body._sent) &&
                 body._sent > 0) {
@@ -155,7 +161,6 @@ let ListenerService = ListenerService_1 = class ListenerService {
                 return listenerEvent;
             }
             listenerEvent = await this.updateListenerEventStatus(listenerEvent.Id, prisma_1.ListenerEventStatus.PROCESSING);
-            const messageTemplate = await this.discordService.MessageTemplate_findOneBySlug(listenerEvent.Type);
             let message = {
                 content: null,
                 avatar_url: 'https://www.echoairlines.com/echo-localizer-logo.png',

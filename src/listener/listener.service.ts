@@ -85,6 +85,8 @@ export class ListenerService {
                 const fshubBody: FSHubEventDto = body as FSHubEventDto;
                 if (fshubBody._data.speed_tas && fshubBody._data.speed_tas > 20) {
                     listenerEvent = await this._processFSHubListenerEvent(sender, fshubBody);
+                } else {
+                    this.logger.warn(`Speed is too low to process '${fshubBody._type}' event for flight #${fshubBody._data.id}`);
                 }
                 break;
             default:
@@ -129,6 +131,9 @@ export class ListenerService {
 
         try {
             let SentAt: Date;
+            if (body._data.speed_tas && body._data.speed_tas <= 20 || !body._data.speed_tas) {
+                throw new Error('Speed is too low to process flight.departed event');
+            }
 
             if (typeof body._sent === 'number' && 
                 Number.isFinite(body._sent) && 
@@ -177,7 +182,7 @@ export class ListenerService {
             listenerEvent = await this.updateListenerEventStatus(listenerEvent.Id, ListenerEventStatus.PROCESSING);
 
             // check if the message template exists
-            const messageTemplate: DiscordMessageTemplate|null = await this.discordService.MessageTemplate_findOneBySlug(listenerEvent.Type);
+            // const messageTemplate: DiscordMessageTemplate|null = await this.discordService.MessageTemplate_findOneBySlug(listenerEvent.Type);
 
             let message: SendDiscordMessageDto = {
                 content: null,

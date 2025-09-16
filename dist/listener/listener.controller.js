@@ -31,18 +31,18 @@ let ListenerController = class ListenerController {
         if (!sender.IsActive) {
             throw new common_1.BadRequestException('Sender is not active');
         }
-        let listenerEvent = undefined;
+        let listenerEvent = null;
         switch (sender.Slug) {
             case 'fshub':
-                listenerEvent = await this.listenerService.processListenerEvent(sender, body);
+                listenerEvent = await this.listenerService.processListenerEvent(sender, body) || null;
                 break;
             default:
                 throw new common_1.BadRequestException('Invalid sender');
         }
         return {
             success: true,
-            message: 'Listener event created',
-            listenerEvent: listenerEvent || null
+            message: (listenerEvent ? 'Listener event created' : 'Listener event not created'),
+            listenerEvent: listenerEvent
         };
     }
 };

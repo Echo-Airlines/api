@@ -154,11 +154,6 @@ let ListenerService = ListenerService_1 = class ListenerService {
                 listenerEvent = await this.updateListenerEventStatus(listenerEvent.Id, prisma_1.ListenerEventStatus.FAILED);
                 return listenerEvent;
             }
-            if (!body._data.speed_tas || body._data.speed_tas < 20) {
-                this.logger.log(`Speed is too low to process '${body._type}' event for flight #${body._data.id} | Speed: ${body._data.speed_tas} | Id: ${listenerEvent.Id}`);
-                listenerEvent = await this.updateListenerEventStatus(listenerEvent.Id, prisma_1.ListenerEventStatus.FAILED);
-                return listenerEvent;
-            }
             listenerEvent = await this.updateListenerEventStatus(listenerEvent.Id, prisma_1.ListenerEventStatus.PROCESSING);
             let message = {
                 content: null,
@@ -170,11 +165,21 @@ let ListenerService = ListenerService_1 = class ListenerService {
                 case 'flight.departed':
                     const flightDeparted = listenerEvent.Data;
                     this.logger.debug(`flight.departed | #${flightDeparted.id} - https://fshub.io/flight/${flightDeparted.id}/report`);
+                    if (!flightDeparted.speed_tas || flightDeparted.speed_tas < 20) {
+                        this.logger.warn(`Speed is too low to process 'flight.departed' event for flight #${flightDeparted.id} | Speed: ${flightDeparted.speed_tas} | Id: ${listenerEvent.Id}`);
+                        listenerEvent = await this.updateListenerEventStatus(listenerEvent.Id, prisma_1.ListenerEventStatus.FAILED);
+                        return listenerEvent;
+                    }
                     message.embeds = await this._processFSHubFlightDeparted(flightDeparted, listenerEvent.Id);
                     break;
                 case 'flight.completed':
                     const flightCompleted = listenerEvent.Data;
                     this.logger.debug(`flight.completed | #${flightCompleted.id} - https://fshub.io/flight/${flightCompleted.id}/report`);
+                    if (!flightCompleted.arrival.speed_tas || flightCompleted.arrival.speed_tas < 20) {
+                        this.logger.warn(`Speed is too low to process 'flight.completed' event for flight #${flightCompleted.id} | Speed: ${flightCompleted.arrival.speed_tas} | Id: ${listenerEvent.Id}`);
+                        listenerEvent = await this.updateListenerEventStatus(listenerEvent.Id, prisma_1.ListenerEventStatus.FAILED);
+                        return listenerEvent;
+                    }
                     message.embeds = await this._processFSHubFlightCompleted(flightCompleted, listenerEvent.Id);
                     break;
                 case 'website.test':

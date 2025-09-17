@@ -12,8 +12,8 @@ export declare class AdminListenerController {
         Name: string;
         Description: string | null;
         Slug: string;
-        IsActive: boolean;
         Token: string;
+        IsActive: boolean;
         DiscordChannelWebhookId: string | null;
     }>;
     getSenders(): Promise<{
@@ -23,8 +23,8 @@ export declare class AdminListenerController {
         Name: string;
         Description: string | null;
         Slug: string;
-        IsActive: boolean;
         Token: string;
+        IsActive: boolean;
         DiscordChannelWebhookId: string | null;
     }[]>;
     getSender(Id: string): Promise<ListenerEventSenderWithRelationsDto>;
@@ -35,8 +35,8 @@ export declare class AdminListenerController {
         Name: string;
         Description: string | null;
         Slug: string;
-        IsActive: boolean;
         Token: string;
+        IsActive: boolean;
         DiscordChannelWebhookId: string | null;
     }>;
     toggleSender(Id: string): Promise<{
@@ -46,8 +46,8 @@ export declare class AdminListenerController {
         Name: string;
         Description: string | null;
         Slug: string;
-        IsActive: boolean;
         Token: string;
+        IsActive: boolean;
         DiscordChannelWebhookId: string | null;
     }>;
     regenerateToken(Id: string): Promise<{
@@ -57,8 +57,8 @@ export declare class AdminListenerController {
         Name: string;
         Description: string | null;
         Slug: string;
-        IsActive: boolean;
         Token: string;
+        IsActive: boolean;
         DiscordChannelWebhookId: string | null;
     }>;
     deleteSender(Id: string): Promise<{
@@ -68,64 +68,64 @@ export declare class AdminListenerController {
         Name: string;
         Description: string | null;
         Slug: string;
-        IsActive: boolean;
         Token: string;
+        IsActive: boolean;
         DiscordChannelWebhookId: string | null;
     }>;
     resendEvent(Id: string): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
-        Type: string;
-        Status: import("prisma/generated/prisma").$Enums.ListenerEventStatus;
         Variant: string;
+        Type: string;
         SentAt: Date;
+        Status: import("prisma/generated/prisma").$Enums.ListenerEventStatus;
         SenderId: string;
         Error: string | null;
         Data: Prisma.JsonValue | null;
         DiscordMessageId: string | null;
         DeliveredAt: Date | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
     } | undefined>;
     getEvents(senderSlug: string, variant?: string, type?: string): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
-        Type: string;
-        Status: import("prisma/generated/prisma").$Enums.ListenerEventStatus;
         Variant: string;
+        Type: string;
         SentAt: Date;
+        Status: import("prisma/generated/prisma").$Enums.ListenerEventStatus;
         SenderId: string;
         Error: string | null;
         Data: Prisma.JsonValue | null;
         DiscordMessageId: string | null;
         DeliveredAt: Date | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
     }[]>;
     markEventAsCompleted(Id: string): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
-        Type: string;
-        Status: import("prisma/generated/prisma").$Enums.ListenerEventStatus;
         Variant: string;
+        Type: string;
         SentAt: Date;
+        Status: import("prisma/generated/prisma").$Enums.ListenerEventStatus;
         SenderId: string;
         Error: string | null;
         Data: Prisma.JsonValue | null;
         DiscordMessageId: string | null;
         DeliveredAt: Date | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
     }>;
     deleteEvent(Id: string): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
-        Type: string;
-        Status: import("prisma/generated/prisma").$Enums.ListenerEventStatus;
         Variant: string;
+        Type: string;
         SentAt: Date;
+        Status: import("prisma/generated/prisma").$Enums.ListenerEventStatus;
         SenderId: string;
         Error: string | null;
         Data: Prisma.JsonValue | null;
         DiscordMessageId: string | null;
         DeliveredAt: Date | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
     }>;
 }

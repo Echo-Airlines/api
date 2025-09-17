@@ -127,9 +127,6 @@ export class ListenerService {
 
         try {
             let SentAt: Date;
-            if (body._data.speed_tas && body._data.speed_tas <= 20 || !body._data.speed_tas) {
-                throw new Error('Speed is too low to process flight.departed event');
-            }
 
             if (typeof body._sent === 'number' && 
                 Number.isFinite(body._sent) && 

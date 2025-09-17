@@ -78,12 +78,7 @@ let ListenerService = ListenerService_1 = class ListenerService {
         switch (sender.Slug) {
             case 'fshub':
                 const fshubBody = body;
-                if (fshubBody._data.speed_tas && fshubBody._data.speed_tas > 20) {
-                    listenerEvent = await this._processFSHubListenerEvent(sender, fshubBody);
-                }
-                else {
-                    this.logger.warn(`Speed is too low to process '${fshubBody._type}' event for flight #${fshubBody._data.id}`);
-                }
+                listenerEvent = await this._processFSHubListenerEvent(sender, fshubBody);
                 break;
             default:
                 throw new Error('Invalid sender');
@@ -119,9 +114,6 @@ let ListenerService = ListenerService_1 = class ListenerService {
         let listenerEvent = undefined;
         try {
             let SentAt;
-            if (body._data.speed_tas && body._data.speed_tas <= 20 || !body._data.speed_tas) {
-                throw new Error('Speed is too low to process flight.departed event');
-            }
             if (typeof body._sent === 'number' &&
                 Number.isFinite(body._sent) &&
                 body._sent > 0) {
@@ -158,6 +150,13 @@ let ListenerService = ListenerService_1 = class ListenerService {
                 });
             }
             if (!sender.DiscordChannelWebhookId) {
+                this.logger.warn(`No Discord channel webhook found for sender ${sender.Slug}`);
+                listenerEvent = await this.updateListenerEventStatus(listenerEvent.Id, prisma_1.ListenerEventStatus.FAILED);
+                return listenerEvent;
+            }
+            if (!body._data.speed_tas || body._data.speed_tas < 20) {
+                this.logger.log(`Speed is too low to process '${body._type}' event for flight #${body._data.id} | Speed: ${body._data.speed_tas} | Id: ${listenerEvent.Id}`);
+                listenerEvent = await this.updateListenerEventStatus(listenerEvent.Id, prisma_1.ListenerEventStatus.FAILED);
                 return listenerEvent;
             }
             listenerEvent = await this.updateListenerEventStatus(listenerEvent.Id, prisma_1.ListenerEventStatus.PROCESSING);

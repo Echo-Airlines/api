@@ -69,6 +69,12 @@ let FlightService = class FlightService {
         });
         return entity;
     }
+    async create(dto) {
+        const entity = await this.prisma.flight.create({
+            data: dto,
+        });
+        return entity;
+    }
     async findAllFlightsByCompanyId(CompanyId, completed, include) {
         let flightStatus = [prisma_1.FlightStatus.PENDING, prisma_1.FlightStatus.FLIGHT];
         if (completed) {

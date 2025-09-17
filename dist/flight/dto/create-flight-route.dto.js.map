@@ -1,1 +1,1 @@
-{"version":3,"file":"create-flight-route.dto.js","sourceRoot":"","sources":["../../../src/flight/dto/create-flight-route.dto.ts"],"names":[],"mappings":";;;AAAA,MAAa,oBAAoB;IAC7B,QAAQ,CAAS;IACjB,QAAQ,CAAS;IACjB,KAAK,CAAS;CACjB;AAJD,oDAIC"}
+{"version":3,"file":"create-flight-route.dto.js","sourceRoot":"","sources":["../../../src/flight/dto/create-flight-route.dto.ts"],"names":[],"mappings":";;;AAAA,MAAa,oBAAoB;IAC7B,QAAQ,CAAU;IAClB,QAAQ,CAAS;IACjB,KAAK,CAAS;CACjB;AAJD,oDAIC"}

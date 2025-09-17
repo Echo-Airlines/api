@@ -19,6 +19,8 @@ const flight_service_1 = require("./flight.service");
 const member_service_1 = require("../member/member.service");
 const common_1 = require("@nestjs/common");
 const prisma_1 = require("../../prisma/generated/prisma/index.js");
+const create_flight_route_dto_1 = require("./dto/create-flight-route.dto");
+const create_flight_dto_1 = require("./dto/create-flight.dto");
 let FlightController = class FlightController {
     flightService;
     memberService;
@@ -74,6 +76,47 @@ let FlightController = class FlightController {
         });
         return results;
     }
+    async createFlight(body) {
+        const data = {
+            ...body,
+            Company: {
+                connect: {
+                    Id: body.CompanyId,
+                },
+            },
+            Category: body.Category,
+            Registered: body.Registered,
+            ResultComments: body.ResultComments,
+            HasStalled: body.HasStalled,
+            HasOverspeeded: body.HasOverspeeded,
+            WrongFuelDetected: body.WrongFuelDetected,
+            WrongWeightDetected: body.WrongWeightDetected,
+            UseFreelanceRouteSchedule: body.UseFreelanceRouteSchedule,
+            CanResumeOrAbort: body.CanResumeOrAbort,
+            Aircraft: {
+                connect: {
+                    Id: body.AircraftId,
+                },
+            },
+            DepartureAirport: {
+                connect: {
+                    Id: body.DepartureAirportId,
+                },
+            },
+            ArrivalIntendedAirport: {
+                connect: {
+                    Id: body.ArrivalIntendedAirportId,
+                },
+            },
+            ArrivalAlternateAirport: {
+                connect: {
+                    Id: body.ArrivalAlternateAirportId,
+                },
+            },
+        };
+        const result = await this.flightService.create(data);
+        return result;
+    }
     async getMyFlights(req, completed) {
         const user = req.user;
         const member = await this.memberService.findByUserId(user.userId);
@@ -124,6 +167,23 @@ let FlightController = class FlightController {
         });
         return result;
     }
+    async getFlightRoutes(flightId) {
+        const result = await this.flightService.findAllFlightRoutesByFlightId(flightId, {
+            Flight: {
+                include: {
+                    Company: true,
+                    Aircraft: true,
+                    DepartureAirport: true,
+                    ArrivalIntendedAirport: true,
+                },
+            },
+        });
+        return result;
+    }
+    async createFlightRoute(body) {
+        const result = await this.flightService.createFlightRoute(body);
+        return result;
+    }
 };
 exports.FlightController = FlightController;
 __decorate([
@@ -141,6 +201,14 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], FlightController.prototype, "getAllFlights", null);
 __decorate([
+    (0, common_1.Post)(),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, is_member_guard_1.IsMemberGuard),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [create_flight_dto_1.CreateFlightDto]),
+    __metadata("design:returntype", Promise)
+], FlightController.prototype, "createFlight", null);
+__decorate([
     (0, common_1.Get)('mine'),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, is_member_guard_1.IsMemberGuard),
     __param(0, (0, common_1.Req)()),
@@ -157,6 +225,22 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], FlightController.prototype, "getMyFlightRoutes", null);
+__decorate([
+    (0, common_1.Get)('routes/:flightId'),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, is_member_guard_1.IsMemberGuard),
+    __param(0, (0, common_1.Param)('flightId')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], FlightController.prototype, "getFlightRoutes", null);
+__decorate([
+    (0, common_1.Post)('routes'),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, is_member_guard_1.IsMemberGuard),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [create_flight_route_dto_1.CreateFlightRouteDto]),
+    __metadata("design:returntype", Promise)
+], FlightController.prototype, "createFlightRoute", null);
 exports.FlightController = FlightController = __decorate([
     (0, common_1.Controller)(['flight', 'flights']),
     __metadata("design:paramtypes", [flight_service_1.FlightService, member_service_1.MemberService])

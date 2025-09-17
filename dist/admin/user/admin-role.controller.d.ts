@@ -6,19 +6,19 @@ export declare class AdminRoleController {
         Id: number;
         CreatedAt: Date;
         UpdatedAt: Date;
-        Slug: string;
-        VirtualAirlineRoleId: string | null;
         Name: string;
         Description: string | null;
+        Slug: string;
+        VirtualAirlineRoleId: string | null;
     }[]>;
     getRoleBySlug(slug: string): Promise<{
         Id: number;
         CreatedAt: Date;
         UpdatedAt: Date;
-        Slug: string;
-        VirtualAirlineRoleId: string | null;
         Name: string;
         Description: string | null;
+        Slug: string;
+        VirtualAirlineRoleId: string | null;
     } | null>;
     linkRoleToVirtualAirlineRole(id: number, body: {
         virtualAirlineRoleId: string;
@@ -26,9 +26,9 @@ export declare class AdminRoleController {
         Id: number;
         CreatedAt: Date;
         UpdatedAt: Date;
-        Slug: string;
-        VirtualAirlineRoleId: string | null;
         Name: string;
         Description: string | null;
+        Slug: string;
+        VirtualAirlineRoleId: string | null;
     }>;
 }

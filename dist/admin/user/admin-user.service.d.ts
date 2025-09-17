@@ -225,26 +225,26 @@ export declare class AdminUserService {
             CreatedAt: Date;
             UpdatedAt: Date;
             Name: string;
+            LastRefresh: Date | null;
             VAId: string;
+            Color: string;
             Permission: number;
             IsDefaultNewRole: boolean;
-            Color: string;
             PayPercent: Prisma.Decimal;
             IsHidden: boolean;
             RestrictLoadingVAJobsIntoNonVAAircraft: boolean;
             RestrictLoadingNonVAJobsIntoVAAircraft: boolean;
             PayWeekly: Prisma.Decimal;
             PayPerFlightHour: Prisma.Decimal;
-            LastRefresh: Date | null;
         } | null;
     } & {
         Id: number;
         CreatedAt: Date;
         UpdatedAt: Date;
-        Slug: string;
-        VirtualAirlineRoleId: string | null;
         Name: string;
         Description: string | null;
+        Slug: string;
+        VirtualAirlineRoleId: string | null;
     })[]>;
     getRoleBySlug(slug: string): Promise<({
         VirtualAirlineRole: {
@@ -252,26 +252,26 @@ export declare class AdminUserService {
             CreatedAt: Date;
             UpdatedAt: Date;
             Name: string;
+            LastRefresh: Date | null;
             VAId: string;
+            Color: string;
             Permission: number;
             IsDefaultNewRole: boolean;
-            Color: string;
             PayPercent: Prisma.Decimal;
             IsHidden: boolean;
             RestrictLoadingVAJobsIntoNonVAAircraft: boolean;
             RestrictLoadingNonVAJobsIntoVAAircraft: boolean;
             PayWeekly: Prisma.Decimal;
             PayPerFlightHour: Prisma.Decimal;
-            LastRefresh: Date | null;
         } | null;
     } & {
         Id: number;
         CreatedAt: Date;
         UpdatedAt: Date;
-        Slug: string;
-        VirtualAirlineRoleId: string | null;
         Name: string;
         Description: string | null;
+        Slug: string;
+        VirtualAirlineRoleId: string | null;
     }) | null>;
     findManyInviteCodes(query?: Prisma.InviteCodeFindManyArgs): Promise<{
         Id: string;
@@ -325,9 +325,9 @@ export declare class AdminUserService {
         Id: number;
         CreatedAt: Date;
         UpdatedAt: Date;
-        Slug: string;
-        VirtualAirlineRoleId: string | null;
         Name: string;
         Description: string | null;
+        Slug: string;
+        VirtualAirlineRoleId: string | null;
     }>;
 }

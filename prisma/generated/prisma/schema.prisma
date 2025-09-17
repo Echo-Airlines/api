@@ -534,7 +534,7 @@ model Flight {
   Passengers                                 Int?
   Cargo                                      Int?
   AddedFuelQty                               Decimal?
-  IsAI                                       Boolean
+  IsAI                                       Boolean   @default(false)
   VerticalSpeedAtTouchdownMpS                Decimal?
   MaxGForce                                  Decimal?
   MinGForce                                  Decimal?

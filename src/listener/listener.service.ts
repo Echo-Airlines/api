@@ -83,11 +83,7 @@ export class ListenerService {
         switch (sender.Slug) {
             case 'fshub':
                 const fshubBody: FSHubEventDto = body as FSHubEventDto;
-                if (fshubBody._data.speed_tas && fshubBody._data.speed_tas > 20) {
                     listenerEvent = await this._processFSHubListenerEvent(sender, fshubBody);
-                } else {
-                    this.logger.warn(`Speed is too low to process '${fshubBody._type}' event for flight #${fshubBody._data.id}`);
-                }
                 break;
             default:
                 throw new Error('Invalid sender');
@@ -176,6 +172,14 @@ export class ListenerService {
             }
 
             if (!sender.DiscordChannelWebhookId) {
+                this.logger.warn(`No Discord channel webhook found for sender ${sender.Slug}`);
+                listenerEvent = await this.updateListenerEventStatus(listenerEvent.Id, ListenerEventStatus.FAILED);
+                return listenerEvent;
+            }
+
+            if (!body._data.speed_tas || body._data.speed_tas < 20) {
+                this.logger.log(`Speed is too low to process '${body._type}' event for flight #${body._data.id} | Speed: ${body._data.speed_tas} | Id: ${listenerEvent.Id}`);
+                listenerEvent = await this.updateListenerEventStatus(listenerEvent.Id, ListenerEventStatus.FAILED);
                 return listenerEvent;
             }
 

@@ -45120,7 +45120,7 @@ export namespace Prisma {
     Passengers?: number | null
     Cargo?: number | null
     AddedFuelQty?: Decimal | DecimalJsLike | number | string | null
-    IsAI: boolean
+    IsAI?: boolean
     VerticalSpeedAtTouchdownMpS?: Decimal | DecimalJsLike | number | string | null
     MaxGForce?: Decimal | DecimalJsLike | number | string | null
     MinGForce?: Decimal | DecimalJsLike | number | string | null
@@ -45189,7 +45189,7 @@ export namespace Prisma {
     Passengers?: number | null
     Cargo?: number | null
     AddedFuelQty?: Decimal | DecimalJsLike | number | string | null
-    IsAI: boolean
+    IsAI?: boolean
     VerticalSpeedAtTouchdownMpS?: Decimal | DecimalJsLike | number | string | null
     MaxGForce?: Decimal | DecimalJsLike | number | string | null
     MinGForce?: Decimal | DecimalJsLike | number | string | null
@@ -45390,7 +45390,7 @@ export namespace Prisma {
     Passengers?: number | null
     Cargo?: number | null
     AddedFuelQty?: Decimal | DecimalJsLike | number | string | null
-    IsAI: boolean
+    IsAI?: boolean
     VerticalSpeedAtTouchdownMpS?: Decimal | DecimalJsLike | number | string | null
     MaxGForce?: Decimal | DecimalJsLike | number | string | null
     MinGForce?: Decimal | DecimalJsLike | number | string | null
@@ -52777,7 +52777,7 @@ export namespace Prisma {
     Passengers?: number | null
     Cargo?: number | null
     AddedFuelQty?: Decimal | DecimalJsLike | number | string | null
-    IsAI: boolean
+    IsAI?: boolean
     VerticalSpeedAtTouchdownMpS?: Decimal | DecimalJsLike | number | string | null
     MaxGForce?: Decimal | DecimalJsLike | number | string | null
     MinGForce?: Decimal | DecimalJsLike | number | string | null
@@ -52845,7 +52845,7 @@ export namespace Prisma {
     Passengers?: number | null
     Cargo?: number | null
     AddedFuelQty?: Decimal | DecimalJsLike | number | string | null
-    IsAI: boolean
+    IsAI?: boolean
     VerticalSpeedAtTouchdownMpS?: Decimal | DecimalJsLike | number | string | null
     MaxGForce?: Decimal | DecimalJsLike | number | string | null
     MinGForce?: Decimal | DecimalJsLike | number | string | null
@@ -53896,7 +53896,7 @@ export namespace Prisma {
     Passengers?: number | null
     Cargo?: number | null
     AddedFuelQty?: Decimal | DecimalJsLike | number | string | null
-    IsAI: boolean
+    IsAI?: boolean
     VerticalSpeedAtTouchdownMpS?: Decimal | DecimalJsLike | number | string | null
     MaxGForce?: Decimal | DecimalJsLike | number | string | null
     MinGForce?: Decimal | DecimalJsLike | number | string | null
@@ -53964,7 +53964,7 @@ export namespace Prisma {
     Passengers?: number | null
     Cargo?: number | null
     AddedFuelQty?: Decimal | DecimalJsLike | number | string | null
-    IsAI: boolean
+    IsAI?: boolean
     VerticalSpeedAtTouchdownMpS?: Decimal | DecimalJsLike | number | string | null
     MaxGForce?: Decimal | DecimalJsLike | number | string | null
     MinGForce?: Decimal | DecimalJsLike | number | string | null
@@ -54446,7 +54446,7 @@ export namespace Prisma {
     Passengers?: number | null
     Cargo?: number | null
     AddedFuelQty?: Decimal | DecimalJsLike | number | string | null
-    IsAI: boolean
+    IsAI?: boolean
     VerticalSpeedAtTouchdownMpS?: Decimal | DecimalJsLike | number | string | null
     MaxGForce?: Decimal | DecimalJsLike | number | string | null
     MinGForce?: Decimal | DecimalJsLike | number | string | null
@@ -54513,7 +54513,7 @@ export namespace Prisma {
     Passengers?: number | null
     Cargo?: number | null
     AddedFuelQty?: Decimal | DecimalJsLike | number | string | null
-    IsAI: boolean
+    IsAI?: boolean
     VerticalSpeedAtTouchdownMpS?: Decimal | DecimalJsLike | number | string | null
     MaxGForce?: Decimal | DecimalJsLike | number | string | null
     MinGForce?: Decimal | DecimalJsLike | number | string | null
@@ -54943,7 +54943,7 @@ export namespace Prisma {
     Passengers?: number | null
     Cargo?: number | null
     AddedFuelQty?: Decimal | DecimalJsLike | number | string | null
-    IsAI: boolean
+    IsAI?: boolean
     VerticalSpeedAtTouchdownMpS?: Decimal | DecimalJsLike | number | string | null
     MaxGForce?: Decimal | DecimalJsLike | number | string | null
     MinGForce?: Decimal | DecimalJsLike | number | string | null
@@ -55010,7 +55010,7 @@ export namespace Prisma {
     Passengers?: number | null
     Cargo?: number | null
     AddedFuelQty?: Decimal | DecimalJsLike | number | string | null
-    IsAI: boolean
+    IsAI?: boolean
     VerticalSpeedAtTouchdownMpS?: Decimal | DecimalJsLike | number | string | null
     MaxGForce?: Decimal | DecimalJsLike | number | string | null
     MinGForce?: Decimal | DecimalJsLike | number | string | null
@@ -55627,7 +55627,7 @@ export namespace Prisma {
     Passengers?: number | null
     Cargo?: number | null
     AddedFuelQty?: Decimal | DecimalJsLike | number | string | null
-    IsAI: boolean
+    IsAI?: boolean
     VerticalSpeedAtTouchdownMpS?: Decimal | DecimalJsLike | number | string | null
     MaxGForce?: Decimal | DecimalJsLike | number | string | null
     MinGForce?: Decimal | DecimalJsLike | number | string | null
@@ -55695,7 +55695,7 @@ export namespace Prisma {
     Passengers?: number | null
     Cargo?: number | null
     AddedFuelQty?: Decimal | DecimalJsLike | number | string | null
-    IsAI: boolean
+    IsAI?: boolean
     VerticalSpeedAtTouchdownMpS?: Decimal | DecimalJsLike | number | string | null
     MaxGForce?: Decimal | DecimalJsLike | number | string | null
     MinGForce?: Decimal | DecimalJsLike | number | string | null
@@ -55769,7 +55769,7 @@ export namespace Prisma {
     Passengers?: number | null
     Cargo?: number | null
     AddedFuelQty?: Decimal | DecimalJsLike | number | string | null
-    IsAI: boolean
+    IsAI?: boolean
     VerticalSpeedAtTouchdownMpS?: Decimal | DecimalJsLike | number | string | null
     MaxGForce?: Decimal | DecimalJsLike | number | string | null
     MinGForce?: Decimal | DecimalJsLike | number | string | null
@@ -55837,7 +55837,7 @@ export namespace Prisma {
     Passengers?: number | null
     Cargo?: number | null
     AddedFuelQty?: Decimal | DecimalJsLike | number | string | null
-    IsAI: boolean
+    IsAI?: boolean
     VerticalSpeedAtTouchdownMpS?: Decimal | DecimalJsLike | number | string | null
     MaxGForce?: Decimal | DecimalJsLike | number | string | null
     MinGForce?: Decimal | DecimalJsLike | number | string | null
@@ -55911,7 +55911,7 @@ export namespace Prisma {
     Passengers?: number | null
     Cargo?: number | null
     AddedFuelQty?: Decimal | DecimalJsLike | number | string | null
-    IsAI: boolean
+    IsAI?: boolean
     VerticalSpeedAtTouchdownMpS?: Decimal | DecimalJsLike | number | string | null
     MaxGForce?: Decimal | DecimalJsLike | number | string | null
     MinGForce?: Decimal | DecimalJsLike | number | string | null
@@ -55979,7 +55979,7 @@ export namespace Prisma {
     Passengers?: number | null
     Cargo?: number | null
     AddedFuelQty?: Decimal | DecimalJsLike | number | string | null
-    IsAI: boolean
+    IsAI?: boolean
     VerticalSpeedAtTouchdownMpS?: Decimal | DecimalJsLike | number | string | null
     MaxGForce?: Decimal | DecimalJsLike | number | string | null
     MinGForce?: Decimal | DecimalJsLike | number | string | null
@@ -56053,7 +56053,7 @@ export namespace Prisma {
     Passengers?: number | null
     Cargo?: number | null
     AddedFuelQty?: Decimal | DecimalJsLike | number | string | null
-    IsAI: boolean
+    IsAI?: boolean
     VerticalSpeedAtTouchdownMpS?: Decimal | DecimalJsLike | number | string | null
     MaxGForce?: Decimal | DecimalJsLike | number | string | null
     MinGForce?: Decimal | DecimalJsLike | number | string | null
@@ -56121,7 +56121,7 @@ export namespace Prisma {
     Passengers?: number | null
     Cargo?: number | null
     AddedFuelQty?: Decimal | DecimalJsLike | number | string | null
-    IsAI: boolean
+    IsAI?: boolean
     VerticalSpeedAtTouchdownMpS?: Decimal | DecimalJsLike | number | string | null
     MaxGForce?: Decimal | DecimalJsLike | number | string | null
     MinGForce?: Decimal | DecimalJsLike | number | string | null
@@ -57185,7 +57185,7 @@ export namespace Prisma {
     Passengers?: number | null
     Cargo?: number | null
     AddedFuelQty?: Decimal | DecimalJsLike | number | string | null
-    IsAI: boolean
+    IsAI?: boolean
     VerticalSpeedAtTouchdownMpS?: Decimal | DecimalJsLike | number | string | null
     MaxGForce?: Decimal | DecimalJsLike | number | string | null
     MinGForce?: Decimal | DecimalJsLike | number | string | null
@@ -57253,7 +57253,7 @@ export namespace Prisma {
     Passengers?: number | null
     Cargo?: number | null
     AddedFuelQty?: Decimal | DecimalJsLike | number | string | null
-    IsAI: boolean
+    IsAI?: boolean
     VerticalSpeedAtTouchdownMpS?: Decimal | DecimalJsLike | number | string | null
     MaxGForce?: Decimal | DecimalJsLike | number | string | null
     MinGForce?: Decimal | DecimalJsLike | number | string | null
@@ -58317,7 +58317,7 @@ export namespace Prisma {
     Passengers?: number | null
     Cargo?: number | null
     AddedFuelQty?: Decimal | DecimalJsLike | number | string | null
-    IsAI: boolean
+    IsAI?: boolean
     VerticalSpeedAtTouchdownMpS?: Decimal | DecimalJsLike | number | string | null
     MaxGForce?: Decimal | DecimalJsLike | number | string | null
     MinGForce?: Decimal | DecimalJsLike | number | string | null
@@ -59023,7 +59023,7 @@ export namespace Prisma {
     Passengers?: number | null
     Cargo?: number | null
     AddedFuelQty?: Decimal | DecimalJsLike | number | string | null
-    IsAI: boolean
+    IsAI?: boolean
     VerticalSpeedAtTouchdownMpS?: Decimal | DecimalJsLike | number | string | null
     MaxGForce?: Decimal | DecimalJsLike | number | string | null
     MinGForce?: Decimal | DecimalJsLike | number | string | null
@@ -59316,7 +59316,7 @@ export namespace Prisma {
     Passengers?: number | null
     Cargo?: number | null
     AddedFuelQty?: Decimal | DecimalJsLike | number | string | null
-    IsAI: boolean
+    IsAI?: boolean
     VerticalSpeedAtTouchdownMpS?: Decimal | DecimalJsLike | number | string | null
     MaxGForce?: Decimal | DecimalJsLike | number | string | null
     MinGForce?: Decimal | DecimalJsLike | number | string | null
@@ -59596,7 +59596,7 @@ export namespace Prisma {
     Passengers?: number | null
     Cargo?: number | null
     AddedFuelQty?: Decimal | DecimalJsLike | number | string | null
-    IsAI: boolean
+    IsAI?: boolean
     VerticalSpeedAtTouchdownMpS?: Decimal | DecimalJsLike | number | string | null
     MaxGForce?: Decimal | DecimalJsLike | number | string | null
     MinGForce?: Decimal | DecimalJsLike | number | string | null
@@ -60101,7 +60101,7 @@ export namespace Prisma {
     Passengers?: number | null
     Cargo?: number | null
     AddedFuelQty?: Decimal | DecimalJsLike | number | string | null
-    IsAI: boolean
+    IsAI?: boolean
     VerticalSpeedAtTouchdownMpS?: Decimal | DecimalJsLike | number | string | null
     MaxGForce?: Decimal | DecimalJsLike | number | string | null
     MinGForce?: Decimal | DecimalJsLike | number | string | null
@@ -60166,7 +60166,7 @@ export namespace Prisma {
     Passengers?: number | null
     Cargo?: number | null
     AddedFuelQty?: Decimal | DecimalJsLike | number | string | null
-    IsAI: boolean
+    IsAI?: boolean
     VerticalSpeedAtTouchdownMpS?: Decimal | DecimalJsLike | number | string | null
     MaxGForce?: Decimal | DecimalJsLike | number | string | null
     MinGForce?: Decimal | DecimalJsLike | number | string | null
@@ -60231,7 +60231,7 @@ export namespace Prisma {
     Passengers?: number | null
     Cargo?: number | null
     AddedFuelQty?: Decimal | DecimalJsLike | number | string | null
-    IsAI: boolean
+    IsAI?: boolean
     VerticalSpeedAtTouchdownMpS?: Decimal | DecimalJsLike | number | string | null
     MaxGForce?: Decimal | DecimalJsLike | number | string | null
     MinGForce?: Decimal | DecimalJsLike | number | string | null
@@ -60296,7 +60296,7 @@ export namespace Prisma {
     Passengers?: number | null
     Cargo?: number | null
     AddedFuelQty?: Decimal | DecimalJsLike | number | string | null
-    IsAI: boolean
+    IsAI?: boolean
     VerticalSpeedAtTouchdownMpS?: Decimal | DecimalJsLike | number | string | null
     MaxGForce?: Decimal | DecimalJsLike | number | string | null
     MinGForce?: Decimal | DecimalJsLike | number | string | null

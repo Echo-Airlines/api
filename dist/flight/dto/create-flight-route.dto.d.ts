@@ -1,5 +1,5 @@
 export declare class CreateFlightRouteDto {
-    FlightId: string;
+    FlightId?: string;
     MemberId: string;
     Route: string;
 }

@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '@prisma/prisma.service';
+import { DatabaseService } from '@database/database.service';
 import { Member, Prisma } from 'prisma/generated/prisma';
 
 @Injectable()
 export class MemberService {
-    constructor(private readonly prisma: PrismaService) {}
+    constructor(private readonly prisma: DatabaseService) {}
 
     // async create(dto: CreateMemberDto, userId: string) {
     //     const member = await this.prisma.member.create({

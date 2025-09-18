@@ -7,10 +7,10 @@ export declare class AirportController {
     constructor(airportService: AirportService, onAirApiService: OnAirApiService);
     getAllRegisteredAirports(): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         Name: string;
         Description: string | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         ICAO: string;
         IATA: string | null;
         Size: number;
@@ -26,10 +26,10 @@ export declare class AirportController {
     }[]>;
     getAirportByICAO(icao: string): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         Name: string;
         Description: string | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         ICAO: string;
         IATA: string | null;
         Size: number;

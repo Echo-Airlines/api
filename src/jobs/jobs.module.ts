@@ -5,7 +5,7 @@ import { JobSchedulerService } from './job-scheduler.service';
 import { OnAirModule } from '../on-air/on-air.module';
 import { VirtualAirlineModule } from '../virtual-airline/virtual-airline.module';
 import { AppConfigModule } from '../app-config/app-config.module';
-import { PrismaModule } from '@prisma/prisma.module';
+import { DatabaseModule } from '@database/database.module';
 import { JobsController } from './jobs.controller';
 import { AircraftModule } from '@aircraft/aircraft.module';
 import { AirportModule } from '@airport/airport.module';
@@ -19,7 +19,7 @@ import { MemberModule } from '@member/member.module';
         OnAirModule,
         VirtualAirlineModule,
         AppConfigModule,
-        PrismaModule,
+        DatabaseModule,
         AircraftModule,
         AirportModule,
         FlightModule,

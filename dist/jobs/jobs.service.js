@@ -12,7 +12,7 @@ var JobsService_1;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.JobsService = void 0;
 const common_1 = require("@nestjs/common");
-const prisma_service_1 = require("../prisma/prisma.service");
+const database_service_1 = require("../database/database.service");
 const prisma_1 = require("../../prisma/generated/prisma/index.js");
 let JobsService = JobsService_1 = class JobsService {
     prisma;
@@ -99,6 +99,6 @@ let JobsService = JobsService_1 = class JobsService {
 exports.JobsService = JobsService;
 exports.JobsService = JobsService = JobsService_1 = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [prisma_service_1.PrismaService])
+    __metadata("design:paramtypes", [database_service_1.DatabaseService])
 ], JobsService);
 //# sourceMappingURL=jobs.service.js.map

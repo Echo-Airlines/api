@@ -1,10 +1,10 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaService } from '@prisma/prisma.service';
+import { DatabaseService } from '@database/database.service';
 import { Member, Prisma, VirtualAirline, VirtualAirlineRole } from 'prisma/generated/prisma';
 
 @Injectable()
 export class VirtualAirlineService {
-    constructor(private prisma: PrismaService) {}
+    constructor(private prisma: DatabaseService) {}
 
     async findAll(query?: Prisma.VirtualAirlineFindManyArgs) {
         const entities: VirtualAirline[] = await this.prisma.virtualAirline.findMany({

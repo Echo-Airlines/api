@@ -7,9 +7,6 @@ export declare class MemberController {
     constructor(memberService: MemberService, userService: UserService);
     findAll(): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
-        LastRefresh: Date | null;
         IsActive: boolean;
         DeactivatedAt: Date | null;
         VAId: string;
@@ -23,14 +20,14 @@ export declare class MemberController {
         Color: string;
         ReputationImpact: import("prisma/generated/prisma/runtime/library").Decimal;
         LastVAFlightDate: Date | null;
+        LastRefresh: Date | null;
         UserId: string | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         CompanyId: string;
     }[]>;
     create(req: any, body: CreateMemberDto): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
-        LastRefresh: Date | null;
         IsActive: boolean;
         DeactivatedAt: Date | null;
         VAId: string;
@@ -44,14 +41,14 @@ export declare class MemberController {
         Color: string;
         ReputationImpact: import("prisma/generated/prisma/runtime/library").Decimal;
         LastVAFlightDate: Date | null;
+        LastRefresh: Date | null;
         UserId: string | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         CompanyId: string;
     } | null>;
     update(Id: string, req: any, body: CreateMemberDto): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
-        LastRefresh: Date | null;
         IsActive: boolean;
         DeactivatedAt: Date | null;
         VAId: string;
@@ -65,7 +62,10 @@ export declare class MemberController {
         Color: string;
         ReputationImpact: import("prisma/generated/prisma/runtime/library").Decimal;
         LastVAFlightDate: Date | null;
+        LastRefresh: Date | null;
         UserId: string | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         CompanyId: string;
     } | null>;
 }

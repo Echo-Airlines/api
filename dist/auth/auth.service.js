@@ -11,7 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthService = void 0;
 const common_1 = require("@nestjs/common");
-const prisma_service_1 = require("../prisma/prisma.service");
+const database_service_1 = require("../database/database.service");
 const UserProfile_dto_1 = require("../user/dto/UserProfile.dto");
 const hash_service_1 = require("../hash/hash.service");
 const jwt_1 = require("@nestjs/jwt");
@@ -431,7 +431,7 @@ let AuthService = class AuthService {
 exports.AuthService = AuthService;
 exports.AuthService = AuthService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [prisma_service_1.PrismaService,
+    __metadata("design:paramtypes", [database_service_1.DatabaseService,
         hash_service_1.HashService,
         jwt_1.JwtService,
         email_service_1.EmailService])

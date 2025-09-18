@@ -45,10 +45,10 @@ export declare class JobSchedulerService implements OnModuleInit {
         nextRunAt: Date;
         job: {
             Id: string;
-            CreatedAt: Date;
-            UpdatedAt: Date;
             Name: string;
             Description: string | null;
+            CreatedAt: Date;
+            UpdatedAt: Date;
             IsEnabled: boolean;
             FirstRunCompleted: boolean;
             Type: import("prisma/generated/prisma").$Enums.JobType;
@@ -78,10 +78,10 @@ export declare class JobSchedulerService implements OnModuleInit {
         nextRunAt: Date;
         job: {
             Id: string;
-            CreatedAt: Date;
-            UpdatedAt: Date;
             Name: string;
             Description: string | null;
+            CreatedAt: Date;
+            UpdatedAt: Date;
             IsEnabled: boolean;
             FirstRunCompleted: boolean;
             Type: import("prisma/generated/prisma").$Enums.JobType;

@@ -13,7 +13,7 @@ const auth_controller_1 = require("./auth.controller");
 const hash_module_1 = require("../hash/hash.module");
 const local_strategy_1 = require("./local.strategy");
 const passport_1 = require("@nestjs/passport");
-const prisma_module_1 = require("../prisma/prisma.module");
+const database_module_1 = require("../database/database.module");
 const constants_1 = require("./constants");
 const jwt_1 = require("@nestjs/jwt");
 const jwt_strategy_1 = require("./jwt.strategy");
@@ -25,7 +25,7 @@ let AuthModule = class AuthModule {
 exports.AuthModule = AuthModule;
 exports.AuthModule = AuthModule = __decorate([
     (0, common_1.Module)({
-        imports: [hash_module_1.HashModule, prisma_module_1.PrismaModule, passport_1.PassportModule, app_config_module_1.AppConfigModule,
+        imports: [hash_module_1.HashModule, database_module_1.DatabaseModule, passport_1.PassportModule, app_config_module_1.AppConfigModule,
             jwt_1.JwtModule.register({
                 secret: constants_1.jwtConstants.secret,
                 signOptions: { expiresIn: '30d' },

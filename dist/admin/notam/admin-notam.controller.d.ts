@@ -6,62 +6,62 @@ export declare class AdminNotamController {
     constructor(notamService: AdminNotamService);
     findAllActive(): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
-        Status: import("prisma/generated/prisma").$Enums.NOTAMStatus;
         Title: string;
         Content: string;
         ExpirationDate: Date | null;
         Link: string | null;
         EffectiveDate: Date;
+        Status: import("prisma/generated/prisma").$Enums.NOTAMStatus;
         CreatedById: string;
+        CreatedAt: Date;
+        UpdatedAt: Date;
     }[]>;
     findOne(id: string): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
-        Status: import("prisma/generated/prisma").$Enums.NOTAMStatus;
         Title: string;
         Content: string;
         ExpirationDate: Date | null;
         Link: string | null;
         EffectiveDate: Date;
+        Status: import("prisma/generated/prisma").$Enums.NOTAMStatus;
         CreatedById: string;
+        CreatedAt: Date;
+        UpdatedAt: Date;
     } | null>;
     create(createNotamDto: CreateNotamDto): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
-        Status: import("prisma/generated/prisma").$Enums.NOTAMStatus;
         Title: string;
         Content: string;
         ExpirationDate: Date | null;
         Link: string | null;
         EffectiveDate: Date;
+        Status: import("prisma/generated/prisma").$Enums.NOTAMStatus;
         CreatedById: string;
+        CreatedAt: Date;
+        UpdatedAt: Date;
     }>;
     update(id: string, updateNotamDto: UpdateNotamDto): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
-        Status: import("prisma/generated/prisma").$Enums.NOTAMStatus;
         Title: string;
         Content: string;
         ExpirationDate: Date | null;
         Link: string | null;
         EffectiveDate: Date;
+        Status: import("prisma/generated/prisma").$Enums.NOTAMStatus;
         CreatedById: string;
+        CreatedAt: Date;
+        UpdatedAt: Date;
     }>;
     remove(id: string): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
-        Status: import("prisma/generated/prisma").$Enums.NOTAMStatus;
         Title: string;
         Content: string;
         ExpirationDate: Date | null;
         Link: string | null;
         EffectiveDate: Date;
+        Status: import("prisma/generated/prisma").$Enums.NOTAMStatus;
         CreatedById: string;
+        CreatedAt: Date;
+        UpdatedAt: Date;
     }>;
 }

@@ -24,6 +24,9 @@
     "db:studio": "npx prisma studio",
     "db:seed": "npx prisma db seed"
   },
+  "prisma": {
+    "seed": "tsx src/prisma/seeder.ts"
+  },
   "dependencies": {
     "@nestjs-modules/mailer": "^2.0.2",
     "@nestjs/axios": "^4.0.1",

@@ -14,7 +14,7 @@ exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
-const prisma_module_1 = require("./prisma/prisma.module");
+const database_module_1 = require("./database/database.module");
 const virtual_airline_module_1 = require("./virtual-airline/virtual-airline.module");
 const on_air_module_1 = require("./on-air/on-air.module");
 const app_config_module_1 = require("./app-config/app-config.module");
@@ -89,7 +89,7 @@ exports.AppModule = AppModule = AppModule_1 = __decorate([
                     },
                 },
             }),
-            prisma_module_1.PrismaModule,
+            database_module_1.DatabaseModule,
             on_air_module_1.OnAirModule,
             virtual_airline_module_1.VirtualAirlineModule,
             app_config_module_1.AppConfigModule,

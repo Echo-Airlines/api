@@ -1,12 +1,12 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaService } from '@prisma/prisma.service';
+import { DatabaseService } from '@database/database.service';
 import { Prisma, User as PrismaUser } from 'prisma/generated/prisma';
 import { PublicUserDto, RawUser, User } from './dto/PublicUser.dto';
 import { UserProfileDto } from './dto/UserProfile.dto';
 
 @Injectable()
 export class UserService {
-    constructor(private prisma: PrismaService) {}
+    constructor(private prisma: DatabaseService) {}
     
     async me(userId: string) {
         const user = await this.prisma.user.findUnique({

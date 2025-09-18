@@ -11,7 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DiscordService = void 0;
 const common_1 = require("@nestjs/common");
-const prisma_service_1 = require("../prisma/prisma.service");
+const database_service_1 = require("../database/database.service");
 const axios_1 = require("axios");
 let DiscordService = class DiscordService {
     prisma;
@@ -126,6 +126,6 @@ let DiscordService = class DiscordService {
 exports.DiscordService = DiscordService;
 exports.DiscordService = DiscordService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [prisma_service_1.PrismaService])
+    __metadata("design:paramtypes", [database_service_1.DatabaseService])
 ], DiscordService);
 //# sourceMappingURL=discord.service.js.map

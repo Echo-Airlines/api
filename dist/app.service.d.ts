@@ -1,7 +1,7 @@
-import { PrismaService } from './prisma/prisma.service';
+import { DatabaseService } from './database/database.service';
 export declare class AppService {
     private readonly prisma;
-    constructor(prisma: PrismaService);
+    constructor(prisma: DatabaseService);
     getHealth(): Promise<{
         status: string;
         timestamp: string;

@@ -10,13 +10,13 @@ exports.NotamModule = void 0;
 const common_1 = require("@nestjs/common");
 const notam_service_1 = require("./notam.service");
 const notam_controller_1 = require("./notam.controller");
-const prisma_module_1 = require("../prisma/prisma.module");
+const database_module_1 = require("../database/database.module");
 let NotamModule = class NotamModule {
 };
 exports.NotamModule = NotamModule;
 exports.NotamModule = NotamModule = __decorate([
     (0, common_1.Module)({
-        imports: [prisma_module_1.PrismaModule],
+        imports: [database_module_1.DatabaseModule],
         controllers: [notam_controller_1.NotamController],
         providers: [notam_service_1.NotamService],
     })

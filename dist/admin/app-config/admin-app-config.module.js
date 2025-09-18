@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AdminAppConfigModule = void 0;
-const prisma_module_1 = require("../../prisma/prisma.module");
+const database_module_1 = require("../../database/database.module");
 const admin_app_config_service_1 = require("./admin-app-config.service");
 const admin_app_config_controller_1 = require("./admin-app-config.controller");
 const common_1 = require("@nestjs/common");
@@ -16,7 +16,7 @@ let AdminAppConfigModule = class AdminAppConfigModule {
 exports.AdminAppConfigModule = AdminAppConfigModule;
 exports.AdminAppConfigModule = AdminAppConfigModule = __decorate([
     (0, common_1.Module)({
-        imports: [prisma_module_1.PrismaModule],
+        imports: [database_module_1.DatabaseModule],
         exports: [admin_app_config_service_1.AdminAppConfigService],
         providers: [admin_app_config_service_1.AdminAppConfigService],
         controllers: [admin_app_config_controller_1.AdminAppConfigController],

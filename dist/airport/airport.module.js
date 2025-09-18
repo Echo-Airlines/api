@@ -10,14 +10,14 @@ exports.AirportModule = void 0;
 const common_1 = require("@nestjs/common");
 const airport_service_1 = require("./airport.service");
 const airport_controller_1 = require("./airport.controller");
-const prisma_module_1 = require("../prisma/prisma.module");
+const database_module_1 = require("../database/database.module");
 const on_air_module_1 = require("../on-air/on-air.module");
 let AirportModule = class AirportModule {
 };
 exports.AirportModule = AirportModule;
 exports.AirportModule = AirportModule = __decorate([
     (0, common_1.Module)({
-        imports: [prisma_module_1.PrismaModule, on_air_module_1.OnAirModule],
+        imports: [database_module_1.DatabaseModule, on_air_module_1.OnAirModule],
         providers: [airport_service_1.AirportService],
         controllers: [airport_controller_1.AirportController],
         exports: [airport_service_1.AirportService],

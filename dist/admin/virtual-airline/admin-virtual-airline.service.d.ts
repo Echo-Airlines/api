@@ -1,12 +1,10 @@
-import { PrismaService } from '@prisma/prisma.service';
+import { DatabaseService } from '@database/database.service';
 import { Prisma } from 'prisma/generated/prisma';
 export declare class AdminVirtualAirlineService {
     private prisma;
-    constructor(prisma: PrismaService);
+    constructor(prisma: DatabaseService);
     findAll(query?: Prisma.VirtualAirlineFindManyArgs): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         ApiKey: string;
         IsPrimary: boolean;
         Identifier: string | null;
@@ -30,11 +28,11 @@ export declare class AdminVirtualAirlineService {
         TotalContractsCompleted: number | null;
         TotalContractsEarnedCredits: number | null;
         LastRefresh: Date | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
     }[]>;
     getPrimaryVirtualAirline(): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         ApiKey: string;
         IsPrimary: boolean;
         Identifier: string | null;
@@ -58,11 +56,11 @@ export declare class AdminVirtualAirlineService {
         TotalContractsCompleted: number | null;
         TotalContractsEarnedCredits: number | null;
         LastRefresh: Date | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
     } | null>;
     getVirtualAirlineById(Id: string): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         ApiKey: string;
         IsPrimary: boolean;
         Identifier: string | null;
@@ -86,17 +84,19 @@ export declare class AdminVirtualAirlineService {
         TotalContractsCompleted: number | null;
         TotalContractsEarnedCredits: number | null;
         LastRefresh: Date | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
     }>;
     getPrimaryVARoles(): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         Name: string;
         LastRefresh: Date | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         VAId: string;
-        Color: string;
         Permission: number;
         IsDefaultNewRole: boolean;
+        Color: string;
         PayPercent: Prisma.Decimal;
         IsHidden: boolean;
         RestrictLoadingVAJobsIntoNonVAAircraft: boolean;
@@ -106,14 +106,14 @@ export declare class AdminVirtualAirlineService {
     }[]>;
     getUnlinkedVARoles(): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         Name: string;
         LastRefresh: Date | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         VAId: string;
-        Color: string;
         Permission: number;
         IsDefaultNewRole: boolean;
+        Color: string;
         PayPercent: Prisma.Decimal;
         IsHidden: boolean;
         RestrictLoadingVAJobsIntoNonVAAircraft: boolean;
@@ -123,8 +123,6 @@ export declare class AdminVirtualAirlineService {
     }[]>;
     getVirtualAirlineByIdentifier(Identifier: string): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         ApiKey: string;
         IsPrimary: boolean;
         Identifier: string | null;
@@ -148,11 +146,11 @@ export declare class AdminVirtualAirlineService {
         TotalContractsCompleted: number | null;
         TotalContractsEarnedCredits: number | null;
         LastRefresh: Date | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
     }>;
     upsertById(virtualAirline: Prisma.VirtualAirlineCreateInput): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         ApiKey: string;
         IsPrimary: boolean;
         Identifier: string | null;
@@ -176,11 +174,11 @@ export declare class AdminVirtualAirlineService {
         TotalContractsCompleted: number | null;
         TotalContractsEarnedCredits: number | null;
         LastRefresh: Date | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
     }>;
     upsertByIdentifier(virtualAirline: Prisma.VirtualAirlineCreateInput): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         ApiKey: string;
         IsPrimary: boolean;
         Identifier: string | null;
@@ -204,20 +202,20 @@ export declare class AdminVirtualAirlineService {
         TotalContractsCompleted: number | null;
         TotalContractsEarnedCredits: number | null;
         LastRefresh: Date | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
     }>;
     create(virtualAirline: Prisma.VirtualAirlineCreateInput): Promise<{
         World: {
             Id: string;
-            CreatedAt: Date;
-            UpdatedAt: Date;
             Name: string;
             Description: string | null;
+            CreatedAt: Date;
+            UpdatedAt: Date;
             Slug: string;
         } | null;
     } & {
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         ApiKey: string;
         IsPrimary: boolean;
         Identifier: string | null;
@@ -241,17 +239,19 @@ export declare class AdminVirtualAirlineService {
         TotalContractsCompleted: number | null;
         TotalContractsEarnedCredits: number | null;
         LastRefresh: Date | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
     }>;
     VARole_findAll(query?: Prisma.VirtualAirlineRoleFindManyArgs): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         Name: string;
         LastRefresh: Date | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         VAId: string;
-        Color: string;
         Permission: number;
         IsDefaultNewRole: boolean;
+        Color: string;
         PayPercent: Prisma.Decimal;
         IsHidden: boolean;
         RestrictLoadingVAJobsIntoNonVAAircraft: boolean;
@@ -261,14 +261,14 @@ export declare class AdminVirtualAirlineService {
     }[]>;
     VARole_findById(Id: string): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         Name: string;
         LastRefresh: Date | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         VAId: string;
-        Color: string;
         Permission: number;
         IsDefaultNewRole: boolean;
+        Color: string;
         PayPercent: Prisma.Decimal;
         IsHidden: boolean;
         RestrictLoadingVAJobsIntoNonVAAircraft: boolean;
@@ -278,14 +278,14 @@ export declare class AdminVirtualAirlineService {
     } | null>;
     VARole_upsert(virtualAirlineRole: Prisma.VirtualAirlineRoleCreateInput): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         Name: string;
         LastRefresh: Date | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         VAId: string;
-        Color: string;
         Permission: number;
         IsDefaultNewRole: boolean;
+        Color: string;
         PayPercent: Prisma.Decimal;
         IsHidden: boolean;
         RestrictLoadingVAJobsIntoNonVAAircraft: boolean;

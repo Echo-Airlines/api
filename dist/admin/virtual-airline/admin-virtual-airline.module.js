@@ -8,7 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AdminVirtualAirlineModule = void 0;
 const common_1 = require("@nestjs/common");
-const prisma_module_1 = require("../../prisma/prisma.module");
+const database_module_1 = require("../../database/database.module");
 const admin_virtual_airline_service_1 = require("./admin-virtual-airline.service");
 const admin_virtual_airline_controller_1 = require("./admin-virtual-airline.controller");
 let AdminVirtualAirlineModule = class AdminVirtualAirlineModule {
@@ -16,7 +16,7 @@ let AdminVirtualAirlineModule = class AdminVirtualAirlineModule {
 exports.AdminVirtualAirlineModule = AdminVirtualAirlineModule;
 exports.AdminVirtualAirlineModule = AdminVirtualAirlineModule = __decorate([
     (0, common_1.Module)({
-        imports: [prisma_module_1.PrismaModule],
+        imports: [database_module_1.DatabaseModule],
         providers: [admin_virtual_airline_service_1.AdminVirtualAirlineService],
         exports: [admin_virtual_airline_service_1.AdminVirtualAirlineService],
         controllers: [admin_virtual_airline_controller_1.AdminVirtualAirlineController],

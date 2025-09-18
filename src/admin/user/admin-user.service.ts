@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '@prisma/prisma.service';
+import { DatabaseService } from '@database/database.service';
 import { InviteCode, Prisma, User as PrismaUser } from 'prisma/generated/prisma';
 
 @Injectable()
 export class AdminUserService {
-    constructor(private prisma: PrismaService) {}
+    constructor(private prisma: DatabaseService) {}
 
     async findAll(query?: Prisma.UserFindManyArgs) {
         const entities = await this.prisma.user.findMany(query);

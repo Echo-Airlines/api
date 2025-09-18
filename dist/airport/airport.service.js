@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AirportService = void 0;
 const common_1 = require("@nestjs/common");
 const on_air_api_service_1 = require("../on-air/on-air-api.service");
-const prisma_service_1 = require("../prisma/prisma.service");
+const database_service_1 = require("../database/database.service");
 const countries_1 = require("./countries");
 let AirportService = class AirportService {
     prisma;
@@ -111,6 +111,6 @@ let AirportService = class AirportService {
 exports.AirportService = AirportService;
 exports.AirportService = AirportService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [prisma_service_1.PrismaService, on_air_api_service_1.OnAirApiService])
+    __metadata("design:paramtypes", [database_service_1.DatabaseService, on_air_api_service_1.OnAirApiService])
 ], AirportService);
 //# sourceMappingURL=airport.service.js.map

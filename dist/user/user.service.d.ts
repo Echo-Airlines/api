@@ -1,16 +1,18 @@
-import { PrismaService } from '@prisma/prisma.service';
+import { DatabaseService } from '@database/database.service';
 import { Prisma } from 'prisma/generated/prisma';
 import { PublicUserDto } from './dto/PublicUser.dto';
 import { UserProfileDto } from './dto/UserProfile.dto';
 export declare class UserService {
     private prisma;
-    constructor(prisma: PrismaService);
+    constructor(prisma: DatabaseService);
     me(userId: string): Promise<UserProfileDto | null>;
     findAllActive(): Promise<PublicUserDto[]>;
     findUserById(Id: string): Promise<PublicUserDto | null>;
     findUserByUsername(username: string): Promise<PublicUserDto>;
     setUserFirstLoginCompleted(UserId: string): Promise<{
         Id: string;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         Username: string;
         Password: string | null;
         Email: string | null;
@@ -24,8 +26,6 @@ export declare class UserService {
         IsVerified: boolean;
         LastLogin: Date | null;
         InviteCodeId: string | null;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         WelcomeEmailSentAt: Date | null;
         ConfirmEmailToken: string | null;
         EmailVerifiedAt: Date | null;
@@ -38,6 +38,8 @@ export declare class UserService {
     }>;
     updateById(Id: string, data: Prisma.UserUpdateInput): Promise<{
         Id: string;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         Username: string;
         Password: string | null;
         Email: string | null;
@@ -51,8 +53,6 @@ export declare class UserService {
         IsVerified: boolean;
         LastLogin: Date | null;
         InviteCodeId: string | null;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         WelcomeEmailSentAt: Date | null;
         ConfirmEmailToken: string | null;
         EmailVerifiedAt: Date | null;
@@ -82,11 +82,27 @@ export declare class UserService {
         DiscordUsername: string | null;
         DiscordAvatar: string | null;
         DiscordEmail: string | null;
-        Members: {
-            Id: string;
+        Roles: {
+            Id: number;
             CreatedAt: Date;
             UpdatedAt: Date;
-            LastRefresh: Date | null;
+            Name: string;
+            Description: string | null;
+            Slug: string;
+            VirtualAirlineRoleId: string | null;
+        }[];
+        PrivacySettings: {
+            Id: string;
+            UserId: string;
+            CreatedAt: Date;
+            ShowOnlineStatus: boolean;
+            ShowFirstName: boolean;
+            ShowLastName: boolean;
+            ShowLastNameInitial: boolean;
+            ShowLastLogin: boolean;
+        }[];
+        Members: {
+            Id: string;
             IsActive: boolean;
             DeactivatedAt: Date | null;
             VAId: string;
@@ -100,27 +116,11 @@ export declare class UserService {
             Color: string;
             ReputationImpact: Prisma.Decimal;
             LastVAFlightDate: Date | null;
+            LastRefresh: Date | null;
             UserId: string | null;
-            CompanyId: string;
-        }[];
-        Roles: {
-            Id: number;
             CreatedAt: Date;
             UpdatedAt: Date;
-            Name: string;
-            Description: string | null;
-            Slug: string;
-            VirtualAirlineRoleId: string | null;
-        }[];
-        PrivacySettings: {
-            Id: string;
-            CreatedAt: Date;
-            UserId: string;
-            ShowOnlineStatus: boolean;
-            ShowFirstName: boolean;
-            ShowLastName: boolean;
-            ShowLastNameInitial: boolean;
-            ShowLastLogin: boolean;
+            CompanyId: string;
         }[];
         InviteCode: {
             Id: string;

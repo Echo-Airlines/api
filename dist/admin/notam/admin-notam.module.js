@@ -8,7 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AdminNotamModule = void 0;
 const common_1 = require("@nestjs/common");
-const prisma_module_1 = require("../../prisma/prisma.module");
+const database_module_1 = require("../../database/database.module");
 const admin_notam_service_1 = require("./admin-notam.service");
 const admin_notam_controller_1 = require("./admin-notam.controller");
 let AdminNotamModule = class AdminNotamModule {
@@ -16,7 +16,7 @@ let AdminNotamModule = class AdminNotamModule {
 exports.AdminNotamModule = AdminNotamModule;
 exports.AdminNotamModule = AdminNotamModule = __decorate([
     (0, common_1.Module)({
-        imports: [prisma_module_1.PrismaModule],
+        imports: [database_module_1.DatabaseModule],
         controllers: [admin_notam_controller_1.AdminNotamController],
         providers: [admin_notam_service_1.AdminNotamService],
         exports: [admin_notam_service_1.AdminNotamService],

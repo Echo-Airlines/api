@@ -9,13 +9,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.DiscordModule = void 0;
 const common_1 = require("@nestjs/common");
 const discord_service_1 = require("./discord.service");
-const prisma_module_1 = require("../prisma/prisma.module");
+const database_module_1 = require("../database/database.module");
 let DiscordModule = class DiscordModule {
 };
 exports.DiscordModule = DiscordModule;
 exports.DiscordModule = DiscordModule = __decorate([
     (0, common_1.Module)({
-        imports: [prisma_module_1.PrismaModule],
+        imports: [database_module_1.DatabaseModule],
         controllers: [],
         providers: [discord_service_1.DiscordService],
         exports: [discord_service_1.DiscordService]

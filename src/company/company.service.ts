@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '@prisma/prisma.service';
+import { DatabaseService } from '@database/database.service';
 import { Company, Prisma } from 'prisma/generated/prisma';
 
 @Injectable()
 export class CompanyService {
-    constructor(private prisma: PrismaService) {}
+    constructor(private prisma: DatabaseService) {}
 
     async findMany(query?: Prisma.CompanyFindManyArgs) {
         const entities: Company[] = await this.prisma.company.findMany(query);

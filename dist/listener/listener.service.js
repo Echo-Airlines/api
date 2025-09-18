@@ -12,7 +12,7 @@ var ListenerService_1;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ListenerService = void 0;
 const common_1 = require("@nestjs/common");
-const prisma_service_1 = require("../prisma/prisma.service");
+const database_service_1 = require("../database/database.service");
 const prisma_1 = require("../../prisma/generated/prisma/index.js");
 const discord_service_1 = require("../discord/discord.service");
 const logger_service_1 = require("../logger/logger.service");
@@ -507,7 +507,7 @@ let ListenerService = ListenerService_1 = class ListenerService {
 exports.ListenerService = ListenerService;
 exports.ListenerService = ListenerService = ListenerService_1 = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [prisma_service_1.PrismaService,
+    __metadata("design:paramtypes", [database_service_1.DatabaseService,
         discord_service_1.DiscordService,
         websocket_gateway_1.WebsocketGateway,
         fshub_service_1.FSHubService])

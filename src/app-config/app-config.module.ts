@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { AppConfigService } from './app-config.service';
 import { AppConfigController } from './app-config.controller';
-import { PrismaModule } from '@prisma/prisma.module';
+import { DatabaseModule } from '@database/database.module';
 import { LiveryController } from './livery.controller';
 
 @Module({
-  imports: [PrismaModule],
+  imports: [DatabaseModule],
   providers: [AppConfigService],
   exports: [AppConfigService],
   controllers: [AppConfigController, LiveryController],

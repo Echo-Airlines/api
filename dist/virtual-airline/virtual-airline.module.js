@@ -9,7 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.VirtualAirlineModule = void 0;
 const common_1 = require("@nestjs/common");
 const virtual_airline_service_1 = require("./virtual-airline.service");
-const prisma_module_1 = require("../prisma/prisma.module");
+const database_module_1 = require("../database/database.module");
 const virtual_airline_controller_1 = require("./virtual-airline.controller");
 const app_config_module_1 = require("../app-config/app-config.module");
 let VirtualAirlineModule = class VirtualAirlineModule {
@@ -17,7 +17,7 @@ let VirtualAirlineModule = class VirtualAirlineModule {
 exports.VirtualAirlineModule = VirtualAirlineModule;
 exports.VirtualAirlineModule = VirtualAirlineModule = __decorate([
     (0, common_1.Module)({
-        imports: [prisma_module_1.PrismaModule, app_config_module_1.AppConfigModule],
+        imports: [database_module_1.DatabaseModule, app_config_module_1.AppConfigModule],
         providers: [virtual_airline_service_1.VirtualAirlineService],
         controllers: [virtual_airline_controller_1.VirtualAirlineController],
         exports: [virtual_airline_service_1.VirtualAirlineService],

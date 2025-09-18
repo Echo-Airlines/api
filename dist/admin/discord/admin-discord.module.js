@@ -8,7 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AdminDiscordModule = void 0;
 const common_1 = require("@nestjs/common");
-const prisma_module_1 = require("../../prisma/prisma.module");
+const database_module_1 = require("../../database/database.module");
 const admin_discord_controller_1 = require("./admin-discord.controller");
 const admin_discord_service_1 = require("./admin-discord.service");
 const discord_service_1 = require("../../discord/discord.service");
@@ -17,7 +17,7 @@ let AdminDiscordModule = class AdminDiscordModule {
 exports.AdminDiscordModule = AdminDiscordModule;
 exports.AdminDiscordModule = AdminDiscordModule = __decorate([
     (0, common_1.Module)({
-        imports: [prisma_module_1.PrismaModule],
+        imports: [database_module_1.DatabaseModule],
         providers: [admin_discord_service_1.AdminDiscordService, discord_service_1.DiscordService],
         exports: [admin_discord_service_1.AdminDiscordService],
         controllers: [admin_discord_controller_1.AdminDiscordController],

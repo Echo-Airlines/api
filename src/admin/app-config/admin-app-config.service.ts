@@ -1,10 +1,10 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
-import { PrismaService } from "@prisma/prisma.service";
+import { DatabaseService } from "@database/database.service";
 import { AppConfig, Prisma } from "prisma/generated/prisma";
 
 @Injectable()
 export class AdminAppConfigService {
-    constructor(private prisma: PrismaService) {}
+    constructor(private prisma: DatabaseService) {}
 
     async create(dto: AppConfig) {
         const appConfig = await this.prisma.appConfig.create({

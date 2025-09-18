@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { OnAirApiService } from '@on-air/on-air-api.service';
 import { OnAirAirport } from '@on-air/types';
-import { PrismaService } from '@prisma/prisma.service';
+import { DatabaseService } from '@database/database.service';
 import { Airport, Prisma } from 'prisma/generated/prisma';
 import countries from './countries';
 
 @Injectable()
 export class AirportService {
-    constructor(private prisma: PrismaService, private onAirApiService: OnAirApiService) {}
+    constructor(private prisma: DatabaseService, private onAirApiService: OnAirApiService) {}
 
     async findAll(include?: Prisma.AirportInclude) {
         const entities: Airport[] = await this.prisma.airport.findMany({

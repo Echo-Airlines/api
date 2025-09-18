@@ -1,5 +1,5 @@
 import { BadRequestException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
-import { PrismaService } from '@prisma/prisma.service';
+import { DatabaseService } from '@database/database.service';
 import { AuthUser, User } from '@user/dto/PublicUser.dto';
 import { UserProfileDto } from '@user/dto/UserProfile.dto';
 import { InviteCode, Prisma, User as PrismaUser, Role, UserPrivacySettings } from 'prisma/generated/prisma';
@@ -30,7 +30,7 @@ export class AuthService {
     }
 
     constructor(
-        private prisma: PrismaService,
+        private prisma: DatabaseService,
         private hashService: HashService,
         private jwtService: JwtService,
         private emailService: EmailService

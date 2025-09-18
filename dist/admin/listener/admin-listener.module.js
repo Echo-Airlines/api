@@ -10,14 +10,14 @@ exports.AdminListenerModule = void 0;
 const common_1 = require("@nestjs/common");
 const admin_listener_service_1 = require("./admin-listener.service");
 const admin_listener_controller_1 = require("./admin-listener.controller");
-const prisma_module_1 = require("../../prisma/prisma.module");
+const database_module_1 = require("../../database/database.module");
 const listener_module_1 = require("../../listener/listener.module");
 let AdminListenerModule = class AdminListenerModule {
 };
 exports.AdminListenerModule = AdminListenerModule;
 exports.AdminListenerModule = AdminListenerModule = __decorate([
     (0, common_1.Module)({
-        imports: [prisma_module_1.PrismaModule, listener_module_1.ListenerModule],
+        imports: [database_module_1.DatabaseModule, listener_module_1.ListenerModule],
         providers: [admin_listener_service_1.AdminListenerService],
         controllers: [admin_listener_controller_1.AdminListenerController],
         exports: [admin_listener_service_1.AdminListenerService],

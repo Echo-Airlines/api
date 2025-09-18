@@ -10,13 +10,13 @@ exports.LiveryModule = void 0;
 const common_1 = require("@nestjs/common");
 const livery_controller_1 = require("./livery.controller");
 const livery_service_1 = require("./livery.service");
-const prisma_module_1 = require("../prisma/prisma.module");
+const database_module_1 = require("../database/database.module");
 let LiveryModule = class LiveryModule {
 };
 exports.LiveryModule = LiveryModule;
 exports.LiveryModule = LiveryModule = __decorate([
     (0, common_1.Module)({
-        imports: [prisma_module_1.PrismaModule],
+        imports: [database_module_1.DatabaseModule],
         providers: [livery_service_1.LiveryService],
         exports: [livery_service_1.LiveryService],
         controllers: [livery_controller_1.LiveryController],

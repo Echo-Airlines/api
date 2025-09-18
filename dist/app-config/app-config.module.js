@@ -10,14 +10,14 @@ exports.AppConfigModule = void 0;
 const common_1 = require("@nestjs/common");
 const app_config_service_1 = require("./app-config.service");
 const app_config_controller_1 = require("./app-config.controller");
-const prisma_module_1 = require("../prisma/prisma.module");
+const database_module_1 = require("../database/database.module");
 const livery_controller_1 = require("./livery.controller");
 let AppConfigModule = class AppConfigModule {
 };
 exports.AppConfigModule = AppConfigModule;
 exports.AppConfigModule = AppConfigModule = __decorate([
     (0, common_1.Module)({
-        imports: [prisma_module_1.PrismaModule],
+        imports: [database_module_1.DatabaseModule],
         providers: [app_config_service_1.AppConfigService],
         exports: [app_config_service_1.AppConfigService],
         controllers: [app_config_controller_1.AppConfigController, livery_controller_1.LiveryController],

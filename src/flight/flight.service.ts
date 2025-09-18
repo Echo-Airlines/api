@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '@prisma/prisma.service';
+import { DatabaseService } from '@database/database.service';
 import { Flight, FlightRoute, FlightStatus, Prisma } from 'prisma/generated/prisma';
 import { CreateFlightRouteDto } from './dto/create-flight-route.dto';
 import { updateFlightRouteDto } from './dto/update-flight-route.dto';
 
 @Injectable()
 export class FlightService {
-    constructor(private prisma: PrismaService) {}
+    constructor(private prisma: DatabaseService) {}
 
     async findAll(query?: Prisma.FlightFindManyArgs) {
         const entities: Flight[] = await this.prisma.flight.findMany({

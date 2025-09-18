@@ -8,8 +8,6 @@ export declare class VirtualAirlineController {
     constructor(virtualAirlineService: VirtualAirlineService, appConfigService: AppConfigService);
     getAll(worldSlug?: string): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         ApiKey: string;
         IsPrimary: boolean;
         Identifier: string | null;
@@ -33,15 +31,17 @@ export declare class VirtualAirlineController {
         TotalContractsCompleted: number | null;
         TotalContractsEarnedCredits: number | null;
         LastRefresh: Date | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
     }[]>;
     getLeaderboard(): Promise<PublicMemberDto[]>;
     getPrimaryVirtualAirlineMembers(): Promise<PublicMemberDto[]>;
     getVARoles(): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         Name: string;
         LastRefresh: Date | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         VAId: string;
         Color: string;
         Permission: number;
@@ -55,8 +55,6 @@ export declare class VirtualAirlineController {
     }[]>;
     create(body: Prisma.VirtualAirlineCreateInput): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         ApiKey: string;
         IsPrimary: boolean;
         Identifier: string | null;
@@ -80,5 +78,7 @@ export declare class VirtualAirlineController {
         TotalContractsCompleted: number | null;
         TotalContractsEarnedCredits: number | null;
         LastRefresh: Date | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
     }>;
 }

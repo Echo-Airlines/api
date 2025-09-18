@@ -1,10 +1,10 @@
 import { Module } from "@nestjs/common";
-import { PrismaModule } from "@prisma/prisma.module";
+import { DatabaseModule } from "@database/database.module";
 import { AdminVirtualAirlineService } from "./admin-virtual-airline.service";
 import { AdminVirtualAirlineController } from "./admin-virtual-airline.controller";
 
 @Module({
-    imports: [PrismaModule],
+    imports: [DatabaseModule],
     providers: [AdminVirtualAirlineService],
     exports: [AdminVirtualAirlineService],
     controllers: [AdminVirtualAirlineController],

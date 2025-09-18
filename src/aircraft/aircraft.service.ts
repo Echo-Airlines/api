@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '@prisma/prisma.service';
+import { DatabaseService } from '@database/database.service';
 import { Aircraft, Livery, Prisma } from 'prisma/generated/prisma';
 
 @Injectable()
 export class AircraftService {
-    constructor(private prisma: PrismaService) {}
+    constructor(private prisma: DatabaseService) {}
 
     async findAllByVirtualAirlineIdentifier(virtualAirlineIdentifier: string) {
         const entities: Aircraft[] = await this.prisma.aircraft.findMany({

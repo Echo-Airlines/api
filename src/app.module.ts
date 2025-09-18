@@ -1,7 +1,7 @@
 import { Module, OnModuleInit } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { PrismaModule } from '@prisma/prisma.module';
+import { DatabaseModule } from '@database/database.module';
 import { VirtualAirlineModule } from '@virtual-airline/virtual-airline.module';
 import { OnAirModule } from '@on-air/on-air.module';
 import { AppConfigModule } from './app-config/app-config.module';
@@ -72,7 +72,7 @@ console.log('emailTemplatesDirectory:', emailTemplatesDirectory);
         },
       },
     }),
-    PrismaModule,
+    DatabaseModule,
     OnAirModule,
     VirtualAirlineModule,
     AppConfigModule,

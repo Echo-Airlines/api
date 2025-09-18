@@ -9,7 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CompanyModule = void 0;
 const common_1 = require("@nestjs/common");
 const company_service_1 = require("./company.service");
-const prisma_module_1 = require("../prisma/prisma.module");
+const database_module_1 = require("../database/database.module");
 const app_config_module_1 = require("../app-config/app-config.module");
 const company_controller_1 = require("./company.controller");
 let CompanyModule = class CompanyModule {
@@ -17,7 +17,7 @@ let CompanyModule = class CompanyModule {
 exports.CompanyModule = CompanyModule;
 exports.CompanyModule = CompanyModule = __decorate([
     (0, common_1.Module)({
-        imports: [prisma_module_1.PrismaModule, app_config_module_1.AppConfigModule],
+        imports: [database_module_1.DatabaseModule, app_config_module_1.AppConfigModule],
         providers: [company_service_1.CompanyService],
         exports: [company_service_1.CompanyService],
         controllers: [company_controller_1.CompanyController],

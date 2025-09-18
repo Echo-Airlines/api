@@ -14,7 +14,7 @@ const job_scheduler_service_1 = require("./job-scheduler.service");
 const on_air_module_1 = require("../on-air/on-air.module");
 const virtual_airline_module_1 = require("../virtual-airline/virtual-airline.module");
 const app_config_module_1 = require("../app-config/app-config.module");
-const prisma_module_1 = require("../prisma/prisma.module");
+const database_module_1 = require("../database/database.module");
 const jobs_controller_1 = require("./jobs.controller");
 const aircraft_module_1 = require("../aircraft/aircraft.module");
 const airport_module_1 = require("../airport/airport.module");
@@ -31,7 +31,7 @@ exports.JobsModule = JobsModule = __decorate([
             on_air_module_1.OnAirModule,
             virtual_airline_module_1.VirtualAirlineModule,
             app_config_module_1.AppConfigModule,
-            prisma_module_1.PrismaModule,
+            database_module_1.DatabaseModule,
             aircraft_module_1.AircraftModule,
             airport_module_1.AirportModule,
             flight_module_1.FlightModule,

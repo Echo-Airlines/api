@@ -1,6 +1,6 @@
 import { Injectable, Logger, NotFoundException, BadRequestException } from '@nestjs/common';
 import { CronExpression } from '@nestjs/schedule';
-import { PrismaService } from '@prisma/prisma.service';
+import { DatabaseService } from '@database/database.service';
 import { $Enums, JobStatus, JobType, type Job, type Prisma } from 'prisma/generated/prisma';
 import { CreateJobDto } from './dto/create-job.dto';
 import { UpdateJobDto } from './dto/update-job.dto';
@@ -14,7 +14,7 @@ export type CronInterval = {
 @Injectable()
 export class JobsService {
     private readonly logger = new Logger(JobsService.name);
-    constructor(private prisma: PrismaService) {}
+    constructor(private prisma: DatabaseService) {}
 
     async create(dto: CreateJobDto) {
         const data: Prisma.JobCreateInput = {

@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '@prisma/prisma.service';
+import { DatabaseService } from '@database/database.service';
 import { Livery, LiveryFile, LiveryImage, Prisma } from 'prisma/generated/prisma';
 
 @Injectable()
 export class LiveryService {
-    constructor(private prisma: PrismaService) {}
+    constructor(private prisma: DatabaseService) {}
     
     async findAll(query?: Prisma.LiveryFindManyArgs) {
         const entities: Livery[] = await this.prisma.livery.findMany({

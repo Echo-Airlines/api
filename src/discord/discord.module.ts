@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { DiscordService } from './discord.service';
-import { PrismaModule } from '@prisma/prisma.module';
+import { DatabaseModule } from '@database/database.module';
 
 @Module({
-  imports: [PrismaModule],
+  imports: [DatabaseModule],
   controllers: [],
   providers: [DiscordService],
   exports: [DiscordService]

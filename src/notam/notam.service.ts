@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { CreateNotamDto } from '../admin/notam/dto/create-notam.dto';
 import { UpdateNotamDto } from '../admin/notam/dto/update-notam.dto';
-import { PrismaService } from '@prisma/prisma.service';
+import { DatabaseService } from '@database/database.service';
 import { NOTAMStatus, Prisma } from 'prisma/generated/prisma';
 
 @Injectable()
 export class NotamService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: DatabaseService) {}
   async findMany(query?: Prisma.NotamFindManyArgs) {
     const entities = await this.prisma.notam.findMany(query);
     

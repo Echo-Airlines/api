@@ -1,13 +1,10 @@
-import { PrismaService } from '@prisma/prisma.service';
+import { DatabaseService } from '@database/database.service';
 import { Prisma } from 'prisma/generated/prisma';
 export declare class MemberService {
     private readonly prisma;
-    constructor(prisma: PrismaService);
+    constructor(prisma: DatabaseService);
     findAllActive(): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
-        LastRefresh: Date | null;
         IsActive: boolean;
         DeactivatedAt: Date | null;
         VAId: string;
@@ -21,26 +18,29 @@ export declare class MemberService {
         Color: string;
         ReputationImpact: Prisma.Decimal;
         LastVAFlightDate: Date | null;
+        LastRefresh: Date | null;
         UserId: string | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         CompanyId: string;
     }[]>;
     findByCompanyId(companyId: string): Promise<({
         Company: {
             Id: string;
+            LastRefresh: Date | null;
             CreatedAt: Date;
             UpdatedAt: Date;
             Name: string;
-            WorldId: string;
-            LastConnection: Date | null;
-            LastReportDate: Date | null;
-            Reputation: Prisma.Decimal;
+            AirlineCode: string;
             CreationDate: Date;
-            DifficultyLevel: number;
             Level: number;
             LevelXP: number;
-            LastRefresh: Date | null;
-            AirlineCode: string;
+            Reputation: Prisma.Decimal;
             Paused: boolean;
+            LastConnection: Date | null;
+            LastReportDate: Date | null;
+            DifficultyLevel: number;
+            WorldId: string;
         };
         User: {
             Id: string;
@@ -49,8 +49,8 @@ export declare class MemberService {
             LastName: string | null;
             PrivacySettings: {
                 Id: string;
-                CreatedAt: Date;
                 UserId: string;
+                CreatedAt: Date;
                 ShowOnlineStatus: boolean;
                 ShowFirstName: boolean;
                 ShowLastName: boolean;
@@ -60,9 +60,6 @@ export declare class MemberService {
         } | null;
     } & {
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
-        LastRefresh: Date | null;
         IsActive: boolean;
         DeactivatedAt: Date | null;
         VAId: string;
@@ -76,14 +73,14 @@ export declare class MemberService {
         Color: string;
         ReputationImpact: Prisma.Decimal;
         LastVAFlightDate: Date | null;
+        LastRefresh: Date | null;
         UserId: string | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         CompanyId: string;
     }) | null>;
     findById(id: string, query?: Partial<Prisma.MemberFindUniqueArgs>): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
-        LastRefresh: Date | null;
         IsActive: boolean;
         DeactivatedAt: Date | null;
         VAId: string;
@@ -97,29 +94,34 @@ export declare class MemberService {
         Color: string;
         ReputationImpact: Prisma.Decimal;
         LastVAFlightDate: Date | null;
+        LastRefresh: Date | null;
         UserId: string | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         CompanyId: string;
     } | null>;
     findByUserId(userId: string): Promise<({
         Company: {
             Id: string;
+            LastRefresh: Date | null;
             CreatedAt: Date;
             UpdatedAt: Date;
             Name: string;
-            WorldId: string;
-            LastConnection: Date | null;
-            LastReportDate: Date | null;
-            Reputation: Prisma.Decimal;
+            AirlineCode: string;
             CreationDate: Date;
-            DifficultyLevel: number;
             Level: number;
             LevelXP: number;
-            LastRefresh: Date | null;
-            AirlineCode: string;
+            Reputation: Prisma.Decimal;
             Paused: boolean;
+            LastConnection: Date | null;
+            LastReportDate: Date | null;
+            DifficultyLevel: number;
+            WorldId: string;
         };
         User: {
             Id: string;
+            CreatedAt: Date;
+            UpdatedAt: Date;
             Username: string;
             Password: string | null;
             Email: string | null;
@@ -133,8 +135,6 @@ export declare class MemberService {
             IsVerified: boolean;
             LastLogin: Date | null;
             InviteCodeId: string | null;
-            CreatedAt: Date;
-            UpdatedAt: Date;
             WelcomeEmailSentAt: Date | null;
             ConfirmEmailToken: string | null;
             EmailVerifiedAt: Date | null;
@@ -147,9 +147,6 @@ export declare class MemberService {
         } | null;
     } & {
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
-        LastRefresh: Date | null;
         IsActive: boolean;
         DeactivatedAt: Date | null;
         VAId: string;
@@ -163,14 +160,14 @@ export declare class MemberService {
         Color: string;
         ReputationImpact: Prisma.Decimal;
         LastVAFlightDate: Date | null;
+        LastRefresh: Date | null;
         UserId: string | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         CompanyId: string;
     }) | null>;
     associateMemberToUser(memberId: string, userId: string): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
-        LastRefresh: Date | null;
         IsActive: boolean;
         DeactivatedAt: Date | null;
         VAId: string;
@@ -184,14 +181,14 @@ export declare class MemberService {
         Color: string;
         ReputationImpact: Prisma.Decimal;
         LastVAFlightDate: Date | null;
+        LastRefresh: Date | null;
         UserId: string | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         CompanyId: string;
     }>;
     create(dto: Prisma.MemberCreateInput): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
-        LastRefresh: Date | null;
         IsActive: boolean;
         DeactivatedAt: Date | null;
         VAId: string;
@@ -205,14 +202,14 @@ export declare class MemberService {
         Color: string;
         ReputationImpact: Prisma.Decimal;
         LastVAFlightDate: Date | null;
+        LastRefresh: Date | null;
         UserId: string | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         CompanyId: string;
     }>;
     update(Id: string, dto: Prisma.MemberUpdateInput): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
-        LastRefresh: Date | null;
         IsActive: boolean;
         DeactivatedAt: Date | null;
         VAId: string;
@@ -226,7 +223,10 @@ export declare class MemberService {
         Color: string;
         ReputationImpact: Prisma.Decimal;
         LastVAFlightDate: Date | null;
+        LastRefresh: Date | null;
         UserId: string | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         CompanyId: string;
     }>;
 }

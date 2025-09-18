@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { LiveryController } from './livery.controller';
 import { LiveryService } from './livery.service';
-import { PrismaModule } from '@prisma/prisma.module';
+import { DatabaseModule } from '@database/database.module';
 
 @Module({
-  imports: [PrismaModule],
+  imports: [DatabaseModule],
   providers: [LiveryService],
   exports: [LiveryService],
   controllers: [LiveryController],

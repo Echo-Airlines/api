@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { DiscordMessage, Prisma } from 'prisma/generated/prisma';
-import { PrismaService } from '@prisma/prisma.service';
+import { DatabaseService } from '@database/database.service';
 import { SendDiscordMessageDto } from './dto/SendDiscordMessageDto';
 import axios from 'axios';
 
 @Injectable()
 export class DiscordService {
-    constructor(private prisma: PrismaService) {} 
+    constructor(private prisma: DatabaseService) {} 
 
     async ChannelWebhook_findMany(query?: Prisma.DiscordChannelWebhookFindManyArgs) {
         const entities = await this.prisma.discordChannelWebhook.findMany(query ?? {});

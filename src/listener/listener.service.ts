@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '@prisma/prisma.service';
-import { DiscordMessage, DiscordMessageTemplate, ListenerEvent, ListenerEventSender, ListenerEventStatus, Prisma } from 'prisma/generated/prisma';
+import { DatabaseService } from '@database/database.service';
+import { DiscordMessage, ListenerEvent, ListenerEventSender, ListenerEventStatus, Prisma } from 'prisma/generated/prisma';
 import { DiscordService } from '@discord/discord.service';
 import { DiscordMessageEmbedDto, SendDiscordMessageDto } from '@discord/dto/SendDiscordMessageDto';
 import { FSHubEventDto } from './dto/FSHubEvent.dto';
@@ -19,7 +19,7 @@ export class ListenerService {
     private readonly logger = new LoggerService(ListenerService.name);
 
     constructor(
-        private prisma: PrismaService, 
+        private prisma: DatabaseService, 
         private readonly discordService: DiscordService,
         private readonly websocketGateway: WebsocketGateway,
         private readonly fshubService: FSHubService

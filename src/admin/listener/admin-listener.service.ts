@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '@prisma/prisma.service';
+import { DatabaseService } from '@database/database.service';
 import { ListenerEventStatus, Prisma } from 'prisma/generated/prisma';
 import * as crypto from 'crypto';
 import { ListenerService } from 'src/listener/listener.service';
@@ -7,7 +7,7 @@ import { FSHubEventDto } from '@listener/dto/FSHubEvent.dto';
 
 @Injectable()
 export class AdminListenerService {
-    constructor(private prisma: PrismaService, private readonly listenerService: ListenerService) {}
+    constructor(private prisma: DatabaseService, private readonly listenerService: ListenerService) {}
 
     async createListenerEvent(event: Prisma.ListenerEventCreateInput) {
         const listenerEvent = await this.prisma.listenerEvent.create({

@@ -1,12 +1,10 @@
-import { PrismaService } from '@prisma/prisma.service';
+import { DatabaseService } from '@database/database.service';
 import { Prisma } from 'prisma/generated/prisma';
 export declare class VirtualAirlineService {
     private prisma;
-    constructor(prisma: PrismaService);
+    constructor(prisma: DatabaseService);
     findAll(query?: Prisma.VirtualAirlineFindManyArgs): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         ApiKey: string;
         IsPrimary: boolean;
         Identifier: string | null;
@@ -30,11 +28,11 @@ export declare class VirtualAirlineService {
         TotalContractsCompleted: number | null;
         TotalContractsEarnedCredits: number | null;
         LastRefresh: Date | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
     }[]>;
     getPrimaryVirtualAirline(query?: Prisma.VirtualAirlineFindFirstArgs): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         ApiKey: string;
         IsPrimary: boolean;
         Identifier: string | null;
@@ -58,12 +56,12 @@ export declare class VirtualAirlineService {
         TotalContractsCompleted: number | null;
         TotalContractsEarnedCredits: number | null;
         LastRefresh: Date | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
     } | null>;
     getPrimaryLeaderboard(sortColumn?: 'reputation' | 'flights' | 'hours' | 'earnings'): Promise<({
         Company: {
             Id: string;
-            CreatedAt: Date;
-            UpdatedAt: Date;
             Name: string;
             WorldId: string;
             LastConnection: Date | null;
@@ -74,15 +72,17 @@ export declare class VirtualAirlineService {
             Level: number;
             LevelXP: number;
             LastRefresh: Date | null;
+            CreatedAt: Date;
+            UpdatedAt: Date;
             AirlineCode: string;
             Paused: boolean;
         };
         VARole: {
             Id: string;
-            CreatedAt: Date;
-            UpdatedAt: Date;
             Name: string;
             LastRefresh: Date | null;
+            CreatedAt: Date;
+            UpdatedAt: Date;
             VAId: string;
             Color: string;
             Permission: number;
@@ -96,9 +96,9 @@ export declare class VirtualAirlineService {
         };
     } & {
         Id: string;
+        LastRefresh: Date | null;
         CreatedAt: Date;
         UpdatedAt: Date;
-        LastRefresh: Date | null;
         IsActive: boolean;
         DeactivatedAt: Date | null;
         VAId: string;
@@ -118,8 +118,6 @@ export declare class VirtualAirlineService {
     getPrimaryVirtualAirlineMembers(): Promise<({
         Company: {
             Id: string;
-            CreatedAt: Date;
-            UpdatedAt: Date;
             Name: string;
             WorldId: string;
             LastConnection: Date | null;
@@ -130,15 +128,17 @@ export declare class VirtualAirlineService {
             Level: number;
             LevelXP: number;
             LastRefresh: Date | null;
+            CreatedAt: Date;
+            UpdatedAt: Date;
             AirlineCode: string;
             Paused: boolean;
         };
         VARole: {
             Id: string;
-            CreatedAt: Date;
-            UpdatedAt: Date;
             Name: string;
             LastRefresh: Date | null;
+            CreatedAt: Date;
+            UpdatedAt: Date;
             VAId: string;
             Color: string;
             Permission: number;
@@ -152,9 +152,9 @@ export declare class VirtualAirlineService {
         };
     } & {
         Id: string;
+        LastRefresh: Date | null;
         CreatedAt: Date;
         UpdatedAt: Date;
-        LastRefresh: Date | null;
         IsActive: boolean;
         DeactivatedAt: Date | null;
         VAId: string;
@@ -173,8 +173,6 @@ export declare class VirtualAirlineService {
     })[]>;
     getVirtualAirlineById(Id: string, query?: Prisma.VirtualAirlineFindUniqueArgs): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         ApiKey: string;
         IsPrimary: boolean;
         Identifier: string | null;
@@ -198,11 +196,11 @@ export declare class VirtualAirlineService {
         TotalContractsCompleted: number | null;
         TotalContractsEarnedCredits: number | null;
         LastRefresh: Date | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
     }>;
     getVirtualAirlineByIdentifier(Identifier: string): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         ApiKey: string;
         IsPrimary: boolean;
         Identifier: string | null;
@@ -226,11 +224,11 @@ export declare class VirtualAirlineService {
         TotalContractsCompleted: number | null;
         TotalContractsEarnedCredits: number | null;
         LastRefresh: Date | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
     }>;
     upsertById(virtualAirline: Prisma.VirtualAirlineCreateInput): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         ApiKey: string;
         IsPrimary: boolean;
         Identifier: string | null;
@@ -254,11 +252,11 @@ export declare class VirtualAirlineService {
         TotalContractsCompleted: number | null;
         TotalContractsEarnedCredits: number | null;
         LastRefresh: Date | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
     }>;
     upsertByIdentifier(virtualAirline: Prisma.VirtualAirlineCreateInput): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         ApiKey: string;
         IsPrimary: boolean;
         Identifier: string | null;
@@ -282,20 +280,20 @@ export declare class VirtualAirlineService {
         TotalContractsCompleted: number | null;
         TotalContractsEarnedCredits: number | null;
         LastRefresh: Date | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
     }>;
     create(virtualAirline: Prisma.VirtualAirlineCreateInput): Promise<{
         World: {
             Id: string;
-            CreatedAt: Date;
-            UpdatedAt: Date;
             Name: string;
             Description: string | null;
+            CreatedAt: Date;
+            UpdatedAt: Date;
             Slug: string;
         } | null;
     } & {
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         ApiKey: string;
         IsPrimary: boolean;
         Identifier: string | null;
@@ -319,13 +317,15 @@ export declare class VirtualAirlineService {
         TotalContractsCompleted: number | null;
         TotalContractsEarnedCredits: number | null;
         LastRefresh: Date | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
     }>;
     getVARoles(): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         Name: string;
         LastRefresh: Date | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         VAId: string;
         Color: string;
         Permission: number;
@@ -339,10 +339,10 @@ export declare class VirtualAirlineService {
     }[]>;
     VARole_findAll(query?: Prisma.VirtualAirlineRoleFindManyArgs): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         Name: string;
         LastRefresh: Date | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         VAId: string;
         Color: string;
         Permission: number;
@@ -356,10 +356,10 @@ export declare class VirtualAirlineService {
     }[]>;
     VARole_findById(Id: string): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         Name: string;
         LastRefresh: Date | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         VAId: string;
         Color: string;
         Permission: number;
@@ -373,10 +373,10 @@ export declare class VirtualAirlineService {
     } | null>;
     VARole_upsert(virtualAirlineRole: Prisma.VirtualAirlineRoleCreateInput): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         Name: string;
         LastRefresh: Date | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         VAId: string;
         Color: string;
         Permission: number;
@@ -390,9 +390,9 @@ export declare class VirtualAirlineService {
     }>;
     Member_findAll(query?: Prisma.MemberFindManyArgs): Promise<{
         Id: string;
+        LastRefresh: Date | null;
         CreatedAt: Date;
         UpdatedAt: Date;
-        LastRefresh: Date | null;
         IsActive: boolean;
         DeactivatedAt: Date | null;
         VAId: string;
@@ -411,9 +411,9 @@ export declare class VirtualAirlineService {
     }[]>;
     Member_findById(Id: string): Promise<{
         Id: string;
+        LastRefresh: Date | null;
         CreatedAt: Date;
         UpdatedAt: Date;
-        LastRefresh: Date | null;
         IsActive: boolean;
         DeactivatedAt: Date | null;
         VAId: string;
@@ -433,8 +433,6 @@ export declare class VirtualAirlineService {
     Member_deactivate(Id: string): Promise<{
         Company: {
             Id: string;
-            CreatedAt: Date;
-            UpdatedAt: Date;
             Name: string;
             WorldId: string;
             LastConnection: Date | null;
@@ -445,15 +443,17 @@ export declare class VirtualAirlineService {
             Level: number;
             LevelXP: number;
             LastRefresh: Date | null;
+            CreatedAt: Date;
+            UpdatedAt: Date;
             AirlineCode: string;
             Paused: boolean;
         };
         VARole: {
             Id: string;
-            CreatedAt: Date;
-            UpdatedAt: Date;
             Name: string;
             LastRefresh: Date | null;
+            CreatedAt: Date;
+            UpdatedAt: Date;
             VAId: string;
             Color: string;
             Permission: number;
@@ -467,9 +467,9 @@ export declare class VirtualAirlineService {
         };
     } & {
         Id: string;
+        LastRefresh: Date | null;
         CreatedAt: Date;
         UpdatedAt: Date;
-        LastRefresh: Date | null;
         IsActive: boolean;
         DeactivatedAt: Date | null;
         VAId: string;

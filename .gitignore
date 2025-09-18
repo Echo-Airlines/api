@@ -1,11 +1,10 @@
 # compiled output
-node_modules/
-build/
-dist/*
-files/
+node_modules
+build
+files
 
 # Logs
-logs/
+logs/=
 *.log
 npm-debug.log*
 pnpm-debug.log*
@@ -55,5 +54,3 @@ pids
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
-
-/generated/prisma

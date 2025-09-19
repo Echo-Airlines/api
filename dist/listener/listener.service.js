@@ -50,13 +50,14 @@ let ListenerService = ListenerService_1 = class ListenerService {
         const listenerEvent = await this.prisma.listenerEvent.update(query);
         return listenerEvent;
     }
-    async updateListenerEventStatus(Id, Status) {
+    async updateListenerEventStatus(Id, { Status, Error }) {
         const query = {
             where: {
                 Id,
             },
             data: {
                 Status,
+                Error,
             }
         };
         const listenerEvent = await this.prisma.listenerEvent.update(query);
@@ -151,10 +152,10 @@ let ListenerService = ListenerService_1 = class ListenerService {
             }
             if (!sender.DiscordChannelWebhookId) {
                 this.logger.warn(`No Discord channel webhook found for sender ${sender.Slug}`);
-                listenerEvent = await this.updateListenerEventStatus(listenerEvent.Id, prisma_1.ListenerEventStatus.FAILED);
+                listenerEvent = await this.updateListenerEventStatus(listenerEvent.Id, { Status: prisma_1.ListenerEventStatus.FAILED, Error: 'No Discord channel webhook found for sender' });
                 return listenerEvent;
             }
-            listenerEvent = await this.updateListenerEventStatus(listenerEvent.Id, prisma_1.ListenerEventStatus.PROCESSING);
+            listenerEvent = await this.updateListenerEventStatus(listenerEvent.Id, { Status: prisma_1.ListenerEventStatus.PROCESSING });
             let message = {
                 content: null,
                 avatar_url: 'https://www.echoairlines.com/echo-localizer-logo.png',
@@ -167,7 +168,7 @@ let ListenerService = ListenerService_1 = class ListenerService {
                     this.logger.debug(`flight.departed | #${flightDeparted.id} - https://fshub.io/flight/${flightDeparted.id}/report`);
                     if (!flightDeparted.speed_tas || flightDeparted.speed_tas < 20) {
                         this.logger.warn(`Speed is too low to process 'flight.departed' event for flight #${flightDeparted.id} | Speed: ${flightDeparted.speed_tas} | Id: ${listenerEvent.Id}`);
-                        listenerEvent = await this.updateListenerEventStatus(listenerEvent.Id, prisma_1.ListenerEventStatus.FAILED);
+                        listenerEvent = await this.updateListenerEventStatus(listenerEvent.Id, { Status: prisma_1.ListenerEventStatus.FAILED, Error: `Speed is too low to process 'flight.departed' event` });
                         return listenerEvent;
                     }
                     message.embeds = await this._processFSHubFlightDeparted(flightDeparted, listenerEvent.Id);
@@ -177,7 +178,7 @@ let ListenerService = ListenerService_1 = class ListenerService {
                     this.logger.debug(`flight.completed | #${flightCompleted.id} - https://fshub.io/flight/${flightCompleted.id}/report`);
                     if (!flightCompleted.arrival.speed_tas || flightCompleted.arrival.speed_tas < 20) {
                         this.logger.warn(`Speed is too low to process 'flight.completed' event for flight #${flightCompleted.id} | Speed: ${flightCompleted.arrival.speed_tas} | Id: ${listenerEvent.Id}`);
-                        listenerEvent = await this.updateListenerEventStatus(listenerEvent.Id, prisma_1.ListenerEventStatus.FAILED);
+                        listenerEvent = await this.updateListenerEventStatus(listenerEvent.Id, { Status: prisma_1.ListenerEventStatus.FAILED, Error: `Speed is too low to process 'flight.completed' event` });
                         return listenerEvent;
                     }
                     message.embeds = await this._processFSHubFlightCompleted(flightCompleted, listenerEvent.Id);

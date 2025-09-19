@@ -38,7 +38,10 @@ export declare class ListenerService {
         Data: Prisma.JsonValue | null;
         DeliveredAt: Date | null;
     }>;
-    updateListenerEventStatus(Id: string, Status: ListenerEventStatus): Promise<{
+    updateListenerEventStatus(Id: string, { Status, Error }: {
+        Status: ListenerEventStatus;
+        Error?: string;
+    }): Promise<{
         Id: string;
         CreatedAt: Date;
         UpdatedAt: Date;

@@ -7,10 +7,10 @@ export declare class AirportService {
     constructor(prisma: DatabaseService, onAirApiService: OnAirApiService);
     findAll(include?: Prisma.AirportInclude): Promise<{
         Id: string;
-        Name: string;
-        Description: string | null;
         CreatedAt: Date;
         UpdatedAt: Date;
+        Name: string;
+        Description: string | null;
         ICAO: string;
         IATA: string | null;
         Size: number;
@@ -26,10 +26,10 @@ export declare class AirportService {
     }[]>;
     findById(id: string, include?: Prisma.AirportInclude): Promise<{
         Id: string;
-        Name: string;
-        Description: string | null;
         CreatedAt: Date;
         UpdatedAt: Date;
+        Name: string;
+        Description: string | null;
         ICAO: string;
         IATA: string | null;
         Size: number;
@@ -45,10 +45,10 @@ export declare class AirportService {
     } | null>;
     findByICAO(ICAO: string, include?: Prisma.AirportInclude): Promise<{
         Id: string;
-        Name: string;
-        Description: string | null;
         CreatedAt: Date;
         UpdatedAt: Date;
+        Name: string;
+        Description: string | null;
         ICAO: string;
         IATA: string | null;
         Size: number;
@@ -64,10 +64,10 @@ export declare class AirportService {
     } | null>;
     findByIATA(IATA: string, include?: Prisma.AirportInclude): Promise<{
         Id: string;
-        Name: string;
-        Description: string | null;
         CreatedAt: Date;
         UpdatedAt: Date;
+        Name: string;
+        Description: string | null;
         ICAO: string;
         IATA: string | null;
         Size: number;
@@ -83,10 +83,10 @@ export declare class AirportService {
     } | null>;
     create(dto: Prisma.AirportCreateInput, include?: Prisma.AirportInclude): Promise<{
         Id: string;
-        Name: string;
-        Description: string | null;
         CreatedAt: Date;
         UpdatedAt: Date;
+        Name: string;
+        Description: string | null;
         ICAO: string;
         IATA: string | null;
         Size: number;
@@ -102,10 +102,10 @@ export declare class AirportService {
     }>;
     upsert(dto: Prisma.AirportCreateInput, include?: Prisma.AirportInclude): Promise<{
         Id: string;
-        Name: string;
-        Description: string | null;
         CreatedAt: Date;
         UpdatedAt: Date;
+        Name: string;
+        Description: string | null;
         ICAO: string;
         IATA: string | null;
         Size: number;
@@ -121,10 +121,10 @@ export declare class AirportService {
     }>;
     lookupByICAO(ICAO: string, include?: Prisma.AirportInclude): Promise<{
         Id: string;
-        Name: string;
-        Description: string | null;
         CreatedAt: Date;
         UpdatedAt: Date;
+        Name: string;
+        Description: string | null;
         ICAO: string;
         IATA: string | null;
         Size: number;

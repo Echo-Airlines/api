@@ -9,10 +9,10 @@ export declare class JobsController {
     constructor(jobsService: JobsService, jobSchedulerService: JobSchedulerService);
     create(createJobDto: CreateJobDto): Promise<{
         Id: string;
-        Name: string;
-        Description: string | null;
         CreatedAt: Date;
         UpdatedAt: Date;
+        Name: string;
+        Description: string | null;
         IsEnabled: boolean;
         FirstRunCompleted: boolean;
         Type: import("prisma/generated/prisma").$Enums.JobType;
@@ -31,10 +31,10 @@ export declare class JobsController {
     }[]>;
     findAll(): Promise<{
         Id: string;
-        Name: string;
-        Description: string | null;
         CreatedAt: Date;
         UpdatedAt: Date;
+        Name: string;
+        Description: string | null;
         IsEnabled: boolean;
         FirstRunCompleted: boolean;
         Type: import("prisma/generated/prisma").$Enums.JobType;
@@ -48,10 +48,10 @@ export declare class JobsController {
     }[]>;
     findOneById(id: string): Promise<{
         Id: string;
-        Name: string;
-        Description: string | null;
         CreatedAt: Date;
         UpdatedAt: Date;
+        Name: string;
+        Description: string | null;
         IsEnabled: boolean;
         FirstRunCompleted: boolean;
         Type: import("prisma/generated/prisma").$Enums.JobType;
@@ -65,10 +65,10 @@ export declare class JobsController {
     } | null>;
     update(id: string, updateJobDto: UpdateJobDto): Promise<{
         Id: string;
-        Name: string;
-        Description: string | null;
         CreatedAt: Date;
         UpdatedAt: Date;
+        Name: string;
+        Description: string | null;
         IsEnabled: boolean;
         FirstRunCompleted: boolean;
         Type: import("prisma/generated/prisma").$Enums.JobType;
@@ -82,10 +82,10 @@ export declare class JobsController {
     }>;
     remove(id: string): Promise<{
         Id: string;
-        Name: string;
-        Description: string | null;
         CreatedAt: Date;
         UpdatedAt: Date;
+        Name: string;
+        Description: string | null;
         IsEnabled: boolean;
         FirstRunCompleted: boolean;
         Type: import("prisma/generated/prisma").$Enums.JobType;
@@ -99,10 +99,10 @@ export declare class JobsController {
     } | null>;
     updateStatus(id: string, status: JobStatus): Promise<{
         Id: string;
-        Name: string;
-        Description: string | null;
         CreatedAt: Date;
         UpdatedAt: Date;
+        Name: string;
+        Description: string | null;
         IsEnabled: boolean;
         FirstRunCompleted: boolean;
         Type: import("prisma/generated/prisma").$Enums.JobType;
@@ -116,10 +116,10 @@ export declare class JobsController {
     } | null>;
     enable(id: string): Promise<{
         Id: string;
-        Name: string;
-        Description: string | null;
         CreatedAt: Date;
         UpdatedAt: Date;
+        Name: string;
+        Description: string | null;
         IsEnabled: boolean;
         FirstRunCompleted: boolean;
         Type: import("prisma/generated/prisma").$Enums.JobType;
@@ -133,10 +133,10 @@ export declare class JobsController {
     }>;
     disable(id: string): Promise<{
         Id: string;
-        Name: string;
-        Description: string | null;
         CreatedAt: Date;
         UpdatedAt: Date;
+        Name: string;
+        Description: string | null;
         IsEnabled: boolean;
         FirstRunCompleted: boolean;
         Type: import("prisma/generated/prisma").$Enums.JobType;
@@ -155,10 +155,10 @@ export declare class JobsController {
         nextRunAt: Date;
         job: {
             Id: string;
-            Name: string;
-            Description: string | null;
             CreatedAt: Date;
             UpdatedAt: Date;
+            Name: string;
+            Description: string | null;
             IsEnabled: boolean;
             FirstRunCompleted: boolean;
             Type: import("prisma/generated/prisma").$Enums.JobType;

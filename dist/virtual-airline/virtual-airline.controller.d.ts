@@ -9,6 +9,8 @@ export declare class VirtualAirlineController {
     constructor(virtualAirlineService: VirtualAirlineService, appConfigService: AppConfigService);
     getAll(worldSlug?: string): Promise<{
         Id: string;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         ApiKey: string;
         IsPrimary: boolean;
         Identifier: string | null;
@@ -32,12 +34,12 @@ export declare class VirtualAirlineController {
         TotalContractsCompleted: number | null;
         TotalContractsEarnedCredits: number | null;
         LastRefresh: Date | null;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         VAManagerDiscordWebhookId: string | null;
     }[]>;
     getPrimaryVirtualAirline(): Promise<{
         Id: string;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         ApiKey: string;
         IsPrimary: boolean;
         Identifier: string | null;
@@ -61,22 +63,20 @@ export declare class VirtualAirlineController {
         TotalContractsCompleted: number | null;
         TotalContractsEarnedCredits: number | null;
         LastRefresh: Date | null;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         VAManagerDiscordWebhookId: string | null;
     } | null>;
     getLeaderboard(): Promise<PublicMemberDto[]>;
     getPrimaryVirtualAirlineMembers(): Promise<PublicMemberDto[]>;
     getVARoles(): Promise<{
         Id: string;
-        Name: string;
-        LastRefresh: Date | null;
         CreatedAt: Date;
         UpdatedAt: Date;
+        Name: string;
+        LastRefresh: Date | null;
         VAId: string;
+        Color: string;
         Permission: number;
         IsDefaultNewRole: boolean;
-        Color: string;
         PayPercent: Prisma.Decimal;
         IsHidden: boolean;
         RestrictLoadingVAJobsIntoNonVAAircraft: boolean;
@@ -86,6 +86,8 @@ export declare class VirtualAirlineController {
     }[]>;
     create(body: Prisma.VirtualAirlineCreateInput): Promise<{
         Id: string;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         ApiKey: string;
         IsPrimary: boolean;
         Identifier: string | null;
@@ -109,12 +111,12 @@ export declare class VirtualAirlineController {
         TotalContractsCompleted: number | null;
         TotalContractsEarnedCredits: number | null;
         LastRefresh: Date | null;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         VAManagerDiscordWebhookId: string | null;
     }>;
     getById(id: string): Promise<{
         Id: string;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         ApiKey: string;
         IsPrimary: boolean;
         Identifier: string | null;
@@ -138,8 +140,6 @@ export declare class VirtualAirlineController {
         TotalContractsCompleted: number | null;
         TotalContractsEarnedCredits: number | null;
         LastRefresh: Date | null;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         VAManagerDiscordWebhookId: string | null;
     }>;
 }

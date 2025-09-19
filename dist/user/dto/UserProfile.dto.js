@@ -11,6 +11,7 @@ class UserProfileDto {
     IsVerified;
     LastLogin;
     FirstLoginCompleted;
+    FSHubPilotId;
     Roles;
     Members;
     constructor(user) {
@@ -21,6 +22,7 @@ class UserProfileDto {
         this.LastName = user.LastName || null;
         this.IsOnline = user.IsOnline;
         this.IsVerified = user.IsVerified || false;
+        this.FSHubPilotId = user.FSHubPilotId || null;
         this.Roles = user.Roles?.map((role) => role.Slug) || [];
         this.LastLogin = user.LastLogin || null;
         this.FirstLoginCompleted = user.FirstLoginCompleted || false;

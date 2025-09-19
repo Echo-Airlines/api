@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const user_service_1 = require("./user.service");
 const config_1 = require("@nestjs/config");
 const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
+const UpdateMe_dto_1 = require("./dto/UpdateMe.dto");
 let UserController = class UserController {
     userService;
     configService;
@@ -46,6 +47,14 @@ let UserController = class UserController {
         }
         return user;
     }
+    async updateMe(req, body) {
+        let user = await this.userService.updateById(req.user.userId, body);
+        if (!user) {
+            throw new common_1.UnauthorizedException('Invalid session');
+        }
+        const result = await this.userService.me(req.user.userId);
+        return result;
+    }
 };
 exports.UserController = UserController;
 __decorate([
@@ -70,6 +79,15 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "me", null);
+__decorate([
+    (0, common_1.Put)('me'),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    __param(0, (0, common_1.Req)()),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, UpdateMe_dto_1.UpdateMeDto]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "updateMe", null);
 exports.UserController = UserController = __decorate([
     (0, common_1.Controller)(['user', 'users', 'u']),
     __metadata("design:paramtypes", [user_service_1.UserService, config_1.ConfigService])

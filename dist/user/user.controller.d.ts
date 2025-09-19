@@ -3,6 +3,7 @@ import { PublicUserDto } from './dto/PublicUser.dto';
 import { ConfigService } from '@nestjs/config';
 import { Response } from 'express';
 import { UserProfileDto } from './dto/UserProfile.dto';
+import { UpdateMeDto } from './dto/UpdateMe.dto';
 export declare class UserController {
     private readonly userService;
     private readonly configService;
@@ -10,4 +11,5 @@ export declare class UserController {
     getAllActiveUsers(): Promise<PublicUserDto[]>;
     confirmEmail(token: string, res: Response): Promise<void>;
     me(req: any): Promise<UserProfileDto>;
+    updateMe(req: any, body: UpdateMeDto): Promise<UserProfileDto | null>;
 }

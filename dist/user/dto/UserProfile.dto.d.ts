@@ -10,6 +10,7 @@ export declare class UserProfileDto {
     IsVerified: boolean;
     LastLogin: Date | null;
     FirstLoginCompleted: boolean;
+    FSHubPilotId: number | null;
     Roles: string[];
     Members: Member[];
     constructor(user: User | AuthUser);

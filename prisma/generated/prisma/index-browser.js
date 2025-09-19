@@ -229,6 +229,7 @@ exports.Prisma.UserScalarFieldEnum = {
   EmailVerifiedAt: 'EmailVerifiedAt',
   ResetPasswordToken: 'ResetPasswordToken',
   ResetPasswordEmailSentAt: 'ResetPasswordEmailSentAt',
+  FSHubPilotId: 'FSHubPilotId',
   DiscordId: 'DiscordId',
   DiscordUsername: 'DiscordUsername',
   DiscordAvatar: 'DiscordAvatar',

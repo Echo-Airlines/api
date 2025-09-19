@@ -1,6 +1,5 @@
 import { Member } from "prisma/generated/prisma";
 import { AuthUser, User } from "./PublicUser.dto";
-import { MemberWithRelations } from "@member/dto/member-witth-relations";
 
 export class UserProfileDto {
     Id: string;
@@ -12,6 +11,7 @@ export class UserProfileDto {
     IsVerified: boolean;
     LastLogin: Date|null;
     FirstLoginCompleted: boolean;
+    FSHubPilotId: number|null;
     Roles: string[];
     Members: Member[];
 
@@ -23,6 +23,7 @@ export class UserProfileDto {
         this.LastName = user.LastName || null;
         this.IsOnline = user.IsOnline;
         this.IsVerified = user.IsVerified || false;
+        this.FSHubPilotId = (user as User).FSHubPilotId || null;
         this.Roles = user.Roles?.map((role) => role.Slug) || [];
         this.LastLogin = user.LastLogin || null;
         this.FirstLoginCompleted = user.FirstLoginCompleted || false;

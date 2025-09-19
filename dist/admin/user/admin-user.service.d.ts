@@ -25,6 +25,7 @@ export declare class AdminUserService {
         EmailVerifiedAt: Date | null;
         ResetPasswordToken: string | null;
         ResetPasswordEmailSentAt: Date | null;
+        FSHubPilotId: string | null;
         DiscordId: string | null;
         DiscordUsername: string | null;
         DiscordAvatar: string | null;
@@ -52,6 +53,7 @@ export declare class AdminUserService {
         EmailVerifiedAt: Date | null;
         ResetPasswordToken: string | null;
         ResetPasswordEmailSentAt: Date | null;
+        FSHubPilotId: string | null;
         DiscordId: string | null;
         DiscordUsername: string | null;
         DiscordAvatar: string | null;
@@ -79,6 +81,7 @@ export declare class AdminUserService {
         EmailVerifiedAt: Date | null;
         ResetPasswordToken: string | null;
         ResetPasswordEmailSentAt: Date | null;
+        FSHubPilotId: string | null;
         DiscordId: string | null;
         DiscordUsername: string | null;
         DiscordAvatar: string | null;
@@ -106,6 +109,7 @@ export declare class AdminUserService {
         EmailVerifiedAt: Date | null;
         ResetPasswordToken: string | null;
         ResetPasswordEmailSentAt: Date | null;
+        FSHubPilotId: string | null;
         DiscordId: string | null;
         DiscordUsername: string | null;
         DiscordAvatar: string | null;
@@ -133,6 +137,7 @@ export declare class AdminUserService {
         EmailVerifiedAt: Date | null;
         ResetPasswordToken: string | null;
         ResetPasswordEmailSentAt: Date | null;
+        FSHubPilotId: string | null;
         DiscordId: string | null;
         DiscordUsername: string | null;
         DiscordAvatar: string | null;
@@ -160,6 +165,7 @@ export declare class AdminUserService {
         EmailVerifiedAt: Date | null;
         ResetPasswordToken: string | null;
         ResetPasswordEmailSentAt: Date | null;
+        FSHubPilotId: string | null;
         DiscordId: string | null;
         DiscordUsername: string | null;
         DiscordAvatar: string | null;
@@ -187,6 +193,7 @@ export declare class AdminUserService {
         EmailVerifiedAt: Date | null;
         ResetPasswordToken: string | null;
         ResetPasswordEmailSentAt: Date | null;
+        FSHubPilotId: string | null;
         DiscordId: string | null;
         DiscordUsername: string | null;
         DiscordAvatar: string | null;
@@ -214,6 +221,7 @@ export declare class AdminUserService {
         EmailVerifiedAt: Date | null;
         ResetPasswordToken: string | null;
         ResetPasswordEmailSentAt: Date | null;
+        FSHubPilotId: string | null;
         DiscordId: string | null;
         DiscordUsername: string | null;
         DiscordAvatar: string | null;

@@ -148,6 +148,7 @@ model User {
   EmailVerifiedAt          DateTime? @db.Timestamp(6)
   ResetPasswordToken       String?   @unique() @db.VarChar
   ResetPasswordEmailSentAt DateTime? @db.Timestamp(6)
+  FSHubPilotId              String?   @unique() @db.VarChar
 
   // Discord OAuth2 fields
   DiscordId       String? @unique() @db.VarChar

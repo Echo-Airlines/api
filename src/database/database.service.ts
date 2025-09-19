@@ -5,7 +5,7 @@ import { PrismaClient } from 'prisma/generated/prisma';
 export class DatabaseService extends PrismaClient implements OnModuleInit, OnModuleDestroy {
   constructor() {
     const omitConfig = {
-      user: { Password: true, Email: true },
+      user: { Password: true, Email: true, FSHubPilotId: true },
       virtualAirline: { ApiKey: true },
     } as const;
 

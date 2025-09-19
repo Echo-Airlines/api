@@ -122,6 +122,7 @@ export class AuthService {
                 BanReason: true,
                 BanExpiresAt: true,
                 LastLogin: true,
+                FSHubPilotId: true,
                 Members: {
                     include: {
                         Company: true,

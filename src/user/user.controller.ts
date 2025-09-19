@@ -1,10 +1,13 @@
-import { BadRequestException, Controller, Get, NotFoundException, Query, Req, Res, UnauthorizedException, UseGuards } from '@nestjs/common';
+import { BadRequestException, Controller, Get, NotFoundException, Query, Req, Res, UnauthorizedException, UseGuards, Put, Body } from '@nestjs/common';
 import { UserService } from './user.service';
 import { PublicUserDto, User } from './dto/PublicUser.dto';
 import { ConfigService } from '@nestjs/config';
 import { Response } from 'express';
 import { UserProfileDto } from './dto/UserProfile.dto';
 import { JwtAuthGuard } from '@auth/jwt-auth.guard';
+import { UpdateMeDto } from './dto/UpdateMe.dto';
+import { plainToInstance } from 'class-transformer';
+import { Prisma } from 'prisma/generated/prisma';
 
 @Controller(['user', 'users', 'u'])
 export class UserController {
@@ -44,5 +47,19 @@ export class UserController {
         }
 
         return user;
+    }
+
+    @Put('me')
+    @UseGuards(JwtAuthGuard)
+    async updateMe(@Req() req, @Body() body: UpdateMeDto) {
+        let user = await this.userService.updateById(req.user.userId, body as Prisma.UserUpdateInput);
+
+        if (!user) {
+            throw new UnauthorizedException('Invalid session');
+        }
+
+        const result: UserProfileDto|null = await this.userService.me(req.user.userId);
+
+        return result;
     }
 }

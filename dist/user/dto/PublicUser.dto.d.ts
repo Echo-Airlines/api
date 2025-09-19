@@ -34,6 +34,7 @@ export type User = {
     PrivacySettings: UserPrivacySettings | null;
     Roles?: Role[];
     LastLogin: Date | null;
+    FSHubPilotId: number | null;
     Members?: Member[];
 };
 export type AuthUser = {

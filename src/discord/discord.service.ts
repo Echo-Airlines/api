@@ -80,6 +80,7 @@ export class DiscordService {
                 data: {
                     ChannelId: channelWebhook.ChannelId,
                     Content: JSON.stringify(data),
+                    
                     DiscordChannelWebhook: {
                         connect: {
                             Id: channelWebhook.Id,
@@ -90,7 +91,7 @@ export class DiscordService {
 
             const webhookUrl = channelWebhook.WebhookUrl;
 
-            const response = await axios.post(webhookUrl, data, {
+            await axios.post(webhookUrl, data, {
                 headers: {
                     'Content-Type': 'application/json',
                     'User-Agent': 'Echo Airlines Discord Bot'

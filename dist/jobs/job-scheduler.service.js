@@ -29,6 +29,9 @@ const flight_service_1 = require("../flight/flight.service");
 const executeVirtualAirlinesFlightsSync_1 = require("./schedules/executeVirtualAirlinesFlightsSync");
 const company_service_1 = require("../company/company.service");
 const member_service_1 = require("../member/member.service");
+const notification_service_1 = require("../notification/notification.service");
+const executeVirtualAirlinesNotificationSync_1 = require("./schedules/executeVirtualAirlinesNotificationSync");
+const discord_service_1 = require("../discord/discord.service");
 let JobSchedulerService = JobSchedulerService_1 = class JobSchedulerService {
     jobsService;
     schedulerRegistry;
@@ -41,10 +44,12 @@ let JobSchedulerService = JobSchedulerService_1 = class JobSchedulerService {
     flightService;
     companyService;
     memberService;
+    notificationService;
+    discordService;
     logger = new common_1.Logger(JobSchedulerService_1.name);
     config = null;
     services;
-    constructor(jobsService, schedulerRegistry, onAirApiService, virtualAirlineService, aircraftService, appConfigService, configService, airportService, flightService, companyService, memberService) {
+    constructor(jobsService, schedulerRegistry, onAirApiService, virtualAirlineService, aircraftService, appConfigService, configService, airportService, flightService, companyService, memberService, notificationService, discordService) {
         this.jobsService = jobsService;
         this.schedulerRegistry = schedulerRegistry;
         this.onAirApiService = onAirApiService;
@@ -56,6 +61,8 @@ let JobSchedulerService = JobSchedulerService_1 = class JobSchedulerService {
         this.flightService = flightService;
         this.companyService = companyService;
         this.memberService = memberService;
+        this.notificationService = notificationService;
+        this.discordService = discordService;
         this.services = {
             VirtualAirline: this.virtualAirlineService,
             OnAir: this.onAirApiService,
@@ -64,6 +71,8 @@ let JobSchedulerService = JobSchedulerService_1 = class JobSchedulerService {
             Flight: this.flightService,
             Company: this.companyService,
             Member: this.memberService,
+            Notification: this.notificationService,
+            Discord: this.discordService,
         };
     }
     async onModuleInit() {
@@ -163,21 +172,24 @@ let JobSchedulerService = JobSchedulerService_1 = class JobSchedulerService {
                 return;
             }
             this.logger.log(`Executing job ${job.Name} (${job.Id}) at ${startTime.toISOString()}`);
-            switch (job.Type) {
-                case prisma_1.JobType.VIRTUAL_AIRLINE_SYNC:
-                    await (0, executeVirtualAirlinesSync_1.executeAllVirtualAirlinesSync)(this);
-                    break;
-                case prisma_1.JobType.VIRTUAL_AIRLINE_MEMBERS_SYNC:
-                    await (0, executeVirtualAirlinesMembersSync_1.executeVirtualAirlinesMembersSync)(this);
-                    break;
-                case prisma_1.JobType.VIRTUAL_AIRLINE_FLEET_SYNC:
-                    await (0, executeVirtualAirlinesFleetSync_1.executeVirtualAirlinesFleetSync)(this);
-                    break;
-                case prisma_1.JobType.VIRTUAL_AIRLINE_FLIGHTS_SYNC:
-                    await (0, executeVirtualAirlinesFlightsSync_1.executeVirtualAirlinesFlightsSync)(this);
-                    break;
-                default:
-                    throw new Error(`Unknown job type: ${job.Type}`);
+            console.log(`${job.Type}| job type: ${typeof job.Type} | JobType: ${typeof prisma_1.JobType.VIRTUAL_AIRLINE_NOTIFICATION_SYNC} | ${(job.Type === prisma_1.JobType.VIRTUAL_AIRLINE_NOTIFICATION_SYNC)}`);
+            if (job.Type === prisma_1.JobType.VIRTUAL_AIRLINE_SYNC) {
+                await (0, executeVirtualAirlinesSync_1.executeAllVirtualAirlinesSync)(this);
+            }
+            else if (job.Type === prisma_1.JobType.VIRTUAL_AIRLINE_MEMBERS_SYNC) {
+                await (0, executeVirtualAirlinesMembersSync_1.executeVirtualAirlinesMembersSync)(this);
+            }
+            else if (job.Type === prisma_1.JobType.VIRTUAL_AIRLINE_FLEET_SYNC) {
+                await (0, executeVirtualAirlinesFleetSync_1.executeVirtualAirlinesFleetSync)(this);
+            }
+            else if (job.Type === prisma_1.JobType.VIRTUAL_AIRLINE_FLIGHTS_SYNC) {
+                await (0, executeVirtualAirlinesFlightsSync_1.executeVirtualAirlinesFlightsSync)(this);
+            }
+            else if (job.Type === prisma_1.JobType.VIRTUAL_AIRLINE_NOTIFICATION_SYNC) {
+                await (0, executeVirtualAirlinesNotificationSync_1.executeVirtualAirlinesNotificationsSync)(this);
+            }
+            else {
+                throw new Error(`Unknown job type: ${job.Type}`);
             }
             const endTime = new Date();
             const duration = endTime.getTime() - startTime.getTime();
@@ -226,6 +238,8 @@ exports.JobSchedulerService = JobSchedulerService = JobSchedulerService_1 = __de
         airport_service_1.AirportService,
         flight_service_1.FlightService,
         company_service_1.CompanyService,
-        member_service_1.MemberService])
+        member_service_1.MemberService,
+        notification_service_1.NotificationService,
+        discord_service_1.DiscordService])
 ], JobSchedulerService);
 //# sourceMappingURL=job-scheduler.service.js.map

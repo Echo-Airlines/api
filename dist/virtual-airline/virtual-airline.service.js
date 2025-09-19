@@ -31,7 +31,7 @@ let VirtualAirlineService = class VirtualAirlineService {
         return entities;
     }
     async getPrimaryVirtualAirline(query) {
-        const entity = await this.prisma.virtualAirline.findFirst({
+        const _query = {
             where: (query?.where) ? query.where : {
                 IsPrimary: true
             },
@@ -40,8 +40,53 @@ let VirtualAirlineService = class VirtualAirlineService {
             },
             orderBy: (query?.orderBy) ? query.orderBy : {
                 UpdatedAt: 'desc',
-            }
-        });
+            },
+            ...query,
+        };
+        const entity = await this.prisma.virtualAirline.findFirst(_query);
+        return entity;
+    }
+    async getPrimaryVirtualAirlineWithApiKey(query) {
+        const _query = {
+            where: (query?.where) ? query.where : {
+                IsPrimary: true
+            },
+            select: {
+                Id: true,
+                ApiKey: true,
+                IsPrimary: true,
+                Identifier: true,
+                Name: true,
+                Description: true,
+                WorldId: true,
+                LastDividendsDistribution: true,
+                LastComputationDate: true,
+                ComputedMemberCount: true,
+                ComputedAircraftsCount: true,
+                ComputedNumberOfFlights30Days: true,
+                ComputedNumberOfFlightHours30Days: true,
+                ComputedMostUsedAirports: true,
+                LastConnection: true,
+                LastReportDate: true,
+                Reputation: true,
+                CreationDate: true,
+                DifficultyLevel: true,
+                Level: true,
+                LevelXP: true,
+                TotalContractsCompleted: true,
+                TotalContractsEarnedCredits: true,
+                LastRefresh: true,
+                CreatedAt: true,
+                UpdatedAt: true,
+                VAManagerDiscordWebhookId: true,
+                World: true,
+            },
+            orderBy: (query?.orderBy) ? query.orderBy : {
+                UpdatedAt: 'desc',
+            },
+            ...query,
+        };
+        const entity = await this.prisma.virtualAirline.findFirst(_query);
         return entity;
     }
     async getPrimaryLeaderboard(sortColumn = 'earnings') {

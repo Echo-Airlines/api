@@ -16,4 +16,5 @@ export declare class OnAirApiService implements OnModuleInit {
     getVirtualAirlineFleet(virtualAirlineId?: string): Promise<OnAirAircraft[]>;
     getVirtualAirlineFlights(virtualAirlineId?: string): Promise<OnAirFlight[]>;
     getAirportByICAO(icao: string): Promise<OnAirAirport | null>;
+    getVirtualAirlineNotifications(virtualAirlineId: string): Promise<import("onair-api").Notification[]>;
 }

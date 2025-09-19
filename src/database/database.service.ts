@@ -6,6 +6,7 @@ export class DatabaseService extends PrismaClient implements OnModuleInit, OnMod
   constructor() {
     const omitConfig = {
       user: { Password: true, Email: true },
+      virtualAirline: { ApiKey: true },
     } as const;
 
     super({

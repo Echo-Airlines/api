@@ -34,8 +34,6 @@ export declare class AuthService {
     changePassword(body: ChangePasswordDto): Promise<UserProfileDto>;
     forgotPassword(body: ForgotPasswordDto): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         Username: string;
         Email: string | null;
         FirstName: string | null;
@@ -47,45 +45,31 @@ export declare class AuthService {
         BanExpiresAt: Date | null;
         IsVerified: boolean;
         LastLogin: Date | null;
-        Roles: {
-            Id: number;
-            CreatedAt: Date;
-            UpdatedAt: Date;
-            Name: string;
-            Description: string | null;
-            Slug: string;
-            VirtualAirlineRoleId: string | null;
-        }[];
-        PrivacySettings: {
-            Id: string;
-            UserId: string;
-            CreatedAt: Date;
-            ShowOnlineStatus: boolean;
-            ShowFirstName: boolean;
-            ShowLastName: boolean;
-            ShowLastNameInitial: boolean;
-            ShowLastLogin: boolean;
-        }[];
+        CreatedAt: Date;
+        UpdatedAt: Date;
         Members: ({
             Company: {
                 Id: string;
-                LastRefresh: Date | null;
                 CreatedAt: Date;
                 UpdatedAt: Date;
                 Name: string;
-                AirlineCode: string;
-                CreationDate: Date;
-                Level: number;
-                LevelXP: number;
-                Reputation: Prisma.Decimal;
-                Paused: boolean;
+                WorldId: string;
                 LastConnection: Date | null;
                 LastReportDate: Date | null;
+                Reputation: Prisma.Decimal;
+                CreationDate: Date;
                 DifficultyLevel: number;
-                WorldId: string;
+                Level: number;
+                LevelXP: number;
+                LastRefresh: Date | null;
+                AirlineCode: string;
+                Paused: boolean;
             };
         } & {
             Id: string;
+            CreatedAt: Date;
+            UpdatedAt: Date;
+            LastRefresh: Date | null;
             IsActive: boolean;
             DeactivatedAt: Date | null;
             VAId: string;
@@ -99,12 +83,28 @@ export declare class AuthService {
             Color: string;
             ReputationImpact: Prisma.Decimal;
             LastVAFlightDate: Date | null;
-            LastRefresh: Date | null;
             UserId: string | null;
-            CreatedAt: Date;
-            UpdatedAt: Date;
             CompanyId: string;
         })[];
+        Roles: {
+            Id: number;
+            CreatedAt: Date;
+            UpdatedAt: Date;
+            Name: string;
+            Description: string | null;
+            Slug: string;
+            VirtualAirlineRoleId: string | null;
+        }[];
+        PrivacySettings: {
+            Id: string;
+            CreatedAt: Date;
+            UserId: string;
+            ShowOnlineStatus: boolean;
+            ShowFirstName: boolean;
+            ShowLastName: boolean;
+            ShowLastNameInitial: boolean;
+            ShowLastLogin: boolean;
+        }[];
     }>;
     createUser(body: RegisterUserDto): Promise<UserProfileDto>;
     findUserByDiscordId(discordId: string): Promise<AuthUser | null>;
@@ -120,8 +120,6 @@ export declare class AuthService {
     } | null>;
     getUserByUsername(username: string): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         Username: string;
         Password: string | null;
         Email: string | null;
@@ -135,6 +133,8 @@ export declare class AuthService {
         IsVerified: boolean;
         LastLogin: Date | null;
         InviteCodeId: string | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         WelcomeEmailSentAt: Date | null;
         ConfirmEmailToken: string | null;
         EmailVerifiedAt: Date | null;
@@ -147,8 +147,6 @@ export declare class AuthService {
     } | null>;
     getUserByEmail(email: string): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         Username: string;
         Password: string | null;
         Email: string | null;
@@ -162,6 +160,8 @@ export declare class AuthService {
         IsVerified: boolean;
         LastLogin: Date | null;
         InviteCodeId: string | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         WelcomeEmailSentAt: Date | null;
         ConfirmEmailToken: string | null;
         EmailVerifiedAt: Date | null;
@@ -174,8 +174,6 @@ export declare class AuthService {
     } | null>;
     resetPassword(body: ResetPasswordDto): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         Username: string;
         Password: string | null;
         Email: string | null;
@@ -189,6 +187,8 @@ export declare class AuthService {
         IsVerified: boolean;
         LastLogin: Date | null;
         InviteCodeId: string | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         WelcomeEmailSentAt: Date | null;
         ConfirmEmailToken: string | null;
         EmailVerifiedAt: Date | null;

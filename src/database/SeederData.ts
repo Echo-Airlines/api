@@ -205,6 +205,13 @@ export const SeedData_Jobs: Prisma.JobCreateInput[] = [
         CronExpression: CronExpression.EVERY_MINUTE,
         IsEnabled: false,
         Type: JobType.VIRTUAL_AIRLINE_FLIGHTS_SYNC,
+    },
+    {
+        Name: 'Virtual Airline Notifications Sync',
+        Description: 'Syncs virtual airline notifications data from OnAir',
+        CronExpression: CronExpression.EVERY_MINUTE,
+        IsEnabled: true,
+        Type: JobType.VIRTUAL_AIRLINE_NOTIFICATION_SYNC,
     }
 ];
 

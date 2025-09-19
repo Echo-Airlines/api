@@ -1,6 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
-  output   = "./generated/prisma"
+  provider        = "prisma-client-js"
+  output          = "./generated/prisma"
   previewFeatures = ["metrics"]
 }
 
@@ -22,7 +22,7 @@ model AppConfig {
   DiscordAuthCreateUser          Boolean  @default(false)
   LocalAuthEnabled               Boolean  @default(true)
   VirtualAirlineInitiated        Boolean  @default(false)
-  FSHubApiKey                    String  @db.VarChar @default("")
+  FSHubApiKey                    String   @default("") @db.VarChar
   CreatedAt                      DateTime @default(now()) @db.Timestamp(6)
   UpdatedAt                      DateTime @default(now()) @db.Timestamp(6)
 }
@@ -51,6 +51,7 @@ model DiscordMessage {
   DiscordMessageTemplate DiscordMessageTemplate? @relation(fields: [DiscordMessageTemplateId], references: [Id])
   DiscordChannelWebhook  DiscordChannelWebhook?  @relation(fields: [DiscordChannelWebhookId], references: [Id])
   ListenerEvents         ListenerEvent[]
+  Notifications           Notification[]
 }
 
 model DiscordMessageTemplate {
@@ -80,10 +81,11 @@ model DiscordChannelWebhook {
   // relations
   DiscordMessages      DiscordMessage[]
   ListenerEventSenders ListenerEventSender[]
+  VirtualAirlines      VirtualAirline[]
 }
 
 model ListenerEvent {
-  Id               String                 @id() @unique() @default(uuid()) @db.Uuid
+  Id               String              @id() @unique() @default(uuid()) @db.Uuid
   Variant          String              @db.VarChar
   Type             String              @db.VarChar
   SentAt           DateTime            @db.Timestamp(6)
@@ -125,28 +127,28 @@ enum ListenerEventStatus {
 }
 
 model User {
-  Id                  String    @id() @unique() @default(uuid()) @db.Uuid
-  Username            String    @unique() @db.VarChar
-  Password            String?   @db.VarChar
-  Email               String?   @unique() @db.VarChar
-  FirstName           String?   @db.VarChar
-  LastName            String?   @db.VarChar
-  FirstLoginCompleted Boolean   @default(false)
-  IsOnline            Boolean   @default(false)
-  IsBanned            Boolean   @default(false)
-  BanReason           String?   @db.VarChar
-  BanExpiresAt        DateTime? @db.Timestamp(6)
-  IsVerified          Boolean   @default(false)
-  LastLogin           DateTime? @db.Timestamp(6)
-  InviteCodeId        String?   @unique() @db.Uuid
-  CreatedAt           DateTime  @default(now()) @db.Timestamp(6)
-  UpdatedAt           DateTime  @default(now()) @db.Timestamp(6)
-  WelcomeEmailSentAt  DateTime? @db.Timestamp(6)
-  ConfirmEmailToken   String?   @unique() @db.VarChar
-  EmailVerifiedAt     DateTime? @db.Timestamp(6)
-  ResetPasswordToken  String?   @unique() @db.VarChar
+  Id                       String    @id() @unique() @default(uuid()) @db.Uuid
+  Username                 String    @unique() @db.VarChar
+  Password                 String?   @db.VarChar
+  Email                    String?   @unique() @db.VarChar
+  FirstName                String?   @db.VarChar
+  LastName                 String?   @db.VarChar
+  FirstLoginCompleted      Boolean   @default(false)
+  IsOnline                 Boolean   @default(false)
+  IsBanned                 Boolean   @default(false)
+  BanReason                String?   @db.VarChar
+  BanExpiresAt             DateTime? @db.Timestamp(6)
+  IsVerified               Boolean   @default(false)
+  LastLogin                DateTime? @db.Timestamp(6)
+  InviteCodeId             String?   @unique() @db.Uuid
+  CreatedAt                DateTime  @default(now()) @db.Timestamp(6)
+  UpdatedAt                DateTime  @default(now()) @db.Timestamp(6)
+  WelcomeEmailSentAt       DateTime? @db.Timestamp(6)
+  ConfirmEmailToken        String?   @unique() @db.VarChar
+  EmailVerifiedAt          DateTime? @db.Timestamp(6)
+  ResetPasswordToken       String?   @unique() @db.VarChar
   ResetPasswordEmailSentAt DateTime? @db.Timestamp(6)
-  
+
   // Discord OAuth2 fields
   DiscordId       String? @unique() @db.VarChar
   DiscordUsername String? @db.VarChar
@@ -219,11 +221,11 @@ model Livery {
   Id            String   @id() @default(uuid()) @db.Uuid
   Name          String   @db.VarChar
   IsActive      Boolean  @default(true)
-  AircraftId    String?   @db.Uuid
+  AircraftId    String?  @db.Uuid
   DownloadCount Int      @default(0)
   Image         String   @db.VarChar
-  ImageFileName String?   @db.VarChar 
-  CoverPhoto    String?   @db.VarChar
+  ImageFileName String?  @db.VarChar
+  CoverPhoto    String?  @db.VarChar
   Metadata      Json?
   Url           String?
   Description   String?
@@ -232,9 +234,9 @@ model Livery {
   UpdatedAt     DateTime @default(now()) @db.Timestamp(6)
 
   // relations
-  Aircraft Aircraft? @relation(fields: [AircraftId], references: [Id])
-  Images LiveryImage[]
-  Files LiveryFile[]
+  Aircraft Aircraft?     @relation(fields: [AircraftId], references: [Id])
+  Images   LiveryImage[]
+  Files    LiveryFile[]
 }
 
 model LiveryImage {
@@ -296,15 +298,17 @@ model VirtualAirline {
   LastRefresh                       DateTime? @db.Timestamp(6)
   CreatedAt                         DateTime  @default(now()) @db.Timestamp(6)
   UpdatedAt                         DateTime  @default(now()) @db.Timestamp(6)
+  VAManagerDiscordWebhookId                String?   @db.Uuid
 
   // relations
   World World? @relation(fields: [WorldId], references: [Id])
+  VAManagerDiscordWebhook DiscordChannelWebhook? @relation(fields: [VAManagerDiscordWebhookId], references: [Id])
 
-  // relations
-  VARoles VirtualAirlineRole[]
-  Members Member[]
-  Fleet   Aircraft[]
-  Flights Flight[]
+  VARoles      VirtualAirlineRole[]
+  Members      Member[]
+  Fleet        Aircraft[]
+  Flights      Flight[]
+  Notifications Notification[]
 }
 
 model VirtualAirlineRole {
@@ -344,20 +348,20 @@ model World {
 }
 
 model Notam {
-  Id        String   @id() @default(uuid()) @db.Uuid
-  Title     String   @db.VarChar
-  Content   String   @db.VarChar
-  ExpirationDate DateTime? @db.Timestamp(6)
-  Link String? @db.VarChar
-  EffectiveDate DateTime @db.Timestamp(6) @default(now())
-  Status NOTAMStatus @default(ACTIVE)
-  CreatedById String   @db.Uuid
+  Id             String      @id() @default(uuid()) @db.Uuid
+  Title          String      @db.VarChar
+  Content        String      @db.VarChar
+  ExpirationDate DateTime?   @db.Timestamp(6)
+  Link           String?     @db.VarChar
+  EffectiveDate  DateTime    @default(now()) @db.Timestamp(6)
+  Status         NOTAMStatus @default(ACTIVE)
+  CreatedById    String      @db.Uuid
 
   CreatedAt DateTime @default(now()) @db.Timestamp(6)
   UpdatedAt DateTime @default(now()) @db.Timestamp(6)
 
   // relations
-  CreatedBy User     @relation(fields: [CreatedById], references: [Id])
+  CreatedBy User @relation(fields: [CreatedById], references: [Id])
 }
 
 enum NOTAMStatus {
@@ -419,7 +423,7 @@ model Company {
   // relations
   World   World    @relation(fields: [WorldId], references: [Id])
   Flights Flight[]
-  Owner  Member?
+  Owner   Member?
 }
 
 model Aircraft {
@@ -534,7 +538,7 @@ model Flight {
   Passengers                                 Int?
   Cargo                                      Int?
   AddedFuelQty                               Decimal?
-  IsAI                                       Boolean @default(false)
+  IsAI                                       Boolean   @default(false)
   VerticalSpeedAtTouchdownMpS                Decimal?
   MaxGForce                                  Decimal?
   MinGForce                                  Decimal?
@@ -638,6 +642,7 @@ enum JobType {
   VIRTUAL_AIRLINE_MEMBERS_SYNC
   VIRTUAL_AIRLINE_FLEET_SYNC
   VIRTUAL_AIRLINE_FLIGHTS_SYNC
+  VIRTUAL_AIRLINE_NOTIFICATION_SYNC
 }
 
 enum JobStatus {
@@ -660,4 +665,24 @@ enum CronExpression {
   EVERY_DAY_AT_MIDNIGHT
   EVERY_WEEK
   EVERY_MONTH
+}
+
+model Notification {
+  Id                   String    @id() @unique() @db.Uuid
+  CompanyId            String    @db.Uuid
+  DiscordMessageSent   Boolean   @default(false)
+  IsRead               Boolean   @default(false)
+  IsNotification       Boolean   @default(false)
+  ZuluEventTime        DateTime? @db.Timestamp(6)
+  DiscordMessageSentAt DateTime? @db.Timestamp(6)
+  DiscordMessageId     String?   @db.Uuid
+  Category             Int       @default(0)
+  Action               Int       @default(0)
+  Description          String    @db.VarChar
+  CreatedAt            DateTime  @default(now()) @db.Timestamp(6)
+  UpdatedAt            DateTime  @default(now()) @db.Timestamp(6)
+
+  // relations
+  VirtualAirline VirtualAirline  @relation(fields: [CompanyId], references: [Id])
+  DiscordMessage DiscordMessage? @relation(fields: [DiscordMessageId], references: [Id])
 }

@@ -5,63 +5,63 @@ export declare class AircraftService {
     constructor(prisma: DatabaseService);
     findAllByVirtualAirlineIdentifier(virtualAirlineIdentifier: string): Promise<{
         Id: string;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         Identifier: string;
+        LastRefresh: Date | null;
         DisplayName: string;
         AircraftStatusId: number;
         AircraftClassId: string;
-        VirtualAirlineId: string;
         CurrentAirportId: string | null;
-        LastRefresh: Date | null;
-        CreatedAt: Date;
-        UpdatedAt: Date;
+        VirtualAirlineId: string;
     }[]>;
     findAll(query?: Prisma.AircraftFindManyArgs): Promise<{
         Id: string;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         Identifier: string;
+        LastRefresh: Date | null;
         DisplayName: string;
         AircraftStatusId: number;
         AircraftClassId: string;
-        VirtualAirlineId: string;
         CurrentAirportId: string | null;
-        LastRefresh: Date | null;
-        CreatedAt: Date;
-        UpdatedAt: Date;
+        VirtualAirlineId: string;
     }[]>;
     findById(Id: string): Promise<{
         Id: string;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         Identifier: string;
+        LastRefresh: Date | null;
         DisplayName: string;
         AircraftStatusId: number;
         AircraftClassId: string;
-        VirtualAirlineId: string;
         CurrentAirportId: string | null;
-        LastRefresh: Date | null;
-        CreatedAt: Date;
-        UpdatedAt: Date;
+        VirtualAirlineId: string;
     } | null>;
     findPrimaryVirtualAirlineFleet(): Promise<{
         Id: string;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         Identifier: string;
+        LastRefresh: Date | null;
         DisplayName: string;
         AircraftStatusId: number;
         AircraftClassId: string;
-        VirtualAirlineId: string;
         CurrentAirportId: string | null;
-        LastRefresh: Date | null;
-        CreatedAt: Date;
-        UpdatedAt: Date;
+        VirtualAirlineId: string;
     }[]>;
     upsert(dto: Prisma.AircraftCreateInput): Promise<{
         Id: string;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         Identifier: string;
+        LastRefresh: Date | null;
         DisplayName: string;
         AircraftStatusId: number;
         AircraftClassId: string;
-        VirtualAirlineId: string;
         CurrentAirportId: string | null;
-        LastRefresh: Date | null;
-        CreatedAt: Date;
-        UpdatedAt: Date;
+        VirtualAirlineId: string;
     }>;
     assignLiveryToAircraft(aircraft: Aircraft, livery: Livery): Promise<{
         Liveries: {
@@ -70,8 +70,8 @@ export declare class AircraftService {
             UpdatedAt: Date;
             Name: string;
             Description: string | null;
-            AircraftId: string | null;
             IsActive: boolean;
+            AircraftId: string | null;
             DownloadCount: number;
             Image: string;
             ImageFileName: string | null;
@@ -82,14 +82,14 @@ export declare class AircraftService {
         }[];
     } & {
         Id: string;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         Identifier: string;
+        LastRefresh: Date | null;
         DisplayName: string;
         AircraftStatusId: number;
         AircraftClassId: string;
-        VirtualAirlineId: string;
         CurrentAirportId: string | null;
-        LastRefresh: Date | null;
-        CreatedAt: Date;
-        UpdatedAt: Date;
+        VirtualAirlineId: string;
     }>;
 }

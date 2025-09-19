@@ -51,6 +51,7 @@ model DiscordMessage {
   DiscordMessageTemplate DiscordMessageTemplate? @relation(fields: [DiscordMessageTemplateId], references: [Id])
   DiscordChannelWebhook  DiscordChannelWebhook?  @relation(fields: [DiscordChannelWebhookId], references: [Id])
   ListenerEvents         ListenerEvent[]
+  Notifications          Notification[]
 }
 
 model DiscordMessageTemplate {
@@ -80,6 +81,7 @@ model DiscordChannelWebhook {
   // relations
   DiscordMessages      DiscordMessage[]
   ListenerEventSenders ListenerEventSender[]
+  VirtualAirlines      VirtualAirline[]
 }
 
 model ListenerEvent {
@@ -296,15 +298,17 @@ model VirtualAirline {
   LastRefresh                       DateTime? @db.Timestamp(6)
   CreatedAt                         DateTime  @default(now()) @db.Timestamp(6)
   UpdatedAt                         DateTime  @default(now()) @db.Timestamp(6)
+  VAManagerDiscordWebhookId         String?   @db.Uuid
 
   // relations
-  World World? @relation(fields: [WorldId], references: [Id])
+  World                   World?                 @relation(fields: [WorldId], references: [Id])
+  VAManagerDiscordWebhook DiscordChannelWebhook? @relation(fields: [VAManagerDiscordWebhookId], references: [Id])
 
-  // relations
-  VARoles VirtualAirlineRole[]
-  Members Member[]
-  Fleet   Aircraft[]
-  Flights Flight[]
+  VARoles       VirtualAirlineRole[]
+  Members       Member[]
+  Fleet         Aircraft[]
+  Flights       Flight[]
+  Notifications Notification[]
 }
 
 model VirtualAirlineRole {
@@ -638,6 +642,7 @@ enum JobType {
   VIRTUAL_AIRLINE_MEMBERS_SYNC
   VIRTUAL_AIRLINE_FLEET_SYNC
   VIRTUAL_AIRLINE_FLIGHTS_SYNC
+  VIRTUAL_AIRLINE_NOTIFICATION_SYNC
 }
 
 enum JobStatus {
@@ -660,4 +665,24 @@ enum CronExpression {
   EVERY_DAY_AT_MIDNIGHT
   EVERY_WEEK
   EVERY_MONTH
+}
+
+model Notification {
+  Id                   String    @id() @unique() @db.Uuid
+  CompanyId            String    @db.Uuid
+  DiscordMessageSent   Boolean   @default(false)
+  IsRead               Boolean   @default(false)
+  IsNotification       Boolean   @default(false)
+  ZuluEventTime        DateTime? @db.Timestamp(6)
+  DiscordMessageSentAt DateTime? @db.Timestamp(6)
+  DiscordMessageId     String?   @db.Uuid
+  Category             Int       @default(0)
+  Action               Int       @default(0)
+  Description          String    @db.VarChar
+  CreatedAt            DateTime  @default(now()) @db.Timestamp(6)
+  UpdatedAt            DateTime  @default(now()) @db.Timestamp(6)
+
+  // relations
+  VirtualAirline VirtualAirline  @relation(fields: [CompanyId], references: [Id])
+  DiscordMessage DiscordMessage? @relation(fields: [DiscordMessageId], references: [Id])
 }

@@ -83,7 +83,7 @@ let DiscordService = class DiscordService {
                 }
             });
             const webhookUrl = channelWebhook.WebhookUrl;
-            const response = await axios_1.default.post(webhookUrl, data, {
+            await axios_1.default.post(webhookUrl, data, {
                 headers: {
                     'Content-Type': 'application/json',
                     'User-Agent': 'Echo Airlines Discord Bot'

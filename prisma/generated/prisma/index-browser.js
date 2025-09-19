@@ -20,12 +20,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.15.0
- * Query Engine version: 85179d7826409ee107a6ba334b5e305ae3fba9fb
+ * Prisma Client JS version: 6.16.2
+ * Query Engine version: 1c57fdcd7e44b29b9313256c76699e91c3ac3c43
  */
 Prisma.prismaVersion = {
-  client: "6.15.0",
-  engine: "85179d7826409ee107a6ba334b5e305ae3fba9fb"
+  client: "6.16.2",
+  engine: "1c57fdcd7e44b29b9313256c76699e91c3ac3c43"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -334,7 +334,8 @@ exports.Prisma.VirtualAirlineScalarFieldEnum = {
   TotalContractsEarnedCredits: 'TotalContractsEarnedCredits',
   LastRefresh: 'LastRefresh',
   CreatedAt: 'CreatedAt',
-  UpdatedAt: 'UpdatedAt'
+  UpdatedAt: 'UpdatedAt',
+  VAManagerDiscordWebhookId: 'VAManagerDiscordWebhookId'
 };
 
 exports.Prisma.VirtualAirlineRoleScalarFieldEnum = {
@@ -573,6 +574,22 @@ exports.Prisma.JobScalarFieldEnum = {
   UpdatedAt: 'UpdatedAt'
 };
 
+exports.Prisma.NotificationScalarFieldEnum = {
+  Id: 'Id',
+  CompanyId: 'CompanyId',
+  DiscordMessageSent: 'DiscordMessageSent',
+  IsRead: 'IsRead',
+  IsNotification: 'IsNotification',
+  ZuluEventTime: 'ZuluEventTime',
+  DiscordMessageSentAt: 'DiscordMessageSentAt',
+  DiscordMessageId: 'DiscordMessageId',
+  Category: 'Category',
+  Action: 'Action',
+  Description: 'Description',
+  CreatedAt: 'CreatedAt',
+  UpdatedAt: 'UpdatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -623,7 +640,8 @@ exports.JobType = exports.$Enums.JobType = {
   VIRTUAL_AIRLINE_SYNC: 'VIRTUAL_AIRLINE_SYNC',
   VIRTUAL_AIRLINE_MEMBERS_SYNC: 'VIRTUAL_AIRLINE_MEMBERS_SYNC',
   VIRTUAL_AIRLINE_FLEET_SYNC: 'VIRTUAL_AIRLINE_FLEET_SYNC',
-  VIRTUAL_AIRLINE_FLIGHTS_SYNC: 'VIRTUAL_AIRLINE_FLIGHTS_SYNC'
+  VIRTUAL_AIRLINE_FLIGHTS_SYNC: 'VIRTUAL_AIRLINE_FLIGHTS_SYNC',
+  VIRTUAL_AIRLINE_NOTIFICATION_SYNC: 'VIRTUAL_AIRLINE_NOTIFICATION_SYNC'
 };
 
 exports.JobStatus = exports.$Enums.JobStatus = {
@@ -676,7 +694,8 @@ exports.Prisma.ModelName = {
   Airport: 'Airport',
   Flight: 'Flight',
   FlightRoute: 'FlightRoute',
-  Job: 'Job'
+  Job: 'Job',
+  Notification: 'Notification'
 };
 
 /**

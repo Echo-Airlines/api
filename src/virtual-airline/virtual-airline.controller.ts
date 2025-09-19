@@ -1,15 +1,18 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, NotFoundException } from '@nestjs/common';
 import { VirtualAirlineService } from './virtual-airline.service';
 import { Member, Prisma, VirtualAirlineRole, VirtualAirline } from 'prisma/generated/prisma';
 import { AppConfigService } from '@app-config/app-config.service';
 import { PublicMemberDto } from './dto/public-member.dto';
+import { MemberWithCompanyVARole } from '@member/dto/member-witth-relations';
+import { LoggerService } from '@logger/logger.service';
 
 
 @Controller('va')
 export class VirtualAirlineController {
+  private readonly logger = new LoggerService(VirtualAirlineController.name);
   constructor(private readonly virtualAirlineService: VirtualAirlineService, private readonly appConfigService: AppConfigService) {}
 
-  @Get()
+  @Get('all')
   async getAll(@Query('worldSlug') worldSlug?: string) {
     let query: Prisma.VirtualAirlineFindManyArgs |undefined = {
       include: {
@@ -40,6 +43,13 @@ export class VirtualAirlineController {
     return result;
   }
 
+  @Get()
+  async getPrimaryVirtualAirline() {
+    const result: VirtualAirline|null = await this.virtualAirlineService.getPrimaryVirtualAirline();
+    
+    return result;
+  }
+
   @Get('leaderboard')
   async getLeaderboard() {
     const result: PublicMemberDto[] = await this.virtualAirlineService.getPrimaryLeaderboard()
@@ -50,7 +60,8 @@ export class VirtualAirlineController {
 
   @Get('members')
   async getPrimaryVirtualAirlineMembers() {
-    const members: Member[] = await this.virtualAirlineService.getPrimaryVirtualAirlineMembers();
+    this.logger.log('getPrimaryVirtualAirlineMembers');
+    const members: MemberWithCompanyVARole[] = await this.virtualAirlineService.getPrimaryVirtualAirlineMembers();
 
     const result: PublicMemberDto[] = members.map((member) => new PublicMemberDto(member));
     
@@ -70,6 +81,17 @@ export class VirtualAirlineController {
 
     // if the virtual airline is created, set the virtual airline initiated flag to true
     await this.appConfigService.setVirtualAirlineInitiated(true);
+
+    return result;
+  }
+
+  @Get(':id')
+  async getById(@Param('id') id: string) {
+    const result: VirtualAirline = await this.virtualAirlineService.getVirtualAirlineById(id);
+    
+    if (!result) {
+      throw new NotFoundException('Virtual airline not found');
+    }
 
     return result;
   }

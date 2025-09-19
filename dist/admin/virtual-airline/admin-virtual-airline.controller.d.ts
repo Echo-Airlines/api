@@ -4,6 +4,8 @@ export declare class AdminVirtualAirlineController {
     constructor(virtualAirlineService: AdminVirtualAirlineService);
     getAll(): Promise<{
         Id: string;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         ApiKey: string;
         IsPrimary: boolean;
         Identifier: string | null;
@@ -27,19 +29,18 @@ export declare class AdminVirtualAirlineController {
         TotalContractsCompleted: number | null;
         TotalContractsEarnedCredits: number | null;
         LastRefresh: Date | null;
-        CreatedAt: Date;
-        UpdatedAt: Date;
+        VAManagerDiscordWebhookId: string | null;
     }[]>;
     getVARoles(): Promise<{
         Id: string;
-        Name: string;
-        LastRefresh: Date | null;
         CreatedAt: Date;
         UpdatedAt: Date;
+        Name: string;
+        LastRefresh: Date | null;
         VAId: string;
+        Color: string;
         Permission: number;
         IsDefaultNewRole: boolean;
-        Color: string;
         PayPercent: import("prisma/generated/prisma/runtime/library").Decimal;
         IsHidden: boolean;
         RestrictLoadingVAJobsIntoNonVAAircraft: boolean;
@@ -49,14 +50,14 @@ export declare class AdminVirtualAirlineController {
     }[]>;
     getUnlinkedVARoles(): Promise<{
         Id: string;
-        Name: string;
-        LastRefresh: Date | null;
         CreatedAt: Date;
         UpdatedAt: Date;
+        Name: string;
+        LastRefresh: Date | null;
         VAId: string;
+        Color: string;
         Permission: number;
         IsDefaultNewRole: boolean;
-        Color: string;
         PayPercent: import("prisma/generated/prisma/runtime/library").Decimal;
         IsHidden: boolean;
         RestrictLoadingVAJobsIntoNonVAAircraft: boolean;

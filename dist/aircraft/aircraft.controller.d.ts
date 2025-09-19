@@ -9,36 +9,36 @@ export declare class AircraftController {
         CreatedAt: Date;
         UpdatedAt: Date;
         Identifier: string;
+        LastRefresh: Date | null;
         DisplayName: string;
         AircraftStatusId: number;
         AircraftClassId: string;
-        VirtualAirlineId: string;
         CurrentAirportId: string | null;
-        LastRefresh: Date | null;
+        VirtualAirlineId: string;
     }[]>;
     getAircraftById(id: string): Promise<{
         Id: string;
         CreatedAt: Date;
         UpdatedAt: Date;
         Identifier: string;
+        LastRefresh: Date | null;
         DisplayName: string;
         AircraftStatusId: number;
         AircraftClassId: string;
-        VirtualAirlineId: string;
         CurrentAirportId: string | null;
-        LastRefresh: Date | null;
+        VirtualAirlineId: string;
     } | null>;
     getFleetByVirtualAirlineIdentifier(virtualAirlineIdentifier: string): Promise<{
         Id: string;
         CreatedAt: Date;
         UpdatedAt: Date;
         Identifier: string;
+        LastRefresh: Date | null;
         DisplayName: string;
         AircraftStatusId: number;
         AircraftClassId: string;
-        VirtualAirlineId: string;
         CurrentAirportId: string | null;
-        LastRefresh: Date | null;
+        VirtualAirlineId: string;
     }[]>;
     assignLiveryToAircraft(id: string, data: {
         liveryId: string;
@@ -47,11 +47,11 @@ export declare class AircraftController {
         CreatedAt: Date;
         UpdatedAt: Date;
         Identifier: string;
+        LastRefresh: Date | null;
         DisplayName: string;
         AircraftStatusId: number;
         AircraftClassId: string;
-        VirtualAirlineId: string;
         CurrentAirportId: string | null;
-        LastRefresh: Date | null;
+        VirtualAirlineId: string;
     }>;
 }

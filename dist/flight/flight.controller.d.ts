@@ -9,12 +9,11 @@ export declare class FlightController {
     constructor(flightService: FlightService, memberService: MemberService);
     getNotCompletedOrCancelledFlights(aircraftIdentifier?: string, completed?: boolean): Promise<{
         Id: string;
-        VAId: string | null;
-        LastRefresh: Date | null;
         CreatedAt: Date;
         UpdatedAt: Date;
+        LastRefresh: Date | null;
+        VAId: string | null;
         CompanyId: string;
-        AircraftId: string | null;
         Registered: boolean;
         Category: number;
         ResultComments: string;
@@ -65,21 +64,21 @@ export declare class FlightController {
         EngineOffRealTime: Date | null;
         LandedRealTime: Date | null;
         AirborneRealTime: Date | null;
+        FlightStatus: import("prisma/generated/prisma").$Enums.FlightStatus;
+        AircraftId: string | null;
         DepartureAirportId: string | null;
         ArrivalIntendedAirportId: string | null;
         ArrivalAlternateAirportId: string | null;
         ArrivalActualAirportId: string | null;
         MemberId: string | null;
-        FlightStatus: import("prisma/generated/prisma").$Enums.FlightStatus;
     }[]>;
     getAllFlights(): Promise<{
         Id: string;
-        VAId: string | null;
-        LastRefresh: Date | null;
         CreatedAt: Date;
         UpdatedAt: Date;
+        LastRefresh: Date | null;
+        VAId: string | null;
         CompanyId: string;
-        AircraftId: string | null;
         Registered: boolean;
         Category: number;
         ResultComments: string;
@@ -130,21 +129,21 @@ export declare class FlightController {
         EngineOffRealTime: Date | null;
         LandedRealTime: Date | null;
         AirborneRealTime: Date | null;
+        FlightStatus: import("prisma/generated/prisma").$Enums.FlightStatus;
+        AircraftId: string | null;
         DepartureAirportId: string | null;
         ArrivalIntendedAirportId: string | null;
         ArrivalAlternateAirportId: string | null;
         ArrivalActualAirportId: string | null;
         MemberId: string | null;
-        FlightStatus: import("prisma/generated/prisma").$Enums.FlightStatus;
     }[]>;
     createFlight(body: CreateFlightDto): Promise<{
         Id: string;
-        VAId: string | null;
-        LastRefresh: Date | null;
         CreatedAt: Date;
         UpdatedAt: Date;
+        LastRefresh: Date | null;
+        VAId: string | null;
         CompanyId: string;
-        AircraftId: string | null;
         Registered: boolean;
         Category: number;
         ResultComments: string;
@@ -195,12 +194,13 @@ export declare class FlightController {
         EngineOffRealTime: Date | null;
         LandedRealTime: Date | null;
         AirborneRealTime: Date | null;
+        FlightStatus: import("prisma/generated/prisma").$Enums.FlightStatus;
+        AircraftId: string | null;
         DepartureAirportId: string | null;
         ArrivalIntendedAirportId: string | null;
         ArrivalAlternateAirportId: string | null;
         ArrivalActualAirportId: string | null;
         MemberId: string | null;
-        FlightStatus: import("prisma/generated/prisma").$Enums.FlightStatus;
     }>;
     getMyFlights(req: any, completed?: boolean): Promise<{
         error: string;
@@ -209,12 +209,11 @@ export declare class FlightController {
     } | {
         flights: {
             Id: string;
-            VAId: string | null;
-            LastRefresh: Date | null;
             CreatedAt: Date;
             UpdatedAt: Date;
+            LastRefresh: Date | null;
+            VAId: string | null;
             CompanyId: string;
-            AircraftId: string | null;
             Registered: boolean;
             Category: number;
             ResultComments: string;
@@ -265,12 +264,13 @@ export declare class FlightController {
             EngineOffRealTime: Date | null;
             LandedRealTime: Date | null;
             AirborneRealTime: Date | null;
+            FlightStatus: import("prisma/generated/prisma").$Enums.FlightStatus;
+            AircraftId: string | null;
             DepartureAirportId: string | null;
             ArrivalIntendedAirportId: string | null;
             ArrivalAlternateAirportId: string | null;
             ArrivalActualAirportId: string | null;
             MemberId: string | null;
-            FlightStatus: import("prisma/generated/prisma").$Enums.FlightStatus;
         }[];
         success: boolean;
         error: null;
@@ -280,23 +280,23 @@ export declare class FlightController {
         CreatedAt: Date;
         UpdatedAt: Date;
         MemberId: string;
-        FlightId: string | null;
         Route: string;
+        FlightId: string | null;
     }[]>;
     getFlightRoutes(flightId: string): Promise<{
         Id: string;
         CreatedAt: Date;
         UpdatedAt: Date;
         MemberId: string;
-        FlightId: string | null;
         Route: string;
+        FlightId: string | null;
     }[]>;
     createFlightRoute(body: CreateFlightRouteDto): Promise<{
         Id: string;
         CreatedAt: Date;
         UpdatedAt: Date;
         MemberId: string;
-        FlightId: string | null;
         Route: string;
+        FlightId: string | null;
     }>;
 }

@@ -43,6 +43,7 @@ const email_module_1 = require("./email/email.module");
 const handlebars_adapter_1 = require("@nestjs-modules/mailer/dist/adapters/handlebars.adapter");
 const mailer_1 = require("@nestjs-modules/mailer");
 const notam_module_1 = require("./notam/notam.module");
+const notification_module_1 = require("./notification/notification.module");
 const emailTemplatesDirectory = (0, path_1.join)(__dirname, 'email/templates');
 console.log('emailTemplatesDirectory:', emailTemplatesDirectory);
 let AppModule = AppModule_1 = class AppModule {
@@ -111,6 +112,7 @@ exports.AppModule = AppModule = AppModule_1 = __decorate([
             websocket_module_1.WebsocketModule,
             email_module_1.EmailModule,
             notam_module_1.NotamModule,
+            notification_module_1.NotificationModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],

@@ -6,7 +6,6 @@ import { VirtualAirlineService } from '../virtual-airline/virtual-airline.servic
 import { AppConfigService } from '../app-config/app-config.service';
 import * as cron from 'cron';
 import { executeAllVirtualAirlinesSync } from './schedules/executeVirtualAirlinesSync';
-// import { executeVirtualAirlineMembersSync } from './schedules/executeVirtualAirlineMembersSync';
 import { AppConfig, Job, JobType, CronExpression } from 'prisma/generated/prisma';
 import { ConfigService } from '@nestjs/config';
 import { executeVirtualAirlinesMembersSync } from './schedules/executeVirtualAirlinesMembersSync';
@@ -17,6 +16,9 @@ import { FlightService } from '@flight/flight.service';
 import { executeVirtualAirlinesFlightsSync } from './schedules/executeVirtualAirlinesFlightsSync';
 import { CompanyService } from '@company/company.service';
 import { MemberService } from '@member/member.service';
+import { NotificationService } from '@notification/notification.service';
+import { executeVirtualAirlinesNotificationsSync } from './schedules/executeVirtualAirlinesNotificationSync';
+import { DiscordService } from '@discord/discord.service';
 
 export interface IJobSchedulerServices {
     VirtualAirline: VirtualAirlineService;
@@ -26,6 +28,8 @@ export interface IJobSchedulerServices {
     Flight: FlightService;
     Company: CompanyService;
     Member: MemberService;
+    Notification: NotificationService;
+    Discord: DiscordService;
 }
 
 @Injectable()
@@ -46,6 +50,8 @@ export class JobSchedulerService implements OnModuleInit {
         private readonly flightService: FlightService,
         private readonly companyService: CompanyService,
         private readonly memberService: MemberService,
+        private readonly notificationService: NotificationService,
+        private readonly discordService: DiscordService,
     ) {
         this.services = {
             VirtualAirline: this.virtualAirlineService,
@@ -55,6 +61,8 @@ export class JobSchedulerService implements OnModuleInit {
             Flight: this.flightService,
             Company: this.companyService,
             Member: this.memberService,
+            Notification: this.notificationService,
+            Discord: this.discordService,
         }
     }
 
@@ -186,32 +194,22 @@ export class JobSchedulerService implements OnModuleInit {
             }
             
             this.logger.log(`Executing job ${job.Name} (${job.Id}) at ${startTime.toISOString()}`);
+            console.log(`${job.Type}| job type: ${typeof job.Type} | JobType: ${typeof JobType.VIRTUAL_AIRLINE_NOTIFICATION_SYNC} | ${(job.Type === JobType.VIRTUAL_AIRLINE_NOTIFICATION_SYNC)}`);
 
-            switch (job.Type) {
-                case JobType.VIRTUAL_AIRLINE_SYNC:
-                    await executeAllVirtualAirlinesSync(this);
-
-                    // update the job status to completed
-                    break;
-                case JobType.VIRTUAL_AIRLINE_MEMBERS_SYNC:
-                    await executeVirtualAirlinesMembersSync(this);
-
-                    // update the job status to completed
-                    break;
-                case JobType.VIRTUAL_AIRLINE_FLEET_SYNC:
-                    await executeVirtualAirlinesFleetSync(this);
-
-                    // update the job status to completed
-                    break;
-                case JobType.VIRTUAL_AIRLINE_FLIGHTS_SYNC:
-                    await executeVirtualAirlinesFlightsSync(this);
-
-                    // update the job status to completed
-                    break;
-                default:
-                    throw new Error(`Unknown job type: ${job.Type}`);
+            if (job.Type === JobType.VIRTUAL_AIRLINE_SYNC) {
+                await executeAllVirtualAirlinesSync(this);
+            } else if (job.Type === JobType.VIRTUAL_AIRLINE_MEMBERS_SYNC) {
+                await executeVirtualAirlinesMembersSync(this);
+            } else if (job.Type === JobType.VIRTUAL_AIRLINE_FLEET_SYNC) {
+                await executeVirtualAirlinesFleetSync(this);
+            } else if (job.Type === JobType.VIRTUAL_AIRLINE_FLIGHTS_SYNC) {
+                await executeVirtualAirlinesFlightsSync(this);
+            } else if (job.Type === JobType.VIRTUAL_AIRLINE_NOTIFICATION_SYNC) {
+                await executeVirtualAirlinesNotificationsSync(this);
+            } else {
+                throw new Error(`Unknown job type: ${job.Type}`);
             }
-
+            
             const endTime = new Date();
             const duration = endTime.getTime() - startTime.getTime();
 

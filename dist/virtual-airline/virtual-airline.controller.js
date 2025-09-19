@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+var VirtualAirlineController_1;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.VirtualAirlineController = void 0;
 const common_1 = require("@nestjs/common");
@@ -18,9 +19,11 @@ const virtual_airline_service_1 = require("./virtual-airline.service");
 const prisma_1 = require("../../prisma/generated/prisma/index.js");
 const app_config_service_1 = require("../app-config/app-config.service");
 const public_member_dto_1 = require("./dto/public-member.dto");
-let VirtualAirlineController = class VirtualAirlineController {
+const logger_service_1 = require("../logger/logger.service");
+let VirtualAirlineController = VirtualAirlineController_1 = class VirtualAirlineController {
     virtualAirlineService;
     appConfigService;
+    logger = new logger_service_1.LoggerService(VirtualAirlineController_1.name);
     constructor(virtualAirlineService, appConfigService) {
         this.virtualAirlineService = virtualAirlineService;
         this.appConfigService = appConfigService;
@@ -51,12 +54,17 @@ let VirtualAirlineController = class VirtualAirlineController {
         const result = await this.virtualAirlineService.findAll(query);
         return result;
     }
+    async getPrimaryVirtualAirline() {
+        const result = await this.virtualAirlineService.getPrimaryVirtualAirline();
+        return result;
+    }
     async getLeaderboard() {
         const result = await this.virtualAirlineService.getPrimaryLeaderboard()
             .then((members) => members.map((member) => new public_member_dto_1.PublicMemberDto(member)));
         return result;
     }
     async getPrimaryVirtualAirlineMembers() {
+        this.logger.log('getPrimaryVirtualAirlineMembers');
         const members = await this.virtualAirlineService.getPrimaryVirtualAirlineMembers();
         const result = members.map((member) => new public_member_dto_1.PublicMemberDto(member));
         return result;
@@ -70,15 +78,28 @@ let VirtualAirlineController = class VirtualAirlineController {
         await this.appConfigService.setVirtualAirlineInitiated(true);
         return result;
     }
+    async getById(id) {
+        const result = await this.virtualAirlineService.getVirtualAirlineById(id);
+        if (!result) {
+            throw new common_1.NotFoundException('Virtual airline not found');
+        }
+        return result;
+    }
 };
 exports.VirtualAirlineController = VirtualAirlineController;
 __decorate([
-    (0, common_1.Get)(),
+    (0, common_1.Get)('all'),
     __param(0, (0, common_1.Query)('worldSlug')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], VirtualAirlineController.prototype, "getAll", null);
+__decorate([
+    (0, common_1.Get)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], VirtualAirlineController.prototype, "getPrimaryVirtualAirline", null);
 __decorate([
     (0, common_1.Get)('leaderboard'),
     __metadata("design:type", Function),
@@ -104,7 +125,14 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], VirtualAirlineController.prototype, "create", null);
-exports.VirtualAirlineController = VirtualAirlineController = __decorate([
+__decorate([
+    (0, common_1.Get)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], VirtualAirlineController.prototype, "getById", null);
+exports.VirtualAirlineController = VirtualAirlineController = VirtualAirlineController_1 = __decorate([
     (0, common_1.Controller)('va'),
     __metadata("design:paramtypes", [virtual_airline_service_1.VirtualAirlineService, app_config_service_1.AppConfigService])
 ], VirtualAirlineController);

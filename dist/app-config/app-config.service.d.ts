@@ -5,6 +5,8 @@ export declare class AppConfigService {
     constructor(prisma: DatabaseService);
     create(dto: AppConfig): Promise<{
         Id: number;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         OnAirSyncEnabled: boolean;
         OnAirVASyncEnabled: boolean;
         OnAirVAMembersSyncEnabled: boolean;
@@ -17,11 +19,11 @@ export declare class AppConfigService {
         LocalAuthEnabled: boolean;
         VirtualAirlineInitiated: boolean;
         FSHubApiKey: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
     }>;
     findOne(query: Prisma.AppConfigWhereInput): Promise<{
         Id: number;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         OnAirSyncEnabled: boolean;
         OnAirVASyncEnabled: boolean;
         OnAirVAMembersSyncEnabled: boolean;
@@ -34,11 +36,11 @@ export declare class AppConfigService {
         LocalAuthEnabled: boolean;
         VirtualAirlineInitiated: boolean;
         FSHubApiKey: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
     }>;
     findMany(query: Prisma.AppConfigFindManyArgs): Promise<{
         Id: number;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         OnAirSyncEnabled: boolean;
         OnAirVASyncEnabled: boolean;
         OnAirVAMembersSyncEnabled: boolean;
@@ -51,11 +53,11 @@ export declare class AppConfigService {
         LocalAuthEnabled: boolean;
         VirtualAirlineInitiated: boolean;
         FSHubApiKey: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
     }[]>;
     getLatest(): Promise<{
         Id: number;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         OnAirSyncEnabled: boolean;
         OnAirVASyncEnabled: boolean;
         OnAirVAMembersSyncEnabled: boolean;
@@ -68,11 +70,11 @@ export declare class AppConfigService {
         LocalAuthEnabled: boolean;
         VirtualAirlineInitiated: boolean;
         FSHubApiKey: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
     } | null>;
     update(query: Prisma.AppConfigWhereInput, dto: AppConfig): Promise<{
         Id: number;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         OnAirSyncEnabled: boolean;
         OnAirVASyncEnabled: boolean;
         OnAirVAMembersSyncEnabled: boolean;
@@ -85,11 +87,11 @@ export declare class AppConfigService {
         LocalAuthEnabled: boolean;
         VirtualAirlineInitiated: boolean;
         FSHubApiKey: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
     }>;
     upsert(dto: AppConfig): Promise<{
         Id: number;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         OnAirSyncEnabled: boolean;
         OnAirVASyncEnabled: boolean;
         OnAirVAMembersSyncEnabled: boolean;
@@ -102,11 +104,11 @@ export declare class AppConfigService {
         LocalAuthEnabled: boolean;
         VirtualAirlineInitiated: boolean;
         FSHubApiKey: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
     }>;
     delete(query: Prisma.AppConfigWhereInput): Promise<{
         Id: number;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         OnAirSyncEnabled: boolean;
         OnAirVASyncEnabled: boolean;
         OnAirVAMembersSyncEnabled: boolean;
@@ -119,11 +121,11 @@ export declare class AppConfigService {
         LocalAuthEnabled: boolean;
         VirtualAirlineInitiated: boolean;
         FSHubApiKey: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
     }>;
     setVirtualAirlineInitiated(VirtualAirlineInitiated: boolean): Promise<{
         Id: number;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         OnAirSyncEnabled: boolean;
         OnAirVASyncEnabled: boolean;
         OnAirVAMembersSyncEnabled: boolean;
@@ -136,14 +138,13 @@ export declare class AppConfigService {
         LocalAuthEnabled: boolean;
         VirtualAirlineInitiated: boolean;
         FSHubApiKey: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
     }>;
     Livery_findAll(): Promise<{
         Id: string;
         CreatedAt: Date;
         UpdatedAt: Date;
         Name: string;
+        Description: string | null;
         IsActive: boolean;
         AircraftId: string | null;
         DownloadCount: number;
@@ -152,7 +153,6 @@ export declare class AppConfigService {
         CoverPhoto: string | null;
         Metadata: Prisma.JsonValue | null;
         Url: string | null;
-        Description: string | null;
         DownloadUrl: string | null;
     }[]>;
     Livery_findAllActive(): Promise<{
@@ -160,6 +160,7 @@ export declare class AppConfigService {
         CreatedAt: Date;
         UpdatedAt: Date;
         Name: string;
+        Description: string | null;
         IsActive: boolean;
         AircraftId: string | null;
         DownloadCount: number;
@@ -168,7 +169,6 @@ export declare class AppConfigService {
         CoverPhoto: string | null;
         Metadata: Prisma.JsonValue | null;
         Url: string | null;
-        Description: string | null;
         DownloadUrl: string | null;
     }[]>;
     Livery_findOneById(id: string): Promise<{
@@ -176,6 +176,7 @@ export declare class AppConfigService {
         CreatedAt: Date;
         UpdatedAt: Date;
         Name: string;
+        Description: string | null;
         IsActive: boolean;
         AircraftId: string | null;
         DownloadCount: number;
@@ -184,7 +185,6 @@ export declare class AppConfigService {
         CoverPhoto: string | null;
         Metadata: Prisma.JsonValue | null;
         Url: string | null;
-        Description: string | null;
         DownloadUrl: string | null;
     }>;
     Livery_findMany(query: Prisma.LiveryFindManyArgs): Promise<{
@@ -192,6 +192,7 @@ export declare class AppConfigService {
         CreatedAt: Date;
         UpdatedAt: Date;
         Name: string;
+        Description: string | null;
         IsActive: boolean;
         AircraftId: string | null;
         DownloadCount: number;
@@ -200,7 +201,6 @@ export declare class AppConfigService {
         CoverPhoto: string | null;
         Metadata: Prisma.JsonValue | null;
         Url: string | null;
-        Description: string | null;
         DownloadUrl: string | null;
     }[]>;
     Livery_findOne(query: Prisma.LiveryFindFirstArgs): Promise<{
@@ -208,6 +208,7 @@ export declare class AppConfigService {
         CreatedAt: Date;
         UpdatedAt: Date;
         Name: string;
+        Description: string | null;
         IsActive: boolean;
         AircraftId: string | null;
         DownloadCount: number;
@@ -216,7 +217,6 @@ export declare class AppConfigService {
         CoverPhoto: string | null;
         Metadata: Prisma.JsonValue | null;
         Url: string | null;
-        Description: string | null;
         DownloadUrl: string | null;
     }>;
     Livery_incrementDownloadCount(id: string): Promise<{
@@ -224,6 +224,7 @@ export declare class AppConfigService {
         CreatedAt: Date;
         UpdatedAt: Date;
         Name: string;
+        Description: string | null;
         IsActive: boolean;
         AircraftId: string | null;
         DownloadCount: number;
@@ -232,7 +233,6 @@ export declare class AppConfigService {
         CoverPhoto: string | null;
         Metadata: Prisma.JsonValue | null;
         Url: string | null;
-        Description: string | null;
         DownloadUrl: string | null;
     }>;
     updateDiscordConfig(config: {
@@ -242,6 +242,8 @@ export declare class AppConfigService {
         DiscordAuthEnabled?: boolean;
     }): Promise<{
         Id: number;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         OnAirSyncEnabled: boolean;
         OnAirVASyncEnabled: boolean;
         OnAirVAMembersSyncEnabled: boolean;
@@ -254,8 +256,6 @@ export declare class AppConfigService {
         LocalAuthEnabled: boolean;
         VirtualAirlineInitiated: boolean;
         FSHubApiKey: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
     }>;
     getDiscordConfig(): Promise<{
         DiscordAuthEnabled: boolean;

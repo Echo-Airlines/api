@@ -1,5 +1,5 @@
 import { Member as PrismaMember, VirtualAirlineRole } from "prisma/generated/prisma";
-import { MemberWithRelations } from "src/member/dto/member-witth-relations";
+import { MemberWithCompanyVARole } from "src/member/dto/member-witth-relations";
 export type Member = PrismaMember & {
     VARole?: VirtualAirlineRole;
 };
@@ -25,5 +25,5 @@ export declare class PublicMemberDto {
     TotalPAXsTransported: number;
     TotalEarnedCredits: number;
     LastRefresh: Date | null;
-    constructor(member: MemberWithRelations);
+    constructor(member: MemberWithCompanyVARole);
 }

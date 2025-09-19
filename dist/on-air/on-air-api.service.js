@@ -27,7 +27,7 @@ let OnAirApiService = OnAirApiService_1 = class OnAirApiService {
         await this.initialize();
     }
     async initialize() {
-        const virtualAirline = await this.virtualAirlineService.getPrimaryVirtualAirline();
+        const virtualAirline = await this.virtualAirlineService.getPrimaryVirtualAirlineWithApiKey();
         if (!virtualAirline) {
             this.logger.warn('Missing required virtual airline configuration. Please create a virtual airline in the admin panel.');
             return;
@@ -92,6 +92,14 @@ let OnAirApiService = OnAirApiService_1 = class OnAirApiService {
             throw new Error('OnAir API not initialized. Please set the config in the admin panel.');
         }
         const result = await this.onAirApi.getAirport(icao);
+        return result;
+    }
+    async getVirtualAirlineNotifications(virtualAirlineId) {
+        if (!this.onAirApi) {
+            this.logger.warn('OnAir API not initialized. Please set the config in the admin panel.');
+            throw new Error('OnAir API not initialized. Please set the config in the admin panel.');
+        }
+        const result = await this.onAirApi.getVirtualAirlineNotifications(virtualAirlineId);
         return result;
     }
 };

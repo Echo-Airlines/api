@@ -12,45 +12,45 @@ export declare class ListenerService {
     constructor(prisma: DatabaseService, discordService: DiscordService, websocketGateway: WebsocketGateway, fshubService: FSHubService);
     createListenerEvent(event: Prisma.ListenerEventCreateInput): Promise<{
         Id: string;
-        Variant: string;
+        CreatedAt: Date;
+        UpdatedAt: Date;
+        DiscordMessageId: string | null;
         Type: string;
-        SentAt: Date;
         Status: import("prisma/generated/prisma").$Enums.ListenerEventStatus;
+        Variant: string;
+        SentAt: Date;
         SenderId: string;
         Error: string | null;
         Data: Prisma.JsonValue | null;
-        DiscordMessageId: string | null;
         DeliveredAt: Date | null;
-        CreatedAt: Date;
-        UpdatedAt: Date;
     }>;
     updateListenerEvent(Id: string, event: Prisma.ListenerEventUpdateInput): Promise<{
         Id: string;
-        Variant: string;
+        CreatedAt: Date;
+        UpdatedAt: Date;
+        DiscordMessageId: string | null;
         Type: string;
-        SentAt: Date;
         Status: import("prisma/generated/prisma").$Enums.ListenerEventStatus;
+        Variant: string;
+        SentAt: Date;
         SenderId: string;
         Error: string | null;
         Data: Prisma.JsonValue | null;
-        DiscordMessageId: string | null;
         DeliveredAt: Date | null;
-        CreatedAt: Date;
-        UpdatedAt: Date;
     }>;
     updateListenerEventStatus(Id: string, Status: ListenerEventStatus): Promise<{
         Id: string;
-        Variant: string;
+        CreatedAt: Date;
+        UpdatedAt: Date;
+        DiscordMessageId: string | null;
         Type: string;
-        SentAt: Date;
         Status: import("prisma/generated/prisma").$Enums.ListenerEventStatus;
+        Variant: string;
+        SentAt: Date;
         SenderId: string;
         Error: string | null;
         Data: Prisma.JsonValue | null;
-        DiscordMessageId: string | null;
         DeliveredAt: Date | null;
-        CreatedAt: Date;
-        UpdatedAt: Date;
     }>;
     getSenderBySlug(Slug: string): Promise<({
         DiscordChannelWebhook: {
@@ -59,10 +59,10 @@ export declare class ListenerService {
             UpdatedAt: Date;
             Name: string;
             Description: string | null;
-            Token: string;
             IsActive: boolean;
             WebhookUrl: string;
             ChannelId: string;
+            Token: string;
         } | null;
     } & {
         Id: string;
@@ -70,24 +70,24 @@ export declare class ListenerService {
         UpdatedAt: Date;
         Name: string;
         Description: string | null;
+        IsActive: boolean;
         Slug: string;
         Token: string;
-        IsActive: boolean;
         DiscordChannelWebhookId: string | null;
     }) | null>;
     processListenerEvent(sender: ListenerEventSender, body: any): Promise<{
         Id: string;
-        Variant: string;
+        CreatedAt: Date;
+        UpdatedAt: Date;
+        DiscordMessageId: string | null;
         Type: string;
-        SentAt: Date;
         Status: import("prisma/generated/prisma").$Enums.ListenerEventStatus;
+        Variant: string;
+        SentAt: Date;
         SenderId: string;
         Error: string | null;
         Data: Prisma.JsonValue | null;
-        DiscordMessageId: string | null;
         DeliveredAt: Date | null;
-        CreatedAt: Date;
-        UpdatedAt: Date;
     } | undefined>;
     private _compileMessageTemplate;
     private _processFSHubListenerEvent;

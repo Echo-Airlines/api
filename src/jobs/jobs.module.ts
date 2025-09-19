@@ -12,6 +12,8 @@ import { AirportModule } from '@airport/airport.module';
 import { FlightModule } from '@flight/flight.module';
 import { CompanyModule } from '@company/company.module';
 import { MemberModule } from '@member/member.module';
+import { DiscordModule } from '@discord/discord.module';
+import { NotificationModule } from '@notification/notification.module';
 
 @Module({
     imports: [
@@ -25,6 +27,8 @@ import { MemberModule } from '@member/member.module';
         FlightModule,
         CompanyModule,
         MemberModule,
+        NotificationModule,
+        DiscordModule,
     ],
     controllers: [JobsController],
     providers: [JobsService, JobSchedulerService],

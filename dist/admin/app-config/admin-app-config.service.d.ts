@@ -5,6 +5,8 @@ export declare class AdminAppConfigService {
     constructor(prisma: DatabaseService);
     create(dto: AppConfig): Promise<{
         Id: number;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         OnAirSyncEnabled: boolean;
         OnAirVASyncEnabled: boolean;
         OnAirVAMembersSyncEnabled: boolean;
@@ -17,11 +19,11 @@ export declare class AdminAppConfigService {
         LocalAuthEnabled: boolean;
         VirtualAirlineInitiated: boolean;
         FSHubApiKey: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
     }>;
     findOne(query: Prisma.AppConfigWhereInput): Promise<{
         Id: number;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         OnAirSyncEnabled: boolean;
         OnAirVASyncEnabled: boolean;
         OnAirVAMembersSyncEnabled: boolean;
@@ -34,11 +36,11 @@ export declare class AdminAppConfigService {
         LocalAuthEnabled: boolean;
         VirtualAirlineInitiated: boolean;
         FSHubApiKey: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
     }>;
     findMany(query: Prisma.AppConfigFindManyArgs): Promise<{
         Id: number;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         OnAirSyncEnabled: boolean;
         OnAirVASyncEnabled: boolean;
         OnAirVAMembersSyncEnabled: boolean;
@@ -51,11 +53,11 @@ export declare class AdminAppConfigService {
         LocalAuthEnabled: boolean;
         VirtualAirlineInitiated: boolean;
         FSHubApiKey: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
     }[]>;
     getLatest(): Promise<{
         Id: number;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         OnAirSyncEnabled: boolean;
         OnAirVASyncEnabled: boolean;
         OnAirVAMembersSyncEnabled: boolean;
@@ -68,11 +70,11 @@ export declare class AdminAppConfigService {
         LocalAuthEnabled: boolean;
         VirtualAirlineInitiated: boolean;
         FSHubApiKey: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
     } | null>;
     update(query: Prisma.AppConfigWhereInput, dto: AppConfig): Promise<{
         Id: number;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         OnAirSyncEnabled: boolean;
         OnAirVASyncEnabled: boolean;
         OnAirVAMembersSyncEnabled: boolean;
@@ -85,11 +87,11 @@ export declare class AdminAppConfigService {
         LocalAuthEnabled: boolean;
         VirtualAirlineInitiated: boolean;
         FSHubApiKey: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
     }>;
     upsert(dto: AppConfig): Promise<{
         Id: number;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         OnAirSyncEnabled: boolean;
         OnAirVASyncEnabled: boolean;
         OnAirVAMembersSyncEnabled: boolean;
@@ -102,11 +104,11 @@ export declare class AdminAppConfigService {
         LocalAuthEnabled: boolean;
         VirtualAirlineInitiated: boolean;
         FSHubApiKey: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
     }>;
     delete(query: Prisma.AppConfigWhereInput): Promise<{
         Id: number;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         OnAirSyncEnabled: boolean;
         OnAirVASyncEnabled: boolean;
         OnAirVAMembersSyncEnabled: boolean;
@@ -119,11 +121,11 @@ export declare class AdminAppConfigService {
         LocalAuthEnabled: boolean;
         VirtualAirlineInitiated: boolean;
         FSHubApiKey: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
     }>;
     setVirtualAirlineInitiated(VirtualAirlineInitiated: boolean): Promise<{
         Id: number;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         OnAirSyncEnabled: boolean;
         OnAirVASyncEnabled: boolean;
         OnAirVAMembersSyncEnabled: boolean;
@@ -136,7 +138,5 @@ export declare class AdminAppConfigService {
         LocalAuthEnabled: boolean;
         VirtualAirlineInitiated: boolean;
         FSHubApiKey: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
     }>;
 }

@@ -153,6 +153,11 @@ export type FlightRoute = $Result.DefaultSelection<Prisma.$FlightRoutePayload>
  * 
  */
 export type Job = $Result.DefaultSelection<Prisma.$JobPayload>
+/**
+ * Model Notification
+ * 
+ */
+export type Notification = $Result.DefaultSelection<Prisma.$NotificationPayload>
 
 /**
  * Enums
@@ -192,7 +197,8 @@ export const JobType: {
   VIRTUAL_AIRLINE_SYNC: 'VIRTUAL_AIRLINE_SYNC',
   VIRTUAL_AIRLINE_MEMBERS_SYNC: 'VIRTUAL_AIRLINE_MEMBERS_SYNC',
   VIRTUAL_AIRLINE_FLEET_SYNC: 'VIRTUAL_AIRLINE_FLEET_SYNC',
-  VIRTUAL_AIRLINE_FLIGHTS_SYNC: 'VIRTUAL_AIRLINE_FLIGHTS_SYNC'
+  VIRTUAL_AIRLINE_FLIGHTS_SYNC: 'VIRTUAL_AIRLINE_FLIGHTS_SYNC',
+  VIRTUAL_AIRLINE_NOTIFICATION_SYNC: 'VIRTUAL_AIRLINE_NOTIFICATION_SYNC'
 };
 
 export type JobType = (typeof JobType)[keyof typeof JobType]
@@ -659,6 +665,16 @@ export class PrismaClient<
     * ```
     */
   get job(): Prisma.JobDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.notification`: Exposes CRUD operations for the **Notification** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Notifications
+    * const notifications = await prisma.notification.findMany()
+    * ```
+    */
+  get notification(): Prisma.NotificationDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -717,8 +733,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.15.0
-   * Query Engine version: 85179d7826409ee107a6ba334b5e305ae3fba9fb
+   * Prisma Client JS version: 6.16.2
+   * Query Engine version: 1c57fdcd7e44b29b9313256c76699e91c3ac3c43
    */
   export type PrismaVersion = {
     client: string
@@ -1126,7 +1142,8 @@ export namespace Prisma {
     Airport: 'Airport',
     Flight: 'Flight',
     FlightRoute: 'FlightRoute',
-    Job: 'Job'
+    Job: 'Job',
+    Notification: 'Notification'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1145,7 +1162,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "appConfig" | "inviteCode" | "discordMessage" | "discordMessageTemplate" | "discordChannelWebhook" | "listenerEvent" | "listenerEventSender" | "user" | "userPrivacySettings" | "role" | "permission" | "livery" | "liveryImage" | "liveryFile" | "virtualAirline" | "virtualAirlineRole" | "world" | "notam" | "member" | "company" | "aircraft" | "aircraftClass" | "aircraftMaintenance" | "aircraftStatus" | "airport" | "flight" | "flightRoute" | "job"
+      modelProps: "appConfig" | "inviteCode" | "discordMessage" | "discordMessageTemplate" | "discordChannelWebhook" | "listenerEvent" | "listenerEventSender" | "user" | "userPrivacySettings" | "role" | "permission" | "livery" | "liveryImage" | "liveryFile" | "virtualAirline" | "virtualAirlineRole" | "world" | "notam" | "member" | "company" | "aircraft" | "aircraftClass" | "aircraftMaintenance" | "aircraftStatus" | "airport" | "flight" | "flightRoute" | "job" | "notification"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -3221,6 +3238,80 @@ export namespace Prisma {
           }
         }
       }
+      Notification: {
+        payload: Prisma.$NotificationPayload<ExtArgs>
+        fields: Prisma.NotificationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.NotificationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.NotificationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>
+          }
+          findFirst: {
+            args: Prisma.NotificationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.NotificationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>
+          }
+          findMany: {
+            args: Prisma.NotificationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>[]
+          }
+          create: {
+            args: Prisma.NotificationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>
+          }
+          createMany: {
+            args: Prisma.NotificationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.NotificationCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>[]
+          }
+          delete: {
+            args: Prisma.NotificationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>
+          }
+          update: {
+            args: Prisma.NotificationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>
+          }
+          deleteMany: {
+            args: Prisma.NotificationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.NotificationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.NotificationUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>[]
+          }
+          upsert: {
+            args: Prisma.NotificationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>
+          }
+          aggregate: {
+            args: Prisma.NotificationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateNotification>
+          }
+          groupBy: {
+            args: Prisma.NotificationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<NotificationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.NotificationCountArgs<ExtArgs>
+            result: $Utils.Optional<NotificationCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -3297,6 +3388,10 @@ export namespace Prisma {
       isolationLevel?: Prisma.TransactionIsolationLevel
     }
     /**
+     * Instance of a Driver Adapter, e.g., like one provided by `@prisma/adapter-planetscale`
+     */
+    adapter?: runtime.SqlDriverAdapterFactory | null
+    /**
      * Global configuration for omitting model fields by default.
      * 
      * @example
@@ -3341,6 +3436,7 @@ export namespace Prisma {
     flight?: FlightOmit
     flightRoute?: FlightRouteOmit
     job?: JobOmit
+    notification?: NotificationOmit
   }
 
   /* Types for Logging */
@@ -3422,10 +3518,12 @@ export namespace Prisma {
 
   export type DiscordMessageCountOutputType = {
     ListenerEvents: number
+    Notifications: number
   }
 
   export type DiscordMessageCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     ListenerEvents?: boolean | DiscordMessageCountOutputTypeCountListenerEventsArgs
+    Notifications?: boolean | DiscordMessageCountOutputTypeCountNotificationsArgs
   }
 
   // Custom InputTypes
@@ -3444,6 +3542,13 @@ export namespace Prisma {
    */
   export type DiscordMessageCountOutputTypeCountListenerEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ListenerEventWhereInput
+  }
+
+  /**
+   * DiscordMessageCountOutputType without action
+   */
+  export type DiscordMessageCountOutputTypeCountNotificationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NotificationWhereInput
   }
 
 
@@ -3485,11 +3590,13 @@ export namespace Prisma {
   export type DiscordChannelWebhookCountOutputType = {
     DiscordMessages: number
     ListenerEventSenders: number
+    VirtualAirlines: number
   }
 
   export type DiscordChannelWebhookCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     DiscordMessages?: boolean | DiscordChannelWebhookCountOutputTypeCountDiscordMessagesArgs
     ListenerEventSenders?: boolean | DiscordChannelWebhookCountOutputTypeCountListenerEventSendersArgs
+    VirtualAirlines?: boolean | DiscordChannelWebhookCountOutputTypeCountVirtualAirlinesArgs
   }
 
   // Custom InputTypes
@@ -3515,6 +3622,13 @@ export namespace Prisma {
    */
   export type DiscordChannelWebhookCountOutputTypeCountListenerEventSendersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ListenerEventSenderWhereInput
+  }
+
+  /**
+   * DiscordChannelWebhookCountOutputType without action
+   */
+  export type DiscordChannelWebhookCountOutputTypeCountVirtualAirlinesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VirtualAirlineWhereInput
   }
 
 
@@ -3727,6 +3841,7 @@ export namespace Prisma {
     Members: number
     Fleet: number
     Flights: number
+    Notifications: number
   }
 
   export type VirtualAirlineCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3734,6 +3849,7 @@ export namespace Prisma {
     Members?: boolean | VirtualAirlineCountOutputTypeCountMembersArgs
     Fleet?: boolean | VirtualAirlineCountOutputTypeCountFleetArgs
     Flights?: boolean | VirtualAirlineCountOutputTypeCountFlightsArgs
+    Notifications?: boolean | VirtualAirlineCountOutputTypeCountNotificationsArgs
   }
 
   // Custom InputTypes
@@ -3773,6 +3889,13 @@ export namespace Prisma {
    */
   export type VirtualAirlineCountOutputTypeCountFlightsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: FlightWhereInput
+  }
+
+  /**
+   * VirtualAirlineCountOutputType without action
+   */
+  export type VirtualAirlineCountOutputTypeCountNotificationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NotificationWhereInput
   }
 
 
@@ -6591,6 +6714,7 @@ export namespace Prisma {
     DiscordMessageTemplate?: boolean | DiscordMessage$DiscordMessageTemplateArgs<ExtArgs>
     DiscordChannelWebhook?: boolean | DiscordMessage$DiscordChannelWebhookArgs<ExtArgs>
     ListenerEvents?: boolean | DiscordMessage$ListenerEventsArgs<ExtArgs>
+    Notifications?: boolean | DiscordMessage$NotificationsArgs<ExtArgs>
     _count?: boolean | DiscordMessageCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["discordMessage"]>
 
@@ -6636,6 +6760,7 @@ export namespace Prisma {
     DiscordMessageTemplate?: boolean | DiscordMessage$DiscordMessageTemplateArgs<ExtArgs>
     DiscordChannelWebhook?: boolean | DiscordMessage$DiscordChannelWebhookArgs<ExtArgs>
     ListenerEvents?: boolean | DiscordMessage$ListenerEventsArgs<ExtArgs>
+    Notifications?: boolean | DiscordMessage$NotificationsArgs<ExtArgs>
     _count?: boolean | DiscordMessageCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type DiscordMessageIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6653,6 +6778,7 @@ export namespace Prisma {
       DiscordMessageTemplate: Prisma.$DiscordMessageTemplatePayload<ExtArgs> | null
       DiscordChannelWebhook: Prisma.$DiscordChannelWebhookPayload<ExtArgs> | null
       ListenerEvents: Prisma.$ListenerEventPayload<ExtArgs>[]
+      Notifications: Prisma.$NotificationPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       Id: string
@@ -7060,6 +7186,7 @@ export namespace Prisma {
     DiscordMessageTemplate<T extends DiscordMessage$DiscordMessageTemplateArgs<ExtArgs> = {}>(args?: Subset<T, DiscordMessage$DiscordMessageTemplateArgs<ExtArgs>>): Prisma__DiscordMessageTemplateClient<$Result.GetResult<Prisma.$DiscordMessageTemplatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     DiscordChannelWebhook<T extends DiscordMessage$DiscordChannelWebhookArgs<ExtArgs> = {}>(args?: Subset<T, DiscordMessage$DiscordChannelWebhookArgs<ExtArgs>>): Prisma__DiscordChannelWebhookClient<$Result.GetResult<Prisma.$DiscordChannelWebhookPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     ListenerEvents<T extends DiscordMessage$ListenerEventsArgs<ExtArgs> = {}>(args?: Subset<T, DiscordMessage$ListenerEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ListenerEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Notifications<T extends DiscordMessage$NotificationsArgs<ExtArgs> = {}>(args?: Subset<T, DiscordMessage$NotificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7552,6 +7679,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ListenerEventScalarFieldEnum | ListenerEventScalarFieldEnum[]
+  }
+
+  /**
+   * DiscordMessage.Notifications
+   */
+  export type DiscordMessage$NotificationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    where?: NotificationWhereInput
+    orderBy?: NotificationOrderByWithRelationInput | NotificationOrderByWithRelationInput[]
+    cursor?: NotificationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: NotificationScalarFieldEnum | NotificationScalarFieldEnum[]
   }
 
   /**
@@ -8901,6 +9052,7 @@ export namespace Prisma {
     UpdatedAt?: boolean
     DiscordMessages?: boolean | DiscordChannelWebhook$DiscordMessagesArgs<ExtArgs>
     ListenerEventSenders?: boolean | DiscordChannelWebhook$ListenerEventSendersArgs<ExtArgs>
+    VirtualAirlines?: boolean | DiscordChannelWebhook$VirtualAirlinesArgs<ExtArgs>
     _count?: boolean | DiscordChannelWebhookCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["discordChannelWebhook"]>
 
@@ -8944,6 +9096,7 @@ export namespace Prisma {
   export type DiscordChannelWebhookInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     DiscordMessages?: boolean | DiscordChannelWebhook$DiscordMessagesArgs<ExtArgs>
     ListenerEventSenders?: boolean | DiscordChannelWebhook$ListenerEventSendersArgs<ExtArgs>
+    VirtualAirlines?: boolean | DiscordChannelWebhook$VirtualAirlinesArgs<ExtArgs>
     _count?: boolean | DiscordChannelWebhookCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type DiscordChannelWebhookIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -8954,6 +9107,7 @@ export namespace Prisma {
     objects: {
       DiscordMessages: Prisma.$DiscordMessagePayload<ExtArgs>[]
       ListenerEventSenders: Prisma.$ListenerEventSenderPayload<ExtArgs>[]
+      VirtualAirlines: Prisma.$VirtualAirlinePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       Id: string
@@ -9361,6 +9515,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     DiscordMessages<T extends DiscordChannelWebhook$DiscordMessagesArgs<ExtArgs> = {}>(args?: Subset<T, DiscordChannelWebhook$DiscordMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DiscordMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     ListenerEventSenders<T extends DiscordChannelWebhook$ListenerEventSendersArgs<ExtArgs> = {}>(args?: Subset<T, DiscordChannelWebhook$ListenerEventSendersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ListenerEventSenderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    VirtualAirlines<T extends DiscordChannelWebhook$VirtualAirlinesArgs<ExtArgs> = {}>(args?: Subset<T, DiscordChannelWebhook$VirtualAirlinesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VirtualAirlinePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9832,6 +9987,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ListenerEventSenderScalarFieldEnum | ListenerEventSenderScalarFieldEnum[]
+  }
+
+  /**
+   * DiscordChannelWebhook.VirtualAirlines
+   */
+  export type DiscordChannelWebhook$VirtualAirlinesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VirtualAirline
+     */
+    select?: VirtualAirlineSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VirtualAirline
+     */
+    omit?: VirtualAirlineOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VirtualAirlineInclude<ExtArgs> | null
+    where?: VirtualAirlineWhereInput
+    orderBy?: VirtualAirlineOrderByWithRelationInput | VirtualAirlineOrderByWithRelationInput[]
+    cursor?: VirtualAirlineWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: VirtualAirlineScalarFieldEnum | VirtualAirlineScalarFieldEnum[]
   }
 
   /**
@@ -20705,6 +20884,7 @@ export namespace Prisma {
     LastRefresh: Date | null
     CreatedAt: Date | null
     UpdatedAt: Date | null
+    VAManagerDiscordWebhookId: string | null
   }
 
   export type VirtualAirlineMaxAggregateOutputType = {
@@ -20734,6 +20914,7 @@ export namespace Prisma {
     LastRefresh: Date | null
     CreatedAt: Date | null
     UpdatedAt: Date | null
+    VAManagerDiscordWebhookId: string | null
   }
 
   export type VirtualAirlineCountAggregateOutputType = {
@@ -20763,6 +20944,7 @@ export namespace Prisma {
     LastRefresh: number
     CreatedAt: number
     UpdatedAt: number
+    VAManagerDiscordWebhookId: number
     _all: number
   }
 
@@ -20820,6 +21002,7 @@ export namespace Prisma {
     LastRefresh?: true
     CreatedAt?: true
     UpdatedAt?: true
+    VAManagerDiscordWebhookId?: true
   }
 
   export type VirtualAirlineMaxAggregateInputType = {
@@ -20849,6 +21032,7 @@ export namespace Prisma {
     LastRefresh?: true
     CreatedAt?: true
     UpdatedAt?: true
+    VAManagerDiscordWebhookId?: true
   }
 
   export type VirtualAirlineCountAggregateInputType = {
@@ -20878,6 +21062,7 @@ export namespace Prisma {
     LastRefresh?: true
     CreatedAt?: true
     UpdatedAt?: true
+    VAManagerDiscordWebhookId?: true
     _all?: true
   }
 
@@ -20994,6 +21179,7 @@ export namespace Prisma {
     LastRefresh: Date | null
     CreatedAt: Date
     UpdatedAt: Date
+    VAManagerDiscordWebhookId: string | null
     _count: VirtualAirlineCountAggregateOutputType | null
     _avg: VirtualAirlineAvgAggregateOutputType | null
     _sum: VirtualAirlineSumAggregateOutputType | null
@@ -21042,11 +21228,14 @@ export namespace Prisma {
     LastRefresh?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
+    VAManagerDiscordWebhookId?: boolean
     World?: boolean | VirtualAirline$WorldArgs<ExtArgs>
+    VAManagerDiscordWebhook?: boolean | VirtualAirline$VAManagerDiscordWebhookArgs<ExtArgs>
     VARoles?: boolean | VirtualAirline$VARolesArgs<ExtArgs>
     Members?: boolean | VirtualAirline$MembersArgs<ExtArgs>
     Fleet?: boolean | VirtualAirline$FleetArgs<ExtArgs>
     Flights?: boolean | VirtualAirline$FlightsArgs<ExtArgs>
+    Notifications?: boolean | VirtualAirline$NotificationsArgs<ExtArgs>
     _count?: boolean | VirtualAirlineCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["virtualAirline"]>
 
@@ -21077,7 +21266,9 @@ export namespace Prisma {
     LastRefresh?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
+    VAManagerDiscordWebhookId?: boolean
     World?: boolean | VirtualAirline$WorldArgs<ExtArgs>
+    VAManagerDiscordWebhook?: boolean | VirtualAirline$VAManagerDiscordWebhookArgs<ExtArgs>
   }, ExtArgs["result"]["virtualAirline"]>
 
   export type VirtualAirlineSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -21107,7 +21298,9 @@ export namespace Prisma {
     LastRefresh?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
+    VAManagerDiscordWebhookId?: boolean
     World?: boolean | VirtualAirline$WorldArgs<ExtArgs>
+    VAManagerDiscordWebhook?: boolean | VirtualAirline$VAManagerDiscordWebhookArgs<ExtArgs>
   }, ExtArgs["result"]["virtualAirline"]>
 
   export type VirtualAirlineSelectScalar = {
@@ -21137,32 +21330,39 @@ export namespace Prisma {
     LastRefresh?: boolean
     CreatedAt?: boolean
     UpdatedAt?: boolean
+    VAManagerDiscordWebhookId?: boolean
   }
 
-  export type VirtualAirlineOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "ApiKey" | "IsPrimary" | "Identifier" | "Name" | "Description" | "WorldId" | "LastDividendsDistribution" | "LastComputationDate" | "ComputedMemberCount" | "ComputedAircraftsCount" | "ComputedNumberOfFlights30Days" | "ComputedNumberOfFlightHours30Days" | "ComputedMostUsedAirports" | "LastConnection" | "LastReportDate" | "Reputation" | "CreationDate" | "DifficultyLevel" | "Level" | "LevelXP" | "TotalContractsCompleted" | "TotalContractsEarnedCredits" | "LastRefresh" | "CreatedAt" | "UpdatedAt", ExtArgs["result"]["virtualAirline"]>
+  export type VirtualAirlineOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "ApiKey" | "IsPrimary" | "Identifier" | "Name" | "Description" | "WorldId" | "LastDividendsDistribution" | "LastComputationDate" | "ComputedMemberCount" | "ComputedAircraftsCount" | "ComputedNumberOfFlights30Days" | "ComputedNumberOfFlightHours30Days" | "ComputedMostUsedAirports" | "LastConnection" | "LastReportDate" | "Reputation" | "CreationDate" | "DifficultyLevel" | "Level" | "LevelXP" | "TotalContractsCompleted" | "TotalContractsEarnedCredits" | "LastRefresh" | "CreatedAt" | "UpdatedAt" | "VAManagerDiscordWebhookId", ExtArgs["result"]["virtualAirline"]>
   export type VirtualAirlineInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     World?: boolean | VirtualAirline$WorldArgs<ExtArgs>
+    VAManagerDiscordWebhook?: boolean | VirtualAirline$VAManagerDiscordWebhookArgs<ExtArgs>
     VARoles?: boolean | VirtualAirline$VARolesArgs<ExtArgs>
     Members?: boolean | VirtualAirline$MembersArgs<ExtArgs>
     Fleet?: boolean | VirtualAirline$FleetArgs<ExtArgs>
     Flights?: boolean | VirtualAirline$FlightsArgs<ExtArgs>
+    Notifications?: boolean | VirtualAirline$NotificationsArgs<ExtArgs>
     _count?: boolean | VirtualAirlineCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type VirtualAirlineIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     World?: boolean | VirtualAirline$WorldArgs<ExtArgs>
+    VAManagerDiscordWebhook?: boolean | VirtualAirline$VAManagerDiscordWebhookArgs<ExtArgs>
   }
   export type VirtualAirlineIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     World?: boolean | VirtualAirline$WorldArgs<ExtArgs>
+    VAManagerDiscordWebhook?: boolean | VirtualAirline$VAManagerDiscordWebhookArgs<ExtArgs>
   }
 
   export type $VirtualAirlinePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "VirtualAirline"
     objects: {
       World: Prisma.$WorldPayload<ExtArgs> | null
+      VAManagerDiscordWebhook: Prisma.$DiscordChannelWebhookPayload<ExtArgs> | null
       VARoles: Prisma.$VirtualAirlineRolePayload<ExtArgs>[]
       Members: Prisma.$MemberPayload<ExtArgs>[]
       Fleet: Prisma.$AircraftPayload<ExtArgs>[]
       Flights: Prisma.$FlightPayload<ExtArgs>[]
+      Notifications: Prisma.$NotificationPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       Id: string
@@ -21191,6 +21391,7 @@ export namespace Prisma {
       LastRefresh: Date | null
       CreatedAt: Date
       UpdatedAt: Date
+      VAManagerDiscordWebhookId: string | null
     }, ExtArgs["result"]["virtualAirline"]>
     composites: {}
   }
@@ -21586,10 +21787,12 @@ export namespace Prisma {
   export interface Prisma__VirtualAirlineClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     World<T extends VirtualAirline$WorldArgs<ExtArgs> = {}>(args?: Subset<T, VirtualAirline$WorldArgs<ExtArgs>>): Prisma__WorldClient<$Result.GetResult<Prisma.$WorldPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    VAManagerDiscordWebhook<T extends VirtualAirline$VAManagerDiscordWebhookArgs<ExtArgs> = {}>(args?: Subset<T, VirtualAirline$VAManagerDiscordWebhookArgs<ExtArgs>>): Prisma__DiscordChannelWebhookClient<$Result.GetResult<Prisma.$DiscordChannelWebhookPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     VARoles<T extends VirtualAirline$VARolesArgs<ExtArgs> = {}>(args?: Subset<T, VirtualAirline$VARolesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VirtualAirlineRolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Members<T extends VirtualAirline$MembersArgs<ExtArgs> = {}>(args?: Subset<T, VirtualAirline$MembersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Fleet<T extends VirtualAirline$FleetArgs<ExtArgs> = {}>(args?: Subset<T, VirtualAirline$FleetArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AircraftPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Flights<T extends VirtualAirline$FlightsArgs<ExtArgs> = {}>(args?: Subset<T, VirtualAirline$FlightsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FlightPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Notifications<T extends VirtualAirline$NotificationsArgs<ExtArgs> = {}>(args?: Subset<T, VirtualAirline$NotificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -21645,6 +21848,7 @@ export namespace Prisma {
     readonly LastRefresh: FieldRef<"VirtualAirline", 'DateTime'>
     readonly CreatedAt: FieldRef<"VirtualAirline", 'DateTime'>
     readonly UpdatedAt: FieldRef<"VirtualAirline", 'DateTime'>
+    readonly VAManagerDiscordWebhookId: FieldRef<"VirtualAirline", 'String'>
   }
     
 
@@ -22060,6 +22264,25 @@ export namespace Prisma {
   }
 
   /**
+   * VirtualAirline.VAManagerDiscordWebhook
+   */
+  export type VirtualAirline$VAManagerDiscordWebhookArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DiscordChannelWebhook
+     */
+    select?: DiscordChannelWebhookSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DiscordChannelWebhook
+     */
+    omit?: DiscordChannelWebhookOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DiscordChannelWebhookInclude<ExtArgs> | null
+    where?: DiscordChannelWebhookWhereInput
+  }
+
+  /**
    * VirtualAirline.VARoles
    */
   export type VirtualAirline$VARolesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -22153,6 +22376,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: FlightScalarFieldEnum | FlightScalarFieldEnum[]
+  }
+
+  /**
+   * VirtualAirline.Notifications
+   */
+  export type VirtualAirline$NotificationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    where?: NotificationWhereInput
+    orderBy?: NotificationOrderByWithRelationInput | NotificationOrderByWithRelationInput[]
+    cursor?: NotificationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: NotificationScalarFieldEnum | NotificationScalarFieldEnum[]
   }
 
   /**
@@ -38846,6 +39093,1233 @@ export namespace Prisma {
 
 
   /**
+   * Model Notification
+   */
+
+  export type AggregateNotification = {
+    _count: NotificationCountAggregateOutputType | null
+    _avg: NotificationAvgAggregateOutputType | null
+    _sum: NotificationSumAggregateOutputType | null
+    _min: NotificationMinAggregateOutputType | null
+    _max: NotificationMaxAggregateOutputType | null
+  }
+
+  export type NotificationAvgAggregateOutputType = {
+    Category: number | null
+    Action: number | null
+  }
+
+  export type NotificationSumAggregateOutputType = {
+    Category: number | null
+    Action: number | null
+  }
+
+  export type NotificationMinAggregateOutputType = {
+    Id: string | null
+    CompanyId: string | null
+    DiscordMessageSent: boolean | null
+    IsRead: boolean | null
+    IsNotification: boolean | null
+    ZuluEventTime: Date | null
+    DiscordMessageSentAt: Date | null
+    DiscordMessageId: string | null
+    Category: number | null
+    Action: number | null
+    Description: string | null
+    CreatedAt: Date | null
+    UpdatedAt: Date | null
+  }
+
+  export type NotificationMaxAggregateOutputType = {
+    Id: string | null
+    CompanyId: string | null
+    DiscordMessageSent: boolean | null
+    IsRead: boolean | null
+    IsNotification: boolean | null
+    ZuluEventTime: Date | null
+    DiscordMessageSentAt: Date | null
+    DiscordMessageId: string | null
+    Category: number | null
+    Action: number | null
+    Description: string | null
+    CreatedAt: Date | null
+    UpdatedAt: Date | null
+  }
+
+  export type NotificationCountAggregateOutputType = {
+    Id: number
+    CompanyId: number
+    DiscordMessageSent: number
+    IsRead: number
+    IsNotification: number
+    ZuluEventTime: number
+    DiscordMessageSentAt: number
+    DiscordMessageId: number
+    Category: number
+    Action: number
+    Description: number
+    CreatedAt: number
+    UpdatedAt: number
+    _all: number
+  }
+
+
+  export type NotificationAvgAggregateInputType = {
+    Category?: true
+    Action?: true
+  }
+
+  export type NotificationSumAggregateInputType = {
+    Category?: true
+    Action?: true
+  }
+
+  export type NotificationMinAggregateInputType = {
+    Id?: true
+    CompanyId?: true
+    DiscordMessageSent?: true
+    IsRead?: true
+    IsNotification?: true
+    ZuluEventTime?: true
+    DiscordMessageSentAt?: true
+    DiscordMessageId?: true
+    Category?: true
+    Action?: true
+    Description?: true
+    CreatedAt?: true
+    UpdatedAt?: true
+  }
+
+  export type NotificationMaxAggregateInputType = {
+    Id?: true
+    CompanyId?: true
+    DiscordMessageSent?: true
+    IsRead?: true
+    IsNotification?: true
+    ZuluEventTime?: true
+    DiscordMessageSentAt?: true
+    DiscordMessageId?: true
+    Category?: true
+    Action?: true
+    Description?: true
+    CreatedAt?: true
+    UpdatedAt?: true
+  }
+
+  export type NotificationCountAggregateInputType = {
+    Id?: true
+    CompanyId?: true
+    DiscordMessageSent?: true
+    IsRead?: true
+    IsNotification?: true
+    ZuluEventTime?: true
+    DiscordMessageSentAt?: true
+    DiscordMessageId?: true
+    Category?: true
+    Action?: true
+    Description?: true
+    CreatedAt?: true
+    UpdatedAt?: true
+    _all?: true
+  }
+
+  export type NotificationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Notification to aggregate.
+     */
+    where?: NotificationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Notifications to fetch.
+     */
+    orderBy?: NotificationOrderByWithRelationInput | NotificationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: NotificationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Notifications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Notifications.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Notifications
+    **/
+    _count?: true | NotificationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: NotificationAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: NotificationSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: NotificationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: NotificationMaxAggregateInputType
+  }
+
+  export type GetNotificationAggregateType<T extends NotificationAggregateArgs> = {
+        [P in keyof T & keyof AggregateNotification]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateNotification[P]>
+      : GetScalarType<T[P], AggregateNotification[P]>
+  }
+
+
+
+
+  export type NotificationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NotificationWhereInput
+    orderBy?: NotificationOrderByWithAggregationInput | NotificationOrderByWithAggregationInput[]
+    by: NotificationScalarFieldEnum[] | NotificationScalarFieldEnum
+    having?: NotificationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: NotificationCountAggregateInputType | true
+    _avg?: NotificationAvgAggregateInputType
+    _sum?: NotificationSumAggregateInputType
+    _min?: NotificationMinAggregateInputType
+    _max?: NotificationMaxAggregateInputType
+  }
+
+  export type NotificationGroupByOutputType = {
+    Id: string
+    CompanyId: string
+    DiscordMessageSent: boolean
+    IsRead: boolean
+    IsNotification: boolean
+    ZuluEventTime: Date | null
+    DiscordMessageSentAt: Date | null
+    DiscordMessageId: string | null
+    Category: number
+    Action: number
+    Description: string
+    CreatedAt: Date
+    UpdatedAt: Date
+    _count: NotificationCountAggregateOutputType | null
+    _avg: NotificationAvgAggregateOutputType | null
+    _sum: NotificationSumAggregateOutputType | null
+    _min: NotificationMinAggregateOutputType | null
+    _max: NotificationMaxAggregateOutputType | null
+  }
+
+  type GetNotificationGroupByPayload<T extends NotificationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<NotificationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof NotificationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], NotificationGroupByOutputType[P]>
+            : GetScalarType<T[P], NotificationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type NotificationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    Id?: boolean
+    CompanyId?: boolean
+    DiscordMessageSent?: boolean
+    IsRead?: boolean
+    IsNotification?: boolean
+    ZuluEventTime?: boolean
+    DiscordMessageSentAt?: boolean
+    DiscordMessageId?: boolean
+    Category?: boolean
+    Action?: boolean
+    Description?: boolean
+    CreatedAt?: boolean
+    UpdatedAt?: boolean
+    VirtualAirline?: boolean | VirtualAirlineDefaultArgs<ExtArgs>
+    DiscordMessage?: boolean | Notification$DiscordMessageArgs<ExtArgs>
+  }, ExtArgs["result"]["notification"]>
+
+  export type NotificationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    Id?: boolean
+    CompanyId?: boolean
+    DiscordMessageSent?: boolean
+    IsRead?: boolean
+    IsNotification?: boolean
+    ZuluEventTime?: boolean
+    DiscordMessageSentAt?: boolean
+    DiscordMessageId?: boolean
+    Category?: boolean
+    Action?: boolean
+    Description?: boolean
+    CreatedAt?: boolean
+    UpdatedAt?: boolean
+    VirtualAirline?: boolean | VirtualAirlineDefaultArgs<ExtArgs>
+    DiscordMessage?: boolean | Notification$DiscordMessageArgs<ExtArgs>
+  }, ExtArgs["result"]["notification"]>
+
+  export type NotificationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    Id?: boolean
+    CompanyId?: boolean
+    DiscordMessageSent?: boolean
+    IsRead?: boolean
+    IsNotification?: boolean
+    ZuluEventTime?: boolean
+    DiscordMessageSentAt?: boolean
+    DiscordMessageId?: boolean
+    Category?: boolean
+    Action?: boolean
+    Description?: boolean
+    CreatedAt?: boolean
+    UpdatedAt?: boolean
+    VirtualAirline?: boolean | VirtualAirlineDefaultArgs<ExtArgs>
+    DiscordMessage?: boolean | Notification$DiscordMessageArgs<ExtArgs>
+  }, ExtArgs["result"]["notification"]>
+
+  export type NotificationSelectScalar = {
+    Id?: boolean
+    CompanyId?: boolean
+    DiscordMessageSent?: boolean
+    IsRead?: boolean
+    IsNotification?: boolean
+    ZuluEventTime?: boolean
+    DiscordMessageSentAt?: boolean
+    DiscordMessageId?: boolean
+    Category?: boolean
+    Action?: boolean
+    Description?: boolean
+    CreatedAt?: boolean
+    UpdatedAt?: boolean
+  }
+
+  export type NotificationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "CompanyId" | "DiscordMessageSent" | "IsRead" | "IsNotification" | "ZuluEventTime" | "DiscordMessageSentAt" | "DiscordMessageId" | "Category" | "Action" | "Description" | "CreatedAt" | "UpdatedAt", ExtArgs["result"]["notification"]>
+  export type NotificationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    VirtualAirline?: boolean | VirtualAirlineDefaultArgs<ExtArgs>
+    DiscordMessage?: boolean | Notification$DiscordMessageArgs<ExtArgs>
+  }
+  export type NotificationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    VirtualAirline?: boolean | VirtualAirlineDefaultArgs<ExtArgs>
+    DiscordMessage?: boolean | Notification$DiscordMessageArgs<ExtArgs>
+  }
+  export type NotificationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    VirtualAirline?: boolean | VirtualAirlineDefaultArgs<ExtArgs>
+    DiscordMessage?: boolean | Notification$DiscordMessageArgs<ExtArgs>
+  }
+
+  export type $NotificationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Notification"
+    objects: {
+      VirtualAirline: Prisma.$VirtualAirlinePayload<ExtArgs>
+      DiscordMessage: Prisma.$DiscordMessagePayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      Id: string
+      CompanyId: string
+      DiscordMessageSent: boolean
+      IsRead: boolean
+      IsNotification: boolean
+      ZuluEventTime: Date | null
+      DiscordMessageSentAt: Date | null
+      DiscordMessageId: string | null
+      Category: number
+      Action: number
+      Description: string
+      CreatedAt: Date
+      UpdatedAt: Date
+    }, ExtArgs["result"]["notification"]>
+    composites: {}
+  }
+
+  type NotificationGetPayload<S extends boolean | null | undefined | NotificationDefaultArgs> = $Result.GetResult<Prisma.$NotificationPayload, S>
+
+  type NotificationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<NotificationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: NotificationCountAggregateInputType | true
+    }
+
+  export interface NotificationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Notification'], meta: { name: 'Notification' } }
+    /**
+     * Find zero or one Notification that matches the filter.
+     * @param {NotificationFindUniqueArgs} args - Arguments to find a Notification
+     * @example
+     * // Get one Notification
+     * const notification = await prisma.notification.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends NotificationFindUniqueArgs>(args: SelectSubset<T, NotificationFindUniqueArgs<ExtArgs>>): Prisma__NotificationClient<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Notification that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {NotificationFindUniqueOrThrowArgs} args - Arguments to find a Notification
+     * @example
+     * // Get one Notification
+     * const notification = await prisma.notification.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends NotificationFindUniqueOrThrowArgs>(args: SelectSubset<T, NotificationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__NotificationClient<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Notification that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationFindFirstArgs} args - Arguments to find a Notification
+     * @example
+     * // Get one Notification
+     * const notification = await prisma.notification.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends NotificationFindFirstArgs>(args?: SelectSubset<T, NotificationFindFirstArgs<ExtArgs>>): Prisma__NotificationClient<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Notification that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationFindFirstOrThrowArgs} args - Arguments to find a Notification
+     * @example
+     * // Get one Notification
+     * const notification = await prisma.notification.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends NotificationFindFirstOrThrowArgs>(args?: SelectSubset<T, NotificationFindFirstOrThrowArgs<ExtArgs>>): Prisma__NotificationClient<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Notifications that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Notifications
+     * const notifications = await prisma.notification.findMany()
+     * 
+     * // Get first 10 Notifications
+     * const notifications = await prisma.notification.findMany({ take: 10 })
+     * 
+     * // Only select the `Id`
+     * const notificationWithIdOnly = await prisma.notification.findMany({ select: { Id: true } })
+     * 
+     */
+    findMany<T extends NotificationFindManyArgs>(args?: SelectSubset<T, NotificationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Notification.
+     * @param {NotificationCreateArgs} args - Arguments to create a Notification.
+     * @example
+     * // Create one Notification
+     * const Notification = await prisma.notification.create({
+     *   data: {
+     *     // ... data to create a Notification
+     *   }
+     * })
+     * 
+     */
+    create<T extends NotificationCreateArgs>(args: SelectSubset<T, NotificationCreateArgs<ExtArgs>>): Prisma__NotificationClient<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Notifications.
+     * @param {NotificationCreateManyArgs} args - Arguments to create many Notifications.
+     * @example
+     * // Create many Notifications
+     * const notification = await prisma.notification.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends NotificationCreateManyArgs>(args?: SelectSubset<T, NotificationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Notifications and returns the data saved in the database.
+     * @param {NotificationCreateManyAndReturnArgs} args - Arguments to create many Notifications.
+     * @example
+     * // Create many Notifications
+     * const notification = await prisma.notification.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Notifications and only return the `Id`
+     * const notificationWithIdOnly = await prisma.notification.createManyAndReturn({
+     *   select: { Id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends NotificationCreateManyAndReturnArgs>(args?: SelectSubset<T, NotificationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Notification.
+     * @param {NotificationDeleteArgs} args - Arguments to delete one Notification.
+     * @example
+     * // Delete one Notification
+     * const Notification = await prisma.notification.delete({
+     *   where: {
+     *     // ... filter to delete one Notification
+     *   }
+     * })
+     * 
+     */
+    delete<T extends NotificationDeleteArgs>(args: SelectSubset<T, NotificationDeleteArgs<ExtArgs>>): Prisma__NotificationClient<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Notification.
+     * @param {NotificationUpdateArgs} args - Arguments to update one Notification.
+     * @example
+     * // Update one Notification
+     * const notification = await prisma.notification.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends NotificationUpdateArgs>(args: SelectSubset<T, NotificationUpdateArgs<ExtArgs>>): Prisma__NotificationClient<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Notifications.
+     * @param {NotificationDeleteManyArgs} args - Arguments to filter Notifications to delete.
+     * @example
+     * // Delete a few Notifications
+     * const { count } = await prisma.notification.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends NotificationDeleteManyArgs>(args?: SelectSubset<T, NotificationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Notifications.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Notifications
+     * const notification = await prisma.notification.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends NotificationUpdateManyArgs>(args: SelectSubset<T, NotificationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Notifications and returns the data updated in the database.
+     * @param {NotificationUpdateManyAndReturnArgs} args - Arguments to update many Notifications.
+     * @example
+     * // Update many Notifications
+     * const notification = await prisma.notification.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Notifications and only return the `Id`
+     * const notificationWithIdOnly = await prisma.notification.updateManyAndReturn({
+     *   select: { Id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends NotificationUpdateManyAndReturnArgs>(args: SelectSubset<T, NotificationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Notification.
+     * @param {NotificationUpsertArgs} args - Arguments to update or create a Notification.
+     * @example
+     * // Update or create a Notification
+     * const notification = await prisma.notification.upsert({
+     *   create: {
+     *     // ... data to create a Notification
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Notification we want to update
+     *   }
+     * })
+     */
+    upsert<T extends NotificationUpsertArgs>(args: SelectSubset<T, NotificationUpsertArgs<ExtArgs>>): Prisma__NotificationClient<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Notifications.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationCountArgs} args - Arguments to filter Notifications to count.
+     * @example
+     * // Count the number of Notifications
+     * const count = await prisma.notification.count({
+     *   where: {
+     *     // ... the filter for the Notifications we want to count
+     *   }
+     * })
+    **/
+    count<T extends NotificationCountArgs>(
+      args?: Subset<T, NotificationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], NotificationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Notification.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends NotificationAggregateArgs>(args: Subset<T, NotificationAggregateArgs>): Prisma.PrismaPromise<GetNotificationAggregateType<T>>
+
+    /**
+     * Group by Notification.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends NotificationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: NotificationGroupByArgs['orderBy'] }
+        : { orderBy?: NotificationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, NotificationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNotificationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Notification model
+   */
+  readonly fields: NotificationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Notification.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__NotificationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    VirtualAirline<T extends VirtualAirlineDefaultArgs<ExtArgs> = {}>(args?: Subset<T, VirtualAirlineDefaultArgs<ExtArgs>>): Prisma__VirtualAirlineClient<$Result.GetResult<Prisma.$VirtualAirlinePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    DiscordMessage<T extends Notification$DiscordMessageArgs<ExtArgs> = {}>(args?: Subset<T, Notification$DiscordMessageArgs<ExtArgs>>): Prisma__DiscordMessageClient<$Result.GetResult<Prisma.$DiscordMessagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Notification model
+   */
+  interface NotificationFieldRefs {
+    readonly Id: FieldRef<"Notification", 'String'>
+    readonly CompanyId: FieldRef<"Notification", 'String'>
+    readonly DiscordMessageSent: FieldRef<"Notification", 'Boolean'>
+    readonly IsRead: FieldRef<"Notification", 'Boolean'>
+    readonly IsNotification: FieldRef<"Notification", 'Boolean'>
+    readonly ZuluEventTime: FieldRef<"Notification", 'DateTime'>
+    readonly DiscordMessageSentAt: FieldRef<"Notification", 'DateTime'>
+    readonly DiscordMessageId: FieldRef<"Notification", 'String'>
+    readonly Category: FieldRef<"Notification", 'Int'>
+    readonly Action: FieldRef<"Notification", 'Int'>
+    readonly Description: FieldRef<"Notification", 'String'>
+    readonly CreatedAt: FieldRef<"Notification", 'DateTime'>
+    readonly UpdatedAt: FieldRef<"Notification", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Notification findUnique
+   */
+  export type NotificationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    /**
+     * Filter, which Notification to fetch.
+     */
+    where: NotificationWhereUniqueInput
+  }
+
+  /**
+   * Notification findUniqueOrThrow
+   */
+  export type NotificationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    /**
+     * Filter, which Notification to fetch.
+     */
+    where: NotificationWhereUniqueInput
+  }
+
+  /**
+   * Notification findFirst
+   */
+  export type NotificationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    /**
+     * Filter, which Notification to fetch.
+     */
+    where?: NotificationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Notifications to fetch.
+     */
+    orderBy?: NotificationOrderByWithRelationInput | NotificationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Notifications.
+     */
+    cursor?: NotificationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Notifications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Notifications.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Notifications.
+     */
+    distinct?: NotificationScalarFieldEnum | NotificationScalarFieldEnum[]
+  }
+
+  /**
+   * Notification findFirstOrThrow
+   */
+  export type NotificationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    /**
+     * Filter, which Notification to fetch.
+     */
+    where?: NotificationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Notifications to fetch.
+     */
+    orderBy?: NotificationOrderByWithRelationInput | NotificationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Notifications.
+     */
+    cursor?: NotificationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Notifications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Notifications.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Notifications.
+     */
+    distinct?: NotificationScalarFieldEnum | NotificationScalarFieldEnum[]
+  }
+
+  /**
+   * Notification findMany
+   */
+  export type NotificationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    /**
+     * Filter, which Notifications to fetch.
+     */
+    where?: NotificationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Notifications to fetch.
+     */
+    orderBy?: NotificationOrderByWithRelationInput | NotificationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Notifications.
+     */
+    cursor?: NotificationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Notifications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Notifications.
+     */
+    skip?: number
+    distinct?: NotificationScalarFieldEnum | NotificationScalarFieldEnum[]
+  }
+
+  /**
+   * Notification create
+   */
+  export type NotificationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Notification.
+     */
+    data: XOR<NotificationCreateInput, NotificationUncheckedCreateInput>
+  }
+
+  /**
+   * Notification createMany
+   */
+  export type NotificationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Notifications.
+     */
+    data: NotificationCreateManyInput | NotificationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Notification createManyAndReturn
+   */
+  export type NotificationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * The data used to create many Notifications.
+     */
+    data: NotificationCreateManyInput | NotificationCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Notification update
+   */
+  export type NotificationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Notification.
+     */
+    data: XOR<NotificationUpdateInput, NotificationUncheckedUpdateInput>
+    /**
+     * Choose, which Notification to update.
+     */
+    where: NotificationWhereUniqueInput
+  }
+
+  /**
+   * Notification updateMany
+   */
+  export type NotificationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Notifications.
+     */
+    data: XOR<NotificationUpdateManyMutationInput, NotificationUncheckedUpdateManyInput>
+    /**
+     * Filter which Notifications to update
+     */
+    where?: NotificationWhereInput
+    /**
+     * Limit how many Notifications to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Notification updateManyAndReturn
+   */
+  export type NotificationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * The data used to update Notifications.
+     */
+    data: XOR<NotificationUpdateManyMutationInput, NotificationUncheckedUpdateManyInput>
+    /**
+     * Filter which Notifications to update
+     */
+    where?: NotificationWhereInput
+    /**
+     * Limit how many Notifications to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Notification upsert
+   */
+  export type NotificationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Notification to update in case it exists.
+     */
+    where: NotificationWhereUniqueInput
+    /**
+     * In case the Notification found by the `where` argument doesn't exist, create a new Notification with this data.
+     */
+    create: XOR<NotificationCreateInput, NotificationUncheckedCreateInput>
+    /**
+     * In case the Notification was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<NotificationUpdateInput, NotificationUncheckedUpdateInput>
+  }
+
+  /**
+   * Notification delete
+   */
+  export type NotificationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    /**
+     * Filter which Notification to delete.
+     */
+    where: NotificationWhereUniqueInput
+  }
+
+  /**
+   * Notification deleteMany
+   */
+  export type NotificationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Notifications to delete
+     */
+    where?: NotificationWhereInput
+    /**
+     * Limit how many Notifications to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Notification.DiscordMessage
+   */
+  export type Notification$DiscordMessageArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DiscordMessage
+     */
+    select?: DiscordMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DiscordMessage
+     */
+    omit?: DiscordMessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DiscordMessageInclude<ExtArgs> | null
+    where?: DiscordMessageWhereInput
+  }
+
+  /**
+   * Notification without action
+   */
+  export type NotificationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -39115,7 +40589,8 @@ export namespace Prisma {
     TotalContractsEarnedCredits: 'TotalContractsEarnedCredits',
     LastRefresh: 'LastRefresh',
     CreatedAt: 'CreatedAt',
-    UpdatedAt: 'UpdatedAt'
+    UpdatedAt: 'UpdatedAt',
+    VAManagerDiscordWebhookId: 'VAManagerDiscordWebhookId'
   };
 
   export type VirtualAirlineScalarFieldEnum = (typeof VirtualAirlineScalarFieldEnum)[keyof typeof VirtualAirlineScalarFieldEnum]
@@ -39394,6 +40869,25 @@ export namespace Prisma {
   };
 
   export type JobScalarFieldEnum = (typeof JobScalarFieldEnum)[keyof typeof JobScalarFieldEnum]
+
+
+  export const NotificationScalarFieldEnum: {
+    Id: 'Id',
+    CompanyId: 'CompanyId',
+    DiscordMessageSent: 'DiscordMessageSent',
+    IsRead: 'IsRead',
+    IsNotification: 'IsNotification',
+    ZuluEventTime: 'ZuluEventTime',
+    DiscordMessageSentAt: 'DiscordMessageSentAt',
+    DiscordMessageId: 'DiscordMessageId',
+    Category: 'Category',
+    Action: 'Action',
+    Description: 'Description',
+    CreatedAt: 'CreatedAt',
+    UpdatedAt: 'UpdatedAt'
+  };
+
+  export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -39799,6 +41293,7 @@ export namespace Prisma {
     DiscordMessageTemplate?: XOR<DiscordMessageTemplateNullableScalarRelationFilter, DiscordMessageTemplateWhereInput> | null
     DiscordChannelWebhook?: XOR<DiscordChannelWebhookNullableScalarRelationFilter, DiscordChannelWebhookWhereInput> | null
     ListenerEvents?: ListenerEventListRelationFilter
+    Notifications?: NotificationListRelationFilter
   }
 
   export type DiscordMessageOrderByWithRelationInput = {
@@ -39813,6 +41308,7 @@ export namespace Prisma {
     DiscordMessageTemplate?: DiscordMessageTemplateOrderByWithRelationInput
     DiscordChannelWebhook?: DiscordChannelWebhookOrderByWithRelationInput
     ListenerEvents?: ListenerEventOrderByRelationAggregateInput
+    Notifications?: NotificationOrderByRelationAggregateInput
   }
 
   export type DiscordMessageWhereUniqueInput = Prisma.AtLeast<{
@@ -39830,6 +41326,7 @@ export namespace Prisma {
     DiscordMessageTemplate?: XOR<DiscordMessageTemplateNullableScalarRelationFilter, DiscordMessageTemplateWhereInput> | null
     DiscordChannelWebhook?: XOR<DiscordChannelWebhookNullableScalarRelationFilter, DiscordChannelWebhookWhereInput> | null
     ListenerEvents?: ListenerEventListRelationFilter
+    Notifications?: NotificationListRelationFilter
   }, "Id" | "Id">
 
   export type DiscordMessageOrderByWithAggregationInput = {
@@ -39944,6 +41441,7 @@ export namespace Prisma {
     UpdatedAt?: DateTimeFilter<"DiscordChannelWebhook"> | Date | string
     DiscordMessages?: DiscordMessageListRelationFilter
     ListenerEventSenders?: ListenerEventSenderListRelationFilter
+    VirtualAirlines?: VirtualAirlineListRelationFilter
   }
 
   export type DiscordChannelWebhookOrderByWithRelationInput = {
@@ -39958,6 +41456,7 @@ export namespace Prisma {
     UpdatedAt?: SortOrder
     DiscordMessages?: DiscordMessageOrderByRelationAggregateInput
     ListenerEventSenders?: ListenerEventSenderOrderByRelationAggregateInput
+    VirtualAirlines?: VirtualAirlineOrderByRelationAggregateInput
   }
 
   export type DiscordChannelWebhookWhereUniqueInput = Prisma.AtLeast<{
@@ -39975,6 +41474,7 @@ export namespace Prisma {
     UpdatedAt?: DateTimeFilter<"DiscordChannelWebhook"> | Date | string
     DiscordMessages?: DiscordMessageListRelationFilter
     ListenerEventSenders?: ListenerEventSenderListRelationFilter
+    VirtualAirlines?: VirtualAirlineListRelationFilter
   }, "Id" | "Id" | "Token">
 
   export type DiscordChannelWebhookOrderByWithAggregationInput = {
@@ -40852,11 +42352,14 @@ export namespace Prisma {
     LastRefresh?: DateTimeNullableFilter<"VirtualAirline"> | Date | string | null
     CreatedAt?: DateTimeFilter<"VirtualAirline"> | Date | string
     UpdatedAt?: DateTimeFilter<"VirtualAirline"> | Date | string
+    VAManagerDiscordWebhookId?: UuidNullableFilter<"VirtualAirline"> | string | null
     World?: XOR<WorldNullableScalarRelationFilter, WorldWhereInput> | null
+    VAManagerDiscordWebhook?: XOR<DiscordChannelWebhookNullableScalarRelationFilter, DiscordChannelWebhookWhereInput> | null
     VARoles?: VirtualAirlineRoleListRelationFilter
     Members?: MemberListRelationFilter
     Fleet?: AircraftListRelationFilter
     Flights?: FlightListRelationFilter
+    Notifications?: NotificationListRelationFilter
   }
 
   export type VirtualAirlineOrderByWithRelationInput = {
@@ -40886,11 +42389,14 @@ export namespace Prisma {
     LastRefresh?: SortOrderInput | SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
+    VAManagerDiscordWebhookId?: SortOrderInput | SortOrder
     World?: WorldOrderByWithRelationInput
+    VAManagerDiscordWebhook?: DiscordChannelWebhookOrderByWithRelationInput
     VARoles?: VirtualAirlineRoleOrderByRelationAggregateInput
     Members?: MemberOrderByRelationAggregateInput
     Fleet?: AircraftOrderByRelationAggregateInput
     Flights?: FlightOrderByRelationAggregateInput
+    Notifications?: NotificationOrderByRelationAggregateInput
   }
 
   export type VirtualAirlineWhereUniqueInput = Prisma.AtLeast<{
@@ -40923,11 +42429,14 @@ export namespace Prisma {
     LastRefresh?: DateTimeNullableFilter<"VirtualAirline"> | Date | string | null
     CreatedAt?: DateTimeFilter<"VirtualAirline"> | Date | string
     UpdatedAt?: DateTimeFilter<"VirtualAirline"> | Date | string
+    VAManagerDiscordWebhookId?: UuidNullableFilter<"VirtualAirline"> | string | null
     World?: XOR<WorldNullableScalarRelationFilter, WorldWhereInput> | null
+    VAManagerDiscordWebhook?: XOR<DiscordChannelWebhookNullableScalarRelationFilter, DiscordChannelWebhookWhereInput> | null
     VARoles?: VirtualAirlineRoleListRelationFilter
     Members?: MemberListRelationFilter
     Fleet?: AircraftListRelationFilter
     Flights?: FlightListRelationFilter
+    Notifications?: NotificationListRelationFilter
   }, "Id" | "ApiKey" | "Identifier">
 
   export type VirtualAirlineOrderByWithAggregationInput = {
@@ -40957,6 +42466,7 @@ export namespace Prisma {
     LastRefresh?: SortOrderInput | SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
+    VAManagerDiscordWebhookId?: SortOrderInput | SortOrder
     _count?: VirtualAirlineCountOrderByAggregateInput
     _avg?: VirtualAirlineAvgOrderByAggregateInput
     _max?: VirtualAirlineMaxOrderByAggregateInput
@@ -40994,6 +42504,7 @@ export namespace Prisma {
     LastRefresh?: DateTimeNullableWithAggregatesFilter<"VirtualAirline"> | Date | string | null
     CreatedAt?: DateTimeWithAggregatesFilter<"VirtualAirline"> | Date | string
     UpdatedAt?: DateTimeWithAggregatesFilter<"VirtualAirline"> | Date | string
+    VAManagerDiscordWebhookId?: UuidNullableWithAggregatesFilter<"VirtualAirline"> | string | null
   }
 
   export type VirtualAirlineRoleWhereInput = {
@@ -42473,6 +43984,106 @@ export namespace Prisma {
     UpdatedAt?: DateTimeWithAggregatesFilter<"Job"> | Date | string
   }
 
+  export type NotificationWhereInput = {
+    AND?: NotificationWhereInput | NotificationWhereInput[]
+    OR?: NotificationWhereInput[]
+    NOT?: NotificationWhereInput | NotificationWhereInput[]
+    Id?: UuidFilter<"Notification"> | string
+    CompanyId?: UuidFilter<"Notification"> | string
+    DiscordMessageSent?: BoolFilter<"Notification"> | boolean
+    IsRead?: BoolFilter<"Notification"> | boolean
+    IsNotification?: BoolFilter<"Notification"> | boolean
+    ZuluEventTime?: DateTimeNullableFilter<"Notification"> | Date | string | null
+    DiscordMessageSentAt?: DateTimeNullableFilter<"Notification"> | Date | string | null
+    DiscordMessageId?: UuidNullableFilter<"Notification"> | string | null
+    Category?: IntFilter<"Notification"> | number
+    Action?: IntFilter<"Notification"> | number
+    Description?: StringFilter<"Notification"> | string
+    CreatedAt?: DateTimeFilter<"Notification"> | Date | string
+    UpdatedAt?: DateTimeFilter<"Notification"> | Date | string
+    VirtualAirline?: XOR<VirtualAirlineScalarRelationFilter, VirtualAirlineWhereInput>
+    DiscordMessage?: XOR<DiscordMessageNullableScalarRelationFilter, DiscordMessageWhereInput> | null
+  }
+
+  export type NotificationOrderByWithRelationInput = {
+    Id?: SortOrder
+    CompanyId?: SortOrder
+    DiscordMessageSent?: SortOrder
+    IsRead?: SortOrder
+    IsNotification?: SortOrder
+    ZuluEventTime?: SortOrderInput | SortOrder
+    DiscordMessageSentAt?: SortOrderInput | SortOrder
+    DiscordMessageId?: SortOrderInput | SortOrder
+    Category?: SortOrder
+    Action?: SortOrder
+    Description?: SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+    VirtualAirline?: VirtualAirlineOrderByWithRelationInput
+    DiscordMessage?: DiscordMessageOrderByWithRelationInput
+  }
+
+  export type NotificationWhereUniqueInput = Prisma.AtLeast<{
+    Id?: string
+    AND?: NotificationWhereInput | NotificationWhereInput[]
+    OR?: NotificationWhereInput[]
+    NOT?: NotificationWhereInput | NotificationWhereInput[]
+    CompanyId?: UuidFilter<"Notification"> | string
+    DiscordMessageSent?: BoolFilter<"Notification"> | boolean
+    IsRead?: BoolFilter<"Notification"> | boolean
+    IsNotification?: BoolFilter<"Notification"> | boolean
+    ZuluEventTime?: DateTimeNullableFilter<"Notification"> | Date | string | null
+    DiscordMessageSentAt?: DateTimeNullableFilter<"Notification"> | Date | string | null
+    DiscordMessageId?: UuidNullableFilter<"Notification"> | string | null
+    Category?: IntFilter<"Notification"> | number
+    Action?: IntFilter<"Notification"> | number
+    Description?: StringFilter<"Notification"> | string
+    CreatedAt?: DateTimeFilter<"Notification"> | Date | string
+    UpdatedAt?: DateTimeFilter<"Notification"> | Date | string
+    VirtualAirline?: XOR<VirtualAirlineScalarRelationFilter, VirtualAirlineWhereInput>
+    DiscordMessage?: XOR<DiscordMessageNullableScalarRelationFilter, DiscordMessageWhereInput> | null
+  }, "Id" | "Id">
+
+  export type NotificationOrderByWithAggregationInput = {
+    Id?: SortOrder
+    CompanyId?: SortOrder
+    DiscordMessageSent?: SortOrder
+    IsRead?: SortOrder
+    IsNotification?: SortOrder
+    ZuluEventTime?: SortOrderInput | SortOrder
+    DiscordMessageSentAt?: SortOrderInput | SortOrder
+    DiscordMessageId?: SortOrderInput | SortOrder
+    Category?: SortOrder
+    Action?: SortOrder
+    Description?: SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+    _count?: NotificationCountOrderByAggregateInput
+    _avg?: NotificationAvgOrderByAggregateInput
+    _max?: NotificationMaxOrderByAggregateInput
+    _min?: NotificationMinOrderByAggregateInput
+    _sum?: NotificationSumOrderByAggregateInput
+  }
+
+  export type NotificationScalarWhereWithAggregatesInput = {
+    AND?: NotificationScalarWhereWithAggregatesInput | NotificationScalarWhereWithAggregatesInput[]
+    OR?: NotificationScalarWhereWithAggregatesInput[]
+    NOT?: NotificationScalarWhereWithAggregatesInput | NotificationScalarWhereWithAggregatesInput[]
+    Id?: UuidWithAggregatesFilter<"Notification"> | string
+    CompanyId?: UuidWithAggregatesFilter<"Notification"> | string
+    DiscordMessageSent?: BoolWithAggregatesFilter<"Notification"> | boolean
+    IsRead?: BoolWithAggregatesFilter<"Notification"> | boolean
+    IsNotification?: BoolWithAggregatesFilter<"Notification"> | boolean
+    ZuluEventTime?: DateTimeNullableWithAggregatesFilter<"Notification"> | Date | string | null
+    DiscordMessageSentAt?: DateTimeNullableWithAggregatesFilter<"Notification"> | Date | string | null
+    DiscordMessageId?: UuidNullableWithAggregatesFilter<"Notification"> | string | null
+    Category?: IntWithAggregatesFilter<"Notification"> | number
+    Action?: IntWithAggregatesFilter<"Notification"> | number
+    Description?: StringWithAggregatesFilter<"Notification"> | string
+    CreatedAt?: DateTimeWithAggregatesFilter<"Notification"> | Date | string
+    UpdatedAt?: DateTimeWithAggregatesFilter<"Notification"> | Date | string
+  }
+
   export type AppConfigCreateInput = {
     OnAirSyncEnabled?: boolean
     OnAirVASyncEnabled?: boolean
@@ -42673,6 +44284,7 @@ export namespace Prisma {
     DiscordMessageTemplate?: DiscordMessageTemplateCreateNestedOneWithoutDiscordMessagesInput
     DiscordChannelWebhook?: DiscordChannelWebhookCreateNestedOneWithoutDiscordMessagesInput
     ListenerEvents?: ListenerEventCreateNestedManyWithoutDiscordMessageInput
+    Notifications?: NotificationCreateNestedManyWithoutDiscordMessageInput
   }
 
   export type DiscordMessageUncheckedCreateInput = {
@@ -42685,6 +44297,7 @@ export namespace Prisma {
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
     ListenerEvents?: ListenerEventUncheckedCreateNestedManyWithoutDiscordMessageInput
+    Notifications?: NotificationUncheckedCreateNestedManyWithoutDiscordMessageInput
   }
 
   export type DiscordMessageUpdateInput = {
@@ -42697,6 +44310,7 @@ export namespace Prisma {
     DiscordMessageTemplate?: DiscordMessageTemplateUpdateOneWithoutDiscordMessagesNestedInput
     DiscordChannelWebhook?: DiscordChannelWebhookUpdateOneWithoutDiscordMessagesNestedInput
     ListenerEvents?: ListenerEventUpdateManyWithoutDiscordMessageNestedInput
+    Notifications?: NotificationUpdateManyWithoutDiscordMessageNestedInput
   }
 
   export type DiscordMessageUncheckedUpdateInput = {
@@ -42709,6 +44323,7 @@ export namespace Prisma {
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ListenerEvents?: ListenerEventUncheckedUpdateManyWithoutDiscordMessageNestedInput
+    Notifications?: NotificationUncheckedUpdateManyWithoutDiscordMessageNestedInput
   }
 
   export type DiscordMessageCreateManyInput = {
@@ -42825,6 +44440,7 @@ export namespace Prisma {
     UpdatedAt?: Date | string
     DiscordMessages?: DiscordMessageCreateNestedManyWithoutDiscordChannelWebhookInput
     ListenerEventSenders?: ListenerEventSenderCreateNestedManyWithoutDiscordChannelWebhookInput
+    VirtualAirlines?: VirtualAirlineCreateNestedManyWithoutVAManagerDiscordWebhookInput
   }
 
   export type DiscordChannelWebhookUncheckedCreateInput = {
@@ -42839,6 +44455,7 @@ export namespace Prisma {
     UpdatedAt?: Date | string
     DiscordMessages?: DiscordMessageUncheckedCreateNestedManyWithoutDiscordChannelWebhookInput
     ListenerEventSenders?: ListenerEventSenderUncheckedCreateNestedManyWithoutDiscordChannelWebhookInput
+    VirtualAirlines?: VirtualAirlineUncheckedCreateNestedManyWithoutVAManagerDiscordWebhookInput
   }
 
   export type DiscordChannelWebhookUpdateInput = {
@@ -42853,6 +44470,7 @@ export namespace Prisma {
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     DiscordMessages?: DiscordMessageUpdateManyWithoutDiscordChannelWebhookNestedInput
     ListenerEventSenders?: ListenerEventSenderUpdateManyWithoutDiscordChannelWebhookNestedInput
+    VirtualAirlines?: VirtualAirlineUpdateManyWithoutVAManagerDiscordWebhookNestedInput
   }
 
   export type DiscordChannelWebhookUncheckedUpdateInput = {
@@ -42867,6 +44485,7 @@ export namespace Prisma {
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     DiscordMessages?: DiscordMessageUncheckedUpdateManyWithoutDiscordChannelWebhookNestedInput
     ListenerEventSenders?: ListenerEventSenderUncheckedUpdateManyWithoutDiscordChannelWebhookNestedInput
+    VirtualAirlines?: VirtualAirlineUncheckedUpdateManyWithoutVAManagerDiscordWebhookNestedInput
   }
 
   export type DiscordChannelWebhookCreateManyInput = {
@@ -43853,10 +45472,12 @@ export namespace Prisma {
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
     World?: WorldCreateNestedOneWithoutVirtualAirlinesInput
+    VAManagerDiscordWebhook?: DiscordChannelWebhookCreateNestedOneWithoutVirtualAirlinesInput
     VARoles?: VirtualAirlineRoleCreateNestedManyWithoutVirtualAirlineInput
     Members?: MemberCreateNestedManyWithoutVirtualAirlineInput
     Fleet?: AircraftCreateNestedManyWithoutVirtualAirlineInput
     Flights?: FlightCreateNestedManyWithoutVirtualAirlineInput
+    Notifications?: NotificationCreateNestedManyWithoutVirtualAirlineInput
   }
 
   export type VirtualAirlineUncheckedCreateInput = {
@@ -43886,10 +45507,12 @@ export namespace Prisma {
     LastRefresh?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    VAManagerDiscordWebhookId?: string | null
     VARoles?: VirtualAirlineRoleUncheckedCreateNestedManyWithoutVirtualAirlineInput
     Members?: MemberUncheckedCreateNestedManyWithoutVirtualAirlineInput
     Fleet?: AircraftUncheckedCreateNestedManyWithoutVirtualAirlineInput
     Flights?: FlightUncheckedCreateNestedManyWithoutVirtualAirlineInput
+    Notifications?: NotificationUncheckedCreateNestedManyWithoutVirtualAirlineInput
   }
 
   export type VirtualAirlineUpdateInput = {
@@ -43919,10 +45542,12 @@ export namespace Prisma {
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     World?: WorldUpdateOneWithoutVirtualAirlinesNestedInput
+    VAManagerDiscordWebhook?: DiscordChannelWebhookUpdateOneWithoutVirtualAirlinesNestedInput
     VARoles?: VirtualAirlineRoleUpdateManyWithoutVirtualAirlineNestedInput
     Members?: MemberUpdateManyWithoutVirtualAirlineNestedInput
     Fleet?: AircraftUpdateManyWithoutVirtualAirlineNestedInput
     Flights?: FlightUpdateManyWithoutVirtualAirlineNestedInput
+    Notifications?: NotificationUpdateManyWithoutVirtualAirlineNestedInput
   }
 
   export type VirtualAirlineUncheckedUpdateInput = {
@@ -43952,10 +45577,12 @@ export namespace Prisma {
     LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    VAManagerDiscordWebhookId?: NullableStringFieldUpdateOperationsInput | string | null
     VARoles?: VirtualAirlineRoleUncheckedUpdateManyWithoutVirtualAirlineNestedInput
     Members?: MemberUncheckedUpdateManyWithoutVirtualAirlineNestedInput
     Fleet?: AircraftUncheckedUpdateManyWithoutVirtualAirlineNestedInput
     Flights?: FlightUncheckedUpdateManyWithoutVirtualAirlineNestedInput
+    Notifications?: NotificationUncheckedUpdateManyWithoutVirtualAirlineNestedInput
   }
 
   export type VirtualAirlineCreateManyInput = {
@@ -43985,6 +45612,7 @@ export namespace Prisma {
     LastRefresh?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    VAManagerDiscordWebhookId?: string | null
   }
 
   export type VirtualAirlineUpdateManyMutationInput = {
@@ -44042,6 +45670,7 @@ export namespace Prisma {
     LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    VAManagerDiscordWebhookId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type VirtualAirlineRoleCreateInput = {
@@ -45750,6 +47379,116 @@ export namespace Prisma {
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type NotificationCreateInput = {
+    Id: string
+    DiscordMessageSent?: boolean
+    IsRead?: boolean
+    IsNotification?: boolean
+    ZuluEventTime?: Date | string | null
+    DiscordMessageSentAt?: Date | string | null
+    Category?: number
+    Action?: number
+    Description: string
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    VirtualAirline: VirtualAirlineCreateNestedOneWithoutNotificationsInput
+    DiscordMessage?: DiscordMessageCreateNestedOneWithoutNotificationsInput
+  }
+
+  export type NotificationUncheckedCreateInput = {
+    Id: string
+    CompanyId: string
+    DiscordMessageSent?: boolean
+    IsRead?: boolean
+    IsNotification?: boolean
+    ZuluEventTime?: Date | string | null
+    DiscordMessageSentAt?: Date | string | null
+    DiscordMessageId?: string | null
+    Category?: number
+    Action?: number
+    Description: string
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+  }
+
+  export type NotificationUpdateInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    DiscordMessageSent?: BoolFieldUpdateOperationsInput | boolean
+    IsRead?: BoolFieldUpdateOperationsInput | boolean
+    IsNotification?: BoolFieldUpdateOperationsInput | boolean
+    ZuluEventTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    DiscordMessageSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Category?: IntFieldUpdateOperationsInput | number
+    Action?: IntFieldUpdateOperationsInput | number
+    Description?: StringFieldUpdateOperationsInput | string
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    VirtualAirline?: VirtualAirlineUpdateOneRequiredWithoutNotificationsNestedInput
+    DiscordMessage?: DiscordMessageUpdateOneWithoutNotificationsNestedInput
+  }
+
+  export type NotificationUncheckedUpdateInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    CompanyId?: StringFieldUpdateOperationsInput | string
+    DiscordMessageSent?: BoolFieldUpdateOperationsInput | boolean
+    IsRead?: BoolFieldUpdateOperationsInput | boolean
+    IsNotification?: BoolFieldUpdateOperationsInput | boolean
+    ZuluEventTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    DiscordMessageSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    DiscordMessageId?: NullableStringFieldUpdateOperationsInput | string | null
+    Category?: IntFieldUpdateOperationsInput | number
+    Action?: IntFieldUpdateOperationsInput | number
+    Description?: StringFieldUpdateOperationsInput | string
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotificationCreateManyInput = {
+    Id: string
+    CompanyId: string
+    DiscordMessageSent?: boolean
+    IsRead?: boolean
+    IsNotification?: boolean
+    ZuluEventTime?: Date | string | null
+    DiscordMessageSentAt?: Date | string | null
+    DiscordMessageId?: string | null
+    Category?: number
+    Action?: number
+    Description: string
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+  }
+
+  export type NotificationUpdateManyMutationInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    DiscordMessageSent?: BoolFieldUpdateOperationsInput | boolean
+    IsRead?: BoolFieldUpdateOperationsInput | boolean
+    IsNotification?: BoolFieldUpdateOperationsInput | boolean
+    ZuluEventTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    DiscordMessageSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Category?: IntFieldUpdateOperationsInput | number
+    Action?: IntFieldUpdateOperationsInput | number
+    Description?: StringFieldUpdateOperationsInput | string
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotificationUncheckedUpdateManyInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    CompanyId?: StringFieldUpdateOperationsInput | string
+    DiscordMessageSent?: BoolFieldUpdateOperationsInput | boolean
+    IsRead?: BoolFieldUpdateOperationsInput | boolean
+    IsNotification?: BoolFieldUpdateOperationsInput | boolean
+    ZuluEventTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    DiscordMessageSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    DiscordMessageId?: NullableStringFieldUpdateOperationsInput | string | null
+    Category?: IntFieldUpdateOperationsInput | number
+    Action?: IntFieldUpdateOperationsInput | number
+    Description?: StringFieldUpdateOperationsInput | string
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -46071,7 +47810,17 @@ export namespace Prisma {
     none?: ListenerEventWhereInput
   }
 
+  export type NotificationListRelationFilter = {
+    every?: NotificationWhereInput
+    some?: NotificationWhereInput
+    none?: NotificationWhereInput
+  }
+
   export type ListenerEventOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type NotificationOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -46201,7 +47950,17 @@ export namespace Prisma {
     none?: ListenerEventSenderWhereInput
   }
 
+  export type VirtualAirlineListRelationFilter = {
+    every?: VirtualAirlineWhereInput
+    some?: VirtualAirlineWhereInput
+    none?: VirtualAirlineWhereInput
+  }
+
   export type ListenerEventSenderOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type VirtualAirlineOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -46915,6 +48674,7 @@ export namespace Prisma {
     LastRefresh?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
+    VAManagerDiscordWebhookId?: SortOrder
   }
 
   export type VirtualAirlineAvgOrderByAggregateInput = {
@@ -46957,6 +48717,7 @@ export namespace Prisma {
     LastRefresh?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
+    VAManagerDiscordWebhookId?: SortOrder
   }
 
   export type VirtualAirlineMinOrderByAggregateInput = {
@@ -46986,6 +48747,7 @@ export namespace Prisma {
     LastRefresh?: SortOrder
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
+    VAManagerDiscordWebhookId?: SortOrder
   }
 
   export type VirtualAirlineSumOrderByAggregateInput = {
@@ -47122,20 +48884,10 @@ export namespace Prisma {
     _max?: NestedDecimalFilter<$PrismaModel>
   }
 
-  export type VirtualAirlineListRelationFilter = {
-    every?: VirtualAirlineWhereInput
-    some?: VirtualAirlineWhereInput
-    none?: VirtualAirlineWhereInput
-  }
-
   export type CompanyListRelationFilter = {
     every?: CompanyWhereInput
     some?: CompanyWhereInput
     none?: CompanyWhereInput
-  }
-
-  export type VirtualAirlineOrderByRelationAggregateInput = {
-    _count?: SortOrder
   }
 
   export type CompanyOrderByRelationAggregateInput = {
@@ -48118,6 +49870,64 @@ export namespace Prisma {
     _max?: NestedEnumCronExpressionFilter<$PrismaModel>
   }
 
+  export type NotificationCountOrderByAggregateInput = {
+    Id?: SortOrder
+    CompanyId?: SortOrder
+    DiscordMessageSent?: SortOrder
+    IsRead?: SortOrder
+    IsNotification?: SortOrder
+    ZuluEventTime?: SortOrder
+    DiscordMessageSentAt?: SortOrder
+    DiscordMessageId?: SortOrder
+    Category?: SortOrder
+    Action?: SortOrder
+    Description?: SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+  }
+
+  export type NotificationAvgOrderByAggregateInput = {
+    Category?: SortOrder
+    Action?: SortOrder
+  }
+
+  export type NotificationMaxOrderByAggregateInput = {
+    Id?: SortOrder
+    CompanyId?: SortOrder
+    DiscordMessageSent?: SortOrder
+    IsRead?: SortOrder
+    IsNotification?: SortOrder
+    ZuluEventTime?: SortOrder
+    DiscordMessageSentAt?: SortOrder
+    DiscordMessageId?: SortOrder
+    Category?: SortOrder
+    Action?: SortOrder
+    Description?: SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+  }
+
+  export type NotificationMinOrderByAggregateInput = {
+    Id?: SortOrder
+    CompanyId?: SortOrder
+    DiscordMessageSent?: SortOrder
+    IsRead?: SortOrder
+    IsNotification?: SortOrder
+    ZuluEventTime?: SortOrder
+    DiscordMessageSentAt?: SortOrder
+    DiscordMessageId?: SortOrder
+    Category?: SortOrder
+    Action?: SortOrder
+    Description?: SortOrder
+    CreatedAt?: SortOrder
+    UpdatedAt?: SortOrder
+  }
+
+  export type NotificationSumOrderByAggregateInput = {
+    Category?: SortOrder
+    Action?: SortOrder
+  }
+
   export type BoolFieldUpdateOperationsInput = {
     set?: boolean
   }
@@ -48197,11 +50007,25 @@ export namespace Prisma {
     connect?: ListenerEventWhereUniqueInput | ListenerEventWhereUniqueInput[]
   }
 
+  export type NotificationCreateNestedManyWithoutDiscordMessageInput = {
+    create?: XOR<NotificationCreateWithoutDiscordMessageInput, NotificationUncheckedCreateWithoutDiscordMessageInput> | NotificationCreateWithoutDiscordMessageInput[] | NotificationUncheckedCreateWithoutDiscordMessageInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutDiscordMessageInput | NotificationCreateOrConnectWithoutDiscordMessageInput[]
+    createMany?: NotificationCreateManyDiscordMessageInputEnvelope
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+  }
+
   export type ListenerEventUncheckedCreateNestedManyWithoutDiscordMessageInput = {
     create?: XOR<ListenerEventCreateWithoutDiscordMessageInput, ListenerEventUncheckedCreateWithoutDiscordMessageInput> | ListenerEventCreateWithoutDiscordMessageInput[] | ListenerEventUncheckedCreateWithoutDiscordMessageInput[]
     connectOrCreate?: ListenerEventCreateOrConnectWithoutDiscordMessageInput | ListenerEventCreateOrConnectWithoutDiscordMessageInput[]
     createMany?: ListenerEventCreateManyDiscordMessageInputEnvelope
     connect?: ListenerEventWhereUniqueInput | ListenerEventWhereUniqueInput[]
+  }
+
+  export type NotificationUncheckedCreateNestedManyWithoutDiscordMessageInput = {
+    create?: XOR<NotificationCreateWithoutDiscordMessageInput, NotificationUncheckedCreateWithoutDiscordMessageInput> | NotificationCreateWithoutDiscordMessageInput[] | NotificationUncheckedCreateWithoutDiscordMessageInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutDiscordMessageInput | NotificationCreateOrConnectWithoutDiscordMessageInput[]
+    createMany?: NotificationCreateManyDiscordMessageInputEnvelope
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
   }
 
   export type DiscordMessageTemplateUpdateOneWithoutDiscordMessagesNestedInput = {
@@ -48238,6 +50062,20 @@ export namespace Prisma {
     deleteMany?: ListenerEventScalarWhereInput | ListenerEventScalarWhereInput[]
   }
 
+  export type NotificationUpdateManyWithoutDiscordMessageNestedInput = {
+    create?: XOR<NotificationCreateWithoutDiscordMessageInput, NotificationUncheckedCreateWithoutDiscordMessageInput> | NotificationCreateWithoutDiscordMessageInput[] | NotificationUncheckedCreateWithoutDiscordMessageInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutDiscordMessageInput | NotificationCreateOrConnectWithoutDiscordMessageInput[]
+    upsert?: NotificationUpsertWithWhereUniqueWithoutDiscordMessageInput | NotificationUpsertWithWhereUniqueWithoutDiscordMessageInput[]
+    createMany?: NotificationCreateManyDiscordMessageInputEnvelope
+    set?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    disconnect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    delete?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    update?: NotificationUpdateWithWhereUniqueWithoutDiscordMessageInput | NotificationUpdateWithWhereUniqueWithoutDiscordMessageInput[]
+    updateMany?: NotificationUpdateManyWithWhereWithoutDiscordMessageInput | NotificationUpdateManyWithWhereWithoutDiscordMessageInput[]
+    deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
+  }
+
   export type NullableIntFieldUpdateOperationsInput = {
     set?: number | null
     increment?: number
@@ -48258,6 +50096,20 @@ export namespace Prisma {
     update?: ListenerEventUpdateWithWhereUniqueWithoutDiscordMessageInput | ListenerEventUpdateWithWhereUniqueWithoutDiscordMessageInput[]
     updateMany?: ListenerEventUpdateManyWithWhereWithoutDiscordMessageInput | ListenerEventUpdateManyWithWhereWithoutDiscordMessageInput[]
     deleteMany?: ListenerEventScalarWhereInput | ListenerEventScalarWhereInput[]
+  }
+
+  export type NotificationUncheckedUpdateManyWithoutDiscordMessageNestedInput = {
+    create?: XOR<NotificationCreateWithoutDiscordMessageInput, NotificationUncheckedCreateWithoutDiscordMessageInput> | NotificationCreateWithoutDiscordMessageInput[] | NotificationUncheckedCreateWithoutDiscordMessageInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutDiscordMessageInput | NotificationCreateOrConnectWithoutDiscordMessageInput[]
+    upsert?: NotificationUpsertWithWhereUniqueWithoutDiscordMessageInput | NotificationUpsertWithWhereUniqueWithoutDiscordMessageInput[]
+    createMany?: NotificationCreateManyDiscordMessageInputEnvelope
+    set?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    disconnect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    delete?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    update?: NotificationUpdateWithWhereUniqueWithoutDiscordMessageInput | NotificationUpdateWithWhereUniqueWithoutDiscordMessageInput[]
+    updateMany?: NotificationUpdateManyWithWhereWithoutDiscordMessageInput | NotificationUpdateManyWithWhereWithoutDiscordMessageInput[]
+    deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
   }
 
   export type DiscordMessageCreateNestedManyWithoutDiscordMessageTemplateInput = {
@@ -48316,6 +50168,13 @@ export namespace Prisma {
     connect?: ListenerEventSenderWhereUniqueInput | ListenerEventSenderWhereUniqueInput[]
   }
 
+  export type VirtualAirlineCreateNestedManyWithoutVAManagerDiscordWebhookInput = {
+    create?: XOR<VirtualAirlineCreateWithoutVAManagerDiscordWebhookInput, VirtualAirlineUncheckedCreateWithoutVAManagerDiscordWebhookInput> | VirtualAirlineCreateWithoutVAManagerDiscordWebhookInput[] | VirtualAirlineUncheckedCreateWithoutVAManagerDiscordWebhookInput[]
+    connectOrCreate?: VirtualAirlineCreateOrConnectWithoutVAManagerDiscordWebhookInput | VirtualAirlineCreateOrConnectWithoutVAManagerDiscordWebhookInput[]
+    createMany?: VirtualAirlineCreateManyVAManagerDiscordWebhookInputEnvelope
+    connect?: VirtualAirlineWhereUniqueInput | VirtualAirlineWhereUniqueInput[]
+  }
+
   export type DiscordMessageUncheckedCreateNestedManyWithoutDiscordChannelWebhookInput = {
     create?: XOR<DiscordMessageCreateWithoutDiscordChannelWebhookInput, DiscordMessageUncheckedCreateWithoutDiscordChannelWebhookInput> | DiscordMessageCreateWithoutDiscordChannelWebhookInput[] | DiscordMessageUncheckedCreateWithoutDiscordChannelWebhookInput[]
     connectOrCreate?: DiscordMessageCreateOrConnectWithoutDiscordChannelWebhookInput | DiscordMessageCreateOrConnectWithoutDiscordChannelWebhookInput[]
@@ -48328,6 +50187,13 @@ export namespace Prisma {
     connectOrCreate?: ListenerEventSenderCreateOrConnectWithoutDiscordChannelWebhookInput | ListenerEventSenderCreateOrConnectWithoutDiscordChannelWebhookInput[]
     createMany?: ListenerEventSenderCreateManyDiscordChannelWebhookInputEnvelope
     connect?: ListenerEventSenderWhereUniqueInput | ListenerEventSenderWhereUniqueInput[]
+  }
+
+  export type VirtualAirlineUncheckedCreateNestedManyWithoutVAManagerDiscordWebhookInput = {
+    create?: XOR<VirtualAirlineCreateWithoutVAManagerDiscordWebhookInput, VirtualAirlineUncheckedCreateWithoutVAManagerDiscordWebhookInput> | VirtualAirlineCreateWithoutVAManagerDiscordWebhookInput[] | VirtualAirlineUncheckedCreateWithoutVAManagerDiscordWebhookInput[]
+    connectOrCreate?: VirtualAirlineCreateOrConnectWithoutVAManagerDiscordWebhookInput | VirtualAirlineCreateOrConnectWithoutVAManagerDiscordWebhookInput[]
+    createMany?: VirtualAirlineCreateManyVAManagerDiscordWebhookInputEnvelope
+    connect?: VirtualAirlineWhereUniqueInput | VirtualAirlineWhereUniqueInput[]
   }
 
   export type DiscordMessageUpdateManyWithoutDiscordChannelWebhookNestedInput = {
@@ -48358,6 +50224,20 @@ export namespace Prisma {
     deleteMany?: ListenerEventSenderScalarWhereInput | ListenerEventSenderScalarWhereInput[]
   }
 
+  export type VirtualAirlineUpdateManyWithoutVAManagerDiscordWebhookNestedInput = {
+    create?: XOR<VirtualAirlineCreateWithoutVAManagerDiscordWebhookInput, VirtualAirlineUncheckedCreateWithoutVAManagerDiscordWebhookInput> | VirtualAirlineCreateWithoutVAManagerDiscordWebhookInput[] | VirtualAirlineUncheckedCreateWithoutVAManagerDiscordWebhookInput[]
+    connectOrCreate?: VirtualAirlineCreateOrConnectWithoutVAManagerDiscordWebhookInput | VirtualAirlineCreateOrConnectWithoutVAManagerDiscordWebhookInput[]
+    upsert?: VirtualAirlineUpsertWithWhereUniqueWithoutVAManagerDiscordWebhookInput | VirtualAirlineUpsertWithWhereUniqueWithoutVAManagerDiscordWebhookInput[]
+    createMany?: VirtualAirlineCreateManyVAManagerDiscordWebhookInputEnvelope
+    set?: VirtualAirlineWhereUniqueInput | VirtualAirlineWhereUniqueInput[]
+    disconnect?: VirtualAirlineWhereUniqueInput | VirtualAirlineWhereUniqueInput[]
+    delete?: VirtualAirlineWhereUniqueInput | VirtualAirlineWhereUniqueInput[]
+    connect?: VirtualAirlineWhereUniqueInput | VirtualAirlineWhereUniqueInput[]
+    update?: VirtualAirlineUpdateWithWhereUniqueWithoutVAManagerDiscordWebhookInput | VirtualAirlineUpdateWithWhereUniqueWithoutVAManagerDiscordWebhookInput[]
+    updateMany?: VirtualAirlineUpdateManyWithWhereWithoutVAManagerDiscordWebhookInput | VirtualAirlineUpdateManyWithWhereWithoutVAManagerDiscordWebhookInput[]
+    deleteMany?: VirtualAirlineScalarWhereInput | VirtualAirlineScalarWhereInput[]
+  }
+
   export type DiscordMessageUncheckedUpdateManyWithoutDiscordChannelWebhookNestedInput = {
     create?: XOR<DiscordMessageCreateWithoutDiscordChannelWebhookInput, DiscordMessageUncheckedCreateWithoutDiscordChannelWebhookInput> | DiscordMessageCreateWithoutDiscordChannelWebhookInput[] | DiscordMessageUncheckedCreateWithoutDiscordChannelWebhookInput[]
     connectOrCreate?: DiscordMessageCreateOrConnectWithoutDiscordChannelWebhookInput | DiscordMessageCreateOrConnectWithoutDiscordChannelWebhookInput[]
@@ -48384,6 +50264,20 @@ export namespace Prisma {
     update?: ListenerEventSenderUpdateWithWhereUniqueWithoutDiscordChannelWebhookInput | ListenerEventSenderUpdateWithWhereUniqueWithoutDiscordChannelWebhookInput[]
     updateMany?: ListenerEventSenderUpdateManyWithWhereWithoutDiscordChannelWebhookInput | ListenerEventSenderUpdateManyWithWhereWithoutDiscordChannelWebhookInput[]
     deleteMany?: ListenerEventSenderScalarWhereInput | ListenerEventSenderScalarWhereInput[]
+  }
+
+  export type VirtualAirlineUncheckedUpdateManyWithoutVAManagerDiscordWebhookNestedInput = {
+    create?: XOR<VirtualAirlineCreateWithoutVAManagerDiscordWebhookInput, VirtualAirlineUncheckedCreateWithoutVAManagerDiscordWebhookInput> | VirtualAirlineCreateWithoutVAManagerDiscordWebhookInput[] | VirtualAirlineUncheckedCreateWithoutVAManagerDiscordWebhookInput[]
+    connectOrCreate?: VirtualAirlineCreateOrConnectWithoutVAManagerDiscordWebhookInput | VirtualAirlineCreateOrConnectWithoutVAManagerDiscordWebhookInput[]
+    upsert?: VirtualAirlineUpsertWithWhereUniqueWithoutVAManagerDiscordWebhookInput | VirtualAirlineUpsertWithWhereUniqueWithoutVAManagerDiscordWebhookInput[]
+    createMany?: VirtualAirlineCreateManyVAManagerDiscordWebhookInputEnvelope
+    set?: VirtualAirlineWhereUniqueInput | VirtualAirlineWhereUniqueInput[]
+    disconnect?: VirtualAirlineWhereUniqueInput | VirtualAirlineWhereUniqueInput[]
+    delete?: VirtualAirlineWhereUniqueInput | VirtualAirlineWhereUniqueInput[]
+    connect?: VirtualAirlineWhereUniqueInput | VirtualAirlineWhereUniqueInput[]
+    update?: VirtualAirlineUpdateWithWhereUniqueWithoutVAManagerDiscordWebhookInput | VirtualAirlineUpdateWithWhereUniqueWithoutVAManagerDiscordWebhookInput[]
+    updateMany?: VirtualAirlineUpdateManyWithWhereWithoutVAManagerDiscordWebhookInput | VirtualAirlineUpdateManyWithWhereWithoutVAManagerDiscordWebhookInput[]
+    deleteMany?: VirtualAirlineScalarWhereInput | VirtualAirlineScalarWhereInput[]
   }
 
   export type DiscordMessageCreateNestedOneWithoutListenerEventsInput = {
@@ -48936,6 +50830,12 @@ export namespace Prisma {
     connect?: WorldWhereUniqueInput
   }
 
+  export type DiscordChannelWebhookCreateNestedOneWithoutVirtualAirlinesInput = {
+    create?: XOR<DiscordChannelWebhookCreateWithoutVirtualAirlinesInput, DiscordChannelWebhookUncheckedCreateWithoutVirtualAirlinesInput>
+    connectOrCreate?: DiscordChannelWebhookCreateOrConnectWithoutVirtualAirlinesInput
+    connect?: DiscordChannelWebhookWhereUniqueInput
+  }
+
   export type VirtualAirlineRoleCreateNestedManyWithoutVirtualAirlineInput = {
     create?: XOR<VirtualAirlineRoleCreateWithoutVirtualAirlineInput, VirtualAirlineRoleUncheckedCreateWithoutVirtualAirlineInput> | VirtualAirlineRoleCreateWithoutVirtualAirlineInput[] | VirtualAirlineRoleUncheckedCreateWithoutVirtualAirlineInput[]
     connectOrCreate?: VirtualAirlineRoleCreateOrConnectWithoutVirtualAirlineInput | VirtualAirlineRoleCreateOrConnectWithoutVirtualAirlineInput[]
@@ -48962,6 +50862,13 @@ export namespace Prisma {
     connectOrCreate?: FlightCreateOrConnectWithoutVirtualAirlineInput | FlightCreateOrConnectWithoutVirtualAirlineInput[]
     createMany?: FlightCreateManyVirtualAirlineInputEnvelope
     connect?: FlightWhereUniqueInput | FlightWhereUniqueInput[]
+  }
+
+  export type NotificationCreateNestedManyWithoutVirtualAirlineInput = {
+    create?: XOR<NotificationCreateWithoutVirtualAirlineInput, NotificationUncheckedCreateWithoutVirtualAirlineInput> | NotificationCreateWithoutVirtualAirlineInput[] | NotificationUncheckedCreateWithoutVirtualAirlineInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutVirtualAirlineInput | NotificationCreateOrConnectWithoutVirtualAirlineInput[]
+    createMany?: NotificationCreateManyVirtualAirlineInputEnvelope
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
   }
 
   export type VirtualAirlineRoleUncheckedCreateNestedManyWithoutVirtualAirlineInput = {
@@ -48992,6 +50899,13 @@ export namespace Prisma {
     connect?: FlightWhereUniqueInput | FlightWhereUniqueInput[]
   }
 
+  export type NotificationUncheckedCreateNestedManyWithoutVirtualAirlineInput = {
+    create?: XOR<NotificationCreateWithoutVirtualAirlineInput, NotificationUncheckedCreateWithoutVirtualAirlineInput> | NotificationCreateWithoutVirtualAirlineInput[] | NotificationUncheckedCreateWithoutVirtualAirlineInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutVirtualAirlineInput | NotificationCreateOrConnectWithoutVirtualAirlineInput[]
+    createMany?: NotificationCreateManyVirtualAirlineInputEnvelope
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+  }
+
   export type NullableDecimalFieldUpdateOperationsInput = {
     set?: Decimal | DecimalJsLike | number | string | null
     increment?: Decimal | DecimalJsLike | number | string
@@ -49008,6 +50922,16 @@ export namespace Prisma {
     delete?: WorldWhereInput | boolean
     connect?: WorldWhereUniqueInput
     update?: XOR<XOR<WorldUpdateToOneWithWhereWithoutVirtualAirlinesInput, WorldUpdateWithoutVirtualAirlinesInput>, WorldUncheckedUpdateWithoutVirtualAirlinesInput>
+  }
+
+  export type DiscordChannelWebhookUpdateOneWithoutVirtualAirlinesNestedInput = {
+    create?: XOR<DiscordChannelWebhookCreateWithoutVirtualAirlinesInput, DiscordChannelWebhookUncheckedCreateWithoutVirtualAirlinesInput>
+    connectOrCreate?: DiscordChannelWebhookCreateOrConnectWithoutVirtualAirlinesInput
+    upsert?: DiscordChannelWebhookUpsertWithoutVirtualAirlinesInput
+    disconnect?: DiscordChannelWebhookWhereInput | boolean
+    delete?: DiscordChannelWebhookWhereInput | boolean
+    connect?: DiscordChannelWebhookWhereUniqueInput
+    update?: XOR<XOR<DiscordChannelWebhookUpdateToOneWithWhereWithoutVirtualAirlinesInput, DiscordChannelWebhookUpdateWithoutVirtualAirlinesInput>, DiscordChannelWebhookUncheckedUpdateWithoutVirtualAirlinesInput>
   }
 
   export type VirtualAirlineRoleUpdateManyWithoutVirtualAirlineNestedInput = {
@@ -49066,6 +50990,20 @@ export namespace Prisma {
     deleteMany?: FlightScalarWhereInput | FlightScalarWhereInput[]
   }
 
+  export type NotificationUpdateManyWithoutVirtualAirlineNestedInput = {
+    create?: XOR<NotificationCreateWithoutVirtualAirlineInput, NotificationUncheckedCreateWithoutVirtualAirlineInput> | NotificationCreateWithoutVirtualAirlineInput[] | NotificationUncheckedCreateWithoutVirtualAirlineInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutVirtualAirlineInput | NotificationCreateOrConnectWithoutVirtualAirlineInput[]
+    upsert?: NotificationUpsertWithWhereUniqueWithoutVirtualAirlineInput | NotificationUpsertWithWhereUniqueWithoutVirtualAirlineInput[]
+    createMany?: NotificationCreateManyVirtualAirlineInputEnvelope
+    set?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    disconnect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    delete?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    update?: NotificationUpdateWithWhereUniqueWithoutVirtualAirlineInput | NotificationUpdateWithWhereUniqueWithoutVirtualAirlineInput[]
+    updateMany?: NotificationUpdateManyWithWhereWithoutVirtualAirlineInput | NotificationUpdateManyWithWhereWithoutVirtualAirlineInput[]
+    deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
+  }
+
   export type VirtualAirlineRoleUncheckedUpdateManyWithoutVirtualAirlineNestedInput = {
     create?: XOR<VirtualAirlineRoleCreateWithoutVirtualAirlineInput, VirtualAirlineRoleUncheckedCreateWithoutVirtualAirlineInput> | VirtualAirlineRoleCreateWithoutVirtualAirlineInput[] | VirtualAirlineRoleUncheckedCreateWithoutVirtualAirlineInput[]
     connectOrCreate?: VirtualAirlineRoleCreateOrConnectWithoutVirtualAirlineInput | VirtualAirlineRoleCreateOrConnectWithoutVirtualAirlineInput[]
@@ -49120,6 +51058,20 @@ export namespace Prisma {
     update?: FlightUpdateWithWhereUniqueWithoutVirtualAirlineInput | FlightUpdateWithWhereUniqueWithoutVirtualAirlineInput[]
     updateMany?: FlightUpdateManyWithWhereWithoutVirtualAirlineInput | FlightUpdateManyWithWhereWithoutVirtualAirlineInput[]
     deleteMany?: FlightScalarWhereInput | FlightScalarWhereInput[]
+  }
+
+  export type NotificationUncheckedUpdateManyWithoutVirtualAirlineNestedInput = {
+    create?: XOR<NotificationCreateWithoutVirtualAirlineInput, NotificationUncheckedCreateWithoutVirtualAirlineInput> | NotificationCreateWithoutVirtualAirlineInput[] | NotificationUncheckedCreateWithoutVirtualAirlineInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutVirtualAirlineInput | NotificationCreateOrConnectWithoutVirtualAirlineInput[]
+    upsert?: NotificationUpsertWithWhereUniqueWithoutVirtualAirlineInput | NotificationUpsertWithWhereUniqueWithoutVirtualAirlineInput[]
+    createMany?: NotificationCreateManyVirtualAirlineInputEnvelope
+    set?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    disconnect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    delete?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    update?: NotificationUpdateWithWhereUniqueWithoutVirtualAirlineInput | NotificationUpdateWithWhereUniqueWithoutVirtualAirlineInput[]
+    updateMany?: NotificationUpdateManyWithWhereWithoutVirtualAirlineInput | NotificationUpdateManyWithWhereWithoutVirtualAirlineInput[]
+    deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
   }
 
   export type RoleCreateNestedOneWithoutVirtualAirlineRoleInput = {
@@ -50256,6 +52208,36 @@ export namespace Prisma {
     set?: $Enums.CronExpression
   }
 
+  export type VirtualAirlineCreateNestedOneWithoutNotificationsInput = {
+    create?: XOR<VirtualAirlineCreateWithoutNotificationsInput, VirtualAirlineUncheckedCreateWithoutNotificationsInput>
+    connectOrCreate?: VirtualAirlineCreateOrConnectWithoutNotificationsInput
+    connect?: VirtualAirlineWhereUniqueInput
+  }
+
+  export type DiscordMessageCreateNestedOneWithoutNotificationsInput = {
+    create?: XOR<DiscordMessageCreateWithoutNotificationsInput, DiscordMessageUncheckedCreateWithoutNotificationsInput>
+    connectOrCreate?: DiscordMessageCreateOrConnectWithoutNotificationsInput
+    connect?: DiscordMessageWhereUniqueInput
+  }
+
+  export type VirtualAirlineUpdateOneRequiredWithoutNotificationsNestedInput = {
+    create?: XOR<VirtualAirlineCreateWithoutNotificationsInput, VirtualAirlineUncheckedCreateWithoutNotificationsInput>
+    connectOrCreate?: VirtualAirlineCreateOrConnectWithoutNotificationsInput
+    upsert?: VirtualAirlineUpsertWithoutNotificationsInput
+    connect?: VirtualAirlineWhereUniqueInput
+    update?: XOR<XOR<VirtualAirlineUpdateToOneWithWhereWithoutNotificationsInput, VirtualAirlineUpdateWithoutNotificationsInput>, VirtualAirlineUncheckedUpdateWithoutNotificationsInput>
+  }
+
+  export type DiscordMessageUpdateOneWithoutNotificationsNestedInput = {
+    create?: XOR<DiscordMessageCreateWithoutNotificationsInput, DiscordMessageUncheckedCreateWithoutNotificationsInput>
+    connectOrCreate?: DiscordMessageCreateOrConnectWithoutNotificationsInput
+    upsert?: DiscordMessageUpsertWithoutNotificationsInput
+    disconnect?: DiscordMessageWhereInput | boolean
+    delete?: DiscordMessageWhereInput | boolean
+    connect?: DiscordMessageWhereUniqueInput
+    update?: XOR<XOR<DiscordMessageUpdateToOneWithWhereWithoutNotificationsInput, DiscordMessageUpdateWithoutNotificationsInput>, DiscordMessageUncheckedUpdateWithoutNotificationsInput>
+  }
+
   export type NestedIntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -50861,6 +52843,7 @@ export namespace Prisma {
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
     ListenerEventSenders?: ListenerEventSenderCreateNestedManyWithoutDiscordChannelWebhookInput
+    VirtualAirlines?: VirtualAirlineCreateNestedManyWithoutVAManagerDiscordWebhookInput
   }
 
   export type DiscordChannelWebhookUncheckedCreateWithoutDiscordMessagesInput = {
@@ -50874,6 +52857,7 @@ export namespace Prisma {
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
     ListenerEventSenders?: ListenerEventSenderUncheckedCreateNestedManyWithoutDiscordChannelWebhookInput
+    VirtualAirlines?: VirtualAirlineUncheckedCreateNestedManyWithoutVAManagerDiscordWebhookInput
   }
 
   export type DiscordChannelWebhookCreateOrConnectWithoutDiscordMessagesInput = {
@@ -50916,6 +52900,46 @@ export namespace Prisma {
 
   export type ListenerEventCreateManyDiscordMessageInputEnvelope = {
     data: ListenerEventCreateManyDiscordMessageInput | ListenerEventCreateManyDiscordMessageInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type NotificationCreateWithoutDiscordMessageInput = {
+    Id: string
+    DiscordMessageSent?: boolean
+    IsRead?: boolean
+    IsNotification?: boolean
+    ZuluEventTime?: Date | string | null
+    DiscordMessageSentAt?: Date | string | null
+    Category?: number
+    Action?: number
+    Description: string
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    VirtualAirline: VirtualAirlineCreateNestedOneWithoutNotificationsInput
+  }
+
+  export type NotificationUncheckedCreateWithoutDiscordMessageInput = {
+    Id: string
+    CompanyId: string
+    DiscordMessageSent?: boolean
+    IsRead?: boolean
+    IsNotification?: boolean
+    ZuluEventTime?: Date | string | null
+    DiscordMessageSentAt?: Date | string | null
+    Category?: number
+    Action?: number
+    Description: string
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+  }
+
+  export type NotificationCreateOrConnectWithoutDiscordMessageInput = {
+    where: NotificationWhereUniqueInput
+    create: XOR<NotificationCreateWithoutDiscordMessageInput, NotificationUncheckedCreateWithoutDiscordMessageInput>
+  }
+
+  export type NotificationCreateManyDiscordMessageInputEnvelope = {
+    data: NotificationCreateManyDiscordMessageInput | NotificationCreateManyDiscordMessageInput[]
     skipDuplicates?: boolean
   }
 
@@ -50971,6 +52995,7 @@ export namespace Prisma {
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ListenerEventSenders?: ListenerEventSenderUpdateManyWithoutDiscordChannelWebhookNestedInput
+    VirtualAirlines?: VirtualAirlineUpdateManyWithoutVAManagerDiscordWebhookNestedInput
   }
 
   export type DiscordChannelWebhookUncheckedUpdateWithoutDiscordMessagesInput = {
@@ -50984,6 +53009,7 @@ export namespace Prisma {
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ListenerEventSenders?: ListenerEventSenderUncheckedUpdateManyWithoutDiscordChannelWebhookNestedInput
+    VirtualAirlines?: VirtualAirlineUncheckedUpdateManyWithoutVAManagerDiscordWebhookNestedInput
   }
 
   export type ListenerEventUpsertWithWhereUniqueWithoutDiscordMessageInput = {
@@ -51020,6 +53046,41 @@ export namespace Prisma {
     UpdatedAt?: DateTimeFilter<"ListenerEvent"> | Date | string
   }
 
+  export type NotificationUpsertWithWhereUniqueWithoutDiscordMessageInput = {
+    where: NotificationWhereUniqueInput
+    update: XOR<NotificationUpdateWithoutDiscordMessageInput, NotificationUncheckedUpdateWithoutDiscordMessageInput>
+    create: XOR<NotificationCreateWithoutDiscordMessageInput, NotificationUncheckedCreateWithoutDiscordMessageInput>
+  }
+
+  export type NotificationUpdateWithWhereUniqueWithoutDiscordMessageInput = {
+    where: NotificationWhereUniqueInput
+    data: XOR<NotificationUpdateWithoutDiscordMessageInput, NotificationUncheckedUpdateWithoutDiscordMessageInput>
+  }
+
+  export type NotificationUpdateManyWithWhereWithoutDiscordMessageInput = {
+    where: NotificationScalarWhereInput
+    data: XOR<NotificationUpdateManyMutationInput, NotificationUncheckedUpdateManyWithoutDiscordMessageInput>
+  }
+
+  export type NotificationScalarWhereInput = {
+    AND?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
+    OR?: NotificationScalarWhereInput[]
+    NOT?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
+    Id?: UuidFilter<"Notification"> | string
+    CompanyId?: UuidFilter<"Notification"> | string
+    DiscordMessageSent?: BoolFilter<"Notification"> | boolean
+    IsRead?: BoolFilter<"Notification"> | boolean
+    IsNotification?: BoolFilter<"Notification"> | boolean
+    ZuluEventTime?: DateTimeNullableFilter<"Notification"> | Date | string | null
+    DiscordMessageSentAt?: DateTimeNullableFilter<"Notification"> | Date | string | null
+    DiscordMessageId?: UuidNullableFilter<"Notification"> | string | null
+    Category?: IntFilter<"Notification"> | number
+    Action?: IntFilter<"Notification"> | number
+    Description?: StringFilter<"Notification"> | string
+    CreatedAt?: DateTimeFilter<"Notification"> | Date | string
+    UpdatedAt?: DateTimeFilter<"Notification"> | Date | string
+  }
+
   export type DiscordMessageCreateWithoutDiscordMessageTemplateInput = {
     Id?: string
     ChannelId: string
@@ -51029,6 +53090,7 @@ export namespace Prisma {
     UpdatedAt?: Date | string
     DiscordChannelWebhook?: DiscordChannelWebhookCreateNestedOneWithoutDiscordMessagesInput
     ListenerEvents?: ListenerEventCreateNestedManyWithoutDiscordMessageInput
+    Notifications?: NotificationCreateNestedManyWithoutDiscordMessageInput
   }
 
   export type DiscordMessageUncheckedCreateWithoutDiscordMessageTemplateInput = {
@@ -51040,6 +53102,7 @@ export namespace Prisma {
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
     ListenerEvents?: ListenerEventUncheckedCreateNestedManyWithoutDiscordMessageInput
+    Notifications?: NotificationUncheckedCreateNestedManyWithoutDiscordMessageInput
   }
 
   export type DiscordMessageCreateOrConnectWithoutDiscordMessageTemplateInput = {
@@ -51091,6 +53154,7 @@ export namespace Prisma {
     UpdatedAt?: Date | string
     DiscordMessageTemplate?: DiscordMessageTemplateCreateNestedOneWithoutDiscordMessagesInput
     ListenerEvents?: ListenerEventCreateNestedManyWithoutDiscordMessageInput
+    Notifications?: NotificationCreateNestedManyWithoutDiscordMessageInput
   }
 
   export type DiscordMessageUncheckedCreateWithoutDiscordChannelWebhookInput = {
@@ -51102,6 +53166,7 @@ export namespace Prisma {
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
     ListenerEvents?: ListenerEventUncheckedCreateNestedManyWithoutDiscordMessageInput
+    Notifications?: NotificationUncheckedCreateNestedManyWithoutDiscordMessageInput
   }
 
   export type DiscordMessageCreateOrConnectWithoutDiscordChannelWebhookInput = {
@@ -51145,6 +53210,84 @@ export namespace Prisma {
 
   export type ListenerEventSenderCreateManyDiscordChannelWebhookInputEnvelope = {
     data: ListenerEventSenderCreateManyDiscordChannelWebhookInput | ListenerEventSenderCreateManyDiscordChannelWebhookInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type VirtualAirlineCreateWithoutVAManagerDiscordWebhookInput = {
+    Id: string
+    ApiKey: string
+    IsPrimary?: boolean
+    Identifier?: string | null
+    Name?: string | null
+    Description?: string | null
+    LastDividendsDistribution?: Date | string | null
+    LastComputationDate?: Date | string | null
+    ComputedMemberCount?: number | null
+    ComputedAircraftsCount?: number | null
+    ComputedNumberOfFlights30Days?: number | null
+    ComputedNumberOfFlightHours30Days?: number | null
+    ComputedMostUsedAirports?: string | null
+    LastConnection?: Date | string | null
+    LastReportDate?: Date | string | null
+    Reputation?: Decimal | DecimalJsLike | number | string | null
+    CreationDate?: Date | string | null
+    DifficultyLevel?: number | null
+    Level?: number | null
+    LevelXP?: number | null
+    TotalContractsCompleted?: number | null
+    TotalContractsEarnedCredits?: number | null
+    LastRefresh?: Date | string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    World?: WorldCreateNestedOneWithoutVirtualAirlinesInput
+    VARoles?: VirtualAirlineRoleCreateNestedManyWithoutVirtualAirlineInput
+    Members?: MemberCreateNestedManyWithoutVirtualAirlineInput
+    Fleet?: AircraftCreateNestedManyWithoutVirtualAirlineInput
+    Flights?: FlightCreateNestedManyWithoutVirtualAirlineInput
+    Notifications?: NotificationCreateNestedManyWithoutVirtualAirlineInput
+  }
+
+  export type VirtualAirlineUncheckedCreateWithoutVAManagerDiscordWebhookInput = {
+    Id: string
+    ApiKey: string
+    IsPrimary?: boolean
+    Identifier?: string | null
+    Name?: string | null
+    Description?: string | null
+    WorldId?: string | null
+    LastDividendsDistribution?: Date | string | null
+    LastComputationDate?: Date | string | null
+    ComputedMemberCount?: number | null
+    ComputedAircraftsCount?: number | null
+    ComputedNumberOfFlights30Days?: number | null
+    ComputedNumberOfFlightHours30Days?: number | null
+    ComputedMostUsedAirports?: string | null
+    LastConnection?: Date | string | null
+    LastReportDate?: Date | string | null
+    Reputation?: Decimal | DecimalJsLike | number | string | null
+    CreationDate?: Date | string | null
+    DifficultyLevel?: number | null
+    Level?: number | null
+    LevelXP?: number | null
+    TotalContractsCompleted?: number | null
+    TotalContractsEarnedCredits?: number | null
+    LastRefresh?: Date | string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    VARoles?: VirtualAirlineRoleUncheckedCreateNestedManyWithoutVirtualAirlineInput
+    Members?: MemberUncheckedCreateNestedManyWithoutVirtualAirlineInput
+    Fleet?: AircraftUncheckedCreateNestedManyWithoutVirtualAirlineInput
+    Flights?: FlightUncheckedCreateNestedManyWithoutVirtualAirlineInput
+    Notifications?: NotificationUncheckedCreateNestedManyWithoutVirtualAirlineInput
+  }
+
+  export type VirtualAirlineCreateOrConnectWithoutVAManagerDiscordWebhookInput = {
+    where: VirtualAirlineWhereUniqueInput
+    create: XOR<VirtualAirlineCreateWithoutVAManagerDiscordWebhookInput, VirtualAirlineUncheckedCreateWithoutVAManagerDiscordWebhookInput>
+  }
+
+  export type VirtualAirlineCreateManyVAManagerDiscordWebhookInputEnvelope = {
+    data: VirtualAirlineCreateManyVAManagerDiscordWebhookInput | VirtualAirlineCreateManyVAManagerDiscordWebhookInput[]
     skipDuplicates?: boolean
   }
 
@@ -51195,6 +53338,55 @@ export namespace Prisma {
     UpdatedAt?: DateTimeFilter<"ListenerEventSender"> | Date | string
   }
 
+  export type VirtualAirlineUpsertWithWhereUniqueWithoutVAManagerDiscordWebhookInput = {
+    where: VirtualAirlineWhereUniqueInput
+    update: XOR<VirtualAirlineUpdateWithoutVAManagerDiscordWebhookInput, VirtualAirlineUncheckedUpdateWithoutVAManagerDiscordWebhookInput>
+    create: XOR<VirtualAirlineCreateWithoutVAManagerDiscordWebhookInput, VirtualAirlineUncheckedCreateWithoutVAManagerDiscordWebhookInput>
+  }
+
+  export type VirtualAirlineUpdateWithWhereUniqueWithoutVAManagerDiscordWebhookInput = {
+    where: VirtualAirlineWhereUniqueInput
+    data: XOR<VirtualAirlineUpdateWithoutVAManagerDiscordWebhookInput, VirtualAirlineUncheckedUpdateWithoutVAManagerDiscordWebhookInput>
+  }
+
+  export type VirtualAirlineUpdateManyWithWhereWithoutVAManagerDiscordWebhookInput = {
+    where: VirtualAirlineScalarWhereInput
+    data: XOR<VirtualAirlineUpdateManyMutationInput, VirtualAirlineUncheckedUpdateManyWithoutVAManagerDiscordWebhookInput>
+  }
+
+  export type VirtualAirlineScalarWhereInput = {
+    AND?: VirtualAirlineScalarWhereInput | VirtualAirlineScalarWhereInput[]
+    OR?: VirtualAirlineScalarWhereInput[]
+    NOT?: VirtualAirlineScalarWhereInput | VirtualAirlineScalarWhereInput[]
+    Id?: UuidFilter<"VirtualAirline"> | string
+    ApiKey?: UuidFilter<"VirtualAirline"> | string
+    IsPrimary?: BoolFilter<"VirtualAirline"> | boolean
+    Identifier?: StringNullableFilter<"VirtualAirline"> | string | null
+    Name?: StringNullableFilter<"VirtualAirline"> | string | null
+    Description?: StringNullableFilter<"VirtualAirline"> | string | null
+    WorldId?: UuidNullableFilter<"VirtualAirline"> | string | null
+    LastDividendsDistribution?: DateTimeNullableFilter<"VirtualAirline"> | Date | string | null
+    LastComputationDate?: DateTimeNullableFilter<"VirtualAirline"> | Date | string | null
+    ComputedMemberCount?: IntNullableFilter<"VirtualAirline"> | number | null
+    ComputedAircraftsCount?: IntNullableFilter<"VirtualAirline"> | number | null
+    ComputedNumberOfFlights30Days?: IntNullableFilter<"VirtualAirline"> | number | null
+    ComputedNumberOfFlightHours30Days?: IntNullableFilter<"VirtualAirline"> | number | null
+    ComputedMostUsedAirports?: StringNullableFilter<"VirtualAirline"> | string | null
+    LastConnection?: DateTimeNullableFilter<"VirtualAirline"> | Date | string | null
+    LastReportDate?: DateTimeNullableFilter<"VirtualAirline"> | Date | string | null
+    Reputation?: DecimalNullableFilter<"VirtualAirline"> | Decimal | DecimalJsLike | number | string | null
+    CreationDate?: DateTimeNullableFilter<"VirtualAirline"> | Date | string | null
+    DifficultyLevel?: IntNullableFilter<"VirtualAirline"> | number | null
+    Level?: IntNullableFilter<"VirtualAirline"> | number | null
+    LevelXP?: IntNullableFilter<"VirtualAirline"> | number | null
+    TotalContractsCompleted?: IntNullableFilter<"VirtualAirline"> | number | null
+    TotalContractsEarnedCredits?: IntNullableFilter<"VirtualAirline"> | number | null
+    LastRefresh?: DateTimeNullableFilter<"VirtualAirline"> | Date | string | null
+    CreatedAt?: DateTimeFilter<"VirtualAirline"> | Date | string
+    UpdatedAt?: DateTimeFilter<"VirtualAirline"> | Date | string
+    VAManagerDiscordWebhookId?: UuidNullableFilter<"VirtualAirline"> | string | null
+  }
+
   export type DiscordMessageCreateWithoutListenerEventsInput = {
     Id?: string
     ChannelId: string
@@ -51204,6 +53396,7 @@ export namespace Prisma {
     UpdatedAt?: Date | string
     DiscordMessageTemplate?: DiscordMessageTemplateCreateNestedOneWithoutDiscordMessagesInput
     DiscordChannelWebhook?: DiscordChannelWebhookCreateNestedOneWithoutDiscordMessagesInput
+    Notifications?: NotificationCreateNestedManyWithoutDiscordMessageInput
   }
 
   export type DiscordMessageUncheckedCreateWithoutListenerEventsInput = {
@@ -51215,6 +53408,7 @@ export namespace Prisma {
     DiscordMessageSentAt?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    Notifications?: NotificationUncheckedCreateNestedManyWithoutDiscordMessageInput
   }
 
   export type DiscordMessageCreateOrConnectWithoutListenerEventsInput = {
@@ -51271,6 +53465,7 @@ export namespace Prisma {
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     DiscordMessageTemplate?: DiscordMessageTemplateUpdateOneWithoutDiscordMessagesNestedInput
     DiscordChannelWebhook?: DiscordChannelWebhookUpdateOneWithoutDiscordMessagesNestedInput
+    Notifications?: NotificationUpdateManyWithoutDiscordMessageNestedInput
   }
 
   export type DiscordMessageUncheckedUpdateWithoutListenerEventsInput = {
@@ -51282,6 +53477,7 @@ export namespace Prisma {
     DiscordMessageSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Notifications?: NotificationUncheckedUpdateManyWithoutDiscordMessageNestedInput
   }
 
   export type ListenerEventSenderUpsertWithoutListenerEventsInput = {
@@ -51368,6 +53564,7 @@ export namespace Prisma {
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
     DiscordMessages?: DiscordMessageCreateNestedManyWithoutDiscordChannelWebhookInput
+    VirtualAirlines?: VirtualAirlineCreateNestedManyWithoutVAManagerDiscordWebhookInput
   }
 
   export type DiscordChannelWebhookUncheckedCreateWithoutListenerEventSendersInput = {
@@ -51381,6 +53578,7 @@ export namespace Prisma {
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
     DiscordMessages?: DiscordMessageUncheckedCreateNestedManyWithoutDiscordChannelWebhookInput
+    VirtualAirlines?: VirtualAirlineUncheckedCreateNestedManyWithoutVAManagerDiscordWebhookInput
   }
 
   export type DiscordChannelWebhookCreateOrConnectWithoutListenerEventSendersInput = {
@@ -51426,6 +53624,7 @@ export namespace Prisma {
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     DiscordMessages?: DiscordMessageUpdateManyWithoutDiscordChannelWebhookNestedInput
+    VirtualAirlines?: VirtualAirlineUpdateManyWithoutVAManagerDiscordWebhookNestedInput
   }
 
   export type DiscordChannelWebhookUncheckedUpdateWithoutListenerEventSendersInput = {
@@ -51439,6 +53638,7 @@ export namespace Prisma {
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     DiscordMessages?: DiscordMessageUncheckedUpdateManyWithoutDiscordChannelWebhookNestedInput
+    VirtualAirlines?: VirtualAirlineUncheckedUpdateManyWithoutVAManagerDiscordWebhookNestedInput
   }
 
   export type RoleCreateWithoutUsersInput = {
@@ -52618,6 +54818,39 @@ export namespace Prisma {
     create: XOR<WorldCreateWithoutVirtualAirlinesInput, WorldUncheckedCreateWithoutVirtualAirlinesInput>
   }
 
+  export type DiscordChannelWebhookCreateWithoutVirtualAirlinesInput = {
+    Id?: string
+    Name?: string
+    Description?: string | null
+    WebhookUrl: string
+    ChannelId: string
+    Token: string
+    IsActive?: boolean
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    DiscordMessages?: DiscordMessageCreateNestedManyWithoutDiscordChannelWebhookInput
+    ListenerEventSenders?: ListenerEventSenderCreateNestedManyWithoutDiscordChannelWebhookInput
+  }
+
+  export type DiscordChannelWebhookUncheckedCreateWithoutVirtualAirlinesInput = {
+    Id?: string
+    Name?: string
+    Description?: string | null
+    WebhookUrl: string
+    ChannelId: string
+    Token: string
+    IsActive?: boolean
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    DiscordMessages?: DiscordMessageUncheckedCreateNestedManyWithoutDiscordChannelWebhookInput
+    ListenerEventSenders?: ListenerEventSenderUncheckedCreateNestedManyWithoutDiscordChannelWebhookInput
+  }
+
+  export type DiscordChannelWebhookCreateOrConnectWithoutVirtualAirlinesInput = {
+    where: DiscordChannelWebhookWhereUniqueInput
+    create: XOR<DiscordChannelWebhookCreateWithoutVirtualAirlinesInput, DiscordChannelWebhookUncheckedCreateWithoutVirtualAirlinesInput>
+  }
+
   export type VirtualAirlineRoleCreateWithoutVirtualAirlineInput = {
     Id: string
     Name: string
@@ -52904,6 +55137,46 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type NotificationCreateWithoutVirtualAirlineInput = {
+    Id: string
+    DiscordMessageSent?: boolean
+    IsRead?: boolean
+    IsNotification?: boolean
+    ZuluEventTime?: Date | string | null
+    DiscordMessageSentAt?: Date | string | null
+    Category?: number
+    Action?: number
+    Description: string
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    DiscordMessage?: DiscordMessageCreateNestedOneWithoutNotificationsInput
+  }
+
+  export type NotificationUncheckedCreateWithoutVirtualAirlineInput = {
+    Id: string
+    DiscordMessageSent?: boolean
+    IsRead?: boolean
+    IsNotification?: boolean
+    ZuluEventTime?: Date | string | null
+    DiscordMessageSentAt?: Date | string | null
+    DiscordMessageId?: string | null
+    Category?: number
+    Action?: number
+    Description: string
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+  }
+
+  export type NotificationCreateOrConnectWithoutVirtualAirlineInput = {
+    where: NotificationWhereUniqueInput
+    create: XOR<NotificationCreateWithoutVirtualAirlineInput, NotificationUncheckedCreateWithoutVirtualAirlineInput>
+  }
+
+  export type NotificationCreateManyVirtualAirlineInputEnvelope = {
+    data: NotificationCreateManyVirtualAirlineInput | NotificationCreateManyVirtualAirlineInput[]
+    skipDuplicates?: boolean
+  }
+
   export type WorldUpsertWithoutVirtualAirlinesInput = {
     update: XOR<WorldUpdateWithoutVirtualAirlinesInput, WorldUncheckedUpdateWithoutVirtualAirlinesInput>
     create: XOR<WorldCreateWithoutVirtualAirlinesInput, WorldUncheckedCreateWithoutVirtualAirlinesInput>
@@ -52933,6 +55206,45 @@ export namespace Prisma {
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Companies?: CompanyUncheckedUpdateManyWithoutWorldNestedInput
+  }
+
+  export type DiscordChannelWebhookUpsertWithoutVirtualAirlinesInput = {
+    update: XOR<DiscordChannelWebhookUpdateWithoutVirtualAirlinesInput, DiscordChannelWebhookUncheckedUpdateWithoutVirtualAirlinesInput>
+    create: XOR<DiscordChannelWebhookCreateWithoutVirtualAirlinesInput, DiscordChannelWebhookUncheckedCreateWithoutVirtualAirlinesInput>
+    where?: DiscordChannelWebhookWhereInput
+  }
+
+  export type DiscordChannelWebhookUpdateToOneWithWhereWithoutVirtualAirlinesInput = {
+    where?: DiscordChannelWebhookWhereInput
+    data: XOR<DiscordChannelWebhookUpdateWithoutVirtualAirlinesInput, DiscordChannelWebhookUncheckedUpdateWithoutVirtualAirlinesInput>
+  }
+
+  export type DiscordChannelWebhookUpdateWithoutVirtualAirlinesInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
+    WebhookUrl?: StringFieldUpdateOperationsInput | string
+    ChannelId?: StringFieldUpdateOperationsInput | string
+    Token?: StringFieldUpdateOperationsInput | string
+    IsActive?: BoolFieldUpdateOperationsInput | boolean
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    DiscordMessages?: DiscordMessageUpdateManyWithoutDiscordChannelWebhookNestedInput
+    ListenerEventSenders?: ListenerEventSenderUpdateManyWithoutDiscordChannelWebhookNestedInput
+  }
+
+  export type DiscordChannelWebhookUncheckedUpdateWithoutVirtualAirlinesInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    Name?: StringFieldUpdateOperationsInput | string
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
+    WebhookUrl?: StringFieldUpdateOperationsInput | string
+    ChannelId?: StringFieldUpdateOperationsInput | string
+    Token?: StringFieldUpdateOperationsInput | string
+    IsActive?: BoolFieldUpdateOperationsInput | boolean
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    DiscordMessages?: DiscordMessageUncheckedUpdateManyWithoutDiscordChannelWebhookNestedInput
+    ListenerEventSenders?: ListenerEventSenderUncheckedUpdateManyWithoutDiscordChannelWebhookNestedInput
   }
 
   export type VirtualAirlineRoleUpsertWithWhereUniqueWithoutVirtualAirlineInput = {
@@ -53105,6 +55417,22 @@ export namespace Prisma {
     FlightStatus?: EnumFlightStatusFilter<"Flight"> | $Enums.FlightStatus
   }
 
+  export type NotificationUpsertWithWhereUniqueWithoutVirtualAirlineInput = {
+    where: NotificationWhereUniqueInput
+    update: XOR<NotificationUpdateWithoutVirtualAirlineInput, NotificationUncheckedUpdateWithoutVirtualAirlineInput>
+    create: XOR<NotificationCreateWithoutVirtualAirlineInput, NotificationUncheckedCreateWithoutVirtualAirlineInput>
+  }
+
+  export type NotificationUpdateWithWhereUniqueWithoutVirtualAirlineInput = {
+    where: NotificationWhereUniqueInput
+    data: XOR<NotificationUpdateWithoutVirtualAirlineInput, NotificationUncheckedUpdateWithoutVirtualAirlineInput>
+  }
+
+  export type NotificationUpdateManyWithWhereWithoutVirtualAirlineInput = {
+    where: NotificationScalarWhereInput
+    data: XOR<NotificationUpdateManyMutationInput, NotificationUncheckedUpdateManyWithoutVirtualAirlineInput>
+  }
+
   export type RoleCreateWithoutVirtualAirlineRoleInput = {
     Name: string
     Description?: string | null
@@ -53158,9 +55486,11 @@ export namespace Prisma {
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
     World?: WorldCreateNestedOneWithoutVirtualAirlinesInput
+    VAManagerDiscordWebhook?: DiscordChannelWebhookCreateNestedOneWithoutVirtualAirlinesInput
     Members?: MemberCreateNestedManyWithoutVirtualAirlineInput
     Fleet?: AircraftCreateNestedManyWithoutVirtualAirlineInput
     Flights?: FlightCreateNestedManyWithoutVirtualAirlineInput
+    Notifications?: NotificationCreateNestedManyWithoutVirtualAirlineInput
   }
 
   export type VirtualAirlineUncheckedCreateWithoutVARolesInput = {
@@ -53190,9 +55520,11 @@ export namespace Prisma {
     LastRefresh?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    VAManagerDiscordWebhookId?: string | null
     Members?: MemberUncheckedCreateNestedManyWithoutVirtualAirlineInput
     Fleet?: AircraftUncheckedCreateNestedManyWithoutVirtualAirlineInput
     Flights?: FlightUncheckedCreateNestedManyWithoutVirtualAirlineInput
+    Notifications?: NotificationUncheckedCreateNestedManyWithoutVirtualAirlineInput
   }
 
   export type VirtualAirlineCreateOrConnectWithoutVARolesInput = {
@@ -53326,9 +55658,11 @@ export namespace Prisma {
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     World?: WorldUpdateOneWithoutVirtualAirlinesNestedInput
+    VAManagerDiscordWebhook?: DiscordChannelWebhookUpdateOneWithoutVirtualAirlinesNestedInput
     Members?: MemberUpdateManyWithoutVirtualAirlineNestedInput
     Fleet?: AircraftUpdateManyWithoutVirtualAirlineNestedInput
     Flights?: FlightUpdateManyWithoutVirtualAirlineNestedInput
+    Notifications?: NotificationUpdateManyWithoutVirtualAirlineNestedInput
   }
 
   export type VirtualAirlineUncheckedUpdateWithoutVARolesInput = {
@@ -53358,9 +55692,11 @@ export namespace Prisma {
     LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    VAManagerDiscordWebhookId?: NullableStringFieldUpdateOperationsInput | string | null
     Members?: MemberUncheckedUpdateManyWithoutVirtualAirlineNestedInput
     Fleet?: AircraftUncheckedUpdateManyWithoutVirtualAirlineNestedInput
     Flights?: FlightUncheckedUpdateManyWithoutVirtualAirlineNestedInput
+    Notifications?: NotificationUncheckedUpdateManyWithoutVirtualAirlineNestedInput
   }
 
   export type MemberUpsertWithWhereUniqueWithoutVARoleInput = {
@@ -53405,10 +55741,12 @@ export namespace Prisma {
     LastRefresh?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    VAManagerDiscordWebhook?: DiscordChannelWebhookCreateNestedOneWithoutVirtualAirlinesInput
     VARoles?: VirtualAirlineRoleCreateNestedManyWithoutVirtualAirlineInput
     Members?: MemberCreateNestedManyWithoutVirtualAirlineInput
     Fleet?: AircraftCreateNestedManyWithoutVirtualAirlineInput
     Flights?: FlightCreateNestedManyWithoutVirtualAirlineInput
+    Notifications?: NotificationCreateNestedManyWithoutVirtualAirlineInput
   }
 
   export type VirtualAirlineUncheckedCreateWithoutWorldInput = {
@@ -53437,10 +55775,12 @@ export namespace Prisma {
     LastRefresh?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    VAManagerDiscordWebhookId?: string | null
     VARoles?: VirtualAirlineRoleUncheckedCreateNestedManyWithoutVirtualAirlineInput
     Members?: MemberUncheckedCreateNestedManyWithoutVirtualAirlineInput
     Fleet?: AircraftUncheckedCreateNestedManyWithoutVirtualAirlineInput
     Flights?: FlightUncheckedCreateNestedManyWithoutVirtualAirlineInput
+    Notifications?: NotificationUncheckedCreateNestedManyWithoutVirtualAirlineInput
   }
 
   export type VirtualAirlineCreateOrConnectWithoutWorldInput = {
@@ -53515,38 +55855,6 @@ export namespace Prisma {
   export type VirtualAirlineUpdateManyWithWhereWithoutWorldInput = {
     where: VirtualAirlineScalarWhereInput
     data: XOR<VirtualAirlineUpdateManyMutationInput, VirtualAirlineUncheckedUpdateManyWithoutWorldInput>
-  }
-
-  export type VirtualAirlineScalarWhereInput = {
-    AND?: VirtualAirlineScalarWhereInput | VirtualAirlineScalarWhereInput[]
-    OR?: VirtualAirlineScalarWhereInput[]
-    NOT?: VirtualAirlineScalarWhereInput | VirtualAirlineScalarWhereInput[]
-    Id?: UuidFilter<"VirtualAirline"> | string
-    ApiKey?: UuidFilter<"VirtualAirline"> | string
-    IsPrimary?: BoolFilter<"VirtualAirline"> | boolean
-    Identifier?: StringNullableFilter<"VirtualAirline"> | string | null
-    Name?: StringNullableFilter<"VirtualAirline"> | string | null
-    Description?: StringNullableFilter<"VirtualAirline"> | string | null
-    WorldId?: UuidNullableFilter<"VirtualAirline"> | string | null
-    LastDividendsDistribution?: DateTimeNullableFilter<"VirtualAirline"> | Date | string | null
-    LastComputationDate?: DateTimeNullableFilter<"VirtualAirline"> | Date | string | null
-    ComputedMemberCount?: IntNullableFilter<"VirtualAirline"> | number | null
-    ComputedAircraftsCount?: IntNullableFilter<"VirtualAirline"> | number | null
-    ComputedNumberOfFlights30Days?: IntNullableFilter<"VirtualAirline"> | number | null
-    ComputedNumberOfFlightHours30Days?: IntNullableFilter<"VirtualAirline"> | number | null
-    ComputedMostUsedAirports?: StringNullableFilter<"VirtualAirline"> | string | null
-    LastConnection?: DateTimeNullableFilter<"VirtualAirline"> | Date | string | null
-    LastReportDate?: DateTimeNullableFilter<"VirtualAirline"> | Date | string | null
-    Reputation?: DecimalNullableFilter<"VirtualAirline"> | Decimal | DecimalJsLike | number | string | null
-    CreationDate?: DateTimeNullableFilter<"VirtualAirline"> | Date | string | null
-    DifficultyLevel?: IntNullableFilter<"VirtualAirline"> | number | null
-    Level?: IntNullableFilter<"VirtualAirline"> | number | null
-    LevelXP?: IntNullableFilter<"VirtualAirline"> | number | null
-    TotalContractsCompleted?: IntNullableFilter<"VirtualAirline"> | number | null
-    TotalContractsEarnedCredits?: IntNullableFilter<"VirtualAirline"> | number | null
-    LastRefresh?: DateTimeNullableFilter<"VirtualAirline"> | Date | string | null
-    CreatedAt?: DateTimeFilter<"VirtualAirline"> | Date | string
-    UpdatedAt?: DateTimeFilter<"VirtualAirline"> | Date | string
   }
 
   export type CompanyUpsertWithWhereUniqueWithoutWorldInput = {
@@ -53796,9 +56104,11 @@ export namespace Prisma {
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
     World?: WorldCreateNestedOneWithoutVirtualAirlinesInput
+    VAManagerDiscordWebhook?: DiscordChannelWebhookCreateNestedOneWithoutVirtualAirlinesInput
     VARoles?: VirtualAirlineRoleCreateNestedManyWithoutVirtualAirlineInput
     Fleet?: AircraftCreateNestedManyWithoutVirtualAirlineInput
     Flights?: FlightCreateNestedManyWithoutVirtualAirlineInput
+    Notifications?: NotificationCreateNestedManyWithoutVirtualAirlineInput
   }
 
   export type VirtualAirlineUncheckedCreateWithoutMembersInput = {
@@ -53828,9 +56138,11 @@ export namespace Prisma {
     LastRefresh?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    VAManagerDiscordWebhookId?: string | null
     VARoles?: VirtualAirlineRoleUncheckedCreateNestedManyWithoutVirtualAirlineInput
     Fleet?: AircraftUncheckedCreateNestedManyWithoutVirtualAirlineInput
     Flights?: FlightUncheckedCreateNestedManyWithoutVirtualAirlineInput
+    Notifications?: NotificationUncheckedCreateNestedManyWithoutVirtualAirlineInput
   }
 
   export type VirtualAirlineCreateOrConnectWithoutMembersInput = {
@@ -54203,9 +56515,11 @@ export namespace Prisma {
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     World?: WorldUpdateOneWithoutVirtualAirlinesNestedInput
+    VAManagerDiscordWebhook?: DiscordChannelWebhookUpdateOneWithoutVirtualAirlinesNestedInput
     VARoles?: VirtualAirlineRoleUpdateManyWithoutVirtualAirlineNestedInput
     Fleet?: AircraftUpdateManyWithoutVirtualAirlineNestedInput
     Flights?: FlightUpdateManyWithoutVirtualAirlineNestedInput
+    Notifications?: NotificationUpdateManyWithoutVirtualAirlineNestedInput
   }
 
   export type VirtualAirlineUncheckedUpdateWithoutMembersInput = {
@@ -54235,9 +56549,11 @@ export namespace Prisma {
     LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    VAManagerDiscordWebhookId?: NullableStringFieldUpdateOperationsInput | string | null
     VARoles?: VirtualAirlineRoleUncheckedUpdateManyWithoutVirtualAirlineNestedInput
     Fleet?: AircraftUncheckedUpdateManyWithoutVirtualAirlineNestedInput
     Flights?: FlightUncheckedUpdateManyWithoutVirtualAirlineNestedInput
+    Notifications?: NotificationUncheckedUpdateManyWithoutVirtualAirlineNestedInput
   }
 
   export type VirtualAirlineRoleUpsertWithoutMembersInput = {
@@ -54772,9 +57088,11 @@ export namespace Prisma {
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
     World?: WorldCreateNestedOneWithoutVirtualAirlinesInput
+    VAManagerDiscordWebhook?: DiscordChannelWebhookCreateNestedOneWithoutVirtualAirlinesInput
     VARoles?: VirtualAirlineRoleCreateNestedManyWithoutVirtualAirlineInput
     Members?: MemberCreateNestedManyWithoutVirtualAirlineInput
     Flights?: FlightCreateNestedManyWithoutVirtualAirlineInput
+    Notifications?: NotificationCreateNestedManyWithoutVirtualAirlineInput
   }
 
   export type VirtualAirlineUncheckedCreateWithoutFleetInput = {
@@ -54804,9 +57122,11 @@ export namespace Prisma {
     LastRefresh?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    VAManagerDiscordWebhookId?: string | null
     VARoles?: VirtualAirlineRoleUncheckedCreateNestedManyWithoutVirtualAirlineInput
     Members?: MemberUncheckedCreateNestedManyWithoutVirtualAirlineInput
     Flights?: FlightUncheckedCreateNestedManyWithoutVirtualAirlineInput
+    Notifications?: NotificationUncheckedCreateNestedManyWithoutVirtualAirlineInput
   }
 
   export type VirtualAirlineCreateOrConnectWithoutFleetInput = {
@@ -55177,9 +57497,11 @@ export namespace Prisma {
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     World?: WorldUpdateOneWithoutVirtualAirlinesNestedInput
+    VAManagerDiscordWebhook?: DiscordChannelWebhookUpdateOneWithoutVirtualAirlinesNestedInput
     VARoles?: VirtualAirlineRoleUpdateManyWithoutVirtualAirlineNestedInput
     Members?: MemberUpdateManyWithoutVirtualAirlineNestedInput
     Flights?: FlightUpdateManyWithoutVirtualAirlineNestedInput
+    Notifications?: NotificationUpdateManyWithoutVirtualAirlineNestedInput
   }
 
   export type VirtualAirlineUncheckedUpdateWithoutFleetInput = {
@@ -55209,9 +57531,11 @@ export namespace Prisma {
     LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    VAManagerDiscordWebhookId?: NullableStringFieldUpdateOperationsInput | string | null
     VARoles?: VirtualAirlineRoleUncheckedUpdateManyWithoutVirtualAirlineNestedInput
     Members?: MemberUncheckedUpdateManyWithoutVirtualAirlineNestedInput
     Flights?: FlightUncheckedUpdateManyWithoutVirtualAirlineNestedInput
+    Notifications?: NotificationUncheckedUpdateManyWithoutVirtualAirlineNestedInput
   }
 
   export type AircraftStatusUpsertWithoutAircraftsInput = {
@@ -56330,9 +58654,11 @@ export namespace Prisma {
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
     World?: WorldCreateNestedOneWithoutVirtualAirlinesInput
+    VAManagerDiscordWebhook?: DiscordChannelWebhookCreateNestedOneWithoutVirtualAirlinesInput
     VARoles?: VirtualAirlineRoleCreateNestedManyWithoutVirtualAirlineInput
     Members?: MemberCreateNestedManyWithoutVirtualAirlineInput
     Fleet?: AircraftCreateNestedManyWithoutVirtualAirlineInput
+    Notifications?: NotificationCreateNestedManyWithoutVirtualAirlineInput
   }
 
   export type VirtualAirlineUncheckedCreateWithoutFlightsInput = {
@@ -56362,9 +58688,11 @@ export namespace Prisma {
     LastRefresh?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    VAManagerDiscordWebhookId?: string | null
     VARoles?: VirtualAirlineRoleUncheckedCreateNestedManyWithoutVirtualAirlineInput
     Members?: MemberUncheckedCreateNestedManyWithoutVirtualAirlineInput
     Fleet?: AircraftUncheckedCreateNestedManyWithoutVirtualAirlineInput
+    Notifications?: NotificationUncheckedCreateNestedManyWithoutVirtualAirlineInput
   }
 
   export type VirtualAirlineCreateOrConnectWithoutFlightsInput = {
@@ -56783,9 +59111,11 @@ export namespace Prisma {
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     World?: WorldUpdateOneWithoutVirtualAirlinesNestedInput
+    VAManagerDiscordWebhook?: DiscordChannelWebhookUpdateOneWithoutVirtualAirlinesNestedInput
     VARoles?: VirtualAirlineRoleUpdateManyWithoutVirtualAirlineNestedInput
     Members?: MemberUpdateManyWithoutVirtualAirlineNestedInput
     Fleet?: AircraftUpdateManyWithoutVirtualAirlineNestedInput
+    Notifications?: NotificationUpdateManyWithoutVirtualAirlineNestedInput
   }
 
   export type VirtualAirlineUncheckedUpdateWithoutFlightsInput = {
@@ -56815,9 +59145,11 @@ export namespace Prisma {
     LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    VAManagerDiscordWebhookId?: NullableStringFieldUpdateOperationsInput | string | null
     VARoles?: VirtualAirlineRoleUncheckedUpdateManyWithoutVirtualAirlineNestedInput
     Members?: MemberUncheckedUpdateManyWithoutVirtualAirlineNestedInput
     Fleet?: AircraftUncheckedUpdateManyWithoutVirtualAirlineNestedInput
+    Notifications?: NotificationUncheckedUpdateManyWithoutVirtualAirlineNestedInput
   }
 
   export type AircraftUpsertWithoutFlightsInput = {
@@ -57558,6 +59890,222 @@ export namespace Prisma {
     Flights?: FlightUncheckedUpdateManyWithoutMemberNestedInput
   }
 
+  export type VirtualAirlineCreateWithoutNotificationsInput = {
+    Id: string
+    ApiKey: string
+    IsPrimary?: boolean
+    Identifier?: string | null
+    Name?: string | null
+    Description?: string | null
+    LastDividendsDistribution?: Date | string | null
+    LastComputationDate?: Date | string | null
+    ComputedMemberCount?: number | null
+    ComputedAircraftsCount?: number | null
+    ComputedNumberOfFlights30Days?: number | null
+    ComputedNumberOfFlightHours30Days?: number | null
+    ComputedMostUsedAirports?: string | null
+    LastConnection?: Date | string | null
+    LastReportDate?: Date | string | null
+    Reputation?: Decimal | DecimalJsLike | number | string | null
+    CreationDate?: Date | string | null
+    DifficultyLevel?: number | null
+    Level?: number | null
+    LevelXP?: number | null
+    TotalContractsCompleted?: number | null
+    TotalContractsEarnedCredits?: number | null
+    LastRefresh?: Date | string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    World?: WorldCreateNestedOneWithoutVirtualAirlinesInput
+    VAManagerDiscordWebhook?: DiscordChannelWebhookCreateNestedOneWithoutVirtualAirlinesInput
+    VARoles?: VirtualAirlineRoleCreateNestedManyWithoutVirtualAirlineInput
+    Members?: MemberCreateNestedManyWithoutVirtualAirlineInput
+    Fleet?: AircraftCreateNestedManyWithoutVirtualAirlineInput
+    Flights?: FlightCreateNestedManyWithoutVirtualAirlineInput
+  }
+
+  export type VirtualAirlineUncheckedCreateWithoutNotificationsInput = {
+    Id: string
+    ApiKey: string
+    IsPrimary?: boolean
+    Identifier?: string | null
+    Name?: string | null
+    Description?: string | null
+    WorldId?: string | null
+    LastDividendsDistribution?: Date | string | null
+    LastComputationDate?: Date | string | null
+    ComputedMemberCount?: number | null
+    ComputedAircraftsCount?: number | null
+    ComputedNumberOfFlights30Days?: number | null
+    ComputedNumberOfFlightHours30Days?: number | null
+    ComputedMostUsedAirports?: string | null
+    LastConnection?: Date | string | null
+    LastReportDate?: Date | string | null
+    Reputation?: Decimal | DecimalJsLike | number | string | null
+    CreationDate?: Date | string | null
+    DifficultyLevel?: number | null
+    Level?: number | null
+    LevelXP?: number | null
+    TotalContractsCompleted?: number | null
+    TotalContractsEarnedCredits?: number | null
+    LastRefresh?: Date | string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    VAManagerDiscordWebhookId?: string | null
+    VARoles?: VirtualAirlineRoleUncheckedCreateNestedManyWithoutVirtualAirlineInput
+    Members?: MemberUncheckedCreateNestedManyWithoutVirtualAirlineInput
+    Fleet?: AircraftUncheckedCreateNestedManyWithoutVirtualAirlineInput
+    Flights?: FlightUncheckedCreateNestedManyWithoutVirtualAirlineInput
+  }
+
+  export type VirtualAirlineCreateOrConnectWithoutNotificationsInput = {
+    where: VirtualAirlineWhereUniqueInput
+    create: XOR<VirtualAirlineCreateWithoutNotificationsInput, VirtualAirlineUncheckedCreateWithoutNotificationsInput>
+  }
+
+  export type DiscordMessageCreateWithoutNotificationsInput = {
+    Id?: string
+    ChannelId: string
+    Content: string
+    DiscordMessageSentAt?: Date | string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    DiscordMessageTemplate?: DiscordMessageTemplateCreateNestedOneWithoutDiscordMessagesInput
+    DiscordChannelWebhook?: DiscordChannelWebhookCreateNestedOneWithoutDiscordMessagesInput
+    ListenerEvents?: ListenerEventCreateNestedManyWithoutDiscordMessageInput
+  }
+
+  export type DiscordMessageUncheckedCreateWithoutNotificationsInput = {
+    Id?: string
+    ChannelId: string
+    Content: string
+    DiscordMessageTemplateId?: number | null
+    DiscordChannelWebhookId?: string | null
+    DiscordMessageSentAt?: Date | string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+    ListenerEvents?: ListenerEventUncheckedCreateNestedManyWithoutDiscordMessageInput
+  }
+
+  export type DiscordMessageCreateOrConnectWithoutNotificationsInput = {
+    where: DiscordMessageWhereUniqueInput
+    create: XOR<DiscordMessageCreateWithoutNotificationsInput, DiscordMessageUncheckedCreateWithoutNotificationsInput>
+  }
+
+  export type VirtualAirlineUpsertWithoutNotificationsInput = {
+    update: XOR<VirtualAirlineUpdateWithoutNotificationsInput, VirtualAirlineUncheckedUpdateWithoutNotificationsInput>
+    create: XOR<VirtualAirlineCreateWithoutNotificationsInput, VirtualAirlineUncheckedCreateWithoutNotificationsInput>
+    where?: VirtualAirlineWhereInput
+  }
+
+  export type VirtualAirlineUpdateToOneWithWhereWithoutNotificationsInput = {
+    where?: VirtualAirlineWhereInput
+    data: XOR<VirtualAirlineUpdateWithoutNotificationsInput, VirtualAirlineUncheckedUpdateWithoutNotificationsInput>
+  }
+
+  export type VirtualAirlineUpdateWithoutNotificationsInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    ApiKey?: StringFieldUpdateOperationsInput | string
+    IsPrimary?: BoolFieldUpdateOperationsInput | boolean
+    Identifier?: NullableStringFieldUpdateOperationsInput | string | null
+    Name?: NullableStringFieldUpdateOperationsInput | string | null
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
+    LastDividendsDistribution?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    LastComputationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ComputedMemberCount?: NullableIntFieldUpdateOperationsInput | number | null
+    ComputedAircraftsCount?: NullableIntFieldUpdateOperationsInput | number | null
+    ComputedNumberOfFlights30Days?: NullableIntFieldUpdateOperationsInput | number | null
+    ComputedNumberOfFlightHours30Days?: NullableIntFieldUpdateOperationsInput | number | null
+    ComputedMostUsedAirports?: NullableStringFieldUpdateOperationsInput | string | null
+    LastConnection?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    LastReportDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Reputation?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    CreationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    DifficultyLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    Level?: NullableIntFieldUpdateOperationsInput | number | null
+    LevelXP?: NullableIntFieldUpdateOperationsInput | number | null
+    TotalContractsCompleted?: NullableIntFieldUpdateOperationsInput | number | null
+    TotalContractsEarnedCredits?: NullableIntFieldUpdateOperationsInput | number | null
+    LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    World?: WorldUpdateOneWithoutVirtualAirlinesNestedInput
+    VAManagerDiscordWebhook?: DiscordChannelWebhookUpdateOneWithoutVirtualAirlinesNestedInput
+    VARoles?: VirtualAirlineRoleUpdateManyWithoutVirtualAirlineNestedInput
+    Members?: MemberUpdateManyWithoutVirtualAirlineNestedInput
+    Fleet?: AircraftUpdateManyWithoutVirtualAirlineNestedInput
+    Flights?: FlightUpdateManyWithoutVirtualAirlineNestedInput
+  }
+
+  export type VirtualAirlineUncheckedUpdateWithoutNotificationsInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    ApiKey?: StringFieldUpdateOperationsInput | string
+    IsPrimary?: BoolFieldUpdateOperationsInput | boolean
+    Identifier?: NullableStringFieldUpdateOperationsInput | string | null
+    Name?: NullableStringFieldUpdateOperationsInput | string | null
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
+    WorldId?: NullableStringFieldUpdateOperationsInput | string | null
+    LastDividendsDistribution?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    LastComputationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ComputedMemberCount?: NullableIntFieldUpdateOperationsInput | number | null
+    ComputedAircraftsCount?: NullableIntFieldUpdateOperationsInput | number | null
+    ComputedNumberOfFlights30Days?: NullableIntFieldUpdateOperationsInput | number | null
+    ComputedNumberOfFlightHours30Days?: NullableIntFieldUpdateOperationsInput | number | null
+    ComputedMostUsedAirports?: NullableStringFieldUpdateOperationsInput | string | null
+    LastConnection?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    LastReportDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Reputation?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    CreationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    DifficultyLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    Level?: NullableIntFieldUpdateOperationsInput | number | null
+    LevelXP?: NullableIntFieldUpdateOperationsInput | number | null
+    TotalContractsCompleted?: NullableIntFieldUpdateOperationsInput | number | null
+    TotalContractsEarnedCredits?: NullableIntFieldUpdateOperationsInput | number | null
+    LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    VAManagerDiscordWebhookId?: NullableStringFieldUpdateOperationsInput | string | null
+    VARoles?: VirtualAirlineRoleUncheckedUpdateManyWithoutVirtualAirlineNestedInput
+    Members?: MemberUncheckedUpdateManyWithoutVirtualAirlineNestedInput
+    Fleet?: AircraftUncheckedUpdateManyWithoutVirtualAirlineNestedInput
+    Flights?: FlightUncheckedUpdateManyWithoutVirtualAirlineNestedInput
+  }
+
+  export type DiscordMessageUpsertWithoutNotificationsInput = {
+    update: XOR<DiscordMessageUpdateWithoutNotificationsInput, DiscordMessageUncheckedUpdateWithoutNotificationsInput>
+    create: XOR<DiscordMessageCreateWithoutNotificationsInput, DiscordMessageUncheckedCreateWithoutNotificationsInput>
+    where?: DiscordMessageWhereInput
+  }
+
+  export type DiscordMessageUpdateToOneWithWhereWithoutNotificationsInput = {
+    where?: DiscordMessageWhereInput
+    data: XOR<DiscordMessageUpdateWithoutNotificationsInput, DiscordMessageUncheckedUpdateWithoutNotificationsInput>
+  }
+
+  export type DiscordMessageUpdateWithoutNotificationsInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    ChannelId?: StringFieldUpdateOperationsInput | string
+    Content?: StringFieldUpdateOperationsInput | string
+    DiscordMessageSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    DiscordMessageTemplate?: DiscordMessageTemplateUpdateOneWithoutDiscordMessagesNestedInput
+    DiscordChannelWebhook?: DiscordChannelWebhookUpdateOneWithoutDiscordMessagesNestedInput
+    ListenerEvents?: ListenerEventUpdateManyWithoutDiscordMessageNestedInput
+  }
+
+  export type DiscordMessageUncheckedUpdateWithoutNotificationsInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    ChannelId?: StringFieldUpdateOperationsInput | string
+    Content?: StringFieldUpdateOperationsInput | string
+    DiscordMessageTemplateId?: NullableIntFieldUpdateOperationsInput | number | null
+    DiscordChannelWebhookId?: NullableStringFieldUpdateOperationsInput | string | null
+    DiscordMessageSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ListenerEvents?: ListenerEventUncheckedUpdateManyWithoutDiscordMessageNestedInput
+  }
+
   export type ListenerEventCreateManyDiscordMessageInput = {
     Id?: string
     Variant: string
@@ -57568,6 +60116,21 @@ export namespace Prisma {
     Error?: string | null
     Data?: NullableJsonNullValueInput | InputJsonValue
     DeliveredAt?: Date | string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+  }
+
+  export type NotificationCreateManyDiscordMessageInput = {
+    Id: string
+    CompanyId: string
+    DiscordMessageSent?: boolean
+    IsRead?: boolean
+    IsNotification?: boolean
+    ZuluEventTime?: Date | string | null
+    DiscordMessageSentAt?: Date | string | null
+    Category?: number
+    Action?: number
+    Description: string
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
   }
@@ -57614,6 +60177,51 @@ export namespace Prisma {
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type NotificationUpdateWithoutDiscordMessageInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    DiscordMessageSent?: BoolFieldUpdateOperationsInput | boolean
+    IsRead?: BoolFieldUpdateOperationsInput | boolean
+    IsNotification?: BoolFieldUpdateOperationsInput | boolean
+    ZuluEventTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    DiscordMessageSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Category?: IntFieldUpdateOperationsInput | number
+    Action?: IntFieldUpdateOperationsInput | number
+    Description?: StringFieldUpdateOperationsInput | string
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    VirtualAirline?: VirtualAirlineUpdateOneRequiredWithoutNotificationsNestedInput
+  }
+
+  export type NotificationUncheckedUpdateWithoutDiscordMessageInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    CompanyId?: StringFieldUpdateOperationsInput | string
+    DiscordMessageSent?: BoolFieldUpdateOperationsInput | boolean
+    IsRead?: BoolFieldUpdateOperationsInput | boolean
+    IsNotification?: BoolFieldUpdateOperationsInput | boolean
+    ZuluEventTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    DiscordMessageSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Category?: IntFieldUpdateOperationsInput | number
+    Action?: IntFieldUpdateOperationsInput | number
+    Description?: StringFieldUpdateOperationsInput | string
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotificationUncheckedUpdateManyWithoutDiscordMessageInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    CompanyId?: StringFieldUpdateOperationsInput | string
+    DiscordMessageSent?: BoolFieldUpdateOperationsInput | boolean
+    IsRead?: BoolFieldUpdateOperationsInput | boolean
+    IsNotification?: BoolFieldUpdateOperationsInput | boolean
+    ZuluEventTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    DiscordMessageSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Category?: IntFieldUpdateOperationsInput | number
+    Action?: IntFieldUpdateOperationsInput | number
+    Description?: StringFieldUpdateOperationsInput | string
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type DiscordMessageCreateManyDiscordMessageTemplateInput = {
     Id?: string
     ChannelId: string
@@ -57633,6 +60241,7 @@ export namespace Prisma {
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     DiscordChannelWebhook?: DiscordChannelWebhookUpdateOneWithoutDiscordMessagesNestedInput
     ListenerEvents?: ListenerEventUpdateManyWithoutDiscordMessageNestedInput
+    Notifications?: NotificationUpdateManyWithoutDiscordMessageNestedInput
   }
 
   export type DiscordMessageUncheckedUpdateWithoutDiscordMessageTemplateInput = {
@@ -57644,6 +60253,7 @@ export namespace Prisma {
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ListenerEvents?: ListenerEventUncheckedUpdateManyWithoutDiscordMessageNestedInput
+    Notifications?: NotificationUncheckedUpdateManyWithoutDiscordMessageNestedInput
   }
 
   export type DiscordMessageUncheckedUpdateManyWithoutDiscordMessageTemplateInput = {
@@ -57677,6 +60287,35 @@ export namespace Prisma {
     UpdatedAt?: Date | string
   }
 
+  export type VirtualAirlineCreateManyVAManagerDiscordWebhookInput = {
+    Id: string
+    ApiKey: string
+    IsPrimary?: boolean
+    Identifier?: string | null
+    Name?: string | null
+    Description?: string | null
+    WorldId?: string | null
+    LastDividendsDistribution?: Date | string | null
+    LastComputationDate?: Date | string | null
+    ComputedMemberCount?: number | null
+    ComputedAircraftsCount?: number | null
+    ComputedNumberOfFlights30Days?: number | null
+    ComputedNumberOfFlightHours30Days?: number | null
+    ComputedMostUsedAirports?: string | null
+    LastConnection?: Date | string | null
+    LastReportDate?: Date | string | null
+    Reputation?: Decimal | DecimalJsLike | number | string | null
+    CreationDate?: Date | string | null
+    DifficultyLevel?: number | null
+    Level?: number | null
+    LevelXP?: number | null
+    TotalContractsCompleted?: number | null
+    TotalContractsEarnedCredits?: number | null
+    LastRefresh?: Date | string | null
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+  }
+
   export type DiscordMessageUpdateWithoutDiscordChannelWebhookInput = {
     Id?: StringFieldUpdateOperationsInput | string
     ChannelId?: StringFieldUpdateOperationsInput | string
@@ -57686,6 +60325,7 @@ export namespace Prisma {
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     DiscordMessageTemplate?: DiscordMessageTemplateUpdateOneWithoutDiscordMessagesNestedInput
     ListenerEvents?: ListenerEventUpdateManyWithoutDiscordMessageNestedInput
+    Notifications?: NotificationUpdateManyWithoutDiscordMessageNestedInput
   }
 
   export type DiscordMessageUncheckedUpdateWithoutDiscordChannelWebhookInput = {
@@ -57697,6 +60337,7 @@ export namespace Prisma {
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ListenerEvents?: ListenerEventUncheckedUpdateManyWithoutDiscordMessageNestedInput
+    Notifications?: NotificationUncheckedUpdateManyWithoutDiscordMessageNestedInput
   }
 
   export type DiscordMessageUncheckedUpdateManyWithoutDiscordChannelWebhookInput = {
@@ -57740,6 +60381,103 @@ export namespace Prisma {
     Slug?: StringFieldUpdateOperationsInput | string
     Token?: StringFieldUpdateOperationsInput | string
     IsActive?: BoolFieldUpdateOperationsInput | boolean
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VirtualAirlineUpdateWithoutVAManagerDiscordWebhookInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    ApiKey?: StringFieldUpdateOperationsInput | string
+    IsPrimary?: BoolFieldUpdateOperationsInput | boolean
+    Identifier?: NullableStringFieldUpdateOperationsInput | string | null
+    Name?: NullableStringFieldUpdateOperationsInput | string | null
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
+    LastDividendsDistribution?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    LastComputationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ComputedMemberCount?: NullableIntFieldUpdateOperationsInput | number | null
+    ComputedAircraftsCount?: NullableIntFieldUpdateOperationsInput | number | null
+    ComputedNumberOfFlights30Days?: NullableIntFieldUpdateOperationsInput | number | null
+    ComputedNumberOfFlightHours30Days?: NullableIntFieldUpdateOperationsInput | number | null
+    ComputedMostUsedAirports?: NullableStringFieldUpdateOperationsInput | string | null
+    LastConnection?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    LastReportDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Reputation?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    CreationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    DifficultyLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    Level?: NullableIntFieldUpdateOperationsInput | number | null
+    LevelXP?: NullableIntFieldUpdateOperationsInput | number | null
+    TotalContractsCompleted?: NullableIntFieldUpdateOperationsInput | number | null
+    TotalContractsEarnedCredits?: NullableIntFieldUpdateOperationsInput | number | null
+    LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    World?: WorldUpdateOneWithoutVirtualAirlinesNestedInput
+    VARoles?: VirtualAirlineRoleUpdateManyWithoutVirtualAirlineNestedInput
+    Members?: MemberUpdateManyWithoutVirtualAirlineNestedInput
+    Fleet?: AircraftUpdateManyWithoutVirtualAirlineNestedInput
+    Flights?: FlightUpdateManyWithoutVirtualAirlineNestedInput
+    Notifications?: NotificationUpdateManyWithoutVirtualAirlineNestedInput
+  }
+
+  export type VirtualAirlineUncheckedUpdateWithoutVAManagerDiscordWebhookInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    ApiKey?: StringFieldUpdateOperationsInput | string
+    IsPrimary?: BoolFieldUpdateOperationsInput | boolean
+    Identifier?: NullableStringFieldUpdateOperationsInput | string | null
+    Name?: NullableStringFieldUpdateOperationsInput | string | null
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
+    WorldId?: NullableStringFieldUpdateOperationsInput | string | null
+    LastDividendsDistribution?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    LastComputationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ComputedMemberCount?: NullableIntFieldUpdateOperationsInput | number | null
+    ComputedAircraftsCount?: NullableIntFieldUpdateOperationsInput | number | null
+    ComputedNumberOfFlights30Days?: NullableIntFieldUpdateOperationsInput | number | null
+    ComputedNumberOfFlightHours30Days?: NullableIntFieldUpdateOperationsInput | number | null
+    ComputedMostUsedAirports?: NullableStringFieldUpdateOperationsInput | string | null
+    LastConnection?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    LastReportDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Reputation?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    CreationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    DifficultyLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    Level?: NullableIntFieldUpdateOperationsInput | number | null
+    LevelXP?: NullableIntFieldUpdateOperationsInput | number | null
+    TotalContractsCompleted?: NullableIntFieldUpdateOperationsInput | number | null
+    TotalContractsEarnedCredits?: NullableIntFieldUpdateOperationsInput | number | null
+    LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    VARoles?: VirtualAirlineRoleUncheckedUpdateManyWithoutVirtualAirlineNestedInput
+    Members?: MemberUncheckedUpdateManyWithoutVirtualAirlineNestedInput
+    Fleet?: AircraftUncheckedUpdateManyWithoutVirtualAirlineNestedInput
+    Flights?: FlightUncheckedUpdateManyWithoutVirtualAirlineNestedInput
+    Notifications?: NotificationUncheckedUpdateManyWithoutVirtualAirlineNestedInput
+  }
+
+  export type VirtualAirlineUncheckedUpdateManyWithoutVAManagerDiscordWebhookInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    ApiKey?: StringFieldUpdateOperationsInput | string
+    IsPrimary?: BoolFieldUpdateOperationsInput | boolean
+    Identifier?: NullableStringFieldUpdateOperationsInput | string | null
+    Name?: NullableStringFieldUpdateOperationsInput | string | null
+    Description?: NullableStringFieldUpdateOperationsInput | string | null
+    WorldId?: NullableStringFieldUpdateOperationsInput | string | null
+    LastDividendsDistribution?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    LastComputationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ComputedMemberCount?: NullableIntFieldUpdateOperationsInput | number | null
+    ComputedAircraftsCount?: NullableIntFieldUpdateOperationsInput | number | null
+    ComputedNumberOfFlights30Days?: NullableIntFieldUpdateOperationsInput | number | null
+    ComputedNumberOfFlightHours30Days?: NullableIntFieldUpdateOperationsInput | number | null
+    ComputedMostUsedAirports?: NullableStringFieldUpdateOperationsInput | string | null
+    LastConnection?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    LastReportDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Reputation?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    CreationDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    DifficultyLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    Level?: NullableIntFieldUpdateOperationsInput | number | null
+    LevelXP?: NullableIntFieldUpdateOperationsInput | number | null
+    TotalContractsCompleted?: NullableIntFieldUpdateOperationsInput | number | null
+    TotalContractsEarnedCredits?: NullableIntFieldUpdateOperationsInput | number | null
+    LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -58365,6 +61103,21 @@ export namespace Prisma {
     FlightStatus?: $Enums.FlightStatus
   }
 
+  export type NotificationCreateManyVirtualAirlineInput = {
+    Id: string
+    DiscordMessageSent?: boolean
+    IsRead?: boolean
+    IsNotification?: boolean
+    ZuluEventTime?: Date | string | null
+    DiscordMessageSentAt?: Date | string | null
+    DiscordMessageId?: string | null
+    Category?: number
+    Action?: number
+    Description: string
+    CreatedAt?: Date | string
+    UpdatedAt?: Date | string
+  }
+
   export type VirtualAirlineRoleUpdateWithoutVirtualAirlineInput = {
     Id?: StringFieldUpdateOperationsInput | string
     Name?: StringFieldUpdateOperationsInput | string
@@ -58726,6 +61479,51 @@ export namespace Prisma {
     FlightStatus?: EnumFlightStatusFieldUpdateOperationsInput | $Enums.FlightStatus
   }
 
+  export type NotificationUpdateWithoutVirtualAirlineInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    DiscordMessageSent?: BoolFieldUpdateOperationsInput | boolean
+    IsRead?: BoolFieldUpdateOperationsInput | boolean
+    IsNotification?: BoolFieldUpdateOperationsInput | boolean
+    ZuluEventTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    DiscordMessageSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Category?: IntFieldUpdateOperationsInput | number
+    Action?: IntFieldUpdateOperationsInput | number
+    Description?: StringFieldUpdateOperationsInput | string
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    DiscordMessage?: DiscordMessageUpdateOneWithoutNotificationsNestedInput
+  }
+
+  export type NotificationUncheckedUpdateWithoutVirtualAirlineInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    DiscordMessageSent?: BoolFieldUpdateOperationsInput | boolean
+    IsRead?: BoolFieldUpdateOperationsInput | boolean
+    IsNotification?: BoolFieldUpdateOperationsInput | boolean
+    ZuluEventTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    DiscordMessageSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    DiscordMessageId?: NullableStringFieldUpdateOperationsInput | string | null
+    Category?: IntFieldUpdateOperationsInput | number
+    Action?: IntFieldUpdateOperationsInput | number
+    Description?: StringFieldUpdateOperationsInput | string
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotificationUncheckedUpdateManyWithoutVirtualAirlineInput = {
+    Id?: StringFieldUpdateOperationsInput | string
+    DiscordMessageSent?: BoolFieldUpdateOperationsInput | boolean
+    IsRead?: BoolFieldUpdateOperationsInput | boolean
+    IsNotification?: BoolFieldUpdateOperationsInput | boolean
+    ZuluEventTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    DiscordMessageSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    DiscordMessageId?: NullableStringFieldUpdateOperationsInput | string | null
+    Category?: IntFieldUpdateOperationsInput | number
+    Action?: IntFieldUpdateOperationsInput | number
+    Description?: StringFieldUpdateOperationsInput | string
+    CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type MemberCreateManyVARoleInput = {
     Id: string
     IsActive?: boolean
@@ -58840,6 +61638,7 @@ export namespace Prisma {
     LastRefresh?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    VAManagerDiscordWebhookId?: string | null
   }
 
   export type CompanyCreateManyWorldInput = {
@@ -58885,10 +61684,12 @@ export namespace Prisma {
     LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    VAManagerDiscordWebhook?: DiscordChannelWebhookUpdateOneWithoutVirtualAirlinesNestedInput
     VARoles?: VirtualAirlineRoleUpdateManyWithoutVirtualAirlineNestedInput
     Members?: MemberUpdateManyWithoutVirtualAirlineNestedInput
     Fleet?: AircraftUpdateManyWithoutVirtualAirlineNestedInput
     Flights?: FlightUpdateManyWithoutVirtualAirlineNestedInput
+    Notifications?: NotificationUpdateManyWithoutVirtualAirlineNestedInput
   }
 
   export type VirtualAirlineUncheckedUpdateWithoutWorldInput = {
@@ -58917,10 +61718,12 @@ export namespace Prisma {
     LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    VAManagerDiscordWebhookId?: NullableStringFieldUpdateOperationsInput | string | null
     VARoles?: VirtualAirlineRoleUncheckedUpdateManyWithoutVirtualAirlineNestedInput
     Members?: MemberUncheckedUpdateManyWithoutVirtualAirlineNestedInput
     Fleet?: AircraftUncheckedUpdateManyWithoutVirtualAirlineNestedInput
     Flights?: FlightUncheckedUpdateManyWithoutVirtualAirlineNestedInput
+    Notifications?: NotificationUncheckedUpdateManyWithoutVirtualAirlineNestedInput
   }
 
   export type VirtualAirlineUncheckedUpdateManyWithoutWorldInput = {
@@ -58949,6 +61752,7 @@ export namespace Prisma {
     LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    VAManagerDiscordWebhookId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CompanyUpdateWithoutWorldInput = {

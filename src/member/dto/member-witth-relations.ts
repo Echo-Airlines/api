@@ -1,10 +1,19 @@
-import { Company, Flight, Member as PrismaMember, Member, User, VirtualAirline, VirtualAirlineRole, FlightRoute } from "prisma/generated/prisma";
+import { Prisma } from "prisma/generated/prisma";
 
-export type MemberWithRelations = PrismaMember & {
-    Company?: Company;
-    VARole?: VirtualAirlineRole;
-    VirtualAirline?: VirtualAirline;
-    Flights?: Flight[];
-    User?: User;
-    FlightRoutes?: FlightRoute[];
-}
+export type MemberWithRelations = Prisma.MemberGetPayload<{
+    include: {
+        Company: true,
+        VirtualAirline: true,
+        VARole: true,
+        Flights: true,
+        User: true,
+        FlightRoutes: true,
+    }
+}>;
+
+export type MemberWithCompanyVARole = Prisma.MemberGetPayload<{
+    include: {
+        Company: true,
+        VARole: true,
+    }
+}>;

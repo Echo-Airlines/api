@@ -6,85 +6,85 @@ export declare class DiscordService {
     constructor(prisma: DatabaseService);
     ChannelWebhook_findMany(query?: Prisma.DiscordChannelWebhookFindManyArgs): Promise<{
         Id: string;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         Name: string;
         Description: string | null;
+        IsActive: boolean;
         WebhookUrl: string;
         ChannelId: string;
         Token: string;
-        IsActive: boolean;
-        CreatedAt: Date;
-        UpdatedAt: Date;
     }[]>;
     ChannelWebhook_findById(Id: string): Promise<{
         Id: string;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         Name: string;
         Description: string | null;
+        IsActive: boolean;
         WebhookUrl: string;
         ChannelId: string;
         Token: string;
-        IsActive: boolean;
-        CreatedAt: Date;
-        UpdatedAt: Date;
     } | null>;
     ChannelWebhook_create(data: Prisma.DiscordChannelWebhookCreateInput): Promise<{
         Id: string;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         Name: string;
         Description: string | null;
+        IsActive: boolean;
         WebhookUrl: string;
         ChannelId: string;
         Token: string;
-        IsActive: boolean;
-        CreatedAt: Date;
-        UpdatedAt: Date;
     }>;
     ChannelWebhook_update(Id: string, data: Prisma.DiscordChannelWebhookUpdateInput): Promise<{
         Id: string;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         Name: string;
         Description: string | null;
+        IsActive: boolean;
         WebhookUrl: string;
         ChannelId: string;
         Token: string;
-        IsActive: boolean;
-        CreatedAt: Date;
-        UpdatedAt: Date;
     }>;
     ChannelWebhook_delete(Id: string): Promise<{
         Id: string;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         Name: string;
         Description: string | null;
+        IsActive: boolean;
         WebhookUrl: string;
         ChannelId: string;
         Token: string;
-        IsActive: boolean;
-        CreatedAt: Date;
-        UpdatedAt: Date;
     }>;
     ChannelWebhook_sendMessage(Id: string, data: SendDiscordMessageDto): Promise<{
         Id: string;
-        ChannelId: string;
         CreatedAt: Date;
         UpdatedAt: Date;
-        Content: string;
+        ChannelId: string;
         DiscordMessageSentAt: Date | null;
+        Content: string;
         DiscordMessageTemplateId: number | null;
         DiscordChannelWebhookId: string | null;
     }>;
     MessageTemplate_findMany(query?: Prisma.DiscordMessageTemplateFindManyArgs): Promise<{
         Id: number;
-        Name: string;
-        Description: string | null;
         CreatedAt: Date;
         UpdatedAt: Date;
-        Content: string;
+        Name: string;
+        Description: string | null;
         Slug: string;
+        Content: string;
     }[]>;
     MessageTemplate_findOneBySlug(Slug: string): Promise<{
         Id: number;
-        Name: string;
-        Description: string | null;
         CreatedAt: Date;
         UpdatedAt: Date;
-        Content: string;
+        Name: string;
+        Description: string | null;
         Slug: string;
+        Content: string;
     } | null>;
 }

@@ -2,16 +2,16 @@ import { Company, Member, Prisma, VirtualAirline } from "prisma/generated/prisma
 import { JobSchedulerService } from "../job-scheduler.service";
 import { OnAirMember } from "@on-air/types";
 import { eachSeries } from "async";
-import { VirtualAirlineWithRelations } from "@virtual-airline/dto/virtual-airline-with-relations";
+import { VirtualAirlineWithMembersWorld } from "@virtual-airline/dto/virtual-airline-with-relations";
 
 
 export async function executeVirtualAirlinesMembersSync(scheduler: JobSchedulerService) {
-    const virtualAirlines: VirtualAirlineWithRelations[] = await scheduler.services.VirtualAirline.findAll({
+    const virtualAirlines: VirtualAirlineWithMembersWorld[] = await scheduler.services.VirtualAirline.findAll({
         include: {
             Members: true,
             World: true,
         }
-    });
+    }) as VirtualAirlineWithMembersWorld[];
 
     for (const virtualAirline of virtualAirlines) {
         await executeVirtualAirlineMembersSync(virtualAirline, scheduler);
@@ -19,7 +19,7 @@ export async function executeVirtualAirlinesMembersSync(scheduler: JobSchedulerS
     }
 }
 
-async function executeVirtualAirlineMembersSync(virtualAirline: VirtualAirlineWithRelations, scheduler: JobSchedulerService) {
+async function executeVirtualAirlineMembersSync(virtualAirline: VirtualAirlineWithMembersWorld, scheduler: JobSchedulerService) {
     return new Promise(async (resolve, reject) => {
         // get the members for OnAir
         const oAMembers: OnAirMember[]|null = await scheduler.services.OnAir.getVirtualAirlineMembers(virtualAirline.Id);
@@ -51,7 +51,7 @@ async function executeVirtualAirlineMembersSync(virtualAirline: VirtualAirlineWi
     });
 }
 
-async function executeVirtualAirlineMemberSync(dto: OnAirMember, virtualAirline: VirtualAirlineWithRelations, scheduler: JobSchedulerService) {
+async function executeVirtualAirlineMemberSync(dto: OnAirMember, virtualAirline: VirtualAirlineWithMembersWorld, scheduler: JobSchedulerService) {
     // try to find the member inf the database
     let member = await scheduler.services.Member.findById(dto.Id, {
         include: {
@@ -183,7 +183,7 @@ async function executeVirtualAirlineMemberSync(dto: OnAirMember, virtualAirline:
     return member;
 }
 
-async function deactivateVirtualAirlineMembers(virtualAirline: VirtualAirlineWithRelations, scheduler: JobSchedulerService) {
+async function deactivateVirtualAirlineMembers(virtualAirline: VirtualAirlineWithMembersWorld, scheduler: JobSchedulerService) {
 
     const oAMembers: OnAirMember[] = await scheduler.services.OnAir.getVirtualAirlineMembers(virtualAirline.Id) || [];
     const results: Member[] = [];

@@ -19,8 +19,6 @@ export declare class AuthController {
     session(req: any): Promise<UserProfileDto>;
     forgotPassword(body: ForgotPasswordDto): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         Username: string;
         Email: string | null;
         FirstName: string | null;
@@ -32,45 +30,31 @@ export declare class AuthController {
         BanExpiresAt: Date | null;
         IsVerified: boolean;
         LastLogin: Date | null;
-        Roles: {
-            Id: number;
-            CreatedAt: Date;
-            UpdatedAt: Date;
-            Name: string;
-            Description: string | null;
-            Slug: string;
-            VirtualAirlineRoleId: string | null;
-        }[];
-        PrivacySettings: {
-            Id: string;
-            UserId: string;
-            CreatedAt: Date;
-            ShowOnlineStatus: boolean;
-            ShowFirstName: boolean;
-            ShowLastName: boolean;
-            ShowLastNameInitial: boolean;
-            ShowLastLogin: boolean;
-        }[];
+        CreatedAt: Date;
+        UpdatedAt: Date;
         Members: ({
             Company: {
                 Id: string;
-                LastRefresh: Date | null;
                 CreatedAt: Date;
                 UpdatedAt: Date;
                 Name: string;
-                AirlineCode: string;
-                CreationDate: Date;
-                Level: number;
-                LevelXP: number;
-                Reputation: import("prisma/generated/prisma/runtime/library").Decimal;
-                Paused: boolean;
+                WorldId: string;
                 LastConnection: Date | null;
                 LastReportDate: Date | null;
+                Reputation: import("prisma/generated/prisma/runtime/library").Decimal;
+                CreationDate: Date;
                 DifficultyLevel: number;
-                WorldId: string;
+                Level: number;
+                LevelXP: number;
+                LastRefresh: Date | null;
+                AirlineCode: string;
+                Paused: boolean;
             };
         } & {
             Id: string;
+            CreatedAt: Date;
+            UpdatedAt: Date;
+            LastRefresh: Date | null;
             IsActive: boolean;
             DeactivatedAt: Date | null;
             VAId: string;
@@ -84,17 +68,31 @@ export declare class AuthController {
             Color: string;
             ReputationImpact: import("prisma/generated/prisma/runtime/library").Decimal;
             LastVAFlightDate: Date | null;
-            LastRefresh: Date | null;
             UserId: string | null;
-            CreatedAt: Date;
-            UpdatedAt: Date;
             CompanyId: string;
         })[];
+        Roles: {
+            Id: number;
+            CreatedAt: Date;
+            UpdatedAt: Date;
+            Name: string;
+            Description: string | null;
+            Slug: string;
+            VirtualAirlineRoleId: string | null;
+        }[];
+        PrivacySettings: {
+            Id: string;
+            CreatedAt: Date;
+            UserId: string;
+            ShowOnlineStatus: boolean;
+            ShowFirstName: boolean;
+            ShowLastName: boolean;
+            ShowLastNameInitial: boolean;
+            ShowLastLogin: boolean;
+        }[];
     }>;
     resetPassword(body: ResetPasswordDto): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         Username: string;
         Password: string | null;
         Email: string | null;
@@ -108,6 +106,8 @@ export declare class AuthController {
         IsVerified: boolean;
         LastLogin: Date | null;
         InviteCodeId: string | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         WelcomeEmailSentAt: Date | null;
         ConfirmEmailToken: string | null;
         EmailVerifiedAt: Date | null;

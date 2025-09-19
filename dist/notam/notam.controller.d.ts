@@ -4,26 +4,26 @@ export declare class NotamController {
     constructor(notamService: NotamService);
     findAllActive(): Promise<{
         Id: string;
-        Title: string;
+        CreatedAt: Date;
+        UpdatedAt: Date;
+        Status: import("prisma/generated/prisma").$Enums.NOTAMStatus;
         Content: string;
+        Title: string;
         ExpirationDate: Date | null;
         Link: string | null;
         EffectiveDate: Date;
-        Status: import("prisma/generated/prisma").$Enums.NOTAMStatus;
         CreatedById: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
     }[]>;
     findOne(id: string): Promise<{
         Id: string;
-        Title: string;
+        CreatedAt: Date;
+        UpdatedAt: Date;
+        Status: import("prisma/generated/prisma").$Enums.NOTAMStatus;
         Content: string;
+        Title: string;
         ExpirationDate: Date | null;
         Link: string | null;
         EffectiveDate: Date;
-        Status: import("prisma/generated/prisma").$Enums.NOTAMStatus;
         CreatedById: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
     } | null>;
 }

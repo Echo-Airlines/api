@@ -1,10 +1,12 @@
-import { Company, VirtualAirline, Member, VARole, Aircraft, AircraftClass, AircraftType, Airport, Flight } from 'onair-api';
+import { Company, VirtualAirline, Member, VARole, Aircraft, AircraftClass, AircraftType, Airport, Flight, Notification } from 'onair-api';
 export type OnAirVirtualAirline = VirtualAirline;
 export type OnAirVirtualAirlineRole = VARole;
 
 export type OnAirCompany = Company;
 
 export type OnAirMember = Member;
+export type OnAirNotification = Notification;
+
 export type OnAirAircraft = Aircraft & {
     AircraftMaintenance: OnAirAircraftMaintenance;
 };

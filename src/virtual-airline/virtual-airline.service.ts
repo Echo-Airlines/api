@@ -1,6 +1,8 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { DatabaseService } from '@database/database.service';
 import { Member, Prisma, VirtualAirline, VirtualAirlineRole } from 'prisma/generated/prisma';
+import { VirtualAirlineWithMembersWorld, VirtualAirlineWithWorld } from './dto/virtual-airline-with-relations';
+import { MemberWithCompanyVARole } from 'src/member/dto/member-witth-relations';
 
 @Injectable()
 export class VirtualAirlineService {
@@ -21,8 +23,8 @@ export class VirtualAirlineService {
         return entities;
     }
 
-    async getPrimaryVirtualAirline(query?: Prisma.VirtualAirlineFindFirstArgs) {
-        const entity: VirtualAirline | null = await this.prisma.virtualAirline.findFirst({
+    async getPrimaryVirtualAirline(query?: Partial<Prisma.VirtualAirlineFindFirstArgs>) {
+        const _query: Prisma.VirtualAirlineFindFirstArgs = {
             where: (query?.where) ? query.where : {
                 IsPrimary: true
             },
@@ -31,26 +33,75 @@ export class VirtualAirlineService {
             },
             orderBy: (query?.orderBy) ? query.orderBy : {
                 UpdatedAt: 'desc',
-            }
-        });
+            },
+            ...query,
+        };
+        
+        const entity: VirtualAirlineWithWorld | null = await this.prisma.virtualAirline.findFirst(_query) as VirtualAirlineWithWorld | null;
+
+        return entity;
+    }
+
+    async getPrimaryVirtualAirlineWithApiKey(query?: Partial<Prisma.VirtualAirlineFindFirstArgs>) {
+        const _query: Prisma.VirtualAirlineFindFirstArgs = {
+            where: (query?.where) ? query.where : {
+                IsPrimary: true
+            },
+            select: {
+                Id: true,
+                ApiKey: true,
+                IsPrimary: true,
+                Identifier: true,
+                Name: true,
+                Description: true,
+                WorldId: true,
+                LastDividendsDistribution: true,
+                LastComputationDate: true,
+                ComputedMemberCount: true,
+                ComputedAircraftsCount: true,
+                ComputedNumberOfFlights30Days: true,
+                ComputedNumberOfFlightHours30Days: true,
+                ComputedMostUsedAirports: true,
+                LastConnection: true,
+                LastReportDate: true,
+                Reputation: true,
+                CreationDate: true,
+                DifficultyLevel: true,
+                Level: true,
+                LevelXP: true,
+                TotalContractsCompleted: true,
+                TotalContractsEarnedCredits: true,
+                LastRefresh: true,
+                CreatedAt: true,
+                UpdatedAt: true,
+                VAManagerDiscordWebhookId: true,
+                World: true,
+            },
+            orderBy: (query?.orderBy) ? query.orderBy : {
+                UpdatedAt: 'desc',
+            },
+            ...query,
+        };
+
+        const entity: VirtualAirlineWithWorld | null = await this.prisma.virtualAirline.findFirst(_query) as VirtualAirlineWithWorld | null;
 
         return entity;
     }
 
     async getPrimaryLeaderboard(sortColumn: 'reputation' | 'flights' | 'hours' | 'earnings' = 'earnings') {
-        const va = await this.getPrimaryVirtualAirline();
+        const va: VirtualAirlineWithWorld | null = await this.getPrimaryVirtualAirline();
 
         if (!va) {
             throw new NotFoundException('Virtual airline not found');
         }
 
-        let members = await this.getPrimaryVirtualAirlineMembers();
+        let members: MemberWithCompanyVARole[] = await this.getPrimaryVirtualAirlineMembers();
 
         if (members.length === 0) {
             return [];
         } else {
             // filter out members with a permission less than 400
-            members = members.filter((member) => {
+            members = members.filter((member: MemberWithCompanyVARole) => {
                 const permission = member.VARole.Permission;
                 return permission < 400;
             });
@@ -72,7 +123,7 @@ export class VirtualAirlineService {
     }
 
     async getPrimaryVirtualAirlineMembers() {
-        const members = await this.prisma.member.findMany({
+        const members: MemberWithCompanyVARole[] = await this.prisma.member.findMany({
             where: {
                 VirtualAirline: {
                     IsPrimary: true,
@@ -94,7 +145,7 @@ export class VirtualAirlineService {
             throw new BadRequestException('Virtual airline ID is required');
         }
 
-        const entity: VirtualAirline | null = await this.prisma.virtualAirline.findUnique({
+        const entity: VirtualAirlineWithMembersWorld | null = await this.prisma.virtualAirline.findUnique({
             ...query,
             include: {
                 World: true,

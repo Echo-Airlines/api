@@ -1,8 +1,23 @@
-import { VirtualAirline, Member, World, VirtualAirlineRole, Aircraft } from "prisma/generated/prisma";
+import { Prisma } from "prisma/generated/prisma";
 
-export type VirtualAirlineWithRelations = VirtualAirline & {
-    Members?: Member[];
-    World?: World;
-    VARoles?: VirtualAirlineRole[];
-    Fleet?: Aircraft[];
-}
+export type VirtualAirlineWithRelations = Prisma.VirtualAirlineGetPayload<{
+    include: {
+        Members: true;
+        World: true;
+        VARoles: true;
+        Fleet: true;
+    }
+}>;
+
+export type VirtualAirlineWithWorld = Prisma.VirtualAirlineGetPayload<{
+    include: {
+        World: true;
+    }
+}>;
+
+export type VirtualAirlineWithMembersWorld = Prisma.VirtualAirlineGetPayload<{
+    include: {
+        Members: true,
+        World: true;
+    }
+}>;

@@ -5,50 +5,50 @@ export declare class NotamService {
     constructor(prisma: DatabaseService);
     findMany(query?: Prisma.NotamFindManyArgs): Promise<{
         Id: string;
-        Title: string;
+        CreatedAt: Date;
+        UpdatedAt: Date;
+        Status: import("prisma/generated/prisma").$Enums.NOTAMStatus;
         Content: string;
+        Title: string;
         ExpirationDate: Date | null;
         Link: string | null;
         EffectiveDate: Date;
-        Status: import("prisma/generated/prisma").$Enums.NOTAMStatus;
         CreatedById: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
     }[]>;
     findOne(query: Prisma.NotamFindUniqueArgs): Promise<{
         Id: string;
-        Title: string;
+        CreatedAt: Date;
+        UpdatedAt: Date;
+        Status: import("prisma/generated/prisma").$Enums.NOTAMStatus;
         Content: string;
+        Title: string;
         ExpirationDate: Date | null;
         Link: string | null;
         EffectiveDate: Date;
-        Status: import("prisma/generated/prisma").$Enums.NOTAMStatus;
         CreatedById: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
     } | null>;
     findAllActive(query?: Partial<Prisma.NotamFindManyArgs>): Promise<{
         Id: string;
-        Title: string;
+        CreatedAt: Date;
+        UpdatedAt: Date;
+        Status: import("prisma/generated/prisma").$Enums.NOTAMStatus;
         Content: string;
+        Title: string;
         ExpirationDate: Date | null;
         Link: string | null;
         EffectiveDate: Date;
-        Status: import("prisma/generated/prisma").$Enums.NOTAMStatus;
         CreatedById: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
     }[]>;
     findOneById(Id: string, query?: Partial<Prisma.NotamFindUniqueArgs>): Promise<{
         Id: string;
-        Title: string;
+        CreatedAt: Date;
+        UpdatedAt: Date;
+        Status: import("prisma/generated/prisma").$Enums.NOTAMStatus;
         Content: string;
+        Title: string;
         ExpirationDate: Date | null;
         Link: string | null;
         EffectiveDate: Date;
-        Status: import("prisma/generated/prisma").$Enums.NOTAMStatus;
         CreatedById: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
     } | null>;
 }

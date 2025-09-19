@@ -21,6 +21,8 @@ const airport_module_1 = require("../airport/airport.module");
 const flight_module_1 = require("../flight/flight.module");
 const company_module_1 = require("../company/company.module");
 const member_module_1 = require("../member/member.module");
+const discord_module_1 = require("../discord/discord.module");
+const notification_module_1 = require("../notification/notification.module");
 let JobsModule = class JobsModule {
 };
 exports.JobsModule = JobsModule;
@@ -37,6 +39,8 @@ exports.JobsModule = JobsModule = __decorate([
             flight_module_1.FlightModule,
             company_module_1.CompanyModule,
             member_module_1.MemberModule,
+            notification_module_1.NotificationModule,
+            discord_module_1.DiscordModule,
         ],
         controllers: [jobs_controller_1.JobsController],
         providers: [jobs_service_1.JobsService, job_scheduler_service_1.JobSchedulerService],

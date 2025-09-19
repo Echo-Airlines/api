@@ -1,6 +1,6 @@
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import OnAirApi from 'onair-api';
-import { OnAirAircraft, OnAirAirport, OnAirCompany, OnAirFlight, OnAirMember, OnAirVirtualAirline, OnAirVirtualAirlineRole } from './types';
+import { OnAirAircraft, OnAirAirport, OnAirCompany, OnAirFlight, OnAirMember, OnAirNotification, OnAirVirtualAirline, OnAirVirtualAirlineRole } from './types';
 import { AppConfig, VirtualAirline } from 'prisma/generated/prisma';
 import { VirtualAirlineService } from '@/virtual-airline/virtual-airline.service';
 
@@ -27,7 +27,7 @@ export class OnAirApiService implements OnModuleInit {
     }
     
     public async initialize() {
-        const virtualAirline: VirtualAirline|null = await this.virtualAirlineService.getPrimaryVirtualAirline();
+        const virtualAirline: VirtualAirline|null = await this.virtualAirlineService.getPrimaryVirtualAirlineWithApiKey();
 
         if (!virtualAirline) {
             this.logger.warn('Missing required virtual airline configuration. Please create a virtual airline in the admin panel.');
@@ -114,6 +114,17 @@ export class OnAirApiService implements OnModuleInit {
         }
 
         const result: OnAirAirport|null = await this.onAirApi.getAirport(icao);
+
+        return result;
+    }
+
+    public async getVirtualAirlineNotifications(virtualAirlineId: string) {
+        if (!this.onAirApi) {
+            this.logger.warn('OnAir API not initialized. Please set the config in the admin panel.');
+            throw new Error('OnAir API not initialized. Please set the config in the admin panel.');
+        }
+
+        const result: OnAirNotification[] = await this.onAirApi.getVirtualAirlineNotifications(virtualAirlineId);
 
         return result;
     }

@@ -11,6 +11,8 @@ import { AirportService } from '@airport/airport.service';
 import { FlightService } from '@flight/flight.service';
 import { CompanyService } from '@company/company.service';
 import { MemberService } from '@member/member.service';
+import { NotificationService } from '@notification/notification.service';
+import { DiscordService } from '@discord/discord.service';
 export interface IJobSchedulerServices {
     VirtualAirline: VirtualAirlineService;
     OnAir: OnAirApiService;
@@ -19,6 +21,8 @@ export interface IJobSchedulerServices {
     Flight: FlightService;
     Company: CompanyService;
     Member: MemberService;
+    Notification: NotificationService;
+    Discord: DiscordService;
 }
 export declare class JobSchedulerService implements OnModuleInit {
     private readonly jobsService;
@@ -32,10 +36,12 @@ export declare class JobSchedulerService implements OnModuleInit {
     private readonly flightService;
     private readonly companyService;
     private readonly memberService;
+    private readonly notificationService;
+    private readonly discordService;
     readonly logger: Logger;
     private config;
     services: IJobSchedulerServices;
-    constructor(jobsService: JobsService, schedulerRegistry: SchedulerRegistry, onAirApiService: OnAirApiService, virtualAirlineService: VirtualAirlineService, aircraftService: AircraftService, appConfigService: AppConfigService, configService: ConfigService, airportService: AirportService, flightService: FlightService, companyService: CompanyService, memberService: MemberService);
+    constructor(jobsService: JobsService, schedulerRegistry: SchedulerRegistry, onAirApiService: OnAirApiService, virtualAirlineService: VirtualAirlineService, aircraftService: AircraftService, appConfigService: AppConfigService, configService: ConfigService, airportService: AirportService, flightService: FlightService, companyService: CompanyService, memberService: MemberService, notificationService: NotificationService, discordService: DiscordService);
     onModuleInit(): Promise<void>;
     unscheduleJob(job: Job): Promise<void>;
     executeJobById(id: string): Promise<{

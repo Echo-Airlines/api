@@ -12,8 +12,6 @@ export declare class AdminUserController {
     constructor(userService: AdminUserService, hashService: HashService, configService: ConfigService, emailService: EmailService);
     getAll(): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         Username: string;
         Password: string | null;
         Email: string | null;
@@ -27,6 +25,8 @@ export declare class AdminUserController {
         IsVerified: boolean;
         LastLogin: Date | null;
         InviteCodeId: string | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         WelcomeEmailSentAt: Date | null;
         ConfirmEmailToken: string | null;
         EmailVerifiedAt: Date | null;
@@ -39,8 +39,6 @@ export declare class AdminUserController {
     }[]>;
     getOneByUsername(username: string): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         Username: string;
         Password: string | null;
         Email: string | null;
@@ -54,6 +52,8 @@ export declare class AdminUserController {
         IsVerified: boolean;
         LastLogin: Date | null;
         InviteCodeId: string | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         WelcomeEmailSentAt: Date | null;
         ConfirmEmailToken: string | null;
         EmailVerifiedAt: Date | null;
@@ -66,8 +66,6 @@ export declare class AdminUserController {
     }>;
     deleteUserById(id: string): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         Username: string;
         Password: string | null;
         Email: string | null;
@@ -81,6 +79,8 @@ export declare class AdminUserController {
         IsVerified: boolean;
         LastLogin: Date | null;
         InviteCodeId: string | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         WelcomeEmailSentAt: Date | null;
         ConfirmEmailToken: string | null;
         EmailVerifiedAt: Date | null;
@@ -93,8 +93,6 @@ export declare class AdminUserController {
     }>;
     createUser(body: AdminAddUserDto): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         Username: string;
         Password: string | null;
         Email: string | null;
@@ -108,6 +106,8 @@ export declare class AdminUserController {
         IsVerified: boolean;
         LastLogin: Date | null;
         InviteCodeId: string | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         WelcomeEmailSentAt: Date | null;
         ConfirmEmailToken: string | null;
         EmailVerifiedAt: Date | null;
@@ -120,8 +120,6 @@ export declare class AdminUserController {
     }>;
     updateUser(username: string, body: AdminUpdateUserDto): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         Username: string;
         Password: string | null;
         Email: string | null;
@@ -135,6 +133,8 @@ export declare class AdminUserController {
         IsVerified: boolean;
         LastLogin: Date | null;
         InviteCodeId: string | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         WelcomeEmailSentAt: Date | null;
         ConfirmEmailToken: string | null;
         EmailVerifiedAt: Date | null;
@@ -147,8 +147,6 @@ export declare class AdminUserController {
     }>;
     sendResetPasswordEmail(username: string): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         Username: string;
         Password: string | null;
         Email: string | null;
@@ -162,6 +160,8 @@ export declare class AdminUserController {
         IsVerified: boolean;
         LastLogin: Date | null;
         InviteCodeId: string | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         WelcomeEmailSentAt: Date | null;
         ConfirmEmailToken: string | null;
         EmailVerifiedAt: Date | null;
@@ -174,8 +174,6 @@ export declare class AdminUserController {
     }>;
     sendWelcomeEmail(username: string): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         Username: string;
         Password: string | null;
         Email: string | null;
@@ -189,6 +187,8 @@ export declare class AdminUserController {
         IsVerified: boolean;
         LastLogin: Date | null;
         InviteCodeId: string | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         WelcomeEmailSentAt: Date | null;
         ConfirmEmailToken: string | null;
         EmailVerifiedAt: Date | null;
@@ -203,8 +203,6 @@ export declare class AdminUserController {
         roleSlug: string;
     }): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         Username: string;
         Password: string | null;
         Email: string | null;
@@ -218,6 +216,8 @@ export declare class AdminUserController {
         IsVerified: boolean;
         LastLogin: Date | null;
         InviteCodeId: string | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         WelcomeEmailSentAt: Date | null;
         ConfirmEmailToken: string | null;
         EmailVerifiedAt: Date | null;
@@ -232,8 +232,6 @@ export declare class AdminUserController {
         roleSlug: string;
     }): Promise<{
         Id: string;
-        CreatedAt: Date;
-        UpdatedAt: Date;
         Username: string;
         Password: string | null;
         Email: string | null;
@@ -247,6 +245,8 @@ export declare class AdminUserController {
         IsVerified: boolean;
         LastLogin: Date | null;
         InviteCodeId: string | null;
+        CreatedAt: Date;
+        UpdatedAt: Date;
         WelcomeEmailSentAt: Date | null;
         ConfirmEmailToken: string | null;
         EmailVerifiedAt: Date | null;

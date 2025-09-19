@@ -30,6 +30,7 @@ import { EmailModule } from './email/email.module';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { NotamModule } from './notam/notam.module';
+import { NotificationModule } from './notification/notification.module';
 
 const emailTemplatesDirectory = join(__dirname, 'email/templates');
 console.log('emailTemplatesDirectory:', emailTemplatesDirectory);
@@ -94,6 +95,7 @@ console.log('emailTemplatesDirectory:', emailTemplatesDirectory);
     WebsocketModule,
     EmailModule,
     NotamModule,
+    NotificationModule,
   ],
   controllers: [AppController],
   providers: [AppService],

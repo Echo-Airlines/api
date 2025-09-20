@@ -1,6 +1,9 @@
 export declare class CreateLiveryDto {
     Name: string;
-    AircraftId: string;
+    AircraftId?: string;
     IsActive: boolean;
-    Image: string;
+    Image?: string;
+    Url?: string;
+    CoverPhoto?: string;
+    DownloadUrl?: string;
 }

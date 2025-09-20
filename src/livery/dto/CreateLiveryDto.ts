@@ -1,19 +1,31 @@
-import { IsBoolean, IsNotEmpty, IsString } from "class-validator";
+import { IsBoolean, IsNotEmpty, IsOptional, IsString } from "class-validator";
 
 export class CreateLiveryDto {
     @IsNotEmpty()
     @IsString()
     Name: string;
 
-    @IsNotEmpty()
     @IsString()
-    AircraftId: string;
+    @IsOptional()
+    AircraftId?: string;
 
     @IsNotEmpty()
     @IsBoolean()
     IsActive: boolean;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
-    Image: string;
+    Image?: string;
+
+    @IsOptional()
+    @IsString()
+    Url?: string;
+
+    @IsOptional()
+    @IsString()
+    CoverPhoto?: string;
+
+    @IsOptional()
+    @IsString()
+    DownloadUrl?: string;
 }

@@ -16,6 +16,9 @@ class CreateLiveryDto {
     AircraftId;
     IsActive;
     Image;
+    Url;
+    CoverPhoto;
+    DownloadUrl;
 }
 exports.CreateLiveryDto = CreateLiveryDto;
 __decorate([
@@ -24,8 +27,8 @@ __decorate([
     __metadata("design:type", String)
 ], CreateLiveryDto.prototype, "Name", void 0);
 __decorate([
-    (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
 ], CreateLiveryDto.prototype, "AircraftId", void 0);
 __decorate([
@@ -34,8 +37,23 @@ __decorate([
     __metadata("design:type", Boolean)
 ], CreateLiveryDto.prototype, "IsActive", void 0);
 __decorate([
-    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateLiveryDto.prototype, "Image", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateLiveryDto.prototype, "Url", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateLiveryDto.prototype, "CoverPhoto", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateLiveryDto.prototype, "DownloadUrl", void 0);
 //# sourceMappingURL=CreateLiveryDto.js.map

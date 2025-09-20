@@ -194,7 +194,7 @@ export class JobSchedulerService implements OnModuleInit {
             }
             
             this.logger.log(`Executing job ${job.Name} (${job.Id}) at ${startTime.toISOString()}`);
-            console.log(`${job.Type}| job type: ${typeof job.Type} | JobType: ${typeof JobType.VIRTUAL_AIRLINE_NOTIFICATION_SYNC} | ${(job.Type === JobType.VIRTUAL_AIRLINE_NOTIFICATION_SYNC)}`);
+            // console.log(`${job.Type}| job type: ${typeof job.Type} | JobType: ${typeof JobType.VIRTUAL_AIRLINE_NOTIFICATION_SYNC} | ${(job.Type === JobType.VIRTUAL_AIRLINE_NOTIFICATION_SYNC)}`);
 
             if (job.Type === JobType.VIRTUAL_AIRLINE_SYNC) {
                 await executeAllVirtualAirlinesSync(this);

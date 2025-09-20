@@ -40,7 +40,7 @@ let FSHubService = class FSHubService {
             throw new Error('FSHub API is not initialized');
         }
         const screenshots = await this.fshubApi.Flight_getFlightScreenshotsById(id);
-        return screenshots;
+        return screenshots.data;
     }
     async getFlightById(id) {
         if (!id) {

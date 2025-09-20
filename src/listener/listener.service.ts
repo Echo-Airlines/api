@@ -188,17 +188,14 @@ export class ListenerService {
             };
 
             switch (listenerEvent.Type) {
-                // case 'profile.updated':
-                //     message.content = '**Pilot Profile Updated**';
-                //     const pilot = listenerEvent.Data as Pilot
-                //     if (!messageTemplate) {
-                //         message.content = `${pilot.name} has updated their profile.`;
-                //     } else {
-                //         message.content = await this._compileMessageTemplate(messageTemplate.Slug, pilot);
-                //     }
+                case 'profile.updated':
+                    const profileUpdated = listenerEvent.Data as any
+                    this.logger.debug(`profile.updated | #${profileUpdated.id} - https://fshub.io/pilot/${profileUpdated.id}/profile`);
+                    listenerEvent = await this.updateListenerEventStatus(listenerEvent.Id, { Status: ListenerEventStatus.FAILED, Error: `No logic defined to process 'profile.updated' event.` });
 
-                //     this.logger.debug(`profile.updated: ${message.content}`);
-                //     break;
+                    return listenerEvent;
+
+                    break;
                 case 'flight.departed':
                     const flightDeparted = listenerEvent.Data as FSHubFlightDepartedEvent
                     this.logger.debug(`flight.departed | #${flightDeparted.id} - https://fshub.io/flight/${flightDeparted.id}/report`);
@@ -212,12 +209,22 @@ export class ListenerService {
                     message.embeds = await this._processFSHubFlightDeparted(flightDeparted, listenerEvent.Id);
                     
                     break;
-                // case 'flight.arrived':
-                //     const flightArrived = listenerEvent.Data as FlightEvent
-                //     this.logger.debug(`flight.arrived | #${flightArrived.id} - https://fshub.io/flight/${flightArrived.id}/report`);
-                //     message.embeds = this._processFSHubFlightArrived(flightArrived);
+                case 'flight.arrived':
+                    const flightArrived = listenerEvent.Data as any
+                    this.logger.debug(`flight.arrived | #${flightArrived.id} - https://fshub.io/flight/${flightArrived.id}/report`);
+                    listenerEvent = await this.updateListenerEventStatus(listenerEvent.Id, { Status: ListenerEventStatus.FAILED, Error: `No logic defined to process 'flight.arrived' event.` });
 
-                //     break;
+                    return listenerEvent;
+
+                    break;
+                case 'flight.updated':
+                    const flightUpdated = listenerEvent.Data as any
+                    this.logger.debug(`flight.updated | #${flightUpdated.id} - https://fshub.io/flight/${flightUpdated.id}/report`);
+                    listenerEvent = await this.updateListenerEventStatus(listenerEvent.Id, { Status: ListenerEventStatus.FAILED, Error: `No logic defined to process 'flight.updated' event.` });
+
+                    return listenerEvent;
+
+                    break;
                 case 'flight.completed':
                     const flightCompleted = listenerEvent.Data as FSHubFlightCompletedEvent
                     this.logger.debug(`flight.completed | #${flightCompleted.id} - https://fshub.io/flight/${flightCompleted.id}/report`);
@@ -231,19 +238,11 @@ export class ListenerService {
                     message.embeds = await this._processFSHubFlightCompleted(flightCompleted, listenerEvent.Id);
 
                     break;
-                // case 'flight.updated':
-                //     const flightUpdated = listenerEvent.Data as FlightEvent
-                //     if (!messageTemplate) {
-                //         message.content = `${flightUpdated.airline.profile.abbreviation} ${flightUpdated.aircraft.name} ${(flightUpdated.plan.flight_no) ? flightUpdated.plan.flight_no : ''} ${flightUpdated.plan.departure} to ${flightUpdated.plan.arrival} flown by ${flightUpdated.user.name} has updated.`;
-                //     } else {
-                //         message.content = await this.compileMessageTemplate(messageTemplate.Slug, flightUpdated);
-                //     }
-
-                //     this.logger.debug(`flight.updated: ${message.content}`);
-                //     break;
+                    
                 case 'website.test':
                     message.content = JSON.stringify(listenerEvent.Data, null, 2) as string;
                     this.logger.debug(`website.test | ${message.content}`);
+                    
                     break;
             }
 
@@ -287,7 +286,6 @@ export class ListenerService {
 
                 notifier.notify(`'${listenerEvent.Type}' event failed to send to Discord: ${error.message}`);
             } 
-
 
             return listenerEvent;
         }

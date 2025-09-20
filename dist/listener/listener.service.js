@@ -163,6 +163,12 @@ let ListenerService = ListenerService_1 = class ListenerService {
                 username: "ECHO Localizer 🐋",
             };
             switch (listenerEvent.Type) {
+                case 'profile.updated':
+                    const profileUpdated = listenerEvent.Data;
+                    this.logger.debug(`profile.updated | #${profileUpdated.id} - https://fshub.io/pilot/${profileUpdated.id}/profile`);
+                    listenerEvent = await this.updateListenerEventStatus(listenerEvent.Id, { Status: prisma_1.ListenerEventStatus.FAILED, Error: `No logic defined to process 'profile.updated' event.` });
+                    return listenerEvent;
+                    break;
                 case 'flight.departed':
                     const flightDeparted = listenerEvent.Data;
                     this.logger.debug(`flight.departed | #${flightDeparted.id} - https://fshub.io/flight/${flightDeparted.id}/report`);
@@ -172,6 +178,18 @@ let ListenerService = ListenerService_1 = class ListenerService {
                         return listenerEvent;
                     }
                     message.embeds = await this._processFSHubFlightDeparted(flightDeparted, listenerEvent.Id);
+                    break;
+                case 'flight.arrived':
+                    const flightArrived = listenerEvent.Data;
+                    this.logger.debug(`flight.arrived | #${flightArrived.id} - https://fshub.io/flight/${flightArrived.id}/report`);
+                    listenerEvent = await this.updateListenerEventStatus(listenerEvent.Id, { Status: prisma_1.ListenerEventStatus.FAILED, Error: `No logic defined to process 'flight.arrived' event.` });
+                    return listenerEvent;
+                    break;
+                case 'flight.updated':
+                    const flightUpdated = listenerEvent.Data;
+                    this.logger.debug(`flight.updated | #${flightUpdated.id} - https://fshub.io/flight/${flightUpdated.id}/report`);
+                    listenerEvent = await this.updateListenerEventStatus(listenerEvent.Id, { Status: prisma_1.ListenerEventStatus.FAILED, Error: `No logic defined to process 'flight.updated' event.` });
+                    return listenerEvent;
                     break;
                 case 'flight.completed':
                     const flightCompleted = listenerEvent.Data;

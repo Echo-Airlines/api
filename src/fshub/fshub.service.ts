@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { AppConfigService } from '@app-config/app-config.service';
-import FSHubApi, { type Screenshot, type Flight } from 'fshub-api';
+import FSHubApi, { type Screenshot, type Flight, FSHubResponse } from 'fshub-api';
 
 export type FSHubScreenshot = Screenshot;
 export type FSHubFlight = Flight;
@@ -38,9 +38,9 @@ export class FSHubService {
         }
 
 
-        const screenshots: FSHubScreenshot[] = await this.fshubApi.Flight_getFlightScreenshotsById(id);
+        const screenshots: FSHubResponse<FSHubScreenshot[]> = await this.fshubApi.Flight_getFlightScreenshotsById(id);
 
-        return screenshots;
+        return screenshots.data;
     }
 
     public async getFlightById(id: number) {
@@ -56,7 +56,7 @@ export class FSHubService {
             throw new Error('FSHub API is not initialized');
         }
 
-        const flight: FSHubFlight = await this.fshubApi.Flight_getFlightById(id);
+        const flight: FSHubResponse<FSHubFlight> = await this.fshubApi.Flight_getFlightById(id);
 
         return flight;
     }

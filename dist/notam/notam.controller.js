@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.NotamController = void 0;
 const common_1 = require("@nestjs/common");
 const notam_service_1 = require("./notam.service");
-const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
+const jwt_auth_guard_1 = require("../auth/guards/jwt-auth.guard");
 let NotamController = class NotamController {
     notamService;
     constructor(notamService) {

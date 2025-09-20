@@ -1,6 +1,6 @@
 import { Controller, Get, NotFoundException, Param, UseGuards } from '@nestjs/common';
-import { JwtAuthGuard } from '@auth/jwt-auth.guard';
-import { IsAdminGuard } from '@auth/is-admin.guard';
+import { JwtAuthGuard } from '@auth/guards/jwt-auth.guard';
+import { IsAdminGuard } from '@auth/guards/is-admin.guard';
 import { AdminVirtualAirlineService } from './admin-virtual-airline.service';
 import { VirtualAirline, VirtualAirlineRole } from 'prisma/generated/prisma';
 

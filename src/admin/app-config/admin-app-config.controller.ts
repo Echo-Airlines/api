@@ -1,5 +1,5 @@
-import { IsAdminGuard } from "@auth/is-admin.guard";
-import { JwtAuthGuard } from "@auth/jwt-auth.guard";
+import { IsAdminGuard } from "@auth/guards/is-admin.guard";
+import { JwtAuthGuard } from "@auth/guards/jwt-auth.guard";
 import { Request, Controller, Get, Put, NotFoundException, Body, UseGuards } from "@nestjs/common";
 import { AppConfig } from "prisma/generated/prisma";
 import { AdminAppConfigService } from "./admin-app-config.service";

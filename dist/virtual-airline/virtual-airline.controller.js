@@ -20,6 +20,9 @@ const prisma_1 = require("../../prisma/generated/prisma/index.js");
 const app_config_service_1 = require("../app-config/app-config.service");
 const public_member_dto_1 = require("./dto/public-member.dto");
 const logger_service_1 = require("../logger/logger.service");
+const jwt_auth_guard_1 = require("../auth/guards/jwt-auth.guard");
+const is_manager_guard_1 = require("../auth/guards/is-manager.guard");
+const UpdateVirtualAirline_dto_1 = require("./dto/UpdateVirtualAirline.dto");
 let VirtualAirlineController = VirtualAirlineController_1 = class VirtualAirlineController {
     virtualAirlineService;
     appConfigService;
@@ -58,6 +61,10 @@ let VirtualAirlineController = VirtualAirlineController_1 = class VirtualAirline
         const result = await this.virtualAirlineService.getPrimaryVirtualAirline();
         return result;
     }
+    async getPrimaryVirtualAirlineWithApiKey() {
+        const result = await this.virtualAirlineService.getPrimaryVirtualAirlineWithApiKey();
+        return result;
+    }
     async getLeaderboard() {
         const result = await this.virtualAirlineService.getPrimaryLeaderboard()
             .then((members) => members.map((member) => new public_member_dto_1.PublicMemberDto(member)));
@@ -85,6 +92,13 @@ let VirtualAirlineController = VirtualAirlineController_1 = class VirtualAirline
         }
         return result;
     }
+    async update(Id, body) {
+        if (body.VAManagerDiscordWebhookId && body.VAManagerDiscordWebhookId.length <= 0) {
+            body.VAManagerDiscordWebhookId = undefined;
+        }
+        const result = await this.virtualAirlineService.updateById(Id, body);
+        return result;
+    }
 };
 exports.VirtualAirlineController = VirtualAirlineController;
 __decorate([
@@ -100,6 +114,12 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], VirtualAirlineController.prototype, "getPrimaryVirtualAirline", null);
+__decorate([
+    (0, common_1.Get)('with-api-key'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], VirtualAirlineController.prototype, "getPrimaryVirtualAirlineWithApiKey", null);
 __decorate([
     (0, common_1.Get)('leaderboard'),
     __metadata("design:type", Function),
@@ -132,6 +152,15 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], VirtualAirlineController.prototype, "getById", null);
+__decorate([
+    (0, common_1.Put)(':id'),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, is_manager_guard_1.IsManagerGuard),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, UpdateVirtualAirline_dto_1.UpdateVirtualAirlineDto]),
+    __metadata("design:returntype", Promise)
+], VirtualAirlineController.prototype, "update", null);
 exports.VirtualAirlineController = VirtualAirlineController = VirtualAirlineController_1 = __decorate([
     (0, common_1.Controller)('va'),
     __metadata("design:paramtypes", [virtual_airline_service_1.VirtualAirlineService, app_config_service_1.AppConfigService])

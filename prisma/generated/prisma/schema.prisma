@@ -300,6 +300,7 @@ model VirtualAirline {
   CreatedAt                         DateTime  @default(now()) @db.Timestamp(6)
   UpdatedAt                         DateTime  @default(now()) @db.Timestamp(6)
   VAManagerDiscordWebhookId         String?   @db.Uuid
+  NotifyNewMembersViaDiscord        Boolean   @default(false)
 
   // relations
   World                   World?                 @relation(fields: [WorldId], references: [Id])

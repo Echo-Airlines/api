@@ -1,8 +1,8 @@
 import { Body, Controller, Get, Param, Put, UseGuards } from '@nestjs/common';
 import { AdminUserService } from './admin-user.service';
 import { Role, } from 'prisma/generated/prisma';
-import { JwtAuthGuard } from '@auth/jwt-auth.guard';
-import { IsAdminGuard } from '@auth/is-admin.guard';
+import { JwtAuthGuard } from '@auth/guards/jwt-auth.guard';
+import { IsAdminGuard } from '@auth/guards/is-admin.guard';
 
 @Controller(['admin/role', 'admin/roles', 'admin/r'])
 export class AdminRoleController {

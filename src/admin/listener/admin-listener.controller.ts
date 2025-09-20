@@ -1,8 +1,8 @@
 // admin-listener.controller.ts
 import { BadRequestException, Body, Controller, Delete, Get, NotFoundException, Param, Post, Put, Query, UseGuards } from '@nestjs/common';
 import { AdminListenerService } from './admin-listener.service';
-import { IsAdminGuard } from '@auth/is-admin.guard';
-import { JwtAuthGuard } from '@auth/jwt-auth.guard';
+import { IsAdminGuard } from '@auth/guards/is-admin.guard';
+import { JwtAuthGuard } from '@auth/guards/jwt-auth.guard';
 import { ListenerEvent, ListenerEventSender, Prisma } from 'prisma/generated/prisma';
 import { CreateListenerSenderDto } from './dto/CreateListenerSender.dto';
 import * as crypto from 'crypto';

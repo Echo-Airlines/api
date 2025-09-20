@@ -14,11 +14,11 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthController = void 0;
 const common_1 = require("@nestjs/common");
-const local_auth_guard_1 = require("./local-auth.guard");
+const local_auth_guard_1 = require("./guards/local-auth.guard");
 const auth_service_1 = require("./auth.service");
-const jwt_auth_guard_1 = require("./jwt-auth.guard");
+const jwt_auth_guard_1 = require("./guards/jwt-auth.guard");
 const ChangePasswordDto_1 = require("./dto/ChangePasswordDto");
-const discord_auth_guard_1 = require("./discord-auth.guard");
+const discord_auth_guard_1 = require("./guards/discord-auth.guard");
 const RegisterUserDto_1 = require("./dto/RegisterUserDto");
 const app_config_service_1 = require("../app-config/app-config.service");
 const ForgotPasswordDto_1 = require("./dto/ForgotPasswordDto");

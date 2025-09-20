@@ -336,7 +336,8 @@ exports.Prisma.VirtualAirlineScalarFieldEnum = {
   LastRefresh: 'LastRefresh',
   CreatedAt: 'CreatedAt',
   UpdatedAt: 'UpdatedAt',
-  VAManagerDiscordWebhookId: 'VAManagerDiscordWebhookId'
+  VAManagerDiscordWebhookId: 'VAManagerDiscordWebhookId',
+  NotifyNewMembersViaDiscord: 'NotifyNewMembersViaDiscord'
 };
 
 exports.Prisma.VirtualAirlineRoleScalarFieldEnum = {

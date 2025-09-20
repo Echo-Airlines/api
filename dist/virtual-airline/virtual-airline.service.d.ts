@@ -1,5 +1,6 @@
 import { DatabaseService } from '@database/database.service';
 import { Prisma } from 'prisma/generated/prisma';
+import { UpdateVirtualAirlineDto } from './dto/UpdateVirtualAirline.dto';
 export declare class VirtualAirlineService {
     private prisma;
     constructor(prisma: DatabaseService);
@@ -31,8 +32,9 @@ export declare class VirtualAirlineService {
         TotalContractsEarnedCredits: number | null;
         LastRefresh: Date | null;
         VAManagerDiscordWebhookId: string | null;
+        NotifyNewMembersViaDiscord: boolean;
     }[]>;
-    getPrimaryVirtualAirline(query?: Partial<Prisma.VirtualAirlineFindFirstArgs>): Promise<({
+    getPrimaryVirtualAirline(query?: Partial<Prisma.VirtualAirlineFindFirstArgs>, select?: string[]): Promise<({
         World: {
             Id: string;
             CreatedAt: Date;
@@ -69,6 +71,7 @@ export declare class VirtualAirlineService {
         TotalContractsEarnedCredits: number | null;
         LastRefresh: Date | null;
         VAManagerDiscordWebhookId: string | null;
+        NotifyNewMembersViaDiscord: boolean;
     }) | null>;
     getPrimaryVirtualAirlineWithApiKey(query?: Partial<Prisma.VirtualAirlineFindFirstArgs>): Promise<({
         World: {
@@ -107,6 +110,7 @@ export declare class VirtualAirlineService {
         TotalContractsEarnedCredits: number | null;
         LastRefresh: Date | null;
         VAManagerDiscordWebhookId: string | null;
+        NotifyNewMembersViaDiscord: boolean;
     }) | null>;
     getPrimaryLeaderboard(sortColumn?: 'reputation' | 'flights' | 'hours' | 'earnings'): Promise<({
         Company: {
@@ -278,6 +282,7 @@ export declare class VirtualAirlineService {
         TotalContractsEarnedCredits: number | null;
         LastRefresh: Date | null;
         VAManagerDiscordWebhookId: string | null;
+        NotifyNewMembersViaDiscord: boolean;
     }>;
     getVirtualAirlineByIdentifier(Identifier: string): Promise<{
         Id: string;
@@ -307,6 +312,7 @@ export declare class VirtualAirlineService {
         TotalContractsEarnedCredits: number | null;
         LastRefresh: Date | null;
         VAManagerDiscordWebhookId: string | null;
+        NotifyNewMembersViaDiscord: boolean;
     }>;
     upsertById(virtualAirline: Prisma.VirtualAirlineCreateInput): Promise<{
         Id: string;
@@ -336,6 +342,7 @@ export declare class VirtualAirlineService {
         TotalContractsEarnedCredits: number | null;
         LastRefresh: Date | null;
         VAManagerDiscordWebhookId: string | null;
+        NotifyNewMembersViaDiscord: boolean;
     }>;
     upsertByIdentifier(virtualAirline: Prisma.VirtualAirlineCreateInput): Promise<{
         Id: string;
@@ -365,6 +372,7 @@ export declare class VirtualAirlineService {
         TotalContractsEarnedCredits: number | null;
         LastRefresh: Date | null;
         VAManagerDiscordWebhookId: string | null;
+        NotifyNewMembersViaDiscord: boolean;
     }>;
     create(virtualAirline: Prisma.VirtualAirlineCreateInput): Promise<{
         World: {
@@ -403,6 +411,37 @@ export declare class VirtualAirlineService {
         TotalContractsEarnedCredits: number | null;
         LastRefresh: Date | null;
         VAManagerDiscordWebhookId: string | null;
+        NotifyNewMembersViaDiscord: boolean;
+    }>;
+    updateById(Id: string, virtualAirline: UpdateVirtualAirlineDto, query?: Prisma.VirtualAirlineUpdateArgs): Promise<{
+        Id: string;
+        CreatedAt: Date;
+        UpdatedAt: Date;
+        ApiKey: string;
+        IsPrimary: boolean;
+        Identifier: string | null;
+        Name: string | null;
+        Description: string | null;
+        WorldId: string | null;
+        LastDividendsDistribution: Date | null;
+        LastComputationDate: Date | null;
+        ComputedMemberCount: number | null;
+        ComputedAircraftsCount: number | null;
+        ComputedNumberOfFlights30Days: number | null;
+        ComputedNumberOfFlightHours30Days: number | null;
+        ComputedMostUsedAirports: string | null;
+        LastConnection: Date | null;
+        LastReportDate: Date | null;
+        Reputation: Prisma.Decimal | null;
+        CreationDate: Date | null;
+        DifficultyLevel: number | null;
+        Level: number | null;
+        LevelXP: number | null;
+        TotalContractsCompleted: number | null;
+        TotalContractsEarnedCredits: number | null;
+        LastRefresh: Date | null;
+        VAManagerDiscordWebhookId: string | null;
+        NotifyNewMembersViaDiscord: boolean;
     }>;
     getVARoles(): Promise<{
         Id: string;

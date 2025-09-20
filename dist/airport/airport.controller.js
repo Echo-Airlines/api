@@ -17,8 +17,8 @@ const common_1 = require("@nestjs/common");
 const airport_service_1 = require("./airport.service");
 const on_air_api_service_1 = require("../on-air/on-air-api.service");
 const prisma_1 = require("../../prisma/generated/prisma/index.js");
-const is_member_guard_1 = require("../auth/is-member.guard");
-const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
+const is_member_guard_1 = require("../auth/guards/is-member.guard");
+const jwt_auth_guard_1 = require("../auth/guards/jwt-auth.guard");
 let AirportController = class AirportController {
     airportService;
     onAirApiService;

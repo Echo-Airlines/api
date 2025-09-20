@@ -31,6 +31,7 @@ export declare class AdminVirtualAirlineService {
         TotalContractsEarnedCredits: number | null;
         LastRefresh: Date | null;
         VAManagerDiscordWebhookId: string | null;
+        NotifyNewMembersViaDiscord: boolean;
     }[]>;
     getPrimaryVirtualAirline(): Promise<{
         Id: string;
@@ -60,6 +61,7 @@ export declare class AdminVirtualAirlineService {
         TotalContractsEarnedCredits: number | null;
         LastRefresh: Date | null;
         VAManagerDiscordWebhookId: string | null;
+        NotifyNewMembersViaDiscord: boolean;
     } | null>;
     getVirtualAirlineById(Id: string): Promise<{
         Id: string;
@@ -89,6 +91,7 @@ export declare class AdminVirtualAirlineService {
         TotalContractsEarnedCredits: number | null;
         LastRefresh: Date | null;
         VAManagerDiscordWebhookId: string | null;
+        NotifyNewMembersViaDiscord: boolean;
     }>;
     getPrimaryVARoles(): Promise<{
         Id: string;
@@ -152,6 +155,7 @@ export declare class AdminVirtualAirlineService {
         TotalContractsEarnedCredits: number | null;
         LastRefresh: Date | null;
         VAManagerDiscordWebhookId: string | null;
+        NotifyNewMembersViaDiscord: boolean;
     }>;
     upsertById(virtualAirline: Prisma.VirtualAirlineCreateInput): Promise<{
         Id: string;
@@ -181,6 +185,7 @@ export declare class AdminVirtualAirlineService {
         TotalContractsEarnedCredits: number | null;
         LastRefresh: Date | null;
         VAManagerDiscordWebhookId: string | null;
+        NotifyNewMembersViaDiscord: boolean;
     }>;
     upsertByIdentifier(virtualAirline: Prisma.VirtualAirlineCreateInput): Promise<{
         Id: string;
@@ -210,6 +215,7 @@ export declare class AdminVirtualAirlineService {
         TotalContractsEarnedCredits: number | null;
         LastRefresh: Date | null;
         VAManagerDiscordWebhookId: string | null;
+        NotifyNewMembersViaDiscord: boolean;
     }>;
     create(virtualAirline: Prisma.VirtualAirlineCreateInput): Promise<{
         World: {
@@ -248,6 +254,7 @@ export declare class AdminVirtualAirlineService {
         TotalContractsEarnedCredits: number | null;
         LastRefresh: Date | null;
         VAManagerDiscordWebhookId: string | null;
+        NotifyNewMembersViaDiscord: boolean;
     }>;
     VARole_findAll(query?: Prisma.VirtualAirlineRoleFindManyArgs): Promise<{
         Id: string;

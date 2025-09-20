@@ -20898,6 +20898,7 @@ export namespace Prisma {
     CreatedAt: Date | null
     UpdatedAt: Date | null
     VAManagerDiscordWebhookId: string | null
+    NotifyNewMembersViaDiscord: boolean | null
   }
 
   export type VirtualAirlineMaxAggregateOutputType = {
@@ -20928,6 +20929,7 @@ export namespace Prisma {
     CreatedAt: Date | null
     UpdatedAt: Date | null
     VAManagerDiscordWebhookId: string | null
+    NotifyNewMembersViaDiscord: boolean | null
   }
 
   export type VirtualAirlineCountAggregateOutputType = {
@@ -20958,6 +20960,7 @@ export namespace Prisma {
     CreatedAt: number
     UpdatedAt: number
     VAManagerDiscordWebhookId: number
+    NotifyNewMembersViaDiscord: number
     _all: number
   }
 
@@ -21016,6 +21019,7 @@ export namespace Prisma {
     CreatedAt?: true
     UpdatedAt?: true
     VAManagerDiscordWebhookId?: true
+    NotifyNewMembersViaDiscord?: true
   }
 
   export type VirtualAirlineMaxAggregateInputType = {
@@ -21046,6 +21050,7 @@ export namespace Prisma {
     CreatedAt?: true
     UpdatedAt?: true
     VAManagerDiscordWebhookId?: true
+    NotifyNewMembersViaDiscord?: true
   }
 
   export type VirtualAirlineCountAggregateInputType = {
@@ -21076,6 +21081,7 @@ export namespace Prisma {
     CreatedAt?: true
     UpdatedAt?: true
     VAManagerDiscordWebhookId?: true
+    NotifyNewMembersViaDiscord?: true
     _all?: true
   }
 
@@ -21193,6 +21199,7 @@ export namespace Prisma {
     CreatedAt: Date
     UpdatedAt: Date
     VAManagerDiscordWebhookId: string | null
+    NotifyNewMembersViaDiscord: boolean
     _count: VirtualAirlineCountAggregateOutputType | null
     _avg: VirtualAirlineAvgAggregateOutputType | null
     _sum: VirtualAirlineSumAggregateOutputType | null
@@ -21242,6 +21249,7 @@ export namespace Prisma {
     CreatedAt?: boolean
     UpdatedAt?: boolean
     VAManagerDiscordWebhookId?: boolean
+    NotifyNewMembersViaDiscord?: boolean
     World?: boolean | VirtualAirline$WorldArgs<ExtArgs>
     VAManagerDiscordWebhook?: boolean | VirtualAirline$VAManagerDiscordWebhookArgs<ExtArgs>
     VARoles?: boolean | VirtualAirline$VARolesArgs<ExtArgs>
@@ -21280,6 +21288,7 @@ export namespace Prisma {
     CreatedAt?: boolean
     UpdatedAt?: boolean
     VAManagerDiscordWebhookId?: boolean
+    NotifyNewMembersViaDiscord?: boolean
     World?: boolean | VirtualAirline$WorldArgs<ExtArgs>
     VAManagerDiscordWebhook?: boolean | VirtualAirline$VAManagerDiscordWebhookArgs<ExtArgs>
   }, ExtArgs["result"]["virtualAirline"]>
@@ -21312,6 +21321,7 @@ export namespace Prisma {
     CreatedAt?: boolean
     UpdatedAt?: boolean
     VAManagerDiscordWebhookId?: boolean
+    NotifyNewMembersViaDiscord?: boolean
     World?: boolean | VirtualAirline$WorldArgs<ExtArgs>
     VAManagerDiscordWebhook?: boolean | VirtualAirline$VAManagerDiscordWebhookArgs<ExtArgs>
   }, ExtArgs["result"]["virtualAirline"]>
@@ -21344,9 +21354,10 @@ export namespace Prisma {
     CreatedAt?: boolean
     UpdatedAt?: boolean
     VAManagerDiscordWebhookId?: boolean
+    NotifyNewMembersViaDiscord?: boolean
   }
 
-  export type VirtualAirlineOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "ApiKey" | "IsPrimary" | "Identifier" | "Name" | "Description" | "WorldId" | "LastDividendsDistribution" | "LastComputationDate" | "ComputedMemberCount" | "ComputedAircraftsCount" | "ComputedNumberOfFlights30Days" | "ComputedNumberOfFlightHours30Days" | "ComputedMostUsedAirports" | "LastConnection" | "LastReportDate" | "Reputation" | "CreationDate" | "DifficultyLevel" | "Level" | "LevelXP" | "TotalContractsCompleted" | "TotalContractsEarnedCredits" | "LastRefresh" | "CreatedAt" | "UpdatedAt" | "VAManagerDiscordWebhookId", ExtArgs["result"]["virtualAirline"]>
+  export type VirtualAirlineOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "ApiKey" | "IsPrimary" | "Identifier" | "Name" | "Description" | "WorldId" | "LastDividendsDistribution" | "LastComputationDate" | "ComputedMemberCount" | "ComputedAircraftsCount" | "ComputedNumberOfFlights30Days" | "ComputedNumberOfFlightHours30Days" | "ComputedMostUsedAirports" | "LastConnection" | "LastReportDate" | "Reputation" | "CreationDate" | "DifficultyLevel" | "Level" | "LevelXP" | "TotalContractsCompleted" | "TotalContractsEarnedCredits" | "LastRefresh" | "CreatedAt" | "UpdatedAt" | "VAManagerDiscordWebhookId" | "NotifyNewMembersViaDiscord", ExtArgs["result"]["virtualAirline"]>
   export type VirtualAirlineInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     World?: boolean | VirtualAirline$WorldArgs<ExtArgs>
     VAManagerDiscordWebhook?: boolean | VirtualAirline$VAManagerDiscordWebhookArgs<ExtArgs>
@@ -21405,6 +21416,7 @@ export namespace Prisma {
       CreatedAt: Date
       UpdatedAt: Date
       VAManagerDiscordWebhookId: string | null
+      NotifyNewMembersViaDiscord: boolean
     }, ExtArgs["result"]["virtualAirline"]>
     composites: {}
   }
@@ -21862,6 +21874,7 @@ export namespace Prisma {
     readonly CreatedAt: FieldRef<"VirtualAirline", 'DateTime'>
     readonly UpdatedAt: FieldRef<"VirtualAirline", 'DateTime'>
     readonly VAManagerDiscordWebhookId: FieldRef<"VirtualAirline", 'String'>
+    readonly NotifyNewMembersViaDiscord: FieldRef<"VirtualAirline", 'Boolean'>
   }
     
 
@@ -40604,7 +40617,8 @@ export namespace Prisma {
     LastRefresh: 'LastRefresh',
     CreatedAt: 'CreatedAt',
     UpdatedAt: 'UpdatedAt',
-    VAManagerDiscordWebhookId: 'VAManagerDiscordWebhookId'
+    VAManagerDiscordWebhookId: 'VAManagerDiscordWebhookId',
+    NotifyNewMembersViaDiscord: 'NotifyNewMembersViaDiscord'
   };
 
   export type VirtualAirlineScalarFieldEnum = (typeof VirtualAirlineScalarFieldEnum)[keyof typeof VirtualAirlineScalarFieldEnum]
@@ -42372,6 +42386,7 @@ export namespace Prisma {
     CreatedAt?: DateTimeFilter<"VirtualAirline"> | Date | string
     UpdatedAt?: DateTimeFilter<"VirtualAirline"> | Date | string
     VAManagerDiscordWebhookId?: UuidNullableFilter<"VirtualAirline"> | string | null
+    NotifyNewMembersViaDiscord?: BoolFilter<"VirtualAirline"> | boolean
     World?: XOR<WorldNullableScalarRelationFilter, WorldWhereInput> | null
     VAManagerDiscordWebhook?: XOR<DiscordChannelWebhookNullableScalarRelationFilter, DiscordChannelWebhookWhereInput> | null
     VARoles?: VirtualAirlineRoleListRelationFilter
@@ -42409,6 +42424,7 @@ export namespace Prisma {
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
     VAManagerDiscordWebhookId?: SortOrderInput | SortOrder
+    NotifyNewMembersViaDiscord?: SortOrder
     World?: WorldOrderByWithRelationInput
     VAManagerDiscordWebhook?: DiscordChannelWebhookOrderByWithRelationInput
     VARoles?: VirtualAirlineRoleOrderByRelationAggregateInput
@@ -42449,6 +42465,7 @@ export namespace Prisma {
     CreatedAt?: DateTimeFilter<"VirtualAirline"> | Date | string
     UpdatedAt?: DateTimeFilter<"VirtualAirline"> | Date | string
     VAManagerDiscordWebhookId?: UuidNullableFilter<"VirtualAirline"> | string | null
+    NotifyNewMembersViaDiscord?: BoolFilter<"VirtualAirline"> | boolean
     World?: XOR<WorldNullableScalarRelationFilter, WorldWhereInput> | null
     VAManagerDiscordWebhook?: XOR<DiscordChannelWebhookNullableScalarRelationFilter, DiscordChannelWebhookWhereInput> | null
     VARoles?: VirtualAirlineRoleListRelationFilter
@@ -42486,6 +42503,7 @@ export namespace Prisma {
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
     VAManagerDiscordWebhookId?: SortOrderInput | SortOrder
+    NotifyNewMembersViaDiscord?: SortOrder
     _count?: VirtualAirlineCountOrderByAggregateInput
     _avg?: VirtualAirlineAvgOrderByAggregateInput
     _max?: VirtualAirlineMaxOrderByAggregateInput
@@ -42524,6 +42542,7 @@ export namespace Prisma {
     CreatedAt?: DateTimeWithAggregatesFilter<"VirtualAirline"> | Date | string
     UpdatedAt?: DateTimeWithAggregatesFilter<"VirtualAirline"> | Date | string
     VAManagerDiscordWebhookId?: UuidNullableWithAggregatesFilter<"VirtualAirline"> | string | null
+    NotifyNewMembersViaDiscord?: BoolWithAggregatesFilter<"VirtualAirline"> | boolean
   }
 
   export type VirtualAirlineRoleWhereInput = {
@@ -45497,6 +45516,7 @@ export namespace Prisma {
     LastRefresh?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    NotifyNewMembersViaDiscord?: boolean
     World?: WorldCreateNestedOneWithoutVirtualAirlinesInput
     VAManagerDiscordWebhook?: DiscordChannelWebhookCreateNestedOneWithoutVirtualAirlinesInput
     VARoles?: VirtualAirlineRoleCreateNestedManyWithoutVirtualAirlineInput
@@ -45534,6 +45554,7 @@ export namespace Prisma {
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
     VAManagerDiscordWebhookId?: string | null
+    NotifyNewMembersViaDiscord?: boolean
     VARoles?: VirtualAirlineRoleUncheckedCreateNestedManyWithoutVirtualAirlineInput
     Members?: MemberUncheckedCreateNestedManyWithoutVirtualAirlineInput
     Fleet?: AircraftUncheckedCreateNestedManyWithoutVirtualAirlineInput
@@ -45567,6 +45588,7 @@ export namespace Prisma {
     LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    NotifyNewMembersViaDiscord?: BoolFieldUpdateOperationsInput | boolean
     World?: WorldUpdateOneWithoutVirtualAirlinesNestedInput
     VAManagerDiscordWebhook?: DiscordChannelWebhookUpdateOneWithoutVirtualAirlinesNestedInput
     VARoles?: VirtualAirlineRoleUpdateManyWithoutVirtualAirlineNestedInput
@@ -45604,6 +45626,7 @@ export namespace Prisma {
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     VAManagerDiscordWebhookId?: NullableStringFieldUpdateOperationsInput | string | null
+    NotifyNewMembersViaDiscord?: BoolFieldUpdateOperationsInput | boolean
     VARoles?: VirtualAirlineRoleUncheckedUpdateManyWithoutVirtualAirlineNestedInput
     Members?: MemberUncheckedUpdateManyWithoutVirtualAirlineNestedInput
     Fleet?: AircraftUncheckedUpdateManyWithoutVirtualAirlineNestedInput
@@ -45639,6 +45662,7 @@ export namespace Prisma {
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
     VAManagerDiscordWebhookId?: string | null
+    NotifyNewMembersViaDiscord?: boolean
   }
 
   export type VirtualAirlineUpdateManyMutationInput = {
@@ -45667,6 +45691,7 @@ export namespace Prisma {
     LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    NotifyNewMembersViaDiscord?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type VirtualAirlineUncheckedUpdateManyInput = {
@@ -45697,6 +45722,7 @@ export namespace Prisma {
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     VAManagerDiscordWebhookId?: NullableStringFieldUpdateOperationsInput | string | null
+    NotifyNewMembersViaDiscord?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type VirtualAirlineRoleCreateInput = {
@@ -48704,6 +48730,7 @@ export namespace Prisma {
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
     VAManagerDiscordWebhookId?: SortOrder
+    NotifyNewMembersViaDiscord?: SortOrder
   }
 
   export type VirtualAirlineAvgOrderByAggregateInput = {
@@ -48747,6 +48774,7 @@ export namespace Prisma {
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
     VAManagerDiscordWebhookId?: SortOrder
+    NotifyNewMembersViaDiscord?: SortOrder
   }
 
   export type VirtualAirlineMinOrderByAggregateInput = {
@@ -48777,6 +48805,7 @@ export namespace Prisma {
     CreatedAt?: SortOrder
     UpdatedAt?: SortOrder
     VAManagerDiscordWebhookId?: SortOrder
+    NotifyNewMembersViaDiscord?: SortOrder
   }
 
   export type VirtualAirlineSumOrderByAggregateInput = {
@@ -53272,6 +53301,7 @@ export namespace Prisma {
     LastRefresh?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    NotifyNewMembersViaDiscord?: boolean
     World?: WorldCreateNestedOneWithoutVirtualAirlinesInput
     VARoles?: VirtualAirlineRoleCreateNestedManyWithoutVirtualAirlineInput
     Members?: MemberCreateNestedManyWithoutVirtualAirlineInput
@@ -53307,6 +53337,7 @@ export namespace Prisma {
     LastRefresh?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    NotifyNewMembersViaDiscord?: boolean
     VARoles?: VirtualAirlineRoleUncheckedCreateNestedManyWithoutVirtualAirlineInput
     Members?: MemberUncheckedCreateNestedManyWithoutVirtualAirlineInput
     Fleet?: AircraftUncheckedCreateNestedManyWithoutVirtualAirlineInput
@@ -53418,6 +53449,7 @@ export namespace Prisma {
     CreatedAt?: DateTimeFilter<"VirtualAirline"> | Date | string
     UpdatedAt?: DateTimeFilter<"VirtualAirline"> | Date | string
     VAManagerDiscordWebhookId?: UuidNullableFilter<"VirtualAirline"> | string | null
+    NotifyNewMembersViaDiscord?: BoolFilter<"VirtualAirline"> | boolean
   }
 
   export type DiscordMessageCreateWithoutListenerEventsInput = {
@@ -55525,6 +55557,7 @@ export namespace Prisma {
     LastRefresh?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    NotifyNewMembersViaDiscord?: boolean
     World?: WorldCreateNestedOneWithoutVirtualAirlinesInput
     VAManagerDiscordWebhook?: DiscordChannelWebhookCreateNestedOneWithoutVirtualAirlinesInput
     Members?: MemberCreateNestedManyWithoutVirtualAirlineInput
@@ -55561,6 +55594,7 @@ export namespace Prisma {
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
     VAManagerDiscordWebhookId?: string | null
+    NotifyNewMembersViaDiscord?: boolean
     Members?: MemberUncheckedCreateNestedManyWithoutVirtualAirlineInput
     Fleet?: AircraftUncheckedCreateNestedManyWithoutVirtualAirlineInput
     Flights?: FlightUncheckedCreateNestedManyWithoutVirtualAirlineInput
@@ -55697,6 +55731,7 @@ export namespace Prisma {
     LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    NotifyNewMembersViaDiscord?: BoolFieldUpdateOperationsInput | boolean
     World?: WorldUpdateOneWithoutVirtualAirlinesNestedInput
     VAManagerDiscordWebhook?: DiscordChannelWebhookUpdateOneWithoutVirtualAirlinesNestedInput
     Members?: MemberUpdateManyWithoutVirtualAirlineNestedInput
@@ -55733,6 +55768,7 @@ export namespace Prisma {
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     VAManagerDiscordWebhookId?: NullableStringFieldUpdateOperationsInput | string | null
+    NotifyNewMembersViaDiscord?: BoolFieldUpdateOperationsInput | boolean
     Members?: MemberUncheckedUpdateManyWithoutVirtualAirlineNestedInput
     Fleet?: AircraftUncheckedUpdateManyWithoutVirtualAirlineNestedInput
     Flights?: FlightUncheckedUpdateManyWithoutVirtualAirlineNestedInput
@@ -55781,6 +55817,7 @@ export namespace Prisma {
     LastRefresh?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    NotifyNewMembersViaDiscord?: boolean
     VAManagerDiscordWebhook?: DiscordChannelWebhookCreateNestedOneWithoutVirtualAirlinesInput
     VARoles?: VirtualAirlineRoleCreateNestedManyWithoutVirtualAirlineInput
     Members?: MemberCreateNestedManyWithoutVirtualAirlineInput
@@ -55816,6 +55853,7 @@ export namespace Prisma {
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
     VAManagerDiscordWebhookId?: string | null
+    NotifyNewMembersViaDiscord?: boolean
     VARoles?: VirtualAirlineRoleUncheckedCreateNestedManyWithoutVirtualAirlineInput
     Members?: MemberUncheckedCreateNestedManyWithoutVirtualAirlineInput
     Fleet?: AircraftUncheckedCreateNestedManyWithoutVirtualAirlineInput
@@ -56147,6 +56185,7 @@ export namespace Prisma {
     LastRefresh?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    NotifyNewMembersViaDiscord?: boolean
     World?: WorldCreateNestedOneWithoutVirtualAirlinesInput
     VAManagerDiscordWebhook?: DiscordChannelWebhookCreateNestedOneWithoutVirtualAirlinesInput
     VARoles?: VirtualAirlineRoleCreateNestedManyWithoutVirtualAirlineInput
@@ -56183,6 +56222,7 @@ export namespace Prisma {
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
     VAManagerDiscordWebhookId?: string | null
+    NotifyNewMembersViaDiscord?: boolean
     VARoles?: VirtualAirlineRoleUncheckedCreateNestedManyWithoutVirtualAirlineInput
     Fleet?: AircraftUncheckedCreateNestedManyWithoutVirtualAirlineInput
     Flights?: FlightUncheckedCreateNestedManyWithoutVirtualAirlineInput
@@ -56560,6 +56600,7 @@ export namespace Prisma {
     LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    NotifyNewMembersViaDiscord?: BoolFieldUpdateOperationsInput | boolean
     World?: WorldUpdateOneWithoutVirtualAirlinesNestedInput
     VAManagerDiscordWebhook?: DiscordChannelWebhookUpdateOneWithoutVirtualAirlinesNestedInput
     VARoles?: VirtualAirlineRoleUpdateManyWithoutVirtualAirlineNestedInput
@@ -56596,6 +56637,7 @@ export namespace Prisma {
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     VAManagerDiscordWebhookId?: NullableStringFieldUpdateOperationsInput | string | null
+    NotifyNewMembersViaDiscord?: BoolFieldUpdateOperationsInput | boolean
     VARoles?: VirtualAirlineRoleUncheckedUpdateManyWithoutVirtualAirlineNestedInput
     Fleet?: AircraftUncheckedUpdateManyWithoutVirtualAirlineNestedInput
     Flights?: FlightUncheckedUpdateManyWithoutVirtualAirlineNestedInput
@@ -57135,6 +57177,7 @@ export namespace Prisma {
     LastRefresh?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    NotifyNewMembersViaDiscord?: boolean
     World?: WorldCreateNestedOneWithoutVirtualAirlinesInput
     VAManagerDiscordWebhook?: DiscordChannelWebhookCreateNestedOneWithoutVirtualAirlinesInput
     VARoles?: VirtualAirlineRoleCreateNestedManyWithoutVirtualAirlineInput
@@ -57171,6 +57214,7 @@ export namespace Prisma {
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
     VAManagerDiscordWebhookId?: string | null
+    NotifyNewMembersViaDiscord?: boolean
     VARoles?: VirtualAirlineRoleUncheckedCreateNestedManyWithoutVirtualAirlineInput
     Members?: MemberUncheckedCreateNestedManyWithoutVirtualAirlineInput
     Flights?: FlightUncheckedCreateNestedManyWithoutVirtualAirlineInput
@@ -57544,6 +57588,7 @@ export namespace Prisma {
     LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    NotifyNewMembersViaDiscord?: BoolFieldUpdateOperationsInput | boolean
     World?: WorldUpdateOneWithoutVirtualAirlinesNestedInput
     VAManagerDiscordWebhook?: DiscordChannelWebhookUpdateOneWithoutVirtualAirlinesNestedInput
     VARoles?: VirtualAirlineRoleUpdateManyWithoutVirtualAirlineNestedInput
@@ -57580,6 +57625,7 @@ export namespace Prisma {
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     VAManagerDiscordWebhookId?: NullableStringFieldUpdateOperationsInput | string | null
+    NotifyNewMembersViaDiscord?: BoolFieldUpdateOperationsInput | boolean
     VARoles?: VirtualAirlineRoleUncheckedUpdateManyWithoutVirtualAirlineNestedInput
     Members?: MemberUncheckedUpdateManyWithoutVirtualAirlineNestedInput
     Flights?: FlightUncheckedUpdateManyWithoutVirtualAirlineNestedInput
@@ -58701,6 +58747,7 @@ export namespace Prisma {
     LastRefresh?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    NotifyNewMembersViaDiscord?: boolean
     World?: WorldCreateNestedOneWithoutVirtualAirlinesInput
     VAManagerDiscordWebhook?: DiscordChannelWebhookCreateNestedOneWithoutVirtualAirlinesInput
     VARoles?: VirtualAirlineRoleCreateNestedManyWithoutVirtualAirlineInput
@@ -58737,6 +58784,7 @@ export namespace Prisma {
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
     VAManagerDiscordWebhookId?: string | null
+    NotifyNewMembersViaDiscord?: boolean
     VARoles?: VirtualAirlineRoleUncheckedCreateNestedManyWithoutVirtualAirlineInput
     Members?: MemberUncheckedCreateNestedManyWithoutVirtualAirlineInput
     Fleet?: AircraftUncheckedCreateNestedManyWithoutVirtualAirlineInput
@@ -59158,6 +59206,7 @@ export namespace Prisma {
     LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    NotifyNewMembersViaDiscord?: BoolFieldUpdateOperationsInput | boolean
     World?: WorldUpdateOneWithoutVirtualAirlinesNestedInput
     VAManagerDiscordWebhook?: DiscordChannelWebhookUpdateOneWithoutVirtualAirlinesNestedInput
     VARoles?: VirtualAirlineRoleUpdateManyWithoutVirtualAirlineNestedInput
@@ -59194,6 +59243,7 @@ export namespace Prisma {
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     VAManagerDiscordWebhookId?: NullableStringFieldUpdateOperationsInput | string | null
+    NotifyNewMembersViaDiscord?: BoolFieldUpdateOperationsInput | boolean
     VARoles?: VirtualAirlineRoleUncheckedUpdateManyWithoutVirtualAirlineNestedInput
     Members?: MemberUncheckedUpdateManyWithoutVirtualAirlineNestedInput
     Fleet?: AircraftUncheckedUpdateManyWithoutVirtualAirlineNestedInput
@@ -59964,6 +60014,7 @@ export namespace Prisma {
     LastRefresh?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    NotifyNewMembersViaDiscord?: boolean
     World?: WorldCreateNestedOneWithoutVirtualAirlinesInput
     VAManagerDiscordWebhook?: DiscordChannelWebhookCreateNestedOneWithoutVirtualAirlinesInput
     VARoles?: VirtualAirlineRoleCreateNestedManyWithoutVirtualAirlineInput
@@ -60000,6 +60051,7 @@ export namespace Prisma {
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
     VAManagerDiscordWebhookId?: string | null
+    NotifyNewMembersViaDiscord?: boolean
     VARoles?: VirtualAirlineRoleUncheckedCreateNestedManyWithoutVirtualAirlineInput
     Members?: MemberUncheckedCreateNestedManyWithoutVirtualAirlineInput
     Fleet?: AircraftUncheckedCreateNestedManyWithoutVirtualAirlineInput
@@ -60077,6 +60129,7 @@ export namespace Prisma {
     LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    NotifyNewMembersViaDiscord?: BoolFieldUpdateOperationsInput | boolean
     World?: WorldUpdateOneWithoutVirtualAirlinesNestedInput
     VAManagerDiscordWebhook?: DiscordChannelWebhookUpdateOneWithoutVirtualAirlinesNestedInput
     VARoles?: VirtualAirlineRoleUpdateManyWithoutVirtualAirlineNestedInput
@@ -60113,6 +60166,7 @@ export namespace Prisma {
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     VAManagerDiscordWebhookId?: NullableStringFieldUpdateOperationsInput | string | null
+    NotifyNewMembersViaDiscord?: BoolFieldUpdateOperationsInput | boolean
     VARoles?: VirtualAirlineRoleUncheckedUpdateManyWithoutVirtualAirlineNestedInput
     Members?: MemberUncheckedUpdateManyWithoutVirtualAirlineNestedInput
     Fleet?: AircraftUncheckedUpdateManyWithoutVirtualAirlineNestedInput
@@ -60362,6 +60416,7 @@ export namespace Prisma {
     LastRefresh?: Date | string | null
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
+    NotifyNewMembersViaDiscord?: boolean
   }
 
   export type DiscordMessageUpdateWithoutDiscordChannelWebhookInput = {
@@ -60459,6 +60514,7 @@ export namespace Prisma {
     LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    NotifyNewMembersViaDiscord?: BoolFieldUpdateOperationsInput | boolean
     World?: WorldUpdateOneWithoutVirtualAirlinesNestedInput
     VARoles?: VirtualAirlineRoleUpdateManyWithoutVirtualAirlineNestedInput
     Members?: MemberUpdateManyWithoutVirtualAirlineNestedInput
@@ -60494,6 +60550,7 @@ export namespace Prisma {
     LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    NotifyNewMembersViaDiscord?: BoolFieldUpdateOperationsInput | boolean
     VARoles?: VirtualAirlineRoleUncheckedUpdateManyWithoutVirtualAirlineNestedInput
     Members?: MemberUncheckedUpdateManyWithoutVirtualAirlineNestedInput
     Fleet?: AircraftUncheckedUpdateManyWithoutVirtualAirlineNestedInput
@@ -60528,6 +60585,7 @@ export namespace Prisma {
     LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    NotifyNewMembersViaDiscord?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ListenerEventCreateManySenderInput = {
@@ -61690,6 +61748,7 @@ export namespace Prisma {
     CreatedAt?: Date | string
     UpdatedAt?: Date | string
     VAManagerDiscordWebhookId?: string | null
+    NotifyNewMembersViaDiscord?: boolean
   }
 
   export type CompanyCreateManyWorldInput = {
@@ -61735,6 +61794,7 @@ export namespace Prisma {
     LastRefresh?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    NotifyNewMembersViaDiscord?: BoolFieldUpdateOperationsInput | boolean
     VAManagerDiscordWebhook?: DiscordChannelWebhookUpdateOneWithoutVirtualAirlinesNestedInput
     VARoles?: VirtualAirlineRoleUpdateManyWithoutVirtualAirlineNestedInput
     Members?: MemberUpdateManyWithoutVirtualAirlineNestedInput
@@ -61770,6 +61830,7 @@ export namespace Prisma {
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     VAManagerDiscordWebhookId?: NullableStringFieldUpdateOperationsInput | string | null
+    NotifyNewMembersViaDiscord?: BoolFieldUpdateOperationsInput | boolean
     VARoles?: VirtualAirlineRoleUncheckedUpdateManyWithoutVirtualAirlineNestedInput
     Members?: MemberUncheckedUpdateManyWithoutVirtualAirlineNestedInput
     Fleet?: AircraftUncheckedUpdateManyWithoutVirtualAirlineNestedInput
@@ -61804,6 +61865,7 @@ export namespace Prisma {
     CreatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     UpdatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     VAManagerDiscordWebhookId?: NullableStringFieldUpdateOperationsInput | string | null
+    NotifyNewMembersViaDiscord?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type CompanyUpdateWithoutWorldInput = {

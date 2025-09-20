@@ -2,6 +2,7 @@ import { VirtualAirlineService } from './virtual-airline.service';
 import { Prisma } from 'prisma/generated/prisma';
 import { AppConfigService } from '@app-config/app-config.service';
 import { PublicMemberDto } from './dto/public-member.dto';
+import { UpdateVirtualAirlineDto } from './dto/UpdateVirtualAirline.dto';
 export declare class VirtualAirlineController {
     private readonly virtualAirlineService;
     private readonly appConfigService;
@@ -35,6 +36,7 @@ export declare class VirtualAirlineController {
         TotalContractsEarnedCredits: number | null;
         LastRefresh: Date | null;
         VAManagerDiscordWebhookId: string | null;
+        NotifyNewMembersViaDiscord: boolean;
     }[]>;
     getPrimaryVirtualAirline(): Promise<{
         Id: string;
@@ -64,6 +66,37 @@ export declare class VirtualAirlineController {
         TotalContractsEarnedCredits: number | null;
         LastRefresh: Date | null;
         VAManagerDiscordWebhookId: string | null;
+        NotifyNewMembersViaDiscord: boolean;
+    } | null>;
+    getPrimaryVirtualAirlineWithApiKey(): Promise<{
+        Id: string;
+        CreatedAt: Date;
+        UpdatedAt: Date;
+        ApiKey: string;
+        IsPrimary: boolean;
+        Identifier: string | null;
+        Name: string | null;
+        Description: string | null;
+        WorldId: string | null;
+        LastDividendsDistribution: Date | null;
+        LastComputationDate: Date | null;
+        ComputedMemberCount: number | null;
+        ComputedAircraftsCount: number | null;
+        ComputedNumberOfFlights30Days: number | null;
+        ComputedNumberOfFlightHours30Days: number | null;
+        ComputedMostUsedAirports: string | null;
+        LastConnection: Date | null;
+        LastReportDate: Date | null;
+        Reputation: Prisma.Decimal | null;
+        CreationDate: Date | null;
+        DifficultyLevel: number | null;
+        Level: number | null;
+        LevelXP: number | null;
+        TotalContractsCompleted: number | null;
+        TotalContractsEarnedCredits: number | null;
+        LastRefresh: Date | null;
+        VAManagerDiscordWebhookId: string | null;
+        NotifyNewMembersViaDiscord: boolean;
     } | null>;
     getLeaderboard(): Promise<PublicMemberDto[]>;
     getPrimaryVirtualAirlineMembers(): Promise<PublicMemberDto[]>;
@@ -112,6 +145,7 @@ export declare class VirtualAirlineController {
         TotalContractsEarnedCredits: number | null;
         LastRefresh: Date | null;
         VAManagerDiscordWebhookId: string | null;
+        NotifyNewMembersViaDiscord: boolean;
     }>;
     getById(id: string): Promise<{
         Id: string;
@@ -141,5 +175,36 @@ export declare class VirtualAirlineController {
         TotalContractsEarnedCredits: number | null;
         LastRefresh: Date | null;
         VAManagerDiscordWebhookId: string | null;
+        NotifyNewMembersViaDiscord: boolean;
+    }>;
+    update(Id: string, body: UpdateVirtualAirlineDto): Promise<{
+        Id: string;
+        CreatedAt: Date;
+        UpdatedAt: Date;
+        ApiKey: string;
+        IsPrimary: boolean;
+        Identifier: string | null;
+        Name: string | null;
+        Description: string | null;
+        WorldId: string | null;
+        LastDividendsDistribution: Date | null;
+        LastComputationDate: Date | null;
+        ComputedMemberCount: number | null;
+        ComputedAircraftsCount: number | null;
+        ComputedNumberOfFlights30Days: number | null;
+        ComputedNumberOfFlightHours30Days: number | null;
+        ComputedMostUsedAirports: string | null;
+        LastConnection: Date | null;
+        LastReportDate: Date | null;
+        Reputation: Prisma.Decimal | null;
+        CreationDate: Date | null;
+        DifficultyLevel: number | null;
+        Level: number | null;
+        LevelXP: number | null;
+        TotalContractsCompleted: number | null;
+        TotalContractsEarnedCredits: number | null;
+        LastRefresh: Date | null;
+        VAManagerDiscordWebhookId: string | null;
+        NotifyNewMembersViaDiscord: boolean;
     }>;
 }

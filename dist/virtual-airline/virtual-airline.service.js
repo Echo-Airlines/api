@@ -30,7 +30,7 @@ let VirtualAirlineService = class VirtualAirlineService {
         });
         return entities;
     }
-    async getPrimaryVirtualAirline(query) {
+    async getPrimaryVirtualAirline(query, select) {
         const _query = {
             where: (query?.where) ? query.where : {
                 IsPrimary: true
@@ -79,6 +79,7 @@ let VirtualAirlineService = class VirtualAirlineService {
                 CreatedAt: true,
                 UpdatedAt: true,
                 VAManagerDiscordWebhookId: true,
+                NotifyNewMembersViaDiscord: true,
                 World: true,
             },
             orderBy: (query?.orderBy) ? query.orderBy : {
@@ -189,6 +190,22 @@ let VirtualAirlineService = class VirtualAirlineService {
                 World: true
             }
         });
+        return entity;
+    }
+    async updateById(Id, virtualAirline, query) {
+        if (!Id) {
+            throw new common_1.BadRequestException('Virtual airline ID is required');
+        }
+        const data = {
+            ...virtualAirline,
+            UpdatedAt: new Date()
+        };
+        const _query = {
+            where: { Id },
+            data: data,
+            ...query
+        };
+        const entity = await this.prisma.virtualAirline.update(_query);
         return entity;
     }
     async getVARoles() {

@@ -3,8 +3,8 @@ import { AirportService } from './airport.service';
 import { OnAirApiService } from '@on-air/on-air-api.service';
 import { OnAirAirport } from '@on-air/types';
 import { Airport, Prisma } from 'prisma/generated/prisma';
-import { IsMemberGuard } from '@auth/is-member.guard';
-import { JwtAuthGuard } from '@auth/jwt-auth.guard';
+import { IsMemberGuard } from '@auth/guards/is-member.guard';
+import { JwtAuthGuard } from '@auth/guards/jwt-auth.guard';
 
 @Controller(['airport', 'airports'])
 export class AirportController {

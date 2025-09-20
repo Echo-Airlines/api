@@ -1,6 +1,6 @@
 import { UseGuards, Controller, Get, Param, Post, Delete, Body, Put, Query, BadRequestException } from '@nestjs/common';
-import { JwtAuthGuard } from '@auth/jwt-auth.guard';
-import { IsAdminGuard } from '@auth/is-admin.guard';
+import { JwtAuthGuard } from '@auth/guards/jwt-auth.guard';
+import { IsAdminGuard } from '@auth/guards/is-admin.guard';
 import { DiscordChannelWebhook, Prisma } from 'prisma/generated/prisma';
 import { AdminDiscordService } from './admin-discord.service';
 import { CreateDiscordChannelWebhookDto } from './dto/CreateDiscordChannelWebhookDto';

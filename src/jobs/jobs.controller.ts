@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query, UseGuards, Put, BadRequestException } from '@nestjs/common';
 import { JobsService } from './jobs.service';
-import { IsAdminGuard } from '@auth/is-admin.guard';
-import { JwtAuthGuard } from '@auth/jwt-auth.guard';
+import { IsAdminGuard } from '@auth/guards/is-admin.guard';
+import { JwtAuthGuard } from '@auth/guards/jwt-auth.guard';
 import { JobSchedulerService } from './job-scheduler.service';
 import { CreateJobDto } from './dto/create-job.dto';
 import { UpdateJobDto } from './dto/update-job.dto';

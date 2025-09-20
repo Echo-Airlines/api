@@ -3,6 +3,7 @@ import { DatabaseService } from '@database/database.service';
 import { Member, Prisma, VirtualAirline, VirtualAirlineRole } from 'prisma/generated/prisma';
 import { VirtualAirlineWithMembersWorld, VirtualAirlineWithWorld } from './dto/virtual-airline-with-relations';
 import { MemberWithCompanyVARole } from 'src/member/dto/member-witth-relations';
+import { UpdateVirtualAirlineDto } from './dto/UpdateVirtualAirline.dto';
 
 @Injectable()
 export class VirtualAirlineService {
@@ -23,7 +24,7 @@ export class VirtualAirlineService {
         return entities;
     }
 
-    async getPrimaryVirtualAirline(query?: Partial<Prisma.VirtualAirlineFindFirstArgs>) {
+    async getPrimaryVirtualAirline(query?: Partial<Prisma.VirtualAirlineFindFirstArgs>, select?: string[]) {
         const _query: Prisma.VirtualAirlineFindFirstArgs = {
             where: (query?.where) ? query.where : {
                 IsPrimary: true
@@ -75,6 +76,7 @@ export class VirtualAirlineService {
                 CreatedAt: true,
                 UpdatedAt: true,
                 VAManagerDiscordWebhookId: true,
+                NotifyNewMembersViaDiscord: true,
                 World: true,
             },
             orderBy: (query?.orderBy) ? query.orderBy : {
@@ -215,6 +217,27 @@ export class VirtualAirlineService {
         return entity;
     }
 
+    async updateById(Id: string, virtualAirline: UpdateVirtualAirlineDto, query?: Prisma.VirtualAirlineUpdateArgs) {
+        if (!Id) {
+            throw new BadRequestException('Virtual airline ID is required');
+        }
+
+        const data: Prisma.VirtualAirlineUpdateInput = {
+            ...virtualAirline,
+            UpdatedAt: new Date()
+        };
+
+        const _query: Prisma.VirtualAirlineUpdateArgs = {
+            where: { Id },
+            data: data,
+            ...query
+        };
+
+        const entity = await this.prisma.virtualAirline.update(_query);
+
+        return entity;
+    }
+
     async getVARoles() {
         const va = await this.getPrimaryVirtualAirline();
 
@@ -273,6 +296,7 @@ export class VirtualAirlineService {
         return entity;
     }
 
+    // members
     async Member_findAll(query?: Prisma.MemberFindManyArgs) {
         const entities: Member[] = await this.prisma.member.findMany({
             ...query,

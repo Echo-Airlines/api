@@ -17,8 +17,8 @@ const common_1 = require("@nestjs/common");
 const admin_notam_service_1 = require("./admin-notam.service");
 const create_notam_dto_1 = require("./dto/create-notam.dto");
 const update_notam_dto_1 = require("./dto/update-notam.dto");
-const jwt_auth_guard_1 = require("../../auth/jwt-auth.guard");
-const is_admin_guard_1 = require("../../auth/is-admin.guard");
+const jwt_auth_guard_1 = require("../../auth/guards/jwt-auth.guard");
+const is_admin_guard_1 = require("../../auth/guards/is-admin.guard");
 let AdminNotamController = class AdminNotamController {
     notamService;
     constructor(notamService) {

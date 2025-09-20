@@ -1,8 +1,8 @@
 import { Body, Controller, Get, NotFoundException, Param, Put, Query, UseGuards } from '@nestjs/common';
 import { AircraftService } from './aircraft.service';
 import { Aircraft, Livery, Prisma } from 'prisma/generated/prisma';
-import { IsAdminGuard } from '@auth/is-admin.guard';
-import { JwtAuthGuard } from '@auth/jwt-auth.guard';
+import { IsAdminGuard } from '@auth/guards/is-admin.guard';
+import { JwtAuthGuard } from '@auth/guards/jwt-auth.guard';
 import { LiveryService } from '@livery/livery.service';
 
 @Controller(['aircraft', 'a', 'fleet'])

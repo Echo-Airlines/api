@@ -51,7 +51,7 @@ model DiscordMessage {
   DiscordMessageTemplate DiscordMessageTemplate? @relation(fields: [DiscordMessageTemplateId], references: [Id])
   DiscordChannelWebhook  DiscordChannelWebhook?  @relation(fields: [DiscordChannelWebhookId], references: [Id])
   ListenerEvents         ListenerEvent[]
-  Notifications           Notification[]
+  Notifications          Notification[]
 }
 
 model DiscordMessageTemplate {
@@ -148,7 +148,7 @@ model User {
   EmailVerifiedAt          DateTime? @db.Timestamp(6)
   ResetPasswordToken       String?   @unique() @db.VarChar
   ResetPasswordEmailSentAt DateTime? @db.Timestamp(6)
-  FSHubPilotId              String?   @unique() @db.VarChar
+  FSHubPilotId             String?   @unique() @db.VarChar
 
   // Discord OAuth2 fields
   DiscordId       String? @unique() @db.VarChar
@@ -299,16 +299,17 @@ model VirtualAirline {
   LastRefresh                       DateTime? @db.Timestamp(6)
   CreatedAt                         DateTime  @default(now()) @db.Timestamp(6)
   UpdatedAt                         DateTime  @default(now()) @db.Timestamp(6)
-  VAManagerDiscordWebhookId                String?   @db.Uuid
+  VAManagerDiscordWebhookId         String?   @db.Uuid
+  NotifyNewMembersViaDiscord        Boolean   @default(false)
 
   // relations
-  World World? @relation(fields: [WorldId], references: [Id])
+  World                   World?                 @relation(fields: [WorldId], references: [Id])
   VAManagerDiscordWebhook DiscordChannelWebhook? @relation(fields: [VAManagerDiscordWebhookId], references: [Id])
 
-  VARoles      VirtualAirlineRole[]
-  Members      Member[]
-  Fleet        Aircraft[]
-  Flights      Flight[]
+  VARoles       VirtualAirlineRole[]
+  Members       Member[]
+  Fleet         Aircraft[]
+  Flights       Flight[]
   Notifications Notification[]
 }
 

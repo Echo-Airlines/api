@@ -1,8 +1,8 @@
 import { BadRequestException, Body, Controller, Delete, Get, NotFoundException, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { AdminUserService } from './admin-user.service';
 import { InviteCode, Prisma, User } from 'prisma/generated/prisma';
-import { JwtAuthGuard } from '@auth/jwt-auth.guard';
-import { IsAdminGuard } from '@auth/is-admin.guard';
+import { JwtAuthGuard } from '@auth/guards/jwt-auth.guard';
+import { IsAdminGuard } from '@auth/guards/is-admin.guard';
 import { AdminAddUserDto } from './dto/AdminAddUserDto';
 import { HashService } from '@hash/hash.service';
 import { CreateEmailDto } from '@email/create-email.dto';

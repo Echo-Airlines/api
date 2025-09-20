@@ -13,8 +13,8 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FlightController = void 0;
-const is_member_guard_1 = require("../auth/is-member.guard");
-const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
+const is_member_guard_1 = require("../auth/guards/is-member.guard");
+const jwt_auth_guard_1 = require("../auth/guards/jwt-auth.guard");
 const flight_service_1 = require("./flight.service");
 const member_service_1 = require("../member/member.service");
 const common_1 = require("@nestjs/common");

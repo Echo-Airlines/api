@@ -1,10 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, NotFoundException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, NotFoundException, Put, UseGuards } from '@nestjs/common';
 import { VirtualAirlineService } from './virtual-airline.service';
 import { Member, Prisma, VirtualAirlineRole, VirtualAirline } from 'prisma/generated/prisma';
 import { AppConfigService } from '@app-config/app-config.service';
 import { PublicMemberDto } from './dto/public-member.dto';
 import { MemberWithCompanyVARole } from '@member/dto/member-witth-relations';
 import { LoggerService } from '@logger/logger.service';
+import { JwtAuthGuard } from '@auth/guards/jwt-auth.guard';
+import { IsManagerGuard } from '@auth/guards/is-manager.guard';
+import { UpdateVirtualAirlineDto } from './dto/UpdateVirtualAirline.dto';
+import { plainToInstance } from 'class-transformer';
 
 
 @Controller('va')
@@ -46,6 +50,13 @@ export class VirtualAirlineController {
   @Get()
   async getPrimaryVirtualAirline() {
     const result: VirtualAirline|null = await this.virtualAirlineService.getPrimaryVirtualAirline();
+    
+    return result;
+  }
+
+  @Get('with-api-key')
+  async getPrimaryVirtualAirlineWithApiKey() {
+    const result: VirtualAirline|null = await this.virtualAirlineService.getPrimaryVirtualAirlineWithApiKey();
     
     return result;
   }
@@ -92,6 +103,18 @@ export class VirtualAirlineController {
     if (!result) {
       throw new NotFoundException('Virtual airline not found');
     }
+
+    return result;
+  }
+
+  @Put(':id')
+  @UseGuards(JwtAuthGuard, IsManagerGuard)
+  async update(@Param('id') Id: string, @Body() body: UpdateVirtualAirlineDto) {
+    if (body.VAManagerDiscordWebhookId && body.VAManagerDiscordWebhookId.length <= 0) {
+      body.VAManagerDiscordWebhookId = undefined;
+    }
+
+    const result: VirtualAirline = await this.virtualAirlineService.updateById(Id, body);
 
     return result;
   }

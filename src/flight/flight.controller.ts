@@ -1,5 +1,5 @@
-import { IsMemberGuard } from '@auth/is-member.guard';
-import { JwtAuthGuard } from '@auth/jwt-auth.guard';
+import { IsMemberGuard } from '@auth/guards/is-member.guard';
+import { JwtAuthGuard } from '@auth/guards/jwt-auth.guard';
 import { FlightService } from '@flight/flight.service';
 import { MemberService } from '@member/member.service';
 import { Body, Controller, Get, NotFoundException, Param, Post, Query, Req, UnauthorizedException, UseGuards } from '@nestjs/common';

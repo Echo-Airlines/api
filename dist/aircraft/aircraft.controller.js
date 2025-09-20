@@ -15,8 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AircraftController = void 0;
 const common_1 = require("@nestjs/common");
 const aircraft_service_1 = require("./aircraft.service");
-const is_admin_guard_1 = require("../auth/is-admin.guard");
-const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
+const is_admin_guard_1 = require("../auth/guards/is-admin.guard");
+const jwt_auth_guard_1 = require("../auth/guards/jwt-auth.guard");
 const livery_service_1 = require("../livery/livery.service");
 let AircraftController = class AircraftController {
     aircraftService;

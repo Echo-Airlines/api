@@ -1,8 +1,8 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from "@nestjs/common";
 import { AdminUserService } from "./admin-user.service";
 import { InviteCode } from "prisma/generated/prisma";
-import { IsAdminGuard } from "@auth/is-admin.guard";
-import { JwtAuthGuard } from "@auth/jwt-auth.guard";
+import { IsAdminGuard } from "@auth/guards/is-admin.guard";
+import { JwtAuthGuard } from "@auth/guards/jwt-auth.guard";
 
 @Controller(['admin/invite-code', 'admin/invite-codes'])
 export class AdminInviteCodeController {

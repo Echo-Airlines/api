@@ -1,4 +1,4 @@
-import { JwtAuthGuard } from '@auth/jwt-auth.guard';
+import { JwtAuthGuard } from '@auth/guards/jwt-auth.guard';
 import { BadRequestException, Body, Controller, Param, Post, Put, Get, Req, UseGuards } from '@nestjs/common';
 import { CreateMemberDto } from './dto/create-member.dto';
 import { MemberService } from './member.service';

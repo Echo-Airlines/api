@@ -13,8 +13,8 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AdminAppConfigController = void 0;
-const is_admin_guard_1 = require("../../auth/is-admin.guard");
-const jwt_auth_guard_1 = require("../../auth/jwt-auth.guard");
+const is_admin_guard_1 = require("../../auth/guards/is-admin.guard");
+const jwt_auth_guard_1 = require("../../auth/guards/jwt-auth.guard");
 const common_1 = require("@nestjs/common");
 const admin_app_config_service_1 = require("./admin-app-config.service");
 let AdminAppConfigController = class AdminAppConfigController {

@@ -30,6 +30,7 @@ export declare class AdminVirtualAirlineController {
         TotalContractsEarnedCredits: number | null;
         LastRefresh: Date | null;
         VAManagerDiscordWebhookId: string | null;
+        NotifyNewMembersViaDiscord: boolean;
     }[]>;
     getVARoles(): Promise<{
         Id: string;

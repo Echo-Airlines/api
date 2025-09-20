@@ -15,8 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AdminRoleController = void 0;
 const common_1 = require("@nestjs/common");
 const admin_user_service_1 = require("./admin-user.service");
-const jwt_auth_guard_1 = require("../../auth/jwt-auth.guard");
-const is_admin_guard_1 = require("../../auth/is-admin.guard");
+const jwt_auth_guard_1 = require("../../auth/guards/jwt-auth.guard");
+const is_admin_guard_1 = require("../../auth/guards/is-admin.guard");
 let AdminRoleController = class AdminRoleController {
     userService;
     constructor(userService) {

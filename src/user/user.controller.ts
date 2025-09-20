@@ -4,7 +4,7 @@ import { PublicUserDto, User } from './dto/PublicUser.dto';
 import { ConfigService } from '@nestjs/config';
 import { Response } from 'express';
 import { UserProfileDto } from './dto/UserProfile.dto';
-import { JwtAuthGuard } from '@auth/jwt-auth.guard';
+import { JwtAuthGuard } from '@auth/guards/jwt-auth.guard';
 import { UpdateMeDto } from './dto/UpdateMe.dto';
 import { plainToInstance } from 'class-transformer';
 import { Prisma } from 'prisma/generated/prisma';

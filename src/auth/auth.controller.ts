@@ -1,10 +1,10 @@
 import { Body, Controller, Get, Post, Req, UnauthorizedException, UseGuards, Res, Param, BadRequestException, NotFoundException } from '@nestjs/common';
-import { LocalAuthGuard } from './local-auth.guard';
+import { LocalAuthGuard } from './guards/local-auth.guard';
 import { AuthService } from './auth.service';
-import { JwtAuthGuard } from './jwt-auth.guard';
+import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { UserProfileDto } from '@user/dto/UserProfile.dto';
 import { ChangePasswordDto } from './dto/ChangePasswordDto';
-import { DiscordAuthGuard } from './discord-auth.guard';
+import { DiscordAuthGuard } from './guards/discord-auth.guard';
 import { Response } from 'express';
 import { AppConfig, InviteCode, User } from 'prisma/generated/prisma';
 import { RegisterUserDto } from './dto/RegisterUserDto';

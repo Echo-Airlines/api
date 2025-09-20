@@ -14,8 +14,8 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AdminDiscordController = void 0;
 const common_1 = require("@nestjs/common");
-const jwt_auth_guard_1 = require("../../auth/jwt-auth.guard");
-const is_admin_guard_1 = require("../../auth/is-admin.guard");
+const jwt_auth_guard_1 = require("../../auth/guards/jwt-auth.guard");
+const is_admin_guard_1 = require("../../auth/guards/is-admin.guard");
 const admin_discord_service_1 = require("./admin-discord.service");
 const CreateDiscordChannelWebhookDto_1 = require("./dto/CreateDiscordChannelWebhookDto");
 const discord_service_1 = require("../../discord/discord.service");

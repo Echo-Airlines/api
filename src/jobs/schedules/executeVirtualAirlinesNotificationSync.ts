@@ -2,6 +2,7 @@ import { JobSchedulerService } from "@jobs/job-scheduler.service";
 import { OnAirNotification } from "@on-air/types";
 import { Notification, Prisma, VirtualAirline } from "prisma/generated/prisma";
 import { eachSeries } from "async";
+import { SendDiscordMessageDto } from "@discord/dto/SendDiscordMessageDto";
 
 export async function executeVirtualAirlinesNotificationsSync(scheduler: JobSchedulerService) {
     const virtualAirlines: VirtualAirline[] = await scheduler.services.VirtualAirline.findAll();
@@ -43,9 +44,8 @@ export async function executeVirtualAirlineNotificationsSync(va: VirtualAirline,
             // update the member by executing the executeVirtualAirlineMemberSync function
             const entity: Notification|null = await executeVirtualAirlineNotificationSync(onAirData, va, scheduler);
 
-
             if (!entity) {
-                scheduler.logger.warn(`Notification ${onAirData.Id} not found, skipping`);
+                // scheduler.logger.warn(`Notification ${onAirData.Id} not found, skipping`);
                 return true;
             }
 
@@ -67,7 +67,11 @@ export async function executeVirtualAirlineNotificationsSync(va: VirtualAirline,
 async function executeVirtualAirlineNotificationSync(onAirData: OnAirNotification, va: VirtualAirline, scheduler: JobSchedulerService): Promise<Notification|null> {
     return new Promise(async (resolve, reject) => {
         try {
-            if (onAirData.IsRead) {
+            // if (onAirData.IsRead) {
+            //     return resolve(null);
+            // }
+
+            if (!onAirData.Description.includes('proposed an application to your Virtual Airline')) {
                 return resolve(null);
             }
             
@@ -80,7 +84,7 @@ async function executeVirtualAirlineNotificationSync(onAirData: OnAirNotificatio
             if (!entity) {
                 scheduler.logger.debug(`Notification ${onAirData.Id} not found, creating new one`);
 
-                entity = await scheduler.services.Notification.create({
+                const dto: Prisma.NotificationCreateInput = {
                     Id: onAirData.Id,
                     Description: onAirData.Description,
                     IsRead: onAirData.IsRead,
@@ -91,8 +95,19 @@ async function executeVirtualAirlineNotificationSync(onAirData: OnAirNotificatio
                     VirtualAirline: {
                         connect: { Id: va.Id },
                     }
+                };
+
+                entity = await scheduler.services.Notification.create(dto);
+
+                await sendDiscordNotification(entity, va, scheduler);
+
+                entity = await scheduler.services.Notification.updateById(entity.Id, {
+                    IsRead: true,
+                    DiscordMessageSentAt: new Date(),
+                    DiscordMessageSent: true,
                 });
             }
+
 
             return resolve(entity);
         } catch (error) {
@@ -100,5 +115,24 @@ async function executeVirtualAirlineNotificationSync(onAirData: OnAirNotificatio
             return reject(error);
         }
     }); 
+}
 
+async function sendDiscordNotification(entity: Notification, va: VirtualAirline, scheduler: JobSchedulerService) {
+    if (!va.VAManagerDiscordWebhookId) {
+        return;
+    }
+
+    const discordWebhook = await scheduler.services.Discord.ChannelWebhook_findById(va.VAManagerDiscordWebhookId);
+
+    if (!discordWebhook) {
+        return;
+    }
+
+    const message: SendDiscordMessageDto = {
+        username: "ECHO Notifier",
+        avatar_url: 'https://www.echoairlines.com/echo-localizer-logo.png',
+        content: entity.Description,
+    };
+
+    await scheduler.services.Discord.ChannelWebhook_sendMessage(discordWebhook.Id, message);
 }

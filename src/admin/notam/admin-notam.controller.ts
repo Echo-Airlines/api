@@ -2,8 +2,8 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@n
 import { AdminNotamService } from './admin-notam.service';
 import { CreateNotamDto } from './dto/create-notam.dto';
 import { UpdateNotamDto } from './dto/update-notam.dto';
-import { JwtAuthGuard } from '@auth/jwt-auth.guard';
-import { IsAdminGuard } from '@auth/is-admin.guard';
+import { JwtAuthGuard } from '@auth/guards/jwt-auth.guard';
+import { IsAdminGuard } from '@auth/guards/is-admin.guard';
 
 @Controller(['admin/notam', 'admin/notams'])
 export class AdminNotamController {

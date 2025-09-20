@@ -11,8 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AdminVirtualAirlineController = void 0;
 const common_1 = require("@nestjs/common");
-const jwt_auth_guard_1 = require("../../auth/jwt-auth.guard");
-const is_admin_guard_1 = require("../../auth/is-admin.guard");
+const jwt_auth_guard_1 = require("../../auth/guards/jwt-auth.guard");
+const is_admin_guard_1 = require("../../auth/guards/is-admin.guard");
 const admin_virtual_airline_service_1 = require("./admin-virtual-airline.service");
 let AdminVirtualAirlineController = class AdminVirtualAirlineController {
     virtualAirlineService;

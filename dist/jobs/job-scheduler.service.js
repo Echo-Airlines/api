@@ -172,7 +172,6 @@ let JobSchedulerService = JobSchedulerService_1 = class JobSchedulerService {
                 return;
             }
             this.logger.log(`Executing job ${job.Name} (${job.Id}) at ${startTime.toISOString()}`);
-            console.log(`${job.Type}| job type: ${typeof job.Type} | JobType: ${typeof prisma_1.JobType.VIRTUAL_AIRLINE_NOTIFICATION_SYNC} | ${(job.Type === prisma_1.JobType.VIRTUAL_AIRLINE_NOTIFICATION_SYNC)}`);
             if (job.Type === prisma_1.JobType.VIRTUAL_AIRLINE_SYNC) {
                 await (0, executeVirtualAirlinesSync_1.executeAllVirtualAirlinesSync)(this);
             }

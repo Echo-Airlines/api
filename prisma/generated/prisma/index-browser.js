@@ -485,6 +485,7 @@ exports.Prisma.AirportScalarFieldEnum = {
 
 exports.Prisma.FlightScalarFieldEnum = {
   Id: 'Id',
+  FSHubId: 'FSHubId',
   AircraftId: 'AircraftId',
   CompanyId: 'CompanyId',
   Registered: 'Registered',
@@ -621,7 +622,8 @@ exports.ListenerEventStatus = exports.$Enums.ListenerEventStatus = {
   PENDING: 'PENDING',
   PROCESSING: 'PROCESSING',
   COMPLETED: 'COMPLETED',
-  FAILED: 'FAILED'
+  FAILED: 'FAILED',
+  SKIPPED: 'SKIPPED'
 };
 
 exports.NOTAMStatus = exports.$Enums.NOTAMStatus = {

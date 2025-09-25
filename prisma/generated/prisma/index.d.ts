@@ -167,7 +167,8 @@ export namespace $Enums {
   PENDING: 'PENDING',
   PROCESSING: 'PROCESSING',
   COMPLETED: 'COMPLETED',
-  FAILED: 'FAILED'
+  FAILED: 'FAILED',
+  SKIPPED: 'SKIPPED'
 };
 
 export type ListenerEventStatus = (typeof ListenerEventStatus)[keyof typeof ListenerEventStatus]
@@ -34697,6 +34698,7 @@ export namespace Prisma {
   }
 
   export type FlightAvgAggregateOutputType = {
+    FSHubId: number | null
     Category: number | null
     IntendedFlightLevel: number | null
     Passengers: number | null
@@ -34730,6 +34732,7 @@ export namespace Prisma {
   }
 
   export type FlightSumAggregateOutputType = {
+    FSHubId: number | null
     Category: number | null
     IntendedFlightLevel: number | null
     Passengers: number | null
@@ -34764,6 +34767,7 @@ export namespace Prisma {
 
   export type FlightMinAggregateOutputType = {
     Id: string | null
+    FSHubId: number | null
     AircraftId: string | null
     CompanyId: string | null
     Registered: boolean | null
@@ -34830,6 +34834,7 @@ export namespace Prisma {
 
   export type FlightMaxAggregateOutputType = {
     Id: string | null
+    FSHubId: number | null
     AircraftId: string | null
     CompanyId: string | null
     Registered: boolean | null
@@ -34896,6 +34901,7 @@ export namespace Prisma {
 
   export type FlightCountAggregateOutputType = {
     Id: number
+    FSHubId: number
     AircraftId: number
     CompanyId: number
     Registered: number
@@ -34963,6 +34969,7 @@ export namespace Prisma {
 
 
   export type FlightAvgAggregateInputType = {
+    FSHubId?: true
     Category?: true
     IntendedFlightLevel?: true
     Passengers?: true
@@ -34996,6 +35003,7 @@ export namespace Prisma {
   }
 
   export type FlightSumAggregateInputType = {
+    FSHubId?: true
     Category?: true
     IntendedFlightLevel?: true
     Passengers?: true
@@ -35030,6 +35038,7 @@ export namespace Prisma {
 
   export type FlightMinAggregateInputType = {
     Id?: true
+    FSHubId?: true
     AircraftId?: true
     CompanyId?: true
     Registered?: true
@@ -35096,6 +35105,7 @@ export namespace Prisma {
 
   export type FlightMaxAggregateInputType = {
     Id?: true
+    FSHubId?: true
     AircraftId?: true
     CompanyId?: true
     Registered?: true
@@ -35162,6 +35172,7 @@ export namespace Prisma {
 
   export type FlightCountAggregateInputType = {
     Id?: true
+    FSHubId?: true
     AircraftId?: true
     CompanyId?: true
     Registered?: true
@@ -35315,6 +35326,7 @@ export namespace Prisma {
 
   export type FlightGroupByOutputType = {
     Id: string
+    FSHubId: number | null
     AircraftId: string | null
     CompanyId: string
     Registered: boolean
@@ -35400,6 +35412,7 @@ export namespace Prisma {
 
   export type FlightSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     Id?: boolean
+    FSHubId?: boolean
     AircraftId?: boolean
     CompanyId?: boolean
     Registered?: boolean
@@ -35476,6 +35489,7 @@ export namespace Prisma {
 
   export type FlightSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     Id?: boolean
+    FSHubId?: boolean
     AircraftId?: boolean
     CompanyId?: boolean
     Registered?: boolean
@@ -35550,6 +35564,7 @@ export namespace Prisma {
 
   export type FlightSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     Id?: boolean
+    FSHubId?: boolean
     AircraftId?: boolean
     CompanyId?: boolean
     Registered?: boolean
@@ -35624,6 +35639,7 @@ export namespace Prisma {
 
   export type FlightSelectScalar = {
     Id?: boolean
+    FSHubId?: boolean
     AircraftId?: boolean
     CompanyId?: boolean
     Registered?: boolean
@@ -35688,7 +35704,7 @@ export namespace Prisma {
     FlightStatus?: boolean
   }
 
-  export type FlightOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "AircraftId" | "CompanyId" | "Registered" | "Category" | "ResultComments" | "StartTime" | "EndTime" | "EngineOnTime" | "EngineOffTime" | "AirborneTime" | "LandedTime" | "IntendedFlightLevel" | "Passengers" | "Cargo" | "AddedFuelQty" | "IsAI" | "VerticalSpeedAtTouchdownMpS" | "MaxGForce" | "MinGForce" | "MaxBank" | "MaxPitch" | "HasStalled" | "HasOverspeeded" | "XPFlight" | "XPFlightBonus" | "XPMissions" | "CargosTotalWeight" | "PAXCount" | "AircraftCurrentFOB" | "AircraftCurrentAltitude" | "ActualCruiseAltitude" | "ActualConsumptionAtCruiseLevelInLbsPerHour" | "ActualTotalFuelConsumptionInLbs" | "ActualConsumptionAtCruiseLevelInGalPerHour" | "ActualTASAtCruiseLevel" | "ActualCruiseTimeInMinutes" | "ActualPressureAltitude" | "RegisterState" | "WrongFuelDetected" | "WrongWeightDetected" | "TimeOffset" | "StartLatitude" | "StartLongitude" | "StartHeading" | "UseFreelanceRouteSchedule" | "RestCrewAfterWarp" | "Score" | "CanResumeOrAbort" | "EngineOnRealTime" | "EngineOffRealTime" | "LandedRealTime" | "AirborneRealTime" | "DepartureAirportId" | "ArrivalIntendedAirportId" | "ArrivalAlternateAirportId" | "ArrivalActualAirportId" | "VAId" | "MemberId" | "LastRefresh" | "CreatedAt" | "UpdatedAt" | "FlightStatus", ExtArgs["result"]["flight"]>
+  export type FlightOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"Id" | "FSHubId" | "AircraftId" | "CompanyId" | "Registered" | "Category" | "ResultComments" | "StartTime" | "EndTime" | "EngineOnTime" | "EngineOffTime" | "AirborneTime" | "LandedTime" | "IntendedFlightLevel" | "Passengers" | "Cargo" | "AddedFuelQty" | "IsAI" | "VerticalSpeedAtTouchdownMpS" | "MaxGForce" | "MinGForce" | "MaxBank" | "MaxPitch" | "HasStalled" | "HasOverspeeded" | "XPFlight" | "XPFlightBonus" | "XPMissions" | "CargosTotalWeight" | "PAXCount" | "AircraftCurrentFOB" | "AircraftCurrentAltitude" | "ActualCruiseAltitude" | "ActualConsumptionAtCruiseLevelInLbsPerHour" | "ActualTotalFuelConsumptionInLbs" | "ActualConsumptionAtCruiseLevelInGalPerHour" | "ActualTASAtCruiseLevel" | "ActualCruiseTimeInMinutes" | "ActualPressureAltitude" | "RegisterState" | "WrongFuelDetected" | "WrongWeightDetected" | "TimeOffset" | "StartLatitude" | "StartLongitude" | "StartHeading" | "UseFreelanceRouteSchedule" | "RestCrewAfterWarp" | "Score" | "CanResumeOrAbort" | "EngineOnRealTime" | "EngineOffRealTime" | "LandedRealTime" | "AirborneRealTime" | "DepartureAirportId" | "ArrivalIntendedAirportId" | "ArrivalAlternateAirportId" | "ArrivalActualAirportId" | "VAId" | "MemberId" | "LastRefresh" | "CreatedAt" | "UpdatedAt" | "FlightStatus", ExtArgs["result"]["flight"]>
   export type FlightInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Company?: boolean | CompanyDefaultArgs<ExtArgs>
     VirtualAirline?: boolean | Flight$VirtualAirlineArgs<ExtArgs>
@@ -35737,6 +35753,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       Id: string
+      FSHubId: number | null
       AircraftId: string | null
       CompanyId: string
       Registered: boolean
@@ -36232,6 +36249,7 @@ export namespace Prisma {
    */
   interface FlightFieldRefs {
     readonly Id: FieldRef<"Flight", 'String'>
+    readonly FSHubId: FieldRef<"Flight", 'Int'>
     readonly AircraftId: FieldRef<"Flight", 'String'>
     readonly CompanyId: FieldRef<"Flight", 'String'>
     readonly Registered: FieldRef<"Flight", 'Boolean'>
@@ -40799,6 +40817,7 @@ export namespace Prisma {
 
   export const FlightScalarFieldEnum: {
     Id: 'Id',
+    FSHubId: 'FSHubId',
     AircraftId: 'AircraftId',
     CompanyId: 'CompanyId',
     Registered: 'Registered',
@@ -43489,6 +43508,7 @@ export namespace Prisma {
     OR?: FlightWhereInput[]
     NOT?: FlightWhereInput | FlightWhereInput[]
     Id?: UuidFilter<"Flight"> | string
+    FSHubId?: IntNullableFilter<"Flight"> | number | null
     AircraftId?: UuidNullableFilter<"Flight"> | string | null
     CompanyId?: UuidFilter<"Flight"> | string
     Registered?: BoolFilter<"Flight"> | boolean
@@ -43564,6 +43584,7 @@ export namespace Prisma {
 
   export type FlightOrderByWithRelationInput = {
     Id?: SortOrder
+    FSHubId?: SortOrderInput | SortOrder
     AircraftId?: SortOrderInput | SortOrder
     CompanyId?: SortOrder
     Registered?: SortOrder
@@ -43639,6 +43660,7 @@ export namespace Prisma {
 
   export type FlightWhereUniqueInput = Prisma.AtLeast<{
     Id?: string
+    FSHubId?: number
     AND?: FlightWhereInput | FlightWhereInput[]
     OR?: FlightWhereInput[]
     NOT?: FlightWhereInput | FlightWhereInput[]
@@ -43713,10 +43735,11 @@ export namespace Prisma {
     ArrivalAlternateAirport?: XOR<AirportNullableScalarRelationFilter, AirportWhereInput> | null
     ArrivalActualAirport?: XOR<AirportNullableScalarRelationFilter, AirportWhereInput> | null
     Member?: XOR<MemberNullableScalarRelationFilter, MemberWhereInput> | null
-  }, "Id" | "Id">
+  }, "Id" | "Id" | "FSHubId">
 
   export type FlightOrderByWithAggregationInput = {
     Id?: SortOrder
+    FSHubId?: SortOrderInput | SortOrder
     AircraftId?: SortOrderInput | SortOrder
     CompanyId?: SortOrder
     Registered?: SortOrder
@@ -43791,6 +43814,7 @@ export namespace Prisma {
     OR?: FlightScalarWhereWithAggregatesInput[]
     NOT?: FlightScalarWhereWithAggregatesInput | FlightScalarWhereWithAggregatesInput[]
     Id?: UuidWithAggregatesFilter<"Flight"> | string
+    FSHubId?: IntNullableWithAggregatesFilter<"Flight"> | number | null
     AircraftId?: UuidNullableWithAggregatesFilter<"Flight"> | string | null
     CompanyId?: UuidWithAggregatesFilter<"Flight"> | string
     Registered?: BoolWithAggregatesFilter<"Flight"> | boolean
@@ -46788,6 +46812,7 @@ export namespace Prisma {
 
   export type FlightCreateInput = {
     Id: string
+    FSHubId?: number | null
     Registered: boolean
     Category: number
     ResultComments: string
@@ -46855,6 +46880,7 @@ export namespace Prisma {
 
   export type FlightUncheckedCreateInput = {
     Id: string
+    FSHubId?: number | null
     AircraftId?: string | null
     CompanyId: string
     Registered: boolean
@@ -46922,6 +46948,7 @@ export namespace Prisma {
 
   export type FlightUpdateInput = {
     Id?: StringFieldUpdateOperationsInput | string
+    FSHubId?: NullableIntFieldUpdateOperationsInput | number | null
     Registered?: BoolFieldUpdateOperationsInput | boolean
     Category?: IntFieldUpdateOperationsInput | number
     ResultComments?: StringFieldUpdateOperationsInput | string
@@ -46989,6 +47016,7 @@ export namespace Prisma {
 
   export type FlightUncheckedUpdateInput = {
     Id?: StringFieldUpdateOperationsInput | string
+    FSHubId?: NullableIntFieldUpdateOperationsInput | number | null
     AircraftId?: NullableStringFieldUpdateOperationsInput | string | null
     CompanyId?: StringFieldUpdateOperationsInput | string
     Registered?: BoolFieldUpdateOperationsInput | boolean
@@ -47056,6 +47084,7 @@ export namespace Prisma {
 
   export type FlightCreateManyInput = {
     Id: string
+    FSHubId?: number | null
     AircraftId?: string | null
     CompanyId: string
     Registered: boolean
@@ -47122,6 +47151,7 @@ export namespace Prisma {
 
   export type FlightUpdateManyMutationInput = {
     Id?: StringFieldUpdateOperationsInput | string
+    FSHubId?: NullableIntFieldUpdateOperationsInput | number | null
     Registered?: BoolFieldUpdateOperationsInput | boolean
     Category?: IntFieldUpdateOperationsInput | number
     ResultComments?: StringFieldUpdateOperationsInput | string
@@ -47180,6 +47210,7 @@ export namespace Prisma {
 
   export type FlightUncheckedUpdateManyInput = {
     Id?: StringFieldUpdateOperationsInput | string
+    FSHubId?: NullableIntFieldUpdateOperationsInput | number | null
     AircraftId?: NullableStringFieldUpdateOperationsInput | string | null
     CompanyId?: StringFieldUpdateOperationsInput | string
     Registered?: BoolFieldUpdateOperationsInput | boolean
@@ -49508,6 +49539,7 @@ export namespace Prisma {
 
   export type FlightCountOrderByAggregateInput = {
     Id?: SortOrder
+    FSHubId?: SortOrder
     AircraftId?: SortOrder
     CompanyId?: SortOrder
     Registered?: SortOrder
@@ -49573,6 +49605,7 @@ export namespace Prisma {
   }
 
   export type FlightAvgOrderByAggregateInput = {
+    FSHubId?: SortOrder
     Category?: SortOrder
     IntendedFlightLevel?: SortOrder
     Passengers?: SortOrder
@@ -49607,6 +49640,7 @@ export namespace Prisma {
 
   export type FlightMaxOrderByAggregateInput = {
     Id?: SortOrder
+    FSHubId?: SortOrder
     AircraftId?: SortOrder
     CompanyId?: SortOrder
     Registered?: SortOrder
@@ -49673,6 +49707,7 @@ export namespace Prisma {
 
   export type FlightMinOrderByAggregateInput = {
     Id?: SortOrder
+    FSHubId?: SortOrder
     AircraftId?: SortOrder
     CompanyId?: SortOrder
     Registered?: SortOrder
@@ -49738,6 +49773,7 @@ export namespace Prisma {
   }
 
   export type FlightSumOrderByAggregateInput = {
+    FSHubId?: SortOrder
     Category?: SortOrder
     IntendedFlightLevel?: SortOrder
     Passengers?: SortOrder
@@ -55069,6 +55105,7 @@ export namespace Prisma {
 
   export type FlightCreateWithoutVirtualAirlineInput = {
     Id: string
+    FSHubId?: number | null
     Registered: boolean
     Category: number
     ResultComments: string
@@ -55135,6 +55172,7 @@ export namespace Prisma {
 
   export type FlightUncheckedCreateWithoutVirtualAirlineInput = {
     Id: string
+    FSHubId?: number | null
     AircraftId?: string | null
     CompanyId: string
     Registered: boolean
@@ -55425,6 +55463,7 @@ export namespace Prisma {
     OR?: FlightScalarWhereInput[]
     NOT?: FlightScalarWhereInput | FlightScalarWhereInput[]
     Id?: UuidFilter<"Flight"> | string
+    FSHubId?: IntNullableFilter<"Flight"> | number | null
     AircraftId?: UuidNullableFilter<"Flight"> | string | null
     CompanyId?: UuidFilter<"Flight"> | string
     Registered?: BoolFilter<"Flight"> | boolean
@@ -56279,6 +56318,7 @@ export namespace Prisma {
 
   export type FlightCreateWithoutMemberInput = {
     Id: string
+    FSHubId?: number | null
     Registered: boolean
     Category: number
     ResultComments: string
@@ -56345,6 +56385,7 @@ export namespace Prisma {
 
   export type FlightUncheckedCreateWithoutMemberInput = {
     Id: string
+    FSHubId?: number | null
     AircraftId?: string | null
     CompanyId: string
     Registered: boolean
@@ -56839,6 +56880,7 @@ export namespace Prisma {
 
   export type FlightCreateWithoutCompanyInput = {
     Id: string
+    FSHubId?: number | null
     Registered: boolean
     Category: number
     ResultComments: string
@@ -56905,6 +56947,7 @@ export namespace Prisma {
 
   export type FlightUncheckedCreateWithoutCompanyInput = {
     Id: string
+    FSHubId?: number | null
     AircraftId?: string | null
     Registered: boolean
     Category: number
@@ -57342,6 +57385,7 @@ export namespace Prisma {
 
   export type FlightCreateWithoutAircraftInput = {
     Id: string
+    FSHubId?: number | null
     Registered: boolean
     Category: number
     ResultComments: string
@@ -57408,6 +57452,7 @@ export namespace Prisma {
 
   export type FlightUncheckedCreateWithoutAircraftInput = {
     Id: string
+    FSHubId?: number | null
     CompanyId: string
     Registered: boolean
     Category: number
@@ -58032,6 +58077,7 @@ export namespace Prisma {
 
   export type FlightCreateWithoutDepartureAirportInput = {
     Id: string
+    FSHubId?: number | null
     Registered: boolean
     Category: number
     ResultComments: string
@@ -58098,6 +58144,7 @@ export namespace Prisma {
 
   export type FlightUncheckedCreateWithoutDepartureAirportInput = {
     Id: string
+    FSHubId?: number | null
     AircraftId?: string | null
     CompanyId: string
     Registered: boolean
@@ -58174,6 +58221,7 @@ export namespace Prisma {
 
   export type FlightCreateWithoutArrivalIntendedAirportInput = {
     Id: string
+    FSHubId?: number | null
     Registered: boolean
     Category: number
     ResultComments: string
@@ -58240,6 +58288,7 @@ export namespace Prisma {
 
   export type FlightUncheckedCreateWithoutArrivalIntendedAirportInput = {
     Id: string
+    FSHubId?: number | null
     AircraftId?: string | null
     CompanyId: string
     Registered: boolean
@@ -58316,6 +58365,7 @@ export namespace Prisma {
 
   export type FlightCreateWithoutArrivalAlternateAirportInput = {
     Id: string
+    FSHubId?: number | null
     Registered: boolean
     Category: number
     ResultComments: string
@@ -58382,6 +58432,7 @@ export namespace Prisma {
 
   export type FlightUncheckedCreateWithoutArrivalAlternateAirportInput = {
     Id: string
+    FSHubId?: number | null
     AircraftId?: string | null
     CompanyId: string
     Registered: boolean
@@ -58458,6 +58509,7 @@ export namespace Prisma {
 
   export type FlightCreateWithoutArrivalActualAirportInput = {
     Id: string
+    FSHubId?: number | null
     Registered: boolean
     Category: number
     ResultComments: string
@@ -58524,6 +58576,7 @@ export namespace Prisma {
 
   export type FlightUncheckedCreateWithoutArrivalActualAirportInput = {
     Id: string
+    FSHubId?: number | null
     AircraftId?: string | null
     CompanyId: string
     Registered: boolean
@@ -59602,6 +59655,7 @@ export namespace Prisma {
 
   export type FlightCreateWithoutFlightRouteInput = {
     Id: string
+    FSHubId?: number | null
     Registered: boolean
     Category: number
     ResultComments: string
@@ -59668,6 +59722,7 @@ export namespace Prisma {
 
   export type FlightUncheckedCreateWithoutFlightRouteInput = {
     Id: string
+    FSHubId?: number | null
     AircraftId?: string | null
     CompanyId: string
     Registered: boolean
@@ -59801,6 +59856,7 @@ export namespace Prisma {
 
   export type FlightUpdateWithoutFlightRouteInput = {
     Id?: StringFieldUpdateOperationsInput | string
+    FSHubId?: NullableIntFieldUpdateOperationsInput | number | null
     Registered?: BoolFieldUpdateOperationsInput | boolean
     Category?: IntFieldUpdateOperationsInput | number
     ResultComments?: StringFieldUpdateOperationsInput | string
@@ -59867,6 +59923,7 @@ export namespace Prisma {
 
   export type FlightUncheckedUpdateWithoutFlightRouteInput = {
     Id?: StringFieldUpdateOperationsInput | string
+    FSHubId?: NullableIntFieldUpdateOperationsInput | number | null
     AircraftId?: NullableStringFieldUpdateOperationsInput | string | null
     CompanyId?: StringFieldUpdateOperationsInput | string
     Registered?: BoolFieldUpdateOperationsInput | boolean
@@ -61149,6 +61206,7 @@ export namespace Prisma {
 
   export type FlightCreateManyVirtualAirlineInput = {
     Id: string
+    FSHubId?: number | null
     AircraftId?: string | null
     CompanyId: string
     Registered: boolean
@@ -61393,6 +61451,7 @@ export namespace Prisma {
 
   export type FlightUpdateWithoutVirtualAirlineInput = {
     Id?: StringFieldUpdateOperationsInput | string
+    FSHubId?: NullableIntFieldUpdateOperationsInput | number | null
     Registered?: BoolFieldUpdateOperationsInput | boolean
     Category?: IntFieldUpdateOperationsInput | number
     ResultComments?: StringFieldUpdateOperationsInput | string
@@ -61459,6 +61518,7 @@ export namespace Prisma {
 
   export type FlightUncheckedUpdateWithoutVirtualAirlineInput = {
     Id?: StringFieldUpdateOperationsInput | string
+    FSHubId?: NullableIntFieldUpdateOperationsInput | number | null
     AircraftId?: NullableStringFieldUpdateOperationsInput | string | null
     CompanyId?: StringFieldUpdateOperationsInput | string
     Registered?: BoolFieldUpdateOperationsInput | boolean
@@ -61525,6 +61585,7 @@ export namespace Prisma {
 
   export type FlightUncheckedUpdateManyWithoutVirtualAirlineInput = {
     Id?: StringFieldUpdateOperationsInput | string
+    FSHubId?: NullableIntFieldUpdateOperationsInput | number | null
     AircraftId?: NullableStringFieldUpdateOperationsInput | string | null
     CompanyId?: StringFieldUpdateOperationsInput | string
     Registered?: BoolFieldUpdateOperationsInput | boolean
@@ -61925,6 +61986,7 @@ export namespace Prisma {
 
   export type FlightCreateManyMemberInput = {
     Id: string
+    FSHubId?: number | null
     AircraftId?: string | null
     CompanyId: string
     Registered: boolean
@@ -61998,6 +62060,7 @@ export namespace Prisma {
 
   export type FlightUpdateWithoutMemberInput = {
     Id?: StringFieldUpdateOperationsInput | string
+    FSHubId?: NullableIntFieldUpdateOperationsInput | number | null
     Registered?: BoolFieldUpdateOperationsInput | boolean
     Category?: IntFieldUpdateOperationsInput | number
     ResultComments?: StringFieldUpdateOperationsInput | string
@@ -62064,6 +62127,7 @@ export namespace Prisma {
 
   export type FlightUncheckedUpdateWithoutMemberInput = {
     Id?: StringFieldUpdateOperationsInput | string
+    FSHubId?: NullableIntFieldUpdateOperationsInput | number | null
     AircraftId?: NullableStringFieldUpdateOperationsInput | string | null
     CompanyId?: StringFieldUpdateOperationsInput | string
     Registered?: BoolFieldUpdateOperationsInput | boolean
@@ -62130,6 +62194,7 @@ export namespace Prisma {
 
   export type FlightUncheckedUpdateManyWithoutMemberInput = {
     Id?: StringFieldUpdateOperationsInput | string
+    FSHubId?: NullableIntFieldUpdateOperationsInput | number | null
     AircraftId?: NullableStringFieldUpdateOperationsInput | string | null
     CompanyId?: StringFieldUpdateOperationsInput | string
     Registered?: BoolFieldUpdateOperationsInput | boolean
@@ -62219,6 +62284,7 @@ export namespace Prisma {
 
   export type FlightCreateManyCompanyInput = {
     Id: string
+    FSHubId?: number | null
     AircraftId?: string | null
     Registered: boolean
     Category: number
@@ -62284,6 +62350,7 @@ export namespace Prisma {
 
   export type FlightUpdateWithoutCompanyInput = {
     Id?: StringFieldUpdateOperationsInput | string
+    FSHubId?: NullableIntFieldUpdateOperationsInput | number | null
     Registered?: BoolFieldUpdateOperationsInput | boolean
     Category?: IntFieldUpdateOperationsInput | number
     ResultComments?: StringFieldUpdateOperationsInput | string
@@ -62350,6 +62417,7 @@ export namespace Prisma {
 
   export type FlightUncheckedUpdateWithoutCompanyInput = {
     Id?: StringFieldUpdateOperationsInput | string
+    FSHubId?: NullableIntFieldUpdateOperationsInput | number | null
     AircraftId?: NullableStringFieldUpdateOperationsInput | string | null
     Registered?: BoolFieldUpdateOperationsInput | boolean
     Category?: IntFieldUpdateOperationsInput | number
@@ -62416,6 +62484,7 @@ export namespace Prisma {
 
   export type FlightUncheckedUpdateManyWithoutCompanyInput = {
     Id?: StringFieldUpdateOperationsInput | string
+    FSHubId?: NullableIntFieldUpdateOperationsInput | number | null
     AircraftId?: NullableStringFieldUpdateOperationsInput | string | null
     Registered?: BoolFieldUpdateOperationsInput | boolean
     Category?: IntFieldUpdateOperationsInput | number
@@ -62499,6 +62568,7 @@ export namespace Prisma {
 
   export type FlightCreateManyAircraftInput = {
     Id: string
+    FSHubId?: number | null
     CompanyId: string
     Registered: boolean
     Category: number
@@ -62634,6 +62704,7 @@ export namespace Prisma {
 
   export type FlightUpdateWithoutAircraftInput = {
     Id?: StringFieldUpdateOperationsInput | string
+    FSHubId?: NullableIntFieldUpdateOperationsInput | number | null
     Registered?: BoolFieldUpdateOperationsInput | boolean
     Category?: IntFieldUpdateOperationsInput | number
     ResultComments?: StringFieldUpdateOperationsInput | string
@@ -62700,6 +62771,7 @@ export namespace Prisma {
 
   export type FlightUncheckedUpdateWithoutAircraftInput = {
     Id?: StringFieldUpdateOperationsInput | string
+    FSHubId?: NullableIntFieldUpdateOperationsInput | number | null
     CompanyId?: StringFieldUpdateOperationsInput | string
     Registered?: BoolFieldUpdateOperationsInput | boolean
     Category?: IntFieldUpdateOperationsInput | number
@@ -62766,6 +62838,7 @@ export namespace Prisma {
 
   export type FlightUncheckedUpdateManyWithoutAircraftInput = {
     Id?: StringFieldUpdateOperationsInput | string
+    FSHubId?: NullableIntFieldUpdateOperationsInput | number | null
     CompanyId?: StringFieldUpdateOperationsInput | string
     Registered?: BoolFieldUpdateOperationsInput | boolean
     Category?: IntFieldUpdateOperationsInput | number
@@ -63003,6 +63076,7 @@ export namespace Prisma {
 
   export type FlightCreateManyDepartureAirportInput = {
     Id: string
+    FSHubId?: number | null
     AircraftId?: string | null
     CompanyId: string
     Registered: boolean
@@ -63068,6 +63142,7 @@ export namespace Prisma {
 
   export type FlightCreateManyArrivalIntendedAirportInput = {
     Id: string
+    FSHubId?: number | null
     AircraftId?: string | null
     CompanyId: string
     Registered: boolean
@@ -63133,6 +63208,7 @@ export namespace Prisma {
 
   export type FlightCreateManyArrivalAlternateAirportInput = {
     Id: string
+    FSHubId?: number | null
     AircraftId?: string | null
     CompanyId: string
     Registered: boolean
@@ -63198,6 +63274,7 @@ export namespace Prisma {
 
   export type FlightCreateManyArrivalActualAirportInput = {
     Id: string
+    FSHubId?: number | null
     AircraftId?: string | null
     CompanyId: string
     Registered: boolean
@@ -63305,6 +63382,7 @@ export namespace Prisma {
 
   export type FlightUpdateWithoutDepartureAirportInput = {
     Id?: StringFieldUpdateOperationsInput | string
+    FSHubId?: NullableIntFieldUpdateOperationsInput | number | null
     Registered?: BoolFieldUpdateOperationsInput | boolean
     Category?: IntFieldUpdateOperationsInput | number
     ResultComments?: StringFieldUpdateOperationsInput | string
@@ -63371,6 +63449,7 @@ export namespace Prisma {
 
   export type FlightUncheckedUpdateWithoutDepartureAirportInput = {
     Id?: StringFieldUpdateOperationsInput | string
+    FSHubId?: NullableIntFieldUpdateOperationsInput | number | null
     AircraftId?: NullableStringFieldUpdateOperationsInput | string | null
     CompanyId?: StringFieldUpdateOperationsInput | string
     Registered?: BoolFieldUpdateOperationsInput | boolean
@@ -63437,6 +63516,7 @@ export namespace Prisma {
 
   export type FlightUncheckedUpdateManyWithoutDepartureAirportInput = {
     Id?: StringFieldUpdateOperationsInput | string
+    FSHubId?: NullableIntFieldUpdateOperationsInput | number | null
     AircraftId?: NullableStringFieldUpdateOperationsInput | string | null
     CompanyId?: StringFieldUpdateOperationsInput | string
     Registered?: BoolFieldUpdateOperationsInput | boolean
@@ -63502,6 +63582,7 @@ export namespace Prisma {
 
   export type FlightUpdateWithoutArrivalIntendedAirportInput = {
     Id?: StringFieldUpdateOperationsInput | string
+    FSHubId?: NullableIntFieldUpdateOperationsInput | number | null
     Registered?: BoolFieldUpdateOperationsInput | boolean
     Category?: IntFieldUpdateOperationsInput | number
     ResultComments?: StringFieldUpdateOperationsInput | string
@@ -63568,6 +63649,7 @@ export namespace Prisma {
 
   export type FlightUncheckedUpdateWithoutArrivalIntendedAirportInput = {
     Id?: StringFieldUpdateOperationsInput | string
+    FSHubId?: NullableIntFieldUpdateOperationsInput | number | null
     AircraftId?: NullableStringFieldUpdateOperationsInput | string | null
     CompanyId?: StringFieldUpdateOperationsInput | string
     Registered?: BoolFieldUpdateOperationsInput | boolean
@@ -63634,6 +63716,7 @@ export namespace Prisma {
 
   export type FlightUncheckedUpdateManyWithoutArrivalIntendedAirportInput = {
     Id?: StringFieldUpdateOperationsInput | string
+    FSHubId?: NullableIntFieldUpdateOperationsInput | number | null
     AircraftId?: NullableStringFieldUpdateOperationsInput | string | null
     CompanyId?: StringFieldUpdateOperationsInput | string
     Registered?: BoolFieldUpdateOperationsInput | boolean
@@ -63699,6 +63782,7 @@ export namespace Prisma {
 
   export type FlightUpdateWithoutArrivalAlternateAirportInput = {
     Id?: StringFieldUpdateOperationsInput | string
+    FSHubId?: NullableIntFieldUpdateOperationsInput | number | null
     Registered?: BoolFieldUpdateOperationsInput | boolean
     Category?: IntFieldUpdateOperationsInput | number
     ResultComments?: StringFieldUpdateOperationsInput | string
@@ -63765,6 +63849,7 @@ export namespace Prisma {
 
   export type FlightUncheckedUpdateWithoutArrivalAlternateAirportInput = {
     Id?: StringFieldUpdateOperationsInput | string
+    FSHubId?: NullableIntFieldUpdateOperationsInput | number | null
     AircraftId?: NullableStringFieldUpdateOperationsInput | string | null
     CompanyId?: StringFieldUpdateOperationsInput | string
     Registered?: BoolFieldUpdateOperationsInput | boolean
@@ -63831,6 +63916,7 @@ export namespace Prisma {
 
   export type FlightUncheckedUpdateManyWithoutArrivalAlternateAirportInput = {
     Id?: StringFieldUpdateOperationsInput | string
+    FSHubId?: NullableIntFieldUpdateOperationsInput | number | null
     AircraftId?: NullableStringFieldUpdateOperationsInput | string | null
     CompanyId?: StringFieldUpdateOperationsInput | string
     Registered?: BoolFieldUpdateOperationsInput | boolean
@@ -63896,6 +63982,7 @@ export namespace Prisma {
 
   export type FlightUpdateWithoutArrivalActualAirportInput = {
     Id?: StringFieldUpdateOperationsInput | string
+    FSHubId?: NullableIntFieldUpdateOperationsInput | number | null
     Registered?: BoolFieldUpdateOperationsInput | boolean
     Category?: IntFieldUpdateOperationsInput | number
     ResultComments?: StringFieldUpdateOperationsInput | string
@@ -63962,6 +64049,7 @@ export namespace Prisma {
 
   export type FlightUncheckedUpdateWithoutArrivalActualAirportInput = {
     Id?: StringFieldUpdateOperationsInput | string
+    FSHubId?: NullableIntFieldUpdateOperationsInput | number | null
     AircraftId?: NullableStringFieldUpdateOperationsInput | string | null
     CompanyId?: StringFieldUpdateOperationsInput | string
     Registered?: BoolFieldUpdateOperationsInput | boolean
@@ -64028,6 +64116,7 @@ export namespace Prisma {
 
   export type FlightUncheckedUpdateManyWithoutArrivalActualAirportInput = {
     Id?: StringFieldUpdateOperationsInput | string
+    FSHubId?: NullableIntFieldUpdateOperationsInput | number | null
     AircraftId?: NullableStringFieldUpdateOperationsInput | string | null
     CompanyId?: StringFieldUpdateOperationsInput | string
     Registered?: BoolFieldUpdateOperationsInput | boolean

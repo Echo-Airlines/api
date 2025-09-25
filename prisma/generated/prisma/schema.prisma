@@ -124,6 +124,7 @@ enum ListenerEventStatus {
   PROCESSING
   COMPLETED
   FAILED
+  SKIPPED
 }
 
 model User {
@@ -525,6 +526,7 @@ model Airport {
 
 model Flight {
   Id                                         String    @id() @unique() @db.Uuid
+  FSHubId                                    Int?      @unique()
   AircraftId                                 String?   @db.Uuid
   CompanyId                                  String    @db.Uuid
   Registered                                 Boolean

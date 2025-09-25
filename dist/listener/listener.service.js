@@ -166,7 +166,7 @@ let ListenerService = ListenerService_1 = class ListenerService {
                 case 'profile.updated':
                     const profileUpdated = listenerEvent.Data;
                     this.logger.debug(`profile.updated | #${profileUpdated.id} - https://fshub.io/pilot/${profileUpdated.id}/profile`);
-                    listenerEvent = await this.updateListenerEventStatus(listenerEvent.Id, { Status: prisma_1.ListenerEventStatus.FAILED, Error: `No logic defined to process 'profile.updated' event.` });
+                    listenerEvent = await this.updateListenerEventStatus(listenerEvent.Id, { Status: prisma_1.ListenerEventStatus.SKIPPED, Error: `No logic defined to process 'profile.updated' event.` });
                     return listenerEvent;
                     break;
                 case 'flight.departed':
@@ -174,7 +174,7 @@ let ListenerService = ListenerService_1 = class ListenerService {
                     this.logger.debug(`flight.departed | #${flightDeparted.id} - https://fshub.io/flight/${flightDeparted.id}/report`);
                     if (!flightDeparted.speed_tas || flightDeparted.speed_tas < 20) {
                         this.logger.warn(`Speed is too low to process 'flight.departed' event for flight #${flightDeparted.id} | Speed: ${flightDeparted.speed_tas} | Id: ${listenerEvent.Id}`);
-                        listenerEvent = await this.updateListenerEventStatus(listenerEvent.Id, { Status: prisma_1.ListenerEventStatus.FAILED, Error: `Speed is too low to process 'flight.departed' event` });
+                        listenerEvent = await this.updateListenerEventStatus(listenerEvent.Id, { Status: prisma_1.ListenerEventStatus.SKIPPED, Error: `Speed is too low to process 'flight.departed' event` });
                         return listenerEvent;
                     }
                     message.embeds = await this._processFSHubFlightDeparted(flightDeparted, listenerEvent.Id);
@@ -182,13 +182,13 @@ let ListenerService = ListenerService_1 = class ListenerService {
                 case 'flight.arrived':
                     const flightArrived = listenerEvent.Data;
                     this.logger.debug(`flight.arrived | #${flightArrived.id} - https://fshub.io/flight/${flightArrived.id}/report`);
-                    listenerEvent = await this.updateListenerEventStatus(listenerEvent.Id, { Status: prisma_1.ListenerEventStatus.FAILED, Error: `No logic defined to process 'flight.arrived' event.` });
+                    listenerEvent = await this.updateListenerEventStatus(listenerEvent.Id, { Status: prisma_1.ListenerEventStatus.SKIPPED, Error: `No logic defined to process 'flight.arrived' event.` });
                     return listenerEvent;
                     break;
                 case 'flight.updated':
                     const flightUpdated = listenerEvent.Data;
                     this.logger.debug(`flight.updated | #${flightUpdated.id} - https://fshub.io/flight/${flightUpdated.id}/report`);
-                    listenerEvent = await this.updateListenerEventStatus(listenerEvent.Id, { Status: prisma_1.ListenerEventStatus.FAILED, Error: `No logic defined to process 'flight.updated' event.` });
+                    listenerEvent = await this.updateListenerEventStatus(listenerEvent.Id, { Status: prisma_1.ListenerEventStatus.SKIPPED, Error: `No logic defined to process 'flight.updated' event.` });
                     return listenerEvent;
                     break;
                 case 'flight.completed':
@@ -196,7 +196,7 @@ let ListenerService = ListenerService_1 = class ListenerService {
                     this.logger.debug(`flight.completed | #${flightCompleted.id} - https://fshub.io/flight/${flightCompleted.id}/report`);
                     if (!flightCompleted.arrival.speed_tas || flightCompleted.arrival.speed_tas < 20) {
                         this.logger.warn(`Speed is too low to process 'flight.completed' event for flight #${flightCompleted.id} | Speed: ${flightCompleted.arrival.speed_tas} | Id: ${listenerEvent.Id}`);
-                        listenerEvent = await this.updateListenerEventStatus(listenerEvent.Id, { Status: prisma_1.ListenerEventStatus.FAILED, Error: `Speed is too low to process 'flight.completed' event` });
+                        listenerEvent = await this.updateListenerEventStatus(listenerEvent.Id, { Status: prisma_1.ListenerEventStatus.SKIPPED, Error: `Speed is too low to process 'flight.completed' event` });
                         return listenerEvent;
                     }
                     message.embeds = await this._processFSHubFlightCompleted(flightCompleted, listenerEvent.Id);

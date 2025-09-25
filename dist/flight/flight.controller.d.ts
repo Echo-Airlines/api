@@ -14,6 +14,7 @@ export declare class FlightController {
         LastRefresh: Date | null;
         VAId: string | null;
         CompanyId: string;
+        FSHubId: number | null;
         Registered: boolean;
         Category: number;
         ResultComments: string;
@@ -79,6 +80,7 @@ export declare class FlightController {
         LastRefresh: Date | null;
         VAId: string | null;
         CompanyId: string;
+        FSHubId: number | null;
         Registered: boolean;
         Category: number;
         ResultComments: string;
@@ -144,6 +146,7 @@ export declare class FlightController {
         LastRefresh: Date | null;
         VAId: string | null;
         CompanyId: string;
+        FSHubId: number | null;
         Registered: boolean;
         Category: number;
         ResultComments: string;
@@ -214,6 +217,7 @@ export declare class FlightController {
             LastRefresh: Date | null;
             VAId: string | null;
             CompanyId: string;
+            FSHubId: number | null;
             Registered: boolean;
             Category: number;
             ResultComments: string;

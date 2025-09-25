@@ -12,6 +12,7 @@ export declare class FlightService {
         LastRefresh: Date | null;
         VAId: string | null;
         CompanyId: string;
+        FSHubId: number | null;
         Registered: boolean;
         Category: number;
         ResultComments: string;
@@ -77,6 +78,7 @@ export declare class FlightService {
         LastRefresh: Date | null;
         VAId: string | null;
         CompanyId: string;
+        FSHubId: number | null;
         Registered: boolean;
         Category: number;
         ResultComments: string;
@@ -142,6 +144,7 @@ export declare class FlightService {
         LastRefresh: Date | null;
         VAId: string | null;
         CompanyId: string;
+        FSHubId: number | null;
         Registered: boolean;
         Category: number;
         ResultComments: string;
@@ -207,6 +210,7 @@ export declare class FlightService {
         LastRefresh: Date | null;
         VAId: string | null;
         CompanyId: string;
+        FSHubId: number | null;
         Registered: boolean;
         Category: number;
         ResultComments: string;
@@ -272,6 +276,7 @@ export declare class FlightService {
         LastRefresh: Date | null;
         VAId: string | null;
         CompanyId: string;
+        FSHubId: number | null;
         Registered: boolean;
         Category: number;
         ResultComments: string;
@@ -337,6 +342,7 @@ export declare class FlightService {
         LastRefresh: Date | null;
         VAId: string | null;
         CompanyId: string;
+        FSHubId: number | null;
         Registered: boolean;
         Category: number;
         ResultComments: string;
@@ -402,6 +408,7 @@ export declare class FlightService {
         LastRefresh: Date | null;
         VAId: string | null;
         CompanyId: string;
+        FSHubId: number | null;
         Registered: boolean;
         Category: number;
         ResultComments: string;
